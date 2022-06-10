@@ -1,0 +1,5 @@
+.chat_log {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 75vh;
+}

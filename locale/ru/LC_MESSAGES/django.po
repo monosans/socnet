@@ -1,0 +1,469 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-06 17:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: server/apps/main/forms.py:18
+msgid "Search posts"
+msgstr "Поиск постов"
+
+#: server/apps/main/forms.py:21 server/apps/main/forms.py:27
+msgid "Search query"
+msgstr "Поисковый запрос"
+
+#: server/apps/main/forms.py:31
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: server/apps/main/forms.py:32
+msgid "First name"
+msgstr "Имя"
+
+#: server/apps/main/forms.py:33
+msgid "Last name"
+msgstr "Фамилия"
+
+#: server/apps/main/forms.py:34
+#: server/apps/main/templates/main/user_detail.html:134
+msgid "Location"
+msgstr "Местонахождение"
+
+#: server/apps/main/forms.py:35
+#: server/apps/main/templates/main/user_detail.html:140
+msgid "About me"
+msgstr "Обо мне"
+
+#: server/apps/main/forms.py:38
+msgid "Fields to search"
+msgstr "Поля для поиска"
+
+#: server/apps/main/models.py:24 server/apps/main/models.py:73
+#: server/apps/messenger/models.py:53 server/apps/users/models.py:72
+msgid "user"
+msgstr "пользователь"
+
+#: server/apps/main/models.py:27 server/apps/main/models.py:76
+#: server/apps/messenger/models.py:61
+msgid "text"
+msgstr "текст"
+
+#: server/apps/main/models.py:30 server/apps/main/models.py:79
+#: server/apps/users/models.py:58
+msgid "image"
+msgstr "изображение"
+
+#: server/apps/main/models.py:32 server/apps/main/models.py:81
+#: server/apps/messenger/models.py:62
+msgid "date/time"
+msgstr "дата/время"
+
+#: server/apps/main/models.py:36 server/apps/main/models.py:85
+msgid "likers"
+msgstr "любители"
+
+#: server/apps/main/models.py:41 server/apps/main/models.py:67
+msgid "post"
+msgstr "пост"
+
+#: server/apps/main/models.py:42
+msgid "posts"
+msgstr "посты"
+
+#: server/apps/main/models.py:54 server/apps/main/models.py:99
+msgid "You must provide either text or an image"
+msgstr "Вы должны предоставить либо текст, либо изображение"
+
+#: server/apps/main/models.py:90
+msgid "post comment"
+msgstr "комментарий к посту"
+
+#: server/apps/main/models.py:91
+msgid "post comments"
+msgstr "комментарий к посту"
+
+#: server/apps/main/signals.py:19
+msgid "You can't subscribe to yourself."
+msgstr "Вы не можете подписаться на себя."
+
+#: server/apps/main/templates/main/liked_post_list.html:6
+#: server/apps/main/templates/main/user_detail.html:158
+msgid "Liked posts"
+msgstr "Понравившиеся посты"
+
+#: server/apps/main/templates/main/liked_post_list.html:22
+msgid "You have no liked posts."
+msgstr "У вас нет понравившихся постов."
+
+#: server/apps/main/templates/main/liked_post_list.html:24
+msgid "The user has no liked posts."
+msgstr "У пользователя нет понравившихся постов."
+
+#: server/apps/main/templates/main/post_detail.html:6
+msgid "Post"
+msgstr "Пост"
+
+#: server/apps/main/templates/main/post_detail.html:41
+#: server/apps/main/templates/main/user_detail.html:188
+msgid "Post deletion"
+msgstr "Удаление поста"
+
+#: server/apps/main/templates/main/post_detail.html:45
+#: server/apps/main/templates/main/user_detail.html:193
+msgid "Are you sure you want to delete your post?"
+msgstr "Вы уверены, что хотите удалить свой пост?"
+
+#: server/apps/main/templates/main/post_detail.html:49
+#: server/apps/main/templates/main/post_detail.html:147
+#: server/apps/main/templates/main/user_detail.html:54
+#: server/apps/main/templates/main/user_detail.html:81
+#: server/apps/main/templates/main/user_detail.html:197
+msgid "Close"
+msgstr "Закрыть"
+
+#: server/apps/main/templates/main/post_detail.html:53
+#: server/apps/main/templates/main/post_detail.html:151
+#: server/apps/main/templates/main/user_detail.html:201
+msgid "Delete"
+msgstr "Удалить"
+
+#: server/apps/main/templates/main/post_detail.html:103
+#: server/apps/main/templates/main/post_detail.html:108
+msgid "Comment"
+msgstr "Комментировать"
+
+#: server/apps/main/templates/main/post_detail.html:139
+msgid "Post comment deletion"
+msgstr "Удаление комментария к посту"
+
+#: server/apps/main/templates/main/post_detail.html:143
+msgid "Are you sure you want to delete your comment?"
+msgstr "Вы уверены, что хотите удалить свой комментарий?"
+
+#: server/apps/main/templates/main/post_list.html:6
+#: server/templates/navbar.html:19 server/templates/navbar.html:32
+msgid "Posts"
+msgstr "Посты"
+
+#: server/apps/main/templates/main/post_list.html:54
+msgid "No posts found."
+msgstr "Посты не найдены."
+
+#: server/apps/main/templates/main/post_list.html:61
+msgid "Subscribe to users of interest to you so that their posts are displayed here."
+msgstr "Подпишитесь на интересующих вас пользователей, чтобы их посты отображались здесь."
+
+#: server/apps/main/templates/main/search_users.html:6
+#: server/apps/main/templates/main/search_users.html:16
+#: server/templates/navbar.html:39
+msgid "Search users"
+msgstr "Поиск пользователей"
+
+#: server/apps/main/templates/main/search_users.html:22
+msgid "Search"
+msgstr "Поиск"
+
+#: server/apps/main/templates/main/search_users.html:48
+msgid "No users found"
+msgstr "Пользователи не найдены"
+
+#: server/apps/main/templates/main/subscriber_list.html:6
+#: server/apps/main/templates/main/user_detail.html:151
+msgid "Subscribers"
+msgstr "Подписчики"
+
+#: server/apps/main/templates/main/subscriber_list.html:38
+msgid "You have no subscribers."
+msgstr "У вас нет подписчиков."
+
+#: server/apps/main/templates/main/subscriber_list.html:40
+msgid "The user has no subscribers."
+msgstr "У пользователя нет подписчиков."
+
+#: server/apps/main/templates/main/subscription_list.html:6
+#: server/apps/main/templates/main/user_detail.html:145
+#: server/templates/navbar.html:26
+msgid "Subscriptions"
+msgstr "Подписки"
+
+#: server/apps/main/templates/main/subscription_list.html:33
+#: server/apps/main/templates/main/user_detail.html:100
+#: server/apps/main/templates/main/user_detail.html:103
+msgid "Unsubscribe"
+msgstr "Отписаться"
+
+#: server/apps/main/templates/main/subscription_list.html:34
+#: server/apps/main/templates/main/user_detail.html:101
+#: server/apps/main/templates/main/user_detail.html:104
+#: server/apps/main/templates/main/user_detail.html:112
+msgid "Subscribe"
+msgstr "Подписаться"
+
+#: server/apps/main/templates/main/subscription_list.html:46
+msgid "You have no subscriptions."
+msgstr "У вас нет подписок."
+
+#: server/apps/main/templates/main/subscription_list.html:48
+msgid "The user has no subscriptions."
+msgstr "У пользователя нет подписок."
+
+#: server/apps/main/templates/main/user_detail.html:31
+msgid "Edit"
+msgstr "Редактировать"
+
+#: server/apps/main/templates/main/user_detail.html:37
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: server/apps/main/templates/main/user_detail.html:47
+msgid "Change password"
+msgstr "Сменить пароль"
+
+#: server/apps/main/templates/main/user_detail.html:56
+msgid "Save"
+msgstr "Сохранить"
+
+#: server/apps/main/templates/main/user_detail.html:65
+#: server/apps/main/templates/main/user_detail.html:85
+msgid "Create post"
+msgstr "Создать пост"
+
+#: server/apps/main/templates/main/user_detail.html:71
+msgid "Post creation"
+msgstr "Создание поста"
+
+#: server/apps/main/templates/main/user_detail.html:96
+#: server/apps/main/templates/main/user_detail.html:109
+msgid "Write message"
+msgstr "Написать сообщение"
+
+#: server/apps/main/templates/main/user_detail.html:128
+msgid "Birth date"
+msgstr "Дата рождения"
+
+#: server/apps/messenger/models.py:16
+msgid "participants"
+msgstr "участники"
+
+#: server/apps/messenger/models.py:20 server/apps/messenger/models.py:59
+msgid "chat"
+msgstr "чат"
+
+#: server/apps/messenger/models.py:21
+msgid "chats"
+msgstr "чаты"
+
+#: server/apps/messenger/models.py:65
+msgid "message"
+msgstr "сообщение"
+
+#: server/apps/messenger/models.py:66
+msgid "messages"
+msgstr "сообщения"
+
+#: server/apps/messenger/signals.py:16
+msgid "The chat must have 2 participants."
+msgstr "В чате должно быть 2 участника."
+
+#: server/apps/messenger/templates/messenger/chat_detail.html:6
+msgid "Chat"
+msgstr "Чат"
+
+#: server/apps/messenger/templates/messenger/chat_detail.html:44
+msgid "Send"
+msgstr "Отправить"
+
+#: server/apps/messenger/templates/messenger/chat_list.html:6
+msgid "Chats"
+msgstr "Чаты"
+
+#: server/apps/messenger/templates/messenger/chat_list.html:44
+msgid "You have no chats."
+msgstr "У вас нет чатов."
+
+#: server/apps/users/admin.py:14
+msgid "Other"
+msgstr "Прочее"
+
+#: server/apps/users/constants.py:6
+msgid "30 characters or less. English and Russian letters."
+msgstr "30 символов или меньше. Английские и русские буквы."
+
+#: server/apps/users/models.py:20
+msgid "username"
+msgstr "имя пользователя"
+
+#: server/apps/users/models.py:25
+msgid "30 characters or less. Lowercase letters, digits and _ only. Must begin with a letter and end with a letter or digit."
+msgstr "30 символов или меньше. Только строчные буквы, цифры и _. Должно начинаться с буквы и заканчиваться буквой или цифрой."
+
+#: server/apps/users/models.py:30
+msgid "A user with that username already exists."
+msgstr "Пользователь с таким именем уже существует."
+
+#: server/apps/users/models.py:34
+msgid "first name"
+msgstr "имя"
+
+#: server/apps/users/models.py:41
+msgid "last name"
+msgstr "фамилия"
+
+#: server/apps/users/models.py:49
+msgid "birth date"
+msgstr "дата рождения"
+
+#: server/apps/users/models.py:55
+msgid "location"
+msgstr "местонахождение"
+
+#: server/apps/users/models.py:61
+msgid "about me"
+msgstr "обо мне"
+
+#: server/apps/users/models.py:67
+msgid "subscriptions"
+msgstr "подписки"
+
+#: server/apps/users/models.py:73
+msgid "users"
+msgstr "пользователи"
+
+#: server/apps/users/templates/users/defender_lockout.html:6
+msgid "Account locked"
+msgstr "Аккаунт заблокирован"
+
+#: server/apps/users/templates/users/defender_lockout.html:10
+msgid "Account locked: too many login attempts. Please try again later."
+msgstr "Аккаунт заблокирован: слишком много попыток входа. Пожалуйста, повторите попытку позже."
+
+#: server/apps/users/templates/users/login.html:6
+#: server/apps/users/templates/users/login.html:9
+#: server/apps/users/templates/users/login.html:18
+#: server/templates/navbar.html:48
+msgid "Log in"
+msgstr "Вход"
+
+#: server/apps/users/templates/users/login.html:15
+msgid "Forgotten your password or username?"
+msgstr "Забыли пароль или имя пользователя?"
+
+#: server/apps/users/templates/users/password_change_done.html:6
+#: server/apps/users/templates/users/password_change_done.html:10
+msgid "Password change successful"
+msgstr "Смена пароля прошла успешно"
+
+#: server/apps/users/templates/users/password_change_done.html:11
+msgid "Your password was changed."
+msgstr "Ваш пароль был изменен."
+
+#: server/apps/users/templates/users/password_change_form.html:6
+#: server/apps/users/templates/users/password_change_form.html:12
+msgid "Password change"
+msgstr "Изменение пароля"
+
+#: server/apps/users/templates/users/password_change_form.html:14
+msgid "Please enter your old password, for security’s sake, and then enter your new password twice so we can verify you typed it in correctly."
+msgstr "В целях безопасности введите свой старый пароль, а затем дважды введите новый пароль, чтобы мы могли убедиться, что вы ввели его правильно."
+
+#: server/apps/users/templates/users/password_change_form.html:21
+#: server/apps/users/templates/users/password_reset_confirm.html:24
+msgid "Change my password"
+msgstr "Изменить свой пароль"
+
+#: server/apps/users/templates/users/password_reset_complete.html:6
+#: server/apps/users/templates/users/password_reset_complete.html:10
+msgid "Password reset complete"
+msgstr "Сброс пароля завершён"
+
+#: server/apps/users/templates/users/password_reset_complete.html:12
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Ваш пароль установлен. Вы можете продолжить и войти в систему сейчас."
+
+#: server/apps/users/templates/users/password_reset_confirm.html:6
+#: server/apps/users/templates/users/password_reset_form.html:6
+#: server/apps/users/templates/users/password_reset_form.html:13
+msgid "Password reset"
+msgstr "Сброс пароля"
+
+#: server/apps/users/templates/users/password_reset_confirm.html:14
+msgid "Enter new password"
+msgstr "Введите новый пароль"
+
+#: server/apps/users/templates/users/password_reset_confirm.html:16
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgstr "Пожалуйста, дважды введите новый пароль, чтобы мы могли убедиться, что вы ввели его правильно."
+
+#: server/apps/users/templates/users/password_reset_confirm.html:30
+msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
+msgstr "Ссылка для сброса пароля недействительна, возможно, потому, что она уже использовалась. Пожалуйста, запросите сброс нового пароля."
+
+#: server/apps/users/templates/users/password_reset_done.html:6
+#: server/apps/users/templates/users/password_reset_done.html:12
+msgid "Password reset sent"
+msgstr "Сброс пароля отправлен"
+
+#: server/apps/users/templates/users/password_reset_done.html:15
+msgid "We’ve emailed you instructions for setting your password, if an account exists with the email you entered. You should receive them shortly."
+msgstr "Мы отправили вам инструкции по установке пароля, если существует учетная запись с введенным вами адресом электронной почты. Вы должны получить их в ближайшее время."
+
+#: server/apps/users/templates/users/password_reset_done.html:18
+msgid "If you don’t receive an email, please make sure you’ve entered the address you registered with, and check your spam folder."
+msgstr "Если вы не получили электронное письмо, убедитесь, что вы ввели адрес, который вы указали при регистрации, и проверьте папку со спамом."
+
+#: server/apps/users/templates/users/password_reset_form.html:15
+msgid "Forgotten your password? Enter your email address below, and we’ll email instructions for setting a new one."
+msgstr "Забыли свой пароль? Введите свой адрес электронной почты ниже, и мы отправим инструкции по электронной почте для настройки нового."
+
+#: server/apps/users/templates/users/password_reset_form.html:23
+msgid "Reset my password"
+msgstr "Сбросить пароль"
+
+#: server/apps/users/templates/users/register.html:6
+#: server/apps/users/templates/users/register.html:9
+#: server/apps/users/templates/users/register.html:15
+#: server/templates/navbar.html:51
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: server/apps/users/validators.py:11
+msgid "You cannot be older than the oldest human."
+msgstr "Вы не можете быть старше самого старого человека."
+
+#: server/apps/users/validators.py:13
+msgid "Are you from the future?"
+msgstr "Вы из будущего?"
+
+#: server/settings/common.py:102
+msgid "English"
+msgstr "Английский"
+
+#: server/settings/common.py:102
+msgid "Russian"
+msgstr "Русский"
+
+#: server/templates/navbar.html:16
+msgid "My page"
+msgstr "Моя страница"
+
+#: server/templates/navbar.html:22
+msgid "Messenger"
+msgstr "Мессенджер"
+
+#: server/templates/navbar.html:44
+msgid "Log out"
+msgstr "Выйти"

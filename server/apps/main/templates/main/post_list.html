@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block title %}
+    {% trans "Posts" %}
+{% endblock title %}
+{% block links %}
+    {% include "main/inc/font_awesome.html" %}
+    <link rel="stylesheet" href="{% static 'css/text_justify.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/avatar_preview.css' %}"/>
+    <link rel="stylesheet" href="{% static 'main/css/img.css' %}"/>
+{% endblock links %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-xl-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            {{ form.search_query }}
+                            <button class="btn btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if posts %}
+                {% include "main/inc/posts.html" %}
+                {% if page_range %}
+                    <ul class="pagination justify-content-center">
+                        {% for page in page_range %}
+                            {% if page == posts.paginator.ELLIPSIS %}
+                                <li class="page-item">
+                                    <div class="page-link">{{ page }}</div>
+                                </li>
+                            {% elif page == posts.number %}
+                                <li class="page-item active">
+                                    <div class="page-link">{{ page }}</div>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% elif request.method == "POST" %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">{% trans "No posts found." %}</div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="text-center">
+                            {% trans "Subscribe to users of interest to you so that their posts are displayed here." %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script async src="{% static 'main/js/like_post.js' %}"></script>
+{% endblock scripts %}

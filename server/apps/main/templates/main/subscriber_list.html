@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block title %}
+    {% trans "Subscribers" %} - {{ user.get_username }}
+{% endblock title %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/avatar_preview.css' %}"/>
+{% endblock links %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-xl-6">
+            {% for subscriber in user.subscribers.all %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="avatar-preview">
+                                {% if subscriber.image %}
+                                    <img class="rounded"
+                                         alt=""
+                                         loading="lazy"
+                                         src="{{ subscriber.image.url }}"/>
+                                {% endif %}
+                            </div>
+                            <div class="col ms-2 text-break">
+                                <a href="{{ subscriber.get_absolute_url }}">{{ subscriber.get_username }}</a>
+                                {{ subscriber.full_name_in_brackets }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            {% if request.user == user %}
+                                {% trans "You have no subscribers." %}
+                            {% else %}
+                                {% trans "The user has no subscribers." %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

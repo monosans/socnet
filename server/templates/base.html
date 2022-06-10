@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        | SocNet</title>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap.min.css"
+              integrity="sha512-o/MhoRPVLExxZjCFVBsm17Pkztkzmh7Dp8k7/3JrtNCHh0AQ489kwpfA3dPSHzKDe8YCuEhxXq3Y71eb/o6amg=="
+              crossorigin="anonymous"
+              referrerpolicy="no-referrer"/>
+        {% block links %}
+        {% endblock links %}
+    </head>
+    <body class="bg-light">
+        <div class="sticky-top">{% include "navbar.html" %}</div>
+        <div class="container">
+            {% for message in messages %}
+                <div class="alert
+                            {% if message.tags == "error" %}
+                                alert-danger
+                            {% else %}
+                                alert-{{ message.tags }}
+                            {% endif %} alert-dismissible">
+                    {{ message }}
+                    <div class="btn btn-close" data-bs-dismiss="alert"></div>
+                </div>
+            {% endfor %}
+            {% block content %}
+            {% endblock content %}
+        </div>
+        {% if request.user.is_authenticated %}
+            {% block scripts %}
+            {% endblock scripts %}
+        {% endif %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js" integrity="sha512-ndrrR94PW3ckaAvvWrAzRi5JWjF71/Pw7TlSo6judANOFCmz0d+0YE+qIGamRRSnVzSvIyGs4BTtyFMm3MT/cg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </body>
+</html>

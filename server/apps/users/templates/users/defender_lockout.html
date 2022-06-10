@@ -1,0 +1,12 @@
+{% extends "card.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Account locked" %}
+{% endblock title %}
+{% block card_body %}
+    <div class="text-center">
+        {% trans "Account locked: too many login attempts. Please try again later." %}
+    </div>
+{% endblock card_body %}

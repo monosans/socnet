@@ -1,0 +1,51 @@
+# Should be used together with `docker-compose.yml`.
+version: "3.8"
+services:
+  caddy:
+    image: "caddy:2-alpine"
+    restart: unless-stopped
+    env_file: ./config/.env
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy-config:/config
+      - caddy-data:/data
+      - django-static:/var/www/django/static
+      - django-media:/var/www/django/media
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+    networks:
+      - proxynet
+
+  web:
+    <<: &web
+      image: "socnet:latest"
+      build:
+        target: production_build
+        context: .
+        dockerfile: ./docker/django/Dockerfile
+        args:
+          DJANGO_ENV: production
+
+      restart: unless-stopped
+      volumes:
+        - django-media:/var/www/django/media
+        - django-locale:/code/locale
+
+    command: bash ./docker/django/gunicorn.sh
+    networks:
+      - proxynet
+    expose:
+      - 8000
+
+networks:
+  # Network for the proxy server and application to connect them
+  proxynet:
+
+volumes:
+  django-media:
+  django-locale:
+  caddy-config:
+  caddy-data:
