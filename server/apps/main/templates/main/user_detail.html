@@ -106,10 +106,12 @@
                         </div>
                     {% else %}
                         <div>
-                            <a class="btn btn-primary w-100 mb-2" href="{% url 'login' %}">{% trans "Write message" %}</a>
+                            <a class="btn btn-primary w-100 mb-2"
+                               href="{% url 'login' %}?next={{ request.path|urlencode }}">{% trans "Write message" %}</a>
                         </div>
                         <div>
-                            <a class="btn btn-primary w-100" href="{% url 'login' %}">{% trans "Subscribe" %}</a>
+                            <a class="btn btn-primary w-100"
+                               href="{% url 'login' %}?next={{ request.path|urlencode }}">{% trans "Subscribe" %}</a>
                         </div>
                     {% endif %}
                 </div>
@@ -218,7 +220,7 @@
                         <div class="fs-4">
                             {% if not request.user.is_authenticated %}
                                 <a class="btn badge rounded-pill bg-light text-dark"
-                                   href="{% url 'login' %}">
+                                   href="{% url 'login' %}?next={{ request.path|urlencode }}">
                                     <i class="fa-regular fa-heart"></i>
                                     <span>{{ post.likers.count }}</span>
                                 </a>
