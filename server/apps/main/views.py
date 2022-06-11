@@ -81,13 +81,13 @@ def subscription_list_view(
 
 @require_http_methods(["GET", "POST"])
 def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
+    if request.method == "POST" and not request.user.is_authenticated:
+        return redirect("login")
     post = get_object_or_404(
         models.Post.objects.select_related("user").prefetch_related("likers"),
         pk=pk,
     )
     if request.method == "POST":
-        if not request.user.is_authenticated:
-            return redirect("login")
         form = forms.PostCommentCreationForm(request.POST, request.FILES)
         if form.is_valid():
             comment = form.save(commit=False)
