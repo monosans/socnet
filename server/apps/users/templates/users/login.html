@@ -10,13 +10,11 @@
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <div class="text-center">
-            <div class="small mb-3">
-                <a class="link-dark" href="{% url 'password_reset' %}">{% trans "Forgotten your password or username?" %}</a>
-            </div>
-            <input type="submit"
-                   value="{% trans 'Log in' %}"
-                   class="btn btn-primary btn-lg"/>
+        <div class="text-center small mb-3">
+            <a class="link-dark" href="{% url 'password_reset' %}">{% trans "Forgotten your password or username?" %}</a>
         </div>
+        <input type="submit"
+               value="{% trans 'Log in' %}"
+               class="btn btn-primary btn-lg w-100"/>
     </form>
 {% endblock card_body %}

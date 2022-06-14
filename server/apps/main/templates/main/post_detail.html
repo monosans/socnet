@@ -99,15 +99,13 @@
         <form enctype="multipart/form-data" method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <div class="text-end">
-                <input type="submit" value="{% trans 'Comment' %}" class="btn btn-primary"/>
-            </div>
+            <input type="submit"
+                   value="{% trans 'Comment' %}"
+                   class="btn btn-primary w-100"/>
         </form>
     {% else %}
-        <div class="text-end">
-            <a class="btn btn-primary"
-               href="{% url 'login' %}?next={{ request.path|urlencode }}">{% trans "Comment" %}</a>
-        </div>
+        <a class="btn btn-primary w-100"
+           href="{% url 'login' %}?next={{ request.path|urlencode }}">{% trans "Comment" %}</a>
     {% endif %}
     {% for comment in comments %}
         <hr class="mt-3"/>
