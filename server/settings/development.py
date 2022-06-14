@@ -27,7 +27,12 @@ INTERNAL_IPS = [
 MEDIA_ROOT = BASE_DIR / "media"
 
 EXTRA_CHECKS = {
-    "include_apps": ["server.apps.main"],
+    "include_apps": [
+        "server.apps.api",
+        "server.apps.messenger",
+        "server.apps.users",
+        "server.apps.main",
+    ],
     "checks": [
         "drf-model-serializer-extra-kwargs",
         "field-boolean-null",
