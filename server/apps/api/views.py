@@ -31,7 +31,7 @@ class _Like(_AuthedAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-class _Unlike(views.APIView):
+class _Unlike(_AuthedAPIView):
     model: Type[Union[main_models.Post, main_models.PostComment]]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
