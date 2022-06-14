@@ -59,14 +59,14 @@ class UnlikePostComment(_Unlike):
 class Subscribe(_AuthedAPIView):
     def post(self, request: AuthedRequest) -> Response:
         user = get_object_or_404(User, pk=request.data["pk"])
-        user.subscribers.add(request.user)
+        user.subscribers.add(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_201_CREATED)
 
 
 class Unsubscribe(_AuthedAPIView):
     def delete(self, request: AuthedRequest, pk: int) -> Response:
         user = get_object_or_404(User, pk=pk)
-        user.subscribers.remove(request.user)
+        user.subscribers.remove(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
