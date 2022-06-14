@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-06 17:49+0000\n"
+"POT-Creation-Date: 2022-06-14 17:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,12 +39,12 @@ msgid "Last name"
 msgstr "Фамилия"
 
 #: server/apps/main/forms.py:34
-#: server/apps/main/templates/main/user_detail.html:134
+#: server/apps/main/templates/main/user_detail.html:136
 msgid "Location"
 msgstr "Местонахождение"
 
 #: server/apps/main/forms.py:35
-#: server/apps/main/templates/main/user_detail.html:140
+#: server/apps/main/templates/main/user_detail.html:142
 msgid "About me"
 msgstr "Обо мне"
 
@@ -53,7 +53,7 @@ msgid "Fields to search"
 msgstr "Поля для поиска"
 
 #: server/apps/main/models.py:24 server/apps/main/models.py:73
-#: server/apps/messenger/models.py:53 server/apps/users/models.py:72
+#: server/apps/messenger/models.py:53 server/apps/users/models.py:75
 msgid "user"
 msgstr "пользователь"
 
@@ -63,7 +63,7 @@ msgid "text"
 msgstr "текст"
 
 #: server/apps/main/models.py:30 server/apps/main/models.py:79
-#: server/apps/users/models.py:58
+#: server/apps/users/models.py:61
 msgid "image"
 msgstr "изображение"
 
@@ -101,7 +101,7 @@ msgid "You can't subscribe to yourself."
 msgstr "Вы не можете подписаться на себя."
 
 #: server/apps/main/templates/main/liked_post_list.html:6
-#: server/apps/main/templates/main/user_detail.html:158
+#: server/apps/main/templates/main/user_detail.html:160
 msgid "Liked posts"
 msgstr "Понравившиеся посты"
 
@@ -118,26 +118,26 @@ msgid "Post"
 msgstr "Пост"
 
 #: server/apps/main/templates/main/post_detail.html:41
-#: server/apps/main/templates/main/user_detail.html:188
+#: server/apps/main/templates/main/user_detail.html:190
 msgid "Post deletion"
 msgstr "Удаление поста"
 
 #: server/apps/main/templates/main/post_detail.html:45
-#: server/apps/main/templates/main/user_detail.html:193
+#: server/apps/main/templates/main/user_detail.html:195
 msgid "Are you sure you want to delete your post?"
 msgstr "Вы уверены, что хотите удалить свой пост?"
 
 #: server/apps/main/templates/main/post_detail.html:49
-#: server/apps/main/templates/main/post_detail.html:147
+#: server/apps/main/templates/main/post_detail.html:146
 #: server/apps/main/templates/main/user_detail.html:54
 #: server/apps/main/templates/main/user_detail.html:81
-#: server/apps/main/templates/main/user_detail.html:197
+#: server/apps/main/templates/main/user_detail.html:199
 msgid "Close"
 msgstr "Закрыть"
 
 #: server/apps/main/templates/main/post_detail.html:53
-#: server/apps/main/templates/main/post_detail.html:151
-#: server/apps/main/templates/main/user_detail.html:201
+#: server/apps/main/templates/main/post_detail.html:150
+#: server/apps/main/templates/main/user_detail.html:203
 msgid "Delete"
 msgstr "Удалить"
 
@@ -146,11 +146,11 @@ msgstr "Удалить"
 msgid "Comment"
 msgstr "Комментировать"
 
-#: server/apps/main/templates/main/post_detail.html:139
+#: server/apps/main/templates/main/post_detail.html:138
 msgid "Post comment deletion"
 msgstr "Удаление комментария к посту"
 
-#: server/apps/main/templates/main/post_detail.html:143
+#: server/apps/main/templates/main/post_detail.html:142
 msgid "Are you sure you want to delete your comment?"
 msgstr "Вы уверены, что хотите удалить свой комментарий?"
 
@@ -173,16 +173,16 @@ msgstr "Подпишитесь на интересующих вас пользо
 msgid "Search users"
 msgstr "Поиск пользователей"
 
-#: server/apps/main/templates/main/search_users.html:22
+#: server/apps/main/templates/main/search_users.html:21
 msgid "Search"
 msgstr "Поиск"
 
-#: server/apps/main/templates/main/search_users.html:48
+#: server/apps/main/templates/main/search_users.html:46
 msgid "No users found"
 msgstr "Пользователи не найдены"
 
 #: server/apps/main/templates/main/subscriber_list.html:6
-#: server/apps/main/templates/main/user_detail.html:151
+#: server/apps/main/templates/main/user_detail.html:153
 msgid "Subscribers"
 msgstr "Подписчики"
 
@@ -195,7 +195,7 @@ msgid "The user has no subscribers."
 msgstr "У пользователя нет подписчиков."
 
 #: server/apps/main/templates/main/subscription_list.html:6
-#: server/apps/main/templates/main/user_detail.html:145
+#: server/apps/main/templates/main/user_detail.html:147
 #: server/templates/navbar.html:26
 msgid "Subscriptions"
 msgstr "Подписки"
@@ -209,7 +209,7 @@ msgstr "Отписаться"
 #: server/apps/main/templates/main/subscription_list.html:34
 #: server/apps/main/templates/main/user_detail.html:101
 #: server/apps/main/templates/main/user_detail.html:104
-#: server/apps/main/templates/main/user_detail.html:112
+#: server/apps/main/templates/main/user_detail.html:114
 msgid "Subscribe"
 msgstr "Подписаться"
 
@@ -247,11 +247,11 @@ msgid "Post creation"
 msgstr "Создание поста"
 
 #: server/apps/main/templates/main/user_detail.html:96
-#: server/apps/main/templates/main/user_detail.html:109
+#: server/apps/main/templates/main/user_detail.html:110
 msgid "Write message"
 msgstr "Написать сообщение"
 
-#: server/apps/main/templates/main/user_detail.html:128
+#: server/apps/main/templates/main/user_detail.html:130
 msgid "Birth date"
 msgstr "Дата рождения"
 
@@ -299,47 +299,47 @@ msgstr "У вас нет чатов."
 msgid "Other"
 msgstr "Прочее"
 
-#: server/apps/users/constants.py:6
-msgid "30 characters or less. English and Russian letters."
-msgstr "30 символов или меньше. Английские и русские буквы."
-
-#: server/apps/users/models.py:20
+#: server/apps/users/models.py:23
 msgid "username"
 msgstr "имя пользователя"
 
-#: server/apps/users/models.py:25
+#: server/apps/users/models.py:28
 msgid "30 characters or less. Lowercase letters, digits and _ only. Must begin with a letter and end with a letter or digit."
 msgstr "30 символов или меньше. Только строчные буквы, цифры и _. Должно начинаться с буквы и заканчиваться буквой или цифрой."
 
-#: server/apps/users/models.py:30
+#: server/apps/users/models.py:33
 msgid "A user with that username already exists."
 msgstr "Пользователь с таким именем уже существует."
 
-#: server/apps/users/models.py:34
+#: server/apps/users/models.py:37
 msgid "first name"
 msgstr "имя"
 
-#: server/apps/users/models.py:41
+#: server/apps/users/models.py:40 server/apps/users/models.py:47
+msgid "30 characters or less. English and Russian letters."
+msgstr "30 символов или меньше. Английские и русские буквы."
+
+#: server/apps/users/models.py:44
 msgid "last name"
 msgstr "фамилия"
 
-#: server/apps/users/models.py:49
+#: server/apps/users/models.py:52
 msgid "birth date"
 msgstr "дата рождения"
 
-#: server/apps/users/models.py:55
+#: server/apps/users/models.py:58
 msgid "location"
 msgstr "местонахождение"
 
-#: server/apps/users/models.py:61
+#: server/apps/users/models.py:64
 msgid "about me"
 msgstr "обо мне"
 
-#: server/apps/users/models.py:67
+#: server/apps/users/models.py:70
 msgid "subscriptions"
 msgstr "подписки"
 
-#: server/apps/users/models.py:73
+#: server/apps/users/models.py:76
 msgid "users"
 msgstr "пользователи"
 
@@ -353,12 +353,12 @@ msgstr "Аккаунт заблокирован: слишком много по�
 
 #: server/apps/users/templates/users/login.html:6
 #: server/apps/users/templates/users/login.html:9
-#: server/apps/users/templates/users/login.html:18
+#: server/apps/users/templates/users/login.html:17
 #: server/templates/navbar.html:48
 msgid "Log in"
 msgstr "Вход"
 
-#: server/apps/users/templates/users/login.html:15
+#: server/apps/users/templates/users/login.html:14
 msgid "Forgotten your password or username?"
 msgstr "Забыли пароль или имя пользователя?"
 
@@ -380,8 +380,8 @@ msgstr "Изменение пароля"
 msgid "Please enter your old password, for security’s sake, and then enter your new password twice so we can verify you typed it in correctly."
 msgstr "В целях безопасности введите свой старый пароль, а затем дважды введите новый пароль, чтобы мы могли убедиться, что вы ввели его правильно."
 
-#: server/apps/users/templates/users/password_change_form.html:21
-#: server/apps/users/templates/users/password_reset_confirm.html:24
+#: server/apps/users/templates/users/password_change_form.html:20
+#: server/apps/users/templates/users/password_reset_confirm.html:23
 msgid "Change my password"
 msgstr "Изменить свой пароль"
 
@@ -408,7 +408,7 @@ msgstr "Введите новый пароль"
 msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr "Пожалуйста, дважды введите новый пароль, чтобы мы могли убедиться, что вы ввели его правильно."
 
-#: server/apps/users/templates/users/password_reset_confirm.html:30
+#: server/apps/users/templates/users/password_reset_confirm.html:28
 msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
 msgstr "Ссылка для сброса пароля недействительна, возможно, потому, что она уже использовалась. Пожалуйста, запросите сброс нового пароля."
 
@@ -429,16 +429,19 @@ msgstr "Если вы не получили электронное письмо,
 msgid "Forgotten your password? Enter your email address below, and we’ll email instructions for setting a new one."
 msgstr "Забыли свой пароль? Введите свой адрес электронной почты ниже, и мы отправим инструкции по электронной почте для настройки нового."
 
-#: server/apps/users/templates/users/password_reset_form.html:23
+#: server/apps/users/templates/users/password_reset_form.html:22
 msgid "Reset my password"
 msgstr "Сбросить пароль"
 
 #: server/apps/users/templates/users/register.html:6
-#: server/apps/users/templates/users/register.html:9
-#: server/apps/users/templates/users/register.html:15
+#: server/apps/users/templates/users/register.html:14
 #: server/templates/navbar.html:51
-msgid "Sign up"
+msgid "Register"
 msgstr "Регистрация"
+
+#: server/apps/users/templates/users/register.html:9
+msgid "Create an account"
+msgstr "Создание учётной записи"
 
 #: server/apps/users/validators.py:11
 msgid "You cannot be older than the oldest human."
@@ -448,11 +451,11 @@ msgstr "Вы не можете быть старше самого старого
 msgid "Are you from the future?"
 msgstr "Вы из будущего?"
 
-#: server/settings/common.py:102
+#: server/settings/common.py:101
 msgid "English"
 msgstr "Английский"
 
-#: server/settings/common.py:102
+#: server/settings/common.py:101
 msgid "Russian"
 msgstr "Русский"
 
