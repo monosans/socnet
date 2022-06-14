@@ -1,3 +1,4 @@
+import re
 from datetime import date
 from typing import Optional
 
@@ -8,7 +9,9 @@ from django.urls import reverse
 from django.utils.timezone import datetime
 from django.utils.translation import gettext_lazy as _
 
-from . import constants, validators
+from . import validators
+
+EN_RU_REGEX = re.compile(r"^(?:[A-z]+|[А-я]+)$")
 
 
 def user_image(instance: "User", filename: str) -> str:
@@ -34,15 +37,15 @@ class User(AbstractUser):
         verbose_name=_("first name"),
         max_length=30,
         blank=True,
-        help_text=constants.NAME_HELP_TEXT,
-        validators=(RegexValidator(constants.EN_RU_REGEX),),
+        help_text=_("30 characters or less. English and Russian letters."),
+        validators=(RegexValidator(EN_RU_REGEX),),
     )
     last_name = models.CharField(
         verbose_name=_("last name"),
         max_length=30,
         blank=True,
-        help_text=constants.NAME_HELP_TEXT,
-        validators=(RegexValidator(constants.EN_RU_REGEX),),
+        help_text=_("30 characters or less. English and Russian letters."),
+        validators=(RegexValidator(EN_RU_REGEX),),
     )
 
     birth_date = models.DateField(
