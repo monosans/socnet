@@ -86,6 +86,11 @@ class UserViewset(AutoPrefetchModelViewSet):
     serializer_class = serializers.UserSerializer
 
 
+class UserByUsernameViewset(UserViewset):
+    serializer_class = serializers.UserByUsernameSerializer
+    lookup_field = "username"
+
+
 class PostCommentViewset(AutoPrefetchModelViewSet):
     queryset = main_models.PostComment.objects.all()
     serializer_class = serializers.PostCommentSerializer

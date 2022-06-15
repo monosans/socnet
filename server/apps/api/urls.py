@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
+from rest_framework import urls as drf_urls
 
 from . import views
 
@@ -14,12 +15,11 @@ router.register("permissions", views.PermissionViewset)
 router.register("post_comments", views.PostCommentViewset)
 router.register("posts", views.PostViewset)
 router.register("users", views.UserViewset)
+router.register("users_by_username", views.UserByUsernameViewset)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path(
-        "api-auth/", include("rest_framework.urls", namespace="rest_framework")
-    ),
+    path("api-auth/", include(drf_urls)),
     path(
         "like_post_comment/<int:pk>/",
         views.UnlikePostComment.as_view(),

@@ -45,6 +45,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
+class UserByUsernameSerializer(UserSerializer):
+    lookup_field = "username"
+
+
 class PostCommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = main_models.PostComment
