@@ -49,25 +49,34 @@ line_length = 79
 extend_skip_glob = ["**/migrations/*"]
 
 [tool.mypy]
-strict = true
-enable_error_code = ["truthy-bool", "redundant-expr", "unused-awaitable"]
-allow_redefinition = false
-check_untyped_defs = true
-disallow_any_explicit = false
+ignore_missing_imports = true
 disallow_any_generics = true
+disallow_subclassing_any = true
 disallow_untyped_calls = true
-ignore_errors = false
-ignore_missing_imports = false
-implicit_reexport = false
-local_partial_types = true
-strict_optional = true
-strict_equality = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
 no_implicit_optional = true
-warn_no_return = true
-warn_unused_ignores = true
+strict_optional = true
 warn_redundant_casts = true
-warn_unused_configs = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_return_any = true
 warn_unreachable = true
+allow_untyped_globals = false
+allow_redefinition = false
+local_partial_types = true
+enable_error_code = [
+    "redundant-expr",
+    "truthy-bool",
+    "ignore-without-code",
+    "unused-awaitable",
+]
+implicit_reexport = false
+strict_concatenate = true
+strict_equality = true
+strict = true
 show_error_codes = true
 plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 exclude = "migrations/"
