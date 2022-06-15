@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-14 17:09+0000\n"
+"POT-Creation-Date: 2022-06-15 15:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -458,6 +458,26 @@ msgstr "Английский"
 #: server/settings/common.py:101
 msgid "Russian"
 msgstr "Русский"
+
+#: server/templates/400.html:6 server/templates/400.html:9
+msgid "Bad Request (400)"
+msgstr "Плохой запрос (400)"
+
+#: server/templates/403.html:6 server/templates/403.html:9
+msgid "403 Forbidden"
+msgstr "403 Запрещено"
+
+#: server/templates/404.html:6 server/templates/404.html:12
+msgid "Not Found"
+msgstr "Не найдено"
+
+#: server/templates/404.html:14
+msgid "The requested resource was not found on this server."
+msgstr "Запрашиваемый ресурс не был найден на этом сервере."
+
+#: server/templates/500.html:6 server/templates/500.html:9
+msgid "Server Error (500)"
+msgstr "Ошибка сервера (500)"
 
 #: server/templates/navbar.html:16
 msgid "My page"

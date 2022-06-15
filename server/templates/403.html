@@ -1,0 +1,10 @@
+{% extends "card.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "403 Forbidden" %}
+{% endblock title %}
+{% block card_body %}
+    <h3 class="text-center">{% trans "403 Forbidden" %}</h3>
+{% endblock card_body %}
