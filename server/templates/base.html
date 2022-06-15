@@ -13,6 +13,10 @@
               integrity="sha512-o/MhoRPVLExxZjCFVBsm17Pkztkzmh7Dp8k7/3JrtNCHh0AQ489kwpfA3dPSHzKDe8YCuEhxXq3Y71eb/o6amg=="
               crossorigin="anonymous"
               referrerpolicy="no-referrer"/>
+        {% if request.user.is_authenticated %}
+            {% block scripts %}
+            {% endblock scripts %}
+        {% endif %}
         {% block links %}
         {% endblock links %}
     </head>
@@ -33,10 +37,6 @@
             {% block content %}
             {% endblock content %}
         </div>
-        {% if request.user.is_authenticated %}
-            {% block scripts %}
-            {% endblock scripts %}
-        {% endif %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js" integrity="sha512-ndrrR94PW3ckaAvvWrAzRi5JWjF71/Pw7TlSo6judANOFCmz0d+0YE+qIGamRRSnVzSvIyGs4BTtyFMm3MT/cg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </body>
 </html>

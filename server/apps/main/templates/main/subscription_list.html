@@ -31,7 +31,7 @@
                                 {% if request.user == user %}
                                     <div>
                                         <span class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>{% trans "Unsubscribe" %}</span>
-                                        <span class="btn btn-primary d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>{% trans "Subscribe" %}</span>
+                                        <span class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>{% trans "Subscribe" %}</span>
                                     </div>
                                 {% endif %}
                             </div>
@@ -55,7 +55,7 @@
     </div>
 {% endblock content %}
 {% block scripts %}
-    {% if request.user == user %}
+    {% if request.user == user and user.subscriptions.all %}
         {% csrf_token %}
         <script defer src="{% static 'main/js/subscribe.js' %}"></script>
     {% endif %}

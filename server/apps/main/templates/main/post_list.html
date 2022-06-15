@@ -67,5 +67,7 @@
     </div>
 {% endblock content %}
 {% block scripts %}
-    <script defer src="{% static 'main/js/like_post.js' %}"></script>
+    {% if posts %}
+        <script defer src="{% static 'main/js/like_post.js' %}"></script>
+    {% endif %}
 {% endblock scripts %}
