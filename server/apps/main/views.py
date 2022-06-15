@@ -92,7 +92,7 @@ def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.user = request.user
+            comment.user = request.user  # type: ignore[assignment]
             comment.save()
             form = forms.PostCommentCreationForm()
     else:
