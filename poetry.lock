@@ -166,7 +166,7 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "certifi"
-version = "2022.5.18.1"
+version = "2022.6.15"
 description = "Python package for providing Mozilla's CA Bundle."
 category = "dev"
 optional = false
@@ -1049,7 +1049,7 @@ twisted = ["zope.interface (>=5.2.0)", "twisted (>=20.3.0)"]
 
 [[package]]
 name = "types-markdown"
-version = "3.3.27"
+version = "3.3.28"
 description = "Typing stubs for Markdown"
 category = "dev"
 optional = false
@@ -1319,8 +1319,8 @@ black = [
     {file = "black-22.3.0.tar.gz", hash = "sha256:35020b8886c022ced9282b51b5a875b6d1ab0c387b31a065b84db7c33085ca79"},
 ]
 certifi = [
-    {file = "certifi-2022.5.18.1-py3-none-any.whl", hash = "sha256:f1d53542ee8cbedbe2118b5686372fb33c297fcd6379b050cca0ef13a597382a"},
-    {file = "certifi-2022.5.18.1.tar.gz", hash = "sha256:9c5705e395cd70084351dd8ad5c41e65655e08ce46f2ec9cf6c2c08390f71eb7"},
+    {file = "certifi-2022.6.15-py3-none-any.whl", hash = "sha256:fe86415d55e84719d75f8b69414f6438ac3547d2078ab91b67e779ef69378412"},
+    {file = "certifi-2022.6.15.tar.gz", hash = "sha256:84c85a9078b11105f04f3036a9482ae10e4621616db313fe045dd24743a0820d"},
 ]
 cffi = [
     {file = "cffi-1.15.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:c2502a1a03b6312837279c8c1bd3ebedf6c12c4228ddbad40912d671ccc8a962"},
@@ -2083,8 +2083,8 @@ txaio = [
     {file = "txaio-22.2.1.tar.gz", hash = "sha256:2e4582b70f04b2345908254684a984206c0d9b50e3074a24a4c55aba21d24d01"},
 ]
 types-markdown = [
-    {file = "types-Markdown-3.3.27.tar.gz", hash = "sha256:3fabd2f344b584483b952e24aeb52f8cb5bad4101ca003d6c5f79a4f8b02e6ee"},
-    {file = "types_Markdown-3.3.27-py3-none-any.whl", hash = "sha256:8c9e233b8f960093bc3be92e3dca874e0a7174e6a28dde142305f3206d0b56bc"},
+    {file = "types-Markdown-3.3.28.tar.gz", hash = "sha256:733ba19dad58d5dca1206390f55fa285573535b7c369b94dd367bbc34bf7e4de"},
+    {file = "types_Markdown-3.3.28-py3-none-any.whl", hash = "sha256:7868cfa3f8a2304d9ecea2ca9b02c14fcb2e34bd26fdbaf01d8c4d362a85d345"},
 ]
 types-pytz = [
     {file = "types-pytz-2021.3.8.tar.gz", hash = "sha256:41253a3a2bf028b6a3f17b58749a692d955af0f74e975de94f6f4d2d3cd01dbd"},
