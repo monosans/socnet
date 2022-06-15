@@ -25,8 +25,8 @@ class User(AbstractUser):
         unique=True,
         db_index=True,
         help_text=_(
-            "30 characters or less. Lowercase letters, digits and _ only."
-            + " Must begin with a letter and end with a letter or digit."
+            "No more than 30 characters. Only lowercase letters, numbers and"
+            + " _. Must begin with a letter and end with a letter or number."
         ),
         validators=(RegexValidator(r"^(?:[a-z][a-z\d_]*[a-z\d]|[a-z])$"),),
         error_messages={
@@ -37,14 +37,18 @@ class User(AbstractUser):
         verbose_name=_("first name"),
         max_length=30,
         blank=True,
-        help_text=_("30 characters or less. English and Russian letters."),
+        help_text=_(
+            "No more than 30 characters. Only English and Russian letters."
+        ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
     last_name = models.CharField(
         verbose_name=_("last name"),
         max_length=30,
         blank=True,
-        help_text=_("30 characters or less. English and Russian letters."),
+        help_text=_(
+            "No more than 30 characters. Only English and Russian letters."
+        ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
 
