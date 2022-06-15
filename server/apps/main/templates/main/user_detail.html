@@ -254,6 +254,6 @@
 {% endblock content %}
 {% block scripts %}
     {% csrf_token %}
-    <script async src="{% static 'main/js/like_post.js' %}"></script>
-    <script async src="{% static 'main/js/subscribe.js' %}"></script>
+    <script defer src="{% static 'main/js/like_post.js' %}"></script>
+    <script defer src="{% static 'main/js/subscribe.js' %}"></script>
 {% endblock scripts %}

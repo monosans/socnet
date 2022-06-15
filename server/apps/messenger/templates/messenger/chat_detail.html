@@ -52,5 +52,5 @@
     {{ chat_pk|json_script:"chat-pk" }}
 {% endblock content %}
 {% block scripts %}
-    <script async src="{% static 'messenger/js/chat.js' %}"></script>
+    <script defer src="{% static 'messenger/js/chat.js' %}"></script>
 {% endblock scripts %}

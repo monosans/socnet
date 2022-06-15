@@ -57,6 +57,6 @@
 {% block scripts %}
     {% if request.user == user %}
         {% csrf_token %}
-        <script async src="{% static 'main/js/subscribe.js' %}"></script>
+        <script defer src="{% static 'main/js/subscribe.js' %}"></script>
     {% endif %}
 {% endblock scripts %}
