@@ -24,7 +24,7 @@ python /code/manage.py compilemessages
 # Concerning `workers` setting see:
 # https://adamj.eu/tech/2019/09/19/working-around-memory-leaks-in-your-django-app/
 /usr/local/bin/gunicorn server.asgi:application \
-  --workers=4 \
+  --workers=$(nproc --all) \
   --max-requests=2000 \
   --max-requests-jitter=400 \
   --bind='0.0.0.0:8000' \
