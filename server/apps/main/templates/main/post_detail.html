@@ -91,7 +91,7 @@
         {% endif %}
         <span class="badge rounded-pill bg-light text-dark">
             <i class="fa-regular fa-comment"></i>
-            {{ comments.count }}
+            {{ post.comments.count }}
         </span>
     </div>
     <hr />
@@ -107,7 +107,7 @@
         <a class="btn btn-primary w-100"
            href="{% url 'login' %}?next={{ request.path|urlencode }}">{% trans "Comment" %}</a>
     {% endif %}
-    {% for comment in comments %}
+    {% for comment in post.comments.all %}
         <hr class="mt-3"/>
         <div class="row">
             <div class="avatar-preview">

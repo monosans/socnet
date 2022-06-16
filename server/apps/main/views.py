@@ -81,28 +81,25 @@ def subscription_list_view(
 
 @require_http_methods(["GET", "POST"])
 def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
-    if request.method == "POST" and not request.user.is_authenticated:
-        return redirect("login")
-    post = get_object_or_404(
-        models.Post.objects.select_related("user").prefetch_related("likers"),
-        pk=pk,
-    )
     if request.method == "POST":
+        if not request.user.is_authenticated:
+            return redirect("login")
         form = forms.PostCommentCreationForm(request.POST, request.FILES)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post
-            comment.user = request.user  # type: ignore[assignment]
+            comment.post_id = pk
+            comment.user = request.user
             comment.save()
             form = forms.PostCommentCreationForm()
     else:
         form = forms.PostCommentCreationForm()
-    comments = (
-        models.PostComment.objects.select_related("user")
-        .prefetch_related("likers")
-        .filter(post=post)
+    post = get_object_or_404(
+        models.Post.objects.select_related("user").prefetch_related(
+            "likers", "comments", "comments__user", "comments__likers"
+        ),
+        pk=pk,
     )
-    context = {"post": post, "comments": comments, "form": form}
+    context = {"post": post, "form": form}
     return render(request, "main/post_detail.html", context)
 
 
