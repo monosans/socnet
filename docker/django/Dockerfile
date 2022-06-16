@@ -31,8 +31,6 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
 
 SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
-# System deps, we don't use exact versions because it is hard to update them, pin when needed:
-# hadolint ignore=DL3008
 RUN apt-get update && apt-get upgrade -y \
   && apt-get install --no-install-recommends -y \
   bash \
