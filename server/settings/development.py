@@ -1,18 +1,9 @@
 import socket
-from typing import List
 
 from .common import DATABASES, INSTALLED_APPS, MIDDLEWARE
-from .config import BASE_DIR, config
+from .config import BASE_DIR
 
 DEBUG = True
-
-ALLOWED_HOSTS: List[str] = [
-    config("DOMAIN_NAME"),
-    "localhost",
-    "0.0.0.0",
-    "127.0.0.1",
-    "[::1]",
-]
 
 INSTALLED_APPS += ("debug_toolbar", "extra_checks")
 
