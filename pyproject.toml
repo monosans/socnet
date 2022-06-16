@@ -68,10 +68,11 @@ plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 django_settings_module = "server.settings"
 
 [tool.djlint]
-blank_line_after_tag = "load,extends"
-format_attribute_template_tags = true
 ignore = "H006,H030,H031"
+blank_line_after_tag = "load,extends"
+profile = "django"
 max_line_length = 80
+format_attribute_template_tags = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
