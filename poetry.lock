@@ -468,7 +468,7 @@ test = ["testfixtures"]
 
 [[package]]
 name = "django-stubs"
-version = "1.11.0"
+version = "1.12.0"
 description = "Mypy stubs for Django"
 category = "dev"
 optional = false
@@ -477,11 +477,14 @@ python-versions = ">=3.7"
 [package.dependencies]
 django = "*"
 django-stubs-ext = ">=0.4.0"
-mypy = ">=0.930,<0.960"
+mypy = ">=0.930"
 tomli = "*"
 types-pytz = "*"
 types-PyYAML = "*"
 typing-extensions = "*"
+
+[package.extras]
+compatible-mypy = ["mypy (>=0.930,<0.970)"]
 
 [[package]]
 name = "django-stubs-ext"
@@ -1218,7 +1221,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "b09e0f20e0018433fa8a3098db7efdad8b182128d1fb084f340ee36c443da206"
+content-hash = "2dfec15d19751ccfc2aedbf92c7f570c1ff9e3f5a1a0dd7dc78a03abc1a628d1"
 
 [metadata.files]
 aioredis = [
@@ -1482,8 +1485,8 @@ django-simple-captcha = [
     {file = "django_simple_captcha-0.5.17-py2.py3-none-any.whl", hash = "sha256:f9a07e5e9de264ba4039c9eaad66bc48188a21ceda5fcdc2fa13c5512141c2c9"},
 ]
 django-stubs = [
-    {file = "django-stubs-1.11.0.tar.gz", hash = "sha256:11a4aa094d3da0108d268386dfd0b9a5bf73fe1ab5919b5a292607671329bc4b"},
-    {file = "django_stubs-1.11.0-py3-none-any.whl", hash = "sha256:e9362c0992414560fc6d2f91aa4dd8339b1cbbf7ddacc95b06cc219b1792d217"},
+    {file = "django-stubs-1.12.0.tar.gz", hash = "sha256:ea8b35d0da49f7b2ee99a79125f1943e033431dd114726d6643cc35de619230e"},
+    {file = "django_stubs-1.12.0-py3-none-any.whl", hash = "sha256:0dff8ec0ba3abe046450b3d8a29ce9e72629893d2c1ef679189cc2bfdb6d2f64"},
 ]
 django-stubs-ext = [
     {file = "django-stubs-ext-0.5.0.tar.gz", hash = "sha256:9bd7418376ab00b7f88d6d56be9fece85bfa0c7c348ac621155fa4d7a91146f2"},
