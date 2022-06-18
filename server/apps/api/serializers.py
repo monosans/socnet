@@ -46,17 +46,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     )
     subscribers = (
         serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="subscriber-detail"
+            many=True, read_only=True, view_name="user-detail"
         )
     )
 
     class Meta:
         model = User
         fields = "__all__"
-
-
-class UserByUsernameSerializer(UserSerializer):
-    lookup_field = "username"
 
 
 class PostCommentSerializer(serializers.HyperlinkedModelSerializer):

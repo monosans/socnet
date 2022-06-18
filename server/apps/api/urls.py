@@ -15,7 +15,6 @@ router.register("permissions", views.PermissionViewset)
 router.register("post_comments", views.PostCommentViewset)
 router.register("posts", views.PostViewset)
 router.register("users", views.UserViewset)
-router.register("users_by_username", views.UserByUsernameViewset)
 
 urlpatterns = [
     path("", include(router.urls)),
