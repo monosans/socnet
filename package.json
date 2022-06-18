@@ -1,6 +1,11 @@
 {
+  "scripts": {
+    "lint": "eslint server",
+    "format": "prettier --write '**/*.{js,json,md,yml}'"
+  },
   "devDependencies": {
     "eslint": "^8.18",
-    "eslint-config-prettier": "^8.5"
+    "eslint-config-prettier": "^8.5",
+    "prettier": "^2.7"
   }
 }
