@@ -11,7 +11,7 @@ chatSocket.onmessage = (e) => {
   const data = JSON.parse(e.data);
   let text = "";
   for (const [index, line] of data.text.split(/\r?\n/).entries()) {
-    if (index != 0) {
+    if (index !== 0) {
       text += "<br/>";
     }
     text += line;

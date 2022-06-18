@@ -6,5 +6,9 @@
   "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
     "ecmaVersion": "latest"
+  },
+  "rules": {
+    "curly": "error",
+    "eqeqeq": "error"
   }
 }
