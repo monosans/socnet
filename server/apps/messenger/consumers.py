@@ -1,5 +1,5 @@
 import json
-from typing import Any
+from typing import Any, Dict
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -59,5 +59,5 @@ class ChatConsumer(AsyncWebsocketConsumer):  # type: ignore[misc]
         }
         await self.channel_layer.group_send(self.room_group_name, msg)
 
-    async def chat_message(self, event: dict[str, Any]) -> None:
+    async def chat_message(self, event: Dict[str, Any]) -> None:
         await self.send(text_data=json.dumps(event))
