@@ -79,41 +79,49 @@ class AutoPrefetchModelViewSet(
 class MessageViewset(AutoPrefetchModelViewSet):
     queryset = messenger_models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
+    search_fields = ["user__username", "text"]
 
 
 class UserViewset(AutoPrefetchModelViewSet):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
+    search_fields = ["username", "email"]
 
 
 class PostCommentViewset(AutoPrefetchModelViewSet):
     queryset = main_models.PostComment.objects.all()
     serializer_class = serializers.PostCommentSerializer
+    search_fields = ["user__username", "text"]
 
 
 class PostViewset(AutoPrefetchModelViewSet):
     queryset = main_models.Post.objects.all()
     serializer_class = serializers.PostSerializer
+    search_fields = ["user__username", "text"]
 
 
 class ChatViewset(AutoPrefetchModelViewSet):
     queryset = messenger_models.Chat.objects.all()
     serializer_class = serializers.ChatSerializer
+    search_fields = ["participants__username"]
 
 
 class GroupViewset(AutoPrefetchModelViewSet):
     queryset = auth_models.Group.objects.all()
     serializer_class = serializers.GroupSerializer
+    search_fields = ["name", "permissions__name", "permissions__codename"]
 
 
 class AccessAttemptViewset(AutoPrefetchModelViewSet):
     queryset = AccessAttempt.objects.all()
     serializer_class = serializers.AccessAttemptSerializer
+    search_fields = ["ip_address", "username"]
 
 
 class PermissionViewset(AutoPrefetchModelViewSet):
     queryset = auth_models.Permission.objects.all()
     serializer_class = serializers.PermissionSerializer
+    search_fields = ["name", "codename"]
 
 
 class LogEntryViewset(
@@ -125,6 +133,7 @@ class LogEntryViewset(
 ):
     queryset = LogEntry.objects.all()
     serializer_class = serializers.LogEntrySerializer
+    search_fields = ["user__username"]
 
 
 class ContentTypeViewset(AutoPrefetchModelViewSet):
