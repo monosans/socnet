@@ -37,10 +37,9 @@
                                         <h5 class="modal-title">{% trans "Edit profile" %}</h5>
                                         <div class="btn btn-close" data-bs-dismiss="modal"></div>
                                     </div>
-                                    <form enctype="multipart/form-data"
-                                          method="post"
-                                          action="{% url 'edit_profile' %}">
+                                    <form enctype="multipart/form-data" method="post">
                                         {% csrf_token %}
+                                        <input type="hidden" name="_form_type" value="user_change_form">
                                         <div class="modal-body">
                                             <div class="text-center">
                                                 <a href="{% url 'password_change' %}" class="btn btn-primary mb-3">
@@ -71,10 +70,9 @@
                                         <h5 class="modal-title">{% trans "Post creation" %}</h5>
                                         <div class="btn btn-close" data-bs-dismiss="modal"></div>
                                     </div>
-                                    <form enctype="multipart/form-data"
-                                          method="post"
-                                          action="{% url 'post_create' %}">
+                                    <form enctype="multipart/form-data" method="post">
                                         {% csrf_token %}
+                                        <input type="hidden" name="_form_type" value="post_creation_form">
                                         <div class="modal-body">{{ post_creation_form|crispy }}</div>
                                         <div class="modal-footer">
                                             <div class="btn btn-secondary" data-bs-dismiss="modal">

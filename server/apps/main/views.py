@@ -153,18 +153,7 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
     return render(request, "main/post_list.html", context)
 
 
-@login_required
-@require_http_methods(["POST"])
-def post_create_view(request: AuthedRequest) -> HttpResponse:
-    form = forms.PostCreationForm(request.POST, request.FILES)
-    if form.is_valid():
-        post = form.save(commit=False)
-        post.user = request.user
-        post.save()
-    return redirect(request.user)
-
-
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
     user = get_user(
         request,
@@ -176,12 +165,27 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
         "subscribers",
         "subscriptions",
     )
-    if request.user == user:
-        post_creation_form = forms.PostCreationForm()
-        user_change_form = forms.UserChangeForm(instance=request.user)
-    else:
-        post_creation_form = None
-        user_change_form = None
+    post_creation_form = None
+    user_change_form = None
+    if request.user.is_authenticated and request.user == user:
+        if request.method == "POST":
+            if request.POST["_form_type"] == "post_creation_form":
+                post_creation_form = forms.PostCreationForm(
+                    request.POST, request.FILES
+                )
+                if post_creation_form.is_valid():
+                    post = post_creation_form.save(commit=False)
+                    post.user = request.user
+                    post.save()
+            elif request.POST["_form_type"] == "user_change_form":
+                user_change_form = forms.UserChangeForm(
+                    request.POST, request.FILES, instance=request.user
+                )
+                if user_change_form.is_valid():
+                    user_change_form.save()
+        else:
+            post_creation_form = forms.PostCreationForm()
+            user_change_form = forms.UserChangeForm(instance=request.user)
     context = {
         "user": user,
         "post_creation_form": post_creation_form,
@@ -197,17 +201,6 @@ def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     if comment.user == request.user:
         comment.delete()
     return redirect(comment.post)
-
-
-@login_required
-@require_http_methods(["POST"])
-def edit_profile_view(request: AuthedRequest) -> HttpResponse:
-    form = forms.UserChangeForm(
-        request.POST, request.FILES, instance=request.user
-    )
-    if form.is_valid():
-        form.save()
-    return redirect(request.user)
 
 
 @require_http_methods(["GET"])
