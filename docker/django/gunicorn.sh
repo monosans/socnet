@@ -18,13 +18,6 @@ python /code/manage.py collectstatic --noinput
 python /code/manage.py compilemessages
 
 # http://docs.gunicorn.org/en/stable/settings.html
-# https://adamj.eu/tech/2019/09/19/working-around-memory-leaks-in-your-django-app/
-/usr/local/bin/gunicorn server.asgi:application \
-  --workers=$(nproc --all) \
-  --max-requests=2000 \
-  --max-requests-jitter=400 \
-  --bind='0.0.0.0:8000' \
-  --chdir='/code' \
-  --log-file=- \
-  --worker-tmp-dir='/dev/shm' \
-  --worker-class 'uvicorn.workers.UvicornWorker'
+/usr/local/bin/gunicorn \
+  --config python:docker.django.gunicorn_config \
+  server.asgi:application

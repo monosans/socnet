@@ -654,6 +654,7 @@ $RECYCLE.BIN/
 
 !config/.env
 !docker/django/entrypoint.sh
+!docker/django/gunicorn_config.py
 !docker/django/gunicorn.sh
 !locale/**/*.po
 !manage.py
