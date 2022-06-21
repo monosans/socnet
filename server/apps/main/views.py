@@ -6,7 +6,6 @@ from django.contrib.postgres.search import SearchVector
 from django.core.paginator import Page, Paginator
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
-from django.http.response import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
