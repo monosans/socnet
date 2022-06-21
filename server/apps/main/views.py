@@ -119,14 +119,13 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
     page_range = None
     if request.method == "POST":
         form = forms.PostsSearchForm(request.POST)
-        if not form.is_valid():
-            return HttpResponseBadRequest()
-        query = form.cleaned_data["search_query"]
-        posts = (
-            models.Post.objects.select_related("user")
-            .prefetch_related("likers", "comments")
-            .filter(text__search=query)
-        )
+        if form.is_valid():
+            query = form.cleaned_data["search_query"]
+            posts = (
+                models.Post.objects.select_related("user")
+                .prefetch_related("likers", "comments")
+                .filter(text__search=query)
+            )
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:
@@ -169,7 +168,8 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
     user_change_form = None
     if request.user.is_authenticated and request.user == user:
         if request.method == "POST":
-            if request.POST["_form_type"] == "post_creation_form":
+            form_type = request.POST["_form_type"]
+            if form_type == "post_creation_form":
                 post_creation_form = forms.PostCreationForm(
                     request.POST, request.FILES
                 )
@@ -177,7 +177,7 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
                     post = post_creation_form.save(commit=False)
                     post.user = request.user
                     post.save()
-            elif request.POST["_form_type"] == "user_change_form":
+            elif form_type == "user_change_form":
                 user_change_form = forms.UserChangeForm(
                     request.POST, request.FILES, instance=request.user
                 )
