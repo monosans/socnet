@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-15 16:09+0000\n"
+"POT-Creation-Date: 2022-06-22 17:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,12 +39,12 @@ msgid "Last name"
 msgstr "Фамилия"
 
 #: server/apps/main/forms.py:34
-#: server/apps/main/templates/main/user_detail.html:136
+#: server/apps/main/templates/main/user_detail.html:134
 msgid "Location"
 msgstr "Местонахождение"
 
 #: server/apps/main/forms.py:35
-#: server/apps/main/templates/main/user_detail.html:142
+#: server/apps/main/templates/main/user_detail.html:140
 msgid "About me"
 msgstr "Обо мне"
 
@@ -101,15 +101,15 @@ msgid "You can't subscribe to yourself."
 msgstr "Вы не можете подписаться на себя."
 
 #: server/apps/main/templates/main/liked_post_list.html:6
-#: server/apps/main/templates/main/user_detail.html:160
+#: server/apps/main/templates/main/user_detail.html:158
 msgid "Liked posts"
 msgstr "Понравившиеся посты"
 
-#: server/apps/main/templates/main/liked_post_list.html:22
+#: server/apps/main/templates/main/liked_post_list.html:24
 msgid "You have no liked posts."
 msgstr "У вас нет понравившихся постов."
 
-#: server/apps/main/templates/main/liked_post_list.html:24
+#: server/apps/main/templates/main/liked_post_list.html:26
 msgid "The user has no liked posts."
 msgstr "У пользователя нет понравившихся постов."
 
@@ -118,26 +118,26 @@ msgid "Post"
 msgstr "Пост"
 
 #: server/apps/main/templates/main/post_detail.html:41
-#: server/apps/main/templates/main/user_detail.html:190
+#: server/apps/main/templates/main/user_detail.html:188
 msgid "Post deletion"
 msgstr "Удаление поста"
 
 #: server/apps/main/templates/main/post_detail.html:45
-#: server/apps/main/templates/main/user_detail.html:195
+#: server/apps/main/templates/main/user_detail.html:193
 msgid "Are you sure you want to delete your post?"
 msgstr "Вы уверены, что хотите удалить свой пост?"
 
 #: server/apps/main/templates/main/post_detail.html:49
 #: server/apps/main/templates/main/post_detail.html:146
-#: server/apps/main/templates/main/user_detail.html:54
-#: server/apps/main/templates/main/user_detail.html:81
-#: server/apps/main/templates/main/user_detail.html:199
+#: server/apps/main/templates/main/user_detail.html:53
+#: server/apps/main/templates/main/user_detail.html:79
+#: server/apps/main/templates/main/user_detail.html:197
 msgid "Close"
 msgstr "Закрыть"
 
 #: server/apps/main/templates/main/post_detail.html:53
 #: server/apps/main/templates/main/post_detail.html:150
-#: server/apps/main/templates/main/user_detail.html:203
+#: server/apps/main/templates/main/user_detail.html:201
 msgid "Delete"
 msgstr "Удалить"
 
@@ -182,7 +182,7 @@ msgid "No users found"
 msgstr "Пользователи не найдены"
 
 #: server/apps/main/templates/main/subscriber_list.html:6
-#: server/apps/main/templates/main/user_detail.html:153
+#: server/apps/main/templates/main/user_detail.html:151
 msgid "Subscribers"
 msgstr "Подписчики"
 
@@ -195,21 +195,21 @@ msgid "The user has no subscribers."
 msgstr "У пользователя нет подписчиков."
 
 #: server/apps/main/templates/main/subscription_list.html:6
-#: server/apps/main/templates/main/user_detail.html:147
+#: server/apps/main/templates/main/user_detail.html:145
 #: server/templates/navbar.html:26
 msgid "Subscriptions"
 msgstr "Подписки"
 
 #: server/apps/main/templates/main/subscription_list.html:33
-#: server/apps/main/templates/main/user_detail.html:100
-#: server/apps/main/templates/main/user_detail.html:103
+#: server/apps/main/templates/main/user_detail.html:98
+#: server/apps/main/templates/main/user_detail.html:101
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
 #: server/apps/main/templates/main/subscription_list.html:34
-#: server/apps/main/templates/main/user_detail.html:101
-#: server/apps/main/templates/main/user_detail.html:104
-#: server/apps/main/templates/main/user_detail.html:114
+#: server/apps/main/templates/main/user_detail.html:99
+#: server/apps/main/templates/main/user_detail.html:102
+#: server/apps/main/templates/main/user_detail.html:112
 msgid "Subscribe"
 msgstr "Подписаться"
 
@@ -229,29 +229,29 @@ msgstr "Редактировать"
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: server/apps/main/templates/main/user_detail.html:47
+#: server/apps/main/templates/main/user_detail.html:46
 msgid "Change password"
 msgstr "Сменить пароль"
 
-#: server/apps/main/templates/main/user_detail.html:56
+#: server/apps/main/templates/main/user_detail.html:55
 msgid "Save"
 msgstr "Сохранить"
 
-#: server/apps/main/templates/main/user_detail.html:65
-#: server/apps/main/templates/main/user_detail.html:85
+#: server/apps/main/templates/main/user_detail.html:64
+#: server/apps/main/templates/main/user_detail.html:83
 msgid "Create post"
 msgstr "Создать пост"
 
-#: server/apps/main/templates/main/user_detail.html:71
+#: server/apps/main/templates/main/user_detail.html:70
 msgid "Post creation"
 msgstr "Создание поста"
 
-#: server/apps/main/templates/main/user_detail.html:96
-#: server/apps/main/templates/main/user_detail.html:110
+#: server/apps/main/templates/main/user_detail.html:94
+#: server/apps/main/templates/main/user_detail.html:108
 msgid "Write message"
 msgstr "Написать сообщение"
 
-#: server/apps/main/templates/main/user_detail.html:130
+#: server/apps/main/templates/main/user_detail.html:128
 msgid "Birth date"
 msgstr "Дата рождения"
 
