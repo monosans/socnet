@@ -512,7 +512,7 @@ pytz = "*"
 
 [[package]]
 name = "djangorestframework-stubs"
-version = "1.6.0"
+version = "1.7.0"
 description = "PEP-484 stubs for django-rest-framework"
 category = "dev"
 optional = false
@@ -521,12 +521,15 @@ python-versions = ">=3.7"
 [package.dependencies]
 coreapi = ">=2.0.0"
 django-stubs = ">=1.11.0"
-mypy = ">=0.930,<0.960"
+mypy = ">=0.950"
 requests = ">=2.0.0"
 types-Markdown = ">=0.1.5"
 types-PyYAML = ">=5.4.3"
 types-requests = ">=0.1.12"
-typing-extensions = ">=3.7.2"
+typing-extensions = ">=3.10.0"
+
+[package.extras]
+compatible-mypy = ["mypy (>=0.950,<0.970)"]
 
 [[package]]
 name = "djlint"
@@ -1221,7 +1224,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "2dfec15d19751ccfc2aedbf92c7f570c1ff9e3f5a1a0dd7dc78a03abc1a628d1"
+content-hash = "e8ce9c1bebb52f0940020a1a0bdc449b3f1e59eb5439f7b0db5cfa277fd7dec8"
 
 [metadata.files]
 aioredis = [
@@ -1497,8 +1500,8 @@ djangorestframework = [
     {file = "djangorestframework-3.13.1.tar.gz", hash = "sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee"},
 ]
 djangorestframework-stubs = [
-    {file = "djangorestframework-stubs-1.6.0.tar.gz", hash = "sha256:6be773635d6cd859a4a56db6458c3f052076e08e70228a7f468979af1dfca53e"},
-    {file = "djangorestframework_stubs-1.6.0-py3-none-any.whl", hash = "sha256:c5b71a92918ba75b21804ecefab6946d8f1109797a91924c1976514308f795b0"},
+    {file = "djangorestframework-stubs-1.7.0.tar.gz", hash = "sha256:6e8a80a0716d8af02aa387dae47f8ef97b6c0efdf159d83a5918d582f8b1ea07"},
+    {file = "djangorestframework_stubs-1.7.0-py3-none-any.whl", hash = "sha256:3ac1447fc87f68fe7d8622d4725b5cef820bcc17918f36c7da3f667363fb7a43"},
 ]
 djlint = [
     {file = "djlint-1.2.0-py3-none-any.whl", hash = "sha256:08d52c58afb0d7d843e3e11ebfbc28608e18cb5eda5e0b98bbcda001213c4538"},
