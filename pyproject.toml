@@ -12,7 +12,7 @@ python = "^3.8"
 channels = "^3.0"
 channels-redis = "^3.4"
 crispy-bootstrap5 = "^0.6"
-Django = { version = "~4.0", extras = ["argon2"] }
+Django = { version = "^4.0", extras = ["argon2"] }
 django-auto-prefetching = "^0.2"
 django-cleanup = "^6.0"
 django-crispy-forms = "^1.14"
