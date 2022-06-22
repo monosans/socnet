@@ -13,6 +13,11 @@
               integrity="sha512-o/MhoRPVLExxZjCFVBsm17Pkztkzmh7Dp8k7/3JrtNCHh0AQ489kwpfA3dPSHzKDe8YCuEhxXq3Y71eb/o6amg=="
               crossorigin="anonymous"
               referrerpolicy="no-referrer"/>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
         {% if request.user.is_authenticated %}
             {% block scripts %}
             {% endblock scripts %}
