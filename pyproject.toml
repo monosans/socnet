@@ -36,7 +36,7 @@ django-stubs = "^1.12"
 djangorestframework-stubs = "^1.7"
 djlint = "^1.2"
 isort = "^5.10"
-mypy = "^0.950"
+mypy = "^0.961"
 
 [tool.black]
 line-length = 79
