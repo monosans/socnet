@@ -3,7 +3,7 @@
 {% load static i18n crispy_forms_tags %}
 
 {% block title %}
-    {% trans "Chat" %} #{{ chat_pk }}
+    {% trans "Chat" %} #{{ chat.pk }}
 {% endblock title %}
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/text_justify.css' %}"/>
@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-body py-0">
                     <div class="chat_log" id="chat-log">
-                        {% for message in messages_ %}
+                        {% for message in chat.messages.all %}
                             <div class="row mb-3">
                                 <div class="avatar-preview">
                                     {% if message.user.image %}
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    {{ chat_pk|json_script:"chat-pk" }}
+    {{ chat.pk|json_script:"chat-pk" }}
 {% endblock content %}
 {% block scripts %}
     <script defer src="{% static 'messenger/js/chat.js' %}"></script>

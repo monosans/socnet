@@ -35,9 +35,8 @@ def chat_detail_view(request: AuthedRequest, pk: int) -> HttpResponse:
         request.user.chats.prefetch_related("messages", "messages__user"),
         pk=pk,
     )
-    messages: QuerySet[models.Message] = chat.messages.all()
     form = forms.MessageCreationForm()
-    context = {"chat_pk": pk, "messages_": messages, "form": form}
+    context = {"chat": chat, "form": form}
     return render(request, "messenger/chat_detail.html", context)
 
 
