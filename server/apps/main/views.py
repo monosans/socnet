@@ -81,7 +81,7 @@ def subscription_list_view(
 @require_http_methods(["GET", "POST"])
 def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "POST":
-        if not request.user.is_authenticated:
+        if request.user.is_anonymous:
             return redirect("login")
         form = forms.PostCommentCreationForm(request.POST, request.FILES)
         if form.is_valid():

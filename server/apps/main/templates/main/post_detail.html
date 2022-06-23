@@ -68,7 +68,7 @@
         </div>
     {% endif %}
     <div class="fs-4">
-        {% if not request.user.is_authenticated %}
+        {% if request.user.is_anonymous %}
             <a class="btn badge rounded-pill bg-light text-dark"
                href="{% url 'login' %}?next={{ request.path|urlencode }}">
                 <i class="fa-regular fa-heart"></i>
@@ -167,7 +167,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="text-muted">{{ comment.date }}</div>
                     <div>
-                        {% if not request.user.is_authenticated %}
+                        {% if request.user.is_anonymous %}
                             <a class="btn badge rounded-pill bg-light text-dark fs-6"
                                href="{% url 'login' %}?next={{ request.path|urlencode }}">
                                 <i class="fa-regular fa-heart"></i>
