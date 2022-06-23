@@ -1,4 +1,4 @@
-from typing import Union
+from typing import List, Optional, Union
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -36,15 +36,15 @@ def get_user(
 
 @require_http_methods(["GET", "POST"])
 def search_users_view(request: HttpRequest) -> HttpResponse:
-    users = None
+    users: Optional[QuerySet[UserType]] = None
     if request.method == "POST":
         form = forms.UsersSearchForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            query = data["search_query"].strip()
-            fields = data["fields_to_search"]
+            query: str = data["search_query"]
+            fields: List[str] = data["fields_to_search"]
             users = User.objects.annotate(search=SearchVector(*fields)).filter(
-                search=query
+                search=query.strip()
             )
     else:
         form = forms.UsersSearchForm()
@@ -92,7 +92,7 @@ def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
             form = forms.PostCommentCreationForm()
     else:
         form = forms.PostCommentCreationForm()
-    post = get_object_or_404(
+    post: models.Post = get_object_or_404(
         models.Post.objects.select_related("user").prefetch_related(
             "likers", "comments", "comments__user", "comments__likers"
         ),
@@ -119,7 +119,7 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = forms.PostsSearchForm(request.POST)
         if form.is_valid():
-            query = form.cleaned_data["search_query"]
+            query: str = form.cleaned_data["search_query"]
             posts = (
                 models.Post.objects.select_related("user")
                 .prefetch_related("likers", "comments")
@@ -128,7 +128,7 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:
-            p = (
+            p: QuerySet[models.Post] = (
                 models.Post.objects.select_related("user")
                 .prefetch_related("likers", "comments")
                 .filter(user__in=request.user.subscriptions.all())

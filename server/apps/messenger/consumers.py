@@ -1,9 +1,9 @@
 import json
-from typing import Any, Dict
+from typing import Dict
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
-from django.urls import reverse
+from django.contrib.auth.models import AbstractBaseUser
 
 from ..users.models import User as UserType
 from . import models
@@ -20,10 +20,11 @@ async def create_message(
 
 class ChatConsumer(AsyncWebsocketConsumer):  # type: ignore[misc]
     async def connect(self) -> None:
-        if self.channel_layer is None or self.scope["user"].is_anonymous:
+        user: AbstractBaseUser = self.scope["user"]
+        if self.channel_layer is None or user.is_anonymous:
             await self.close()
             return
-        self.room_name = self.scope["url_route"]["kwargs"]["chat_pk"]
+        self.room_name = int(self.scope["url_route"]["kwargs"]["chat_pk"])
         self.room_group_name = f"chat_{self.room_name}"
         await self.channel_layer.group_add(
             self.room_group_name, self.channel_name
@@ -40,24 +41,19 @@ class ChatConsumer(AsyncWebsocketConsumer):  # type: ignore[misc]
     async def receive(self, text_data: str) -> None:
         if self.channel_layer is None:
             return
-        text_data_json = json.loads(text_data)
+        user: UserType = self.scope["user"]
+        text_data_json: Dict[str, str] = json.loads(text_data)
         message = text_data_json["message"]
-        message_obj = await create_message(
-            self.scope["user"], self.room_name, message
-        )
-        msg = {
+        message_obj = await create_message(user, self.room_name, message)
+        msg: Dict[str, str] = {
             "type": "chat_message",
             "text": message,
-            "user__username": message_obj.user.get_username(),
-            "user__image": message_obj.user.image.url
-            if message_obj.user.image
-            else None,
+            "user__username": user.get_username(),
+            "user__image": user.image.url if user.image else None,
             "date": message_obj.simple_date,
-            "user_href": reverse(
-                "user", args=(message_obj.user.get_username(),)
-            ),
+            "user_href": user.get_absolute_url(),
         }
         await self.channel_layer.group_send(self.room_group_name, msg)
 
-    async def chat_message(self, event: Dict[str, Any]) -> None:
+    async def chat_message(self, event: Dict[str, str]) -> None:
         await self.send(text_data=json.dumps(event))

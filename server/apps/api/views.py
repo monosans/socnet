@@ -26,7 +26,8 @@ class _Like(_AuthedAPIView):
     model: Type[Union[main_models.Post, main_models.PostComment]]
 
     def post(self, request: AuthedRequest) -> Response:
-        obj = get_object_or_404(self.model, pk=request.data["pk"])
+        pk = int(request.data["pk"])
+        obj = get_object_or_404(self.model, pk=pk)
         obj.likers.add(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_201_CREATED)
 
@@ -58,7 +59,8 @@ class UnlikePostComment(_Unlike):
 
 class Subscribe(_AuthedAPIView):
     def post(self, request: AuthedRequest) -> Response:
-        user = get_object_or_404(User, pk=request.data["pk"])
+        pk = int(request.data["pk"])
+        user = get_object_or_404(User, pk=pk)
         user.subscribers.add(request.user)
         return Response(status=status.HTTP_201_CREATED)
 
