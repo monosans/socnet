@@ -153,19 +153,12 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
 
 @require_http_methods(["GET", "POST"])
 def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
-    user = get_user(
-        request,
-        username,
-        "liked_posts",
-        "posts",
-        "posts__comments",
-        "posts__likers",
-        "subscribers",
-        "subscriptions",
-    )
     post_creation_form = None
     user_change_form = None
-    if request.user.is_authenticated and request.user == user:
+    if (
+        request.user.is_authenticated
+        and request.user.get_username() == username
+    ):
         if request.method == "POST":
             form_type = request.POST["_form_type"]
             if form_type == "post_creation_form":
@@ -182,9 +175,20 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
                 )
                 if user_change_form.is_valid():
                     user_change_form.save()
-        else:
+        if post_creation_form is None:
             post_creation_form = forms.PostCreationForm()
+        if user_change_form is None:
             user_change_form = forms.UserChangeForm(instance=request.user)
+    user = get_user(
+        request,
+        username,
+        "liked_posts",
+        "posts",
+        "posts__comments",
+        "posts__likers",
+        "subscribers",
+        "subscriptions",
+    )
     context = {
         "user": user,
         "post_creation_form": post_creation_form,
