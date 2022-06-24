@@ -30,7 +30,7 @@ uvicorn = { version = "^0.18", extras = ["standard"] }
 
 [tool.poetry.dev-dependencies]
 black = "^22.3"
-django-debug-toolbar = "^3.4"
+django-debug-toolbar = "^3.5"
 django-extra-checks = "^0.11"
 django-stubs = "^1.12"
 djangorestframework-stubs = "^1.7"
