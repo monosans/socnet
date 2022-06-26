@@ -20,8 +20,6 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
   PIP_DEFAULT_TIMEOUT=100 \
   # dockerize:
   DOCKERIZE_VERSION=v0.6.1 \
-  # tini:
-  TINI_VERSION=v0.19.0 \
   # poetry:
   POETRY_VERSION=1.1.13 \
   POETRY_NO_INTERACTION=1 \
@@ -39,14 +37,11 @@ RUN apt-get update && apt-get upgrade -y \
   gettext \
   git \
   libpq-dev \
+  tini \
   # https://github.com/jwilder/dockerize
   && curl -sSLO "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" \
   && tar -C /usr/local/bin -xzvf "dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" \
   && rm "dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" && dockerize --version \
-  # https://github.com/krallin/tini
-  && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
-  && curl -o /usr/local/bin/tini -sSLO "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${dpkgArch}" \
-  && chmod +x /usr/local/bin/tini && tini --version \
   # https://github.com/python-poetry/poetry
   && curl -sSL 'https://install.python-poetry.org' | python - \
   && poetry --version \
