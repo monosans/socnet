@@ -34,7 +34,7 @@ django-debug-toolbar = "^3.5"
 django-extra-checks = "^0.11"
 django-stubs = "^1.12"
 djangorestframework-stubs = "^1.7"
-djlint = "^1.2"
+djlint = "^1.3"
 isort = "^5.10"
 mypy = "^0.961"
 

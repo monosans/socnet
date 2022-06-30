@@ -533,7 +533,7 @@ compatible-mypy = ["mypy (>=0.950,<0.970)"]
 
 [[package]]
 name = "djlint"
-version = "1.2.1"
+version = "1.3.0"
 description = "HTML Template Linter and Formatter"
 category = "dev"
 optional = false
@@ -1223,7 +1223,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "d4a479c56dbe719d2bef266c65c8be39e1995957fe7305c405d695477d34adbe"
+content-hash = "5f79aee407a3b764b34dc1069c4a9c28e9f0b878c08379a6af595ca46ba3de0f"
 
 [metadata.files]
 aioredis = [
@@ -1503,8 +1503,8 @@ djangorestframework-stubs = [
     {file = "djangorestframework_stubs-1.7.0-py3-none-any.whl", hash = "sha256:3ac1447fc87f68fe7d8622d4725b5cef820bcc17918f36c7da3f667363fb7a43"},
 ]
 djlint = [
-    {file = "djlint-1.2.1-py3-none-any.whl", hash = "sha256:803939fd0f2fa073d697c280911de5dcf9f56cae890f5d37216c0f598b0ed248"},
-    {file = "djlint-1.2.1.tar.gz", hash = "sha256:f28ed1b7a88b35361a0ff302148314c8f254cfc968ac0513021903a1898344b5"},
+    {file = "djlint-1.3.0-py3-none-any.whl", hash = "sha256:0c986bf542cdac3025d431a5b15e6c3977f652f2e76e408dbb5e7aaab6b73d99"},
+    {file = "djlint-1.3.0.tar.gz", hash = "sha256:b2d8e6c0a14f88da165296f0da05795d15299b7ab0a9093d670ce9ffd867bc79"},
 ]
 docutils = [
     {file = "docutils-0.18.1-py2.py3-none-any.whl", hash = "sha256:23010f129180089fbcd3bc08cfefccb3b890b0050e1ca00c867036e9d161b98c"},
