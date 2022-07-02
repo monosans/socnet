@@ -1,22 +1,30 @@
 #!/usr/bin/env bash
 
 set -o errexit
-set -o nounset
 set -o pipefail
+set -o nounset
 
-readonly cmd="$*"
+postgres_ready() {
+	python3 <<END
+import psycopg2
 
-: "${DJANGO_DATABASE_HOST:=db}"
-: "${DJANGO_DATABASE_PORT:=5432}"
-: "${DJANGO_REDIS_HOST:=redis}"
-: "${DJANGO_REDIS_PORT:=6379}"
+try:
+    psycopg2.connect(
+        dbname="${POSTGRES_DB}",
+        user="${POSTGRES_USER}",
+        password="${POSTGRES_PASSWORD}",
+        host="${POSTGRES_HOST}",
+        port="${POSTGRES_PORT}",
+    )
+except psycopg2.OperationalError:
+    raise SystemExit(-1)
+raise SystemExit
+END
+}
 
-# Make sure that this container is started
-# after the ones with Postgres and Redis:
-dockerize \
-  -wait "tcp://${DJANGO_DATABASE_HOST}:${DJANGO_DATABASE_PORT}" \
-  -wait "tcp://${DJANGO_REDIS_HOST}:${DJANGO_REDIS_PORT}" \
-  -timeout 90s
+until postgres_ready; do
+	echo >&2 'Waiting for PostgreSQL to become available...'
+	sleep 1
+done
 
-# Evaluating passed command
-exec $cmd
+exec "$@"

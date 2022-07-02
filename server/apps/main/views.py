@@ -1,5 +1,6 @@
 from typing import List, Optional, Union
 
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
@@ -8,6 +9,7 @@ from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
 from ..users.models import User as UserType
@@ -46,6 +48,11 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
             users = User.objects.annotate(search=SearchVector(*fields)).filter(
                 search=query.strip()
             )
+        else:
+            message = "{} {}".format(
+                _("An error occurred while searching."), _("Please try again.")
+            )
+            messages.error(request, message)
     else:
         form = forms.UsersSearchForm()
     context = {"form": form, "users": users}
@@ -90,6 +97,12 @@ def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
             comment.user = request.user
             comment.save()
             form = forms.PostCommentCreationForm()
+        else:
+            message = "{} {}".format(
+                _("An error occurred while creating the comment."),
+                _("Please try again."),
+            )
+            messages.error(request, message)
     else:
         form = forms.PostCommentCreationForm()
     post: models.Post = get_object_or_404(
@@ -125,6 +138,11 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
                 .prefetch_related("likers", "comments")
                 .filter(text__search=query)
             )
+        else:
+            message = "{} {}".format(
+                _("An error occurred while searching."), _("Please try again.")
+            )
+            messages.error(request, message)
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:
@@ -169,12 +187,24 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
                     post = post_creation_form.save(commit=False)
                     post.user = request.user
                     post.save()
+                else:
+                    message = "{} {}".format(
+                        _("An error occurred while creating the post."),
+                        _("Please try again."),
+                    )
+                    messages.error(request, message)
             elif form_type == "user_change_form":
                 user_change_form = forms.UserChangeForm(
                     request.POST, request.FILES, instance=request.user
                 )
                 if user_change_form.is_valid():
                     user_change_form.save()
+                else:
+                    message = "{} {}".format(
+                        _("An error occurred while saving the profile."),
+                        _("Please try again."),
+                    )
+                    messages.error(request, message)
         if post_creation_form is None:
             post_creation_form = forms.PostCreationForm()
         if user_change_form is None:

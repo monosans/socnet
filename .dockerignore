@@ -652,11 +652,10 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/database,django,jetbrains+all,linux,macos,node,notepadpp,python,redis,sublimetext,vim,visualstudiocode,windows
 
-!config/.env
-!docker/django/entrypoint.sh
-!docker/django/gunicorn_config.py
-!docker/django/gunicorn.sh
-!locale/**/*.po
+!docker
+!locale/
+!requirements/
+!.env
 !manage.py
-!poetry.lock
 !pyproject.toml
+Dockerfile

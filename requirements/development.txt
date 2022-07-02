@@ -1,0 +1,11 @@
+-r local.txt
+
+pre-commit==2.19.0
+black==22.6.0
+isort==5.10.1
+djlint==1.3.0
+
+mypy==0.961
+django-stubs==1.12.0
+djangorestframework-stubs==1.7.0
+channels-redis==3.4.0

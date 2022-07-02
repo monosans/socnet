@@ -1,11 +1,40 @@
 {
   "scripts": {
-    "lint": "eslint server",
-    "format": "prettier --write '**/*.{js,json,md,yml}'"
+    "lint": "eslint --fix server",
+    "format": "prettier --write . '!**/*.html'"
   },
   "devDependencies": {
-    "eslint": "^8.18",
+    "eslint": "^8.19",
     "eslint-config-prettier": "^8.5",
     "prettier": "^2.7"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest"
+    },
+    "rules": {
+      "curly": "error",
+      "eqeqeq": "error",
+      "no-implicit-globals": [
+        "error",
+        {
+          "lexicalBindings": true
+        }
+      ],
+      "no-var": "error",
+      "prefer-const": "error",
+      "strict": [
+        "error",
+        "global"
+      ]
+    }
   }
 }

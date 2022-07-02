@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-22 17:46+0000\n"
+"POT-Creation-Date: 2022-07-02 08:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,475 +18,423 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: server/apps/main/forms.py:18
+msgid "Main"
+msgstr "Основное"
+
 msgid "Search posts"
 msgstr "Поиск постов"
 
-#: server/apps/main/forms.py:21 server/apps/main/forms.py:27
 msgid "Search query"
 msgstr "Поисковый запрос"
 
-#: server/apps/main/forms.py:31
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: server/apps/main/forms.py:32
 msgid "First name"
 msgstr "Имя"
 
-#: server/apps/main/forms.py:33
 msgid "Last name"
 msgstr "Фамилия"
 
-#: server/apps/main/forms.py:34
-#: server/apps/main/templates/main/user_detail.html:134
 msgid "Location"
 msgstr "Местонахождение"
 
-#: server/apps/main/forms.py:35
-#: server/apps/main/templates/main/user_detail.html:140
 msgid "About me"
 msgstr "Обо мне"
 
-#: server/apps/main/forms.py:38
 msgid "Fields to search"
 msgstr "Поля для поиска"
 
-#: server/apps/main/models.py:24 server/apps/main/models.py:73
-#: server/apps/messenger/models.py:53 server/apps/users/models.py:79
 msgid "user"
 msgstr "пользователь"
 
-#: server/apps/main/models.py:27 server/apps/main/models.py:76
-#: server/apps/messenger/models.py:61
 msgid "text"
 msgstr "текст"
 
-#: server/apps/main/models.py:30 server/apps/main/models.py:79
-#: server/apps/users/models.py:65
 msgid "image"
 msgstr "изображение"
 
-#: server/apps/main/models.py:32 server/apps/main/models.py:81
-#: server/apps/messenger/models.py:62
 msgid "date/time"
 msgstr "дата/время"
 
-#: server/apps/main/models.py:36 server/apps/main/models.py:85
 msgid "likers"
 msgstr "любители"
 
-#: server/apps/main/models.py:41 server/apps/main/models.py:67
 msgid "post"
 msgstr "пост"
 
-#: server/apps/main/models.py:42
 msgid "posts"
 msgstr "посты"
 
-#: server/apps/main/models.py:54 server/apps/main/models.py:99
 msgid "You must provide either text or an image"
 msgstr "Вы должны предоставить либо текст, либо изображение"
 
-#: server/apps/main/models.py:90
 msgid "post comment"
 msgstr "комментарий к посту"
 
-#: server/apps/main/models.py:91
 msgid "post comments"
 msgstr "комментарий к посту"
 
-#: server/apps/main/signals.py:19
 msgid "You can't subscribe to yourself."
 msgstr "Вы не можете подписаться на себя."
 
-#: server/apps/main/templates/main/liked_post_list.html:6
-#: server/apps/main/templates/main/user_detail.html:158
 msgid "Liked posts"
 msgstr "Понравившиеся посты"
 
-#: server/apps/main/templates/main/liked_post_list.html:24
 msgid "You have no liked posts."
 msgstr "У вас нет понравившихся постов."
 
-#: server/apps/main/templates/main/liked_post_list.html:26
 msgid "The user has no liked posts."
 msgstr "У пользователя нет понравившихся постов."
 
-#: server/apps/main/templates/main/post_detail.html:6
 msgid "Post"
 msgstr "Пост"
 
-#: server/apps/main/templates/main/post_detail.html:41
-#: server/apps/main/templates/main/user_detail.html:188
 msgid "Post deletion"
 msgstr "Удаление поста"
 
-#: server/apps/main/templates/main/post_detail.html:45
-#: server/apps/main/templates/main/user_detail.html:193
 msgid "Are you sure you want to delete your post?"
 msgstr "Вы уверены, что хотите удалить свой пост?"
 
-#: server/apps/main/templates/main/post_detail.html:49
-#: server/apps/main/templates/main/post_detail.html:146
-#: server/apps/main/templates/main/user_detail.html:53
-#: server/apps/main/templates/main/user_detail.html:79
-#: server/apps/main/templates/main/user_detail.html:197
 msgid "Close"
 msgstr "Закрыть"
 
-#: server/apps/main/templates/main/post_detail.html:53
-#: server/apps/main/templates/main/post_detail.html:150
-#: server/apps/main/templates/main/user_detail.html:201
 msgid "Delete"
 msgstr "Удалить"
 
-#: server/apps/main/templates/main/post_detail.html:103
-#: server/apps/main/templates/main/post_detail.html:108
 msgid "Comment"
 msgstr "Комментировать"
 
-#: server/apps/main/templates/main/post_detail.html:138
 msgid "Post comment deletion"
 msgstr "Удаление комментария к посту"
 
-#: server/apps/main/templates/main/post_detail.html:142
 msgid "Are you sure you want to delete your comment?"
 msgstr "Вы уверены, что хотите удалить свой комментарий?"
 
-#: server/apps/main/templates/main/post_list.html:6
-#: server/templates/navbar.html:19 server/templates/navbar.html:32
 msgid "Posts"
 msgstr "Посты"
 
-#: server/apps/main/templates/main/post_list.html:54
 msgid "No posts found."
 msgstr "Посты не найдены."
 
-#: server/apps/main/templates/main/post_list.html:61
 msgid "Subscribe to users you are interested in, so that their posts are displayed here."
 msgstr "Подпишитесь на интересных вам пользователей, чтобы их посты отображались здесь."
 
-#: server/apps/main/templates/main/search_users.html:6
-#: server/apps/main/templates/main/search_users.html:16
-#: server/templates/navbar.html:39
 msgid "Search users"
 msgstr "Поиск пользователей"
 
-#: server/apps/main/templates/main/search_users.html:21
 msgid "Search"
 msgstr "Поиск"
 
-#: server/apps/main/templates/main/search_users.html:46
 msgid "No users found"
 msgstr "Пользователи не найдены"
 
-#: server/apps/main/templates/main/subscriber_list.html:6
-#: server/apps/main/templates/main/user_detail.html:151
 msgid "Subscribers"
 msgstr "Подписчики"
 
-#: server/apps/main/templates/main/subscriber_list.html:38
 msgid "You have no subscribers."
 msgstr "У вас нет подписчиков."
 
-#: server/apps/main/templates/main/subscriber_list.html:40
 msgid "The user has no subscribers."
 msgstr "У пользователя нет подписчиков."
 
-#: server/apps/main/templates/main/subscription_list.html:6
-#: server/apps/main/templates/main/user_detail.html:145
-#: server/templates/navbar.html:26
 msgid "Subscriptions"
 msgstr "Подписки"
 
-#: server/apps/main/templates/main/subscription_list.html:33
-#: server/apps/main/templates/main/user_detail.html:98
-#: server/apps/main/templates/main/user_detail.html:101
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
-#: server/apps/main/templates/main/subscription_list.html:34
-#: server/apps/main/templates/main/user_detail.html:99
-#: server/apps/main/templates/main/user_detail.html:102
-#: server/apps/main/templates/main/user_detail.html:112
 msgid "Subscribe"
 msgstr "Подписаться"
 
-#: server/apps/main/templates/main/subscription_list.html:46
 msgid "You have no subscriptions."
 msgstr "У вас нет подписок."
 
-#: server/apps/main/templates/main/subscription_list.html:48
 msgid "The user has no subscriptions."
 msgstr "У пользователя нет подписок."
 
-#: server/apps/main/templates/main/user_detail.html:31
 msgid "Edit"
 msgstr "Редактировать"
 
-#: server/apps/main/templates/main/user_detail.html:37
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: server/apps/main/templates/main/user_detail.html:46
-msgid "Change password"
+msgid "Change Password"
 msgstr "Сменить пароль"
 
-#: server/apps/main/templates/main/user_detail.html:55
 msgid "Save"
 msgstr "Сохранить"
 
-#: server/apps/main/templates/main/user_detail.html:64
-#: server/apps/main/templates/main/user_detail.html:83
 msgid "Create post"
 msgstr "Создать пост"
 
-#: server/apps/main/templates/main/user_detail.html:70
 msgid "Post creation"
 msgstr "Создание поста"
 
-#: server/apps/main/templates/main/user_detail.html:94
-#: server/apps/main/templates/main/user_detail.html:108
 msgid "Write message"
 msgstr "Написать сообщение"
 
-#: server/apps/main/templates/main/user_detail.html:128
 msgid "Birth date"
 msgstr "Дата рождения"
 
-#: server/apps/messenger/models.py:16
-msgid "participants"
-msgstr "участники"
+msgid "An error occurred while searching."
+msgstr "Во время поиска произошла ошибка."
 
-#: server/apps/messenger/models.py:20 server/apps/messenger/models.py:59
-msgid "chat"
-msgstr "чат"
+msgid "Please try again."
+msgstr "Пожалуйста, попробуйте ещё раз."
 
-#: server/apps/messenger/models.py:21
-msgid "chats"
-msgstr "чаты"
+msgid "An error occurred while creating the comment."
+msgstr "При создании комментария произошла ошибка."
 
-#: server/apps/messenger/models.py:65
-msgid "message"
-msgstr "сообщение"
+msgid "An error occurred while creating the post."
+msgstr "При создании поста произошла ошибка."
 
-#: server/apps/messenger/models.py:66
-msgid "messages"
-msgstr "сообщения"
+msgid "An error occurred while saving the profile."
+msgstr "При сохранении профиля произошла ошибка."
 
-#: server/apps/messenger/signals.py:16
-msgid "The chat must have 2 participants."
-msgstr "В чате должно быть 2 участника."
-
-#: server/apps/messenger/templates/messenger/chat_detail.html:6
-msgid "Chat"
-msgstr "Чат"
-
-#: server/apps/messenger/templates/messenger/chat_detail.html:44
-msgid "Send"
-msgstr "Отправить"
-
-#: server/apps/messenger/templates/messenger/chat_list.html:6
-msgid "Chats"
-msgstr "Чаты"
-
-#: server/apps/messenger/templates/messenger/chat_list.html:44
-msgid "You have no chats."
-msgstr "У вас нет чатов."
-
-#: server/apps/users/admin.py:14
-msgid "Other"
-msgstr "Прочее"
-
-#: server/apps/users/models.py:23
-msgid "username"
-msgstr "имя пользователя"
-
-#: server/apps/users/models.py:28
-msgid "No more than 30 characters. Only lowercase letters, numbers and _. Must begin with a letter and end with a letter or number."
-msgstr "Не более 30 символов. Только строчные буквы, цифры и _. Должно начинаться с буквы и заканчиваться буквой или цифрой."
-
-#: server/apps/users/models.py:33
-msgid "A user with that username already exists."
-msgstr "Пользователь с таким именем уже существует."
-
-#: server/apps/users/models.py:37
-msgid "first name"
-msgstr "имя"
-
-#: server/apps/users/models.py:41 server/apps/users/models.py:50
-msgid "No more than 30 characters. Only English and Russian letters."
-msgstr "Не более 30 символов. Только английские и русские буквы."
-
-#: server/apps/users/models.py:46
-msgid "last name"
-msgstr "фамилия"
-
-#: server/apps/users/models.py:56
-msgid "birth date"
-msgstr "дата рождения"
-
-#: server/apps/users/models.py:62
-msgid "location"
-msgstr "местонахождение"
-
-#: server/apps/users/models.py:68
-msgid "about me"
-msgstr "обо мне"
-
-#: server/apps/users/models.py:74
-msgid "subscriptions"
-msgstr "подписки"
-
-#: server/apps/users/models.py:80
-msgid "users"
-msgstr "пользователи"
-
-#: server/apps/users/templates/users/defender_lockout.html:6
-msgid "Account locked"
-msgstr "Учётная запись заблокирована"
-
-#: server/apps/users/templates/users/defender_lockout.html:10
-msgid "Account locked: too many login attempts. Please try again later."
-msgstr "Учётная запись заблокирована: слишком много попыток входа. Пожалуйста, повторите попытку позже."
-
-#: server/apps/users/templates/users/login.html:6
-#: server/apps/users/templates/users/login.html:9
-#: server/apps/users/templates/users/login.html:17
-#: server/templates/navbar.html:48
-msgid "Log in"
-msgstr "Вход"
-
-#: server/apps/users/templates/users/login.html:14
-msgid "Forgotten your password or username?"
-msgstr "Забыли пароль или имя пользователя?"
-
-#: server/apps/users/templates/users/password_change_done.html:6
-#: server/apps/users/templates/users/password_change_done.html:10
-msgid "Password change successful"
-msgstr "Смена пароля прошла успешно"
-
-#: server/apps/users/templates/users/password_change_done.html:11
-msgid "Your password was changed."
-msgstr "Ваш пароль был изменен."
-
-#: server/apps/users/templates/users/password_change_form.html:6
-#: server/apps/users/templates/users/password_change_form.html:12
-msgid "Password change"
-msgstr "Смена пароля"
-
-#: server/apps/users/templates/users/password_change_form.html:14
-msgid "Please enter your old password, for security’s sake, and then enter your new password twice so we can verify you typed it in correctly."
-msgstr "Пожалуйста, в целях безопасности введите свой старый пароль, а затем дважды введите новый пароль, чтобы мы могли убедиться, что вы ввели его правильно."
-
-#: server/apps/users/templates/users/password_change_form.html:20
-#: server/apps/users/templates/users/password_reset_confirm.html:23
-msgid "Change my password"
-msgstr "Изменить свой пароль"
-
-#: server/apps/users/templates/users/password_reset_complete.html:6
-#: server/apps/users/templates/users/password_reset_complete.html:10
-msgid "Password reset complete"
-msgstr "Сброс пароля завершён"
-
-#: server/apps/users/templates/users/password_reset_complete.html:12
-msgid "Your password has been set.  You may go ahead and log in now."
-msgstr "Ваш пароль установлен. Теперь вы можете войти в систему."
-
-#: server/apps/users/templates/users/password_reset_confirm.html:6
-#: server/apps/users/templates/users/password_reset_form.html:6
-#: server/apps/users/templates/users/password_reset_form.html:13
-msgid "Password reset"
-msgstr "Сброс пароля"
-
-#: server/apps/users/templates/users/password_reset_confirm.html:14
-msgid "Enter new password"
-msgstr "Введите новый пароль"
-
-#: server/apps/users/templates/users/password_reset_confirm.html:16
-msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr "Пожалуйста, дважды введите новый пароль, чтобы мы могли убедиться, что вы ввели его правильно."
-
-#: server/apps/users/templates/users/password_reset_confirm.html:28
-msgid "The password reset link was invalid, possibly because it has already been used.  Please request a new password reset."
-msgstr "Ссылка на сброс пароля недействительна, возможно, потому что она уже использовалась. Пожалуйста, запросите новый сброс пароля."
-
-#: server/apps/users/templates/users/password_reset_done.html:6
-#: server/apps/users/templates/users/password_reset_done.html:12
-msgid "Password reset sent"
-msgstr "Сброс пароля отправлен"
-
-#: server/apps/users/templates/users/password_reset_done.html:15
-msgid "We’ve emailed you instructions for setting your password, if an account exists with the email you entered. You should receive them shortly."
-msgstr "Мы отправили вам инструкции по установке пароля, если существует учётная запись с указанным вами адресом электронной почты. Вы должны получить их в ближайшее время."
-
-#: server/apps/users/templates/users/password_reset_done.html:18
-msgid "If you don’t receive an email, please make sure you’ve entered the address you entered in your profile, and check your spam folder."
-msgstr "Если вы не получили электронное письмо, пожалуйста, убедитесь, что вы ввели адрес, указанный в вашем профиле, и проверьте папку со спамом."
-
-#: server/apps/users/templates/users/password_reset_form.html:15
-msgid "Forgotten your password? Enter your email address below, and we’ll email instructions for setting a new one."
-msgstr "Забыли пароль? Введите свой адрес электронной почты ниже, и мы отправим инструкции по установке нового пароля."
-
-#: server/apps/users/templates/users/password_reset_form.html:22
-msgid "Reset my password"
-msgstr "Сбросить пароль"
-
-#: server/apps/users/templates/users/register.html:6
-#: server/apps/users/templates/users/register.html:14
-#: server/templates/navbar.html:51
-msgid "Register"
-msgstr "Регистрация"
-
-#: server/apps/users/templates/users/register.html:9
-msgid "Create an account"
-msgstr "Создание учётной записи"
-
-#: server/apps/users/validators.py:11
-msgid "You cannot be older than the oldest human."
-msgstr "Вы не можете быть старше самого старого человека."
-
-#: server/apps/users/validators.py:13
-msgid "Are you from the future?"
-msgstr "Вы из будущего?"
-
-#: server/settings/common.py:101
-msgid "English"
-msgstr "Английский"
-
-#: server/settings/common.py:101
-msgid "Russian"
-msgstr "Русский"
-
-#: server/templates/400.html:6 server/templates/400.html:9
-msgid "Bad Request (400)"
-msgstr "Плохой запрос (400)"
-
-#: server/templates/403.html:6 server/templates/403.html:9
-msgid "403 Forbidden"
-msgstr "403 Запрещено"
-
-#: server/templates/404.html:6 server/templates/404.html:12
-msgid "Not Found"
-msgstr "Не найдено"
-
-#: server/templates/404.html:14
-msgid "The requested resource was not found on this server."
-msgstr "Запрашиваемый ресурс не был найден на этом сервере."
-
-#: server/templates/500.html:6 server/templates/500.html:9
-msgid "Server Error (500)"
-msgstr "Ошибка сервера (500)"
-
-#: server/templates/navbar.html:16
-msgid "My page"
-msgstr "Моя страница"
-
-#: server/templates/navbar.html:22
 msgid "Messenger"
 msgstr "Мессенджер"
 
-#: server/templates/navbar.html:44
-msgid "Log out"
-msgstr "Выйти"
+msgid "participants"
+msgstr "участники"
+
+msgid "chat"
+msgstr "чат"
+
+msgid "chats"
+msgstr "чаты"
+
+msgid "message"
+msgstr "сообщение"
+
+msgid "messages"
+msgstr "сообщения"
+
+msgid "The chat must have 2 participants."
+msgstr "В чате должно быть 2 участника."
+
+msgid "Chat"
+msgstr "Чат"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Chats"
+msgstr "Чаты"
+
+msgid "You have no chats."
+msgstr "У вас нет чатов."
+
+msgid "Other"
+msgstr "Прочее"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "username"
+msgstr "имя пользователя"
+
+msgid "No more than 30 characters. Only lowercase English letters, numbers and _. Must begin with a letter and end with a letter or number."
+msgstr "Не более 30 символов. Только строчные английские буквы, цифры и _. Должно начинаться с буквы и заканчиваться буквой или цифрой."
+
+msgid "A user with that username already exists."
+msgstr "Пользователь с таким именем уже существует."
+
+msgid "first name"
+msgstr "имя"
+
+msgid "No more than 30 characters. Only English and Russian letters and -."
+msgstr "Не более 30 символов. Только английские и русские буквы и -."
+
+msgid "last name"
+msgstr "фамилия"
+
+msgid "birth date"
+msgstr "дата рождения"
+
+msgid "location"
+msgstr "местонахождение"
+
+msgid "about me"
+msgstr "обо мне"
+
+msgid "subscriptions"
+msgstr "подписки"
+
+msgid "users"
+msgstr "пользователи"
+
+msgid "You cannot be older than the oldest human."
+msgstr "Вы не можете быть старше самого старого человека."
+
+msgid "Are you from the future?"
+msgstr "Вы из будущего?"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Russian"
+msgstr "Русский"
+
+msgid "Bad Request (400)"
+msgstr "Плохой запрос (400)"
+
+msgid "Forbidden (403)"
+msgstr "Запрещено (403)"
+
+msgid "You're not allowed to access this page."
+msgstr "Вы не имеете права доступа к этой странице."
+
+msgid "Not Found (404)"
+msgstr "Не найдено (404)"
+
+msgid "The requested resource was not found."
+msgstr "Запрашиваемый ресурс не найден."
+
+msgid "Server Error (500)"
+msgstr "Ошибка сервера (500)"
+
+msgid "Something went wrong."
+msgstr "Что-то пошло не так."
+
+msgid "Account Inactive"
+msgstr "Учётная запись неактивна"
+
+msgid "This account is inactive."
+msgstr "Эта учётная запись неактивна."
+
+msgid "E-mail Addresses"
+msgstr "Адреса электронной почты"
+
+msgid "The following e-mail addresses are associated with your account:"
+msgstr "С вашей учётной записью связаны следующие адреса электронной почты:"
+
+msgid "Verified"
+msgstr "Подтверждён"
+
+msgid "Unverified"
+msgstr "Не подтвержден"
+
+msgid "Primary"
+msgstr "Основной"
+
+msgid "Make Primary"
+msgstr "Сделать основным"
+
+msgid "Re-send Verification"
+msgstr "Переотправить подтверждение"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr "Вы действительно хотите удалить выбранный адрес электронной почты?"
+
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc."
+msgstr "В настоящее время у вас не установлен адрес электронной почты. Вам следует добавить адрес электронной почты, чтобы вы могли получать уведомления, сбрасывать пароль и т.д."
+
+msgid "Add E-mail Address"
+msgstr "Добавить адрес электронной почты"
+
+msgid "Add E-mail"
+msgstr "Добавить адрес электронной почты"
+
+msgid "Confirm E-mail Address"
+msgstr "Подтвердить адрес электронной почты"
+
+#, python-format
+msgid "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail address for user %(user_display)s."
+msgstr "Пожалуйста, подтвердите, что <a href=\"mailto:%(email)s\">%(email)s</a> является адресом электронной почты пользователя %(user_display)s."
+
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#, python-format
+msgid "This e-mail confirmation link expired or is invalid. Please <a href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr "Срок действия этой ссылки на подтверждение электронной почты истек или она недействительна. Пожалуйста, <a href=\"%(email_url)s\">отправьте новый запрос на подтверждение электронной почты</a>."
+
+msgid "Sign In"
+msgstr "Вход"
+
+#, python-format
+msgid "If you have not created an account yet, then please <a href=\"%(signup_url)s\">sign up</a> first."
+msgstr "Если вы ещё не создали учётную запись, то сначала <a href=\"%(signup_url)s\">зарегистрируйтесь</a>."
+
+msgid "Forgot Password?"
+msgstr "Забыли пароль?"
+
+msgid "Sign Out"
+msgstr "Выход"
+
+msgid "Are you sure you want to sign out?"
+msgstr "Вы уверены, что хотите выйти?"
+
+msgid "Password Reset"
+msgstr "Сброс пароля"
+
+msgid "Forgotten your password? Enter your e-mail address below, and we'll send you an e-mail allowing you to reset it."
+msgstr "Забыли пароль? Введите свой адрес электронной почты ниже, и мы вышлем вам письмо, по которому вы сможете его сбросить."
+
+msgid "Reset My Password"
+msgstr "Сбросить пароль"
+
+msgid "We have sent you an e-mail. If you have not received it please check your spam folder."
+msgstr "Мы отправили вам электронное письмо. Если вы его не получили, проверьте папку \"Спам\"."
+
+msgid "Bad Token"
+msgstr "Плохой токен"
+
+#, python-format
+msgid "The password reset link was invalid, possibly because it has already been used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</a>."
+msgstr "Ссылка на сброс пароля недействительна, возможно, потому что она уже использовалась. Пожалуйста, запросите <a href=\"%(passwd_reset_url)s\">новый сброс пароля</a>."
+
+msgid "Your password is now changed."
+msgstr "Теперь ваш пароль изменён."
+
+msgid "Set Password"
+msgstr "Установить пароль"
+
+msgid "Signup"
+msgstr "Регистрация"
+
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#, python-format
+msgid "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr "Уже есть учётная запись? Тогда, пожалуйста, <a href=\"%(login_url)s\">войдите</a>."
+
+msgid "Sign Up Closed"
+msgstr "Регистрация закрыта"
+
+msgid "We are sorry, but the sign up is currently closed."
+msgstr "Мы сожалеем, но в настоящее время регистрация закрыта."
+
+msgid "Note"
+msgstr "Примечание"
+
+#, python-format
+msgid "you are already logged in as %(user_display)s."
+msgstr "вы уже вошли в систему под именем %(user_display)s."
+
+msgid "Verify Your E-mail Address"
+msgstr "Подтвердите свой адрес электронной почты"
+
+msgid "We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder."
+msgstr "Мы отправили вам электронное письмо для проверки. Перейдите по указанной ссылке, чтобы завершить процесс регистрации. Если вы не видите письмо с подтверждением в своём основном почтовом ящике, проверьте папку \"Спам\"."
+
+msgid "This part of the site requires us to verify that you are who you claim to be. For this purpose, we require that you verify ownership of your e-mail address."
+msgstr "Эта часть сайта требует, чтобы мы проверили, что вы являетесь тем, за кого себя выдаёте. Для этого мы требуем, чтобы вы подтвердили принадлежность вашего адреса электронной почты."
+
+msgid "We have sent an e-mail to you for verification. Please click on the link inside that e-mail. If you do not see the verification e-mail in your main inbox, check your spam folder."
+msgstr "Мы отправили вам электронное письмо для проверки. Пожалуйста, нажмите на ссылку в этом письме. Если вы не видите письмо с подтверждением в своём основном почтовом ящике, проверьте папку \"Спам\"."
+
+#, python-format
+msgid "you can still <a href=\"%(email_url)s\">change your e-mail address</a>."
+msgstr "вы всё ещё можете <a href=\"%(email_url)s\">изменить свой адрес электронной почты</a>."
+
+msgid "My page"
+msgstr "Моя страница"

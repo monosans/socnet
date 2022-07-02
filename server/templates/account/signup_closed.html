@@ -1,0 +1,11 @@
+{% extends "card.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  {% trans "Sign Up Closed" %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="text-center mb-4">{% trans "Sign Up Closed" %}</h3>
+  <div>{% trans "We are sorry, but the sign up is currently closed." %}</div>
+{% endblock card_body %}

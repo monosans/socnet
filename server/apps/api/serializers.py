@@ -1,4 +1,3 @@
-from defender.models import AccessAttempt
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
@@ -88,12 +87,6 @@ class ChatSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = messenger_models.Chat
-        fields = "__all__"
-
-
-class AccessAttemptSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = AccessAttempt
         fields = "__all__"
 
 

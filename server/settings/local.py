@@ -1,15 +1,15 @@
 import socket
 
-from .common import DATABASES, INSTALLED_APPS, MIDDLEWARE
-from .config import BASE_DIR
+from .base import *
 
 DEBUG = True
 
-INSTALLED_APPS += ("debug_toolbar", "extra_checks")
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+INSTALLED_APPS += ["debug_toolbar", "extra_checks"]
+MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
-# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = [
     "{}.1".format(ip[: ip.rfind(".")])
     for ip in socket.gethostbyname_ex(socket.gethostname())[2]
@@ -20,9 +20,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 EXTRA_CHECKS = {
     "include_apps": [
         "server.apps.api",
+        "server.apps.main",
         "server.apps.messenger",
         "server.apps.users",
-        "server.apps.main",
     ],
     "checks": [
         "drf-model-serializer-extra-kwargs",
@@ -42,6 +42,3 @@ EXTRA_CHECKS = {
         "no-unique-together",
     ],
 }
-
-# https://docs.djangoproject.com/en/4.0/ref/databases/#caveats
-DATABASES["default"]["CONN_MAX_AGE"] = 0

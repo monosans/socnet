@@ -57,7 +57,6 @@ class UserChangeForm(auth_forms.UserChangeForm[UserType]):
     class Meta(auth_forms.UserChangeForm.Meta):
         model = User
         fields = (
-            "email",
             "first_name",
             "last_name",
             "image",

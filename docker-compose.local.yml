@@ -1,0 +1,30 @@
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+      target: python-local-stage
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+        - BUILD_ENVIRONMENT=local
+    image: local_django
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file: ./.env
+    command: python3 -Wd manage.py runserver 0.0.0.0:8000
+
+  postgres:
+    image: postgres:14
+    restart: unless-stopped
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    env_file: ./.env
+
+volumes:
+  local_postgres_data:

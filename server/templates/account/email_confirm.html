@@ -1,0 +1,28 @@
+{% extends "card.html" %}
+
+{% load i18n account %}
+
+{% block title %}
+  {% trans "Confirm E-mail Address" %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="mb-4 text-center">{% trans "Confirm E-mail Address" %}</h3>
+  {% if confirmation %}
+    <div class="mb-3 text-break">
+      {% user_display confirmation.email_address.user as user_display %}
+      {% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
+    </div>
+    <form method="post"
+          action="{% url 'account_confirm_email' confirmation.key %}">
+      {% csrf_token %}
+      <input class="btn btn-primary w-100"
+             type="submit"
+             value="{% trans 'Confirm' %}"/>
+    </form>
+  {% else %}
+    <div>
+      {% url "account_email" as email_url %}
+      {% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}
+    </div>
+  {% endif %}
+{% endblock card_body %}

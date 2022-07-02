@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 from . import validators
 
-EN_RU_REGEX = re.compile(r"^(?:[A-z]+|[А-я]+)$")
+EN_RU_REGEX = re.compile(r"^(?:[a-zA-Z\-]+|[а-яА-Я\-]+)$")
 
 
 def user_image(instance: "User", filename: str) -> str:
@@ -25,10 +25,11 @@ class User(AbstractUser):
         unique=True,
         db_index=True,
         help_text=_(
-            "No more than 30 characters. Only lowercase letters, numbers and"
-            + " _. Must begin with a letter and end with a letter or number."
+            "No more than 30 characters. "
+            + "Only lowercase English letters, numbers and _. "
+            + "Must begin with a letter and end with a letter or number."
         ),
-        validators=(RegexValidator(r"^(?:[a-z][a-z\d_]*[a-z\d]|[a-z])$"),),
+        validators=(RegexValidator(r"^(?:[a-z]|[a-z][a-z\d_]*[a-z\d])$"),),
         error_messages={
             "unique": _("A user with that username already exists.")
         },
@@ -38,7 +39,8 @@ class User(AbstractUser):
         max_length=30,
         blank=True,
         help_text=_(
-            "No more than 30 characters. Only English and Russian letters."
+            "No more than 30 characters. "
+            + "Only English and Russian letters and -."
         ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
@@ -47,7 +49,8 @@ class User(AbstractUser):
         max_length=30,
         blank=True,
         help_text=_(
-            "No more than 30 characters. Only English and Russian letters."
+            "No more than 30 characters. "
+            + "Only English and Russian letters and -."
         ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
@@ -65,7 +68,7 @@ class User(AbstractUser):
         verbose_name=_("image"), upload_to=user_image, blank=True
     )
     about = models.TextField(
-        verbose_name=_("about me"), max_length=1024, blank=True
+        verbose_name=_("about me"), max_length=4096, blank=True
     )
     subscriptions = models.ManyToManyField(
         to="self",
@@ -87,13 +90,10 @@ class User(AbstractUser):
 
     @property
     def full_name_in_brackets(self) -> str:
-        if self.first_name and self.last_name:
-            return f"({self.first_name} {self.last_name})"
-        if self.first_name:
-            return f"({self.first_name})"
-        if self.last_name:
-            return f"({self.last_name})"
-        return ""
+        full_name = self.get_full_name()
+        if not full_name:
+            return ""
+        return f"({full_name})"
 
     @property
     def age(self) -> Optional[int]:

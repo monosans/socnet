@@ -1,16 +1,11 @@
 {% extends "card.html" %}
 
-{% load static i18n %}
+{% load i18n %}
 
 {% block title %}
-    {% trans "Not Found" %}
+  {% trans "Not Found (404)" %}
 {% endblock title %}
-{% block links %}
-    <link rel="stylesheet" href="{% static 'css/text_justify.css' %}"/>
-{% endblock links %}
 {% block card_body %}
-    <h3 class="mb-4 text-center">{% trans "Not Found" %}</h3>
-    <div class="text-justify text-break">
-        {% trans "The requested resource was not found on this server." %}
-    </div>
+  <h3 class="mb-4 text-center">{% trans "Not Found (404)" %}</h3>
+  <div>{% trans "The requested resource was not found." %}</div>
 {% endblock card_body %}

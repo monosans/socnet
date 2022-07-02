@@ -1,0 +1,13 @@
+{% extends "card.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  {% trans "Verify Your E-mail Address" %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="text-center mb-4">{% trans "Verify Your E-mail Address" %}</h3>
+  <div>
+    {% trans "We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder." %}
+  </div>
+{% endblock card_body %}

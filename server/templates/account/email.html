@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load static i18n crispy_forms_tags %}
+
+{% block title %}
+  {% trans "E-mail Addresses" %}
+{% endblock title %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="text-center mb-4">{% trans "E-mail Addresses" %}</h3>
+          {% if user.emailaddress_set.all %}
+            <div class="mb-3">
+              {% trans "The following e-mail addresses are associated with your account:" %}
+            </div>
+            <form action="{% url 'account_email' %}" method="post">
+              {% csrf_token %}
+              <div class="mb-2">
+                {% for emailaddress in user.emailaddress_set.all %}
+                  <div>
+                    <input type="radio"
+                           name="email"
+                           {% if emailaddress.primary or user.emailaddress_set.count == 1 %}
+                             checked="checked"
+                           {% endif %}
+                           value="{{ emailaddress.email }}"/>
+                    <span>{{ emailaddress.email }}</span>
+                    {% if emailaddress.verified %}
+                      <span>{% trans "Verified" %}</span>
+                    {% else %}
+                      <span>{% trans "Unverified" %}</span>
+                    {% endif %}
+                    {% if emailaddress.primary %}
+                      <span>{% trans "Primary" %}</span>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+              <input class="btn btn-primary"
+                     type="submit"
+                     name="action_primary"
+                     value="{% trans 'Make Primary' %}"/>
+              <input class="btn btn-primary"
+                     type="submit"
+                     name="action_send"
+                     value="{% trans 'Re-send Verification' %}"/>
+              <div class="btn btn-danger"
+                   data-bs-toggle="modal"
+                   data-bs-target="#emailRemove">
+                {% trans "Remove" %}
+              </div>
+              <div class="modal fade" id="emailRemove" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <div class="btn-close" data-bs-dismiss="modal"></div>
+                    </div>
+                    <div class="modal-body">
+                      {% trans "Do you really want to remove the selected e-mail address?" %}
+                    </div>
+                    <div class="modal-footer">
+                      <div class="btn btn-secondary" data-bs-dismiss="modal">
+                        {% trans "Close" %}
+                      </div>
+                      <input type="submit"
+                             class="btn btn-danger"
+                             name="action_remove"
+                             value="{% trans 'Remove' %}"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          {% else %}
+            <div>
+              <strong>{% trans "Warning" %}:</strong> {% trans "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {% if can_add_email %}
+        <div class="card mt-4">
+          <div class="card-body">
+            <h4 class="text-center">{% trans "Add E-mail Address" %}</h4>
+            <form method="post" action="{% url 'account_email' %}">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <input class="btn btn-primary w-100"
+                     name="action_add"
+                     type="submit"
+                     value="{% trans 'Add E-mail' %}"/>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}

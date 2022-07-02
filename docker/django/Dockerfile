@@ -1,85 +1,70 @@
-# This Dockerfile uses multi-stage build to customize DEV and PROD images:
-# https://docs.docker.com/develop/develop-images/multistage-build/
+FROM python:3-slim as python
 
-FROM python:3-slim as development_build
+ENV PYTHONUNBUFFERED=1 \
+  PYTHONDONTWRITEBYTECODE=1
 
-ARG DJANGO_ENV
-ARG USER=web
-ARG USER_ID=1000
-ARG USER_GID=1000
+WORKDIR /app
 
-ENV DJANGO_ENV=${DJANGO_ENV} \
-  # python:
-  PYTHONFAULTHANDLER=1 \
-  PYTHONUNBUFFERED=1 \
-  PYTHONHASHSEED=random \
-  PYTHONDONTWRITEBYTECODE=1 \
-  # pip:
-  PIP_NO_CACHE_DIR=1 \
-  PIP_DISABLE_PIP_VERSION_CHECK=1 \
-  PIP_DEFAULT_TIMEOUT=100 \
-  # dockerize:
-  DOCKERIZE_VERSION=v0.6.1 \
-  # poetry:
-  POETRY_VERSION=1.1.13 \
-  POETRY_NO_INTERACTION=1 \
-  POETRY_VIRTUALENVS_CREATE=false \
-  POETRY_CACHE_DIR='/var/cache/pypoetry' \
-  POETRY_HOME='/usr/local'
+FROM python as python-build-stage
 
-SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
+ARG BUILD_ENVIRONMENT
 
-RUN apt-get update && apt-get upgrade -y \
+# hadolint ignore=DL3008
+RUN apt-get update \
   && apt-get install --no-install-recommends -y \
-  bash \
+  # required for building Python packages
   build-essential \
-  curl \
-  gettext \
-  git \
+  # required for psycopg2
+  libpq-dev
+
+# Copy requirements to cache them
+COPY ./requirements .
+
+# Create wheels
+RUN pip wheel --progress-bar off --no-color --wheel-dir /usr/src/app/wheels \
+  -r "${BUILD_ENVIRONMENT}".txt
+
+FROM python as python-local-stage
+
+ARG BUILD_ENVIRONMENT
+ARG UID
+ARG GID
+
+# hadolint ignore=DL3008
+RUN groupadd -g "${GID}" -r django \
+  && useradd -g django -l -r -u "${UID}" django \
+  && if [ "${BUILD_ENVIRONMENT}" = 'production' ]; \
+  then mkdir -p /var/www/django/static /var/www/django/media \
+  && chown django:django /var/www/django/static /var/www/django/media; fi \
+  && apt-get update \
+  && apt-get install --no-install-recommends -y \
+  # required for psycopg2
   libpq-dev \
-  tini \
-  # https://github.com/jwilder/dockerize
-  && curl -sSLO "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" \
-  && tar -C /usr/local/bin -xzvf "dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" \
-  && rm "dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" && dockerize --version \
-  # https://github.com/python-poetry/poetry
-  && curl -sSL 'https://install.python-poetry.org' | python - \
-  && poetry --version \
-  # Cleaning cache:
+  # i18n
+  gettext \
+  # cleaning up
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+  && apt-get clean -y \
+  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /code
+# Copy wheels from build-stage
+COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 
-RUN groupadd -r ${USER} --gid ${USER_GID} && useradd --uid ${USER_ID} -d /code -r -g ${USER} ${USER} \
-  && chown ${USER}:${USER} -R /code \
-  && mkdir -p /var/www/django/static /var/www/django/media \
-  && chown ${USER}:${USER} /var/www/django/static /var/www/django/media
+# Install wheels
+RUN pip install --no-cache-dir --no-index --progress-bar off --no-color \
+  --find-links=/wheels/ /wheels/* \
+  && rm -rf /wheels/
 
-# Copy only requirements, to cache them in docker layer
-COPY --chown=web:web ./poetry.lock ./pyproject.toml /code/
+COPY --chown=django:django ./docker/django/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Project initialization:
-RUN echo "$DJANGO_ENV" && poetry version \
-  # Install deps:
-  && poetry run pip install -U pip \
-  && poetry install \
-  $(if [ "$DJANGO_ENV" = 'production' ]; then echo '--no-dev'; fi) \
-  --no-interaction --no-ansi \
-  # Cleaning poetry installation's cache for production:
-  && if [ "$DJANGO_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
+USER django
 
-# This is a special case. We need to run this script as an entry point:
-COPY ./docker/django/entrypoint.sh /docker-entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
-# Setting up proper permissions:
-RUN chmod +x '/docker-entrypoint.sh'
+FROM python-local-stage AS python-production-stage
 
-# Running as non-root user:
-USER $USER
+COPY --chown=django:django ./docker/django/start.sh /start.sh
+RUN chmod +x /start.sh
 
-# We customize how our app is loaded with the custom entrypoint:
-ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
-
-FROM development_build AS production_build
-COPY --chown=web:web . /code
+COPY --chown=django:django . .

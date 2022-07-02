@@ -5,7 +5,7 @@ from django.db.utils import IntegrityError
 from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
-from ..messenger.models import Chat
+from .models import Chat
 
 
 @receiver(m2m_changed, sender=Chat.participants.through)

@@ -43,7 +43,7 @@ class Post(models.Model):
         ordering = ("-pk",)
 
     def __str__(self) -> str:
-        return "#{} ({})".format(self.pk, self.user)
+        return f"#{self.pk} ({self.user})"
 
     def get_absolute_url(self) -> str:
         return reverse("post", args=(self.pk,))
@@ -73,7 +73,7 @@ class PostComment(models.Model):
         verbose_name=_("user"),
     )
     text = models.TextField(
-        verbose_name=_("text"), max_length=1024, blank=True
+        verbose_name=_("text"), max_length=4096, blank=True
     )
     image = models.ImageField(
         verbose_name=_("image"), upload_to=post_comment_image, blank=True
@@ -91,7 +91,7 @@ class PostComment(models.Model):
         verbose_name_plural = _("post comments")
 
     def __str__(self) -> str:
-        return "#{} ({} -> {})".format(self.pk, self.user, self.post)
+        return f"#{self.pk} ({self.user} -> {self.post})"
 
     def clean(self) -> None:
         if not self.text and not self.image:

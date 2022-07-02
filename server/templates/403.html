@@ -3,8 +3,9 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "403 Forbidden" %}
+  {% trans "Forbidden (403)" %}
 {% endblock title %}
 {% block card_body %}
-    <h3 class="text-center">{% trans "403 Forbidden" %}</h3>
+  <h3 class="mb-4 text-center">{% trans "Forbidden (403)" %}</h3>
+  <div >{% trans "You're not allowed to access this page." %}</div>
 {% endblock card_body %}

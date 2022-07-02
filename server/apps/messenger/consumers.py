@@ -2,15 +2,20 @@ from typing import Any, Dict, Union
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from channels_redis.core import RedisChannelLayer
+from channels.layers import InMemoryChannelLayer
 from django.contrib.auth.models import AbstractBaseUser, AnonymousUser
 
 from ..users.models import User as UserType
 from . import models
 
+try:
+    from channels_redis.core import RedisChannelLayer
+except ImportError:
+    pass
+
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
-    channel_layer: RedisChannelLayer
+    channel_layer: Union["RedisChannelLayer", InMemoryChannelLayer]
 
     async def connect(self) -> None:
         user: Union[AbstractBaseUser, AnonymousUser] = self.scope["user"]

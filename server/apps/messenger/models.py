@@ -39,7 +39,7 @@ class Chat(models.Model):
 
     @cached_property
     def last_message(self) -> Optional["Message"]:
-        messages = self.messages.all()
+        messages: models.QuerySet["Message"] = self.messages.all()
         if not messages:
             return None
         return next(reversed(messages))
@@ -58,7 +58,7 @@ class Message(models.Model):
         related_name="messages",
         verbose_name=_("chat"),
     )
-    text = models.TextField(verbose_name=_("text"), max_length=2048)
+    text = models.TextField(verbose_name=_("text"), max_length=4096)
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
 
     class Meta:
@@ -66,8 +66,8 @@ class Message(models.Model):
         verbose_name_plural = _("messages")
 
     def __str__(self) -> str:
-        return "#{} ({} -> {})".format(
-            self.pk, self.user, self.chat.get_companion(self.user)
+        return (
+            f"#{self.pk} ({self.user} -> {self.chat.get_companion(self.user)})"
         )
 
     @property

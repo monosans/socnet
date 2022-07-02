@@ -1,6 +1,6 @@
 # SocNet
 
-Social network written in Django Framework as a portfolio project.
+Social network written in Django Framework.
 
 ## What can users do?
 
@@ -13,12 +13,17 @@ Social network written in Django Framework as a portfolio project.
 
 ## Main technologies used
 
+- Docker
+- Docker Compose
+
 Backend:
 
-- Python
-- Django
+- Python 3.8+
+- Django 4.0
 - Django REST framework (DRF)
 - Django Channels (WebSockets)
+- Django Allauth
+- Django environ
 - PostgreSQL
 - Redis
 - Gunicorn + Uvicorn
@@ -26,13 +31,9 @@ Backend:
 Frontend:
 
 - HTML + Django template language
-- Bootstrap CSS
+- Bootstrap CSS 5
 - JavaScript
-
-Misc:
-
-- Docker
-- Poetry
+- Font Awesome 6
 
 ## Supported languages
 
@@ -40,25 +41,26 @@ English and Russian languages ​​are supported. The language is selected base
 
 ## Installation
 
-[Install `docker` and `docker-compose`](https://docs.docker.com/engine/install/).
+[Install `Docker` and `Docker Compose`](https://docs.docker.com/engine/install/).
 
 ### Configuration
 
-Copy the `config/.env.template` file to `config/.env`. Set the settings you need in the `config/.env` file.
+Copy the `.env.template` file to `.env`. Set the settings you need in the `.env` file.
 
 ### Development
 
 ```bash
-docker compose build
-docker compose run --rm web python manage.py migrate
-docker compose up
+docker compose -f docker-compose.local.yml build
+docker compose -f docker-compose.local.yml run --rm django python manage.py migrate
+docker compose -f docker-compose.local.yml run --rm django python manage.py compilemessages
+docker compose -f docker-compose.local.yml up
 ```
 
 ### Production
 
-To run this in production, you need to specify a domain name in `config/.env`. An SSL certificate will be obtained automatically.
+To run this in production, you need to specify a domain name and email settings in `.env`.
 
 ```bash
-docker compose -f docker-compose.yml -f docker/docker-compose.prod.yml build
-docker compose -f docker-compose.yml -f docker/docker-compose.prod.yml up -d
+docker compose -f docker-compose.production.yml build
+docker compose -f docker-compose.production.yml up -d
 ```

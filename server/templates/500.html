@@ -3,8 +3,9 @@
 {% load i18n %}
 
 {% block title %}
-    {% trans "Server Error (500)" %}
+  {% trans "Server Error (500)" %}
 {% endblock title %}
 {% block card_body %}
-    <h3 class="text-center">{% trans "Server Error (500)" %}</h3>
+  <h3 class="mb-4 text-center">{% trans "Server Error (500)" %}</h3>
+  <div>{% trans "Something went wrong." %}</div>
 {% endblock card_body %}

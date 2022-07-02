@@ -1,6 +1,5 @@
 from typing import Type, Union
 
-from defender.models import AccessAttempt
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
@@ -112,12 +111,6 @@ class GroupViewset(AutoPrefetchModelViewSet):
     queryset = auth_models.Group.objects.all()
     serializer_class = serializers.GroupSerializer
     search_fields = ["name", "permissions__name", "permissions__codename"]
-
-
-class AccessAttemptViewset(AutoPrefetchModelViewSet):
-    queryset = AccessAttempt.objects.all()
-    serializer_class = serializers.AccessAttemptSerializer
-    search_fields = ["ip_address", "username"]
 
 
 class PermissionViewset(AutoPrefetchModelViewSet):
