@@ -47,10 +47,6 @@ repos:
         additional_dependencies:
           - eslint
           - eslint-config-prettier
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.10.0
-    hooks:
-      - id: hadolint
   - repo: https://github.com/Riverside-Healthcare/djLint
     rev: v1.3.0
     hooks:
