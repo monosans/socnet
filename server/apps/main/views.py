@@ -14,26 +14,9 @@ from django.views.decorators.http import require_http_methods
 
 from ..users.models import User as UserType
 from ..users.types import AuthedRequest
-from . import forms, models
+from . import forms, models, services
 
 User = get_user_model()
-
-
-def get_user(
-    request: HttpRequest, username: str, *prefetch_related: str
-) -> UserType:
-    if (
-        len(prefetch_related) < 2
-        and request.user.is_authenticated
-        and request.user.get_username() == username
-    ):
-        return request.user
-    qs = (
-        User.objects.prefetch_related(*prefetch_related)
-        if prefetch_related
-        else User
-    )
-    return get_object_or_404(qs, username=username)  # type: ignore[arg-type]
 
 
 @require_http_methods(["GET", "POST"])
@@ -70,7 +53,7 @@ def index(request: AuthedRequest) -> HttpResponse:
 def subscriber_list_view(
     request: AuthedRequest, username: str
 ) -> HttpResponse:
-    user = get_user(request, username, "subscribers")
+    user = services.get_user(request, username, "subscribers")
     context = {"user": user}
     return render(request, "main/subscriber_list.html", context)
 
@@ -80,7 +63,7 @@ def subscriber_list_view(
 def subscription_list_view(
     request: AuthedRequest, username: str
 ) -> HttpResponse:
-    user = get_user(request, username, "subscriptions")
+    user = services.get_user(request, username, "subscriptions")
     context = {"user": user}
     return render(request, "main/subscription_list.html", context)
 
@@ -209,7 +192,7 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
             post_creation_form = forms.PostCreationForm()
         if user_change_form is None:
             user_change_form = forms.UserChangeForm(instance=request.user)
-    user = get_user(
+    user = services.get_user(
         request,
         username,
         "liked_posts",
@@ -238,7 +221,7 @@ def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 
 @require_http_methods(["GET"])
 def liked_post_list_view(request: HttpRequest, username: str) -> HttpResponse:
-    user = get_user(
+    user = services.get_user(
         request,
         username,
         "liked_posts",
