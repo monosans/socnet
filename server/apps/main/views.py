@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
 from django.core.paginator import Page, Paginator
-from django.db.models import QuerySet
+from django.db.models import Count, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -170,6 +170,7 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
                     post = post_creation_form.save(commit=False)
                     post.user = request.user
                     post.save()
+                    post_creation_form = forms.PostCreationForm()
                 else:
                     message = "{} {}".format(
                         _("An error occurred while creating the post."),
@@ -192,15 +193,14 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
             post_creation_form = forms.PostCreationForm()
         if user_change_form is None:
             user_change_form = forms.UserChangeForm(instance=request.user)
-    user = services.get_user(
-        request,
-        username,
-        "liked_posts",
-        "posts",
-        "posts__comments",
-        "posts__likers",
-        "subscribers",
-        "subscriptions",
+    user: UserType = get_object_or_404(
+        User.objects.prefetch_related(
+            "posts", "posts__comments", "posts__likers", "subscribers"
+        ).annotate(
+            liked_posts_count=Count("liked_posts"),
+            subscriptions_count=Count("subscriptions"),
+        ),
+        username=username,
     )
     context = {
         "user": user,

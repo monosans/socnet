@@ -3,7 +3,7 @@
 {% load static i18n %}
 
 {% block title %}
-  {% trans "Liked posts" %}
+  {% trans "Liked posts" %} - {{ user.get_username }}
 {% endblock title %}
 {% block links %}
   {% include "main/inc/font_awesome.html" %}

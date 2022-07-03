@@ -13,7 +13,7 @@ def upload_date() -> str:
 
 
 def post_image(instance: "Post", filename: str) -> str:
-    return f"user_{instance.user.pk}/posts/{upload_date()}/{filename}"
+    return f"user_{instance.user_id}/posts/{upload_date()}/{filename}"
 
 
 class Post(models.Model):
@@ -56,7 +56,7 @@ class Post(models.Model):
 
 
 def post_comment_image(instance: "PostComment", filename: str) -> str:
-    return f"user_{instance.user.pk}/comments/{upload_date()}/{filename}"
+    return f"user_{instance.user_id}/comments/{upload_date()}/{filename}"
 
 
 class PostComment(models.Model):
