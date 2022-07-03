@@ -40,7 +40,7 @@ repos:
       - id: prettier
         exclude_types: [html]
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.18.0
+    rev: v8.19.0
     hooks:
       - id: eslint
         args: [--fix]
