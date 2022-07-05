@@ -134,16 +134,19 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
                 .prefetch_related("likers", "comments")
                 .filter(user__in=request.user.subscriptions.all())
             )
-            page = request.GET.get("page", "1")
-            paginator = Paginator(p, 5)
-            if paginator.num_pages < int(page):
-                # If the user sets a page number greater than the
-                # last page number, we redirect him to the last page.
-                url = "{}?page={}".format(
-                    reverse("posts"), paginator.num_pages
-                )
-                return redirect(url)
-            posts = paginator.get_page(page)
+            paginator = Paginator(p, per_page=5)
+            try:
+                page = int(request.GET["page"])
+            except (KeyError, ValueError):
+                page = 1
+            else:
+                if page < 1:
+                    page = 1
+                elif page > paginator.num_pages:
+                    # If the user sets a page number greater than the
+                    # last page number, show him the last page.
+                    page = paginator.num_pages
+            posts = paginator.page(page)
             if paginator.num_pages > 1:
                 page_range = posts.paginator.get_elided_page_range(
                     page, on_each_side=1, on_ends=1
