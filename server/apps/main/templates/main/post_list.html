@@ -52,7 +52,9 @@
           <div class="card-body">
             <div class="text-center">
               {% if request.method == "POST" %}
-                {% trans "No posts found." %}
+                {% if form.is_valid %}
+                  {% trans "No posts found." %}
+                {% endif %}
               {% else %}
                 {% trans "Subscribe to users you are interested in, so that their posts are displayed here." %}
               {% endif %}

@@ -31,11 +31,6 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
             users = User.objects.annotate(search=SearchVector(*fields)).filter(
                 search=query.strip()
             )
-        else:
-            message = "{} {}".format(
-                _("An error occurred while searching."), _("Please try again.")
-            )
-            messages.error(request, message)
     else:
         form = forms.UsersSearchForm()
     context = {"form": form, "users": users}
@@ -121,11 +116,6 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
                 .prefetch_related("likers", "comments")
                 .filter(text__search=query)
             )
-        else:
-            message = "{} {}".format(
-                _("An error occurred while searching."), _("Please try again.")
-            )
-            messages.error(request, message)
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:
