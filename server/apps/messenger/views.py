@@ -1,5 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.db.models import QuerySet
+from django.db.models import Prefetch, QuerySet
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
@@ -7,22 +8,29 @@ from django.views.decorators.http import require_http_methods
 from ..users.types import AuthedRequest
 from . import forms, models
 
+User = get_user_model()
+
 
 @login_required
 @require_http_methods(["GET"])
 def chat_list_view(request: AuthedRequest) -> HttpResponse:
-    chats: QuerySet[models.Chat] = request.user.chats.prefetch_related(
-        "participants", "messages"
+    prefetches = (
+        Prefetch(
+            "participants",
+            User.objects.only("username", "image", "first_name", "last_name"),
+        ),
+        Prefetch(
+            "messages",
+            models.Message.objects.order_by("chat_id", "-date")
+            .distinct("chat_id")
+            .only("text", "date", "chat_id"),
+        ),
     )
-    sorted_chats = sorted(
-        chats,
-        key=lambda x: x.last_message.date.timestamp()
-        if x.last_message
-        else float("-inf"),
-        reverse=True,
+    chats: QuerySet[models.Chat] = request.user.chats.prefetch_related(
+        *prefetches
     )
     chats_with_companion = (
-        (chat, chat.get_companion(request.user)) for chat in sorted_chats
+        (chat, chat.get_companion(request.user)) for chat in chats
     )
     context = {"chats": chats_with_companion}
     return render(request, "messenger/chat_list.html", context)
@@ -31,9 +39,14 @@ def chat_list_view(request: AuthedRequest) -> HttpResponse:
 @login_required
 @require_http_methods(["GET"])
 def chat_detail_view(request: AuthedRequest, pk: int) -> HttpResponse:
+    prefetch = Prefetch(
+        "messages",
+        models.Message.objects.select_related("user").only(
+            "text", "date", "chat_id", "user__username", "user__image"
+        ),
+    )
     chat: models.Chat = get_object_or_404(
-        request.user.chats.prefetch_related("messages", "messages__user"),
-        pk=pk,
+        request.user.chats.prefetch_related(prefetch).only("id"), pk=pk
     )
     form = forms.MessageCreationForm()
     context = {"chat": chat, "form": form}
@@ -48,5 +61,5 @@ def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
         participants__in=[request.user.pk]
     ).get_or_create(participants__in=[pk])
     if created:
-        chat.participants.add(request.user.pk, pk)
+        chat.participants.set([request.user.pk, pk])
     return redirect("chat", pk=chat.pk)

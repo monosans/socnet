@@ -1,9 +1,6 @@
-from typing import Optional
-
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
 from ..users.models import User as UserType
@@ -36,13 +33,6 @@ class Chat(models.Model):
                 self.participants.all(),
             )
         )
-
-    @cached_property
-    def last_message(self) -> Optional["Message"]:
-        messages: models.QuerySet["Message"] = self.messages.all()
-        if not messages:
-            return None
-        return next(reversed(messages))
 
 
 class Message(models.Model):

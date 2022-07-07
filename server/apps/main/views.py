@@ -5,16 +5,15 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
 from django.core.paginator import Page, Paginator
-from django.db.models import Count, QuerySet
+from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
 from ..users.models import User as UserType
 from ..users.types import AuthedRequest
-from . import forms, models, services
+from . import forms, models
 
 User = get_user_model()
 
@@ -28,8 +27,10 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
             data = form.cleaned_data
             query: str = data["search_query"]
             fields: List[str] = data["fields_to_search"]
-            users = User.objects.annotate(search=SearchVector(*fields)).filter(
-                search=query.strip()
+            users = (
+                User.objects.annotate(search=SearchVector(*fields))
+                .filter(search=query.strip())
+                .only("username", "first_name", "last_name", "image")
             )
     else:
         form = forms.UsersSearchForm()
@@ -48,7 +49,14 @@ def index(request: AuthedRequest) -> HttpResponse:
 def subscriber_list_view(
     request: AuthedRequest, username: str
 ) -> HttpResponse:
-    user = services.get_user(request, username, "subscribers")
+    prefetch = Prefetch(
+        "subscribers",
+        User.objects.only("username", "first_name", "last_name", "image"),
+    )
+    user = get_object_or_404(
+        User.objects.prefetch_related(prefetch).only("username"),
+        username=username,
+    )
     context = {"user": user}
     return render(request, "main/subscriber_list.html", context)
 
@@ -58,7 +66,14 @@ def subscriber_list_view(
 def subscription_list_view(
     request: AuthedRequest, username: str
 ) -> HttpResponse:
-    user = services.get_user(request, username, "subscriptions")
+    prefetch = Prefetch(
+        "subscriptions",
+        User.objects.only("username", "first_name", "last_name", "image"),
+    )
+    user = get_object_or_404(
+        User.objects.prefetch_related(prefetch).only("username"),
+        username=username,
+    )
     context = {"user": user}
     return render(request, "main/subscription_list.html", context)
 
@@ -83,12 +98,22 @@ def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
             messages.error(request, message)
     else:
         form = forms.PostCommentCreationForm()
-    post: models.Post = get_object_or_404(
-        models.Post.objects.select_related("user").prefetch_related(
-            "likers", "comments", "comments__user", "comments__likers"
-        ),
-        pk=pk,
+    prefetch_qs = models.PostComment.objects.select_related("user").only(
+        "post_id", "text", "image", "date", "user__username", "user__image"
     )
+    qs = models.Post.objects.select_related("user").only(
+        "text", "image", "date", "user__username", "user__image"
+    )
+    if request.user.is_anonymous:
+        prefetch_qs = prefetch_qs.annotate(Count("likers"))
+        qs = qs.annotate(Count("likers"))
+    else:
+        users = User.objects.only("id")
+        prefetch_qs = prefetch_qs.prefetch_related(Prefetch("likers", users))
+        qs = qs.prefetch_related(Prefetch("likers", users))
+    prefetch = Prefetch("comments", prefetch_qs)
+    qs = qs.prefetch_related(prefetch)
+    post = get_object_or_404(qs, pk=pk)
     context = {"post": post, "form": form}
     return render(request, "main/post_detail.html", context)
 
@@ -96,9 +121,7 @@ def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
 @login_required
 @require_http_methods(["POST"])
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    post = get_object_or_404(models.Post, pk=pk)
-    if post.user != request.user:
-        return redirect(post)
+    post: models.Post = get_object_or_404(request.user.posts.only("id"), pk=pk)
     post.delete()
     return redirect(request.user)
 
@@ -107,22 +130,28 @@ def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 def post_list_view(request: HttpRequest) -> HttpResponse:
     posts: Union[QuerySet[models.Post], Page[models.Post], None] = None
     page_range = None
+    qs = models.Post.objects.select_related("user").only(
+        "date", "text", "image", "user__username", "user__image"
+    )
+    qs = (
+        qs.annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
+        if request.user.is_anonymous
+        else qs.annotate(Count("comments")).prefetch_related(
+            Prefetch("likers", User.objects.only("id"))
+        )
+    )
     if request.method == "POST":
         form = forms.PostsSearchForm(request.POST)
         if form.is_valid():
             query: str = form.cleaned_data["search_query"]
-            posts = (
-                models.Post.objects.select_related("user")
-                .prefetch_related("likers", "comments")
-                .filter(text__search=query)
-            )
+            posts = qs.filter(text__search=query)
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:
-            p: QuerySet[models.Post] = (
-                models.Post.objects.select_related("user")
-                .prefetch_related("likers", "comments")
-                .filter(user__in=request.user.subscriptions.all())
+            p: QuerySet[models.Post] = qs.filter(
+                user__in=request.user.subscriptions.all()
             )
             paginator = Paginator(p, per_page=5)
             try:
@@ -186,12 +215,35 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
             post_creation_form = forms.PostCreationForm()
         if user_change_form is None:
             user_change_form = forms.UserChangeForm(instance=request.user)
+    users = User.objects.only("id")
+    subscribers_prefetch = Prefetch("subscribers", users)
+    posts_prefetch_qs = models.Post.objects.only(
+        "user_id", "date", "text", "image"
+    )
+    posts_prefetch_qs = (
+        posts_prefetch_qs.annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
+        if request.user.is_anonymous
+        else posts_prefetch_qs.annotate(Count("comments")).prefetch_related(
+            Prefetch("likers", users)
+        )
+    )
+    posts_prefetch = Prefetch("posts", posts_prefetch_qs)
     user: UserType = get_object_or_404(
-        User.objects.prefetch_related(
-            "posts", "posts__comments", "posts__likers", "subscribers"
-        ).annotate(
-            liked_posts_count=Count("liked_posts"),
-            subscriptions_count=Count("subscriptions"),
+        User.objects.annotate(
+            Count("subscriptions", distinct=True),
+            Count("liked_posts", distinct=True),
+        )
+        .prefetch_related(subscribers_prefetch, posts_prefetch)
+        .only(
+            "username",
+            "image",
+            "first_name",
+            "last_name",
+            "birth_date",
+            "location",
+            "about",
         ),
         username=username,
     )
@@ -206,21 +258,31 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
 @login_required
 @require_http_methods(["POST"])
 def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    comment = get_object_or_404(models.PostComment, pk=pk)
-    if comment.user == request.user:
-        comment.delete()
+    comment: models.PostComment = get_object_or_404(
+        request.user.post_comments.only("id"), pk=pk
+    )
+    comment.delete()
     return redirect(comment.post)
 
 
 @require_http_methods(["GET"])
 def liked_post_list_view(request: HttpRequest, username: str) -> HttpResponse:
-    user = services.get_user(
-        request,
-        username,
-        "liked_posts",
-        "liked_posts__comments",
-        "liked_posts__likers",
-        "liked_posts__user",
+    prefetch_qs = models.Post.objects.select_related("user").only(
+        "date", "image", "text", "user__username", "user__image"
+    )
+    prefetch_qs = (
+        prefetch_qs.annotate(
+            Count("likers", distinct=True), Count("comments", distinct=True)
+        )
+        if request.user.is_anonymous
+        else prefetch_qs.annotate(Count("comments")).prefetch_related(
+            Prefetch("likers", User.objects.only("id"))
+        )
+    )
+    prefetch = Prefetch("liked_posts", prefetch_qs)
+    user: UserType = get_object_or_404(
+        User.objects.prefetch_related(prefetch).only("username"),
+        username=username,
     )
     context = {"user": user, "posts": user.liked_posts.all()}
     return render(request, "main/liked_post_list.html", context)

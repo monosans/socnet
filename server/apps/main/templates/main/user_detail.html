@@ -144,7 +144,7 @@
             <tr>
               <td class="pe-3">{% trans "Subscriptions" %}</td>
               <td>
-                <a href="{% url 'subscriptions' user.get_username %}">{{ user.subscriptions_count }}</a>
+                <a href="{% url 'subscriptions' user.get_username %}">{{ user.subscriptions__count }}</a>
               </td>
             </tr>
             <tr>
@@ -157,7 +157,7 @@
             <tr>
               <td class="pe-3">{% trans "Liked posts" %}</td>
               <td>
-                <a href="{% url 'liked_posts' user.get_username %}">{{ user.liked_posts_count }}</a>
+                <a href="{% url 'liked_posts' user.get_username %}">{{ user.liked_posts__count }}</a>
               </td>
             </tr>
           </table>
@@ -222,7 +222,7 @@
                 <a class="btn badge rounded-pill bg-light text-dark"
                    href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
                   <i class="fa-regular fa-heart"></i>
-                  <span>{{ post.likers.count }}</span>
+                  <span>{{ post.likers__count }}</span>
                 </a>
               {% elif request.user in post.likers.all %}
                 <span class="btn badge rounded-pill bg-light text-dark"
@@ -242,7 +242,7 @@
               <a href="{{ post.get_absolute_url }}">
                 <span class="btn badge rounded-pill bg-light text-dark">
                   <i class="fa-regular fa-comment"></i>
-                  {{ post.comments.count }}
+                  {{ post.comments__count }}
                 </span>
               </a>
             </div>

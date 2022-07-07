@@ -31,7 +31,7 @@
           <a class="btn badge rounded-pill bg-light text-dark"
              href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
             <i class="fa-regular fa-heart"></i>
-            <span>{{ post.likers.count }}</span>
+            <span>{{ post.likers__count }}</span>
           </a>
         {% elif request.user in post.likers.all %}
           <span class="btn badge rounded-pill bg-light text-dark"
@@ -51,7 +51,7 @@
         <a href="{{ post.get_absolute_url }}">
           <span class="btn badge rounded-pill bg-light text-dark">
             <i class="fa-regular fa-comment"></i>
-            {{ post.comments.count }}
+            {{ post.comments__count }}
           </span>
         </a>
       </div>
