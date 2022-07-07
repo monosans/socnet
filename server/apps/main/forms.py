@@ -64,3 +64,4 @@ class UserChangeForm(auth_forms.UserChangeForm[UserType]):
             "location",
             "about",
         )
+        widgets = {"birth_date": forms.DateInput({"type": "date"})}
