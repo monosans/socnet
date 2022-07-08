@@ -12,6 +12,5 @@ django-crispy-forms==1.14.0
 crispy-bootstrap5==0.6
 
 djangorestframework==3.13.1
-django-auto-prefetching==0.2.11
 
 channels==3.0.5
