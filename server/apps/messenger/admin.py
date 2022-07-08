@@ -6,7 +6,6 @@ from . import models
 @admin.register(models.Message)
 class MessageAdmin(admin.ModelAdmin[models.Message]):
     list_display = ("id", "user", "chat_id", "date")
-    readonly_fields = ("date",)
 
 
 @admin.register(models.Chat)
