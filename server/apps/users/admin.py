@@ -30,4 +30,9 @@ class UserAdmin(UserAdminBase):
         "date_joined",
         "is_staff",
     )
-    readonly_fields = ("date_joined", "last_login")
+    readonly_fields = (
+        *UserAdminBase.readonly_fields,
+        "date_joined",
+        "last_login",
+    )
+    filter_horizontal = (*UserAdminBase.filter_horizontal, "subscriptions")

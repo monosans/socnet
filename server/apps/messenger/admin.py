@@ -12,3 +12,4 @@ class MessageAdmin(admin.ModelAdmin[models.Message]):
 @admin.register(models.Chat)
 class ChatAdmin(admin.ModelAdmin[models.Chat]):
     list_display = ("id",)
+    filter_horizontal = ("participants",)
