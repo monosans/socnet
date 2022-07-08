@@ -42,9 +42,6 @@ class Post(models.Model):
         verbose_name_plural = _("posts")
         ordering = ("-pk",)
 
-    def __str__(self) -> str:
-        return f"#{self.pk} ({self.user})"
-
     def get_absolute_url(self) -> str:
         return reverse("post", args=(self.pk,))
 
@@ -89,9 +86,6 @@ class PostComment(models.Model):
     class Meta:
         verbose_name = _("post comment")
         verbose_name_plural = _("post comments")
-
-    def __str__(self) -> str:
-        return f"#{self.pk} ({self.user} -> {self.post})"
 
     def clean(self) -> None:
         if not self.text and not self.image:

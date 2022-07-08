@@ -7,10 +7,9 @@ from . import models
 class PostAdmin(admin.ModelAdmin[models.Post]):
     list_display = ("id", "user", "date")
     readonly_fields = ("date",)
-    ordering = ("pk",)
 
 
 @admin.register(models.PostComment)
 class PostCommentAdmin(admin.ModelAdmin[models.PostComment]):
-    list_display = ("id", "user", "post", "date")
+    list_display = ("id", "user", "post_id", "date")
     readonly_fields = ("date",)

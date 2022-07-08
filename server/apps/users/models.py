@@ -82,9 +82,6 @@ class User(AbstractUser):
         verbose_name = _("user")
         verbose_name_plural = _("users")
 
-    def __str__(self) -> str:
-        return self.username
-
     def get_absolute_url(self) -> str:
         return reverse("user", args=(self.username,))
 

@@ -17,12 +17,6 @@ class Chat(models.Model):
         verbose_name = _("chat")
         verbose_name_plural = _("chats")
 
-    def __str__(self) -> str:
-        return "#{} ({})".format(
-            self.pk,
-            ", ".join(user.get_username() for user in self.participants.all()),
-        )
-
     def get_absolute_url(self) -> str:
         return reverse("chat", args=(self.pk,))
 
@@ -54,11 +48,6 @@ class Message(models.Model):
     class Meta:
         verbose_name = _("message")
         verbose_name_plural = _("messages")
-
-    def __str__(self) -> str:
-        return (
-            f"#{self.pk} ({self.user} -> {self.chat.get_companion(self.user)})"
-        )
 
     @property
     def simple_date(self) -> str:
