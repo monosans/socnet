@@ -18,7 +18,7 @@ urlpatterns = [
     path("admin/doc/", include(admindocs_urls)),
     path("admin/", admin.site.urls),
     path("accounts/", include(allauth_urls)),
-    path("api/v1/", include(api_urls)),
+    path("api/", include(api_urls)),
     path("chat/", include(messenger_urls)),
     path("", include(main_urls)),
     path(

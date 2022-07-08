@@ -2,7 +2,7 @@
 (() => {
   for (const button of document.querySelectorAll("[data-is-subscribed]")) {
     button.addEventListener("click", function () {
-      let url = "/api/v1/subscription/",
+      let url = "/api/subscription/",
         method,
         body;
       if (this.dataset.isSubscribed === "y") {
