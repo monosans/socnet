@@ -83,7 +83,7 @@ class User(AbstractUser):
         verbose_name_plural = _("users")
 
     def get_absolute_url(self) -> str:
-        return reverse("user", args=(self.username,))
+        return reverse("user", args=(self.get_username(),))
 
     @property
     def full_name_in_brackets(self) -> str:
