@@ -94,10 +94,7 @@ class GroupViewset(viewsets.ModelViewSet):
 
 
 class LogEntryViewset(
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.ListModelMixin,
-    viewsets.GenericViewSet,
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
     queryset = LogEntry.objects.all()
     serializer_class = serializers.LogEntrySerializer
