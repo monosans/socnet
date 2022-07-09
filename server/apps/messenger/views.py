@@ -62,4 +62,4 @@ def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
     ).get_or_create(participants__in=[pk])
     if created:
         chat.participants.set([request.user.pk, pk])
-    return redirect("chat", pk=chat.pk)
+    return redirect(chat)

@@ -3,11 +3,13 @@ from typing import List, Optional, Union
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchVector
 from django.core.paginator import Page, Paginator
 from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
@@ -82,7 +84,7 @@ def subscription_list_view(
 def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "POST":
         if request.user.is_anonymous:
-            return redirect("login")
+            return redirect_to_login(next=reverse("post", args=(pk,)))
         form = forms.PostCommentCreationForm(request.POST, request.FILES)
         if form.is_valid():
             comment = form.save(commit=False)
