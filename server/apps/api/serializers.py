@@ -24,6 +24,17 @@ class ChatSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
+    logentry_set = (
+        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+            many=True, read_only=True, view_name="logentry-detail"
+        )
+    )
+    permission_set = (
+        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+            many=True, read_only=True, view_name="permission-detail"
+        )
+    )
+
     class Meta:
         model = ContentType
         fields = "__all__"

@@ -82,7 +82,13 @@ class ChatViewSet(viewsets.ModelViewSet):
 
 
 class ContentTypeViewSet(viewsets.ModelViewSet):
-    queryset = ContentType.objects.all()
+    queryset = ContentType.objects.prefetch_related(
+        Prefetch("logentry_set", LogEntry.objects.only("content_type_id")),
+        Prefetch(
+            "permission_set",
+            auth_models.Permission.objects.only("content_type_id"),
+        ),
+    )
     serializer_class = serializers.ContentTypeSerializer
 
 
