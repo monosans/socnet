@@ -16,6 +16,9 @@
           integrity="sha512-o/MhoRPVLExxZjCFVBsm17Pkztkzmh7Dp8k7/3JrtNCHh0AQ489kwpfA3dPSHzKDe8YCuEhxXq3Y71eb/o6amg=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer"/>
+    {% block links %}
+    {% endblock links %}
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js" integrity="sha512-ndrrR94PW3ckaAvvWrAzRi5JWjF71/Pw7TlSo6judANOFCmz0d+0YE+qIGamRRSnVzSvIyGs4BTtyFMm3MT/cg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {% if request.method == "POST" %}
       <script async src="{% static 'js/prevent_post_on_refresh.js' %}"></script>
     {% endif %}
@@ -23,8 +26,6 @@
       {% block scripts %}
       {% endblock scripts %}
     {% endif %}
-    {% block links %}
-    {% endblock links %}
   </head>
   <body class="bg-light">
     <div class="mb-3">
@@ -102,6 +103,5 @@
       {% block content %}
       {% endblock content %}
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js" integrity="sha512-ndrrR94PW3ckaAvvWrAzRi5JWjF71/Pw7TlSo6judANOFCmz0d+0YE+qIGamRRSnVzSvIyGs4BTtyFMm3MT/cg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </body>
 </html>
