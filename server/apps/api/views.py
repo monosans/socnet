@@ -161,6 +161,6 @@ class UserViewSet(viewsets.ModelViewSet):
             "user_permissions", auth_models.Permission.objects.only("pk")
         ),
         Prefetch("subscriptions", User.objects.only("pk")),
-    )
+    ).defer("password")
     serializer_class = serializers.UserSerializer
     search_fields = ["username", "email"]
