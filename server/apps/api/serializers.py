@@ -96,6 +96,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             many=True, read_only=True, view_name="post-detail"
         )
     )
+    logentry_set = (
+        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+            many=True, read_only=True, view_name="logentry-detail"
+        )
+    )
     outgoing_messages = (
         serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
             many=True, read_only=True, view_name="message-detail"

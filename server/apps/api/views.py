@@ -147,6 +147,7 @@ class UserViewSet(viewsets.ModelViewSet):
             "liked_comments", main_models.PostComment.objects.only("user_id")
         ),
         Prefetch("liked_posts", main_models.Post.objects.only("pk")),
+        Prefetch("logentry_set", LogEntry.objects.only("user_id")),
         Prefetch(
             "outgoing_messages",
             messenger_models.Message.objects.only("user_id"),
