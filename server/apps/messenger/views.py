@@ -46,7 +46,7 @@ def chat_detail_view(request: AuthedRequest, pk: int) -> HttpResponse:
         ),
     )
     chat: models.Chat = get_object_or_404(
-        request.user.chats.prefetch_related(prefetch).only("id"), pk=pk
+        request.user.chats.prefetch_related(prefetch).only("pk"), pk=pk
     )
     form = forms.MessageCreationForm()
     context = {"chat": chat, "form": form}

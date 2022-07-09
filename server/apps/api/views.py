@@ -74,7 +74,7 @@ class Unsubscribe(_AuthedAPIView):
 class ChatViewset(viewsets.ModelViewSet):
     queryset = messenger_models.Chat.objects.prefetch_related(
         Prefetch("messages", messenger_models.Message.objects.only("chat_id")),
-        Prefetch("participants", User.objects.only("id")),
+        Prefetch("participants", User.objects.only("pk")),
     )
     serializer_class = serializers.ChatSerializer
     search_fields = ["participants__username"]
@@ -87,7 +87,7 @@ class ContentTypeViewset(viewsets.ModelViewSet):
 
 class GroupViewset(viewsets.ModelViewSet):
     queryset = auth_models.Group.objects.prefetch_related(
-        Prefetch("permissions", auth_models.Permission.objects.only("id"))
+        Prefetch("permissions", auth_models.Permission.objects.only("pk"))
     )
     serializer_class = serializers.GroupSerializer
     search_fields = ["name", "permissions__name", "permissions__codename"]
@@ -115,7 +115,7 @@ class PermissionViewset(viewsets.ModelViewSet):
 
 class PostCommentViewset(viewsets.ModelViewSet):
     queryset = main_models.PostComment.objects.prefetch_related(
-        Prefetch("likers", User.objects.only("id"))
+        Prefetch("likers", User.objects.only("pk"))
     )
     serializer_class = serializers.PostCommentSerializer
     search_fields = ["user__username", "text"]
@@ -124,7 +124,7 @@ class PostCommentViewset(viewsets.ModelViewSet):
 class PostViewset(viewsets.ModelViewSet):
     queryset = main_models.Post.objects.prefetch_related(
         Prefetch("comments", main_models.PostComment.objects.only("post_id")),
-        Prefetch("likers", User.objects.only("id")),
+        Prefetch("likers", User.objects.only("pk")),
     )
     serializer_class = serializers.PostSerializer
     search_fields = ["user__username", "text"]
@@ -132,11 +132,11 @@ class PostViewset(viewsets.ModelViewSet):
 
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.prefetch_related(
-        Prefetch("chats", messenger_models.Chat.objects.only("id")),
+        Prefetch("chats", messenger_models.Chat.objects.only("pk")),
         Prefetch(
             "liked_comments", main_models.PostComment.objects.only("user_id")
         ),
-        Prefetch("liked_posts", main_models.Post.objects.only("id")),
+        Prefetch("liked_posts", main_models.Post.objects.only("pk")),
         Prefetch(
             "outgoing_messages",
             messenger_models.Message.objects.only("user_id"),
@@ -145,12 +145,12 @@ class UserViewset(viewsets.ModelViewSet):
             "post_comments", main_models.PostComment.objects.only("user_id")
         ),
         Prefetch("posts", main_models.Post.objects.only("user_id")),
-        Prefetch("subscribers", User.objects.only("id")),
-        Prefetch("groups", auth_models.Group.objects.only("id")),
+        Prefetch("subscribers", User.objects.only("pk")),
+        Prefetch("groups", auth_models.Group.objects.only("pk")),
         Prefetch(
-            "user_permissions", auth_models.Permission.objects.only("id")
+            "user_permissions", auth_models.Permission.objects.only("pk")
         ),
-        Prefetch("subscriptions", User.objects.only("id")),
+        Prefetch("subscriptions", User.objects.only("pk")),
     )
     serializer_class = serializers.UserSerializer
     search_fields = ["username", "email"]

@@ -108,7 +108,7 @@ def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
         prefetch_qs = prefetch_qs.annotate(Count("likers"))
         qs = qs.annotate(Count("likers"))
     else:
-        users = User.objects.only("id")
+        users = User.objects.only("pk")
         prefetch_qs = prefetch_qs.prefetch_related(Prefetch("likers", users))
         qs = qs.prefetch_related(Prefetch("likers", users))
     prefetch = Prefetch("comments", prefetch_qs)
@@ -121,7 +121,7 @@ def post_detail_view(request: HttpRequest, pk: int) -> HttpResponse:
 @login_required
 @require_http_methods(["POST"])
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    post: models.Post = get_object_or_404(request.user.posts.only("id"), pk=pk)
+    post: models.Post = get_object_or_404(request.user.posts.only("pk"), pk=pk)
     post.delete()
     return redirect(request.user)
 
@@ -139,7 +139,7 @@ def post_list_view(request: HttpRequest) -> HttpResponse:
         )
         if request.user.is_anonymous
         else qs.annotate(Count("comments")).prefetch_related(
-            Prefetch("likers", User.objects.only("id"))
+            Prefetch("likers", User.objects.only("pk"))
         )
     )
     if request.method == "POST":
@@ -215,7 +215,7 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
             post_creation_form = forms.PostCreationForm()
         if user_change_form is None:
             user_change_form = forms.UserChangeForm(instance=request.user)
-    users = User.objects.only("id")
+    users = User.objects.only("pk")
     subscribers_prefetch = Prefetch("subscribers", users)
     posts_prefetch_qs = models.Post.objects.only(
         "user_id", "date", "text", "image"
@@ -259,7 +259,7 @@ def user_detail_view(request: HttpRequest, username: str) -> HttpResponse:
 @require_http_methods(["POST"])
 def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     comment: models.PostComment = get_object_or_404(
-        request.user.post_comments.only("id"), pk=pk
+        request.user.post_comments.only("pk"), pk=pk
     )
     comment.delete()
     return redirect(comment.post)
