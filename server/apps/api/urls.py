@@ -4,36 +4,42 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register("chats", views.ChatViewset)
-router.register("content_types", views.ContentTypeViewset)
-router.register("groups", views.GroupViewset)
-router.register("log_entries", views.LogEntryViewset)
-router.register("messages", views.MessageViewset)
-router.register("permissions", views.PermissionViewset)
-router.register("post_comments", views.PostCommentViewset)
-router.register("posts", views.PostViewset)
-router.register("users", views.UserViewset)
+router.register("chats", views.ChatViewSet)
+router.register("content_types", views.ContentTypeViewSet)
+router.register("groups", views.GroupViewSet)
+router.register("log_entries", views.LogEntryViewSet)
+router.register("messages", views.MessageViewSet)
+router.register("permissions", views.PermissionViewSet)
+router.register("post_comments", views.PostCommentViewSet)
+router.register("posts", views.PostViewSet)
+router.register("users", views.UserViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
     path(
-        "like_post_comment/<int:pk>/",
-        views.UnlikePostComment.as_view(),
-        name="unlike_post_comment",
+        "post_comment_like/<int:pk>/",
+        views.PostCommentUnlikeView.as_view(),
+        name="post_comment_unlike",
     ),
     path(
-        "like_post_comment/",
-        views.LikePostComment.as_view(),
-        name="like_post_comment",
+        "post_comment_like/",
+        views.PostCommentLikeView.as_view(),
+        name="post_comment_like",
     ),
     path(
-        "like_post/<int:pk>/", views.UnlikePost.as_view(), name="unlike_post"
+        "post_like/<int:pk>/",
+        views.PostUnlikeView.as_view(),
+        name="post_unlike",
     ),
-    path("like_post/", views.LikePost.as_view(), name="like_post"),
+    path("post_like/", views.PostLikeView.as_view(), name="post_like"),
     path(
         "subscription/<int:pk>/",
-        views.Unsubscribe.as_view(),
-        name="unsubscribe",
+        views.UserUnsubscribeView.as_view(),
+        name="user_unsubscribe",
     ),
-    path("subscription/", views.Subscribe.as_view(), name="subscribe"),
+    path(
+        "subscription/",
+        views.UserSubscribeView.as_view(),
+        name="user_subscribe",
+    ),
 ]

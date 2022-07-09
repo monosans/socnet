@@ -21,7 +21,7 @@ class _AuthedAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
 
-class _Like(_AuthedAPIView):
+class _LikeView(_AuthedAPIView):
     model: Type[Union[main_models.Post, main_models.PostComment]]
 
     def post(self, request: AuthedRequest) -> Response:
@@ -31,7 +31,7 @@ class _Like(_AuthedAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-class _Unlike(_AuthedAPIView):
+class _UnlikeView(_AuthedAPIView):
     model: Type[Union[main_models.Post, main_models.PostComment]]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
@@ -40,23 +40,23 @@ class _Unlike(_AuthedAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class LikePost(_Like):
+class PostLikeView(_LikeView):
     model = main_models.Post
 
 
-class UnlikePost(_Unlike):
+class PostUnlikeView(_UnlikeView):
     model = main_models.Post
 
 
-class LikePostComment(_Like):
+class PostCommentLikeView(_LikeView):
     model = main_models.PostComment
 
 
-class UnlikePostComment(_Unlike):
+class PostCommentUnlikeView(_UnlikeView):
     model = main_models.PostComment
 
 
-class Subscribe(_AuthedAPIView):
+class UserSubscribeView(_AuthedAPIView):
     def post(self, request: AuthedRequest) -> Response:
         pk = int(request.data["pk"])
         user = get_object_or_404(User, pk=pk)
@@ -64,14 +64,14 @@ class Subscribe(_AuthedAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-class Unsubscribe(_AuthedAPIView):
+class UserUnsubscribeView(_AuthedAPIView):
     def delete(self, request: AuthedRequest, pk: int) -> Response:
         user = get_object_or_404(User, pk=pk)
         user.subscribers.remove(request.user)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class ChatViewset(viewsets.ModelViewSet):
+class ChatViewSet(viewsets.ModelViewSet):
     queryset = messenger_models.Chat.objects.prefetch_related(
         Prefetch("messages", messenger_models.Message.objects.only("chat_id")),
         Prefetch("participants", User.objects.only("pk")),
@@ -80,12 +80,12 @@ class ChatViewset(viewsets.ModelViewSet):
     search_fields = ["participants__username"]
 
 
-class ContentTypeViewset(viewsets.ModelViewSet):
+class ContentTypeViewSet(viewsets.ModelViewSet):
     queryset = ContentType.objects.all()
     serializer_class = serializers.ContentTypeSerializer
 
 
-class GroupViewset(viewsets.ModelViewSet):
+class GroupViewSet(viewsets.ModelViewSet):
     queryset = auth_models.Group.objects.prefetch_related(
         Prefetch("permissions", auth_models.Permission.objects.only("pk"))
     )
@@ -93,7 +93,7 @@ class GroupViewset(viewsets.ModelViewSet):
     search_fields = ["name", "permissions__name", "permissions__codename"]
 
 
-class LogEntryViewset(
+class LogEntryViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
     queryset = LogEntry.objects.all()
@@ -101,19 +101,19 @@ class LogEntryViewset(
     search_fields = ["user__username"]
 
 
-class MessageViewset(viewsets.ModelViewSet):
+class MessageViewSet(viewsets.ModelViewSet):
     queryset = messenger_models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
     search_fields = ["user__username", "text"]
 
 
-class PermissionViewset(viewsets.ModelViewSet):
+class PermissionViewSet(viewsets.ModelViewSet):
     queryset = auth_models.Permission.objects.all()
     serializer_class = serializers.PermissionSerializer
     search_fields = ["name", "codename"]
 
 
-class PostCommentViewset(viewsets.ModelViewSet):
+class PostCommentViewSet(viewsets.ModelViewSet):
     queryset = main_models.PostComment.objects.prefetch_related(
         Prefetch("likers", User.objects.only("pk"))
     )
@@ -121,7 +121,7 @@ class PostCommentViewset(viewsets.ModelViewSet):
     search_fields = ["user__username", "text"]
 
 
-class PostViewset(viewsets.ModelViewSet):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = main_models.Post.objects.prefetch_related(
         Prefetch("comments", main_models.PostComment.objects.only("post_id")),
         Prefetch("likers", User.objects.only("pk")),
@@ -130,7 +130,7 @@ class PostViewset(viewsets.ModelViewSet):
     search_fields = ["user__username", "text"]
 
 
-class UserViewset(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.prefetch_related(
         Prefetch("chats", messenger_models.Chat.objects.only("pk")),
         Prefetch(

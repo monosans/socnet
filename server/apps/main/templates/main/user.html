@@ -7,8 +7,8 @@
 {% endblock title %}
 {% block links %}
   {% include "main/inc/font_awesome.html" %}
-  <link rel="stylesheet" href="{% static 'main/css/avatar.css' %}"/>
-  <link rel="stylesheet" href="{% static 'main/css/img.css' %}"/>
+  <link rel="stylesheet" href="{% static 'main/css/img_avatar.css' %}"/>
+  <link rel="stylesheet" href="{% static 'main/css/img_responsive.css' %}"/>
 {% endblock links %}
 {% block content %}
   <div class="row mb-2">
@@ -18,7 +18,7 @@
           {% if user.image %}
             <div class="text-center">
               <img src="{{ user.image.url }}"
-                   class="img-thumbnail avatar mb-2"
+                   class="img-thumbnail img-avatar mb-2"
                    alt=""
                    loading="lazy"/>
             </div>
@@ -87,7 +87,7 @@
               </div>
             </div>
           {% elif request.user.is_authenticated %}
-            <form action="{% url 'create_chat' user.pk %}" method="post">
+            <form action="{% url 'chat_get_or_create' user.pk %}" method="post">
               {% csrf_token %}
               <input class="btn btn-primary w-100 mb-2"
                      type="submit"
@@ -214,7 +214,10 @@
             </div>
             {% if post.image %}
               <div>
-                <img class="img rounded" src="{{ post.image.url }}" alt="" loading="lazy"/>
+                <img class="img-responsive rounded"
+                     src="{{ post.image.url }}"
+                     alt=""
+                     loading="lazy"/>
               </div>
             {% endif %}
             <div class="fs-4">
@@ -256,10 +259,10 @@
   {% if user.posts.all or request.user != user %}
     {% csrf_token %}
     {% if user.posts.all %}
-      <script defer src="{% static 'main/js/like_post.js' %}"></script>
+      <script defer src="{% static 'main/js/like.js' %}"></script>
     {% endif %}
     {% if request.user != user %}
-      <script defer src="{% static 'main/js/subscribe.js' %}"></script>
+      <script defer src="{% static 'main/js/user_subscribe.js' %}"></script>
     {% endif %}
   {% endif %}
 {% endblock scripts %}

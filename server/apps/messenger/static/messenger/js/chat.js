@@ -18,7 +18,7 @@
       }
       text += line;
     }
-    let html = '<div class="row mb-3"><div class="avatar-preview">';
+    let html = '<div class="row mb-3"><div class="avatar-thumbnail">';
     if (data.user__image) {
       html += `<img src="${data.user__image}" alt="" class="rounded" loading="lazy"/>`;
     }

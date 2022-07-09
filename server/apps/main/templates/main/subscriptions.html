@@ -6,7 +6,7 @@
   {% trans "Subscriptions" %} - {{ user.get_username }}
 {% endblock title %}
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/avatar_preview.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail' %}"/>
 {% endblock links %}
 {% block content %}
   <div class="row justify-content-center">
@@ -15,7 +15,7 @@
         <div class="card">
           <div class="card-body">
             <div class="row align-items-center">
-              <div class="avatar-preview">
+              <div class="avatar-thumbnail">
                 {% if subscription.image %}
                   <img class="rounded"
                        alt=""
@@ -57,6 +57,6 @@
 {% block scripts %}
   {% if request.user == user and user.subscriptions.all %}
     {% csrf_token %}
-    <script defer src="{% static 'main/js/subscribe.js' %}"></script>
+    <script defer src="{% static 'main/js/user_subscribe.js' %}"></script>
   {% endif %}
 {% endblock scripts %}

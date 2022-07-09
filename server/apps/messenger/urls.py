@@ -4,8 +4,10 @@ from . import views
 
 urlpatterns = [
     path(
-        "<int:pk>/create/", views.chat_get_or_create_view, name="create_chat"
+        "<int:pk>/get_or_create/",
+        views.chat_get_or_create_view,
+        name="chat_get_or_create",
     ),
-    path("<int:pk>/", views.chat_detail_view, name="chat"),
-    path("", views.chat_list_view, name="chats"),
+    path("<int:pk>/", views.chat_view, name="chat"),
+    path("", views.chats_view, name="chats"),
 ]

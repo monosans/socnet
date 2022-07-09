@@ -4,10 +4,10 @@
     button.addEventListener("click", function () {
       let url, value;
       if (this.dataset.postPk) {
-        url = "/api/like_post/";
+        url = "/api/post_like/";
         value = this.dataset.postPk;
       } else if (this.dataset.postCommentPk) {
-        url = "/api/like_post_comment/";
+        url = "/api/post_comment_like/";
         value = this.dataset.postCommentPk;
       } else {
         return;

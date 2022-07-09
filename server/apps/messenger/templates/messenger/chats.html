@@ -6,7 +6,7 @@
   {% trans "Chats" %}
 {% endblock title %}
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/avatar_preview.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail' %}"/>
 {% endblock links %}
 {% block content %}
   <div class="row justify-content-center">
@@ -17,7 +17,7 @@
              class="text-decoration-none text-dark">
             <div class="card-body">
               <div class="row align-items-center">
-                <div class="avatar-preview">
+                <div class="avatar-thumbnail">
                   {% if companion.image %}
                     <img class="rounded" alt="" loading="lazy" src="{{ companion.image.url }}"/>
                   {% endif %}

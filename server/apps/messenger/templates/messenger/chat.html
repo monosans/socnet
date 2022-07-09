@@ -6,8 +6,8 @@
   {% trans "Chat" %} #{{ chat.pk }}
 {% endblock title %}
 {% block links %}
-  <link rel="stylesheet" href="{% static 'css/avatar_preview.css' %}"/>
-  <link rel="stylesheet" href="{% static 'messenger/css/chat_log.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail' %}"/>
+  <link rel="stylesheet" href="{% static 'messenger/css/chat.css' %}"/>
 {% endblock links %}
 {% block content %}
   <div class="row justify-content-center">
@@ -17,7 +17,7 @@
           <div class="chat_log" id="chat-log">
             {% for message in chat.messages.all %}
               <div class="row mb-3">
-                <div class="avatar-preview">
+                <div class="avatar-thumbnail">
                   {% if message.user.image %}
                     <img src="{{ message.user.image.url }}"
                          alt=""

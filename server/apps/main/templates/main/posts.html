@@ -7,8 +7,8 @@
 {% endblock title %}
 {% block links %}
   {% include "main/inc/font_awesome.html" %}
-  <link rel="stylesheet" href="{% static 'css/avatar_preview.css' %}"/>
-  <link rel="stylesheet" href="{% static 'main/css/img.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail' %}"/>
+  <link rel="stylesheet" href="{% static 'main/css/img_responsive.css' %}"/>
 {% endblock links %}
 {% block content %}
   <div class="row justify-content-center">
@@ -67,6 +67,6 @@
 {% endblock content %}
 {% block scripts %}
   {% if posts %}
-    <script defer src="{% static 'main/js/like_post.js' %}"></script>
+    <script defer src="{% static 'main/js/like.js' %}"></script>
   {% endif %}
 {% endblock scripts %}

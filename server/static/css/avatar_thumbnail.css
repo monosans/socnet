@@ -1,8 +1,8 @@
-div.avatar-preview {
+div.avatar-thumbnail {
   width: 50px;
   height: 50px;
 }
-div.avatar-preview > img {
+div.avatar-thumbnail > img {
   max-width: 50px;
   max-height: 50px;
 }

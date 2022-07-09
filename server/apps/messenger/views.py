@@ -13,7 +13,24 @@ User = get_user_model()
 
 @login_required
 @require_http_methods(["GET"])
-def chat_list_view(request: AuthedRequest) -> HttpResponse:
+def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
+    prefetch = Prefetch(
+        "messages",
+        models.Message.objects.select_related("user").only(
+            "text", "date", "chat_id", "user__username", "user__image"
+        ),
+    )
+    chat: models.Chat = get_object_or_404(
+        request.user.chats.prefetch_related(prefetch).only("pk"), pk=pk
+    )
+    form = forms.MessageCreationForm()
+    context = {"chat": chat, "form": form}
+    return render(request, "messenger/chat.html", context)
+
+
+@login_required
+@require_http_methods(["GET"])
+def chats_view(request: AuthedRequest) -> HttpResponse:
     prefetches = (
         Prefetch(
             "participants",
@@ -33,24 +50,7 @@ def chat_list_view(request: AuthedRequest) -> HttpResponse:
         (chat, chat.get_companion(request.user)) for chat in chats
     )
     context = {"chats": chats_with_companion}
-    return render(request, "messenger/chat_list.html", context)
-
-
-@login_required
-@require_http_methods(["GET"])
-def chat_detail_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    prefetch = Prefetch(
-        "messages",
-        models.Message.objects.select_related("user").only(
-            "text", "date", "chat_id", "user__username", "user__image"
-        ),
-    )
-    chat: models.Chat = get_object_or_404(
-        request.user.chats.prefetch_related(prefetch).only("pk"), pk=pk
-    )
-    form = forms.MessageCreationForm()
-    context = {"chat": chat, "form": form}
-    return render(request, "messenger/chat_detail.html", context)
+    return render(request, "messenger/chats.html", context)
 
 
 @login_required
