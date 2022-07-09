@@ -43,7 +43,7 @@ class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
 class EmailAddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EmailAddress
-        fields = ["url", "email", "verified", "primary", "user"]
+        fields = "__all__"
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

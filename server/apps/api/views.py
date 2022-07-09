@@ -93,9 +93,7 @@ class ContentTypeViewSet(viewsets.ModelViewSet):
 
 
 class EmailAddressViewSet(viewsets.ModelViewSet):
-    queryset = EmailAddress.objects.only(
-        "email", "verified", "primary", "user_id"
-    )
+    queryset = EmailAddress.objects.all()
     serializer_class = serializers.EmailAddressSerializer
     search_fields = ["email"]
 
