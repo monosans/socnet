@@ -96,7 +96,8 @@ class EmailAddressViewSet(viewsets.ModelViewSet):
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = auth_models.Group.objects.prefetch_related(
-        Prefetch("permissions", auth_models.Permission.objects.only("pk"))
+        Prefetch("permissions", auth_models.Permission.objects.only("pk")),
+        Prefetch("user_set", User.objects.only("pk")),
     )
     serializer_class = serializers.GroupSerializer
     search_fields = ["name", "permissions__name", "permissions__codename"]

@@ -36,6 +36,12 @@ class EmailAddressSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    user_set = (
+        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+            many=True, read_only=True, view_name="user-detail"
+        )
+    )
+
     class Meta:
         model = auth_models.Group
         fields = "__all__"
