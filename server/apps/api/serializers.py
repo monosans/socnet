@@ -1,3 +1,4 @@
+from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
@@ -26,6 +27,12 @@ class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ContentType
         fields = "__all__"
+
+
+class EmailAddressSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = EmailAddress
+        fields = ["url", "email", "verified", "primary", "user"]
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -73,6 +80,11 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     chats = serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
         many=True, read_only=True, view_name="chat-detail"
+    )
+    emailaddress_set = (
+        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+            many=True, read_only=True, view_name="emailaddress-detail"
+        )
     )
     liked_comments = (
         serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]

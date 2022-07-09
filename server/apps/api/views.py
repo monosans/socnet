@@ -1,5 +1,6 @@
 from typing import Type, Union
 
+from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
@@ -85,6 +86,14 @@ class ContentTypeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ContentTypeSerializer
 
 
+class EmailAddressViewSet(viewsets.ModelViewSet):
+    queryset = EmailAddress.objects.only(
+        "email", "verified", "primary", "user_id"
+    )
+    serializer_class = serializers.EmailAddressSerializer
+    search_fields = ["email"]
+
+
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = auth_models.Group.objects.prefetch_related(
         Prefetch("permissions", auth_models.Permission.objects.only("pk"))
@@ -133,6 +142,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.prefetch_related(
         Prefetch("chats", messenger_models.Chat.objects.only("pk")),
+        Prefetch("emailaddress_set", EmailAddress.objects.only("user_id")),
         Prefetch(
             "liked_comments", main_models.PostComment.objects.only("user_id")
         ),

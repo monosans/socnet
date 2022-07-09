@@ -6,6 +6,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register("chats", views.ChatViewSet)
 router.register("content_types", views.ContentTypeViewSet)
+router.register("email_addresses", views.EmailAddressViewSet)
 router.register("groups", views.GroupViewSet)
 router.register("log_entries", views.LogEntryViewSet)
 router.register("messages", views.MessageViewSet)
