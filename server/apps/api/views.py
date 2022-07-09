@@ -117,7 +117,10 @@ class MessageViewSet(viewsets.ModelViewSet):
 
 
 class PermissionViewSet(viewsets.ModelViewSet):
-    queryset = auth_models.Permission.objects.all()
+    queryset = auth_models.Permission.objects.prefetch_related(
+        Prefetch("group_set", auth_models.Group.objects.only("pk")),
+        Prefetch("user_set", User.objects.only("pk")),
+    )
     serializer_class = serializers.PermissionSerializer
     search_fields = ["name", "codename"]
 

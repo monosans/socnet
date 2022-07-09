@@ -54,6 +54,17 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PermissionSerializer(serializers.HyperlinkedModelSerializer):
+    group_set = (
+        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+            many=True, read_only=True, view_name="group-detail"
+        )
+    )
+    user_set = (
+        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+            many=True, read_only=True, view_name="user-detail"
+        )
+    )
+
     class Meta:
         model = auth_models.Permission
         fields = "__all__"
