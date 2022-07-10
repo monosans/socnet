@@ -1,4 +1,6 @@
-from typing import Any, Set
+from __future__ import annotations
+
+from typing import Any
 
 from django.contrib.auth import get_user_model
 from django.db.models.signals import m2m_changed
@@ -13,7 +15,7 @@ User = get_user_model()
 
 @receiver(m2m_changed, sender=User.subscriptions.through)
 def verify_self_subscription(
-    instance: UserType, action: str, pk_set: Set[int], **kwargs: Any
+    instance: UserType, action: str, pk_set: set[int], **kwargs: Any
 ) -> None:
     if action == "pre_add" and instance.pk in pk_set:
         raise IntegrityError(_("You can't subscribe to yourself."))

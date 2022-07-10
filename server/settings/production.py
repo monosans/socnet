@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .base import *
 
 ALLOWED_HOSTS = [env("DOMAIN_NAME")]

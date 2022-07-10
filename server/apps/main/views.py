@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from __future__ import annotations
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -108,13 +108,13 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
 
 @require_http_methods(["GET", "POST"])
 def users_search_view(request: HttpRequest) -> HttpResponse:
-    users: Optional[QuerySet[UserType]] = None
+    users: QuerySet[UserType] | None = None
     if request.method == "POST":
         form = forms.UsersSearchForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             query: str = data["search_query"]
-            fields: List[str] = data["fields_to_search"]
+            fields: list[str] = data["fields_to_search"]
             users = (
                 User.objects.annotate(search=SearchVector(*fields))
                 .filter(search=query.strip())
@@ -198,7 +198,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 @require_http_methods(["GET", "POST"])
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: Union[QuerySet[models.Post], Page[models.Post], None] = None
+    posts: QuerySet[models.Post] | Page[models.Post] | None = None
     page_range = None
     qs = models.Post.objects.select_related("user").only(
         "date", "text", "image", "user__username", "user__image"

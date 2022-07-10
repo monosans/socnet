@@ -1,4 +1,4 @@
-from typing import Type, Union
+from __future__ import annotations
 
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
@@ -23,7 +23,7 @@ class _AuthedAPIView(views.APIView):
 
 
 class _LikeView(_AuthedAPIView):
-    model: Type[Union[main_models.Post, main_models.PostComment]]
+    model: type[main_models.Post | main_models.PostComment]
 
     def post(self, request: AuthedRequest) -> Response:
         pk = int(request.data["pk"])
@@ -33,7 +33,7 @@ class _LikeView(_AuthedAPIView):
 
 
 class _UnlikeView(_AuthedAPIView):
-    model: Type[Union[main_models.Post, main_models.PostComment]]
+    model: type[main_models.Post | main_models.PostComment]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
         obj = get_object_or_404(self.model, pk=pk)

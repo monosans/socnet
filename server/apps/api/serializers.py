@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import get_user_model

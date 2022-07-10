@@ -1,6 +1,8 @@
 """https://docs.djangoproject.com/en/4.0/ref/settings/"""
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 import environ
 from django.utils.translation import gettext_lazy as _
@@ -147,6 +149,6 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
-CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {
+CHANNEL_LAYERS: dict[str, dict[str, Any]] = {
     "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 }

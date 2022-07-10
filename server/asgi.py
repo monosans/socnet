@@ -2,6 +2,8 @@
 https://docs.djangoproject.com/en/4.0/howto/deployment/asgi/
 https://channels.readthedocs.io/en/latest/introduction.html#django-integration
 """
+from __future__ import annotations
+
 import os
 
 from channels.auth import AuthMiddlewareStack

@@ -1,4 +1,6 @@
 """https://docs.djangoproject.com/en/4.0/topics/http/urls/"""
+from __future__ import annotations
+
 from allauth import urls as allauth_urls
 from django.conf import settings
 from django.contrib import admin

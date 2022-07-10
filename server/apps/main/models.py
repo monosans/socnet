@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -12,7 +14,7 @@ def upload_date() -> str:
     return f"{today.year}/{today.month}/{today.day}"
 
 
-def post_image(instance: "Post", filename: str) -> str:
+def post_image(instance: Post, filename: str) -> str:
     return f"user_{instance.user_id}/posts/{upload_date()}/{filename}"
 
 
@@ -52,7 +54,7 @@ class Post(models.Model):
             )
 
 
-def post_comment_image(instance: "PostComment", filename: str) -> str:
+def post_comment_image(instance: PostComment, filename: str) -> str:
     return f"user_{instance.user_id}/comments/{upload_date()}/{filename}"
 
 
