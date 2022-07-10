@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Prefetch
-from rest_framework import mixins, permissions, status, views, viewsets
+from rest_framework import permissions, status, views, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
@@ -81,7 +81,7 @@ class ChatViewSet(viewsets.ModelViewSet):
     search_fields = ["participants__username"]
 
 
-class ContentTypeViewSet(viewsets.ModelViewSet):
+class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ContentType.objects.prefetch_related(
         Prefetch("logentry_set", LogEntry.objects.only("content_type_id")),
         Prefetch(
@@ -107,9 +107,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     search_fields = ["name", "permissions__name", "permissions__codename"]
 
 
-class LogEntryViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
-):
+class LogEntryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = LogEntry.objects.all()
     serializer_class = serializers.LogEntrySerializer
     search_fields = ["user__username"]
@@ -121,7 +119,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     search_fields = ["user__username", "text"]
 
 
-class PermissionViewSet(viewsets.ModelViewSet):
+class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = auth_models.Permission.objects.prefetch_related(
         Prefetch("group_set", auth_models.Group.objects.only("pk")),
         Prefetch("user_set", User.objects.only("pk")),
