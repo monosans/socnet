@@ -39,8 +39,5 @@ EMAIL_PORT = env.int("EMAIL_PORT")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
 EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 
-STATICFILES_STORAGE = (
-    "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
-)
 STATIC_ROOT = "/var/www/django/static"
 MEDIA_ROOT = "/var/www/django/media"
