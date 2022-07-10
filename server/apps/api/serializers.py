@@ -7,15 +7,16 @@ from rest_framework import serializers
 
 from ..main import models as main_models
 from ..messenger import models as messenger_models
+from ..users.models import User as UserType
 
 User = get_user_model()
 
 
 class ChatSerializer(serializers.HyperlinkedModelSerializer):
-    messages = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="message-detail"
-        )
+    messages: serializers.HyperlinkedRelatedField[
+        messenger_models.Message
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="message-detail"
     )
 
     class Meta:
@@ -24,15 +25,15 @@ class ChatSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
-    logentry_set = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="logentry-detail"
-        )
+    logentry_set: serializers.HyperlinkedRelatedField[
+        LogEntry
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="logentry-detail"
     )
-    permission_set = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="permission-detail"
-        )
+    permission_set: serializers.HyperlinkedRelatedField[
+        auth_models.Permission
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="permission-detail"
     )
 
     class Meta:
@@ -47,10 +48,10 @@ class EmailAddressSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    user_set = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="user-detail"
-        )
+    user_set: serializers.HyperlinkedRelatedField[
+        UserType
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="user-detail"
     )
 
     class Meta:
@@ -71,15 +72,15 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PermissionSerializer(serializers.HyperlinkedModelSerializer):
-    group_set = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="group-detail"
-        )
+    group_set: serializers.HyperlinkedRelatedField[
+        auth_models.Group
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="group-detail"
     )
-    user_set = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="user-detail"
-        )
+    user_set: serializers.HyperlinkedRelatedField[
+        UserType
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="user-detail"
     )
 
     class Meta:
@@ -94,10 +95,10 @@ class PostCommentSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
-    comments = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="postcomment-detail"
-        )
+    comments: serializers.HyperlinkedRelatedField[
+        main_models.PostComment
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="postcomment-detail"
     )
 
     class Meta:
@@ -106,46 +107,50 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    chats = serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+    chats: serializers.HyperlinkedRelatedField[
+        messenger_models.Chat
+    ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="chat-detail"
     )
-    emailaddress_set = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="emailaddress-detail"
-        )
+    emailaddress_set: serializers.HyperlinkedRelatedField[
+        EmailAddress
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="emailaddress-detail"
     )
-    liked_comments = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="postcomment-detail"
-        )
+    liked_comments: serializers.HyperlinkedRelatedField[
+        main_models.PostComment
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="postcomment-detail"
     )
-    liked_posts = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="post-detail"
-        )
-    )
-    logentry_set = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="logentry-detail"
-        )
-    )
-    outgoing_messages = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="message-detail"
-        )
-    )
-    post_comments = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="postcomment-detail"
-        )
-    )
-    posts = serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
+    liked_posts: serializers.HyperlinkedRelatedField[
+        main_models.Post
+    ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="post-detail"
     )
-    subscribers = (
-        serializers.HyperlinkedRelatedField(  # type: ignore[var-annotated]
-            many=True, read_only=True, view_name="user-detail"
-        )
+    logentry_set: serializers.HyperlinkedRelatedField[
+        LogEntry
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="logentry-detail"
+    )
+    outgoing_messages: serializers.HyperlinkedRelatedField[
+        messenger_models.Message
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="message-detail"
+    )
+    post_comments: serializers.HyperlinkedRelatedField[
+        main_models.PostComment
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="postcomment-detail"
+    )
+    posts: serializers.HyperlinkedRelatedField[
+        main_models.Post
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="post-detail"
+    )
+    subscribers: serializers.HyperlinkedRelatedField[
+        UserType
+    ] = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name="user-detail"
     )
 
     class Meta:
