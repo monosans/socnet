@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-05 14:26+0000\n"
+"POT-Creation-Date: 2022-07-10 10:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,15 +120,6 @@ msgstr "Посты не найдены."
 msgid "Subscribe to users you are interested in, so that their posts are displayed here."
 msgstr "Подпишитесь на интересных вам пользователей, чтобы их посты отображались здесь."
 
-msgid "Search users"
-msgstr "Поиск пользователей"
-
-msgid "Search"
-msgstr "Поиск"
-
-msgid "No users found"
-msgstr "Пользователи не найдены"
-
 msgid "Subscribers"
 msgstr "Подписчики"
 
@@ -177,17 +168,26 @@ msgstr "Написать сообщение"
 msgid "Birth date"
 msgstr "Дата рождения"
 
-msgid "An error occurred while creating the comment."
-msgstr "При создании комментария произошла ошибка."
+msgid "Search users"
+msgstr "Поиск пользователей"
 
-msgid "Please try again."
-msgstr "Пожалуйста, попробуйте ещё раз."
+msgid "Search"
+msgstr "Поиск"
+
+msgid "No users found"
+msgstr "Пользователи не найдены"
 
 msgid "An error occurred while creating the post."
 msgstr "При создании поста произошла ошибка."
 
+msgid "Please try again."
+msgstr "Пожалуйста, попробуйте ещё раз."
+
 msgid "An error occurred while saving the profile."
 msgstr "При сохранении профиля произошла ошибка."
+
+msgid "An error occurred while creating the comment."
+msgstr "При создании комментария произошла ошибка."
 
 msgid "Messenger"
 msgstr "Мессенджер"
