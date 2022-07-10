@@ -1,4 +1,6 @@
 """https://docs.gunicorn.org/en/stable/settings.html"""
+from __future__ import annotations
+
 import multiprocessing
 
 bind = "0.0.0.0:5000"
