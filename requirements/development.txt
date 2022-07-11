@@ -1,6 +1,6 @@
 -r local.txt
 
-pre-commit==2.19.0
+pre-commit==2.20.0
 black==22.6.0
 isort==5.10.1
 djlint==1.7.0
