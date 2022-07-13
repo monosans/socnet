@@ -89,8 +89,6 @@ class User(AbstractUser):
     @property
     def full_name_in_brackets(self) -> str:
         full_name = self.get_full_name()
-        if not full_name:
-            return ""
         return f"({full_name})"
 
     @property
