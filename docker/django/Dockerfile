@@ -26,9 +26,9 @@ RUN pip wheel --progress-bar off --no-color --wheel-dir /usr/src/app/wheels \
 
 FROM python as python-local-stage
 
-ARG BUILD_ENVIRONMENT
-ARG UID
-ARG GID
+ARG BUILD_ENVIRONMENT \
+  UID \
+  GID
 
 # hadolint ignore=DL3008
 RUN groupadd -g "${GID}" -r django \
