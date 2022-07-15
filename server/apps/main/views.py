@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchRank, SearchVector
 from django.core.paginator import Page, Paginator
 from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest, HttpResponse
@@ -112,12 +112,13 @@ def users_search_view(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = forms.UsersSearchForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            query: str = data["search_query"]
-            fields: list[str] = data["fields_to_search"]
+            query: str = form.cleaned_data["search_query"]
+            fields: list[str] = form.cleaned_data["fields_to_search"]
+            rank = SearchRank(vector=SearchVector(*fields), query=query)
             users = (
-                User.objects.annotate(search=SearchVector(*fields))
-                .filter(search=query.strip())
+                User.objects.annotate(rank=rank)
+                .filter(rank__gt=0)
+                .order_by("-rank", "username")
                 .only("username", "first_name", "last_name", "image")
             )
     else:
@@ -216,7 +217,12 @@ def posts_view(request: HttpRequest) -> HttpResponse:
         form = forms.PostsSearchForm(request.POST)
         if form.is_valid():
             query: str = form.cleaned_data["search_query"]
-            posts = qs.filter(text__search=query)
+            rank = SearchRank(vector="text", query=query)
+            posts = (
+                qs.annotate(rank=rank)
+                .filter(rank__gt=0)
+                .order_by("-rank", "-pk")
+            )
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:
