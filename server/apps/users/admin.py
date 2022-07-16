@@ -5,11 +5,15 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from django.utils.translation import gettext_lazy as _
 
+from . import forms
+
 User = get_user_model()
 
 
 @admin.register(User)
 class UserAdmin(UserAdminBase):
+    form = forms.UserAdminChangeForm
+    add_form = forms.UserAdminCreationForm
     fieldsets = (
         *(UserAdminBase.fieldsets or ()),  # make typing happy
         (
