@@ -1,5 +1,6 @@
 # https://caddyserver.com/docs/caddyfile
 {
+	admin off
 	email {$TLS_EMAIL}
 }
 
@@ -9,27 +10,30 @@ www.{$DOMAIN_NAME} {
 }
 
 {$DOMAIN_NAME} {
+	handle_path /static/* {
+		# STATIC_ROOT
+		root * /var/www/django/static
+		file_server {
+			precompressed br gzip
+		}
+	}
+
+	handle_path /media/* {
+		# MEDIA_ROOT
+		root * /var/www/django/media
+		file_server
+	}
+
+	handle {
+		reverse_proxy django:5000
+	}
+
 	header {
 		-Server
-		?Strict-Transport-Security max-age=31536000; includeSubDomains; preload
-		?X-Content-Type-Options nosniff
-		?X-Frame-Options DENY
-		?Referrer-Policy same-origin
-	}
-
-	@app {
-		not path /static/* /media/*
-	}
-
-	reverse_proxy @app django:5000
-
-	@staticMedia {
-		path /static/* /media/*
-	}
-
-	file_server @staticMedia {
-		# Parent directory of `STATIC_ROOT` and `MEDIA_ROOT`
-		root /var/www/django
+		?Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		?X-Content-Type-Options "nosniff"
+		?X-Frame-Options "DENY"
+		?Referrer-Policy "same-origin"
 	}
 
 	encode gzip
