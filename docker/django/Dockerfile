@@ -38,6 +38,8 @@ RUN groupadd -g "${GID}" -r django \
   && chown django:django /var/www/django/static /var/www/django/media; fi \
   && apt-get update \
   && apt-get install --no-install-recommends -y \
+  # static files compression
+  brotli \
   # required for psycopg2
   libpq-dev \
   # i18n
