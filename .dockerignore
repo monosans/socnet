@@ -1,4 +1,7 @@
 **
+!docker/
+!locale/
+!requirements/
 !server/
 
 # Created by https://www.toptal.com/developers/gitignore/api/database,django,jetbrains+all,linux,macos,node,notepadpp,python,redis,sublimetext,vim,visualstudiocode,windows
@@ -652,11 +655,7 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/database,django,jetbrains+all,linux,macos,node,notepadpp,python,redis,sublimetext,vim,visualstudiocode,windows
 
-!docker
-Dockerfile
-!locale/
-!requirements/
-requirements/development.txt
 !.env
 !manage.py
 !pyproject.toml
+Dockerfile
