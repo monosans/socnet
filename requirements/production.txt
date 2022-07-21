@@ -4,4 +4,3 @@ gunicorn==20.1.0
 uvicorn[standard]==0.18.2
 
 redis[hiredis]==4.3.4
-channels-redis==3.4.1
