@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o pipefail
-set -o nounset
+set -euo pipefail
 
 postgres_ready() {
 	python3 <<END

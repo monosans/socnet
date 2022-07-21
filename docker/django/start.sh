@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o pipefail
-set -o nounset
+set -euo pipefail
 
 python3 /app/manage.py migrate --noinput
 python3 /app/manage.py collectstatic --noinput --clear

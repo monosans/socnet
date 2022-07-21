@@ -1,58 +1,58 @@
 services:
   django:
+    image: socnet_production_django
     build:
+      target: python-production-stage
       context: .
       dockerfile: ./docker/django/Dockerfile
-      target: python-production-stage
       args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
         - BUILD_ENVIRONMENT=production
-    image: production_django
-    restart: unless-stopped
+        - GID=${GID:-1000}
+        - UID=${UID:-1000}
+    command: /start.sh
     depends_on:
       - postgres
       - redis
-    volumes:
-      - production_django_static:/var/www/django/static
-      - production_django_media:/var/www/django/media
+    env_file: ./.env
     environment:
       - DJANGO_SETTINGS_MODULE=server.settings.production
-    env_file: ./.env
-    command: /start.sh
+    restart: unless-stopped
+    volumes:
+      - production_django_media:/var/www/django/media
+      - production_django_static:/var/www/django/static
 
   postgres:
     image: postgres:14
+    env_file: ./.env
     restart: unless-stopped
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
-    env_file: ./.env
 
   redis:
     image: redis:7
     restart: unless-stopped
 
   caddy:
+    image: socnet_production_caddy
     build:
       context: .
       dockerfile: ./docker/caddy/Dockerfile
-    image: production_caddy
-    restart: unless-stopped
     depends_on:
       - django
-    volumes:
-      - production_caddy_config:/config
-      - production_caddy_data:/data
-      - production_django_static:/var/www/django/static
-      - production_django_media:/var/www/django/media
+    env_file: ./.env
     ports:
       - "80:80"
       - "443:443"
-    env_file: ./.env
+    restart: unless-stopped
+    volumes:
+      - production_caddy_config:/config
+      - production_caddy_data:/data
+      - production_django_media:/var/www/django/media
+      - production_django_static:/var/www/django/static
 
 volumes:
-  production_django_static:
-  production_django_media:
-  production_postgres_data:
   production_caddy_config:
   production_caddy_data:
+  production_django_media:
+  production_django_static:
+  production_postgres_data:

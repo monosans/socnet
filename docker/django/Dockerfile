@@ -26,16 +26,14 @@ RUN pip wheel --progress-bar off --no-color --wheel-dir /usr/src/app/wheels \
 
 FROM python as python-local-stage
 
-ARG BUILD_ENVIRONMENT \
-  UID \
+ARG UID \
   GID
 
 # hadolint ignore=DL3008
 RUN groupadd -g "${GID}" -r django \
   && useradd -g django -l -r -u "${UID}" django \
-  && if [ "${BUILD_ENVIRONMENT}" = 'production' ]; \
-  then mkdir -p /var/www/django/static /var/www/django/media \
-  && chown django:django /var/www/django/static /var/www/django/media; fi \
+  && mkdir -p /var/www/django/static /var/www/django/media \
+  && chown django:django /var/www/django/static /var/www/django/media \
   && apt-get update \
   && apt-get install --no-install-recommends -y \
   # static files compression
