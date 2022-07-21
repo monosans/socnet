@@ -5,16 +5,16 @@ from allauth import urls as allauth_urls
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs_urls
-from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic import TemplateView
 
 from .apps.api import urls as api_urls
 from .apps.main import urls as main_urls
 from .apps.messenger import urls as messenger_urls
+from .apps.users.views import admin_site_login_view
 
 # https://django-allauth.readthedocs.io/en/latest/advanced.html#admin
-admin.site.login = login_required(admin.site.login)  # type: ignore[assignment]
+admin.site.login = admin_site_login_view  # type: ignore[assignment]
 
 urlpatterns = [
     path("admin/doc/", include(admindocs_urls)),
