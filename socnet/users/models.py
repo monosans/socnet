@@ -27,10 +27,12 @@ class User(AbstractUser):
         db_index=True,
         help_text=_(
             "No more than 30 characters. "
-            + "Only lowercase English letters, numbers and _. "
+            + "Only English letters, numbers and _. "
             + "Must begin with a letter and end with a letter or number."
         ),
-        validators=(RegexValidator(r"^(?:[a-z]|[a-z][a-z\d_]*[a-z\d])$"),),
+        validators=(
+            RegexValidator(r"^(?:[a-zA-Z]|[a-zA-Z][a-zA-Z\d_]*[a-zA-Z\d])$"),
+        ),
         error_messages={
             "unique": _("A user with that username already exists.")
         },
