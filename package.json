@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "lint": "eslint --fix server",
+    "lint": "eslint --fix .",
     "format": "prettier --write . '!**/*.html'"
   },
   "devDependencies": {

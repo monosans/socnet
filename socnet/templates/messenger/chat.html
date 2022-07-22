@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block title %}
+  {% trans "Chat" %} #{{ chat.pk }}
+{% endblock title %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}"/>
+{% endblock css %}
+{% block javascript %}
+  <script defer src="{% static 'messenger/js/chat.js' %}"></script>
+{% endblock javascript %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-body py-0">
+          <div class="chat_log" id="chat-log">
+            {% for message in chat.messages.all %}
+              <div class="row mb-3">
+                <div class="avatar-thumbnail">
+                  {% if message.user.image %}
+                    <img src="{{ message.user.image.url }}"
+                         alt=""
+                         class="rounded"
+                         loading="lazy"/>
+                  {% endif %}
+                </div>
+                <div class="col ms-2">
+                  <div class="text-break">
+                    <div>
+                      <a href="{{ message.user.get_absolute_url }}">{{ message.user.get_username }}</a>
+                      <span class="text-secondary">{{ message.simple_date }}</span>
+                    </div>
+                    <div class="me-2">{{ message.text|linebreaksbr }}</div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group">
+            {{ form.text }}
+            <input type="submit"
+                   value="{% trans "Send" %}"
+                   class="btn btn-primary"
+                   id="chat-message-submit"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ chat.pk|json_script:"chat-pk" }}
+{% endblock content %}

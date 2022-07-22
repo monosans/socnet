@@ -26,7 +26,7 @@ show_error_codes = true
 plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 
 [tool.django-stubs]
-django_settings_module = "server.settings.test"
+django_settings_module = "config.settings.test"
 
 [tool.djlint]
 ignore = "H006,H030,H031"

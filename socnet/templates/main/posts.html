@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block title %}
+  {% trans "Posts" %}
+{% endblock title %}
+{% block css %}
+  {% include "main/inc/font_awesome.html" %}
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}"/>
+{% endblock css %}
+{% block javascript %}
+  {% if posts %}
+    <script defer src="{% static 'js/like.js' %}"></script>
+  {% endif %}
+{% endblock javascript %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-xl-6">
+      <div class="card mb-2">
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+              {{ form.search_query }}
+              <button class="btn btn-primary">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% if posts %}
+        {% include "main/inc/posts.html" %}
+        {% if page_range %}
+          <ul class="pagination justify-content-center">
+            {% for page in page_range %}
+              {% if page == posts.paginator.ELLIPSIS %}
+                <li class="page-item">
+                  <div class="page-link">{{ page }}</div>
+                </li>
+              {% elif page == posts.number %}
+                <li class="page-item active">
+                  <div class="page-link">{{ page }}</div>
+                </li>
+              {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% else %}
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center">
+              {% if request.method == "POST" %}
+                {% if form.is_valid %}
+                  {% trans "No posts found." %}
+                {% endif %}
+              {% else %}
+                {% trans "Subscribe to users you are interested in, so that their posts are displayed here." %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}

@@ -1,8 +1,8 @@
 **
+!config/
 !docker/
 !locale/
-!requirements/
-!server/
+!socnet/
 
 # Created by https://www.toptal.com/developers/gitignore/api/database,django,jetbrains+all,linux,macos,node,notepadpp,python,redis,sublimetext,vim,visualstudiocode,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=database,django,jetbrains+all,linux,macos,node,notepadpp,python,redis,sublimetext,vim,visualstudiocode,windows
@@ -658,4 +658,5 @@ $RECYCLE.BIN/
 !.env
 !manage.py
 !pyproject.toml
+!requirements/*.txt
 Dockerfile

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-15 18:50+0000\n"
+"POT-Creation-Date: 2022-07-22 14:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Russian"
+msgstr "Русский"
 
 msgid "Main"
 msgstr "Основное"
@@ -78,105 +84,6 @@ msgstr "комментарий к посту"
 msgid "You can't subscribe to yourself."
 msgstr "Вы не можете подписаться на себя."
 
-msgid "Liked posts"
-msgstr "Понравившиеся посты"
-
-msgid "You have no liked posts."
-msgstr "У вас нет понравившихся постов."
-
-msgid "The user has no liked posts."
-msgstr "У пользователя нет понравившихся постов."
-
-msgid "Post"
-msgstr "Пост"
-
-msgid "Post deletion"
-msgstr "Удаление поста"
-
-msgid "Are you sure you want to delete your post?"
-msgstr "Вы уверены, что хотите удалить свой пост?"
-
-msgid "Close"
-msgstr "Закрыть"
-
-msgid "Delete"
-msgstr "Удалить"
-
-msgid "Comment"
-msgstr "Комментировать"
-
-msgid "Post comment deletion"
-msgstr "Удаление комментария к посту"
-
-msgid "Are you sure you want to delete your comment?"
-msgstr "Вы уверены, что хотите удалить свой комментарий?"
-
-msgid "Posts"
-msgstr "Посты"
-
-msgid "No posts found."
-msgstr "Посты не найдены."
-
-msgid "Subscribe to users you are interested in, so that their posts are displayed here."
-msgstr "Подпишитесь на интересных вам пользователей, чтобы их посты отображались здесь."
-
-msgid "Subscribers"
-msgstr "Подписчики"
-
-msgid "You have no subscribers."
-msgstr "У вас нет подписчиков."
-
-msgid "The user has no subscribers."
-msgstr "У пользователя нет подписчиков."
-
-msgid "Subscriptions"
-msgstr "Подписки"
-
-msgid "Unsubscribe"
-msgstr "Отписаться"
-
-msgid "Subscribe"
-msgstr "Подписаться"
-
-msgid "You have no subscriptions."
-msgstr "У вас нет подписок."
-
-msgid "The user has no subscriptions."
-msgstr "У пользователя нет подписок."
-
-msgid "Edit"
-msgstr "Редактировать"
-
-msgid "Edit profile"
-msgstr "Редактировать профиль"
-
-msgid "Change Password"
-msgstr "Сменить пароль"
-
-msgid "Save"
-msgstr "Сохранить"
-
-msgid "Create post"
-msgstr "Создать пост"
-
-msgid "Post creation"
-msgstr "Создание поста"
-
-msgid "Write message"
-msgstr "Написать сообщение"
-
-msgid "Birth date"
-msgstr "Дата рождения"
-
-msgid "Search users"
-msgstr "Поиск пользователей"
-
-msgid "Search"
-msgstr "Поиск"
-
-msgid "No users found"
-msgstr "Пользователи не найдены"
-
 msgid "An error occurred while creating the post."
 msgstr "При создании поста произошла ошибка."
 
@@ -209,66 +116,6 @@ msgstr "сообщения"
 
 msgid "The chat must have 2 participants."
 msgstr "В чате должно быть 2 участника."
-
-msgid "Chat"
-msgstr "Чат"
-
-msgid "Send"
-msgstr "Отправить"
-
-msgid "Chats"
-msgstr "Чаты"
-
-msgid "You have no chats."
-msgstr "У вас нет чатов."
-
-msgid "Other"
-msgstr "Прочее"
-
-msgid "Users"
-msgstr "Пользователи"
-
-msgid "username"
-msgstr "имя пользователя"
-
-msgid "No more than 30 characters. Only lowercase English letters, numbers and _. Must begin with a letter and end with a letter or number."
-msgstr "Не более 30 символов. Только строчные английские буквы, цифры и _. Должно начинаться с буквы и заканчиваться буквой или цифрой."
-
-msgid "A user with that username already exists."
-msgstr "Пользователь с таким именем уже существует."
-
-msgid "first name"
-msgstr "имя"
-
-msgid "No more than 30 characters. Only English and Russian letters and -."
-msgstr "Не более 30 символов. Только английские и русские буквы и -."
-
-msgid "last name"
-msgstr "фамилия"
-
-msgid "birth date"
-msgstr "дата рождения"
-
-msgid "location"
-msgstr "местонахождение"
-
-msgid "about me"
-msgstr "обо мне"
-
-msgid "subscriptions"
-msgstr "подписки"
-
-msgid "You cannot be older than the oldest human."
-msgstr "Вы не можете быть старше самого старого человека."
-
-msgid "Are you from the future?"
-msgstr "Вы из будущего?"
-
-msgid "English"
-msgstr "Английский"
-
-msgid "Russian"
-msgstr "Русский"
 
 msgid "Bad Request (400)"
 msgstr "Плохой запрос (400)"
@@ -324,6 +171,9 @@ msgstr "Удалить"
 msgid "Do you really want to remove the selected e-mail address?"
 msgstr "Вы действительно хотите удалить выбранный адрес электронной почты?"
 
+msgid "Close"
+msgstr "Закрыть"
+
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -365,6 +215,9 @@ msgstr "Выход"
 
 msgid "Are you sure you want to sign out?"
 msgstr "Вы уверены, что хотите выйти?"
+
+msgid "Change Password"
+msgstr "Сменить пароль"
 
 msgid "Password Reset"
 msgstr "Сброс пароля"
@@ -432,3 +285,150 @@ msgstr "вы всё ещё можете <a href=\"%(email_url)s\">изменит
 
 msgid "My page"
 msgstr "Моя страница"
+
+msgid "Posts"
+msgstr "Посты"
+
+msgid "Subscriptions"
+msgstr "Подписки"
+
+msgid "Search users"
+msgstr "Поиск пользователей"
+
+msgid "Liked posts"
+msgstr "Понравившиеся посты"
+
+msgid "You have no liked posts."
+msgstr "У вас нет понравившихся постов."
+
+msgid "The user has no liked posts."
+msgstr "У пользователя нет понравившихся постов."
+
+msgid "Post"
+msgstr "Пост"
+
+msgid "Post deletion"
+msgstr "Удаление поста"
+
+msgid "Are you sure you want to delete your post?"
+msgstr "Вы уверены, что хотите удалить свой пост?"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Comment"
+msgstr "Комментировать"
+
+msgid "Post comment deletion"
+msgstr "Удаление комментария к посту"
+
+msgid "Are you sure you want to delete your comment?"
+msgstr "Вы уверены, что хотите удалить свой комментарий?"
+
+msgid "No posts found."
+msgstr "Посты не найдены."
+
+msgid "Subscribe to users you are interested in, so that their posts are displayed here."
+msgstr "Подпишитесь на интересных вам пользователей, чтобы их посты отображались здесь."
+
+msgid "Subscribers"
+msgstr "Подписчики"
+
+msgid "You have no subscribers."
+msgstr "У вас нет подписчиков."
+
+msgid "The user has no subscribers."
+msgstr "У пользователя нет подписчиков."
+
+msgid "Unsubscribe"
+msgstr "Отписаться"
+
+msgid "Subscribe"
+msgstr "Подписаться"
+
+msgid "You have no subscriptions."
+msgstr "У вас нет подписок."
+
+msgid "The user has no subscriptions."
+msgstr "У пользователя нет подписок."
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Create post"
+msgstr "Создать пост"
+
+msgid "Post creation"
+msgstr "Создание поста"
+
+msgid "Write message"
+msgstr "Написать сообщение"
+
+msgid "Birth date"
+msgstr "Дата рождения"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "No users found"
+msgstr "Пользователи не найдены"
+
+msgid "Chat"
+msgstr "Чат"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Chats"
+msgstr "Чаты"
+
+msgid "You have no chats."
+msgstr "У вас нет чатов."
+
+msgid "Other"
+msgstr "Прочее"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "username"
+msgstr "имя пользователя"
+
+msgid "No more than 30 characters. Only lowercase English letters, numbers and _. Must begin with a letter and end with a letter or number."
+msgstr "Не более 30 символов. Только строчные английские буквы, цифры и _. Должно начинаться с буквы и заканчиваться буквой или цифрой."
+
+msgid "A user with that username already exists."
+msgstr "Пользователь с таким именем уже существует."
+
+msgid "first name"
+msgstr "имя"
+
+msgid "No more than 30 characters. Only English and Russian letters and -."
+msgstr "Не более 30 символов. Только английские и русские буквы и -."
+
+msgid "last name"
+msgstr "фамилия"
+
+msgid "birth date"
+msgstr "дата рождения"
+
+msgid "location"
+msgstr "местонахождение"
+
+msgid "about me"
+msgstr "обо мне"
+
+msgid "subscriptions"
+msgstr "подписки"
+
+msgid "You cannot be older than the oldest human."
+msgstr "Вы не можете быть старше самого старого человека."
+
+msgid "Are you from the future?"
+msgstr "Вы из будущего?"

@@ -15,7 +15,7 @@ services:
       - redis
     env_file: ./.env
     environment:
-      - DJANGO_SETTINGS_MODULE=server.settings.production
+      - DJANGO_SETTINGS_MODULE=config.settings.production
     restart: unless-stopped
     volumes:
       - production_django_media:/var/www/django/media
