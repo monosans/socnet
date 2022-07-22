@@ -41,7 +41,7 @@ English and Russian languages ​​are supported. The language is selected base
 
 ## Installation
 
-[Install `Docker` and `Docker Compose`](https://docs.docker.com/engine/install/).
+[Install `Docker Compose`](https://docs.docker.com/compose/install/).
 
 ### Configuration
 
@@ -50,10 +50,10 @@ Copy the `.env.template` file to `.env`. Set the settings you need in the `.env`
 ### Development
 
 ```bash
-docker compose -f docker-compose.local.yml build
-docker compose -f docker-compose.local.yml run --rm django python manage.py migrate
-docker compose -f docker-compose.local.yml run --rm django python manage.py compilemessages
-docker compose -f docker-compose.local.yml up
+docker compose build
+docker compose run --rm django python manage.py migrate
+docker compose run --rm django python manage.py compilemessages
+docker compose up
 ```
 
 ### Production
@@ -61,6 +61,6 @@ docker compose -f docker-compose.local.yml up
 To run this in production, you need to specify a domain name and email settings in `.env`.
 
 ```bash
-docker compose -f docker-compose.production.yml build
-docker compose -f docker-compose.production.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.prod.yml build
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
