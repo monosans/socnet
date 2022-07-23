@@ -84,6 +84,10 @@ class User(AbstractUser):
     def get_absolute_url(self) -> str:
         return reverse("user", args=(self.get_username(),))
 
+    def clean(self) -> None:
+        super().clean()
+        setattr(self, self.USERNAME_FIELD, self.get_username().lower())
+
     @property
     def full_name_in_brackets(self) -> str:
         full_name = self.get_full_name()
