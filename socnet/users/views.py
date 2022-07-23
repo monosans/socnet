@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
@@ -9,7 +11,9 @@ from .types import AuthedRequest
 
 
 @login_required
-def admin_site_login_view(request: AuthedRequest) -> HttpResponse:
+def admin_site_login_view(
+    request: AuthedRequest, extra_context: dict[str, Any] | None = None
+) -> HttpResponse:
     if not request.user.is_staff:
         raise PermissionDenied
     next = request.GET.get("next", "admin:index")
