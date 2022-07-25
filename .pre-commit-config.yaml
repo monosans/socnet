@@ -22,7 +22,7 @@ repos:
         args: [--fix=lf]
       - id: trailing-whitespace
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.37.1
+    rev: v2.37.2
     hooks:
       - id: pyupgrade
         args: [--py38-plus]
@@ -48,6 +48,6 @@ repos:
           - eslint
           - eslint-config-prettier
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.7.0
+    rev: v1.7.2
     hooks:
       - id: djlint-django
