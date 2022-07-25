@@ -6,7 +6,7 @@ django-extra-checks==0.11.0
 pre-commit==2.20.0
 black==22.6.0
 isort==5.10.1
-djlint==1.7.1
+djlint==1.7.2
 
 mypy==0.971
 django-stubs==1.12.0
