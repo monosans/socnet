@@ -2,27 +2,26 @@
 
 set -euo pipefail
 
-postgres_ready() {
-	python3 <<END
+python3 <<END
+import sys
+import time
+
 import psycopg2
 
-try:
-    psycopg2.connect(
-        dbname="${POSTGRES_DB}",
-        user="${POSTGRES_USER}",
-        password="${POSTGRES_PASSWORD}",
-        host="${POSTGRES_HOST}",
-        port="${POSTGRES_PORT}",
-    )
-except psycopg2.OperationalError:
-    raise SystemExit(-1)
-raise SystemExit
+while True:
+    try:
+        psycopg2.connect(
+            dbname="${POSTGRES_DB}",
+            user="${POSTGRES_USER}",
+            password="${POSTGRES_PASSWORD}",
+            host="${POSTGRES_HOST}",
+            port="${POSTGRES_PORT}",
+        )
+    except psycopg2.OperationalError as e:
+        sys.stderr.write(str(e))
+    else:
+        break
+    time.sleep(1)
 END
-}
-
-until postgres_ready; do
-	echo >&2 'Waiting for PostgreSQL to become available...'
-	sleep 1
-done
 
 exec "$@"
