@@ -15,8 +15,8 @@
              name="{{ redirect_field_name }}"
              value="{{ redirect_field_value }}"/>
     {% endif %}
-    <input class="btn btn-primary w-100"
-           type="submit"
-           value="{% trans 'Sign Out' %}"/>
+    <button class="btn btn-primary w-100" type="submit">
+      {% trans 'Sign Out' %}
+    </button>
   </form>
 {% endblock card_body %}

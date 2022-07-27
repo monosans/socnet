@@ -17,9 +17,9 @@
           <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <input type="submit"
-                   value="{% trans "Search" %}"
-                   class="btn btn-primary w-100"/>
+            <button type="submit" class="btn btn-primary w-100">
+              {% trans "Search" %}
+            </button>
           </form>
         </div>
       </div>

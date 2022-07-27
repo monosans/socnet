@@ -26,48 +26,46 @@
                              checked="checked"
                            {% endif %}
                            value="{{ emailaddress.email }}"/>
-                    <span>{{ emailaddress.email }}</span>
+                    {{ emailaddress.email }}
                     {% if emailaddress.verified %}
-                      <span>{% trans "Verified" %}</span>
+                      {% trans "Verified" %}
                     {% else %}
-                      <span>{% trans "Unverified" %}</span>
+                      {% trans "Unverified" %}
                     {% endif %}
                     {% if emailaddress.primary %}
-                      <span>{% trans "Primary" %}</span>
+                      {% trans "Primary" %}
                     {% endif %}
                   </div>
                 {% endfor %}
               </div>
-              <input class="btn btn-primary"
-                     type="submit"
-                     name="action_primary"
-                     value="{% trans 'Make Primary' %}"/>
-              <input class="btn btn-primary"
-                     type="submit"
-                     name="action_send"
-                     value="{% trans 'Re-send Verification' %}"/>
-              <div class="btn btn-danger"
-                   data-bs-toggle="modal"
-                   data-bs-target="#emailRemove">
+              <button class="btn btn-primary" type="submit" name="action_primary">
+                {% trans 'Make Primary' %}
+              </button>
+              <button class="btn btn-primary" type="submit" name="action_send">
+                {% trans 'Re-send Verification' %}
+              </button>
+              <button type="button"
+                      class="btn btn-danger"
+                      data-bs-toggle="modal"
+                      data-bs-target="#emailRemove">
                 {% trans "Remove" %}
-              </div>
+              </button>
               <div class="modal fade" id="emailRemove" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <div class="btn-close" data-bs-dismiss="modal"></div>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                       {% trans "Do you really want to remove the selected e-mail address?" %}
                     </div>
                     <div class="modal-footer">
-                      <div class="btn btn-secondary" data-bs-dismiss="modal">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         {% trans "Close" %}
-                      </div>
-                      <input type="submit"
-                             class="btn btn-danger"
-                             name="action_remove"
-                             value="{% trans 'Remove' %}"/>
+                      </button>
+                      <button type="submit" class="btn btn-danger" name="action_remove">
+                        {% trans 'Remove' %}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -87,10 +85,9 @@
             <form method="post" action="{% url 'account_email' %}">
               {% csrf_token %}
               {{ form|crispy }}
-              <input class="btn btn-primary w-100"
-                     name="action_add"
-                     type="submit"
-                     value="{% trans 'Add E-mail' %}"/>
+              <button class="btn btn-primary w-100" name="action_add" type="submit">
+                {% trans 'Add E-mail' %}
+              </button>
             </form>
           </div>
         </div>

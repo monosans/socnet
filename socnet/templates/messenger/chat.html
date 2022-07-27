@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="{% static 'css/chat.css' %}"/>
 {% endblock css %}
 {% block javascript %}
-  <script defer src="{% static 'messenger/js/chat.js' %}"></script>
+  <script defer src="{% static 'js/chat.js' %}"></script>
 {% endblock javascript %}
 {% block content %}
   <div class="row justify-content-center">
@@ -46,10 +46,9 @@
         <div class="card-body">
           <div class="input-group">
             {{ form.text }}
-            <input type="submit"
-                   value="{% trans "Send" %}"
-                   class="btn btn-primary"
-                   id="chat-message-submit"/>
+            <button type="button" class="btn btn-primary" id="chat-message-submit">
+              {% trans "Send" %}
+            </button>
           </div>
         </div>
       </div>
