@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-22 20:24+0000\n"
+"POT-Creation-Date: 2022-07-27 19:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -289,9 +289,6 @@ msgstr "Моя страница"
 msgid "Posts"
 msgstr "Посты"
 
-msgid "Subscriptions"
-msgstr "Подписки"
-
 msgid "Search users"
 msgstr "Поиск пользователей"
 
@@ -339,6 +336,9 @@ msgstr "У вас нет подписчиков."
 
 msgid "The user has no subscribers."
 msgstr "У пользователя нет подписчиков."
+
+msgid "Subscriptions"
+msgstr "Подписки"
 
 msgid "Unsubscribe"
 msgstr "Отписаться"
