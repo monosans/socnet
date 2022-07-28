@@ -24,7 +24,7 @@ COPY ./requirements .
 RUN pip wheel --progress-bar off --no-color --wheel-dir /usr/src/app/wheels \
   -r "${BUILD_ENVIRONMENT}".txt
 
-FROM python as python-local-stage
+FROM python as python-run-stage
 
 ARG UID \
   GID
@@ -58,13 +58,11 @@ RUN pip install --no-cache-dir --no-index --progress-bar off --no-color \
 COPY --chown=django:django ./docker/django/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-USER django
-
-ENTRYPOINT ["/entrypoint.sh"]
-
-FROM python-local-stage AS python-production-stage
-
 COPY --chown=django:django ./docker/django/start.sh /start.sh
 RUN chmod +x /start.sh
 
 COPY --chown=django:django . .
+
+USER django
+
+ENTRYPOINT ["/entrypoint.sh"]

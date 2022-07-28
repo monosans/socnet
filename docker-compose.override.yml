@@ -2,7 +2,6 @@ services:
   django:
     image: socnet_local_django
     build:
-      target: python-local-stage
       args:
         - BUILD_ENVIRONMENT=local
     command: python3 -Wd manage.py runserver 0.0.0.0:8000
