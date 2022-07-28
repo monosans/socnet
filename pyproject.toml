@@ -35,3 +35,12 @@ blank_line_after_tag = "load,extends"
 profile = "django"
 max_line_length = 80
 format_attribute_template_tags = true
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+FAIL_INVALID_TEMPLATE_VARS = true
+addopts = "--strict-markers --strict-config --cov --cov-branch"
+xfail_strict = true
+
+[tool.coverage.run]
+plugins = ["django_coverage_plugin"]
