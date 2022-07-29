@@ -101,3 +101,20 @@ COPY --chown=django:django . .
 USER django
 
 ENTRYPOINT ["/app/docker/django/entrypoint.sh"]
+
+
+FROM python-base-run-stage as python-ci-run-stage
+
+# Copy wheels from build-stage
+COPY --from=python-build-stage /usr/src/app/wheels /wheels/
+
+# Install wheels
+RUN pip install \
+  --progress-bar off \
+  --no-index \
+  -f /wheels/ /wheels/* \
+  --no-cache-dir \
+  --no-color \
+  && rm -rf /wheels/
+
+ENTRYPOINT ["/app/docker/django/entrypoint.sh"]
