@@ -1,5 +1,7 @@
 # SocNet
 
+[![codecov](https://codecov.io/gh/monosans/socnet/branch/main/graph/badge.svg)](https://codecov.io/gh/monosans/socnet)
+
 Social network written in Django Framework.
 
 ## What can users do?
