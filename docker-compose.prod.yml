@@ -2,9 +2,10 @@ services:
   django:
     image: socnet_production_django
     build:
+      target: python-production-run-stage
       args:
         - BUILD_ENVIRONMENT=production
-    command: /start.sh
+    command: /app/docker/django/start.sh
     depends_on:
       - redis
     environment:

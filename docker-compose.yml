@@ -3,9 +3,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/django/Dockerfile
-      args:
-        - GID=${GID:-1000}
-        - UID=${UID:-1000}
     depends_on:
       - postgres
     env_file: ./.env

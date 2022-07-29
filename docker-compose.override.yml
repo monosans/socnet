@@ -2,8 +2,11 @@ services:
   django:
     image: socnet_local_django
     build:
+      target: python-local-run-stage
       args:
         - BUILD_ENVIRONMENT=local
+        - GID=${GID:-1000}
+        - UID=${UID:-1000}
     command: python3 -Wd manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
