@@ -1,5 +1,6 @@
 # SocNet
 
+[![CI](https://github.com/monosans/socnet/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/monosans/socnet/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/monosans/socnet/branch/main/graph/badge.svg)](https://codecov.io/gh/monosans/socnet)
 
 Social network written in Django Framework.
