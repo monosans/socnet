@@ -6,6 +6,8 @@ services:
     depends_on:
       - postgres
     env_file: ./.env
+    environment:
+      - READ_ENV_TEMPLATE=False
     restart: unless-stopped
 
   postgres:

@@ -8,8 +8,12 @@ import environ
 from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+
 env = environ.Env()
-env.read_env(str(BASE_DIR / ".env"))
+
+# Needed for running mypy outside of docker
+if env.bool("READ_ENV_TEMPLATE", default=True):
+    env.read_env(str(BASE_DIR / ".env.template"))
 
 APPS_DIR = BASE_DIR / "socnet"
 

@@ -49,7 +49,7 @@ English and Russian languages ​​are supported. The language is selected base
 
 ### Configuration
 
-The project is configured in the `.env` file.
+Copy the `.env.template` file to `.env`. Set the settings you need in the `.env` file.
 
 ### Development
 
