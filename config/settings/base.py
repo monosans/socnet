@@ -13,7 +13,7 @@ env = environ.Env()
 env.smart_cast = False
 
 # Needed for running mypy outside of docker
-if env.bool("READ_ENV_TEMPLATE", default=True):
+if env.bool("READ_ENV_TEMPLATE", default=True):  # pragma: no cover
     env.read_env(str(BASE_DIR / ".env.template"))
 
 APPS_DIR = BASE_DIR / "socnet"
