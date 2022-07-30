@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: cp .env.template .env
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django pytest --cov-report=xml
