@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as _
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
 env = environ.Env()
+env.smart_cast = False
 
 # Needed for running mypy outside of docker
 if env.bool("READ_ENV_TEMPLATE", default=True):
@@ -18,7 +19,7 @@ if env.bool("READ_ENV_TEMPLATE", default=True):
 APPS_DIR = BASE_DIR / "socnet"
 
 DEBUG = False
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = env.str("DJANGO_SECRET_KEY")
 
 TIME_ZONE = "UTC"
 LANGUAGE_CODE = "en-us"
@@ -31,10 +32,10 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("POSTGRES_DB"),
-        "USER": env("POSTGRES_USER"),
-        "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": env("POSTGRES_HOST"),
+        "NAME": env.str("POSTGRES_DB"),
+        "USER": env.str("POSTGRES_USER"),
+        "PASSWORD": env.str("POSTGRES_PASSWORD"),
+        "HOST": env.str("POSTGRES_HOST"),
         "PORT": env.int("POSTGRES_PORT"),
         "ATOMIC_REQUESTS": True,
     }
