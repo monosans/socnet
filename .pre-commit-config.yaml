@@ -22,7 +22,7 @@ repos:
         args: [--fix=lf]
       - id: trailing-whitespace
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.37.2
+    rev: v2.37.3
     hooks:
       - id: pyupgrade
         args: [--py38-plus]
@@ -34,6 +34,27 @@ repos:
     rev: 5.10.1
     hooks:
       - id: isort
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.971
+    hooks:
+      - id: mypy
+        args: []
+        additional_dependencies:
+          - django-allauth==0.51.0
+          - django-cleanup==6.0.0
+          - django-environ==0.9.0
+          - django-logentry-admin==1.1.0
+          - psycopg2-binary==2.9.3
+          - django-crispy-forms==1.14.0
+          - crispy-bootstrap5==0.6
+          - djangorestframework==3.13.1
+          - channels==3.0.5
+          - channels-redis==3.4.1
+          - django-debug-toolbar==3.5.0
+          - django-stubs==1.12.0
+          - djangorestframework-stubs==1.7.0
+          - pytest==7.1.2
+          - factory-boy==3.2.1
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.7.1
     hooks:
@@ -48,6 +69,6 @@ repos:
           - eslint
           - eslint-config-prettier
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.7.2
+    rev: v1.9.2
     hooks:
       - id: djlint-django
