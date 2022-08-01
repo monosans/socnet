@@ -61,7 +61,7 @@ repos:
       - id: prettier
         exclude_types: [html]
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.20.0
+    rev: v8.21.0
     hooks:
       - id: eslint
         args: [--fix]
@@ -69,6 +69,6 @@ repos:
           - eslint
           - eslint-config-prettier
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.9.2
+    rev: v1.9.3
     hooks:
       - id: djlint-django
