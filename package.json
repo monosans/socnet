@@ -4,7 +4,7 @@
     "format": "prettier --write . '!**/*.html'"
   },
   "devDependencies": {
-    "eslint": "^8.20",
+    "eslint": "^8.21",
     "eslint-config-prettier": "^8.5",
     "prettier": "^2.7"
   },
