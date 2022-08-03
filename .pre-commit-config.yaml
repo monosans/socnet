@@ -69,6 +69,6 @@ repos:
           - eslint
           - eslint-config-prettier
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.9.3
+    rev: v1.9.4
     hooks:
       - id: djlint-django
