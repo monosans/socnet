@@ -23,7 +23,7 @@ Social network written in Django Framework.
 Backend:
 
 - Python 3.8+
-- Django 4.0
+- Django 4.1
 - Django REST framework (DRF)
 - Django Channels (WebSockets)
 - Django Allauth
