@@ -1,4 +1,4 @@
-"""https://docs.djangoproject.com/en/4.0/topics/http/urls/"""
+"""https://docs.djangoproject.com/en/4.1/topics/http/urls/"""
 from __future__ import annotations
 
 from allauth import urls as allauth_urls

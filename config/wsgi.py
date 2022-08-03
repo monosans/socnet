@@ -1,4 +1,4 @@
-"""https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/"""
+"""https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/"""
 from __future__ import annotations
 
 import os

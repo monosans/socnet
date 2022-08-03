@@ -1,4 +1,4 @@
-"""https://docs.djangoproject.com/en/4.0/ref/settings/"""
+"""https://docs.djangoproject.com/en/4.1/ref/settings/"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -78,7 +78,7 @@ LOGIN_REDIRECT_URL = "index"
 LOGIN_URL = "account_login"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-# https://docs.djangoproject.com/en/4.0/topics/auth/passwords/#using-argon2-with-django
+# https://docs.djangoproject.com/en/4.1/topics/auth/passwords/#using-argon2-with-django
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
