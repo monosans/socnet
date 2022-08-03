@@ -2,13 +2,11 @@
 line-length = 79
 skip-magic-trailing-comma = true
 preview = true
-extend-exclude = "/migrations/"
 
 [tool.isort]
 profile = "black"
 line_length = 79
 add_imports = ["from __future__ import annotations"]
-extend_skip_glob = ["**/migrations/*"]
 
 [tool.mypy]
 exclude = "migrations/"
