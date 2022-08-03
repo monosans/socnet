@@ -9,7 +9,6 @@ line_length = 79
 add_imports = ["from __future__ import annotations"]
 
 [tool.mypy]
-exclude = "migrations/"
 ignore_missing_imports = true
 warn_unreachable = true
 local_partial_types = true
@@ -22,6 +21,10 @@ enable_error_code = [
 strict = true
 show_error_codes = true
 plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+
+[[tool.mypy.overrides]]
+module = "socnet.*.migrations.*"
+ignore_errors = true
 
 [tool.django-stubs]
 django_settings_module = "config.settings.test"
