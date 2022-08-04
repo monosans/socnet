@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from django.contrib.auth import forms as auth_forms
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy as _
 
 from .models import User as UserType
 
