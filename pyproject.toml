@@ -4,6 +4,7 @@ skip-magic-trailing-comma = true
 preview = true
 
 [tool.isort]
+py_version = 38
 profile = "black"
 line_length = 79
 add_imports = ["from __future__ import annotations"]
