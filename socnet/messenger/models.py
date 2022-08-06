@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Generator
+
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -23,12 +25,12 @@ class Chat(models.Model):
         return reverse("chat", args=(self.pk,))
 
     def get_companion(self, user: UserType) -> UserType:
-        return next(
-            filter(
-                lambda participant: participant != user,
-                self.participants.all(),
-            )
+        companion: Generator[UserType, None, None] = (
+            participant
+            for participant in self.participants.all()
+            if participant != user
         )
+        return next(companion)
 
 
 class Message(models.Model):

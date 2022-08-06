@@ -28,3 +28,11 @@ jobs:
       - uses: codecov/codecov-action@v3
         with:
           files: ./coverage.xml
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: cp .env.template .env
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm pylint .
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down

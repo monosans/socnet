@@ -16,6 +16,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
 # is populated before importing code that may import ORM models.
 django_asgi_app = get_asgi_application()
 
+# pylint: disable-next=wrong-import-position
 from socnet.messenger.routing import websocket_urlpatterns
 
 application = ProtocolTypeRouter(

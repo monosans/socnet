@@ -86,7 +86,12 @@ class User(AbstractUser):
 
     def clean(self) -> None:
         super().clean()
-        setattr(self, self.USERNAME_FIELD, self.get_username().lower())
+        setattr(
+            self,
+            self.USERNAME_FIELD,
+            # pylint: disable-next=no-member
+            self.get_username().lower(),
+        )
 
     @property
     def full_name_in_brackets(self) -> str:

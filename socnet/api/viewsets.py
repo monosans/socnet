@@ -14,7 +14,7 @@ from . import serializers
 
 User = get_user_model()
 
-
+# pylint: disable=too-many-ancestors
 class ChatViewSet(viewsets.ModelViewSet):
     queryset = messenger_models.Chat.objects.prefetch_related(
         Prefetch("messages", messenger_models.Message.objects.only("chat_id")),

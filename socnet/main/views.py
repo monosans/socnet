@@ -45,6 +45,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
                     post.save()
                     post_creation_form = forms.PostCreationForm()
                 else:
+                    # pylint: disable-next=consider-using-f-string
                     message = "{} {}".format(
                         _("An error occurred while creating the post."),
                         _("Please try again."),
@@ -57,6 +58,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
                 if user_change_form.is_valid():
                     user_change_form.save()
                 else:
+                    # pylint: disable-next=consider-using-f-string
                     message = "{} {}".format(
                         _("An error occurred while saving the profile."),
                         _("Please try again."),
@@ -170,6 +172,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             comment.save()
             form = forms.PostCommentCreationForm()
         else:
+            # pylint: disable-next=consider-using-f-string
             message = "{} {}".format(
                 _("An error occurred while creating the comment."),
                 _("Please try again."),
@@ -226,10 +229,10 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:
-            p: QuerySet[models.Post] = qs.filter(
+            subscribed_posts: QuerySet[models.Post] = qs.filter(
                 user__in=request.user.subscriptions.all()
             )
-            paginator = Paginator(p, per_page=5)
+            paginator = Paginator(subscribed_posts, per_page=5)
             try:
                 page = int(request.GET["page"])
             except (KeyError, ValueError):

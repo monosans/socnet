@@ -45,3 +45,52 @@ xfail_strict = true
 
 [tool.coverage.run]
 plugins = ["django_coverage_plugin"]
+
+[tool.pylint.main]
+ignore-paths = ["socnet/.*/migrations/.*"]
+jobs = 0
+
+# https://pylint.pycqa.org/en/stable/user_guide/checkers/extensions.html
+load-plugins = [
+    "pylint_django",
+    "pylint.extensions.bad_builtin",
+    "pylint.extensions.broad_try_clause",
+    "pylint.extensions.check_elif",
+    "pylint.extensions.code_style",
+    "pylint.extensions.comparetozero",
+    "pylint.extensions.comparison_placement",
+    "pylint.extensions.confusing_elif",
+    "pylint.extensions.consider_ternary_expression",
+    "pylint.extensions.empty_comment",
+    "pylint.extensions.emptystring",
+    "pylint.extensions.eq_without_hash",
+    "pylint.extensions.for_any_all",
+    "pylint.extensions.overlapping_exceptions",
+    "pylint.extensions.private_import",
+    "pylint.extensions.redefined_loop_name",
+    "pylint.extensions.set_membership",
+    "pylint.extensions.typing",
+    "pylint.extensions.while_used",
+]
+
+py-version = "3.8"
+recursive = true
+
+[tool.pylint.basic]
+good-names = ["db", "pk"]
+
+[tool.pylint."django foreign keys referenced by strings"]
+django-settings-module = "config.settings.test"
+
+[tool.pylint.format]
+max-line-length = 79
+
+[tool.pylint."messages control"]
+disable = [
+    "consider-using-assignment-expr",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "too-few-public-methods",
+    "unsubscriptable-object",
+]

@@ -11,7 +11,8 @@ def test_unauthorized(client: Client) -> None:
     assert response.redirect_chain == [  # type: ignore[attr-defined]
         ("/admin/login/?next=/admin/doc/", 302),
         (
-            "/accounts/login/?next=/admin/login/%3Fnext%3D%252Fadmin%252Fdoc%252F",
+            "/accounts/login/"
+            + "?next=/admin/login/%3Fnext%3D%252Fadmin%252Fdoc%252F",
             302,
         ),
     ]

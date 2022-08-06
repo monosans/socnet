@@ -32,6 +32,7 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:  # pragma: no cover
+    # pylint: disable-next=ungrouped-imports
     from django.conf.urls.static import static
 
     urlpatterns += static(

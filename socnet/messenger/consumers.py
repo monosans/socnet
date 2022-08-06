@@ -20,19 +20,23 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
         if user.is_anonymous:
             await self.close()
             return
+        # pylint: disable-next=attribute-defined-outside-init
         self.room_name = int(self.scope["url_route"]["kwargs"]["chat_pk"])
+        # pylint: disable-next=attribute-defined-outside-init
         self.room_group_name = f"chat_{self.room_name}"
         await self.channel_layer.group_add(
             self.room_group_name, self.channel_name
         )
         await self.accept()
 
-    async def disconnect(self, close_code: int) -> None:
+    async def disconnect(self, code: int) -> None:
         await self.channel_layer.group_discard(
             self.room_group_name, self.channel_name
         )
 
-    async def receive_json(self, content: dict[str, str]) -> None:
+    async def receive_json(
+        self, content: dict[str, str], **kwargs: Any
+    ) -> None:
         user: UserType = self.scope["user"]
         message_text = content["message"]
         message_obj: models.Message = await database_sync_to_async(

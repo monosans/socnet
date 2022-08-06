@@ -12,9 +12,11 @@ from .types import AuthedRequest
 
 @login_required
 def admin_site_login_view(
-    request: AuthedRequest, extra_context: dict[str, Any] | None = None
+    request: AuthedRequest,
+    # pylint: disable-next=unused-argument
+    extra_context: dict[str, Any] | None = None,
 ) -> HttpResponse:
     if not request.user.is_staff:
         raise PermissionDenied
-    next = request.GET.get("next", "admin:index")
-    return redirect(next)
+    next_page = request.GET.get("next", "admin:index")
+    return redirect(next_page)

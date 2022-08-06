@@ -8,6 +8,9 @@ black==22.6.0
 isort==5.10.1
 djlint==1.9.4
 
+pylint==2.14.5
+pylint-django==2.5.3
+
 mypy==0.971
 django-stubs==1.12.0
 djangorestframework-stubs==1.7.0

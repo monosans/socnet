@@ -20,7 +20,11 @@ class UserFactory(DjangoModelFactory):  # type: ignore[misc]
 
     @post_generation  # type: ignore[misc]
     def password(
-        obj: UserType, create: bool, extracted: Any, **kwargs: Any
+        obj: UserType,
+        # pylint: disable-next=unused-argument
+        create: bool,
+        extracted: Any,
+        **kwargs: Any,
     ) -> None:
         if not isinstance(extracted, str):
             extracted = Faker("password").evaluate(
