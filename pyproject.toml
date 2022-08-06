@@ -12,6 +12,7 @@ add_imports = ["from __future__ import annotations"]
 
 [tool.mypy]
 ignore_missing_imports = true
+python_version = "3.8"
 warn_unreachable = true
 local_partial_types = true
 enable_error_code = [
