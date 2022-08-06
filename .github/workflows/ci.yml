@@ -34,5 +34,5 @@ jobs:
       - uses: actions/checkout@v3
       - run: cp .env.template .env
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm pylint .
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django pylint .
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down
