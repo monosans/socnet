@@ -14,8 +14,7 @@ MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = [
-    # pylint: disable-next=consider-using-f-string
-    "{}.1".format(ip[: ip.rfind(".")])
+    ip[: ip.rfind(".")] + ".1"
     for ip in socket.gethostbyname_ex(socket.gethostname())[2]
 ] + ["127.0.0.1", "10.0.2.2"]
 
