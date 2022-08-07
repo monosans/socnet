@@ -51,7 +51,6 @@ plugins = ["django_coverage_plugin"]
 
 [tool.pylint.main]
 ignore-paths = ["socnet/.*/migrations/.*"]
-jobs = 0
 
 # https://pylint.pycqa.org/en/stable/user_guide/checkers/extensions.html
 load-plugins = [
