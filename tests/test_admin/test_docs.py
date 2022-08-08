@@ -12,7 +12,7 @@ def test_unauthorized(client: Client) -> None:
         ("/admin/login/?next=/admin/doc/", 302),
         (
             "/accounts/login/"
-            "?next=/admin/login/%3Fnext%3D%252Fadmin%252Fdoc%252F",
+            + "?next=/admin/login/%3Fnext%3D%252Fadmin%252Fdoc%252F",
             302,
         ),
     ]

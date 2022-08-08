@@ -27,8 +27,8 @@ class User(AbstractUser):
         db_index=True,
         help_text=_(
             "No more than 30 characters. "
-            "Only English letters, numbers and _. "
-            "Must begin with a letter and end with a letter or number."
+            + "Only English letters, numbers and _. "
+            + "Must begin with a letter and end with a letter or number."
         ),
         validators=(
             RegexValidator(r"^(?:[a-zA-Z]|[a-zA-Z][a-zA-Z\d_]*[a-zA-Z\d])$"),
@@ -43,7 +43,7 @@ class User(AbstractUser):
         blank=True,
         help_text=_(
             "No more than 30 characters. "
-            "Only English and Russian letters and -."
+            + "Only English and Russian letters and -."
         ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
@@ -53,7 +53,7 @@ class User(AbstractUser):
         blank=True,
         help_text=_(
             "No more than 30 characters. "
-            "Only English and Russian letters and -."
+            + "Only English and Russian letters and -."
         ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
