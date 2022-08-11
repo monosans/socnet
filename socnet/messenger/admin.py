@@ -7,7 +7,7 @@ from . import models
 
 @admin.register(models.Chat)
 class ChatAdmin(admin.ModelAdmin[models.Chat]):
-    filter_horizontal = ("participants",)
+    autocomplete_fields = ("participants",)
     list_display = ("id",)
     search_fields = ("participants__username",)
 

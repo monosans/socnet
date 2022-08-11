@@ -12,7 +12,6 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(UserAdminBase):
-    form = forms.UserAdminChangeForm
     add_form = forms.UserAdminCreationForm
     fieldsets = (
         *(UserAdminBase.fieldsets or ()),  # make typing happy
@@ -30,6 +29,7 @@ class UserAdmin(UserAdminBase):
         ),
     )
     filter_horizontal = (*UserAdminBase.filter_horizontal, "subscriptions")
+    form = forms.UserAdminChangeForm
     list_display = (
         "username",
         "email",
