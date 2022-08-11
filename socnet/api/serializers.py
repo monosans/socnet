@@ -157,5 +157,5 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        exclude = ["password"]
+        fields = "__all__"
         read_only_fields = ["date_joined", "last_login"]
