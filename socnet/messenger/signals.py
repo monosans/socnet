@@ -22,5 +22,5 @@ def validate_chat_participants_count(
     if action == "post_add" and instance.participants.count() != 2:
         raise ValidationError(
             _("The chat must have 2 participants."),
-            "invalid_chat_participants_count",
+            code="invalid_chat_participants_count",
         )

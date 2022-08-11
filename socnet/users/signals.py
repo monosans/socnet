@@ -22,5 +22,5 @@ def forbid_self_subscription(
 ) -> None:
     if action == "pre_add" and instance.pk in pk_set:
         raise ValidationError(
-            _("You can't subscribe to yourself."), "self_subscription"
+            _("You can't subscribe to yourself."), code="self_subscription"
         )

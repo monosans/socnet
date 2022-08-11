@@ -50,7 +50,8 @@ class Post(models.Model):
     def clean(self) -> None:
         if not self.text and not self.image:
             raise ValidationError(
-                gettext("You must provide either text or an image")
+                gettext("You must provide either text or an image"),
+                code="must_provide_either_text_or_image",
             )
 
 
@@ -92,5 +93,6 @@ class PostComment(models.Model):
     def clean(self) -> None:
         if not self.text and not self.image:
             raise ValidationError(
-                gettext("You must provide either text or an image")
+                gettext("You must provide either text or an image"),
+                code="must_provide_either_text_or_image",
             )

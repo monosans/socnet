@@ -10,6 +10,11 @@ from django.utils.translation import gettext as _
 def validate_birth_date(birth_date: date) -> None:
     today = datetime.today().date()
     if birth_date < today - timedelta(days=44724):
-        raise ValidationError(_("You cannot be older than the oldest human."))
+        raise ValidationError(
+            _("You cannot be older than the oldest human."),
+            code="unrealistically old",
+        )
     if birth_date > today:
-        raise ValidationError(_("Are you from the future?"))
+        raise ValidationError(
+            _("Are you from the future?"), code="birth_date_in_the_future"
+        )
