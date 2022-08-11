@@ -11,7 +11,7 @@ from django.utils.translation import gettext as _
 from ..users.models import User as UserType
 from ..utils.pre_save_full_clean import pre_save_full_clean
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 pre_save_full_clean(User)
 

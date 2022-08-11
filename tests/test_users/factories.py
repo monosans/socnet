@@ -33,5 +33,5 @@ class UserFactory(DjangoModelFactory):  # type: ignore[misc]
         obj.set_password(extracted)
 
     class Meta:
-        model = get_user_model()
+        model: type[UserType] = get_user_model()
         django_get_or_create = ["username"]

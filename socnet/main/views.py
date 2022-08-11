@@ -16,7 +16,7 @@ from ..users.models import User as UserType
 from ..users.types import AuthedRequest
 from . import forms, models
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 
 @login_required

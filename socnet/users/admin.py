@@ -6,8 +6,9 @@ from django.contrib.auth.admin import UserAdmin as UserAdminBase
 from django.utils.translation import gettext_lazy as _
 
 from . import forms
+from .models import User as UserType
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 
 @admin.register(User)

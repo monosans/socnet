@@ -6,9 +6,10 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from ..main import models as main_models
+from ..users.models import User as UserType
 from .types import AuthedRequest
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 
 class _AuthedAPIView(views.APIView):

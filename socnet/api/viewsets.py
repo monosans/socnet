@@ -10,9 +10,10 @@ from rest_framework import viewsets
 
 from ..main import models as main_models
 from ..messenger import models as messenger_models
+from ..users.models import User as UserType
 from . import serializers
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 # pylint: disable=too-many-ancestors
 class ChatViewSet(viewsets.ModelViewSet):

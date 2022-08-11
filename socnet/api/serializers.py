@@ -11,7 +11,7 @@ from ..main import models as main_models
 from ..messenger import models as messenger_models
 from ..users.models import User as UserType
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 
 class ChatSerializer(serializers.HyperlinkedModelSerializer):

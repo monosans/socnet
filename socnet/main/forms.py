@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from ..users.models import User as UserType
 from . import models
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 
 class PostsSearchForm(forms.Form):

@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 from .models import User as UserType
 
-User = get_user_model()
+User: type[UserType] = get_user_model()
 
 
 class UserAdminChangeForm(auth_forms.UserChangeForm[UserType]):
