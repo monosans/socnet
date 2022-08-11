@@ -7,6 +7,7 @@ from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.layers import InMemoryChannelLayer
 from channels_redis.core import RedisChannelLayer
 from django.contrib.auth.models import AbstractBaseUser, AnonymousUser
+from django.core.exceptions import ValidationError
 
 from ..users.models import User as UserType
 from . import models
@@ -38,16 +39,20 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
         self, content: dict[str, str], **kwargs: Any
     ) -> None:
         user: UserType = self.scope["user"]
-        message_text = content["message"]
-        message_obj: models.Message = await database_sync_to_async(
-            models.Message.objects.create
-        )(user=user, chat_id=self.room_name, text=message_text)
+        message = models.Message(
+            user=user, chat_id=self.room_name, text=content["message"]
+        )
+        coro = database_sync_to_async(message.save)(force_insert=True)
+        try:
+            await coro
+        except ValidationError:
+            return
         msg: dict[str, str] = {
             "type": "chat_message",
-            "text": message_text,
+            "text": message.text,
             "user__username": user.get_username(),
             "user__image": user.image.url if user.image else None,
-            "date": message_obj.simple_date,
+            "date": message.simple_date,
             "user_href": user.get_absolute_url(),
         }
         await self.channel_layer.group_send(self.room_group_name, msg)

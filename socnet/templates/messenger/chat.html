@@ -44,12 +44,14 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <div class="input-group">
-            {{ form.text }}
-            <button type="button" class="btn btn-primary" id="chat-message-submit">
-              {% trans "Send" %}
-            </button>
-          </div>
+          <form id="messageSendForm">
+            <div class="input-group">
+              {{ form.text }}
+              <button type="submit" class="btn btn-primary" id="messageSubmitBtn">
+                {% trans "Send" %}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

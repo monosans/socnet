@@ -10,5 +10,5 @@ class MessageCreationForm(forms.ModelForm[models.Message]):
         model = models.Message
         fields = ("text",)
         widgets = {
-            "text": forms.Textarea({"class": "form-control", "rows": 2})
+            "text": forms.Textarea({"class": "form-control", "rows": 4})
         }

@@ -3,7 +3,8 @@
   const chatPk = JSON.parse(document.getElementById("chat-pk").textContent);
   const chatLog = document.getElementById("chat-log");
   const textarea = document.getElementById("id_text");
-  const submitBtn = document.getElementById("chat-message-submit");
+  const submitBtn = document.getElementById("messageSubmitBtn");
+  const form = document.getElementById("messageSendForm");
   chatLog.scrollTo(0, chatLog.scrollHeight);
   const proto = window.location.protocol === "https:" ? "wss" : "ws";
   const chatSocket = new WebSocket(
@@ -26,13 +27,20 @@
     chatLog.innerHTML += html;
     chatLog.scrollTo(0, chatLog.scrollHeight);
   };
-  submitBtn.addEventListener("click", () => {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
     chatSocket.send(
       JSON.stringify({
         message: textarea.value,
       })
     );
     textarea.value = "";
+    textarea.focus();
+  });
+  textarea.addEventListener("input", () => {
+    if (/^\s+$/.test(textarea.value)) {
+      textarea.value = "";
+    }
   });
   textarea.addEventListener("keyup", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
