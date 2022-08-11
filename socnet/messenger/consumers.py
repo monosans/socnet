@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Coroutine
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.layers import InMemoryChannelLayer
 from channels_redis.core import RedisChannelLayer
-from django.contrib.auth.models import AbstractBaseUser, AnonymousUser
+from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
 
 from ..users.models import User as UserType
@@ -17,7 +17,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
     channel_layer: RedisChannelLayer | InMemoryChannelLayer
 
     async def connect(self) -> None:
-        user: AbstractBaseUser | AnonymousUser = self.scope["user"]
+        user: UserType | AnonymousUser = self.scope["user"]
         if user.is_anonymous:
             await self.close()
             return
@@ -39,11 +39,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
         self, content: dict[str, str], **kwargs: Any
     ) -> None:
         user: UserType = self.scope["user"]
-        coro = database_sync_to_async(models.Message.objects.create)(
-            user=user, chat_id=self.room_name, text=content["message"]
-        )
+        coro: Coroutine[None, None, models.Message] = database_sync_to_async(
+            models.Message.objects.create
+        )(user=user, chat_id=self.room_name, text=content["message"])
         try:
-            message: models.Message = await coro
+            message = await coro
         except ValidationError:
             return
         msg: dict[str, str] = {
