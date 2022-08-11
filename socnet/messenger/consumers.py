@@ -39,12 +39,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
         self, content: dict[str, str], **kwargs: Any
     ) -> None:
         user: UserType = self.scope["user"]
-        message = models.Message(
+        coro = database_sync_to_async(models.Message.objects.create)(
             user=user, chat_id=self.room_name, text=content["message"]
         )
-        coro = database_sync_to_async(message.save)(force_insert=True)
         try:
-            await coro
+            message: models.Message = await coro
         except ValidationError:
             return
         msg: dict[str, str] = {
