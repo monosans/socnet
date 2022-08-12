@@ -9,11 +9,11 @@ Social network written in Django Framework.
 ## What can users do?
 
 - Maintain their own profile by providing information about themselves and posting.
-- Subscribe to other users to later see their posts in their news feed.
+- Subscribe to other users to see their posts in their news feed.
 - Write comments on posts.
 - Like posts and comments.
-- Write each other messages in real time.
-- Search users and posts.
+- Write messages to each other in real time.
+- Search for users and posts.
 
 ## Main technologies used
 
