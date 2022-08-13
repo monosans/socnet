@@ -78,7 +78,7 @@
          class="btn badge rounded-pill bg-light text-dark"
          href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
         <i class="fa-regular fa-heart"></i>
-        {{ post.likers__count }}
+        <span>{{ post.likers__count }}</span>
       </a>
     {% elif request.user in post.likers.all %}
       <button type="button"
@@ -86,7 +86,7 @@
               data-is-liked="y"
               data-post-pk="{{ post.pk }}">
         <i class="text-danger fa-solid fa-heart"></i>
-        {{ post.likers.count }}
+        <span>{{ post.likers.count }}</span>
       </button>
     {% else %}
       <button type="button"
@@ -94,7 +94,7 @@
               data-is-liked="n"
               data-post-pk="{{ post.pk }}">
         <i class="fa-regular fa-heart"></i>
-        {{ post.likers.count }}
+        <span>{{ post.likers.count }}</span>
       </button>
     {% endif %}
     <span class="badge rounded-pill bg-light text-dark">
