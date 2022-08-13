@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from typing import Type
+
 from django.contrib.auth import forms as auth_forms
 from django.contrib.auth import get_user_model
 
 from .models import User as UserType
 
-User: type[UserType] = get_user_model()
+User: Type[UserType] = get_user_model()
 
 
 class UserAdminChangeForm(auth_forms.UserChangeForm[UserType]):

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Type
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch, QuerySet
@@ -11,7 +13,7 @@ from ..users.models import User as UserType
 from ..users.types import AuthedRequest
 from . import forms, models
 
-User: type[UserType] = get_user_model()
+User: Type[UserType] = get_user_model()
 
 
 @login_required

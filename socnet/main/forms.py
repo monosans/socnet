@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Type
+
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.contrib.auth import get_user_model
@@ -8,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from ..users.models import User as UserType
 from . import models
 
-User: type[UserType] = get_user_model()
+User: Type[UserType] = get_user_model()
 
 
 class PostsSearchForm(forms.Form):

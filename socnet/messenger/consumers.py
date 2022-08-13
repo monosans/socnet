@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Coroutine
+from typing import Any, Coroutine, Dict, Union
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
@@ -14,10 +14,10 @@ from . import models
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
-    channel_layer: RedisChannelLayer | InMemoryChannelLayer
+    channel_layer: Union[RedisChannelLayer, InMemoryChannelLayer]
 
     async def connect(self) -> None:
-        user: UserType | AnonymousUser = self.scope["user"]
+        user: Union[UserType, AnonymousUser] = self.scope["user"]
         if user.is_anonymous:
             await self.close()
             return
@@ -36,7 +36,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
         )
 
     async def receive_json(
-        self, content: dict[str, str], **kwargs: Any
+        self, content: Dict[str, str], **kwargs: Any
     ) -> None:
         user: UserType = self.scope["user"]
         coro: Coroutine[None, None, models.Message] = database_sync_to_async(
@@ -46,7 +46,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
             message = await coro
         except ValidationError:
             return
-        msg: dict[str, str] = {
+        msg: Dict[str, str] = {
             "type": "chat_message",
             "text": message.text,
             "user__username": user.get_username(),
@@ -56,5 +56,5 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
         }
         await self.channel_layer.group_send(self.room_group_name, msg)
 
-    async def chat_message(self, event: dict[str, Any]) -> None:
+    async def chat_message(self, event: Dict[str, Any]) -> None:
         await self.send_json(event)

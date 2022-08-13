@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from datetime import date
+from typing import Optional
 
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
@@ -101,8 +102,8 @@ class User(AbstractUser):
         return f"({full_name})"
 
     @property
-    def age(self) -> int | None:
-        birth_date: date | None = self.birth_date
+    def age(self) -> Optional[int]:
+        birth_date: Optional[date] = self.birth_date
         if birth_date is None:
             return None
         today = datetime.today()

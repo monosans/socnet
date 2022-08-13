@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Type, Union
+
 from django.contrib.auth import get_user_model
 from rest_framework import permissions, status, views
 from rest_framework.generics import get_object_or_404
@@ -9,7 +11,7 @@ from ..main import models as main_models
 from ..users.models import User as UserType
 from .types import AuthedRequest
 
-User: type[UserType] = get_user_model()
+User: Type[UserType] = get_user_model()
 
 
 class _AuthedAPIView(views.APIView):
@@ -17,7 +19,7 @@ class _AuthedAPIView(views.APIView):
 
 
 class _LikeView(_AuthedAPIView):
-    model: type[main_models.Post | main_models.PostComment]
+    model: Type[Union[main_models.Post, main_models.PostComment]]
 
     def post(self, request: AuthedRequest) -> Response:
         pk = int(request.data["pk"])
@@ -27,7 +29,7 @@ class _LikeView(_AuthedAPIView):
 
 
 class _UnlikeView(_AuthedAPIView):
-    model: type[main_models.Post | main_models.PostComment]
+    model: Type[Union[main_models.Post, main_models.PostComment]]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
         obj = get_object_or_404(self.model, pk=pk)

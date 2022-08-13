@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Type
 
 from django.contrib.auth import get_user_model
 from factory import Faker, post_generation
@@ -33,5 +33,5 @@ class UserFactory(DjangoModelFactory):  # type: ignore[misc]
         obj.set_password(extracted)
 
     class Meta:
-        model: type[UserType] = get_user_model()
+        model: Type[UserType] = get_user_model()
         django_get_or_create = ["username"]

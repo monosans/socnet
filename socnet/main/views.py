@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import List, Optional, Type, Union
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -16,7 +18,7 @@ from ..users.models import User as UserType
 from ..users.types import AuthedRequest
 from . import forms, models
 
-User: type[UserType] = get_user_model()
+User: Type[UserType] = get_user_model()
 
 
 @login_required
@@ -110,12 +112,12 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
 
 @require_http_methods(["GET", "POST"])
 def users_search_view(request: HttpRequest) -> HttpResponse:
-    users: QuerySet[UserType] | None = None
+    users: Optional[QuerySet[UserType]] = None
     if request.method == "POST":
         form = forms.UsersSearchForm(request.POST)
         if form.is_valid():
             query: str = form.cleaned_data["search_query"]
-            fields: list[str] = form.cleaned_data["fields_to_search"]
+            fields: List[str] = form.cleaned_data["fields_to_search"]
             rank = SearchRank(vector=SearchVector(*fields), query=query)
             users = (
                 User.objects.annotate(rank=rank)
@@ -202,7 +204,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 @require_http_methods(["GET", "POST"])
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: QuerySet[models.Post] | Page[models.Post] | None = None
+    posts: Union[QuerySet[models.Post], Page[models.Post], None] = None
     page_range = None
     qs = models.Post.objects.select_related("user").only(
         "date", "text", "image", "user__username", "user__image"

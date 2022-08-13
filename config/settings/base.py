@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict
 
 import environ
 from django.utils.translation import gettext_lazy as _
@@ -157,6 +157,6 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
-CHANNEL_LAYERS: dict[str, dict[str, Any]] = {
+CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {
     "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 }
