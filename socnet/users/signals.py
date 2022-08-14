@@ -8,12 +8,12 @@ from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
-from .models import User as UserType
 from ..utils.pre_save_full_clean import pre_save_full_clean
+from .models import User as UserType
 
 User: Type[UserType] = get_user_model()
 
-pre_save_full_clean(User)
+pre_save_full_clean(sender=User)
 
 
 @receiver(m2m_changed, sender=User.subscriptions.through)

@@ -9,15 +9,14 @@ from django.utils.translation import gettext as _
 
 from ..utils.pre_save_full_clean import pre_save_full_clean
 from . import models
-from .models import Chat
 
-pre_save_full_clean(models.Chat)
-pre_save_full_clean(models.Message)
+pre_save_full_clean(sender=models.Chat)
+pre_save_full_clean(sender=models.Message)
 
 
-@receiver(m2m_changed, sender=Chat.participants.through)
+@receiver(m2m_changed, sender=models.Chat.participants.through)
 def validate_chat_participants_count(
-    instance: Chat, action: str, **kwargs: Any
+    instance: models.Chat, action: str, **kwargs: Any
 ) -> None:
     if action == "post_add" and instance.participants.count() != 2:
         raise ValidationError(
