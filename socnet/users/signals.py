@@ -8,7 +8,7 @@ from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
-from ..users.models import User as UserType
+from .models import User as UserType
 from ..utils.pre_save_full_clean import pre_save_full_clean
 
 User: Type[UserType] = get_user_model()
