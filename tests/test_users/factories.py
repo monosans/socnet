@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from typing import Any, Type
+from typing import Type
 
 from django.contrib.auth import get_user_model
-from factory import Faker, post_generation
+from factory import Faker
 from factory.django import DjangoModelFactory
 
 from socnet.users.models import User as UserType
