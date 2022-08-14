@@ -17,20 +17,7 @@ class UserFactory(DjangoModelFactory):  # type: ignore[misc]
     birth_date = Faker("date_of_birth")
     location = Faker("address")
     about = Faker("paragraph")
-
-    @post_generation  # type: ignore[misc]
-    def password(
-        obj: UserType,
-        # pylint: disable-next=unused-argument
-        create: bool,
-        extracted: Any,
-        **kwargs: Any,
-    ) -> None:
-        if not isinstance(extracted, str):
-            extracted = Faker("password").evaluate(
-                None, None, extra={"locale": None}
-            )
-        obj.set_password(extracted)
+    password = Faker("password")
 
     class Meta:
         model: Type[UserType] = get_user_model()
