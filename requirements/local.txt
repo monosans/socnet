@@ -6,7 +6,7 @@ django-extra-checks==0.12.0
 pre-commit==2.20.0
 black==22.6.0
 isort==5.10.1
-djlint==1.9.5
+djlint==1.11.0
 
 pylint==2.14.5
 pylint-django==2.5.3
