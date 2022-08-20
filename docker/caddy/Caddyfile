@@ -4,8 +4,7 @@
 	email {$TLS_EMAIL}
 }
 
-# Redirect "www" to "non-www"
-www.{$DOMAIN_NAME} {
+(common) {
 	header {
 		-Server
 		?Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -13,22 +12,19 @@ www.{$DOMAIN_NAME} {
 		?X-Frame-Options "DENY"
 		?Referrer-Policy "same-origin"
 	}
-
-	redir https://{$DOMAIN_NAME}{uri}
 
 	encode gzip
 }
 
-{$DOMAIN_NAME} {
-	header {
-		-Server
-		?Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-		?X-Content-Type-Options "nosniff"
-		?X-Frame-Options "DENY"
-		?Referrer-Policy "same-origin"
-	}
+# Redirect "www" to "non-www"
+www.{$DOMAIN_NAME} {
+	import common
 
-	encode gzip
+	redir https://{$DOMAIN_NAME}{uri}
+}
+
+{$DOMAIN_NAME} {
+	import common
 
 	handle_path /static/* {
 		# STATIC_ROOT
