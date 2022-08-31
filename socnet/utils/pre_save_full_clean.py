@@ -8,7 +8,7 @@ from django.db.models.signals import pre_save
 
 
 def _full_clean(instance: Model, **kwargs: Any) -> None:
-    instance.full_clean()
+    instance.full_clean(validate_unique=False)
 
 
 pre_save_full_clean = partial(pre_save.connect, _full_clean)
