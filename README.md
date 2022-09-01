@@ -55,8 +55,8 @@ Copy the `.env.template` file to `.env`. Set the settings you need in the `.env`
 
 ```bash
 docker compose build
-docker compose run --rm django python manage.py migrate
-docker compose run --rm django python manage.py compilemessages
+docker compose run --rm django python3 manage.py migrate
+docker compose run --rm django python3 manage.py compilemessages
 docker compose up
 ```
 
