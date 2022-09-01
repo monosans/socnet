@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from django.urls import include, path
+from django.urls import path
 from rest_framework import routers
 
 from . import views, viewsets
@@ -18,7 +18,7 @@ router.register("posts", viewsets.PostViewSet)
 router.register("users", viewsets.UserViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
+    *router.urls,
     path(
         "post_comment_like/<int:pk>/",
         views.PostCommentUnlikeView.as_view(),
