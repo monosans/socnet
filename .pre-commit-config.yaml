@@ -28,6 +28,21 @@ repos:
       - id: pyupgrade
         args: [--py38-plus, --keep-runtime-typing]
 
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.23.0
+    hooks:
+      - id: eslint
+        args: [--fix]
+        additional_dependencies:
+          - eslint
+          - eslint-config-prettier
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.7.1
+    hooks:
+      - id: prettier
+        exclude_types: [html]
+
   - repo: https://github.com/psf/black
     rev: 22.6.0
     hooks:
@@ -54,7 +69,7 @@ repos:
           - djangorestframework==3.13.1
           - channels==3.0.5
           - channels-redis==3.4.1
-          - django-debug-toolbar==3.5.0
+          - django-debug-toolbar==3.6.0
           - django-stubs==1.12.0
           - djangorestframework-stubs==1.7.0
           - pytest==7.1.2
@@ -69,22 +84,7 @@ repos:
         types: [python]
         require_serial: true
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v2.7.1
-    hooks:
-      - id: prettier
-        exclude_types: [html]
-
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.23.0
-    hooks:
-      - id: eslint
-        args: [--fix]
-        additional_dependencies:
-          - eslint
-          - eslint-config-prettier
-
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.12.0
+    rev: v1.12.1
     hooks:
       - id: djlint-django
