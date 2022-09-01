@@ -5,7 +5,7 @@ services:
       target: python-production-run-stage
       args:
         - BUILD_ENVIRONMENT=production
-    command: /app/docker/django/start.sh
+    command: ["bash", "/app/docker/django/start.sh"]
     depends_on:
       - redis
     environment:

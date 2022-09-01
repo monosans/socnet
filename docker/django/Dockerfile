@@ -68,7 +68,7 @@ RUN groupadd -g "${GID}" -r django \
 
 USER django
 
-ENTRYPOINT ["/app/docker/django/entrypoint.sh"]
+ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
 
 
 FROM python-base-run-stage as python-production-run-stage
@@ -100,7 +100,7 @@ COPY --chown=django:django . .
 
 USER django
 
-ENTRYPOINT ["/app/docker/django/entrypoint.sh"]
+ENTRYPOINT ["bash", "/app/docker/django/entrypoint.prod.sh"]
 
 
 FROM python-base-run-stage as python-ci-run-stage
@@ -117,4 +117,4 @@ RUN pip install \
   --no-color \
   && rm -rf /wheels/
 
-ENTRYPOINT ["/app/docker/django/entrypoint.sh"]
+ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
