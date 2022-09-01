@@ -7,7 +7,14 @@ services:
         - BUILD_ENVIRONMENT=local
         - GID=${GID:-1000}
         - UID=${UID:-1000}
-    command: ["python3", "-Wd", "manage.py", "runserver", "0.0.0.0:8000"]
+    command:
+      [
+        "/usr/local/bin/uvicorn",
+        "config.asgi:application",
+        "--host",
+        "0.0.0.0",
+        "--reload",
+      ]
     ports:
       - "8000:8000"
     volumes:
