@@ -6,16 +6,19 @@ from rest_framework import routers
 from . import views, viewsets
 
 router = routers.DefaultRouter()
-router.register("chats", viewsets.ChatViewSet)
-router.register("content_types", viewsets.ContentTypeViewSet)
-router.register("email_addresses", viewsets.EmailAddressViewSet)
-router.register("groups", viewsets.GroupViewSet)
-router.register("log_entries", viewsets.LogEntryViewSet)
-router.register("messages", viewsets.MessageViewSet)
-router.register("permissions", viewsets.PermissionViewSet)
-router.register("post_comments", viewsets.PostCommentViewSet)
-router.register("posts", viewsets.PostViewSet)
-router.register("users", viewsets.UserViewSet)
+for prefix, viewset in (
+    ("chats", viewsets.ChatViewSet),
+    ("content_types", viewsets.ContentTypeViewSet),
+    ("email_addresses", viewsets.EmailAddressViewSet),
+    ("groups", viewsets.GroupViewSet),
+    ("log_entries", viewsets.LogEntryViewSet),
+    ("messages", viewsets.MessageViewSet),
+    ("permissions", viewsets.PermissionViewSet),
+    ("post_comments", viewsets.PostCommentViewSet),
+    ("posts", viewsets.PostViewSet),
+    ("users", viewsets.UserViewSet),
+):
+    router.register(prefix, viewset)
 
 urlpatterns = [
     *router.urls,
