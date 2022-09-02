@@ -5,21 +5,21 @@ from .base import *
 
 ALLOWED_HOSTS = [env.str("DOMAIN_NAME")]
 
-DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)
+DATABASES["default"]["CONN_MAX_AGE"] = 60
 
-_REDIS_HOST = env.str("REDIS_HOST")
-_REDIS_PORT = env.int("REDIS_PORT")
+_REDIS_HOST = "redis"
+_REDIS_PORT = 6379
 _REDIS_URL = f"redis://{_REDIS_HOST}:{_REDIS_PORT}"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": f"{_REDIS_URL}/1",
+        "LOCATION": _REDIS_URL,
     }
 }
 
 CHANNEL_LAYERS["default"] = {
     "BACKEND": "channels_redis.core.RedisChannelLayer",
-    "CONFIG": {"hosts": [f"{_REDIS_URL}/2"]},
+    "CONFIG": {"hosts": [(_REDIS_HOST, _REDIS_PORT)]},
 }
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
