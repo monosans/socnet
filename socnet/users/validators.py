@@ -6,10 +6,12 @@ from django.core.exceptions import ValidationError
 from django.utils.timezone import datetime, timedelta
 from django.utils.translation import gettext as _
 
+WORLD_RECORD_FOR_NUMBER_OF_DAYS_LIVED = timedelta(days=44724)
+
 
 def validate_birth_date(birth_date: date) -> None:
     today = datetime.today().date()
-    if birth_date < today - timedelta(days=44724):
+    if birth_date < today - WORLD_RECORD_FOR_NUMBER_OF_DAYS_LIVED:
         raise ValidationError(
             _("You cannot be older than the oldest human."),
             code="unrealistically old",
