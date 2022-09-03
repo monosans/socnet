@@ -14,6 +14,7 @@ services:
         "--host",
         "0.0.0.0",
         "--reload",
+        "--no-server-header",
       ]
     ports:
       - "8000:8000"
