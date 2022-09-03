@@ -6,25 +6,33 @@
 
 (common) {
 	header {
+		?Referrer-Policy "same-origin"
 		-Server
 		?Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 		?X-Content-Type-Options "nosniff"
 		?X-Frame-Options "DENY"
-		?Referrer-Policy "same-origin"
 	}
 
 	encode gzip
 }
 
+(common_with_error_handling) {
+	import common
+
+	handle_errors {
+		import common
+	}
+}
+
 # Redirect "www" to "non-www"
 www.{$DOMAIN_NAME} {
-	import common
+	import common_with_error_handling
 
 	redir https://{$DOMAIN_NAME}{uri}
 }
 
 {$DOMAIN_NAME} {
-	import common
+	import common_with_error_handling
 
 	handle_path /static/* {
 		# STATIC_ROOT
