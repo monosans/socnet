@@ -5,18 +5,13 @@ from typing import Any, Set, Type
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db.models.signals import m2m_changed
-from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
-from ..utils.pre_save_full_clean import pre_save_full_clean
 from .models import User as UserType
 
 User: Type[UserType] = get_user_model()
 
-pre_save_full_clean(sender=User)
 
-
-@receiver(m2m_changed, sender=User.subscriptions.through)
 def forbid_self_subscription(
     instance: UserType, action: str, pk_set: Set[int], **kwargs: Any
 ) -> None:
@@ -24,3 +19,8 @@ def forbid_self_subscription(
         raise ValidationError(
             _("You can't subscribe to yourself."), code="self_subscription"
         )
+
+
+m2m_changed.connect(
+    forbid_self_subscription, sender=User.subscriptions.through
+)

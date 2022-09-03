@@ -1,7 +1,17 @@
 from __future__ import annotations
 
-from ..utils.pre_save_full_clean import pre_save_full_clean
-from . import models
+from typing import Any
 
-pre_save_full_clean(sender=models.Post)
-pre_save_full_clean(sender=models.PostComment)
+from django.apps import apps
+from django.db.models import Model
+from django.db.models.signals import pre_save
+
+
+def full_clean(instance: Model, **kwargs: Any) -> None:
+    instance.full_clean(  # type: ignore[call-arg]
+        validate_unique=False, validate_constraints=False
+    )
+
+
+for model in apps.get_models(include_auto_created=True):
+    pre_save.connect(full_clean, sender=model)
