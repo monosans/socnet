@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 
 from . import validators
 
-EN_RU_REGEX = re.compile(r"^(?:[a-zA-Z\-]+|[а-яА-Я\-]+)$")
+EN_RU_REGEX = re.compile(r"^(?:[\-A-Za-z]+|[\-ЁА-яё]+)$")
 
 
 def user_image(instance: User, filename: str) -> str:
@@ -32,7 +32,7 @@ class User(AbstractUser):
             + "Must begin with a letter and end with a letter or number."
         ),
         validators=(
-            RegexValidator(r"^(?:[a-zA-Z]|[a-zA-Z][a-zA-Z\d_]*[a-zA-Z\d])$"),
+            RegexValidator(r"^(?:[A-Za-z]|[A-Za-z][\dA-Z_a-z]*[\dA-Za-z])$"),
         ),
         error_messages={
             "unique": _("A user with that username already exists.")
