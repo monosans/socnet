@@ -22,10 +22,8 @@
     {% if request.method == "POST" %}
       <script async src="{% static 'js/prevent_post_on_refresh.js' %}"></script>
     {% endif %}
-    {% if request.user.is_authenticated %}
-      {% block javascript %}
-      {% endblock javascript %}
-    {% endif %}
+    {% block javascript %}
+    {% endblock javascript %}
   </head>
   <body class="bg-light">
     <div class="mb-3">

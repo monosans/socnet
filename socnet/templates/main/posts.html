@@ -11,9 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}"/>
 {% endblock css %}
 {% block javascript %}
-  {% if posts %}
-    <script defer src="{% static 'js/like.js' %}"></script>
-  {% endif %}
+  <script defer src="{% static 'js/like.js' %}"></script>
 {% endblock javascript %}
 {% block content %}
   <div class="row justify-content-center">
@@ -58,9 +56,7 @@
           <div class="card-body">
             <div class="text-center">
               {% if request.method == "POST" %}
-                {% if form.is_valid %}
-                  {% trans "No posts found." %}
-                {% endif %}
+                {% trans "No posts found." %}
               {% else %}
                 {% trans "Subscribe to users you are interested in, so that their posts are displayed here." %}
               {% endif %}

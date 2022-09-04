@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-04 07:45+0000\n"
+"POT-Creation-Date: 2022-09-04 12:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,8 +90,14 @@ msgstr "Пожалуйста, попробуйте ещё раз."
 msgid "An error occurred while saving the profile."
 msgstr "При сохранении профиля произошла ошибка."
 
+msgid "An error occurred while searching for users."
+msgstr "При поиске пользователей произошла ошибка."
+
 msgid "An error occurred while creating the comment."
 msgstr "При создании комментария произошла ошибка."
+
+msgid "An error occurred while searching for posts."
+msgstr "При поиске постов произошла ошибка."
 
 msgid "Messenger"
 msgstr "Мессенджер"

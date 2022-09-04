@@ -11,17 +11,11 @@
   <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}"/>
 {% endblock css %}
 {% block javascript %}
-  {% if user.posts.all or request.user != user %}
-    {% csrf_token %}
-    {% if user.posts.all %}
-      <script defer src="{% static 'js/like.js' %}"></script>
-    {% endif %}
-    {% if request.user != user %}
-      <script defer src="{% static 'js/user_subscribe.js' %}"></script>
-    {% endif %}
-  {% endif %}
+  <script defer src="{% static 'js/like.js' %}"></script>
+  <script defer src="{% static 'js/user_subscribe.js' %}"></script>
 {% endblock javascript %}
 {% block content %}
+  {% csrf_token %}
   <div class="row mb-2">
     <div class="col-xl-3 col-lg-12">
       <div class="card">

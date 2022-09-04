@@ -125,6 +125,13 @@ def users_search_view(request: HttpRequest) -> HttpResponse:
                 .order_by("-rank", "username")
                 .only("username", "first_name", "last_name", "image")
             )
+        else:
+            # pylint: disable-next=consider-using-f-string
+            message = "{} {}".format(
+                _("An error occurred while searching for users."),
+                _("Please try again."),
+            )
+            messages.error(request, message)
     else:
         form = forms.UsersSearchForm()
     context = {"form": form, "users": users}
@@ -228,6 +235,13 @@ def posts_view(request: HttpRequest) -> HttpResponse:
                 .filter(rank__gt=0)
                 .order_by("-rank", "-pk")
             )
+        else:
+            # pylint: disable-next=consider-using-f-string
+            message = "{} {}".format(
+                _("An error occurred while searching for posts."),
+                _("Please try again."),
+            )
+            messages.error(request, message)
     else:
         form = forms.PostsSearchForm()
         if request.user.is_authenticated:

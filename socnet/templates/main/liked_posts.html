@@ -11,12 +11,10 @@
   <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}"/>
 {% endblock css %}
 {% block javascript %}
-  {% if posts %}
-    {% csrf_token %}
-    <script defer src="{% static 'js/like.js' %}"></script>
-  {% endif %}
+  <script defer src="{% static 'js/like.js' %}"></script>
 {% endblock javascript %}
 {% block content %}
+  {% csrf_token %}
   <div class="row justify-content-center">
     <div class="col-xl-6">
       {% if posts %}
