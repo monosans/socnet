@@ -8,7 +8,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import redirect
 
-from .types import AuthedRequest
+from ..users.types import AuthedRequest
 
 
 @login_required

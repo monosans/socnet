@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "logentry_admin",
     "rest_framework",
+    "socnet.common",
     "socnet.main",
     "socnet.messenger",
     "socnet.users",
