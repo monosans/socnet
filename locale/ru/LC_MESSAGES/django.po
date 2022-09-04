@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 19:14+0000\n"
+"POT-Creation-Date: 2022-09-04 07:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,9 +80,6 @@ msgstr "комментарий к посту"
 
 msgid "post comments"
 msgstr "комментарий к посту"
-
-msgid "You can't subscribe to yourself."
-msgstr "Вы не можете подписаться на себя."
 
 msgid "An error occurred while creating the post."
 msgstr "При создании поста произошла ошибка."
@@ -358,6 +355,9 @@ msgstr "Редактировать"
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
+msgid "Change E-mail"
+msgstr "Изменить электронную почту"
+
 msgid "Save"
 msgstr "Сохранить"
 
@@ -426,6 +426,9 @@ msgstr "обо мне"
 
 msgid "subscriptions"
 msgstr "подписки"
+
+msgid "You can't subscribe to yourself."
+msgstr "Вы не можете подписаться на себя."
 
 msgid "You cannot be older than the oldest human."
 msgstr "Вы не можете быть старше самого старого человека."
