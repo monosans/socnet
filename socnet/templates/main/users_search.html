@@ -41,11 +41,13 @@
             </div>
           </div>
         {% empty %}
-          <div class="card mt-1">
-            <div class="card-body">
-              <div class="text-center">{% trans "No users found" %}</div>
+          {% if form.is_valid %}
+            <div class="card mt-1">
+              <div class="card-body">
+                <div class="text-center">{% trans "No users found" %}</div>
+              </div>
             </div>
-          </div>
+          {% endif %}
         {% endfor %}
       {% endif %}
     </div>
