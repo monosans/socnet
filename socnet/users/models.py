@@ -11,6 +11,11 @@ from django.urls import reverse
 from django.utils.timezone import datetime
 from django.utils.translation import gettext_lazy as _
 
+from ..common.fields import (
+    LowercaseCharField,
+    NormalizedCharField,
+    NormalizedTextField,
+)
 from . import validators
 
 EN_RU_REGEX = re.compile(r"^(?:[\-A-Za-z]+|[\-ЁА-яё]+)$")
@@ -21,7 +26,7 @@ def user_image(instance: User, filename: str) -> str:
 
 
 class User(AbstractUser):
-    username = models.CharField(
+    username = LowercaseCharField(
         verbose_name=_("username"),
         max_length=30,
         unique=True,
@@ -65,13 +70,13 @@ class User(AbstractUser):
         null=True,
         validators=(validators.validate_birth_date,),
     )
-    location = models.CharField(
+    location = NormalizedCharField(
         verbose_name=_("location"), max_length=128, blank=True
     )
     image = models.ImageField(
         verbose_name=_("image"), upload_to=user_image, blank=True
     )
-    about = models.TextField(
+    about = NormalizedTextField(
         verbose_name=_("about me"), max_length=4096, blank=True
     )
     subscriptions = models.ManyToManyField(
@@ -84,15 +89,6 @@ class User(AbstractUser):
 
     def get_absolute_url(self) -> str:
         return reverse("user", args=(self.get_username(),))
-
-    def clean(self) -> None:
-        super().clean()
-        setattr(
-            self,
-            self.USERNAME_FIELD,
-            # pylint: disable-next=no-member
-            self.get_username().lower(),
-        )
 
     @property
     def full_name_in_brackets(self) -> str:

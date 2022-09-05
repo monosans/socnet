@@ -8,6 +8,8 @@ from django.utils.timezone import datetime
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
+from ..common.fields import NormalizedTextField
+
 
 def upload_date() -> str:
     today = datetime.today()
@@ -25,7 +27,7 @@ class Post(models.Model):
         related_name="posts",
         verbose_name=_("user"),
     )
-    text = models.TextField(
+    text = NormalizedTextField(
         verbose_name=_("text"), max_length=4096, blank=True
     )
     image = models.ImageField(
@@ -72,7 +74,7 @@ class PostComment(models.Model):
         related_name="post_comments",
         verbose_name=_("user"),
     )
-    text = models.TextField(
+    text = NormalizedTextField(
         verbose_name=_("text"), max_length=4096, blank=True
     )
     image = models.ImageField(

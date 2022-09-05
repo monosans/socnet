@@ -7,6 +7,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from ..common.fields import NormalizedTextField
 from ..users.models import User as UserType
 
 
@@ -46,7 +47,7 @@ class Message(models.Model):
         related_name="messages",
         verbose_name=_("chat"),
     )
-    text = models.TextField(verbose_name=_("text"), max_length=4096)
+    text = NormalizedTextField(verbose_name=_("text"), max_length=4096)
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
 
     class Meta:
