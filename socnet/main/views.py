@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional, Type, Union
+from typing import Any, Dict, List, Optional, Type, Union
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -27,49 +27,45 @@ def index(request: AuthedRequest) -> HttpResponse:
     return redirect(request.user)
 
 
+@login_required
+@require_http_methods(["GET", "POST"])
+def edit_profile(request: AuthedRequest) -> HttpResponse:
+    if request.method == "POST":
+        form = forms.UserChangeForm(
+            request.POST, request.FILES, instance=request.user
+        )
+        if form.is_valid():
+            form.save()
+    else:
+        form = forms.UserChangeForm(instance=request.user)
+    context = {"form": form}
+    return render(request, "main/edit_profile.html", context)
+
+
 @require_http_methods(["GET", "POST"])
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
-    post_creation_form = None
-    user_change_form = None
+    context: Dict[str, Any] = {}
     if (
         request.user.is_authenticated
         and request.user.get_username() == username
     ):
         if request.method == "POST":
-            form_type = request.POST["_form_type"]
-            if form_type == "post_creation_form":
-                post_creation_form = forms.PostCreationForm(
-                    request.POST, request.FILES
+            form = forms.PostCreationForm(request.POST, request.FILES)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.user = request.user
+                post.save()
+                form = forms.PostCreationForm()
+            else:
+                # pylint: disable-next=consider-using-f-string
+                message = "{} {}".format(
+                    _("An error occurred while creating the post."),
+                    _("Please try again."),
                 )
-                if post_creation_form.is_valid():
-                    post = post_creation_form.save(commit=False)
-                    post.user = request.user
-                    post.save()
-                    post_creation_form = forms.PostCreationForm()
-                else:
-                    # pylint: disable-next=consider-using-f-string
-                    message = "{} {}".format(
-                        _("An error occurred while creating the post."),
-                        _("Please try again."),
-                    )
-                    messages.error(request, message)
-            elif form_type == "user_change_form":
-                user_change_form = forms.UserChangeForm(
-                    request.POST, request.FILES, instance=request.user
-                )
-                if user_change_form.is_valid():
-                    user_change_form.save()
-                else:
-                    # pylint: disable-next=consider-using-f-string
-                    message = "{} {}".format(
-                        _("An error occurred while saving the profile."),
-                        _("Please try again."),
-                    )
-                    messages.error(request, message)
-        if post_creation_form is None:
-            post_creation_form = forms.PostCreationForm()
-        if user_change_form is None:
-            user_change_form = forms.UserChangeForm(instance=request.user)
+                messages.error(request, message)
+        else:
+            form = forms.PostCreationForm()
+        context["form"] = form
     users = User.objects.only("pk")
     subscribers_prefetch = Prefetch("subscribers", users)
     posts_prefetch_qs = models.Post.objects.only(
@@ -102,11 +98,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
         ),
         username=username,
     )
-    context = {
-        "user": user,
-        "post_creation_form": post_creation_form,
-        "user_change_form": user_change_form,
-    }
+    context["user"] = user
     return render(request, "main/user.html", context)
 
 

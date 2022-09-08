@@ -29,45 +29,11 @@
             </div>
           {% endif %}
           {% if request.user == user %}
-            <button type="button"
-                    class="btn btn-primary w-100 mb-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#user_change_modal">
+            <a role="button"
+               class="btn btn-primary w-100 mb-2"
+               href="{% url 'edit_profile' %}">
               {% trans "Edit" %}
-            </button>
-            <div class="modal fade" id="user_change_modal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">{% trans "Edit profile" %}</h5>
-                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <form enctype="multipart/form-data" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="_form_type" value="user_change_form"/>
-                    <div class="modal-body">
-                      <div class="text-center mb-3">
-                        <a role="button"
-                           href="{% url 'account_change_password' %}"
-                           class="btn btn-primary">
-                          {% trans "Change Password" %}
-                        </a>
-                        <a role="button"
-                           href="{% url 'account_email' %}"
-                           class="btn btn-primary">{% trans "Change E-mail" %}</a>
-                      </div>
-                      {{ user_change_form|crispy }}
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        {% trans "Close" %}
-                      </button>
-                      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            </a>
             <button type="button"
                     class="btn btn-primary w-100"
                     data-bs-toggle="modal"
@@ -83,8 +49,7 @@
                   </div>
                   <form enctype="multipart/form-data" method="post">
                     {% csrf_token %}
-                    <input type="hidden" name="_form_type" value="post_creation_form"/>
-                    <div class="modal-body">{{ post_creation_form|crispy }}</div>
+                    <div class="modal-body">{{ form|crispy }}</div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         {% trans "Close" %}
@@ -165,18 +130,14 @@
               </td>
             </tr>
             <tr>
-              <td class="pe-3">
-                {% trans "Subscribers" %}
-              </td>
+              <td class="pe-3">{% trans "Subscribers" %}</td>
               <td>
                 <a id="subscribers_count"
                    href="{% url 'subscribers' user.get_username %}">{{ user.subscribers.count }}</a>
               </td>
             </tr>
             <tr>
-              <td class="pe-3">
-                {% trans "Liked posts" %}
-              </td>
+              <td class="pe-3">{% trans "Liked posts" %}</td>
               <td>
                 <a href="{% url 'liked_posts' user.get_username %}">{{ user.liked_posts__count }}</a>
               </td>
@@ -206,9 +167,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">
-                            {% trans "Post deletion" %}
-                          </h5>
+                          <h5 class="modal-title">{% trans "Post deletion" %}</h5>
                           <button type="button" class="btn btn-close" data-bs-dismiss="modal">
                           </button>
                         </div>

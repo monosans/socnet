@@ -1,0 +1,25 @@
+{% extends "card.html" %}
+
+{% load i18n crispy_forms_tags %}
+
+{% block title %}
+  {% trans "Edit profile" %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="mb-4 text-center">{% trans "Edit profile" %}</h3>
+  <div class="mb-3 text-center">
+    <a role="button"
+       href="{% url 'account_change_password' %}"
+       class="btn btn-primary">
+      {% trans "Change Password" %}
+    </a>
+    <a role="button"
+       href="{% url 'account_email' %}"
+       class="btn btn-primary">{% trans "Change E-mail" %}</a>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-primary w-100" type="submit">{% trans "Save" %}</button>
+  </form>
+{% endblock card_body %}
