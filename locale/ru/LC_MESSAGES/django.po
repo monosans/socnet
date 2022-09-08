@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-05 07:06+0000\n"
+"POT-Creation-Date: 2022-09-08 20:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,9 +89,6 @@ msgstr "При создании поста произошла ошибка."
 
 msgid "Please try again."
 msgstr "Пожалуйста, попробуйте ещё раз."
-
-msgid "An error occurred while saving the profile."
-msgstr "При сохранении профиля произошла ошибка."
 
 msgid "An error occurred while creating the comment."
 msgstr "При создании комментария произошла ошибка."
@@ -292,6 +289,15 @@ msgstr "Посты"
 msgid "Search users"
 msgstr "Поиск пользователей"
 
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+msgid "Change E-mail"
+msgstr "Изменить электронную почту"
+
+msgid "Save"
+msgstr "Сохранить"
+
 msgid "Liked posts"
 msgstr "Понравившиеся посты"
 
@@ -354,15 +360,6 @@ msgstr "У пользователя нет подписок."
 
 msgid "Edit"
 msgstr "Редактировать"
-
-msgid "Edit profile"
-msgstr "Редактировать профиль"
-
-msgid "Change E-mail"
-msgstr "Изменить электронную почту"
-
-msgid "Save"
-msgstr "Сохранить"
 
 msgid "Create post"
 msgstr "Создать пост"
