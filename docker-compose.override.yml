@@ -14,6 +14,8 @@ services:
         "--host",
         "0.0.0.0",
         "--reload",
+        "--reload-include",
+        "*.html",
         "--no-server-header",
       ]
     ports:
