@@ -30,11 +30,12 @@
       <div class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
           <div class="container">
-            <div class="navbar-toggler"
-                 data-bs-toggle="collapse"
-                 data-bs-target="#navbarNav">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
               <span class="navbar-toggler-icon"></span>
-            </div>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 {% if request.user.is_authenticated %}
