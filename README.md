@@ -4,7 +4,7 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/monosans/socnet/main.svg)](https://results.pre-commit.ci/latest/github/monosans/socnet/main)
 [![codecov](https://codecov.io/gh/monosans/socnet/branch/main/graph/badge.svg)](https://codecov.io/gh/monosans/socnet)
 
-Social network written in Django Framework.
+Social network built with Django Framework.
 
 ## What can users do?
 
@@ -28,8 +28,8 @@ Backend:
 - Django Channels (WebSockets)
 - Django Allauth
 - Django environ
-- PostgreSQL
-- Redis
+- PostgreSQL 14
+- Redis 7
 - Gunicorn + Uvicorn
 
 Frontend:
