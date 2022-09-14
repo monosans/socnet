@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from typing import Any, Set, Type
+from typing import Any, Set
 
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db.models.signals import m2m_changed
 from django.utils.translation import gettext as _
 
 from .models import User as UserType
-
-User: Type[UserType] = get_user_model()
 
 
 def forbid_self_subscription(
@@ -21,6 +19,4 @@ def forbid_self_subscription(
         )
 
 
-m2m_changed.connect(
-    forbid_self_subscription, sender=User.subscriptions.through
-)
+m2m_changed.connect(forbid_self_subscription, sender=settings.AUTH_USER_MODEL)
