@@ -6,9 +6,9 @@
         method,
         body;
       if (this.dataset.isSubscribed === "y") {
+        url += `${this.dataset.userPk}/`;
         method = "DELETE";
         body = null;
-        url += `${this.dataset.userPk}/`;
       } else {
         method = "POST";
         body = JSON.stringify({ pk: this.dataset.userPk });

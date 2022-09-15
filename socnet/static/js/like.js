@@ -12,12 +12,15 @@
       } else {
         return;
       }
+      const csrfToken = document.querySelector(
+        "[name=csrfmiddlewaretoken]"
+      ).value;
       const span = this.querySelector("span");
       const likesCount = parseInt(span.innerHTML);
       let method, body;
       if (this.dataset.isLiked === "y") {
-        method = "DELETE";
         url += `${value}/`;
+        method = "DELETE";
         body = null;
         this.dataset.isLiked = "n";
         span.innerHTML = likesCount - 1;
@@ -31,8 +34,7 @@
         method: method,
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
-            .value,
+          "X-CSRFToken": csrfToken,
         },
         body: body,
       });
