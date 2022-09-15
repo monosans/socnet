@@ -12,6 +12,10 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 INSTALLED_APPS += ["debug_toolbar", "extra_checks"]
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
+TEMPLATES[0]["OPTIONS"][  # type: ignore[index]
+    "string_if_invalid"
+] = "INVALID EXPRESSION: %s"
+
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = [
     ip[: ip.rfind(".")] + ".1"
