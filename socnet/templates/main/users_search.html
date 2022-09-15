@@ -14,8 +14,7 @@
       <div class="card">
         <div class="card-body">
           <h3 class="mb-4 text-center">{% trans "Search users" %}</h3>
-          <form method="post">
-            {% csrf_token %}
+          <form method="get">
             {{ form|crispy }}
             <button type="submit" class="btn btn-primary w-100">
               {% trans "Search" %}
@@ -23,7 +22,7 @@
           </form>
         </div>
       </div>
-      {% if request.method == "POST" %}
+      {% if request.GET %}
         {% for user in users %}
           <div class="card mt-1">
             <div class="card-body">

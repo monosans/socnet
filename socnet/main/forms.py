@@ -14,7 +14,7 @@ User: Type[UserType] = get_user_model()
 
 
 class PostsSearchForm(forms.Form):
-    search_query = forms.Field(
+    q = forms.Field(
         widget=forms.Textarea(
             {
                 "rows": "1",
@@ -27,10 +27,10 @@ class PostsSearchForm(forms.Form):
 
 
 class UsersSearchForm(forms.Form):
-    search_query = forms.Field(
+    q = forms.Field(
         widget=forms.Textarea({"rows": "2"}), label=_("Search query")
     )
-    fields_to_search = forms.MultipleChoiceField(
+    search_fields = forms.MultipleChoiceField(
         choices=(
             ("username", _("Username")),
             ("first_name", _("First name")),

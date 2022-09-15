@@ -102,15 +102,15 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "main/user.html", context)
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def users_search_view(request: HttpRequest) -> HttpResponse:
     users: Optional[QuerySet[UserType]] = None
-    if request.method == "POST":
-        form = forms.UsersSearchForm(request.POST)
+    if request.GET:
+        form = forms.UsersSearchForm(request.GET)
         if form.is_valid():
-            query: str = form.cleaned_data["search_query"]
-            fields: List[str] = form.cleaned_data["fields_to_search"]
-            rank = SearchRank(vector=SearchVector(*fields), query=query)
+            query: str = form.cleaned_data["q"]
+            search_fields: List[str] = form.cleaned_data["search_fields"]
+            rank = SearchRank(vector=SearchVector(*search_fields), query=query)
             users = (
                 User.objects.annotate(rank=rank)
                 .filter(rank__gt=0)
@@ -194,7 +194,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "main/post.html", context)
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def posts_view(request: HttpRequest) -> HttpResponse:
     posts: Union[QuerySet[models.Post], Page[models.Post], None] = None
     page_range = None
@@ -210,10 +210,10 @@ def posts_view(request: HttpRequest) -> HttpResponse:
             Prefetch("likers", User.objects.only("pk"))
         )
     )
-    if request.method == "POST":
-        form = forms.PostsSearchForm(request.POST)
+    if request.GET:
+        form = forms.PostsSearchForm(request.GET)
         if form.is_valid():
-            query: str = form.cleaned_data["search_query"]
+            query: str = form.cleaned_data["q"]
             rank = SearchRank(vector="text", query=query)
             posts = (
                 qs.annotate(rank=rank)
