@@ -44,7 +44,6 @@ class Post(models.Model):
     class Meta:
         verbose_name = _("post")
         verbose_name_plural = _("posts")
-        ordering = ("-pk",)
 
     def get_absolute_url(self) -> str:
         return reverse("post", args=(self.pk,))
