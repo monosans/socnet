@@ -225,7 +225,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
         if request.user.is_authenticated:
             subscribed_posts: QuerySet[models.Post] = qs.filter(
                 user__in=request.user.subscriptions.all()
-            )
+            ).order_by("-pk")
             paginator = Paginator(subscribed_posts, per_page=5)
             try:
                 page = int(request.GET["page"])
