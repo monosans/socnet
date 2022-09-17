@@ -45,7 +45,9 @@
                          class="nav-link
                                 {% if user_url == request.path %}
                                   active
-                                {% endif %}">{% trans "My page" %}</a>
+                                {% endif %}">
+                        {% trans "My page" %}
+                      </a>
                     {% endwith %}
                   </li>
                   <li class="nav-item">
@@ -54,7 +56,9 @@
                        class="nav-link
                               {% if url_posts == request.path %}
                                 active
-                              {% endif %}">{% trans "Posts" %}</a>
+                              {% endif %}">
+                      {% trans "Posts" %}
+                    </a>
                   </li>
                   <li class="nav-item">
                     {% url 'chats' as url_chats %}
@@ -62,7 +66,9 @@
                        class="nav-link
                               {% if url_chats == request.path %}
                                 active
-                              {% endif %}">{% trans "Messenger" %}</a>
+                              {% endif %}">
+                      {% trans "Messenger" %}
+                    </a>
                   </li>
                 {% else %}
                   <li class="nav-item">
@@ -71,7 +77,9 @@
                        class="nav-link
                               {% if url_posts == request.path %}
                                 active
-                              {% endif %}">{% trans "Posts" %}</a>
+                              {% endif %}">
+                      {% trans "Posts" %}
+                    </a>
                   </li>
                 {% endif %}
                 <li class="nav-item">
@@ -80,7 +88,9 @@
                      class="nav-link
                             {% if url_users_search == request.path %}
                               active
-                            {% endif %}">{% trans "Search users" %}</a>
+                            {% endif %}">
+                    {% trans "Search users" %}
+                  </a>
                 </li>
               </ul>
               <ul class="navbar-nav ms-auto">
@@ -100,7 +110,9 @@
                        class="nav-link
                               {% if url_login == request.path %}
                                 active
-                              {% endif %}">{% trans "Sign In" %}</a>
+                              {% endif %}">
+                      {% trans "Sign In" %}
+                    </a>
                   {% endif %}
                 </li>
               </ul>
@@ -117,9 +129,11 @@
                         alert-danger
                       {% elif message.tags %}
                         alert-{{ message.tags }}
-                      {% endif %} alert-dismissible">
-            <div>{{ message }}</div>
-            <button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
+                      {% endif %}
+                      alert-dismissible fade show"
+               role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
         {% endfor %}
       {% endif %}

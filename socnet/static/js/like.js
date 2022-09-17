@@ -1,47 +1,56 @@
 "use strict";
 (() => {
-  for (const button of document.querySelectorAll("[data-is-liked]")) {
-    button.addEventListener("click", function () {
-      let url, value;
-      if (this.dataset.postPk) {
-        url = "/api/post_like/";
-        value = this.dataset.postPk;
-      } else if (this.dataset.postCommentPk) {
-        url = "/api/post_comment_like/";
-        value = this.dataset.postCommentPk;
-      } else {
+  function handler(e) {
+    const btn = e.currentTarget;
+    btn.setAttribute("disabled", "");
+    let url, value;
+    if (btn.dataset.postPk) {
+      url = "/api/post_like/";
+      value = btn.dataset.postPk;
+    } else if (btn.dataset.postCommentPk) {
+      url = "/api/post_comment_like/";
+      value = btn.dataset.postCommentPk;
+    } else {
+      return;
+    }
+    const span = btn.querySelector("span");
+    const likesCount = parseInt(span.innerHTML);
+    let method, body;
+    if (btn.dataset.isLiked === "y") {
+      url += `${value}/`;
+      method = "DELETE";
+      body = null;
+    } else {
+      method = "POST";
+      body = JSON.stringify({ pk: value });
+    }
+    void fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+          .value,
+      },
+      body: body,
+    }).then((value) => {
+      if (!value.ok) {
         return;
       }
-      const csrfToken = document.querySelector(
-        "[name=csrfmiddlewaretoken]"
-      ).value;
-      const span = this.querySelector("span");
-      const likesCount = parseInt(span.innerHTML);
-      let method, body;
-      if (this.dataset.isLiked === "y") {
-        url += `${value}/`;
-        method = "DELETE";
-        body = null;
-        this.dataset.isLiked = "n";
+      if (btn.dataset.isLiked === "y") {
         span.innerHTML = likesCount - 1;
+        btn.dataset.isLiked = "n";
       } else {
-        method = "POST";
-        body = JSON.stringify({ pk: value });
-        this.dataset.isLiked = "y";
         span.innerHTML = likesCount + 1;
+        btn.dataset.isLiked = "y";
       }
-      void fetch(url, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken,
-        },
-        body: body,
-      });
-      const iconClassList = this.querySelector("i").classList;
+      const iconClassList = btn.querySelector("i").classList;
       iconClassList.toggle("text-danger");
       iconClassList.toggle("fa-regular");
       iconClassList.toggle("fa-solid");
+      btn.removeAttribute("disabled");
     });
+  }
+  for (const btn of document.querySelectorAll("[data-is-liked]")) {
+    btn.addEventListener("click", handler);
   }
 })();

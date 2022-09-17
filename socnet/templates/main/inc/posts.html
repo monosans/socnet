@@ -10,12 +10,15 @@
           </div>
           <div class="col ms-2">
             <div class="text-break">
-              <a class="text-decoration-none" href="{{ post.user.get_absolute_url }}">{{ post.user.get_username }}
+              <a class="text-decoration-none" href="{{ post.user.get_absolute_url }}">
+                {{ post.user.get_username }}
               </a>
             </div>
             <div>
               <a class="text-muted text-decoration-none"
-                 href="{{ post.get_absolute_url }}">{{ post.date }}</a>
+                 href="{{ post.get_absolute_url }}">
+                {{ post.date }}
+              </a>
             </div>
           </div>
         </div>
@@ -38,25 +41,27 @@
             <span>{{ post.likers__count }}</span>
           </a>
         {% elif request.user in post.likers.all %}
-          <span class="btn badge rounded-pill bg-light text-dark"
-                data-is-liked="y"
-                data-post-pk="{{ post.pk }}">
+          <button type="button"
+                  class="btn badge rounded-pill bg-light text-dark"
+                  data-is-liked="y"
+                  data-post-pk="{{ post.pk }}">
             <i class="text-danger fa-solid fa-heart"></i>
             <span>{{ post.likers.count }}</span>
-          </span>
+          </button >
         {% else %}
-          <span class="btn badge rounded-pill bg-light text-dark"
-                data-is-liked="n"
-                data-post-pk="{{ post.pk }}">
+          <button type="button"
+                  class="btn badge rounded-pill bg-light text-dark"
+                  data-is-liked="n"
+                  data-post-pk="{{ post.pk }}">
             <i class="fa-regular fa-heart"></i>
             <span>{{ post.likers.count }}</span>
-          </span>
+          </button>
         {% endif %}
-        <a href="{{ post.get_absolute_url }}">
-          <span class="btn badge rounded-pill bg-light text-dark">
-            <i class="fa-regular fa-comment"></i>
-            {{ post.comments__count }}
-          </span>
+        <a role="button"
+           href="{{ post.get_absolute_url }}"
+           class="btn badge rounded-pill bg-light text-dark">
+          <i class="fa-regular fa-comment"></i>
+          {{ post.comments__count }}
         </a>
       </div>
     </div>

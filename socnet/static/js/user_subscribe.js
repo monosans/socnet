@@ -1,29 +1,33 @@
 "use strict";
 (() => {
-  for (const button of document.querySelectorAll("[data-is-subscribed]")) {
-    button.addEventListener("click", function () {
-      let url = "/api/subscription/",
-        method,
-        body;
-      if (this.dataset.isSubscribed === "y") {
-        url += `${this.dataset.userPk}/`;
-        method = "DELETE";
-        body = null;
-      } else {
-        method = "POST";
-        body = JSON.stringify({ pk: this.dataset.userPk });
+  function handler(e) {
+    const btn = e.currentTarget;
+    btn.setAttribute("disabled", "");
+    let url = "/api/subscription/",
+      method,
+      body;
+    if (btn.dataset.isSubscribed === "y") {
+      url += `${btn.dataset.userPk}/`;
+      method = "DELETE";
+      body = null;
+    } else {
+      method = "POST";
+      body = JSON.stringify({ pk: btn.dataset.userPk });
+    }
+    void fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+          .value,
+      },
+      body: body,
+    }).then((value) => {
+      if (!value.ok) {
+        return;
       }
-      void fetch(url, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
-            .value,
-        },
-        body: body,
-      });
       for (const el of document.querySelectorAll(
-        `[data-is-subscribed][data-user-pk="${this.dataset.userPk}"]`
+        `[data-is-subscribed][data-user-pk="${btn.dataset.userPk}"]`
       )) {
         el.classList.toggle("d-none");
       }
@@ -35,6 +39,10 @@
           parseInt(subscribers_count.innerHTML) +
           (method === "DELETE" ? -1 : 1);
       }
+      btn.removeAttribute("disabled");
     });
+  }
+  for (const btn of document.querySelectorAll("[data-is-subscribed]")) {
+    btn.addEventListener("click", handler);
   }
 })();

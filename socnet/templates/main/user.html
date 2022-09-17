@@ -71,14 +71,18 @@
             </form>
             <div>
               {% if request.user in user.subscribers.all %}
-                <button type="button" class="btn btn-light w-100" data-is-subscribed="y" data-user-pk={{ user.pk }}>{% trans "Unsubscribe" %}
+                <button type="button" class="btn btn-light w-100" data-is-subscribed="y" data-user-pk={{ user.pk }}>
+                  {% trans "Unsubscribe" %}
                 </button>
-                <button type="button" class="btn btn-primary w-100 d-none" data-is-subscribed="n" data-user-pk={{ user.pk }}>{% trans "Subscribe" %}
+                <button type="button" class="btn btn-primary w-100 d-none" data-is-subscribed="n" data-user-pk={{ user.pk }}>
+                  {% trans "Subscribe" %}
                 </button>
               {% else %}
-                <button type="button" class="btn btn-light w-100 d-none" data-is-subscribed="y" data-user-pk={{ user.pk }}>{% trans "Unsubscribe" %}
+                <button type="button" class="btn btn-light w-100 d-none" data-is-subscribed="y" data-user-pk={{ user.pk }}>
+                  {% trans "Unsubscribe" %}
                 </button>
-                <button type="button" class="btn btn-primary w-100" data-is-subscribed="n" data-user-pk={{ user.pk }}>{% trans "Subscribe" %}
+                <button type="button" class="btn btn-primary w-100" data-is-subscribed="n" data-user-pk={{ user.pk }}>
+                  {% trans "Subscribe" %}
                 </button>
               {% endif %}
             </div>
@@ -86,12 +90,16 @@
             <div>
               <a role="button"
                  class="btn btn-primary w-100 mb-2"
-                 href="{% url 'account_login' %}?next={{ request.path|urlencode }}">{% trans "Write message" %}</a>
+                 href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+                {% trans "Write message" %}
+              </a>
             </div>
             <div>
               <a role="button"
                  class="btn btn-primary w-100"
-                 href="{% url 'account_login' %}?next={{ request.path|urlencode }}">{% trans "Subscribe" %}</a>
+                 href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+                {% trans "Subscribe" %}
+              </a>
             </div>
           {% endif %}
         </div>
@@ -104,42 +112,48 @@
             {{ user.get_username }}
             {{ user.full_name_in_brackets }}
           </div>
-          <table cols="2">
+          <table class="table">
             {% if user.birth_date %}
               <tr>
-                <td class="pe-3">{% trans "Birth date" %}</td>
+                <td>{% trans "Birth date" %}</td>
                 <td>{{ user.birth_date }} ({{ user.age }})</td>
               </tr>
             {% endif %}
             {% if user.location %}
               <tr>
-                <td class="pe-3">{% trans "Location" %}</td>
+                <td>{% trans "Location" %}</td>
                 <td class="text-break">{{ user.location }}</td>
               </tr>
             {% endif %}
             {% if user.about %}
               <tr>
-                <td class="pe-3">{% trans "About me" %}</td>
+                <td>{% trans "About me" %}</td>
                 <td class="text-break">{{ user.about|linebreaksbr }}</td>
               </tr>
             {% endif %}
             <tr>
-              <td class="pe-3">{% trans "Subscriptions" %}</td>
+              <td>{% trans "Subscriptions" %}</td>
               <td>
-                <a href="{% url 'subscriptions' user.get_username %}">{{ user.subscriptions__count }}</a>
+                <a href="{% url 'subscriptions' user.get_username %}">
+                  {{ user.subscriptions__count }}
+                </a>
               </td>
             </tr>
             <tr>
-              <td class="pe-3">{% trans "Subscribers" %}</td>
+              <td>{% trans "Subscribers" %}</td>
               <td>
                 <a id="subscribers_count"
-                   href="{% url 'subscribers' user.get_username %}">{{ user.subscribers.count }}</a>
+                   href="{% url 'subscribers' user.get_username %}">
+                  {{ user.subscribers.count }}
+                </a>
               </td>
             </tr>
             <tr>
-              <td class="pe-3">{% trans "Liked posts" %}</td>
+              <td>{% trans "Liked posts" %}</td>
               <td>
-                <a href="{% url 'liked_posts' user.get_username %}">{{ user.liked_posts__count }}</a>
+                <a href="{% url 'liked_posts' user.get_username %}">
+                  {{ user.liked_posts__count }}
+                </a>
               </td>
             </tr>
           </table>
@@ -155,7 +169,9 @@
             <div class="w-100">
               <div class="d-flex justify-content-between">
                 <div>
-                  <a href="{{ post.get_absolute_url }}" class="text-decoration-none">{{ post.date }}</a>
+                  <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
+                    {{ post.date }}
+                  </a>
                 </div>
                 {% if post.user == request.user %}
                   <div>
@@ -208,7 +224,9 @@
                    class="btn badge rounded-pill bg-light text-dark"
                    href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
                   <i class="fa-regular fa-heart"></i>
-                  <span>{{ post.likers__count }}</span>
+                  <span>
+                    {{ post.likers__count }}
+                  </span>
                 </a>
               {% elif request.user in post.likers.all %}
                 <button type="button"
@@ -216,7 +234,9 @@
                         data-is-liked="y"
                         data-post-pk="{{ post.pk }}">
                   <i class="text-danger fa-solid fa-heart"></i>
-                  <span>{{ post.likers.count }}</span>
+                  <span>
+                    {{ post.likers.count }}
+                  </span>
                 </button>
               {% else %}
                 <button type="button"
@@ -224,7 +244,9 @@
                         data-is-liked="n"
                         data-post-pk="{{ post.pk }}">
                   <i class="fa-regular fa-heart"></i>
-                  <span>{{ post.likers.count }}</span>
+                  <span>
+                    {{ post.likers.count }}
+                  </span>
                 </button>
               {% endif %}
               <a href="{{ post.get_absolute_url }}">

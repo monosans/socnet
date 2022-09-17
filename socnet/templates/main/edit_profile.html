@@ -15,7 +15,9 @@
     </a>
     <a role="button"
        href="{% url 'account_email' %}"
-       class="btn btn-primary">{% trans "Change E-mail" %}</a>
+       class="btn btn-primary">
+      {% trans "Change E-mail" %}
+    </a>
   </div>
   <form method="post">
     {% csrf_token %}

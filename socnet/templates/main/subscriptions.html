@@ -29,14 +29,18 @@
               </div>
               <div class="col ms-2 d-flex justify-content-between">
                 <div class="text-break">
-                  <a href="{{ subscription.get_absolute_url }}">{{ subscription.get_username }}</a>
+                  <a href="{{ subscription.get_absolute_url }}">
+                    {{ subscription.get_username }}
+                  </a>
                   {{ subscription.full_name_in_brackets }}
                 </div>
                 {% if request.user == user %}
                   <div>
-                    <button type="button" class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>{% trans "Unsubscribe" %}
+                    <button type="button" class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>
+                      {% trans "Unsubscribe" %}
                     </button>
-                    <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>{% trans "Subscribe" %}
+                    <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>
+                      {% trans "Subscribe" %}
                     </button>
                   </div>
                 {% endif %}
