@@ -1,16 +1,22 @@
 from __future__ import annotations
 
-from typing import Any, Coroutine, Dict, Union
+from typing import Any, Dict, Union
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.layers import InMemoryChannelLayer
 from channels_redis.core import RedisChannelLayer
 from django.contrib.auth.models import AnonymousUser
-from django.core.exceptions import ValidationError
+from django.db.models import Model
 
 from ..users.models import User as UserType
 from . import models
+
+
+@database_sync_to_async  # type: ignore[misc]
+def save_obj(obj: Model) -> None:
+    obj.full_clean()
+    obj.save()
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
@@ -39,13 +45,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
         self, content: Dict[str, str], **kwargs: Any
     ) -> None:
         user: UserType = self.scope["user"]
-        coro: Coroutine[None, None, models.Message] = database_sync_to_async(
-            models.Message.objects.create
-        )(user=user, chat_id=self.room_name, text=content["message"])
-        try:
-            message = await coro
-        except ValidationError:
-            return
+        message = models.Message(
+            user=user, chat_id=self.room_name, text=content["message"]
+        )
+        await save_obj(message)
         msg: Dict[str, str] = {
             "type": "chat_message",
             "text": message.text,
