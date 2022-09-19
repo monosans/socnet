@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from django.db import migrations
 
-import socnet.common.fields
+import socnet.core.fields
 
 
 class Migration(migrations.Migration):
@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="message",
             name="text",
-            field=socnet.common.fields.NormalizedTextField(
+            field=socnet.core.fields.NormalizedTextField(
                 max_length=4096, verbose_name="text"
             ),
         )

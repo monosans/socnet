@@ -8,7 +8,7 @@ from django.utils.timezone import datetime
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
-from ..common.fields import NormalizedTextField
+from ..core.fields import NormalizedTextField
 
 
 def upload_date() -> str:

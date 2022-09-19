@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.utils.timezone import datetime
 from django.utils.translation import gettext_lazy as _
 
-from ..common.fields import (
+from ..core.fields import (
     LowercaseCharField,
     NormalizedCharField,
     NormalizedTextField,

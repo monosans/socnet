@@ -5,7 +5,7 @@ from __future__ import annotations
 import django.core.validators
 from django.db import migrations
 
-import socnet.common.fields
+import socnet.core.fields
 
 
 class Migration(migrations.Migration):
@@ -17,21 +17,21 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="user",
             name="about",
-            field=socnet.common.fields.NormalizedTextField(
+            field=socnet.core.fields.NormalizedTextField(
                 blank=True, max_length=4096, verbose_name="about me"
             ),
         ),
         migrations.AlterField(
             model_name="user",
             name="location",
-            field=socnet.common.fields.NormalizedCharField(
+            field=socnet.core.fields.NormalizedCharField(
                 blank=True, max_length=128, verbose_name="location"
             ),
         ),
         migrations.AlterField(
             model_name="user",
             name="username",
-            field=socnet.common.fields.LowercaseCharField(
+            field=socnet.core.fields.LowercaseCharField(
                 db_index=True,
                 error_messages={
                     "unique": "A user with that username already exists."

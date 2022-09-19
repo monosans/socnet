@@ -7,7 +7,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from ..common.fields import NormalizedTextField
+from ..core.fields import NormalizedTextField
 from ..users.models import User as UserType
 
 
