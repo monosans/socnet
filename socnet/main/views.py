@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Type, Union
+from typing import Any, Dict, Type, Union
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
-from django.contrib.postgres.search import SearchRank, SearchVector
+from django.contrib.postgres.search import SearchRank
 from django.core.paginator import Page, Paginator
 from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest, HttpResponse
@@ -25,21 +25,6 @@ User: Type[UserType] = get_user_model()
 @require_http_methods(["GET"])
 def index(request: AuthedRequest) -> HttpResponse:
     return redirect(request.user)
-
-
-@login_required
-@require_http_methods(["GET", "POST"])
-def edit_profile(request: AuthedRequest) -> HttpResponse:
-    if request.method == "POST":
-        form = forms.UserChangeForm(
-            request.POST, request.FILES, instance=request.user
-        )
-        if form.is_valid():
-            form.save()
-    else:
-        form = forms.UserChangeForm(instance=request.user)
-    context = {"form": form}
-    return render(request, "main/edit_profile.html", context)
 
 
 @require_http_methods(["GET", "POST"])
@@ -100,27 +85,6 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
     )
     context["user"] = user
     return render(request, "main/user.html", context)
-
-
-@require_http_methods(["GET"])
-def users_search_view(request: HttpRequest) -> HttpResponse:
-    users: Optional[QuerySet[UserType]] = None
-    if request.GET:
-        form = forms.UsersSearchForm(request.GET)
-        if form.is_valid():
-            query: str = form.cleaned_data["q"]
-            search_fields: List[str] = form.cleaned_data["search_fields"]
-            rank = SearchRank(vector=SearchVector(*search_fields), query=query)
-            users = (
-                User.objects.annotate(rank=rank)
-                .filter(rank__gt=0)
-                .order_by("-rank", "username")
-                .only("username", "first_name", "last_name", "image")
-            )
-    else:
-        form = forms.UsersSearchForm()
-    context = {"form": form, "users": users}
-    return render(request, "main/users_search.html", context)
 
 
 @login_required

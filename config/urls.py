@@ -12,6 +12,7 @@ from socnet.api import urls as api_urls
 from socnet.core.views import admin_site_login_view
 from socnet.main import urls as main_urls
 from socnet.messenger import urls as messenger_urls
+from socnet.users import urls as users_urls
 
 # https://django-allauth.readthedocs.io/en/latest/advanced.html#admin
 admin.site.login = admin_site_login_view  # type: ignore[assignment]
@@ -23,6 +24,7 @@ urlpatterns = [
     path("api/", include(api_urls)),
     path("chat/", include(messenger_urls)),
     path("", include(main_urls)),
+    path("users/", include(users_urls)),
     path(
         "robots.txt",
         TemplateView.as_view(
