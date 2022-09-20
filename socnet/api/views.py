@@ -7,7 +7,7 @@ from rest_framework import permissions, status, views
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from ..main import models as main_models
+from ..blog import models as blog_models
 from ..users.models import User as UserType
 from .types import AuthedRequest
 
@@ -19,7 +19,7 @@ class _AuthedAPIView(views.APIView):
 
 
 class _LikeView(_AuthedAPIView):
-    model: Type[Union[main_models.Post, main_models.PostComment]]
+    model: Type[Union[blog_models.Post, blog_models.PostComment]]
 
     def post(self, request: AuthedRequest) -> Response:
         pk = int(request.data["pk"])
@@ -29,7 +29,7 @@ class _LikeView(_AuthedAPIView):
 
 
 class _UnlikeView(_AuthedAPIView):
-    model: Type[Union[main_models.Post, main_models.PostComment]]
+    model: Type[Union[blog_models.Post, blog_models.PostComment]]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
         obj = get_object_or_404(self.model, pk=pk)
@@ -38,19 +38,19 @@ class _UnlikeView(_AuthedAPIView):
 
 
 class PostLikeView(_LikeView):
-    model = main_models.Post
+    model = blog_models.Post
 
 
 class PostUnlikeView(_UnlikeView):
-    model = main_models.Post
+    model = blog_models.Post
 
 
 class PostCommentLikeView(_LikeView):
-    model = main_models.PostComment
+    model = blog_models.PostComment
 
 
 class PostCommentUnlikeView(_UnlikeView):
-    model = main_models.PostComment
+    model = blog_models.PostComment
 
 
 class UserSubscribeView(_AuthedAPIView):

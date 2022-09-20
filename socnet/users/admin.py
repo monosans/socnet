@@ -4,7 +4,7 @@ from typing import Type
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin as UserAdminBase
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 
 from . import forms
@@ -14,10 +14,10 @@ User: Type[UserType] = get_user_model()
 
 
 @admin.register(User)
-class UserAdmin(UserAdminBase):
+class UserAdmin(BaseUserAdmin):
     add_form = forms.UserAdminCreationForm
     fieldsets = (
-        *(UserAdminBase.fieldsets or ()),  # make typing happy
+        *(BaseUserAdmin.fieldsets or ()),  # make typing happy
         (
             _("Other"),
             {
@@ -31,7 +31,7 @@ class UserAdmin(UserAdminBase):
             },
         ),
     )
-    filter_horizontal = (*UserAdminBase.filter_horizontal, "subscriptions")
+    filter_horizontal = (*BaseUserAdmin.filter_horizontal, "subscriptions")
     form = forms.UserAdminChangeForm
     list_display = (
         "username",
@@ -40,9 +40,9 @@ class UserAdmin(UserAdminBase):
         "date_joined",
         "is_staff",
     )
-    list_filter = (*UserAdminBase.list_filter, "date_joined", "last_login")
+    list_filter = (*BaseUserAdmin.list_filter, "date_joined", "last_login")
     readonly_fields = (
-        *UserAdminBase.readonly_fields,
+        *BaseUserAdmin.readonly_fields,
         "date_joined",
         "last_login",
     )

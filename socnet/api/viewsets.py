@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Prefetch
 from rest_framework import viewsets
 
-from ..main import models as main_models
+from ..blog import models as blog_models
 from ..messenger import models as messenger_models
 from ..users.models import User as UserType
 from . import serializers
@@ -75,7 +75,7 @@ class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class PostCommentViewSet(viewsets.ModelViewSet):
-    queryset = main_models.PostComment.objects.prefetch_related(
+    queryset = blog_models.PostComment.objects.prefetch_related(
         Prefetch("likers", User.objects.only("pk"))
     )
     serializer_class = serializers.PostCommentSerializer
@@ -83,8 +83,8 @@ class PostCommentViewSet(viewsets.ModelViewSet):
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = main_models.Post.objects.prefetch_related(
-        Prefetch("comments", main_models.PostComment.objects.only("post_id")),
+    queryset = blog_models.Post.objects.prefetch_related(
+        Prefetch("comments", blog_models.PostComment.objects.only("post_id")),
         Prefetch("likers", User.objects.only("pk")),
     )
     serializer_class = serializers.PostSerializer
@@ -96,18 +96,18 @@ class UserViewSet(viewsets.ModelViewSet):
         Prefetch("chats", messenger_models.Chat.objects.only("pk")),
         Prefetch("emailaddress_set", EmailAddress.objects.only("user_id")),
         Prefetch(
-            "liked_comments", main_models.PostComment.objects.only("user_id")
+            "liked_comments", blog_models.PostComment.objects.only("user_id")
         ),
-        Prefetch("liked_posts", main_models.Post.objects.only("pk")),
+        Prefetch("liked_posts", blog_models.Post.objects.only("pk")),
         Prefetch("logentry_set", LogEntry.objects.only("user_id")),
         Prefetch(
             "outgoing_messages",
             messenger_models.Message.objects.only("user_id"),
         ),
         Prefetch(
-            "post_comments", main_models.PostComment.objects.only("user_id")
+            "post_comments", blog_models.PostComment.objects.only("user_id")
         ),
-        Prefetch("posts", main_models.Post.objects.only("user_id")),
+        Prefetch("posts", blog_models.Post.objects.only("user_id")),
         Prefetch("subscribers", User.objects.only("pk")),
         Prefetch("groups", auth_models.Group.objects.only("pk")),
         Prefetch(

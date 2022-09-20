@@ -38,7 +38,7 @@ class UserChangeForm(auth_forms.UserChangeForm[UserType]):
         widgets = {"birth_date": forms.DateInput({"type": "date"})}
 
 
-class UsersSearchForm(forms.Form):
+class UserSearchForm(forms.Form):
     q = forms.Field(
         widget=forms.Textarea({"rows": "2"}), label=_("Search query")
     )

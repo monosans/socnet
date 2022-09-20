@@ -4,20 +4,10 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.timezone import datetime
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from ..core.fields import NormalizedTextField
-
-
-def upload_date() -> str:
-    today = datetime.today()
-    return f"{today.year}/{today.month}/{today.day}"
-
-
-def post_image(instance: Post, filename: str) -> str:
-    return f"user_{instance.user_id}/posts/{upload_date()}/{filename}"
 
 
 class Post(models.Model):
@@ -31,7 +21,7 @@ class Post(models.Model):
         verbose_name=_("text"), max_length=4096, blank=True
     )
     image = models.ImageField(
-        verbose_name=_("image"), upload_to=post_image, blank=True
+        verbose_name=_("image"), upload_to="post_images/%Y/%m/%d/", blank=True
     )
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
     likers = models.ManyToManyField(
@@ -56,10 +46,6 @@ class Post(models.Model):
             )
 
 
-def post_comment_image(instance: PostComment, filename: str) -> str:
-    return f"user_{instance.user_id}/comments/{upload_date()}/{filename}"
-
-
 class PostComment(models.Model):
     post = models.ForeignKey(
         to=Post,
@@ -77,7 +63,9 @@ class PostComment(models.Model):
         verbose_name=_("text"), max_length=4096, blank=True
     )
     image = models.ImageField(
-        verbose_name=_("image"), upload_to=post_comment_image, blank=True
+        verbose_name=_("image"),
+        upload_to="post_comment_images/%Y/%m/%d/",
+        blank=True,
     )
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
     likers = models.ManyToManyField(

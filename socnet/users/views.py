@@ -8,7 +8,6 @@ from django.contrib.postgres.search import SearchRank, SearchVector
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
 from . import forms
@@ -37,7 +36,7 @@ def edit_profile(request: AuthedRequest) -> HttpResponse:
 def users_search_view(request: HttpRequest) -> HttpResponse:
     users: Optional[QuerySet[UserType]] = None
     if request.GET:
-        form = forms.UsersSearchForm(request.GET)
+        form = forms.UserSearchForm(request.GET)
         if form.is_valid():
             query: str = form.cleaned_data["q"]
             search_fields: List[str] = form.cleaned_data["search_fields"]
@@ -49,6 +48,6 @@ def users_search_view(request: HttpRequest) -> HttpResponse:
                 .only("username", "first_name", "last_name", "image")
             )
     else:
-        form = forms.UsersSearchForm()
+        form = forms.UserSearchForm()
     context = {"form": form, "users": users}
     return render(request, "users/users_search.html", context)

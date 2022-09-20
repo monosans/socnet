@@ -21,12 +21,6 @@ from . import forms, models
 User: Type[UserType] = get_user_model()
 
 
-@login_required
-@require_http_methods(["GET"])
-def index(request: AuthedRequest) -> HttpResponse:
-    return redirect(request.user)
-
-
 @require_http_methods(["GET", "POST"])
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     context: Dict[str, Any] = {}
@@ -84,7 +78,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
         username=username,
     )
     context["user"] = user
-    return render(request, "main/user.html", context)
+    return render(request, "blog/user.html", context)
 
 
 @login_required
@@ -99,7 +93,7 @@ def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
         username=username,
     )
     context = {"user": user}
-    return render(request, "main/subscriptions.html", context)
+    return render(request, "blog/subscriptions.html", context)
 
 
 @login_required
@@ -114,7 +108,7 @@ def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
         username=username,
     )
     context = {"user": user}
-    return render(request, "main/subscribers.html", context)
+    return render(request, "blog/subscribers.html", context)
 
 
 @require_http_methods(["GET", "POST"])
@@ -155,7 +149,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     qs = qs.prefetch_related(prefetch)
     post = get_object_or_404(qs, pk=pk)
     context = {"post": post, "form": form}
-    return render(request, "main/post.html", context)
+    return render(request, "blog/post.html", context)
 
 
 @require_http_methods(["GET"])
@@ -175,7 +169,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
         )
     )
     if request.GET:
-        form = forms.PostsSearchForm(request.GET)
+        form = forms.PostSearchForm(request.GET)
         if form.is_valid():
             query: str = form.cleaned_data["q"]
             rank = SearchRank(vector="text", query=query)
@@ -185,7 +179,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
                 .order_by("-rank", "-pk")
             )
     else:
-        form = forms.PostsSearchForm()
+        form = forms.PostSearchForm()
         if request.user.is_authenticated:
             subscribed_posts: QuerySet[models.Post] = qs.filter(
                 user__in=request.user.subscriptions.all()
@@ -208,7 +202,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
                     page, on_each_side=1, on_ends=1
                 )
     context = {"posts": posts, "page_range": page_range, "form": form}
-    return render(request, "main/posts.html", context)
+    return render(request, "blog/posts.html", context)
 
 
 @require_http_methods(["GET"])
@@ -231,7 +225,7 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         username=username,
     )
     context = {"user": user, "posts": user.liked_posts.all()}
-    return render(request, "main/liked_posts.html", context)
+    return render(request, "blog/liked_posts.html", context)
 
 
 @login_required

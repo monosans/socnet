@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-19 18:06+0000\n"
+"POT-Creation-Date: 2022-09-19 18:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,35 +24,14 @@ msgstr "Английский"
 msgid "Russian"
 msgstr "Русский"
 
-msgid "Core"
-msgstr "Основное"
-
-msgid "Main"
-msgstr "Основное"
+msgid "Blog"
+msgstr "Блог"
 
 msgid "Search posts"
 msgstr "Поиск постов"
 
 msgid "Search query"
 msgstr "Поисковый запрос"
-
-msgid "Username"
-msgstr "Имя пользователя"
-
-msgid "First name"
-msgstr "Имя"
-
-msgid "Last name"
-msgstr "Фамилия"
-
-msgid "Location"
-msgstr "Местонахождение"
-
-msgid "About me"
-msgstr "Обо мне"
-
-msgid "Fields to search"
-msgstr "Поля для поиска"
 
 msgid "user"
 msgstr "пользователь"
@@ -92,6 +71,9 @@ msgstr "Пожалуйста, попробуйте ещё раз."
 
 msgid "An error occurred while creating the comment."
 msgstr "При создании комментария произошла ошибка."
+
+msgid "Core"
+msgstr "Основное"
 
 msgid "Messenger"
 msgstr "Мессенджер"
@@ -289,15 +271,6 @@ msgstr "Посты"
 msgid "Search users"
 msgstr "Поиск пользователей"
 
-msgid "Edit profile"
-msgstr "Редактировать профиль"
-
-msgid "Change E-mail"
-msgstr "Изменить электронную почту"
-
-msgid "Save"
-msgstr "Сохранить"
-
 msgid "Liked posts"
 msgstr "Понравившиеся посты"
 
@@ -373,11 +346,11 @@ msgstr "Написать сообщение"
 msgid "Birth date"
 msgstr "Дата рождения"
 
-msgid "Search"
-msgstr "Поиск"
+msgid "Location"
+msgstr "Местонахождение"
 
-msgid "No users found"
-msgstr "Пользователи не найдены"
+msgid "About me"
+msgstr "Обо мне"
 
 msgid "Chat"
 msgstr "Чат"
@@ -391,11 +364,38 @@ msgstr "Чаты"
 msgid "You have no chats."
 msgstr "У вас нет чатов."
 
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+msgid "Change E-mail"
+msgstr "Изменить электронную почту"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "No users found"
+msgstr "Пользователи не найдены"
+
 msgid "Other"
 msgstr "Прочее"
 
 msgid "Users"
 msgstr "Пользователи"
+
+msgid "Username"
+msgstr "Имя пользователя"
+
+msgid "First name"
+msgstr "Имя"
+
+msgid "Last name"
+msgstr "Фамилия"
+
+msgid "Fields to search"
+msgstr "Поля для поиска"
 
 msgid "username"
 msgstr "имя пользователя"

@@ -6,7 +6,7 @@
   {% trans "Posts" %}
 {% endblock title %}
 {% block css %}
-  {% include "main/inc/font_awesome.html" %}
+  {% include "blog/inc/font_awesome.html" %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}"/>
 {% endblock css %}
@@ -31,7 +31,7 @@
         </div>
       </div>
       {% if posts %}
-        {% include "main/inc/posts.html" %}
+        {% include "blog/inc/posts.html" %}
         {% if page_range %}
           <ul class="pagination justify-content-center">
             {% for page in page_range %}

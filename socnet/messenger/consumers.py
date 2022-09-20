@@ -54,7 +54,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
             "text": message.text,
             "user__username": user.get_username(),
             "user__image": user.image.url if user.image else None,
-            "date": message.simple_date,
+            "date": message.formatted_date,
             "user_href": user.get_absolute_url(),
         }
         await self.channel_layer.group_send(self.room_group_name, msg)

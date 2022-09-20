@@ -4,6 +4,7 @@ from typing import Generator
 
 from django.conf import settings
 from django.db import models
+from django.template import defaultfilters
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -55,5 +56,5 @@ class Message(models.Model):
         verbose_name_plural = _("messages")
 
     @property
-    def simple_date(self) -> str:
-        return self.date.strftime("%Y-%m-%d %H:%M")
+    def formatted_date(self) -> str:
+        return defaultfilters.date(self.date, "Y-m-d H:i")

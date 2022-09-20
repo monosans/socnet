@@ -34,7 +34,7 @@
                       <a href="{{ message.user.get_absolute_url }}">
                         {{ message.user.get_username }}
                       </a>
-                      <span class="text-secondary">{{ message.simple_date }}</span>
+                      <span class="text-secondary">{{ message.formatted_date }}</span>
                     </div>
                     <div class="me-2">{{ message.text|linebreaksbr }}</div>
                   </div>

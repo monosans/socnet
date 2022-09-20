@@ -9,7 +9,7 @@ from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 
-from ..main import models as main_models
+from ..blog import models as blog_models
 from ..messenger import models as messenger_models
 from ..users.models import User as UserType
 
@@ -94,19 +94,19 @@ class PermissionSerializer(serializers.HyperlinkedModelSerializer):
 
 class PostCommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = main_models.PostComment
+        model = blog_models.PostComment
         fields = "__all__"
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     comments: serializers.HyperlinkedRelatedField[
-        main_models.PostComment
+        blog_models.PostComment
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="postcomment-detail"
     )
 
     class Meta:
-        model = main_models.Post
+        model = blog_models.Post
         fields = "__all__"
 
 
@@ -122,12 +122,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         many=True, read_only=True, view_name="emailaddress-detail"
     )
     liked_comments: serializers.HyperlinkedRelatedField[
-        main_models.PostComment
+        blog_models.PostComment
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="postcomment-detail"
     )
     liked_posts: serializers.HyperlinkedRelatedField[
-        main_models.Post
+        blog_models.Post
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="post-detail"
     )
@@ -142,12 +142,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         many=True, read_only=True, view_name="message-detail"
     )
     post_comments: serializers.HyperlinkedRelatedField[
-        main_models.PostComment
+        blog_models.PostComment
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="postcomment-detail"
     )
     posts: serializers.HyperlinkedRelatedField[
-        main_models.Post
+        blog_models.Post
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="post-detail"
     )

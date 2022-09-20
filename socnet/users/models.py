@@ -21,10 +21,6 @@ from . import validators
 EN_RU_REGEX = re.compile(r"^(?:[\-A-Za-z]+|[\-ЁА-яё]+)$")
 
 
-def user_image(instance: User, filename: str) -> str:
-    return f"user_{instance.pk}/{filename}"
-
-
 class User(AbstractUser):
     username = LowercaseCharField(
         verbose_name=_("username"),
@@ -74,7 +70,7 @@ class User(AbstractUser):
         verbose_name=_("location"), max_length=128, blank=True
     )
     image = models.ImageField(
-        verbose_name=_("image"), upload_to=user_image, blank=True
+        verbose_name=_("image"), upload_to="user_images/", blank=True
     )
     about = NormalizedTextField(
         verbose_name=_("about me"), max_length=4096, blank=True

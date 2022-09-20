@@ -12,7 +12,19 @@ from . import models
 User: Type[UserType] = get_user_model()
 
 
-class PostsSearchForm(forms.Form):
+class PostCreationForm(forms.ModelForm[models.Post]):
+    class Meta:
+        model = models.Post
+        fields = ("text", "image")
+
+
+class PostCommentCreationForm(forms.ModelForm[models.PostComment]):
+    class Meta:
+        model = models.PostComment
+        fields = ("text", "image")
+
+
+class PostSearchForm(forms.Form):
     q = forms.Field(
         widget=forms.Textarea(
             {
@@ -23,15 +35,3 @@ class PostsSearchForm(forms.Form):
         ),
         label=_("Search query"),
     )
-
-
-class PostCommentCreationForm(forms.ModelForm[models.PostComment]):
-    class Meta:
-        model = models.PostComment
-        fields = ("text", "image")
-
-
-class PostCreationForm(forms.ModelForm[models.Post]):
-    class Meta:
-        model = models.Post
-        fields = ("text", "image")
