@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from typing import Type, Union
+from typing import Iterable, Optional, Type
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
-from django.core.paginator import Page, Paginator
-from django.db.models import Count, Prefetch, QuerySet
+from django.core.paginator import Paginator
+from django.db.models import Count, Prefetch
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
@@ -55,7 +55,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
             "about",
         )
     )
-    user: UserType = get_object_or_404(qs, username=username)
+    user = get_object_or_404(qs, username=username)
     context = {"user": user}
     return render(request, "blog/user.html", context)
 
@@ -83,10 +83,8 @@ def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
         "subscriptions",
         User.objects.only("username", "first_name", "last_name", "image"),
     )
-    user = get_object_or_404(
-        User.objects.prefetch_related(prefetch).only("username"),
-        username=username,
-    )
+    qs = User.objects.prefetch_related(prefetch).only("username")
+    user = get_object_or_404(qs, username=username)
     context = {"user": user}
     return render(request, "blog/subscriptions.html", context)
 
@@ -98,10 +96,8 @@ def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
         "subscribers",
         User.objects.only("username", "first_name", "last_name", "image"),
     )
-    user = get_object_or_404(
-        User.objects.prefetch_related(prefetch).only("username"),
-        username=username,
-    )
+    qs = User.objects.prefetch_related(prefetch).only("username")
+    user = get_object_or_404(qs, username=username)
     context = {"user": user}
     return render(request, "blog/subscribers.html", context)
 
@@ -149,7 +145,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 @require_http_methods(["GET"])
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: Union[QuerySet[models.Post], Page[models.Post], None] = None
+    posts: Optional[Iterable[models.Post]]
     page_range = None
     qs = models.Post.objects.select_related("user").only(
         "date", "text", "image", "user__username", "user__image"
@@ -176,7 +172,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.PostSearchForm()
         if request.user.is_authenticated:
-            subscribed_posts: QuerySet[models.Post] = qs.filter(
+            subscribed_posts = qs.filter(
                 user__in=request.user.subscriptions.all()
             ).order_by("-pk")
             paginator = Paginator(subscribed_posts, per_page=5)
@@ -215,10 +211,8 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         )
     )
     prefetch = Prefetch("liked_posts", prefetch_qs)
-    user: UserType = get_object_or_404(
-        User.objects.prefetch_related(prefetch).only("username"),
-        username=username,
-    )
+    qs = User.objects.prefetch_related(prefetch).only("username")
+    user = get_object_or_404(qs, username=username)
     context = {"user": user, "posts": user.liked_posts.all()}
     return render(request, "blog/liked_posts.html", context)
 
@@ -226,7 +220,8 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 @login_required
 @require_http_methods(["POST"])
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    post: models.Post = get_object_or_404(request.user.posts.only("pk"), pk=pk)
+    qs = request.user.posts.only("pk")
+    post = get_object_or_404(qs, pk=pk)
     post.delete()
     return redirect(request.user)
 
@@ -234,8 +229,7 @@ def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 @login_required
 @require_http_methods(["POST"])
 def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    comment: models.PostComment = get_object_or_404(
-        request.user.post_comments.only("pk"), pk=pk
-    )
+    qs = request.user.post_comments.only("pk")
+    comment = get_object_or_404(qs, pk=pk)
     comment.delete()
     return redirect(comment.post)

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from typing import List, Optional, Type
+from typing import Iterable, List, Optional, Type
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchRank, SearchVector
-from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
@@ -34,7 +33,7 @@ def edit_profile(request: AuthedRequest) -> HttpResponse:
 
 @require_http_methods(["GET"])
 def users_search_view(request: HttpRequest) -> HttpResponse:
-    users: Optional[QuerySet[UserType]] = None
+    users: Optional[Iterable[UserType]] = None
     if request.GET:
         form = forms.UserSearchForm(request.GET)
         if form.is_valid():

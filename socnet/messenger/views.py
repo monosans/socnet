@@ -4,7 +4,7 @@ from typing import Type
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.db.models import Prefetch, QuerySet
+from django.db.models import Prefetch
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
@@ -25,9 +25,8 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
             "text", "date", "chat_id", "user__username", "user__image"
         ),
     )
-    chat: models.Chat = get_object_or_404(
-        request.user.chats.prefetch_related(prefetch).only("pk"), pk=pk
-    )
+    qs = request.user.chats.prefetch_related(prefetch).only("pk")
+    chat = get_object_or_404(qs, pk=pk)
     form = forms.MessageCreationForm()
     context = {"chat": chat, "form": form}
     return render(request, "messenger/chat.html", context)
@@ -48,9 +47,7 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
             .only("text", "date", "chat_id"),
         ),
     )
-    chats: QuerySet[models.Chat] = request.user.chats.prefetch_related(
-        *prefetches
-    )
+    chats = request.user.chats.prefetch_related(*prefetches)
     chats_with_companion = (
         (chat, chat.get_companion(request.user)) for chat in chats
     )
@@ -61,7 +58,6 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
 @login_required
 @require_http_methods(["POST"])
 def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    chat: models.Chat
     chat, created = models.Chat.objects.filter(
         participants__in=[request.user.pk]
     ).get_or_create(participants__in=[pk])
