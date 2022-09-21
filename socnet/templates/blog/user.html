@@ -34,34 +34,11 @@
                href="{% url 'edit_profile' %}">
               {% trans "Edit" %}
             </a>
-            <button type="button"
-                    class="btn btn-primary w-100"
-                    data-bs-toggle="modal"
-                    data-bs-target="#post_creation_modal">
+            <a role="button"
+               class="btn btn-primary w-100"
+               href="{% url 'post_create' %}">
               {% trans "Create post" %}
-            </button>
-            <div class="modal fade" id="post_creation_modal" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">{% trans "Post creation" %}</h5>
-                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <form enctype="multipart/form-data" method="post">
-                    {% csrf_token %}
-                    <div class="modal-body">{{ form|crispy }}</div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        {% trans "Close" %}
-                      </button>
-                      <button type="submit" class="btn btn-primary">
-                        {% trans "Create post" %}
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+            </a>
           {% elif request.user.is_authenticated %}
             <form action="{% url 'chat_get_or_create' user.pk %}" method="post">
               {% csrf_token %}
@@ -87,20 +64,16 @@
               {% endif %}
             </div>
           {% else %}
-            <div>
-              <a role="button"
-                 class="btn btn-primary w-100 mb-2"
-                 href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
-                {% trans "Write message" %}
-              </a>
-            </div>
-            <div>
-              <a role="button"
-                 class="btn btn-primary w-100"
-                 href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
-                {% trans "Subscribe" %}
-              </a>
-            </div>
+            <a role="button"
+               class="btn btn-primary w-100 mb-2"
+               href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+              {% trans "Write message" %}
+            </a>
+            <a role="button"
+               class="btn btn-primary w-100"
+               href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+              {% trans "Subscribe" %}
+            </a>
           {% endif %}
         </div>
       </div>
@@ -184,8 +157,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title">{% trans "Post deletion" %}</h5>
-                          <button type="button" class="btn btn-close" data-bs-dismiss="modal">
-                          </button>
+                          <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
                           {% trans "Are you sure you want to delete your post?" %}
@@ -196,9 +168,7 @@
                           </button>
                           <form action="{% url 'post_delete' post.pk %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">
-                              {% trans "Delete" %}
-                            </button>
+                            <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
                           </form>
                         </div>
                       </div>
@@ -207,9 +177,7 @@
                 {% endif %}
               </div>
             </div>
-            <div class="text-break">
-              {{ post.text|linebreaksbr }}
-            </div>
+            <div class="text-break">{{ post.text|linebreaksbr }}</div>
             {% if post.image %}
               <div>
                 <img class="img-responsive rounded"

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Type, Union
+from typing import Type, Union
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -21,32 +21,9 @@ from . import forms, models
 User: Type[UserType] = get_user_model()
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
-    context: Dict[str, Any] = {}
-    if (
-        request.user.is_authenticated
-        and request.user.get_username() == username
-    ):
-        if request.method == "POST":
-            form = forms.PostCreationForm(request.POST, request.FILES)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.user = request.user
-                post.save()
-                form = forms.PostCreationForm()
-            else:
-                # pylint: disable-next=consider-using-f-string
-                message = "{} {}".format(
-                    _("An error occurred while creating the post."),
-                    _("Please try again."),
-                )
-                messages.error(request, message)
-        else:
-            form = forms.PostCreationForm()
-        context["form"] = form
     users = User.objects.only("pk")
-    subscribers_prefetch = Prefetch("subscribers", users)
     posts_prefetch_qs = models.Post.objects.only(
         "user_id", "date", "text", "image"
     )
@@ -59,13 +36,15 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
             Prefetch("likers", users)
         )
     )
-    posts_prefetch = Prefetch("posts", posts_prefetch_qs)
-    user: UserType = get_object_or_404(
+    qs = (
         User.objects.annotate(
             Count("subscriptions", distinct=True),
             Count("liked_posts", distinct=True),
         )
-        .prefetch_related(subscribers_prefetch, posts_prefetch)
+        .prefetch_related(
+            Prefetch("subscribers", users),
+            Prefetch("posts", posts_prefetch_qs),
+        )
         .only(
             "username",
             "image",
@@ -74,11 +53,27 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
             "birth_date",
             "location",
             "about",
-        ),
-        username=username,
+        )
     )
-    context["user"] = user
+    user: UserType = get_object_or_404(qs, username=username)
+    context = {"user": user}
     return render(request, "blog/user.html", context)
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def post_create_view(request: AuthedRequest) -> HttpResponse:
+    if request.method == "POST":
+        form = forms.PostCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect(post)
+    else:
+        form = forms.PostCreationForm()
+    context = {"form": form}
+    return render(request, "blog/post_create.html", context)
 
 
 @login_required

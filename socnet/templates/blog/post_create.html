@@ -1,0 +1,17 @@
+{% extends "card.html" %}
+
+{% load i18n crispy_forms_tags %}
+
+{% block title %}
+  {% trans "Post creation" %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="mb-4 text-center">{% trans "Post creation" %}</h3>
+  <form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-primary w-100" type="submit">
+      {% trans "Create post" %}
+    </button>
+  </form>
+{% endblock card_body %}
