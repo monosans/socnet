@@ -86,6 +86,7 @@ max-line-length = 79
 [tool.pylint."messages control"]
 disable = [
     "consider-using-assignment-expr",
+    "duplicate-code",
     "missing-class-docstring",
     "missing-function-docstring",
     "missing-module-docstring",
