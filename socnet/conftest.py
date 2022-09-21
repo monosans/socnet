@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Tuple
 
 import pytest
 from django.conf import LazySettings
@@ -8,7 +9,7 @@ from django.test import Client
 
 from socnet.users.models import User as UserType
 
-from .test_users.factories import UserFactory
+from .users.tests.factories import UserFactory
 
 
 @pytest.fixture(autouse=True)
@@ -32,3 +33,13 @@ def authed_client(
 ) -> Client:
     client.force_login(user)
     return client
+
+
+@pytest.fixture()
+def authed_client_user(
+    client: Client,
+    # pylint: disable-next=redefined-outer-name
+    user: UserType,
+) -> Tuple[Client, UserType]:
+    client.force_login(user)
+    return client, user
