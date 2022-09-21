@@ -145,7 +145,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 @require_http_methods(["GET"])
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: Optional[Iterable[models.Post]]
+    posts: Optional[Iterable[models.Post]] = None
     page_range = None
     qs = models.Post.objects.select_related("user").only(
         "date", "text", "image", "user__username", "user__image"

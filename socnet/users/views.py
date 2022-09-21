@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, List, Optional, Type
+from typing import List, Type
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -33,7 +33,7 @@ def edit_profile(request: AuthedRequest) -> HttpResponse:
 
 @require_http_methods(["GET"])
 def users_search_view(request: HttpRequest) -> HttpResponse:
-    users: Optional[Iterable[UserType]] = None
+    users = None
     if request.GET:
         form = forms.UserSearchForm(request.GET)
         if form.is_valid():
