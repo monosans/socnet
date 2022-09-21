@@ -1,12 +1,8 @@
 from __future__ import annotations
 
-from typing import Type
-
 from django.contrib.auth import get_user_model
 from factory import Faker
 from factory.django import DjangoModelFactory
-
-from socnet.users.models import User as UserType
 
 
 class UserFactory(DjangoModelFactory):  # type: ignore[misc]
@@ -20,5 +16,5 @@ class UserFactory(DjangoModelFactory):  # type: ignore[misc]
     password = Faker("password")
 
     class Meta:
-        model: Type[UserType] = get_user_model()
+        model = get_user_model()
         django_get_or_create = ["username"]

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Type
-
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import get_user_model
@@ -12,10 +10,9 @@ from rest_framework import viewsets
 
 from ..blog import models as blog_models
 from ..messenger import models as messenger_models
-from ..users.models import User as UserType
 from . import serializers
 
-User: Type[UserType] = get_user_model()
+User = get_user_model()
 
 # pylint: disable=too-many-ancestors
 class ChatViewSet(viewsets.ModelViewSet):

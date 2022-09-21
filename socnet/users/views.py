@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Type
+from typing import List
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -10,10 +10,9 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
 from . import forms
-from .models import User as UserType
 from .types import AuthedRequest
 
-User: Type[UserType] = get_user_model()
+User = get_user_model()
 
 
 @login_required

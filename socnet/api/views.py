@@ -8,10 +8,9 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from ..blog import models as blog_models
-from ..users.models import User as UserType
 from .types import AuthedRequest
 
-User: Type[UserType] = get_user_model()
+User = get_user_model()
 
 
 class _AuthedAPIView(views.APIView):

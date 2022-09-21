@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, Optional, Type
+from typing import Iterable, Optional
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -14,11 +14,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
-from ..users.models import User as UserType
 from ..users.types import AuthedRequest
 from . import forms, models
 
-User: Type[UserType] = get_user_model()
+User = get_user_model()
 
 
 @require_http_methods(["GET"])
