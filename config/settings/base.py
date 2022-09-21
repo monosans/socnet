@@ -139,6 +139,30 @@ X_FRAME_OPTIONS = "DENY"
 
 EMAIL_TIMEOUT = 5
 
+ADMINS = [(env.str("ADMIN_NAME"), env.str("ADMIN_EMAIL"))]
+MANAGERS = ADMINS
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": (
+                "%(levelname)s %(asctime)s %(module)s "
+                "%(process)d %(thread)d %(message)s"
+            )
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
+}
+
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
