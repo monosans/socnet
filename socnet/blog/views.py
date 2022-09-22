@@ -153,7 +153,9 @@ def posts_view(request: HttpRequest) -> HttpResponse:
             subscribed_posts = qs.filter(
                 user__in=request.user.subscriptions.all()
             ).order_by("-pk")
-            posts, page_range = services.paginate(request, subscribed_posts)
+            posts, page_range = services.paginate(
+                request, subscribed_posts, per_page=5
+            )
     context = {"posts": posts, "page_range": page_range, "form": form}
     return render(request, "blog/posts.html", context)
 

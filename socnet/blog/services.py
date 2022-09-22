@@ -39,9 +39,9 @@ def get_subscriptions(username: str, field: str) -> UserType:
 
 
 def paginate(
-    request: HttpRequest, object_list: QuerySet[TModel]
+    request: HttpRequest, object_list: QuerySet[TModel], *, per_page: int
 ) -> Tuple[Page[TModel], Optional[Iterator[Union[str, int]]]]:
-    paginator = Paginator(object_list, per_page=5)
+    paginator = Paginator(object_list, per_page=per_page)
     try:
         page = int(request.GET["page"])
     except (KeyError, ValueError):
