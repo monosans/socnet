@@ -86,49 +86,51 @@
             {{ user.full_name_in_brackets }}
           </div>
           <table class="table">
-            {% if user.birth_date %}
+            <tbody>
+              {% if user.birth_date %}
+                <tr>
+                  <td>{% trans "Birth date" %}</td>
+                  <td>{{ user.birth_date }} ({{ user.age }})</td>
+                </tr>
+              {% endif %}
+              {% if user.location %}
+                <tr>
+                  <td>{% trans "Location" %}</td>
+                  <td class="text-break">{{ user.location }}</td>
+                </tr>
+              {% endif %}
+              {% if user.about %}
+                <tr>
+                  <td>{% trans "About me" %}</td>
+                  <td class="text-break">{{ user.about|linebreaksbr }}</td>
+                </tr>
+              {% endif %}
               <tr>
-                <td>{% trans "Birth date" %}</td>
-                <td>{{ user.birth_date }} ({{ user.age }})</td>
+                <td>{% trans "Subscriptions" %}</td>
+                <td>
+                  <a href="{% url 'subscriptions' user.get_username %}">
+                    {{ user.subscriptions__count }}
+                  </a>
+                </td>
               </tr>
-            {% endif %}
-            {% if user.location %}
               <tr>
-                <td>{% trans "Location" %}</td>
-                <td class="text-break">{{ user.location }}</td>
+                <td>{% trans "Subscribers" %}</td>
+                <td>
+                  <a id="subscribers_count"
+                     href="{% url 'subscribers' user.get_username %}">
+                    {{ user.subscribers.count }}
+                  </a>
+                </td>
               </tr>
-            {% endif %}
-            {% if user.about %}
               <tr>
-                <td>{% trans "About me" %}</td>
-                <td class="text-break">{{ user.about|linebreaksbr }}</td>
+                <td>{% trans "Liked posts" %}</td>
+                <td>
+                  <a href="{% url 'liked_posts' user.get_username %}">
+                    {{ user.liked_posts__count }}
+                  </a>
+                </td>
               </tr>
-            {% endif %}
-            <tr>
-              <td>{% trans "Subscriptions" %}</td>
-              <td>
-                <a href="{% url 'subscriptions' user.get_username %}">
-                  {{ user.subscriptions__count }}
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>{% trans "Subscribers" %}</td>
-              <td>
-                <a id="subscribers_count"
-                   href="{% url 'subscribers' user.get_username %}">
-                  {{ user.subscribers.count }}
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>{% trans "Liked posts" %}</td>
-              <td>
-                <a href="{% url 'liked_posts' user.get_username %}">
-                  {{ user.liked_posts__count }}
-                </a>
-              </td>
-            </tr>
+            </tbody>
           </table>
         </div>
       </div>
