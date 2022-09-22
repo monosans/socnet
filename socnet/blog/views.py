@@ -1,21 +1,21 @@
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Optional, Union
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
-from django.core.paginator import Paginator
-from django.db.models import Count, Prefetch
+from django.core.paginator import Page
+from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
 
 from ..users.types import AuthedRequest
-from . import forms, models
+from . import forms, models, services
 
 User = get_user_model()
 
@@ -78,12 +78,7 @@ def post_create_view(request: AuthedRequest) -> HttpResponse:
 @login_required
 @require_http_methods(["GET"])
 def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
-    prefetch = Prefetch(
-        "subscriptions",
-        User.objects.only("username", "first_name", "last_name", "image"),
-    )
-    qs = User.objects.prefetch_related(prefetch).only("username")
-    user = get_object_or_404(qs, username=username)
+    user = services.get_subscriptions(username, "subscriptions")
     context = {"user": user}
     return render(request, "blog/subscriptions.html", context)
 
@@ -91,12 +86,7 @@ def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
 @login_required
 @require_http_methods(["GET"])
 def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
-    prefetch = Prefetch(
-        "subscribers",
-        User.objects.only("username", "first_name", "last_name", "image"),
-    )
-    qs = User.objects.prefetch_related(prefetch).only("username")
-    user = get_object_or_404(qs, username=username)
+    user = services.get_subscriptions(username, "subscribers")
     context = {"user": user}
     return render(request, "blog/subscribers.html", context)
 
@@ -144,20 +134,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 @require_http_methods(["GET"])
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: Optional[Iterable[models.Post]] = None
+    posts: Optional[Union[QuerySet[models.Post], Page[models.Post]]] = None
     page_range = None
-    qs = models.Post.objects.select_related("user").only(
-        "date", "text", "image", "user__username", "user__image"
-    )
-    qs = (
-        qs.annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
-        if request.user.is_anonymous
-        else qs.annotate(Count("comments")).prefetch_related(
-            Prefetch("likers", User.objects.only("pk"))
-        )
-    )
+    qs = services.get_posts_preview_qs(request)
     if request.GET:
         form = forms.PostSearchForm(request.GET)
         if form.is_valid():
@@ -174,41 +153,14 @@ def posts_view(request: HttpRequest) -> HttpResponse:
             subscribed_posts = qs.filter(
                 user__in=request.user.subscriptions.all()
             ).order_by("-pk")
-            paginator = Paginator(subscribed_posts, per_page=5)
-            try:
-                page = int(request.GET["page"])
-            except (KeyError, ValueError):
-                page = 1
-            else:
-                if page < 1:
-                    page = 1
-                elif page > paginator.num_pages:
-                    # If the user sets a page number greater than the
-                    # last page number, show him the last page.
-                    page = paginator.num_pages
-            posts = paginator.page(page)
-            if paginator.num_pages > 1:
-                page_range = posts.paginator.get_elided_page_range(
-                    page, on_each_side=1, on_ends=1
-                )
+            posts, page_range = services.paginate(request, subscribed_posts)
     context = {"posts": posts, "page_range": page_range, "form": form}
     return render(request, "blog/posts.html", context)
 
 
 @require_http_methods(["GET"])
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
-    prefetch_qs = models.Post.objects.select_related("user").only(
-        "date", "image", "text", "user__username", "user__image"
-    )
-    prefetch_qs = (
-        prefetch_qs.annotate(
-            Count("likers", distinct=True), Count("comments", distinct=True)
-        )
-        if request.user.is_anonymous
-        else prefetch_qs.annotate(Count("comments")).prefetch_related(
-            Prefetch("likers", User.objects.only("id"))
-        )
-    )
+    prefetch_qs = services.get_posts_preview_qs(request)
     prefetch = Prefetch("liked_posts", prefetch_qs)
     qs = User.objects.prefetch_related(prefetch).only("username")
     user = get_object_or_404(qs, username=username)
