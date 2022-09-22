@@ -39,7 +39,7 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         ),
         Prefetch(
             "messages",
-            models.Message.objects.order_by("chat_id", "-date")
+            models.Message.objects.order_by("chat_id", "-pk")
             .distinct("chat_id")
             .only("text", "date", "chat_id"),
         ),
