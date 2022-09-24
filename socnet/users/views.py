@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchRank, SearchVector
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_safe
 
 from . import forms
 from .types import AuthedRequest
@@ -15,7 +15,7 @@ from .types import AuthedRequest
 User = get_user_model()
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET", "HEAD", "POST"])
 @login_required
 def edit_profile(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
@@ -30,7 +30,7 @@ def edit_profile(request: AuthedRequest) -> HttpResponse:
     return render(request, "users/edit_profile.html", context)
 
 
-@require_http_methods(["GET"])
+@require_safe
 def users_search_view(request: HttpRequest) -> HttpResponse:
     users = None
     if request.GET:

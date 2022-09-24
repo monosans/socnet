@@ -12,7 +12,11 @@ from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import (
+    require_http_methods,
+    require_POST,
+    require_safe,
+)
 
 from ..users.types import AuthedRequest
 from . import forms, models, services
@@ -20,7 +24,7 @@ from . import forms, models, services
 User = get_user_model()
 
 
-@require_http_methods(["GET"])
+@require_safe
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     users = User.objects.only("pk")
     posts_prefetch_qs = models.Post.objects.only(
@@ -59,7 +63,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "blog/user.html", context)
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET", "HEAD", "POST"])
 @login_required
 def post_create_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
@@ -75,7 +79,7 @@ def post_create_view(request: AuthedRequest) -> HttpResponse:
     return render(request, "blog/post_create.html", context)
 
 
-@require_http_methods(["GET"])
+@require_safe
 @login_required
 def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscriptions")
@@ -83,7 +87,7 @@ def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
     return render(request, "blog/subscriptions.html", context)
 
 
-@require_http_methods(["GET"])
+@require_safe
 @login_required
 def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscribers")
@@ -91,7 +95,7 @@ def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
     return render(request, "blog/subscribers.html", context)
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET", "HEAD", "POST"])
 def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "POST":
         if request.user.is_anonymous:
@@ -132,7 +136,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "blog/post.html", context)
 
 
-@require_http_methods(["GET"])
+@require_safe
 def posts_view(request: HttpRequest) -> HttpResponse:
     posts: Optional[Union[QuerySet[models.Post], Page[models.Post]]] = None
     page_range = None
@@ -160,7 +164,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     return render(request, "blog/posts.html", context)
 
 
-@require_http_methods(["GET"])
+@require_safe
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     prefetch_qs = services.get_posts_preview_qs(request)
     prefetch = Prefetch("liked_posts", prefetch_qs)
@@ -170,7 +174,7 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "blog/liked_posts.html", context)
 
 
-@require_http_methods(["POST"])
+@require_POST
 @login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     qs = request.user.posts.only("pk")
@@ -179,7 +183,7 @@ def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     return redirect(request.user)
 
 
-@require_http_methods(["POST"])
+@require_POST
 @login_required
 def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     qs = request.user.post_comments.only("pk")

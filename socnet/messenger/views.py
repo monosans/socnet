@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_POST, require_safe
 
 from ..users.types import AuthedRequest
 from . import forms, models
@@ -13,7 +13,7 @@ from . import forms, models
 User = get_user_model()
 
 
-@require_http_methods(["GET"])
+@require_safe
 @login_required
 def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
     prefetch = Prefetch(
@@ -29,7 +29,7 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
     return render(request, "messenger/chat.html", context)
 
 
-@require_http_methods(["GET"])
+@require_safe
 @login_required
 def chats_view(request: AuthedRequest) -> HttpResponse:
     prefetches = (
@@ -52,7 +52,7 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
     return render(request, "messenger/chats.html", context)
 
 
-@require_http_methods(["POST"])
+@require_POST
 @login_required
 def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
     chat, created = models.Chat.objects.filter(
