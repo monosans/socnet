@@ -9,7 +9,7 @@ from django.test import Client
 
 from socnet.users.models import User as UserType
 
-from .users.tests.factories import UserFactory
+from .test_users.factories import UserFactory
 
 
 @pytest.fixture(autouse=True)
