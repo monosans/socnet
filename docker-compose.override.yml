@@ -1,6 +1,5 @@
 services:
   django:
-    image: socnet_local_django
     build:
       target: python-local-run-stage
       args:

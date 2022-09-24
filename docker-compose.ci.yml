@@ -1,6 +1,5 @@
 services:
   django:
-    image: socnet_ci_django
     build:
       target: python-ci-run-stage
       args:

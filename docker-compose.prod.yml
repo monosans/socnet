@@ -1,6 +1,5 @@
 services:
   django:
-    image: socnet_production_django
     build:
       target: python-production-run-stage
       args:
@@ -23,7 +22,6 @@ services:
     restart: unless-stopped
 
   caddy:
-    image: socnet_production_caddy
     build:
       context: .
       dockerfile: ./docker/caddy/Dockerfile
