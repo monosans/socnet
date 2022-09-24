@@ -84,7 +84,7 @@ class User(AbstractUser):
     )
 
     def get_absolute_url(self) -> str:
-        return reverse("user", args=(self.get_username(),))
+        return reverse("blog:user", args=(self.get_username(),))
 
     @property
     def full_name_in_brackets(self) -> str:

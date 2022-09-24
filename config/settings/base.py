@@ -76,7 +76,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "core:index"
 LOGIN_URL = "account_login"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 

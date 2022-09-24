@@ -36,7 +36,7 @@ class Post(models.Model):
         verbose_name_plural = _("posts")
 
     def get_absolute_url(self) -> str:
-        return reverse("post", args=(self.pk,))
+        return reverse("blog:post", args=(self.pk,))
 
     def clean(self) -> None:
         if not self.text and not self.image:

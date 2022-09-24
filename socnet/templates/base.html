@@ -51,7 +51,7 @@
                     {% endwith %}
                   </li>
                   <li class="nav-item">
-                    {% url 'posts' as url_posts %}
+                    {% url 'blog:posts' as url_posts %}
                     <a href="{{ url_posts }}"
                        class="nav-link
                               {% if url_posts == request.path %}
@@ -61,7 +61,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    {% url 'chats' as url_chats %}
+                    {% url 'messenger:chats' as url_chats %}
                     <a href="{{ url_chats }}"
                        class="nav-link
                               {% if url_chats == request.path %}
@@ -72,7 +72,7 @@
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    {% url 'posts' as url_posts %}
+                    {% url 'blogposts' as url_posts %}
                     <a href="{{ url_posts }}"
                        class="nav-link
                               {% if url_posts == request.path %}
@@ -83,7 +83,7 @@
                   </li>
                 {% endif %}
                 <li class="nav-item">
-                  {% url 'users_search' as url_users_search %}
+                  {% url 'users:users_search' as url_users_search %}
                   <a href="{{ url_users_search }}"
                      class="nav-link
                             {% if url_users_search == request.path %}

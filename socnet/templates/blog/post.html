@@ -51,7 +51,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                       {% trans "Close" %}
                     </button>
-                    <form action="{% url 'post_delete' post.pk %}" method="post">
+                    <form action="{% url 'blog:post_delete' post.pk %}" method="post">
                       {% csrf_token %}
                       <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
                     </form>
@@ -156,7 +156,8 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                       {% trans "Close" %}
                     </button>
-                    <form action="{% url 'post_comment_delete' comment.pk %}" method="post">
+                    <form action="{% url 'blog:post_comment_delete' comment.pk %}"
+                          method="post">
                       {% csrf_token %}
                       <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
                     </form>

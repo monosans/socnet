@@ -4,6 +4,7 @@ from django.urls import path
 
 from . import views
 
+app_name = "messenger"
 urlpatterns = [
     path(
         "<int:pk>/get_or_create/",

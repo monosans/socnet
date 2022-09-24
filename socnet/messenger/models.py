@@ -24,7 +24,7 @@ class Chat(models.Model):
         verbose_name_plural = _("chats")
 
     def get_absolute_url(self) -> str:
-        return reverse("chat", args=(self.pk,))
+        return reverse("messenger:chat", args=(self.pk,))
 
     def get_companion(self, user: UserType) -> UserType:
         companion: Generator[UserType, None, None] = (

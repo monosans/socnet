@@ -31,16 +31,17 @@
           {% if request.user == user %}
             <a role="button"
                class="btn btn-primary w-100 mb-2"
-               href="{% url 'edit_profile' %}">
+               href="{% url 'users:edit_profile' %}">
               {% trans "Edit" %}
             </a>
             <a role="button"
                class="btn btn-primary w-100"
-               href="{% url 'post_create' %}">
+               href="{% url 'blog:post_create' %}">
               {% trans "Create post" %}
             </a>
           {% elif request.user.is_authenticated %}
-            <form action="{% url 'chat_get_or_create' user.pk %}" method="post">
+            <form action="{% url 'messenger:chat_get_or_create' user.pk %}"
+                  method="post">
               {% csrf_token %}
               <button class="btn btn-primary w-100 mb-2" type="submit">
                 {% trans "Write message" %}
@@ -108,7 +109,7 @@
               <tr>
                 <td>{% trans "Subscriptions" %}</td>
                 <td>
-                  <a href="{% url 'subscriptions' user.get_username %}">
+                  <a href="{% url 'blog:subscriptions' user.get_username %}">
                     {{ user.subscriptions__count }}
                   </a>
                 </td>
@@ -117,7 +118,7 @@
                 <td>{% trans "Subscribers" %}</td>
                 <td>
                   <a id="subscribers_count"
-                     href="{% url 'subscribers' user.get_username %}">
+                     href="{% url 'blog:subscribers' user.get_username %}">
                     {{ user.subscribers.count }}
                   </a>
                 </td>
@@ -125,7 +126,7 @@
               <tr>
                 <td>{% trans "Liked posts" %}</td>
                 <td>
-                  <a href="{% url 'liked_posts' user.get_username %}">
+                  <a href="{% url 'blog:liked_posts' user.get_username %}">
                     {{ user.liked_posts__count }}
                   </a>
                 </td>
@@ -168,7 +169,7 @@
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             {% trans "Close" %}
                           </button>
-                          <form action="{% url 'post_delete' post.pk %}" method="post">
+                          <form action="{% url 'blog:post_delete' post.pk %}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
                           </form>
