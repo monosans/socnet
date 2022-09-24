@@ -25,8 +25,8 @@ def admin_site_login_view(
     return redirect(next_page)
 
 
-@login_required
 @require_http_methods(["GET"])
+@login_required
 def index_view(request: AuthedRequest) -> HttpResponse:
     return redirect(request.user)
 

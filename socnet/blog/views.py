@@ -59,8 +59,8 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "blog/user.html", context)
 
 
-@login_required
 @require_http_methods(["GET", "POST"])
+@login_required
 def post_create_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
         form = forms.PostCreationForm(request.POST, request.FILES)
@@ -75,16 +75,16 @@ def post_create_view(request: AuthedRequest) -> HttpResponse:
     return render(request, "blog/post_create.html", context)
 
 
-@login_required
 @require_http_methods(["GET"])
+@login_required
 def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscriptions")
     context = {"user": user}
     return render(request, "blog/subscriptions.html", context)
 
 
-@login_required
 @require_http_methods(["GET"])
+@login_required
 def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscribers")
     context = {"user": user}
@@ -170,8 +170,8 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "blog/liked_posts.html", context)
 
 
-@login_required
 @require_http_methods(["POST"])
+@login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     qs = request.user.posts.only("pk")
     post = get_object_or_404(qs, pk=pk)
@@ -179,8 +179,8 @@ def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     return redirect(request.user)
 
 
-@login_required
 @require_http_methods(["POST"])
+@login_required
 def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     qs = request.user.post_comments.only("pk")
     comment = get_object_or_404(qs, pk=pk)

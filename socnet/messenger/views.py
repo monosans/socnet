@@ -13,8 +13,8 @@ from . import forms, models
 User = get_user_model()
 
 
-@login_required
 @require_http_methods(["GET"])
+@login_required
 def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
     prefetch = Prefetch(
         "messages",
@@ -29,8 +29,8 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
     return render(request, "messenger/chat.html", context)
 
 
-@login_required
 @require_http_methods(["GET"])
+@login_required
 def chats_view(request: AuthedRequest) -> HttpResponse:
     prefetches = (
         Prefetch(
@@ -52,8 +52,8 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
     return render(request, "messenger/chats.html", context)
 
 
-@login_required
 @require_http_methods(["POST"])
+@login_required
 def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
     chat, created = models.Chat.objects.filter(
         participants__in=[request.user.pk]

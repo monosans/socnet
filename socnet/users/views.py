@@ -15,8 +15,8 @@ from .types import AuthedRequest
 User = get_user_model()
 
 
-@login_required
 @require_http_methods(["GET", "POST"])
+@login_required
 def edit_profile(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
         form = forms.UserChangeForm(
