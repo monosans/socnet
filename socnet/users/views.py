@@ -17,21 +17,21 @@ User = get_user_model()
 
 @require_http_methods(["GET", "HEAD", "POST"])
 @login_required
-def edit_profile(request: AuthedRequest) -> HttpResponse:
+def edit_profile_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
-        form = forms.UserChangeForm(
+        form = forms.EditProfileForm(
             request.POST, request.FILES, instance=request.user
         )
         if form.is_valid():
             form.save()
     else:
-        form = forms.UserChangeForm(instance=request.user)
+        form = forms.EditProfileForm(instance=request.user)
     context = {"form": form}
     return render(request, "users/edit_profile.html", context)
 
 
 @require_safe
-def users_search_view(request: HttpRequest) -> HttpResponse:
+def search_users_view(request: HttpRequest) -> HttpResponse:
     users = None
     if request.GET:
         form = forms.UserSearchForm(request.GET)
@@ -48,4 +48,4 @@ def users_search_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.UserSearchForm()
     context = {"form": form, "users": users}
-    return render(request, "users/users_search.html", context)
+    return render(request, "users/search_users.html", context)

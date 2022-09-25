@@ -20,7 +20,7 @@ class UserAdminCreationForm(auth_forms.UserCreationForm[UserType]):
         model = User
 
 
-class UserChangeForm(auth_forms.UserChangeForm[UserType]):
+class EditProfileForm(auth_forms.UserChangeForm[UserType]):
     password = None  # type: ignore[assignment]
 
     class Meta(auth_forms.UserChangeForm.Meta):

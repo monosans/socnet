@@ -22,30 +22,10 @@ for prefix, viewset in (
 
 urlpatterns = [
     *router.urls,
-    path(
-        "post_comment_like/<int:pk>/",
-        views.PostCommentUnlikeView.as_view(),
-        name="post_comment_unlike",
-    ),
-    path(
-        "post_comment_like/",
-        views.PostCommentLikeView.as_view(),
-        name="post_comment_like",
-    ),
-    path(
-        "post_like/<int:pk>/",
-        views.PostUnlikeView.as_view(),
-        name="post_unlike",
-    ),
-    path("post_like/", views.PostLikeView.as_view(), name="post_like"),
-    path(
-        "subscription/<int:pk>/",
-        views.UserUnsubscribeView.as_view(),
-        name="user_unsubscribe",
-    ),
-    path(
-        "subscription/",
-        views.UserSubscribeView.as_view(),
-        name="user_subscribe",
-    ),
+    path("post_comment_like/<int:pk>/", views.PostCommentUnlikeView.as_view()),
+    path("post_comment_like/", views.PostCommentLikeView.as_view()),
+    path("post_like/<int:pk>/", views.PostUnlikeView.as_view()),
+    path("post_like/", views.PostLikeView.as_view()),
+    path("subscription/<int:pk>/", views.UserUnsubscribeView.as_view()),
+    path("subscription/", views.UserSubscribeView.as_view()),
 ]

@@ -83,10 +83,10 @@
                   </li>
                 {% endif %}
                 <li class="nav-item">
-                  {% url 'users:users_search' as url_users_search %}
-                  <a href="{{ url_users_search }}"
+                  {% url 'users:search_users' as url_search_users %}
+                  <a href="{{ url_search_users }}"
                      class="nav-link
-                            {% if url_users_search == request.path %}
+                            {% if url_search_users == request.path %}
                               active
                             {% endif %}">
                     {% trans "Search users" %}

@@ -24,48 +24,9 @@ from . import forms, models, services
 User = get_user_model()
 
 
-@require_safe
-def user_view(request: HttpRequest, username: str) -> HttpResponse:
-    users = User.objects.only("pk")
-    posts_prefetch_qs = models.Post.objects.only(
-        "user_id", "date", "text", "image"
-    )
-    posts_prefetch_qs = (
-        posts_prefetch_qs.annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
-        if request.user.is_anonymous
-        else posts_prefetch_qs.annotate(Count("comments")).prefetch_related(
-            Prefetch("likers", users)
-        )
-    )
-    qs = (
-        User.objects.annotate(
-            Count("subscriptions", distinct=True),
-            Count("liked_posts", distinct=True),
-        )
-        .prefetch_related(
-            Prefetch("subscribers", users),
-            Prefetch("posts", posts_prefetch_qs),
-        )
-        .only(
-            "username",
-            "image",
-            "first_name",
-            "last_name",
-            "birth_date",
-            "location",
-            "about",
-        )
-    )
-    user = get_object_or_404(qs, username=username)
-    context = {"user": user}
-    return render(request, "blog/user.html", context)
-
-
 @require_http_methods(["GET", "HEAD", "POST"])
 @login_required
-def post_create_view(request: AuthedRequest) -> HttpResponse:
+def create_post_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
         form = forms.PostCreationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -76,23 +37,25 @@ def post_create_view(request: AuthedRequest) -> HttpResponse:
     else:
         form = forms.PostCreationForm()
     context = {"form": form}
-    return render(request, "blog/post_create.html", context)
+    return render(request, "blog/create_post.html", context)
 
 
-@require_safe
+@require_POST
 @login_required
-def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
-    user = services.get_subscriptions(username, "subscriptions")
-    context = {"user": user}
-    return render(request, "blog/subscriptions.html", context)
+def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
+    qs = request.user.post_comments.only("pk")
+    comment = get_object_or_404(qs, pk=pk)
+    comment.delete()
+    return redirect(comment.post)
 
 
-@require_safe
+@require_POST
 @login_required
-def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
-    user = services.get_subscriptions(username, "subscribers")
-    context = {"user": user}
-    return render(request, "blog/subscribers.html", context)
+def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
+    qs = request.user.posts.only("pk")
+    post = get_object_or_404(qs, pk=pk)
+    post.delete()
+    return redirect(request.user)
 
 
 @require_http_methods(["GET", "HEAD", "POST"])
@@ -174,19 +137,56 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "blog/liked_posts.html", context)
 
 
-@require_POST
+@require_safe
 @login_required
-def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    qs = request.user.posts.only("pk")
-    post = get_object_or_404(qs, pk=pk)
-    post.delete()
-    return redirect(request.user)
+def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
+    user = services.get_subscriptions(username, "subscribers")
+    context = {"user": user}
+    return render(request, "blog/subscribers.html", context)
 
 
-@require_POST
+@require_safe
 @login_required
-def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    qs = request.user.post_comments.only("pk")
-    comment = get_object_or_404(qs, pk=pk)
-    comment.delete()
-    return redirect(comment.post)
+def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
+    user = services.get_subscriptions(username, "subscriptions")
+    context = {"user": user}
+    return render(request, "blog/subscriptions.html", context)
+
+
+@require_safe
+def user_view(request: HttpRequest, username: str) -> HttpResponse:
+    users = User.objects.only("pk")
+    posts_prefetch_qs = models.Post.objects.only(
+        "user_id", "date", "text", "image"
+    )
+    posts_prefetch_qs = (
+        posts_prefetch_qs.annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
+        if request.user.is_anonymous
+        else posts_prefetch_qs.annotate(Count("comments")).prefetch_related(
+            Prefetch("likers", users)
+        )
+    )
+    qs = (
+        User.objects.annotate(
+            Count("subscriptions", distinct=True),
+            Count("liked_posts", distinct=True),
+        )
+        .prefetch_related(
+            Prefetch("subscribers", users),
+            Prefetch("posts", posts_prefetch_qs),
+        )
+        .only(
+            "username",
+            "image",
+            "first_name",
+            "last_name",
+            "birth_date",
+            "location",
+            "about",
+        )
+    )
+    user = get_object_or_404(qs, username=username)
+    context = {"user": user}
+    return render(request, "blog/user.html", context)

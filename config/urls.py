@@ -22,12 +22,12 @@ admin.site.login = core_views.admin_site_login_view  # type: ignore[assignment]
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path("admin/doc/", include(admindocs_urls)),
     path("admin/", admin.site.urls),
-    path("", include(core_urls)),
-    path("accounts/", include(allauth_urls)),
     path("api/", include(api_urls)),
-    path("blog/", include(blog_urls)),
     path("messenger/", include(messenger_urls)),
-    path("users/", include(users_urls)),
+    path("", include(allauth_urls)),
+    path("", include(core_urls)),
+    path("", include(blog_urls)),
+    path("", include(users_urls)),
 ]
 
 if settings.DEBUG:  # pragma: no cover

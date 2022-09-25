@@ -17,6 +17,15 @@ class _AuthedAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
 
+class _UnlikeView(_AuthedAPIView):
+    model: Type[Union[blog_models.Post, blog_models.PostComment]]
+
+    def delete(self, request: AuthedRequest, pk: int) -> Response:
+        obj = get_object_or_404(self.model, pk=pk)
+        obj.likers.remove(request.user)  # type: ignore[attr-defined]
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class _LikeView(_AuthedAPIView):
     model: Type[Union[blog_models.Post, blog_models.PostComment]]
 
@@ -27,29 +36,27 @@ class _LikeView(_AuthedAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-class _UnlikeView(_AuthedAPIView):
-    model: Type[Union[blog_models.Post, blog_models.PostComment]]
-
-    def delete(self, request: AuthedRequest, pk: int) -> Response:
-        obj = get_object_or_404(self.model, pk=pk)
-        obj.likers.remove(request.user)  # type: ignore[attr-defined]
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class PostUnlikeView(_UnlikeView):
+    model = blog_models.Post
 
 
 class PostLikeView(_LikeView):
     model = blog_models.Post
 
 
-class PostUnlikeView(_UnlikeView):
-    model = blog_models.Post
+class PostCommentUnlikeView(_UnlikeView):
+    model = blog_models.PostComment
 
 
 class PostCommentLikeView(_LikeView):
     model = blog_models.PostComment
 
 
-class PostCommentUnlikeView(_UnlikeView):
-    model = blog_models.PostComment
+class UserUnsubscribeView(_AuthedAPIView):
+    def delete(self, request: AuthedRequest, pk: int) -> Response:
+        user = get_object_or_404(User, pk=pk)
+        user.subscribers.remove(request.user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserSubscribeView(_AuthedAPIView):
@@ -58,10 +65,3 @@ class UserSubscribeView(_AuthedAPIView):
         user = get_object_or_404(User, pk=pk)
         user.subscribers.add(request.user)
         return Response(status=status.HTTP_201_CREATED)
-
-
-class UserUnsubscribeView(_AuthedAPIView):
-    def delete(self, request: AuthedRequest, pk: int) -> Response:
-        user = get_object_or_404(User, pk=pk)
-        user.subscribers.remove(request.user)
-        return Response(status=status.HTTP_204_NO_CONTENT)

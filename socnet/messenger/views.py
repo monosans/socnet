@@ -13,6 +13,17 @@ from . import forms, models
 User = get_user_model()
 
 
+@require_POST
+@login_required
+def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
+    chat, created = models.Chat.objects.filter(
+        participants__in=[request.user.pk]
+    ).get_or_create(participants__in=[pk])
+    if created:
+        chat.participants.set([request.user.pk, pk])
+    return redirect(chat)
+
+
 @require_safe
 @login_required
 def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
@@ -50,14 +61,3 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
     )
     context = {"chats": chats_with_companion}
     return render(request, "messenger/chats.html", context)
-
-
-@require_POST
-@login_required
-def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    chat, created = models.Chat.objects.filter(
-        participants__in=[request.user.pk]
-    ).get_or_create(participants__in=[pk])
-    if created:
-        chat.participants.set([request.user.pk, pk])
-    return redirect(chat)
