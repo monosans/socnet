@@ -87,7 +87,7 @@ class User(AbstractUser):
         return reverse("blog:user", args=(self.get_username(),))
 
     @property
-    def full_name_in_brackets(self) -> str:
+    def full_name_in_parentheses(self) -> str:
         full_name = self.get_full_name()
         if not full_name:
             return ""

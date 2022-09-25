@@ -26,7 +26,7 @@
                   {% with last_message=chat.messages.first %}
                     <div class="text-break">
                       {{ companion.get_username }}
-                      {{ companion.full_name_in_brackets }}
+                      {{ companion.full_name_in_parentheses }}
                       {% if last_message %}
                         <div class="text-secondary">{{ last_message.text|truncatechars:30 }}</div>
                       {% endif %}
