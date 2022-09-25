@@ -29,7 +29,7 @@ repos:
         args: [--py38-plus, --keep-runtime-typing]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.23.1
+    rev: v8.24.0
     hooks:
       - id: eslint
         args: [--fix]
@@ -85,6 +85,6 @@ repos:
         require_serial: true
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.17.1
+    rev: v1.17.2
     hooks:
       - id: djlint-django
