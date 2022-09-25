@@ -15,10 +15,7 @@ class TestAdmin:
         response = client.get("/admin/", follow=True)
         assert response.redirect_chain == [  # type: ignore[attr-defined]
             ("/admin/login/?next=/admin/", 302),
-            (
-                "/accounts/login/?next=/admin/login/%3Fnext%3D%252Fadmin%252F",
-                302,
-            ),
+            ("/login/?next=/admin/login/%3Fnext%3D%252Fadmin%252F", 302),
         ]
         assert response.status_code == 200
 
@@ -44,8 +41,7 @@ class TestAdminDocs:
         assert response.redirect_chain == [  # type: ignore[attr-defined]
             ("/admin/login/?next=/admin/doc/", 302),
             (
-                "/accounts/login/"
-                + "?next=/admin/login/%3Fnext%3D%252Fadmin%252Fdoc%252F",
+                "/login/?next=/admin/login/%3Fnext%3D%252Fadmin%252Fdoc%252F",
                 302,
             ),
         ]
@@ -70,7 +66,7 @@ class TestIndex:
     def test_unauthed(self, client: Client) -> None:
         response = client.get("", follow=True)
         assert response.redirect_chain == [  # type: ignore[attr-defined]
-            ("/accounts/login/?next=/", 302)
+            ("/login/?next=/", 302)
         ]
         assert response.status_code == 200
 
@@ -78,7 +74,7 @@ class TestIndex:
         client, user = authed_client_user
         response = client.get("", follow=True)
         assert response.redirect_chain == [  # type: ignore[attr-defined]
-            (f"/blog/user/{user.get_username()}/", 302)
+            (f"/user/{user.get_username()}/", 302)
         ]
         assert response.status_code == 200
 
