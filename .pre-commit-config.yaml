@@ -85,6 +85,6 @@ repos:
         require_serial: true
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.17.2
+    rev: v1.17.3
     hooks:
       - id: djlint-django
