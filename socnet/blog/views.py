@@ -138,16 +138,14 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 
 
 @require_safe
-@login_required
-def subscribers_view(request: AuthedRequest, username: str) -> HttpResponse:
+def subscribers_view(request: HttpRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscribers")
     context = {"user": user}
     return render(request, "blog/subscribers.html", context)
 
 
 @require_safe
-@login_required
-def subscriptions_view(request: AuthedRequest, username: str) -> HttpResponse:
+def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscriptions")
     context = {"user": user}
     return render(request, "blog/subscriptions.html", context)
