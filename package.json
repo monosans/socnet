@@ -1,12 +1,16 @@
 {
   "scripts": {
-    "lint": "eslint --fix .",
-    "format": "prettier --write . '!**/*.html'"
+    "eslint": "eslint --fix .",
+    "format": "prettier --write . '!**/*.html'",
+    "stylelint": "stylelint '**/*.css'"
   },
   "devDependencies": {
-    "eslint": "^8.23",
+    "eslint": "^8.24",
     "eslint-config-prettier": "^8.5",
-    "prettier": "^2.7"
+    "prettier": "^2.7",
+    "stylelint": "^14.13",
+    "stylelint-config-prettier": "^9.0",
+    "stylelint-config-standard": "^28.0"
   },
   "eslintConfig": {
     "env": {
@@ -36,5 +40,11 @@
         "global"
       ]
     }
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ]
   }
 }
