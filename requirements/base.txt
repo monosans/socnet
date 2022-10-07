@@ -14,6 +14,6 @@ crispy-bootstrap5==0.7
 djangorestframework==3.14.0
 
 channels==3.0.5
-channels-redis==3.4.1
+channels-redis==4.0.0
 
 uvicorn[standard]==0.18.3
