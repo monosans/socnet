@@ -27,13 +27,13 @@ MEDIA_ROOT = str(APPS_DIR / "media")
 EXTRA_CHECKS = {
     "checks": [
         "drf-model-serializer-extra-kwargs",
-        "field-boolean-null",
         "field-choices-constraint",
         "field-default-null",
         "field-file-upload-to",
         "field-foreign-key-db-index",
         "field-help-text-gettext",
         "field-null",
+        "field-related-name",
         "field-text-null",
         "field-verbose-name-gettext-case",
         "field-verbose-name-gettext",
