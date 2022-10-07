@@ -23,7 +23,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.38.2
+    rev: v3.0.0
     hooks:
       - id: pyupgrade
         args: [--py38-plus, --keep-runtime-typing]
@@ -53,7 +53,7 @@ repos:
         exclude_types: [html]
 
   - repo: https://github.com/psf/black
-    rev: 22.8.0
+    rev: 22.10.0
     hooks:
       - id: black
 
@@ -63,7 +63,7 @@ repos:
       - id: isort
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.981
+    rev: v0.982
     hooks:
       - id: mypy
         args: []
@@ -72,12 +72,12 @@ repos:
           - django-cleanup==6.0.0
           - django-environ==0.9.0
           - django-logentry-admin==1.1.0
-          - psycopg2-binary==2.9.3
+          - psycopg2-binary==2.9.4
           - django-crispy-forms==1.14.0
           - crispy-bootstrap5==0.7
           - djangorestframework==3.14.0
           - channels==3.0.5
-          - channels-redis==3.4.1
+          - channels-redis==4.0.0
           - django-debug-toolbar==3.7.0
           - django-stubs==1.12.0
           - djangorestframework-stubs==1.7.0
