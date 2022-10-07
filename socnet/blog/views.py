@@ -44,18 +44,15 @@ def create_post_view(request: AuthedRequest) -> HttpResponse:
 @require_POST
 @login_required
 def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    qs = request.user.post_comments.only("pk")
-    comment = get_object_or_404(qs, pk=pk)
-    comment.delete()
-    return redirect(comment.post)
+    request.user.post_comments.filter(pk=pk).delete()
+    redirect_to = request.GET.get("next", request.user)
+    return redirect(redirect_to)
 
 
 @require_POST
 @login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    qs = request.user.posts.only("pk")
-    post = get_object_or_404(qs, pk=pk)
-    post.delete()
+    request.user.posts.filter(pk=pk).delete()
     return redirect(request.user)
 
 

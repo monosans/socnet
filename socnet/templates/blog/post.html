@@ -156,7 +156,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                       {% trans "Close" %}
                     </button>
-                    <form action="{% url 'blog:post_comment_delete' comment.pk %}"
+                    <form action="{% url 'blog:post_comment_delete' comment.pk %}?next={{ post.get_absolute_url }}"
                           method="post">
                       {% csrf_token %}
                       <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>

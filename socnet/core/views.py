@@ -21,8 +21,8 @@ def admin_site_login_view(
 ) -> HttpResponse:
     if not admin.site.has_permission(request):
         raise PermissionDenied
-    next_page = request.GET.get("next", "admin:index")
-    return redirect(next_page)
+    redirect_to = request.GET.get("next", "admin:index")
+    return redirect(redirect_to)
 
 
 @require_safe
