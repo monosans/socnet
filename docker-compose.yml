@@ -8,9 +8,16 @@ services:
     env_file: ./.env
     environment:
       - READ_ENV_TEMPLATE=False
+    networks:
+      - postgres
     restart: unless-stopped
 
   postgres:
     image: postgres:14
     env_file: ./.env
+    networks:
+      - postgres
     restart: unless-stopped
+
+networks:
+  postgres:
