@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 import environ
+from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
@@ -162,6 +163,8 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
+
+MESSAGE_TAGS = {messages.DEBUG: "", messages.ERROR: "danger"}
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
