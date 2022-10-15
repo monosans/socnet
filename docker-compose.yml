@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: postgres:14
+    image: postgres:15
     env_file: ./.env
     networks:
       - postgres

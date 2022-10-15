@@ -28,7 +28,7 @@ Backend:
 - Django Channels (WebSockets)
 - Django Allauth
 - Django environ
-- PostgreSQL 14
+- PostgreSQL 15
 - Redis 7
 - Gunicorn + Uvicorn
 
