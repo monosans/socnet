@@ -45,7 +45,10 @@
                 </li>
               {% else %}
                 <li class="page-item">
-                  <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                  <a class="page-link"
+                     href="?{% if query %}q={{ query }}&amp;{% endif %}page={{ page }}">
+                    {{ page }}
+                  </a>
                 </li>
               {% endif %}
             {% endfor %}

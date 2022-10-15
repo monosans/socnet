@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-from typing import Optional, Union
+from typing import Optional
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
-from django.core.paginator import Page
 from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -99,13 +98,15 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 @require_safe
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: Optional[Union[QuerySet[models.Post], Page[models.Post]]] = None
-    page_range = None
+    posts:Optional[QuerySet[models.Post]] = None
+    page = None
+    page_range= None
+    query = None
     qs = services.get_posts_preview_qs(request)
     if request.GET:
         form = forms.PostSearchForm(request.GET)
         if form.is_valid():
-            query: str = form.cleaned_data["q"]
+            query = form.cleaned_data["q"]
             rank = SearchRank(vector="text", query=query)
             posts = (
                 qs.annotate(rank=rank)
@@ -115,11 +116,17 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.PostSearchForm()
         if request.user.is_authenticated:
-            subscribed_posts = qs.filter(
+            posts = qs.filter(
                 user__in=request.user.subscriptions.all()
             ).order_by("-pk")
-            posts, page_range = paginate(request, subscribed_posts, per_page=5)
-    context = {"posts": posts, "page_range": page_range, "form": form}
+    if posts is not None:
+        page, page_range = paginate(request, posts, per_page=5)
+    context = {
+        "posts": page,
+        "page_range": page_range,
+        "form": form,
+        "query": query,
+    }
     return render(request, "blog/posts.html", context)
 
 
