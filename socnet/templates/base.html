@@ -42,10 +42,7 @@
                   <li class="nav-item">
                     {% with request.user.get_absolute_url as user_url %}
                       <a href="{{ user_url }}"
-                         class="nav-link
-                                {% if user_url == request.path %}
-                                  active
-                                {% endif %}">
+                         class="nav-link{% if user_url == request.path %} active{% endif %}">
                         {% trans "My page" %}
                       </a>
                     {% endwith %}
@@ -53,20 +50,14 @@
                   <li class="nav-item">
                     {% url 'blog:posts' as url_posts %}
                     <a href="{{ url_posts }}"
-                       class="nav-link
-                              {% if url_posts == request.path %}
-                                active
-                              {% endif %}">
+                       class="nav-link{% if url_posts == request.path %} active{% endif %}">
                       {% trans "Posts" %}
                     </a>
                   </li>
                   <li class="nav-item">
                     {% url 'messenger:chats' as url_chats %}
                     <a href="{{ url_chats }}"
-                       class="nav-link
-                              {% if url_chats == request.path %}
-                                active
-                              {% endif %}">
+                       class="nav-link{% if url_chats == request.path %} active{% endif %}">
                       {% trans "Messenger" %}
                     </a>
                   </li>
@@ -74,10 +65,7 @@
                   <li class="nav-item">
                     {% url 'blogposts' as url_posts %}
                     <a href="{{ url_posts }}"
-                       class="nav-link
-                              {% if url_posts == request.path %}
-                                active
-                              {% endif %}">
+                       class="nav-link{% if url_posts == request.path %} active{% endif %}">
                       {% trans "Posts" %}
                     </a>
                   </li>
@@ -85,10 +73,7 @@
                 <li class="nav-item">
                   {% url 'users:search_users' as url_search_users %}
                   <a href="{{ url_search_users }}"
-                     class="nav-link
-                            {% if url_search_users == request.path %}
-                              active
-                            {% endif %}">
+                     class="nav-link{% if url_search_users == request.path %} active{% endif %}">
                     {% trans "Search users" %}
                   </a>
                 </li>
@@ -98,19 +83,13 @@
                   {% if request.user.is_authenticated %}
                     {% url 'account_logout' as url_logout %}
                     <a href="{{ url_logout }}"
-                       class="nav-link
-                              {% if url_logout == request.path %}
-                                active
-                              {% endif %}">
+                       class="nav-link{% if url_logout == request.path %} active{% endif %}">
                       {% trans "Sign Out" %}
                     </a>
                   {% else %}
                     {% url 'account_login' as url_login %}
                     <a href="{{ url_login }}"
-                       class="nav-link
-                              {% if url_login == request.path %}
-                                active
-                              {% endif %}">
+                       class="nav-link{% if url_login == request.path %} active{% endif %}">
                       {% trans "Sign In" %}
                     </a>
                   {% endif %}
