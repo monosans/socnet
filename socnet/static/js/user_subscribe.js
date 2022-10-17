@@ -27,12 +27,12 @@
         return;
       }
       for (const el of document.querySelectorAll(
-        `[data-is-subscribed][data-user-pk="${btn.dataset.userPk}"]`
+        `[data-is-subscribed][data-user-pk="${btn.dataset.userPk}"]`,
       )) {
         el.classList.toggle("d-none");
       }
       const subscribers_count = document.querySelector(
-        '[id="subscribers_count"]'
+        '[id="subscribers_count"]',
       );
       if (subscribers_count) {
         subscribers_count.innerHTML =
