@@ -8,7 +8,7 @@
   chatLog.scrollTo(0, chatLog.scrollHeight);
   const proto = window.location.protocol === "https:" ? "wss" : "ws";
   const chatSocket = new WebSocket(
-    `${proto}://${window.location.host}/ws/chat/${chatPk}/`,
+    `${proto}://${window.location.host}/ws/chat/${chatPk}/`
   );
   chatSocket.onmessage = (e) => {
     const data = JSON.parse(e.data);
@@ -32,7 +32,7 @@
     chatSocket.send(
       JSON.stringify({
         message: textarea.value,
-      }),
+      })
     );
     textarea.value = "";
     textarea.focus();
