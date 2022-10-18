@@ -24,11 +24,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
 
     async def connect(self) -> None:
         user: Union[UserType, AnonymousUser] = self.scope["user"]
-        if user.is_anonymous:
+        chat_pk = int(self.scope["url_route"]["kwargs"]["chat_pk"])
+        if (
+            user.is_anonymous
+            or not await database_sync_to_async(
+                models.Chat.objects.filter(
+                    pk=chat_pk, participants=user
+                ).exists
+            )()
+        ):
             await self.close()
             return
         # pylint: disable-next=attribute-defined-outside-init
-        self.room_name = int(self.scope["url_route"]["kwargs"]["chat_pk"])
+        self.room_name = chat_pk
         # pylint: disable-next=attribute-defined-outside-init
         self.room_group_name = f"chat_{self.room_name}"
         await self.channel_layer.group_add(
