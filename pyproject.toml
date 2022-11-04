@@ -38,6 +38,7 @@ indent = 2
 blank_line_after_tag = "load,extends"
 profile = "django"
 max_line_length = 80
+format_attribute_template_tags = true
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
