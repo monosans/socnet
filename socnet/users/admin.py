@@ -32,6 +32,7 @@ class UserAdmin(BaseUserAdmin):
         filtered_field_options = {
             k: (
                 filter_fields(v)
+                # pylint: disable-next=isinstance-second-argument-not-valid-type
                 if k == "fields" and isinstance(v, Iterable)
                 else v
             )
