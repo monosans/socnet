@@ -11,7 +11,11 @@ from django.urls import reverse
 from django.utils.timezone import datetime
 from django.utils.translation import gettext_lazy as _
 
-from ..core.fields import NormalizedCharField, NormalizedTextField
+from ..core.fields import (
+    LowercaseEmailField,
+    NormalizedCharField,
+    NormalizedTextField,
+)
 from . import validators
 
 EN_RU_REGEX = re.compile(r"^(?:[\-A-Za-z]+|[\-ЁА-яё]+)$")
@@ -53,6 +57,7 @@ class User(AbstractUser):
         ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
+    email = LowercaseEmailField(_("email address"), unique=True)
 
     birth_date = models.DateField(
         verbose_name=_("birth date"),
