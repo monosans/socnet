@@ -58,7 +58,7 @@ class User(AbstractUser):
         ),
         validators=(RegexValidator(EN_RU_REGEX),),
     )
-    email = LowercaseEmailField(_("email address"), unique=True)
+    email = LowercaseEmailField(verbose_name=_("email address"), unique=True)
 
     birth_date = models.DateField(
         verbose_name=_("birth date"),
