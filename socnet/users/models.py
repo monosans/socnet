@@ -31,7 +31,7 @@ class User(AbstractUser):
         unique=True,
         db_index=True,
         help_text=_(
-            "No more than 30 characters. "
+            "No more than 32 characters. "
             + "Only lowercase English letters, numbers and _. "
             + "Must begin with a letter and end with a letter or number."
         ),
