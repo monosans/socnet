@@ -14,7 +14,7 @@ User = get_user_model()
 class UserAdmin(BaseUserAdmin):
     add_form = forms.UserAdminCreationForm
     fieldsets = (
-        *(BaseUserAdmin.fieldsets or ()),  # make typing happy
+        *(BaseUserAdmin.fieldsets or ()),
         (
             _("Other"),
             {
