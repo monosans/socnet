@@ -5,6 +5,7 @@ from datetime import date
 from typing import Optional
 
 from django.contrib.auth.models import AbstractUser
+from django.contrib.postgres.fields import CICharField
 from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
@@ -22,7 +23,7 @@ EN_RU_REGEX = re.compile(r"^(?:[\-A-Za-z]+|[\-ЁА-яё]+)$")
 
 
 class User(AbstractUser):
-    username = models.CharField(
+    username = CICharField(
         verbose_name=_("username"),
         max_length=30,
         unique=True,
