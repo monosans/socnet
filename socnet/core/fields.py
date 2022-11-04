@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Optional, Union
 
-from django.db.models import CharField, EmailField, Model, TextField
+from django.contrib.postgres.fields import CIEmailField
+from django.db.models import CharField, Model, TextField
 from django.db.models.expressions import Combinable
 
 from . import utils
@@ -13,7 +14,7 @@ class LowercaseCharField(CharField[Union[str, int, Combinable], str]):
         return utils.lower_str(super().clean(value, model_instance))
 
 
-class LowercaseEmailField(EmailField[Union[str, int, Combinable], str]):
+class LowercaseEmailField(CIEmailField):
     def clean(self, value: Any, model_instance: Optional[Model]) -> Any:
         return utils.lower_str(super().clean(value, model_instance))
 
