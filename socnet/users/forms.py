@@ -18,6 +18,7 @@ class UserAdminChangeForm(auth_forms.UserChangeForm[UserType]):
 class UserAdminCreationForm(auth_forms.UserCreationForm[UserType]):
     class Meta(auth_forms.UserCreationForm.Meta):
         model = User
+        fields = ("email", *auth_forms.UserCreationForm.Meta.fields)
 
 
 class EditProfileForm(auth_forms.UserChangeForm[UserType]):
