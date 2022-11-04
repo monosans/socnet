@@ -13,10 +13,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: socnet_postgres
-    build:
-      context: .
-      dockerfile: ./docker/django/Dockerfile
+    image: postgres:15
     env_file: ./.env
     networks:
       - postgres
