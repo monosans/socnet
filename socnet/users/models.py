@@ -11,30 +11,24 @@ from django.urls import reverse
 from django.utils.timezone import datetime
 from django.utils.translation import gettext_lazy as _
 
-from ..core.fields import (
-    LowercaseCharField,
-    NormalizedCharField,
-    NormalizedTextField,
-)
+from ..core.fields import NormalizedCharField, NormalizedTextField
 from . import validators
 
 EN_RU_REGEX = re.compile(r"^(?:[\-A-Za-z]+|[\-ЁА-яё]+)$")
 
 
 class User(AbstractUser):
-    username = LowercaseCharField(
+    username = models.CharField(
         verbose_name=_("username"),
         max_length=30,
         unique=True,
         db_index=True,
         help_text=_(
             "No more than 30 characters. "
-            + "Only English letters, numbers and _. "
+            + "Only lowecase English letters, numbers and _. "
             + "Must begin with a letter and end with a letter or number."
         ),
-        validators=(
-            RegexValidator(r"^(?:[A-Za-z]|[A-Za-z][\dA-Z_a-z]*[\dA-Za-z])$"),
-        ),
+        validators=(RegexValidator(r"^(?:[a-z]|[a-z][\d_a-z]*[\da-z])$"),),
         error_messages={
             "unique": _("A user with that username already exists.")
         },
