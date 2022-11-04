@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-21 11:59+0000\n"
+"POT-Creation-Date: 2022-11-04 12:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,31 +99,22 @@ msgstr "Плохой запрос (400)"
 msgid "Forbidden (403)"
 msgstr "Запрещено (403)"
 
-msgid "You're not allowed to access this page."
-msgstr "Вы не имеете права доступа к этой странице."
-
 msgid "Not Found (404)"
 msgstr "Не найдено (404)"
-
-msgid "The requested resource was not found."
-msgstr "Запрашиваемый ресурс не найден."
 
 msgid "Server Error (500)"
 msgstr "Ошибка сервера (500)"
 
-msgid "Something went wrong."
-msgstr "Что-то пошло не так."
-
-msgid "Account Inactive"
+msgid "Account is inactive"
 msgstr "Учётная запись неактивна"
 
 msgid "This account is inactive."
 msgstr "Эта учётная запись неактивна."
 
-msgid "E-mail Addresses"
+msgid "Email addresses"
 msgstr "Адреса электронной почты"
 
-msgid "The following e-mail addresses are associated with your account:"
+msgid "The following email addresses are associated with your account:"
 msgstr "С вашей учётной записью связаны следующие адреса электронной почты:"
 
 msgid "Verified"
@@ -135,129 +126,117 @@ msgstr "Не подтвержден"
 msgid "Primary"
 msgstr "Основной"
 
-msgid "Make Primary"
+msgid "Make primary"
 msgstr "Сделать основным"
 
-msgid "Re-send Verification"
-msgstr "Переотправить подтверждение"
+msgid "Resend verification"
+msgstr "Повторно отправить подтверждение"
 
 msgid "Remove"
 msgstr "Удалить"
 
-msgid "Do you really want to remove the selected e-mail address?"
+msgid "Do you really want to remove the selected email address?"
 msgstr "Вы действительно хотите удалить выбранный адрес электронной почты?"
 
 msgid "Close"
 msgstr "Закрыть"
 
-msgid "Warning"
-msgstr "Предупреждение"
-
-msgid "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc."
+msgid "You currently do not have an email address set up. You should add an email address so you can receive notifications, reset your password, etc."
 msgstr "В настоящее время у вас не установлен адрес электронной почты. Вам следует добавить адрес электронной почты, чтобы вы могли получать уведомления, сбрасывать пароль и т.д."
 
-msgid "Add E-mail Address"
+msgid "Add email address"
 msgstr "Добавить адрес электронной почты"
 
-msgid "Add E-mail"
-msgstr "Добавить адрес электронной почты"
-
-msgid "Confirm E-mail Address"
+msgid "Confirm email address"
 msgstr "Подтвердить адрес электронной почты"
 
 #, python-format
-msgid "Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail address for user %(user_display)s."
-msgstr "Пожалуйста, подтвердите, что <a href=\"mailto:%(email)s\">%(email)s</a> является адресом электронной почты пользователя %(user_display)s."
+msgid "Confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is the email address of the user %(user_display)s."
+msgstr "Подтвердите, что <a href=\"mailto:%(email)s\">%(email)s</a> - это адрес электронной почты пользователя %(user_display)s."
 
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #, python-format
-msgid "This e-mail confirmation link expired or is invalid. Please <a href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
-msgstr "Срок действия этой ссылки на подтверждение электронной почты истек или она недействительна. Пожалуйста, <a href=\"%(email_url)s\">отправьте новый запрос на подтверждение электронной почты</a>."
+msgid "This email confirmation link has expired or is invalid. <a href=\"%(email_url)s\">Send a new email confirmation request</a>."
+msgstr "Срок действия этой ссылки на подтверждение электронной почты истёк или она недействительна. <a href=\"%(email_url)s\">Отправьте новый запрос на подтверждение электронной почты</a>."
 
-msgid "Sign In"
-msgstr "Вход"
+msgid "Log in"
+msgstr "Войти"
 
 #, python-format
-msgid "If you have not created an account yet, then please <a href=\"%(signup_url)s\">sign up</a> first."
-msgstr "Если вы ещё не создали учётную запись, то сначала <a href=\"%(signup_url)s\">зарегистрируйтесь</a>."
+msgid "If you don't have an account yet, <a href=\"%(signup_url)s\">register</a>."
+msgstr "Если у вас ещё нет учётной записи, <a href=\"%(signup_url)s\">зарегистрируйтесь</a>."
 
-msgid "Forgot Password?"
+msgid "Forgot password?"
 msgstr "Забыли пароль?"
 
-msgid "Sign Out"
-msgstr "Выход"
+msgid "Log out"
+msgstr "Выйти"
 
-msgid "Are you sure you want to sign out?"
+msgid "Are you sure you want to log out?"
 msgstr "Вы уверены, что хотите выйти?"
 
-msgid "Change Password"
-msgstr "Сменить пароль"
+msgid "Change password"
+msgstr "Изменить пароль"
 
-msgid "Password Reset"
+msgid "Password reset"
 msgstr "Сброс пароля"
 
-msgid "Forgotten your password? Enter your e-mail address below, and we'll send you an e-mail allowing you to reset it."
-msgstr "Забыли пароль? Введите свой адрес электронной почты ниже, и мы вышлем вам письмо, по которому вы сможете его сбросить."
+msgid "Forgot your password? Enter your email address below and we'll send you an email allowing you to reset it."
+msgstr "Забыли свой пароль? Введите свой адрес электронной почты ниже, и мы отправим вам электронное письмо, позволяющее сбросить его."
 
-msgid "Reset My Password"
+msgid "Reset password"
 msgstr "Сбросить пароль"
 
-msgid "We have sent you an e-mail. If you have not received it please check your spam folder."
+msgid "We have sent you an email. If you didn't receive it, check your spam folder."
 msgstr "Мы отправили вам электронное письмо. Если вы его не получили, проверьте папку \"Спам\"."
 
-msgid "Bad Token"
+msgid "Bad token"
 msgstr "Плохой токен"
 
 #, python-format
-msgid "The password reset link was invalid, possibly because it has already been used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</a>."
-msgstr "Ссылка на сброс пароля недействительна, возможно, потому что она уже использовалась. Пожалуйста, запросите <a href=\"%(passwd_reset_url)s\">новый сброс пароля</a>."
+msgid "The password reset link was invalid, possibly because it has already been used. Request a <a href=\"%(passwd_reset_url)s\">new password reset</a>."
+msgstr "Ссылка на сброс пароля недействительна, возможно, потому, что она уже использовалась. Запросите <a href=\"%(passwd_reset_url)s\">новый сброс пароля</a>."
 
-msgid "Your password is now changed."
-msgstr "Теперь ваш пароль изменён."
+msgid "Your password has been changed."
+msgstr "Ваш пароль был изменён."
 
-msgid "Set Password"
+msgid "Set password"
 msgstr "Установить пароль"
 
-msgid "Signup"
-msgstr "Регистрация"
-
-msgid "Sign Up"
-msgstr "Регистрация"
+msgid "Register"
+msgstr "Зарегистрироваться"
 
 #, python-format
-msgid "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
-msgstr "Уже есть учётная запись? Тогда, пожалуйста, <a href=\"%(login_url)s\">войдите</a>."
+msgid "If you already have an account, <a href=\"%(login_url)s\">log in</a>."
+msgstr "Если у вас уже есть учётная запись, <a href=\"%(login_url)s\">войдите</a>."
 
-msgid "Sign Up Closed"
+msgid "Registration is closed"
 msgstr "Регистрация закрыта"
 
-msgid "We are sorry, but the sign up is currently closed."
-msgstr "Мы сожалеем, но в настоящее время регистрация закрыта."
-
-msgid "Note"
-msgstr "Примечание"
+msgid "We are sorry, but registration is currently closed."
+msgstr "Мы сожалеем, но регистрация в настоящее время закрыта."
 
 #, python-format
-msgid "you are already logged in as %(user_display)s."
-msgstr "вы уже вошли в систему под именем %(user_display)s."
+msgid "You are already logged in as %(user_display)s."
+msgstr "Вы уже вошли как %(user_display)s."
 
-msgid "Verify Your E-mail Address"
+msgid "Verify your email address"
 msgstr "Подтвердите свой адрес электронной почты"
 
-msgid "We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification e-mail in your main inbox, check your spam folder."
-msgstr "Мы отправили вам электронное письмо для проверки. Перейдите по указанной ссылке, чтобы завершить процесс регистрации. Если вы не видите письмо с подтверждением в своём основном почтовом ящике, проверьте папку \"Спам\"."
+msgid "We have sent you an email for verification. Follow the link provided to complete the registration process. If you don't see the verification email in your main mailbox, check your spam folder."
+msgstr "Мы отправили вам электронное письмо для подтверждения. Перейдите по указанной ссылке, чтобы завершить процесс регистрации. Если вы не видите письмо для подтверждения в своём основном почтовом ящике, проверьте папку \"Спам\"."
 
-msgid "This part of the site requires us to verify that you are who you claim to be. For this purpose, we require that you verify ownership of your e-mail address."
-msgstr "Эта часть сайта требует, чтобы мы проверили, что вы являетесь тем, за кого себя выдаёте. Для этого мы требуем, чтобы вы подтвердили принадлежность вашего адреса электронной почты."
+msgid "This part of the site requires us to verify that you are who you say you are. To do this, we require you to verify ownership of your email address."
+msgstr "Эта часть сайта требует от нас подтверждения того, что вы являетесь тем, за кого себя выдаёте. Для этого мы требуем, чтобы вы подтвердили право собственности на свой адрес электронной почты."
 
-msgid "We have sent an e-mail to you for verification. Please click on the link inside that e-mail. If you do not see the verification e-mail in your main inbox, check your spam folder."
-msgstr "Мы отправили вам электронное письмо для проверки. Пожалуйста, нажмите на ссылку в этом письме. Если вы не видите письмо с подтверждением в своём основном почтовом ящике, проверьте папку \"Спам\"."
+msgid "We have sent you an email for verification. Click on the link in this email. If you don't see the verification email in your main mailbox, check your spam folder."
+msgstr "Мы отправили вам электронное письмо для подтверждения. Нажмите на ссылку в этом письме. Если вы не видите письмо для подтверждения в своём основном почтовом ящике, проверьте папку \"Спам\"."
 
 #, python-format
-msgid "you can still <a href=\"%(email_url)s\">change your e-mail address</a>."
-msgstr "вы всё ещё можете <a href=\"%(email_url)s\">изменить свой адрес электронной почты</a>."
+msgid "You can still <a href=\"%(email_url)s\">change your email address</a>."
+msgstr "Вы всё ещё можете <a href=\"%(email_url)s\">изменить свой адрес электронной почты</a>."
 
 msgid "My page"
 msgstr "Моя страница"
@@ -266,7 +245,10 @@ msgid "Posts"
 msgstr "Посты"
 
 msgid "Search users"
-msgstr "Поиск пользователей"
+msgstr "Искать пользователей"
+
+msgid "Create post"
+msgstr "Создать поста"
 
 msgid "Liked posts"
 msgstr "Понравившиеся посты"
@@ -292,23 +274,17 @@ msgstr "Удалить"
 msgid "Comment"
 msgstr "Комментировать"
 
-msgid "Post comment deletion"
-msgstr "Удаление комментария к посту"
+msgid "Delete post comment"
+msgstr "Удалить комментарий к посту"
 
 msgid "Are you sure you want to delete your comment?"
 msgstr "Вы уверены, что хотите удалить свой комментарий?"
-
-msgid "Post creation"
-msgstr "Создание поста"
-
-msgid "Create post"
-msgstr "Создать пост"
 
 msgid "No posts found."
 msgstr "Посты не найдены."
 
 msgid "Subscribe to users you are interested in, so that their posts are displayed here."
-msgstr "Подпишитесь на интересных вам пользователей, чтобы их посты отображались здесь."
+msgstr "Подпишитесь на интересующих вас пользователей, чтобы их посты отображались здесь."
 
 msgid "Subscribers"
 msgstr "Подписчики"
@@ -364,7 +340,7 @@ msgstr "У вас нет чатов."
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-msgid "Change E-mail"
+msgid "Change email"
 msgstr "Изменить электронную почту"
 
 msgid "Save"
@@ -427,7 +403,7 @@ msgstr "подписки"
 msgid "You can't subscribe to yourself."
 msgstr "Вы не можете подписаться на себя."
 
-msgid "You cannot be older than the oldest human."
+msgid "You can't be older than the oldest human."
 msgstr "Вы не можете быть старше самого старого человека."
 
 msgid "Are you from the future?"

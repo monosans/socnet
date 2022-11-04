@@ -3,11 +3,8 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Account Inactive" %}
+  {% trans "Account is inactive" %}
 {% endblock title %}
 {% block card_body %}
-  <div class="text-center">
-    <h3 class="mb-4">{% trans "Account Inactive" %}</h3>
-    <div>{% trans "This account is inactive." %}</div>
-  </div>
+  <div class="text-center">{% trans "This account is inactive." %}</div>
 {% endblock card_body %}

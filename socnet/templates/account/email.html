@@ -3,19 +3,19 @@
 {% load i18n crispy_forms_tags %}
 
 {% block title %}
-  {% trans "E-mail Addresses" %}
+  {% trans "Email addresses" %}
 {% endblock title %}
 {% block content %}
   <div class="row justify-content-center">
     <div class="col-xl-6">
       <div class="card">
         <div class="card-body">
-          <h3 class="text-center mb-4">{% trans "E-mail Addresses" %}</h3>
+          <h3 class="text-center mb-4">{% trans "Email addresses" %}</h3>
           {% if user.emailaddress_set.all %}
             <div class="mb-3">
-              {% trans "The following e-mail addresses are associated with your account:" %}
+              {% trans "The following email addresses are associated with your account:" %}
             </div>
-            <form action="{% url 'account_email' %}" method="post">
+            <form method="post">
               {% csrf_token %}
               <div class="mb-2">
                 {% for emailaddress in user.emailaddress_set.all %}
@@ -39,10 +39,10 @@
                 {% endfor %}
               </div>
               <button class="btn btn-primary" type="submit" name="action_primary">
-                {% trans "Make Primary" %}
+                {% trans "Make primary" %}
               </button>
               <button class="btn btn-primary" type="submit" name="action_send">
-                {% trans "Re-send Verification" %}
+                {% trans "Resend verification" %}
               </button>
               <button type="button"
                       class="btn btn-danger"
@@ -57,7 +57,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                      {% trans "Do you really want to remove the selected e-mail address?" %}
+                      {% trans "Do you really want to remove the selected email address?" %}
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -73,7 +73,7 @@
             </form>
           {% else %}
             <div>
-              <strong>{% trans "Warning" %}:</strong> {% trans "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}
+              {% trans "You currently do not have an email address set up. You should add an email address so you can receive notifications, reset your password, etc." %}
             </div>
           {% endif %}
         </div>
@@ -81,12 +81,12 @@
       {% if can_add_email %}
         <div class="card mt-4">
           <div class="card-body">
-            <h4 class="text-center">{% trans "Add E-mail Address" %}</h4>
-            <form method="post" action="{% url 'account_email' %}">
+            <h4 class="text-center">{% trans "Add email address" %}</h4>
+            <form method="post">
               {% csrf_token %}
               {{ form|crispy }}
               <button class="btn btn-primary w-100" name="action_add" type="submit">
-                {% trans "Add E-mail" %}
+                {% trans "Add email address" %}
               </button>
             </form>
           </div>

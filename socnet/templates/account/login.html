@@ -3,14 +3,14 @@
 {% load i18n crispy_forms_tags %}
 
 {% block title %}
-  {% trans "Sign In" %}
+  {% trans "Log in" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="mb-4 text-center">{% trans "Sign In" %}</h3>
+  <h3 class="mb-4 text-center">{% trans "Log in" %}</h3>
   <div class="mb-3">
-    {% blocktrans %}If you have not created an account yet, then please <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+    {% blocktrans %}If you don't have an account yet, <a href="{{ signup_url }}">register</a>.{% endblocktrans %}
   </div>
-  <form method="post" action="{% url 'account_login' %}">
+  <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
     {% if redirect_field_value %}
@@ -19,10 +19,10 @@
              value="{{ redirect_field_value }}"/>
     {% endif %}
     <div class="text-center mb-3">
-      <a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+      <a href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>
     </div>
     <button class="btn btn-primary w-100" type="submit">
-      {% trans "Sign In" %}
+      {% trans "Log in" %}
     </button>
   </form>
 {% endblock card_body %}

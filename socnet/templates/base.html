@@ -94,24 +94,36 @@
                 </li>
               </ul>
               <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated %}
+                  <li class="nav-item">
                     {% url 'account_logout' as url_logout %}
                     <a href="{{ url_logout }}"
                        class="nav-link
                               {% if url_logout == request.path %}
                                 active
                               {% endif %}">
-                      {% trans "Sign Out" %}
+                      {% trans "Log out" %}
                     </a>
-                  {% else %}
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    {% url 'account_signup' as url_signup %}
+                    <a href="{{ url_signup }}"
+                       class="nav-link
+                              {% if url_signup == request.path %}
+                                active
+                              {% endif %}">
+                      {% trans "Register" %}
+                    </a>
+                  </li>
+                  <li class="nav-item">
                     {% url 'account_login' as url_login %}
                     <a href="{{ url_login }}"
                        class="nav-link
                               {% if url_login == request.path %}
                                 active
                               {% endif %}">
-                      {% trans "Sign In" %}
+                      {% trans "Log in" %}
                     </a>
                   {% endif %}
                 </li>

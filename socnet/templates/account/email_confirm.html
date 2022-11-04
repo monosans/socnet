@@ -3,17 +3,16 @@
 {% load i18n account %}
 
 {% block title %}
-  {% trans "Confirm E-mail Address" %}
+  {% trans "Confirm email address" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="mb-4 text-center">{% trans "Confirm E-mail Address" %}</h3>
+  <h3 class="mb-4 text-center">{% trans "Confirm email address" %}</h3>
   {% if confirmation %}
     <div class="mb-3 text-break">
       {% user_display confirmation.email_address.user as user_display %}
-      {% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
+      {% blocktrans with confirmation.email_address.email as email %}Confirm that <a href="mailto:{{ email }}">{{ email }}</a> is the email address of the user {{ user_display }}.{% endblocktrans %}
     </div>
-    <form method="post"
-          action="{% url 'account_confirm_email' confirmation.key %}">
+    <form method="post">
       {% csrf_token %}
       <button class="btn btn-primary w-100" type="submit">
         {% trans "Confirm" %}
@@ -22,7 +21,7 @@
   {% else %}
     <div>
       {% url "account_email" as email_url %}
-      {% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}
+      {% blocktrans %}This email confirmation link has expired or is invalid. <a href="{{ email_url }}">Send a new email confirmation request</a>.{% endblocktrans %}
     </div>
   {% endif %}
 {% endblock card_body %}
