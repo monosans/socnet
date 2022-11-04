@@ -19,6 +19,12 @@ updates:
       interval: "daily"
       time: "15:00"
 
+  - package-ecosystem: "docker"
+    directory: "docker/postgres/"
+    schedule:
+      interval: "daily"
+      time: "15:00"
+
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
