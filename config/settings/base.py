@@ -92,7 +92,6 @@ PASSWORD_HASHERS = [
 
 _PASS = "django.contrib.auth.password_validation"
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": f"{_PASS}.UserAttributeSimilarityValidator"},
     {"NAME": f"{_PASS}.MinimumLengthValidator"},
     {"NAME": f"{_PASS}.CommonPasswordValidator"},
     {"NAME": f"{_PASS}.NumericPasswordValidator"},
