@@ -56,8 +56,8 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         ),
     )
     chats = request.user.chats.prefetch_related(*prefetches)
-    chats_with_companion = (
-        (chat, chat.get_companion(request.user)) for chat in chats
+    chats_with_interlocutor = (
+        (chat, chat.get_interlocutor(request.user)) for chat in chats
     )
-    context = {"chats": chats_with_companion}
+    context = {"chats": chats_with_interlocutor}
     return render(request, "messenger/chats.html", context)

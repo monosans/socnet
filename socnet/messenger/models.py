@@ -26,13 +26,13 @@ class Chat(models.Model):
     def get_absolute_url(self) -> str:
         return reverse("messenger:chat", args=(self.pk,))
 
-    def get_companion(self, user: UserType) -> UserType:
-        companion: Generator[UserType, None, None] = (
+    def get_interlocutor(self, user: UserType) -> UserType:
+        interlocutor: Generator[UserType, None, None] = (
             participant
             for participant in self.participants.all()
             if participant != user
         )
-        return next(companion)
+        return next(interlocutor)
 
 
 class Message(models.Model):
