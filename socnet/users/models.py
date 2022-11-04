@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from datetime import date
 from typing import Optional
 
@@ -19,18 +18,21 @@ from ..core.fields import (
 )
 from . import validators
 
-EN_RU_REGEX = re.compile(r"^(?:[\-A-Za-z]+|[\-ЁА-яё]+)$")
-
 
 class User(AbstractUser):
+    date_joined = None  # type: ignore[assignment]
+    first_name = None  # type: ignore[assignment]
+    last_login = None  # type: ignore[assignment]
+    last_name = None  # type: ignore[assignment]
+
     username = CICharField(
         verbose_name=_("username"),
-        max_length=30,
+        max_length=32,
         unique=True,
         db_index=True,
         help_text=_(
             "No more than 30 characters. "
-            + "Only lowecase English letters, numbers and _. "
+            + "Only lowercase English letters, numbers and _. "
             + "Must begin with a letter and end with a letter or number."
         ),
         validators=(RegexValidator(r"^(?:[a-z]|[a-z][\d_a-z]*[\da-z])$"),),
@@ -38,25 +40,8 @@ class User(AbstractUser):
             "unique": _("A user with that username already exists.")
         },
     )
-    first_name = models.CharField(
-        verbose_name=_("first name"),
-        max_length=30,
-        blank=True,
-        help_text=_(
-            "No more than 30 characters. "
-            + "Only English and Russian letters and -."
-        ),
-        validators=(RegexValidator(EN_RU_REGEX),),
-    )
-    last_name = models.CharField(
-        verbose_name=_("last name"),
-        max_length=30,
-        blank=True,
-        help_text=_(
-            "No more than 30 characters. "
-            + "Only English and Russian letters and -."
-        ),
-        validators=(RegexValidator(EN_RU_REGEX),),
+    display_name = models.CharField(
+        verbose_name=_("display name"), max_length=64, blank=True
     )
     email = LowercaseEmailField(verbose_name=_("email address"), unique=True)
 
@@ -86,12 +71,17 @@ class User(AbstractUser):
     def get_absolute_url(self) -> str:
         return reverse("blog:user", args=(self.get_username(),))
 
+    def get_full_name(self) -> str:
+        return self.display_name
+
+    def get_short_name(self) -> str:
+        return self.display_name
+
     @property
-    def full_name_in_parentheses(self) -> str:
-        full_name = self.get_full_name()
-        if not full_name:
+    def display_name_in_parentheses(self) -> str:
+        if not self.display_name:
             return ""
-        return f"({full_name})"
+        return f"({self.display_name})"
 
     @property
     def age(self) -> Optional[int]:

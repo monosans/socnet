@@ -43,7 +43,7 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
                 User.objects.annotate(rank=rank)
                 .filter(rank__gt=0)
                 .order_by("-rank", "username")
-                .only("username", "first_name", "last_name", "image")
+                .only("username", "display_name", "image")
             )
     else:
         form = forms.UserSearchForm()

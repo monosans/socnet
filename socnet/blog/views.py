@@ -174,8 +174,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
         .only(
             "username",
             "image",
-            "first_name",
-            "last_name",
+            "display_name",
             "birth_date",
             "location",
             "about",

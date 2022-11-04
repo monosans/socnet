@@ -26,14 +26,7 @@ class EditProfileForm(auth_forms.UserChangeForm[UserType]):
 
     class Meta(auth_forms.UserChangeForm.Meta):
         model = User
-        fields = (
-            "first_name",
-            "last_name",
-            "image",
-            "birth_date",
-            "location",
-            "about",
-        )
+        fields = ("display_name", "image", "birth_date", "location", "about")
         widgets = {"birth_date": forms.DateInput({"type": "date"})}
 
 
@@ -44,8 +37,7 @@ class UserSearchForm(forms.Form):
     search_fields = forms.MultipleChoiceField(
         choices=(
             ("username", _("Username")),
-            ("first_name", _("First name")),
-            ("last_name", _("Last name")),
+            ("display_name", _("Display name")),
             ("location", _("Location")),
             ("about", _("About me")),
         ),

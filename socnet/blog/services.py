@@ -26,8 +26,7 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
 
 def get_subscriptions(username: str, field: str) -> UserType:
     prefetch = Prefetch(
-        field,
-        User.objects.only("username", "first_name", "last_name", "image"),
+        field, User.objects.only("username", "display_name", "image")
     )
     qs = User.objects.prefetch_related(prefetch).only("username")
     return get_object_or_404(qs, username=username)

@@ -46,7 +46,7 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
     prefetches = (
         Prefetch(
             "participants",
-            User.objects.only("username", "image", "first_name", "last_name"),
+            User.objects.only("username", "image", "display_name"),
         ),
         Prefetch(
             "messages",
