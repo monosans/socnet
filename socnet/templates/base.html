@@ -40,7 +40,7 @@
               <ul class="navbar-nav">
                 {% if request.user.is_authenticated %}
                   <li class="nav-item">
-                    {% with request.user.get_absolute_url as user_url %}
+                    {% with user_url=request.user.get_absolute_url %}
                       <a href="{{ user_url }}"
                          class="nav-link
                                 {% if user_url == request.path %}
@@ -51,7 +51,7 @@
                     {% endwith %}
                   </li>
                   <li class="nav-item">
-                    {% url 'blog:posts' as url_posts %}
+                    {% url "blog:posts" as url_posts %}
                     <a href="{{ url_posts }}"
                        class="nav-link
                               {% if url_posts == request.path %}
@@ -61,7 +61,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    {% url 'messenger:chats' as url_chats %}
+                    {% url "messenger:chats" as url_chats %}
                     <a href="{{ url_chats }}"
                        class="nav-link
                               {% if url_chats == request.path %}
@@ -72,7 +72,7 @@
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    {% url 'blogposts' as url_posts %}
+                    {% url "blogposts" as url_posts %}
                     <a href="{{ url_posts }}"
                        class="nav-link
                               {% if url_posts == request.path %}
@@ -83,7 +83,7 @@
                   </li>
                 {% endif %}
                 <li class="nav-item">
-                  {% url 'users:search_users' as url_search_users %}
+                  {% url "users:search_users" as url_search_users %}
                   <a href="{{ url_search_users }}"
                      class="nav-link
                             {% if url_search_users == request.path %}
@@ -96,7 +96,7 @@
               <ul class="navbar-nav ms-auto">
                 {% if request.user.is_authenticated %}
                   <li class="nav-item">
-                    {% url 'account_logout' as url_logout %}
+                    {% url "account_logout" as url_logout %}
                     <a href="{{ url_logout }}"
                        class="nav-link
                               {% if url_logout == request.path %}
@@ -107,7 +107,7 @@
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    {% url 'account_login' as url_login %}
+                    {% url "account_login" as url_login %}
                     <a href="{{ url_login }}"
                        class="nav-link
                               {% if url_login == request.path %}
@@ -117,7 +117,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    {% url 'account_signup' as url_signup %}
+                    {% url "account_signup" as url_signup %}
                     <a href="{{ url_signup }}"
                        class="nav-link
                               {% if url_signup == request.path %}

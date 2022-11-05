@@ -28,7 +28,7 @@
                 <div class="col ms-2 d-flex justify-content-between align-items-center">
                   {% with last_message=chat.messages.first %}
                     <div class="text-break">
-                      {{ interlocutor.get_username }}
+                      {{ interlocutor }}
                       {{ interlocutor.display_name_in_parentheses }}
                       {% if last_message %}
                         <div class="text-secondary">{{ last_message.text|truncatechars:30 }}</div>

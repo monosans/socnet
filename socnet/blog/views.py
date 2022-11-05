@@ -138,7 +138,7 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         .only("username")
     )
     user = get_object_or_404(qs)
-    context = {"user": user, "posts": user.liked_posts.all()}
+    context = {"user": user}
     return render(request, "blog/liked_posts.html", context)
 
 

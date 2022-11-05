@@ -3,7 +3,7 @@
 {% load static i18n %}
 
 {% block title %}
-  {% trans "Subscriptions" %} - {{ user.get_username }}
+  {{ user }} - {% trans "subscriptions" %}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>
@@ -15,52 +15,59 @@
   {% csrf_token %}
   <div class="row justify-content-center">
     <div class="col-xl-6">
-      {% for subscription in user.subscriptions.all %}
-        <div class="card">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="avatar-thumbnail">
-                {% if subscription.image %}
-                  <img class="rounded"
-                       alt=""
-                       loading="lazy"
-                       src="{{ subscription.image.url }}"/>
-                {% endif %}
-              </div>
-              <div class="col ms-2 d-flex justify-content-between">
-                <div class="text-break">
-                  <a href="{{ subscription.get_absolute_url }}">
-                    {{ subscription.get_username }}
-                  </a>
-                  {{ subscription.display_name_in_parentheses }}
-                </div>
-                {% if request.user == user %}
-                  <div>
-                    <button type="button" class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>
-                      {% trans "Unsubscribe" %}
-                    </button>
-                    <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>
-                      {% trans "Subscribe" %}
-                    </button>
+      {% with subscriptions=user.subscriptions.all  %}
+        {% if subscriptions %}
+          <div class="card mb-1">
+            <div class="card-body">
+              <h3 class="text-center">{{ user }} - {% trans "subscriptions" %}</h3>
+            </div>
+          </div>
+          {% for subscription in subscriptions %}
+            <div class="card mb-1">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="avatar-thumbnail">
+                    {% if subscription.image %}
+                      <img class="rounded"
+                           alt=""
+                           loading="lazy"
+                           src="{{ subscription.image.url }}"/>
+                    {% endif %}
                   </div>
+                  <div class="col ms-2 d-flex justify-content-between">
+                    <div class="text-break">
+                      <a href="{{ subscription.get_absolute_url }}">{{ subscription }}</a>
+                      {{ subscription.display_name_in_parentheses }}
+                    </div>
+                    {% if request.user == user %}
+                      <div>
+                        <button type="button" class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>
+                          {% trans "Unsubscribe" %}
+                        </button>
+                        <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>
+                          {% trans "Subscribe" %}
+                        </button>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center">
+                {% if request.user == user %}
+                  {% trans "You have no subscriptions." %}
+                {% else %}
+                  {% blocktrans %}{{ user }} has no subscriptions.{% endblocktrans %}
                 {% endif %}
               </div>
             </div>
           </div>
-        </div>
-      {% empty %}
-        <div class="card">
-          <div class="card-body">
-            <div class="text-center">
-              {% if request.user == user %}
-                {% trans "You have no subscriptions." %}
-              {% else %}
-                {% trans "The user has no subscriptions." %}
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      {% endfor %}
+        {% endif %}
+      {% endwith %}
     </div>
   </div>
 {% endblock content %}

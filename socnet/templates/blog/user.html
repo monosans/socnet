@@ -3,7 +3,7 @@
 {% load static i18n %}
 
 {% block title %}
-  {{ user.get_username }}
+  {{ user }}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/img_avatar.css' %}"/>
@@ -80,7 +80,7 @@
       <div class="card h-100">
         <div class="card-body">
           <div class="fs-2 mb-2 text-break">
-            {{ user.get_username }}
+            {{ user }}
             {{ user.display_name_in_parentheses }}
           </div>
           <table class="table">

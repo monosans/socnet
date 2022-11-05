@@ -8,13 +8,13 @@
 {% block card_body %}
   <h3 class="text-center mb-3">{% trans "Delete account" %}</h3>
   <div class="mb-3">
-    {% blocktrans with user.get_username as username %}Are you sure you want to delete the <span class="fw-bolder">{{ username }}</span> account? All data associated with this account will be deleted.{% endblocktrans %}
+    {% blocktrans %}Are you sure you want to delete the <span class="fw-bolder">{{ user }}</span> account? All data associated with this account will be deleted.{% endblocktrans %}
   </div>
   <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <button class="btn btn-danger w-100" type="submit">
-      {% trans "Delete account" %}
+      {% trans "Delete" %}
     </button>
   </form>
 {% endblock card_body %}

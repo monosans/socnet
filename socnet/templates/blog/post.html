@@ -26,7 +26,7 @@
           <div>
             <div class="text-break">
               <a class="text-decoration-none" href="{{ post.user.get_absolute_url }}">
-                {{ post.user.get_username }}
+                {{ post.user }}
               </a>
             </div>
             <div class="text-muted">{{ post.date }}</div>
@@ -41,7 +41,7 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">{% trans "Post deletion" %}</h5>
+                    <h5 class="modal-title">{% trans "Delete post" %}</h5>
                     <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
@@ -135,7 +135,7 @@
           <div class="text-break">
             <a class="text-decoration-none"
                href="{{ comment.user.get_absolute_url }}">
-              {{ comment.user.get_username }}
+              {{ comment.user }}
             </a>
           </div>
           {% if comment.user == request.user %}
