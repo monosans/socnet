@@ -45,7 +45,7 @@
               </button>
             </form>
             <div>
-              {% if request.user in user.subscribers.all %}
+              {% if user.is_subscription %}
                 <button type="button" class="btn btn-light w-100" data-is-subscribed="y" data-user-pk={{ user.pk }}>
                   {% trans "Unsubscribe" %}
                 </button>
@@ -124,7 +124,7 @@
                 <td>
                   <a id="subscribers_count"
                      href="{% url 'blog:subscribers' user.get_username %}">
-                    {{ user.subscribers.count }}
+                    {{ user.subscribers__count }}
                   </a>
                 </td>
               </tr>

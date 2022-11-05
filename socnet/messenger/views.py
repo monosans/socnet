@@ -31,8 +31,8 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
             "text", "date", "chat_id", "user__username", "user__image"
         ),
     )
-    qs = request.user.chats.prefetch_related(prefetch).only("pk")
-    chat = get_object_or_404(qs, pk=pk)
+    qs = request.user.chats.filter(pk=pk).prefetch_related(prefetch).only("pk")
+    chat = get_object_or_404(qs)
     form = forms.MessageCreationForm()
     context = {"chat": chat, "form": form}
     return render(request, "messenger/chat.html", context)

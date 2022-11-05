@@ -81,13 +81,13 @@
         <i class="fa-regular fa-heart"></i>
         <span>{{ post.likers__count }}</span>
       </a>
-    {% elif request.user in post.likers.all %}
+    {% elif post.is_liked %}
       <button type="button"
               class="btn badge rounded-pill bg-light text-dark"
               data-is-liked="y"
               data-post-pk="{{ post.pk }}">
         <i class="text-danger fa-solid fa-heart"></i>
-        <span>{{ post.likers.count }}</span>
+        <span>{{ post.likers__count }}</span>
       </button>
     {% else %}
       <button type="button"
@@ -95,7 +95,7 @@
               data-is-liked="n"
               data-post-pk="{{ post.pk }}">
         <i class="fa-regular fa-heart"></i>
-        <span>{{ post.likers.count }}</span>
+        <span>{{ post.likers__count }}</span>
       </button>
     {% endif %}
     <span class="badge rounded-pill bg-light text-dark">
@@ -186,13 +186,13 @@
                 <i class="fa-regular fa-heart"></i>
                 {{ comment.likers__count }}
               </a>
-            {% elif request.user in comment.likers.all %}
+            {% elif comment.is_liked %}
               <button type="button"
                       class="btn badge rounded-pill bg-light text-dark fs-6"
                       data-is-liked="y"
                       data-post-comment-pk="{{ comment.pk }}">
                 <i class="text-danger fa-solid fa-heart"></i>
-                <span>{{ comment.likers.count }}</span>
+                <span>{{ comment.likers__count }}</span>
               </button>
             {% else %}
               <button type="button"
@@ -200,7 +200,7 @@
                       data-is-liked="n"
                       data-post-comment-pk="{{ comment.pk }}">
                 <i class="fa-regular fa-heart"></i>
-                <span>{{ comment.likers.count }}</span>
+                <span>{{ comment.likers__count }}</span>
               </button>
             {% endif %}
           </div>

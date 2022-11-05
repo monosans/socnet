@@ -19,7 +19,8 @@ class _UnlikeView(_AuthedAPIView):
     model: Type[Union[blog_models.Post, blog_models.PostComment]]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
-        obj = get_object_or_404(self.model, pk=pk)
+        qs = self.model.objects.filter(pk=pk)
+        obj = get_object_or_404(qs)
         obj.likers.remove(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -29,7 +30,8 @@ class _LikeView(_AuthedAPIView):
 
     def post(self, request: AuthedRequest) -> Response:
         pk = int(request.data["pk"])
-        obj = get_object_or_404(self.model, pk=pk)
+        qs = self.model.objects.filter(pk=pk)
+        obj = get_object_or_404(qs)
         obj.likers.add(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_201_CREATED)
 
@@ -52,7 +54,8 @@ class PostCommentLikeView(_LikeView):
 
 class UserUnsubscribeView(_AuthedAPIView):
     def delete(self, request: AuthedRequest, pk: int) -> Response:
-        user = get_object_or_404(User, pk=pk)
+        qs = User.objects.filter(pk=pk)
+        user = get_object_or_404(qs)
         user.subscribers.remove(request.user)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -60,6 +63,7 @@ class UserUnsubscribeView(_AuthedAPIView):
 class UserSubscribeView(_AuthedAPIView):
     def post(self, request: AuthedRequest) -> Response:
         pk = int(request.data["pk"])
-        user = get_object_or_404(User, pk=pk)
+        qs = User.objects.filter(pk=pk)
+        user = get_object_or_404(qs)
         user.subscribers.add(request.user)
         return Response(status=status.HTTP_201_CREATED)

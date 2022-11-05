@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
 from django.core.paginator import Page
-from django.db.models import Count, Prefetch, QuerySet
+from django.db.models import Count, Prefetch, Q, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
@@ -75,22 +75,29 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             messages.error(request, message)
     else:
         form = forms.PostCommentCreationForm()
-    prefetch_qs = models.PostComment.objects.select_related("user").only(
-        "post_id", "text", "image", "date", "user__username", "user__image"
+    comments_qs = (
+        models.PostComment.objects.annotate(Count("likers"))
+        .select_related("user")
+        .only(
+            "post_id", "text", "image", "date", "user__username", "user__image"
+        )
     )
-    qs = models.Post.objects.select_related("user").only(
-        "text", "image", "date", "user__username", "user__image"
+    qs = (
+        models.Post.objects.filter(pk=pk)
+        .annotate(Count("likers"))
+        .select_related("user")
+        .only("text", "image", "date", "user__username", "user__image")
     )
-    if request.user.is_anonymous:
-        prefetch_qs = prefetch_qs.annotate(Count("likers"))
-        qs = qs.annotate(Count("likers"))
-    else:
-        users = User.objects.only("pk")
-        prefetch_qs = prefetch_qs.prefetch_related(Prefetch("likers", users))
-        qs = qs.prefetch_related(Prefetch("likers", users))
-    prefetch = Prefetch("comments", prefetch_qs)
+    if request.user.is_authenticated:
+        comments_qs = comments_qs.annotate(  # type: ignore[assignment]
+            is_liked=Q(pk__in=request.user.liked_comments.all())
+        )
+        qs = qs.annotate(  # type: ignore[assignment]
+            is_liked=Q(pk__in=request.user.liked_posts.all())
+        )
+    prefetch = Prefetch("comments", comments_qs)
     qs = qs.prefetch_related(prefetch)
-    post = get_object_or_404(qs, pk=pk)
+    post = get_object_or_404(qs)
     context = {"post": post, "form": form}
     return render(request, "blog/post.html", context)
 
@@ -125,28 +132,31 @@ def posts_view(request: HttpRequest) -> HttpResponse:
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     prefetch_qs = services.get_posts_preview_qs(request)
     prefetch = Prefetch("liked_posts", prefetch_qs)
-    qs = User.objects.prefetch_related(prefetch).only("username")
-    user = get_object_or_404(qs, username=username)
+    qs = (
+        User.objects.filter(username=username)
+        .prefetch_related(prefetch)
+        .only("username")
+    )
+    user = get_object_or_404(qs)
     context = {"user": user, "posts": user.liked_posts.all()}
     return render(request, "blog/liked_posts.html", context)
 
 
 @require_safe
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
-    posts = models.Post.objects.only("user_id", "date", "text", "image")
-    posts = (
-        posts.annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
+    posts = models.Post.objects.annotate(
+        Count("comments", distinct=True), Count("likers", distinct=True)
+    ).only("user_id", "date", "text", "image")
+    if request.user.is_authenticated:
+        posts = posts.annotate(  # type: ignore[assignment]
+            is_liked=Q(pk__in=request.user.liked_posts.all())
         )
-        if request.user.is_anonymous
-        else posts.annotate(Count("comments")).prefetch_related(
-            Prefetch("likers", User.objects.only("pk"))
-        )
+    qs = (
+        User.objects.filter(username=username)
+        .prefetch_related(Prefetch("posts", posts))
+        .only("username")
     )
-    qs = User.objects.prefetch_related(Prefetch("posts", posts)).only(
-        "username"
-    )
-    user = get_object_or_404(qs, username=username)
+    user = get_object_or_404(qs)
     context = {"user": user}
     return render(request, "blog/user_posts.html", context)
 
@@ -168,12 +178,13 @@ def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
 @require_safe
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = (
-        User.objects.annotate(
+        User.objects.filter(username=username)
+        .annotate(
             Count("liked_posts", distinct=True),
             Count("posts", distinct=True),
+            Count("subscribers", distinct=True),
             Count("subscriptions", distinct=True),
         )
-        .prefetch_related(Prefetch("subscribers", User.objects.only("pk")))
         .only(
             "username",
             "image",
@@ -183,6 +194,10 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
             "about",
         )
     )
-    user = get_object_or_404(qs, username=username)
+    if request.user.is_authenticated:
+        qs = qs.annotate(  # type: ignore[assignment]
+            is_subscription=Q(pk__in=request.user.subscriptions.all())
+        )
+    user = get_object_or_404(qs)
     context = {"user": user}
     return render(request, "blog/user.html", context)

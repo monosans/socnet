@@ -13,6 +13,7 @@
   <script defer src="{% static 'js/like.js' %}"></script>
 {% endblock javascript %}
 {% block content %}
+  {% csrf_token %}
   <div class="row justify-content-center">
     <div class="col-xl-6">
       <div class="card mb-2">
@@ -82,13 +83,13 @@
                   <i class="fa-regular fa-heart"></i>
                   <span>{{ post.likers__count }}</span>
                 </a>
-              {% elif request.user in post.likers.all %}
+              {% elif post.is_liked %}
                 <button type="button"
                         class="btn badge rounded-pill bg-light text-dark"
                         data-is-liked="y"
                         data-post-pk="{{ post.pk }}">
                   <i class="text-danger fa-solid fa-heart"></i>
-                  <span>{{ post.likers.count }}</span>
+                  <span>{{ post.likers__count }}</span>
                 </button>
               {% else %}
                 <button type="button"
@@ -96,7 +97,7 @@
                         data-is-liked="n"
                         data-post-pk="{{ post.pk }}">
                   <i class="fa-regular fa-heart"></i>
-                  <span>{{ post.likers.count }}</span>
+                  <span>{{ post.likers__count }}</span>
                 </button>
               {% endif %}
               <a href="{{ post.get_absolute_url }}">
