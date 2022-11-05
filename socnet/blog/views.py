@@ -132,6 +132,26 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 
 
 @require_safe
+def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
+    posts = models.Post.objects.only("user_id", "date", "text", "image")
+    posts = (
+        posts.annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
+        if request.user.is_anonymous
+        else posts.annotate(Count("comments")).prefetch_related(
+            Prefetch("likers", User.objects.only("pk"))
+        )
+    )
+    qs = User.objects.prefetch_related(Prefetch("posts", posts)).only(
+        "username"
+    )
+    user = get_object_or_404(qs, username=username)
+    context = {"user": user}
+    return render(request, "blog/user_posts.html", context)
+
+
+@require_safe
 def subscribers_view(request: HttpRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscribers")
     context = {"user": user}
@@ -147,28 +167,13 @@ def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
 
 @require_safe
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
-    users = User.objects.only("pk")
-    posts_prefetch_qs = models.Post.objects.only(
-        "user_id", "date", "text", "image"
-    )
-    posts_prefetch_qs = (
-        posts_prefetch_qs.annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
-        if request.user.is_anonymous
-        else posts_prefetch_qs.annotate(Count("comments")).prefetch_related(
-            Prefetch("likers", users)
-        )
-    )
     qs = (
         User.objects.annotate(
-            Count("subscriptions", distinct=True),
             Count("liked_posts", distinct=True),
+            Count("posts", distinct=True),
+            Count("subscriptions", distinct=True),
         )
-        .prefetch_related(
-            Prefetch("subscribers", users),
-            Prefetch("posts", posts_prefetch_qs),
-        )
+        .prefetch_related(Prefetch("subscribers", User.objects.only("pk")))
         .only(
             "username",
             "image",

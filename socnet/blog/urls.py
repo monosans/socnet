@@ -21,6 +21,9 @@ urlpatterns = [
         name="liked_posts",
     ),
     path(
+        "user/<str:username>/posts/", views.user_posts_view, name="user_posts"
+    ),
+    path(
         "user/<str:username>/subscribers/",
         views.subscribers_view,
         name="subscribers",
