@@ -1,6 +1,13 @@
 from __future__ import annotations
 
-from django.db.models import Count, Prefetch, Q, QuerySet
+from django.db.models import (
+    BooleanField,
+    Count,
+    ExpressionWrapper,
+    Prefetch,
+    Q,
+    QuerySet,
+)
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
@@ -18,7 +25,11 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
     )
     if request.user.is_anonymous:
         return qs
-    return qs.annotate(is_liked=Q(pk__in=request.user.liked_posts.all()))
+    return qs.annotate(
+        is_liked=ExpressionWrapper(
+            Q(pk__in=request.user.liked_posts.all()), BooleanField()
+        )
+    )
 
 
 def get_subscriptions(username: str, field: str) -> User:
