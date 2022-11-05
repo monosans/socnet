@@ -38,7 +38,7 @@ repos:
           - eslint-config-prettier
 
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v14.14.0
+    rev: v14.14.1
     hooks:
       - id: stylelint
         additional_dependencies:
