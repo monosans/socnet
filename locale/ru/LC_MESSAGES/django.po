@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 16:29+0000\n"
+"POT-Creation-Date: 2022-11-05 20:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,20 +250,21 @@ msgstr "Искать пользователей"
 msgid "Create post"
 msgstr "Создать поста"
 
-msgid "Liked posts"
-msgstr "Понравившиеся посты"
+msgid "liked posts"
+msgstr "понравившиеся посты"
 
 msgid "You have no liked posts."
 msgstr "У вас нет понравившихся постов."
 
-msgid "The user has no liked posts."
-msgstr "У пользователя нет понравившихся постов."
+#, python-format
+msgid "%(user)s has no liked posts."
+msgstr "У %(user)s нет понравившихся постов."
 
 msgid "Post"
 msgstr "Пост"
 
-msgid "Post deletion"
-msgstr "Удаление поста"
+msgid "Delete post"
+msgstr "Удалить пост"
 
 msgid "Are you sure you want to delete your post?"
 msgstr "Вы уверены, что хотите удалить свой пост?"
@@ -286,17 +287,18 @@ msgstr "Посты не найдены."
 msgid "Subscribe to users you are interested in, so that their posts are displayed here."
 msgstr "Подпишитесь на интересующих вас пользователей, чтобы их посты отображались здесь."
 
-msgid "Subscribers"
-msgstr "Подписчики"
+msgid "subscribers"
+msgstr "подписчики"
 
 msgid "You have no subscribers."
 msgstr "У вас нет подписчиков."
 
-msgid "The user has no subscribers."
-msgstr "У пользователя нет подписчиков."
+#, python-format
+msgid "%(user)s has no subscribers."
+msgstr "У %(user)s нет подписчиков."
 
-msgid "Subscriptions"
-msgstr "Подписки"
+msgid "subscriptions"
+msgstr "подписки"
 
 msgid "Unsubscribe"
 msgstr "Отписаться"
@@ -307,8 +309,9 @@ msgstr "Подписаться"
 msgid "You have no subscriptions."
 msgstr "У вас нет подписок."
 
-msgid "The user has no subscriptions."
-msgstr "У пользователя нет подписок."
+#, python-format
+msgid "%(user)s has no subscriptions."
+msgstr "У %(user)s нет подписок."
 
 msgid "Edit"
 msgstr "Редактировать"
@@ -324,6 +327,22 @@ msgstr "Местонахождение"
 
 msgid "About me"
 msgstr "Обо мне"
+
+msgid "Subscriptions"
+msgstr "Подписки"
+
+msgid "Subscribers"
+msgstr "Подписчики"
+
+msgid "Liked posts"
+msgstr "Понравившиеся посты"
+
+msgid "You have no posts."
+msgstr "У вас нет постов."
+
+#, python-format
+msgid "%(user)s has no posts."
+msgstr "У %(user)s нет постов."
 
 msgid "Chat"
 msgstr "Чат"
@@ -403,9 +422,6 @@ msgstr "местонахождение"
 
 msgid "about me"
 msgstr "обо мне"
-
-msgid "subscriptions"
-msgstr "подписки"
 
 msgid "You can't subscribe to yourself."
 msgstr "Вы не можете подписаться на себя."
