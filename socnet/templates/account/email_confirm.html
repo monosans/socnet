@@ -6,7 +6,7 @@
   {% trans "Confirm email address" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="mb-4 text-center">{% trans "Confirm email address" %}</h3>
+  <h3 class="text-center mb-3">{% trans "Confirm email address" %}</h3>
   {% if confirmation %}
     <div class="mb-3 text-break">
       {% user_display confirmation.email_address.user as user_display %}
