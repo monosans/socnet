@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import django.contrib.postgres.fields.citext
 import django.core.validators
+from django.contrib.postgres.operations import CITextExtension
 from django.db import migrations, models
 
 import socnet.core.fields
@@ -13,10 +14,7 @@ class Migration(migrations.Migration):
     dependencies = [("users", "0001_initial")]
 
     operations = [
-        migrations.RunSQL(
-            "CREATE EXTENSION IF NOT EXISTS citext",
-            "DROP EXTENSION IF EXISTS citext",
-        ),
+        CITextExtension(),
         migrations.RemoveField(model_name="user", name="date_joined"),
         migrations.RemoveField(model_name="user", name="first_name"),
         migrations.RemoveField(model_name="user", name="last_login"),
