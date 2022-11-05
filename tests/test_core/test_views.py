@@ -5,7 +5,7 @@ from typing import Tuple
 import pytest
 from django.test import Client
 
-from socnet.users.models import User as UserType
+from socnet.users.models import User
 
 
 class TestAdmin:
@@ -66,7 +66,7 @@ class TestIndex:
         assert response.redirect_chain == [("/login/?next=/", 302)]
         assert response.status_code == 200
 
-    def test_authed(self, authed_client_user: Tuple[Client, UserType]) -> None:
+    def test_authed(self, authed_client_user: Tuple[Client, User]) -> None:
         client, user = authed_client_user
         response = client.get("", follow=True)
         assert response.redirect_chain == [

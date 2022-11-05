@@ -2,26 +2,23 @@ from __future__ import annotations
 
 from django import forms
 from django.contrib.auth import forms as auth_forms
-from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-from .models import User as UserType
-
-User = get_user_model()
+from .models import User
 
 
-class UserAdminChangeForm(auth_forms.UserChangeForm[UserType]):
+class UserAdminChangeForm(auth_forms.UserChangeForm[User]):
     class Meta(auth_forms.UserChangeForm.Meta):
         model = User
 
 
-class UserAdminCreationForm(auth_forms.UserCreationForm[UserType]):
+class UserAdminCreationForm(auth_forms.UserCreationForm[User]):
     class Meta(auth_forms.UserCreationForm.Meta):
         model = User
         fields = ("email", *auth_forms.UserCreationForm.Meta.fields)
 
 
-class EditProfileForm(auth_forms.UserChangeForm[UserType]):
+class EditProfileForm(auth_forms.UserChangeForm[User]):
     password = None  # type: ignore[assignment]
 
     class Meta(auth_forms.UserChangeForm.Meta):

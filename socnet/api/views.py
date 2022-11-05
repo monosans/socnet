@@ -2,15 +2,13 @@ from __future__ import annotations
 
 from typing import Type, Union
 
-from django.contrib.auth import get_user_model
 from rest_framework import permissions, status, views
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from ..blog import models as blog_models
+from ..users.models import User
 from .types import AuthedRequest
-
-User = get_user_model()
 
 
 class _AuthedAPIView(views.APIView):

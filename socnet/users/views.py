@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import List
 
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchRank, SearchVector
 from django.http import HttpRequest, HttpResponse
@@ -10,9 +9,8 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods, require_safe
 
 from . import forms
+from .models import User
 from .types import AuthedRequest
-
-User = get_user_model()
 
 
 @require_http_methods(["GET", "HEAD", "POST"])

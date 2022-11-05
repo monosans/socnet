@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-from django.contrib.auth import get_user_model
 from django.db.models import Count, Prefetch, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from ..users.models import User as UserType
+from ..users.models import User
 from . import models
-
-User = get_user_model()
 
 
 def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
@@ -24,7 +21,7 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
     )
 
 
-def get_subscriptions(username: str, field: str) -> UserType:
+def get_subscriptions(username: str, field: str) -> User:
     prefetch = Prefetch(
         field, User.objects.only("username", "display_name", "image")
     )

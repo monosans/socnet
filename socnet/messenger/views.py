@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST, require_safe
 
+from ..users.models import User
 from ..users.types import AuthedRequest
 from . import forms, models
-
-User = get_user_model()
 
 
 @require_POST

@@ -9,7 +9,7 @@ from channels_redis.core import RedisChannelLayer
 from django.contrib.auth.models import AnonymousUser
 from django.db.models import Model
 
-from ..users.models import User as UserType
+from ..users.models import User
 from . import models
 
 
@@ -23,7 +23,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
     channel_layer: Union[RedisChannelLayer, InMemoryChannelLayer]
 
     async def connect(self) -> None:
-        user: Union[UserType, AnonymousUser] = self.scope["user"]
+        user: Union[User, AnonymousUser] = self.scope["user"]
         chat_pk = int(self.scope["url_route"]["kwargs"]["chat_pk"])
         if (
             user.is_anonymous
@@ -52,7 +52,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
     async def receive_json(
         self, content: Dict[str, str], **kwargs: Any
     ) -> None:
-        user: UserType = self.scope["user"]
+        user: User = self.scope["user"]
         message = models.Message(
             user=user, chat_id=self.room_name, text=content["message"]
         )

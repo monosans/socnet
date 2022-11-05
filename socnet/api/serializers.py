@@ -2,16 +2,13 @@ from __future__ import annotations
 
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
-from django.contrib.auth import get_user_model
 from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 
 from ..blog import models as blog_models
 from ..messenger import models as messenger_models
-from ..users.models import User as UserType
-
-User = get_user_model()
+from ..users.models import User
 
 
 class ChatSerializer(serializers.HyperlinkedModelSerializer):
@@ -51,7 +48,7 @@ class EmailAddressSerializer(serializers.HyperlinkedModelSerializer):
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     user_set: serializers.HyperlinkedRelatedField[
-        UserType
+        User
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="user-detail"
     )
@@ -80,7 +77,7 @@ class PermissionSerializer(serializers.HyperlinkedModelSerializer):
         many=True, read_only=True, view_name="group-detail"
     )
     user_set: serializers.HyperlinkedRelatedField[
-        UserType
+        User
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="user-detail"
     )
@@ -150,7 +147,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         many=True, read_only=True, view_name="post-detail"
     )
     subscribers: serializers.HyperlinkedRelatedField[
-        UserType
+        User
     ] = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name="user-detail"
     )

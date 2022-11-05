@@ -7,7 +7,7 @@ import pytest
 from django.conf import LazySettings
 from django.test import Client
 
-from socnet.users.models import User as UserType
+from socnet.users.models import User
 
 from .test_users.factories import UserFactory
 
@@ -21,7 +21,7 @@ def _media_root(settings: LazySettings, tmp_path: Path) -> None:
 def user(
     # pylint: disable-next=unused-argument
     db: None,
-) -> UserType:
+) -> User:
     return UserFactory()
 
 
@@ -29,7 +29,7 @@ def user(
 def authed_client(
     client: Client,
     # pylint: disable-next=redefined-outer-name
-    user: UserType,
+    user: User,
 ) -> Client:
     client.force_login(user)
     return client
@@ -39,7 +39,7 @@ def authed_client(
 def authed_client_user(
     client: Client,
     # pylint: disable-next=redefined-outer-name
-    user: UserType,
-) -> Tuple[Client, UserType]:
+    user: User,
+) -> Tuple[Client, User]:
     client.force_login(user)
     return client, user

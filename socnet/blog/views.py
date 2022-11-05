@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Optional, Union
 
 from django.contrib import messages
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
@@ -19,10 +18,9 @@ from django.views.decorators.http import (
 )
 
 from ..core.utils import paginate
+from ..users.models import User
 from ..users.types import AuthedRequest
 from . import forms, models, services
-
-User = get_user_model()
 
 
 @require_http_methods(["GET", "HEAD", "POST"])

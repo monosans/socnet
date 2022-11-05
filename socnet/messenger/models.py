@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from ..core.fields import NormalizedTextField
-from ..users.models import User as UserType
+from ..users.models import User
 
 
 class Chat(models.Model):
@@ -26,8 +26,8 @@ class Chat(models.Model):
     def get_absolute_url(self) -> str:
         return reverse("messenger:chat", args=(self.pk,))
 
-    def get_interlocutor(self, user: UserType) -> UserType:
-        interlocutor: Generator[UserType, None, None] = (
+    def get_interlocutor(self, user: User) -> User:
+        interlocutor: Generator[User, None, None] = (
             participant
             for participant in self.participants.all()
             if participant != user
