@@ -130,7 +130,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
 
 @require_safe
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
-    prefetch_qs = services.get_posts_preview_qs(request)
+    prefetch_qs = services.get_posts_preview_qs(request).order_by("-pk")
     prefetch = Prefetch("liked_posts", prefetch_qs)
     qs = (
         User.objects.filter(username=username)
@@ -144,9 +144,13 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 
 @require_safe
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
-    posts = models.Post.objects.annotate(
-        Count("comments", distinct=True), Count("likers", distinct=True)
-    ).only("user_id", "date", "text", "image")
+    posts = (
+        models.Post.objects.annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
+        .order_by("-pk")
+        .only("user_id", "date", "text", "image")
+    )
     if request.user.is_authenticated:
         posts = posts.annotate(  # type: ignore[assignment]
             is_liked=Q(pk__in=request.user.liked_posts.all())
