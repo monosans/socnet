@@ -5,12 +5,26 @@ from typing import List
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchRank, SearchVector
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods, require_safe
 
 from . import forms
 from .models import User
 from .types import AuthedRequest
+
+
+@require_http_methods(["GET", "HEAD", "POST"])
+@login_required
+def delete_account_view(request: AuthedRequest) -> HttpResponse:
+    if request.method == "POST":
+        form = forms.AccountDeletionForm(request.user, request.POST)
+        if form.is_valid():
+            request.user.delete()
+            return redirect("core:index")
+    else:
+        form = forms.AccountDeletionForm(request.user)
+    context = {"form": form}
+    return render(request, "users/delete_account.html", context)
 
 
 @require_http_methods(["GET", "HEAD", "POST"])

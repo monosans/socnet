@@ -6,18 +6,27 @@
   {% trans "Edit profile" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="mb-4 text-center">{% trans "Edit profile" %}</h3>
+  <h3 class="mb-3 text-center">{% trans "Edit profile" %}</h3>
   <div class="mb-3 text-center">
-    <a role="button"
-       href="{% url 'account_change_password' %}"
-       class="btn btn-primary">
-      {% trans "Change password" %}
-    </a>
-    <a role="button"
-       href="{% url 'account_email' %}"
-       class="btn btn-primary">
-      {% trans "Change email" %}
-    </a>
+    <div class="mb-1">
+      <a role="button"
+         href="{% url 'account_change_password' %}"
+         class="btn btn-primary">
+        {% trans "Change password" %}
+      </a>
+      <a role="button"
+         href="{% url 'account_email' %}"
+         class="btn btn-primary">
+        {% trans "Change email" %}
+      </a>
+    </div>
+    <div>
+      <a role="button"
+         href="{% url 'users:delete_account' %}"
+         class="btn btn-danger">
+        {% trans "Delete account" %}
+      </a>
+    </div>
   </div>
   <form method="post">
     {% csrf_token %}

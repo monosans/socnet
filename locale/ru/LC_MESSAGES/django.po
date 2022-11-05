@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 20:18+0000\n"
+"POT-Creation-Date: 2022-11-05 16:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -337,6 +337,13 @@ msgstr "Чаты"
 msgid "You have no chats."
 msgstr "У вас нет чатов."
 
+msgid "Delete account"
+msgstr "Удалить учётную запись"
+
+#, python-format
+msgid "Are you sure you want to delete the <span class=\"fw-bolder\">%(user)s</span> account? All data associated with this account will be deleted."
+msgstr "Вы уверены, что хотите удалить учётную запись <span class=\"fw-bolder\">%(user)s</span>? Все данные, связанные с этой учётной записью, будут удалены."
+
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
@@ -366,6 +373,12 @@ msgstr "Отображаемое имя"
 
 msgid "Fields to search"
 msgstr "Поля для поиска"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Invalid password."
+msgstr "Неверный пароль."
 
 msgid "username"
 msgstr "имя пользователя"
