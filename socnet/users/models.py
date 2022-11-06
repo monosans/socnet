@@ -31,8 +31,7 @@ class User(AbstractUser):
         unique=True,
         db_index=True,
         help_text=_(
-            "No more than 32 characters. "
-            + "Only lowercase English letters, numbers and _. "
+            "Only lowercase English letters, numbers and _. "
             + "Must begin with a letter and end with a letter or number."
         ),
         validators=(RegexValidator(r"^(?:[a-z]|[a-z][\d_a-z]*[\da-z])$"),),
