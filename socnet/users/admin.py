@@ -24,36 +24,24 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets[0][1]["fields"] = ("email", *add_fieldsets[0][1]["fields"])
 
     add_form = forms.UserAdminCreationForm
-
-    fieldsets = []
-    for name, field_options in BaseUserAdmin.fieldsets or ():
-        filtered_field_options = {
-            k: (
-                filter_fields(v)
-                # pylint: disable-next=isinstance-second-argument-not-valid-type
-                if k == "fields" and isinstance(v, Iterable)
-                else v
-            )
-            for k, v in field_options.items()
-        }
-        if filtered_field_options["fields"]:
-            fieldsets.append((name, filtered_field_options))
-    fieldsets.append(
+    fieldsets = (
         (
-            _("Other"),
+            None,
             {
                 "fields": (
+                    "username",
+                    "email",
                     "display_name",
                     "birth_date",
-                    "location",
                     "image",
+                    "location",
                     "about",
-                    "subscriptions",
                 )
             },
-        )
+        ),
+        (_("Blog"), {"fields": ("subscriptions",)}),
+        BaseUserAdmin.fieldsets[2],  # type: ignore[index]
     )
-
     filter_horizontal = (
         *filter_fields(BaseUserAdmin.filter_horizontal),
         "subscriptions",
