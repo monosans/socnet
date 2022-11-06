@@ -7,6 +7,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from ..blog import models as blog_models
+from ..users.exceptions import SelfSubscriptionError
 from ..users.models import User
 from .types import AuthedRequest
 
@@ -65,5 +66,8 @@ class UserSubscribeView(_AuthedAPIView):
         pk = int(request.data["pk"])
         qs = User.objects.filter(pk=pk)
         user = get_object_or_404(qs)
-        user.subscribers.add(request.user)
+        try:
+            user.subscribers.add(request.user)
+        except SelfSubscriptionError:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_201_CREATED)
