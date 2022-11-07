@@ -10,7 +10,6 @@ from django.db.models import Count, Prefetch, Q, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.utils.translation import gettext as _
 from django.views.decorators.http import (
     require_http_methods,
     require_POST,
@@ -51,9 +50,9 @@ def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 @login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     request.user.posts.filter(pk=pk).delete()
-    next = request.GET.get("next")
-    if next:
-        return redirect(next)
+    redirect_to = request.GET.get("next")
+    if redirect_to:
+        return redirect(redirect_to)
     return redirect(
         reverse("blog:user_posts", args=(request.user.get_username(),))
     )
