@@ -17,7 +17,7 @@
   {% include "blog/inc/post_body.html" %}
   <hr/>
   {% if request.user.is_authenticated %}
-    <form enctype="multipart/form-data" method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form|crispy }}
       <button type="submit" class="btn btn-primary w-100">
