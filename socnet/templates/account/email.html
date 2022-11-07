@@ -13,12 +13,12 @@
           <h3 class="text-center mb-3">{% trans "Email addresses" %}</h3>
           {% with emailaddress_set=user.emailaddress_set.all %}
             {% if emailaddress_set %}
-              <div class="mb-3">
+              <div class="mb-2">
                 {% trans "The following email addresses are associated with your account:" %}
               </div>
               <form method="post">
                 {% csrf_token %}
-                <div class="mb-2">
+                <div class="mb-3">
                   {% for emailaddress in emailaddress_set %}
                     <div>
                       <input type="radio"
