@@ -7,6 +7,7 @@
 {% endblock title %}
 {% block css %}
   {% include "blog/inc/font_awesome.html" %}
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}"/>
 {% endblock css %}
 {% block javascript %}
@@ -23,93 +24,7 @@
               <h3 class="text-center">{{ user }} - {% trans "posts" %}</h3>
             </div>
           </div>
-          {% for post in posts %}
-            <div class="card mb-2">
-              <div class="card-body">
-                <div class="w-100">
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
-                        {{ post.date }}
-                      </a>
-                    </div>
-                    {% if user == request.user %}
-                      <div>
-                        <i class="fa-solid fa-xmark btn text-danger"
-                           data-bs-toggle="modal"
-                           data-bs-target="#post{{ post.pk }}_modal"></i>
-                      </div>
-                      <div class="modal fade" id="post{{ post.pk }}_modal" tabindex="-1">
-                        <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title">{% trans "Delete post" %}</h5>
-                              <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                              {% trans "Are you sure you want to delete your post?" %}
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                {% trans "Close" %}
-                              </button>
-                              <form action="{% url 'blog:post_delete' post.pk %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    {% endif %}
-                  </div>
-                </div>
-                {% if post.text %}
-                  <div class="text-break">{{ post.text|linebreaksbr }}</div>
-                {% endif %}
-                {% if post.image %}
-                  <div>
-                    <img class="img-responsive rounded"
-                         src="{{ post.image.url }}"
-                         alt=""
-                         loading="lazy"/>
-                  </div>
-                {% endif %}
-                <div class="fs-4">
-                  {% if request.user.is_anonymous %}
-                    <a role="button"
-                       class="btn badge rounded-pill bg-light text-dark"
-                       href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
-                      <i class="fa-regular fa-heart"></i>
-                      <span>{{ post.likers__count }}</span>
-                    </a>
-                  {% elif post.is_liked %}
-                    <button type="button"
-                            class="btn badge rounded-pill bg-light text-dark"
-                            data-is-liked="y"
-                            data-post-pk="{{ post.pk }}">
-                      <i class="text-danger fa-solid fa-heart"></i>
-                      <span>{{ post.likers__count }}</span>
-                    </button>
-                  {% else %}
-                    <button type="button"
-                            class="btn badge rounded-pill bg-light text-dark"
-                            data-is-liked="n"
-                            data-post-pk="{{ post.pk }}">
-                      <i class="fa-regular fa-heart"></i>
-                      <span>{{ post.likers__count }}</span>
-                    </button>
-                  {% endif %}
-                  <a href="{{ post.get_absolute_url }}">
-                    <button type="button" class="btn badge rounded-pill bg-light text-dark">
-                      <i class="fa-regular fa-comment"></i>
-                      {{ post.comments__count }}
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
+          {% include "blog/inc/posts_preview.html" %}
         {% else %}
           <div class="card">
             <div class="card-body">

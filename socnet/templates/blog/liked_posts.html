@@ -17,26 +17,28 @@
   {% csrf_token %}
   <div class="row justify-content-center">
     <div class="col-xl-6">
-      {% if posts %}
-        <div class="card mb-2">
-          <div class="card-body">
-            <h3 class="text-center">{{ user }} - {% trans "liked posts" %}</h3>
-          </div>
-        </div>
-        {% include "blog/inc/posts_preview.html" with posts=user.liked_posts.all %}
-      {% else %}
-        <div class="card">
-          <div class="card-body">
-            <div class="text-center">
-              {% if request.user == user %}
-                {% trans "You have no liked posts." %}
-              {% else %}
-                {% blocktrans %}{{ user }} has no liked posts.{% endblocktrans %}
-              {% endif %}
+      {% with posts=user.liked_posts.all %}
+        {% if posts %}
+          <div class="card mb-2">
+            <div class="card-body">
+              <h3 class="text-center">{{ user }} - {% trans "liked posts" %}</h3>
             </div>
           </div>
-        </div>
-      {% endif %}
+          {% include "blog/inc/posts_preview.html" %}
+        {% else %}
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center">
+                {% if request.user == user %}
+                  {% trans "You have no liked posts." %}
+                {% else %}
+                  {% blocktrans %}{{ user }} has no liked posts.{% endblocktrans %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endwith %}
     </div>
   </div>
 {% endblock content %}

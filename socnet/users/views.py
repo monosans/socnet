@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import List
 
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchRank, SearchVector
 from django.http import HttpRequest, HttpResponse
@@ -20,7 +21,7 @@ def delete_account_view(request: AuthedRequest) -> HttpResponse:
         form = forms.AccountDeletionForm(request.user, request.POST)
         if form.is_valid():
             request.user.delete()
-            return redirect("core:index")
+            return redirect(settings.LOGIN_URL)
     else:
         form = forms.AccountDeletionForm(request.user)
     context = {"form": form}

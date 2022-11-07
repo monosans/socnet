@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Optional, Union
 
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
@@ -10,6 +9,7 @@ from django.core.paginator import Page
 from django.db.models import Count, Prefetch, Q, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import (
     require_http_methods,
@@ -51,7 +51,12 @@ def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 @login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     request.user.posts.filter(pk=pk).delete()
-    return redirect(request.user)
+    next = request.GET.get("next")
+    if next:
+        return redirect(next)
+    return redirect(
+        reverse("blog:user_posts", args=(request.user.get_username(),))
+    )
 
 
 @require_http_methods(["GET", "HEAD", "POST"])
@@ -66,13 +71,6 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             comment.user = request.user
             comment.save()
             form = forms.PostCommentCreationForm()
-        else:
-            # pylint: disable-next=consider-using-f-string
-            message = "{} {}".format(
-                _("An error occurred while creating the comment."),
-                _("Please try again."),
-            )
-            messages.error(request, message)
     else:
         form = forms.PostCommentCreationForm()
     comments_qs = (
@@ -84,7 +82,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     )
     qs = (
         models.Post.objects.filter(pk=pk)
-        .annotate(Count("likers"))
+        .annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
         .select_related("user")
         .only("text", "image", "date", "user__username", "user__image")
     )
