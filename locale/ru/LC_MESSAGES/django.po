@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 13:22+0000\n"
+"POT-Creation-Date: 2022-11-07 15:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,12 +62,6 @@ msgstr "комментарий к посту"
 
 msgid "post comments"
 msgstr "комментарий к посту"
-
-msgid "An error occurred while creating the comment."
-msgstr "При создании комментария произошла ошибка."
-
-msgid "Please try again."
-msgstr "Пожалуйста, попробуйте ещё раз."
 
 msgid "Core"
 msgstr "Основное"
@@ -250,19 +244,6 @@ msgstr "Искать пользователей"
 msgid "Create post"
 msgstr "Создать поста"
 
-msgid "liked posts"
-msgstr "понравившиеся посты"
-
-msgid "You have no liked posts."
-msgstr "У вас нет понравившихся постов."
-
-#, python-format
-msgid "%(user)s has no liked posts."
-msgstr "У %(user)s нет понравившихся постов."
-
-msgid "Post"
-msgstr "Пост"
-
 msgid "Delete post"
 msgstr "Удалить пост"
 
@@ -271,6 +252,16 @@ msgstr "Вы уверены, что хотите удалить свой пос�
 
 msgid "Delete"
 msgstr "Удалить"
+
+msgid "liked posts"
+msgstr "понравившиеся посты"
+
+#, python-format
+msgid "%(user)s has no liked posts."
+msgstr "У %(user)s нет понравившихся постов."
+
+msgid "Post"
+msgstr "Пост"
 
 msgid "Comment"
 msgstr "Комментировать"
@@ -290,9 +281,6 @@ msgstr "Подпишитесь на интересующих вас пользо
 msgid "subscribers"
 msgstr "подписчики"
 
-msgid "You have no subscribers."
-msgstr "У вас нет подписчиков."
-
 #, python-format
 msgid "%(user)s has no subscribers."
 msgstr "У %(user)s нет подписчиков."
@@ -305,9 +293,6 @@ msgstr "Отписаться"
 
 msgid "Subscribe"
 msgstr "Подписаться"
-
-msgid "You have no subscriptions."
-msgstr "У вас нет подписок."
 
 #, python-format
 msgid "%(user)s has no subscriptions."
@@ -336,9 +321,6 @@ msgstr "Подписчики"
 
 msgid "Liked posts"
 msgstr "Понравившиеся посты"
-
-msgid "You have no posts."
-msgstr "У вас нет постов."
 
 #, python-format
 msgid "%(user)s has no posts."
