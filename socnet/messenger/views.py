@@ -27,9 +27,9 @@ def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
 def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
     prefetch = Prefetch(
         "messages",
-        models.Message.objects.select_related("user").only(
-            "chat_id", "date", "text", "user__image", "user__username"
-        ),
+        models.Message.objects.select_related("user")
+        .order_by("pk")
+        .only("chat_id", "date", "text", "user__image", "user__username"),
     )
     qs = request.user.chats.filter(pk=pk).prefetch_related(prefetch).only("pk")
     chat = get_object_or_404(qs)

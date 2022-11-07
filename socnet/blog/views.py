@@ -75,6 +75,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     comments_qs = (
         models.PostComment.objects.annotate(Count("likers"))
         .select_related("user")
+        .order_by("pk")
         .only(
             "date", "image", "post_id", "text", "user__image", "user__username"
         )
