@@ -11,7 +11,7 @@ djlint==1.19.4
 pylint==2.14.5
 pylint-django==2.5.3
 
-mypy==0.982
+mypy==0.990
 django-stubs==1.13.0
 djangorestframework-stubs==1.7.0
 
