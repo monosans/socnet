@@ -5,7 +5,7 @@ from typing import Iterable, Tuple, TypeVar
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from . import forms
 from .models import User
@@ -24,7 +24,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets[0][1]["fields"] = ("email", *add_fieldsets[0][1]["fields"])
 
     add_form = forms.UserAdminCreationForm
-    fieldsets = (
+    fieldsets = (  # type: ignore[assignment]
         (
             None,
             {
