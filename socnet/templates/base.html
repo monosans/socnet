@@ -72,7 +72,7 @@
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    {% url "blogposts" as url_posts %}
+                    {% url "blog:posts" as url_posts %}
                     <a href="{{ url_posts }}"
                        class="nav-link
                               {% if url_posts == request.path %}
