@@ -1,0 +1,19 @@
+{% if page_range %}
+  <ul class="pagination justify-content-center">
+    {% for page in page_range %}
+      {% if page == posts.paginator.ELLIPSIS %}
+        <li class="page-item">
+          <div class="page-link">{{ page }}</div>
+        </li>
+      {% elif page == posts.number %}
+        <li class="page-item active">
+          <div class="page-link">{{ page }}</div>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}
