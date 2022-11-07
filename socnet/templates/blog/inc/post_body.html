@@ -6,7 +6,7 @@
       <a href="{{ post|obj_admin_url }}" class="btn btn-outline-primary">{% trans "Admin page" %}</a>
     </div>
   {% endif %}
-  <div class="row">
+  <div class="row align-items-center">
     <div class="avatar-thumbnail">
       {% if post.user.image %}
         <img src="{{ post.user.image.url }}" alt="" loading="lazy" class="rounded"/>
