@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static i18n %}
+{% load static i18n obj_admin_url %}
 
 {% block title %}
   {{ user }}
@@ -79,9 +79,14 @@
     <div class="col-xl-9 col-lg-12 mb-2">
       <div class="card h-100">
         <div class="card-body">
-          <div class="fs-2 mb-2 text-break">
-            {{ user }}
-            {{ user.display_name_in_parentheses }}
+          {% if request.user.is_staff %}
+            <div class="text-end">
+              <a href="{{ user|obj_admin_url }}" class="btn btn-outline-primary">{% trans "Admin page" %}</a>
+            </div>
+          {% endif %}
+          <div class="fs-4 ms-2">
+            <div>{{ user }}</div>
+            <div>{{ user.display_name }}</div>
           </div>
           <table class="table">
             <tbody>

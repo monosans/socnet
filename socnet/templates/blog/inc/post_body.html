@@ -1,6 +1,11 @@
-{% load i18n %}
+{% load i18n obj_admin_url %}
 
 <div class="card-title">
+  {% if request.user.is_staff %}
+    <div class="text-end mb-1">
+      <a href="{{ post|obj_admin_url }}" class="btn btn-outline-primary">{% trans "Admin page" %}</a>
+    </div>
+  {% endif %}
   <div class="row">
     <div class="avatar-thumbnail">
       {% if post.user.image %}
