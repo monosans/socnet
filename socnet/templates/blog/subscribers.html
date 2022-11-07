@@ -42,11 +42,7 @@
           <div class="card">
             <div class="card-body">
               <div class="text-center">
-                {% if request.user == user %}
-                  {% trans "You have no subscribers." %}
-                {% else %}
-                  {% blocktrans %}{{ user }} has no subscribers.{% endblocktrans %}
-                {% endif %}
+                {% blocktrans %}{{ user }} has no subscribers.{% endblocktrans %}
               </div>
             </div>
           </div>
