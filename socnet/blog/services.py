@@ -21,7 +21,7 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
         .select_related("user")
-        .only("date", "text", "image", "user__username", "user__image")
+        .only("date", "image", "text", "user__imageuser__username")
     )
     if request.user.is_anonymous:
         return qs
@@ -34,7 +34,7 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
 
 def get_subscriptions(username: str, field: str) -> User:
     prefetch = Prefetch(
-        field, User.objects.only("username", "display_name", "image")
+        field, User.objects.only("display_name", "image", "username")
     )
     qs = (
         User.objects.filter(username=username)

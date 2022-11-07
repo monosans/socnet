@@ -77,26 +77,19 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
         models.PostComment.objects.annotate(Count("likers"))
         .select_related("user")
         .only(
-            "post_id", "text", "image", "date", "user__username", "user__image"
+            "date", "image", "post_id", "text", "user__image", "user__username"
         )
-    )
-    qs = (
-        models.Post.objects.filter(pk=pk)
-        .annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
-        .select_related("user")
-        .only("text", "image", "date", "user__username", "user__image")
     )
     if request.user.is_authenticated:
         comments_qs = comments_qs.annotate(  # type: ignore[assignment]
             is_liked=Q(pk__in=request.user.liked_comments.all())
         )
-        qs = qs.annotate(  # type: ignore[assignment]
-            is_liked=Q(pk__in=request.user.liked_posts.all())
-        )
     prefetch = Prefetch("comments", comments_qs)
-    qs = qs.prefetch_related(prefetch)
+    qs = (
+        services.get_posts_preview_qs(request)
+        .filter(pk=pk)
+        .prefetch_related(prefetch)
+    )
     post = get_object_or_404(qs)
     context = {"post": post, "form": form}
     return render(request, "blog/post.html", context)
@@ -149,16 +142,17 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
         .order_by("-pk")
-        .only("user_id", "date", "text", "image")
+        .only("date", "image", "text", "user_id")
     )
     if request.user.is_authenticated:
         posts = posts.annotate(  # type: ignore[assignment]
             is_liked=Q(pk__in=request.user.liked_posts.all())
         )
+    prefetch = Prefetch("posts", posts)
     qs = (
         User.objects.filter(username=username)
-        .prefetch_related(Prefetch("posts", posts))
-        .only("username")
+        .prefetch_related(prefetch)
+        .only("image", "username")
     )
     user = get_object_or_404(qs)
     context = {"user": user}
@@ -190,12 +184,12 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
             Count("subscriptions", distinct=True),
         )
         .only(
-            "username",
-            "image",
-            "display_name",
-            "birth_date",
-            "location",
             "about",
+            "birth_date",
+            "display_name",
+            "image",
+            "location",
+            "username",
         )
     )
     if request.user.is_authenticated:

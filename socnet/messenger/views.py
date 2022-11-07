@@ -28,7 +28,7 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
     prefetch = Prefetch(
         "messages",
         models.Message.objects.select_related("user").only(
-            "text", "date", "chat_id", "user__username", "user__image"
+            "chat_id", "date", "text", "user__image", "user__username"
         ),
     )
     qs = request.user.chats.filter(pk=pk).prefetch_related(prefetch).only("pk")
@@ -43,14 +43,14 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
 def chats_view(request: AuthedRequest) -> HttpResponse:
     prefetches = (
         Prefetch(
-            "participants",
-            User.objects.only("username", "image", "display_name"),
-        ),
-        Prefetch(
             "messages",
             models.Message.objects.order_by("chat_id", "-pk")
             .distinct("chat_id")
-            .only("text", "date", "chat_id"),
+            .only("chat_id", "date", "text"),
+        ),
+        Prefetch(
+            "participants",
+            User.objects.only("display_name", "image", "username"),
         ),
     )
     chats = request.user.chats.prefetch_related(*prefetches)
