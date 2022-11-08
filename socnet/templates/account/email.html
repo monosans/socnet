@@ -10,7 +10,7 @@
     <div class="col-xl-6">
       <div class="card">
         <div class="card-body">
-          <h3 class="text-center mb-3">{% trans "Email addresses" %}</h3>
+          <h3 class="mb-3 text-center">{% trans "Email addresses" %}</h3>
           {% with emailaddress_set=user.emailaddress_set.all %}
             {% if emailaddress_set %}
               <div class="mb-2">
@@ -39,10 +39,10 @@
                     </div>
                   {% endfor %}
                 </div>
-                <button class="btn btn-primary" type="submit" name="action_primary">
+                <button type="submit" name="action_primary" class="btn btn-primary">
                   {% trans "Make primary" %}
                 </button>
-                <button class="btn btn-primary" type="submit" name="action_send">
+                <button type="submit" name="action_send" class="btn btn-primary">
                   {% trans "Resend verification" %}
                 </button>
                 <button type="button"
@@ -64,7 +64,7 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                           {% trans "Close" %}
                         </button>
-                        <button type="submit" class="btn btn-danger" name="action_remove">
+                        <button type="submit" name="action_remove" class="btn btn-danger">
                           {% trans "Remove" %}
                         </button>
                       </div>
@@ -87,7 +87,7 @@
             <form method="post">
               {% csrf_token %}
               {{ form|crispy }}
-              <button class="btn btn-primary w-100" name="action_add" type="submit">
+              <button type="submit" name="action_add" class="btn btn-primary w-100">
                 {% trans "Add email address" %}
               </button>
             </form>

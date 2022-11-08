@@ -6,24 +6,18 @@
   {% trans "Edit profile" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="text-center mb-3">{% trans "Edit profile" %}</h3>
-  <div class="text-center mb-3">
+  <h3 class="mb-3 text-center">{% trans "Edit profile" %}</h3>
+  <div class="mb-3 text-center">
     <div class="mb-1">
-      <a role="button"
-         href="{% url 'account_change_password' %}"
-         class="btn btn-primary">
+      <a href="{% url 'account_change_password' %}" class="btn btn-primary">
         {% trans "Change password" %}
       </a>
-      <a role="button"
-         href="{% url 'account_email' %}"
-         class="btn btn-primary">
+      <a href="{% url 'account_email' %}" class="btn btn-primary">
         {% trans "Change email" %}
       </a>
     </div>
     <div>
-      <a role="button"
-         href="{% url 'users:delete_account' %}"
-         class="btn btn-danger">
+      <a href="{% url 'users:delete_account' %}" class="btn btn-danger">
         {% trans "Delete account" %}
       </a>
     </div>
@@ -31,6 +25,6 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
-    <button class="btn btn-primary w-100" type="submit">{% trans "Save" %}</button>
+    <button type="submit" class="btn btn-primary w-100">{% trans "Save" %}</button>
   </form>
 {% endblock card_body %}

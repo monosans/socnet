@@ -15,27 +15,36 @@
         {% if subscribers %}
           <div class="card mb-1">
             <div class="card-body">
-              <h3 class="text-center">{{ user }} - {% trans "subscribers" %}</h3>
+              <h3 class="text-center">
+                <a href="{{ user.get_absolute_url }}" class="text-decoration-none">
+                  {{ user }}
+                </a>
+                <div>{% trans "Subscribers" %}</div>
+              </h3>
             </div>
           </div>
           {% for subscriber in subscribers %}
             <div class="card mb-1">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="avatar-thumbnail">
-                    {% if subscriber.image %}
-                      <img class="rounded"
-                           alt=""
-                           loading="lazy"
-                           src="{{ subscriber.image.url }}"/>
-                    {% endif %}
-                  </div>
-                  <div class="col ms-2 text-break">
-                    <a href="{{ subscriber.get_absolute_url }}">{{ subscriber }}</a>
-                    {{ subscriber.display_name_in_parentheses }}
+              <a href="{{ subscriber.get_absolute_url }}" class="text-decoration-none">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="avatar-thumbnail">
+                      {% if subscriber.image %}
+                        <img src="{{ subscriber.image.url }}"
+                             alt=""
+                             loading="lazy"
+                             class="rounded"/>
+                      {% endif %}
+                    </div>
+                    <div class="col ms-2">
+                      <div class="text-break">
+                        {{ subscriber }}
+                        {{ subscriber.display_name_in_parentheses }}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           {% endfor %}
         {% else %}

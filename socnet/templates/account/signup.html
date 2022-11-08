@@ -6,7 +6,7 @@
   {% trans "Register" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="text-center mb-3">{% trans "Register" %}</h3>
+  <h3 class="mb-3 text-center">{% trans "Register" %}</h3>
   <div class="mb-3">
     {% blocktrans %}If you already have an account, <a href="{{ login_url }}">log in</a>.{% endblocktrans %}
   </div>
@@ -18,7 +18,7 @@
              name="{{ redirect_field_name }}"
              value="{{ redirect_field_value }}"/>
     {% endif %}
-    <button class="btn btn-primary w-100" type="submit">
+    <button type="submit" class="btn btn-primary w-100">
       {% trans "Register" %}
     </button>
   </form>

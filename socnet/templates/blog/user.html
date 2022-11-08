@@ -14,33 +14,30 @@
 {% block content %}
   {% csrf_token %}
   <div class="row">
-    <div class="col-xl-3 col-lg-12 mb-2">
+    <div class="col-12 col-xl-3 mb-2 mb-xl-0">
       <div class="card">
         <div class="card-body">
           {% if user.image %}
             <div class="text-center">
               <img src="{{ user.image.url }}"
-                   class="img-thumbnail img-avatar mb-2"
                    alt=""
-                   loading="lazy"/>
+                   loading="lazy"
+                   class="img-thumbnail img-avatar mb-2"/>
             </div>
           {% endif %}
           {% if request.user == user %}
-            <a role="button"
-               class="btn btn-primary w-100 mb-2"
-               href="{% url 'users:edit_profile' %}">
+            <a href="{% url 'users:edit_profile' %}"
+               class="btn btn-primary w-100 mb-2">
               {% trans "Edit" %}
             </a>
-            <a role="button"
-               class="btn btn-primary w-100"
-               href="{% url 'blog:create_post' %}">
+            <a href="{% url 'blog:create_post' %}" class="btn btn-primary w-100">
               {% trans "Create post" %}
             </a>
           {% elif request.user.is_authenticated %}
             <form action="{% url 'messenger:chat_get_or_create' user.pk %}"
                   method="post">
               {% csrf_token %}
-              <button class="btn btn-primary w-100 mb-2" type="submit">
+              <button type="submit" class="btn btn-primary w-100 mb-2">
                 {% trans "Write message" %}
               </button>
             </form>
@@ -62,21 +59,19 @@
               {% endif %}
             </div>
           {% else %}
-            <a role="button"
-               class="btn btn-primary w-100 mb-2"
-               href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+            <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
+               class="btn btn-primary w-100 mb-2">
               {% trans "Write message" %}
             </a>
-            <a role="button"
-               class="btn btn-primary w-100"
-               href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+            <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
+               class="btn btn-primary w-100">
               {% trans "Subscribe" %}
             </a>
           {% endif %}
         </div>
       </div>
     </div>
-    <div class="col-xl-9 col-lg-12 mb-2">
+    <div class="col-12 col-xl-9">
       <div class="card h-100">
         <div class="card-body">
           {% if request.user.is_staff %}
@@ -127,8 +122,8 @@
               <tr>
                 <td>{% trans "Subscribers" %}</td>
                 <td>
-                  <a id="subscribers_count"
-                     href="{% url 'blog:subscribers' user.get_username %}">
+                  <a href="{% url 'blog:subscribers' user.get_username %}"
+                     id="subscribers_count">
                     {{ user.subscribers__count }}
                   </a>
                 </td>

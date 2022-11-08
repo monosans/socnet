@@ -1,4 +1,8 @@
 {% load i18n account %}
 
-{% user_display user as user_display %}
-{% blocktrans %}You are already logged in as {{ user_display }}.{% endblocktrans %}
+{% if user.is_authenticated %}
+  <div class="mb-3">
+    {% user_display user as user_display %}
+    {% blocktrans %}You are already logged in as {{ user_display }}.{% endblocktrans %}
+  </div>
+{% endif %}

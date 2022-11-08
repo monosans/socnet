@@ -21,7 +21,10 @@
         {% if posts %}
           <div class="card mb-2">
             <div class="card-body">
-              <h3 class="text-center">{{ user }} - {% trans "liked posts" %}</h3>
+              <h3 class="text-center">
+                <a href="{{ user.get_absolute_url }}" class="text-decoration-none">{{ user }}</a>
+                <div>{% trans "Liked posts" %}</div>
+              </h3>
             </div>
           </div>
           {% include "blog/inc/posts_preview.html" %}

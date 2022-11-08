@@ -31,7 +31,8 @@
                 <div class="col ms-2">
                   <div class="text-break">
                     <div>
-                      <a href="{{ message.user.get_absolute_url }}">{{ message.user }}</a>
+                      <a href="{{ message.user.get_absolute_url }}"
+                         class="text-decoration-none">{{ message.user }}</a>
                       <span class="text-secondary">{{ message.formatted_date }}</span>
                     </div>
                     <div class="me-2">{{ message.text|linebreaksbr }}</div>

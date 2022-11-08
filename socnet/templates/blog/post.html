@@ -25,17 +25,18 @@
       </button>
     </form>
   {% else %}
-    <a role="button"
-       class="btn btn-primary w-100"
-       href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+    <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
+       class="btn btn-primary w-100">
       {% trans "Comment" %}
     </a>
   {% endif %}
   {% for comment in post.comments.all %}
     <hr class="mt-3"/>
     {% if request.user.is_staff %}
-      <div class="text-end mb-1">
-        <a href="{{ comment|obj_admin_url }}" class="btn btn-outline-primary">{% trans "Admin page" %}</a>
+      <div class="mb-1 text-end">
+        <a href="{{ comment|obj_admin_url }}" class="btn btn-outline-primary">
+          {% trans "Admin page" %}
+        </a>
       </div>
     {% endif %}
     <div class="row">
@@ -50,8 +51,8 @@
       <div class="col ms-2">
         <div class="d-flex justify-content-between">
           <div class="text-break">
-            <a class="text-decoration-none"
-               href="{{ comment.user.get_absolute_url }}">
+            <a href="{{ comment.user.get_absolute_url }}"
+               class="text-decoration-none">
               {{ comment.user }}
             </a>
           </div>
@@ -86,20 +87,19 @@
         </div>
         <div class="text-break">{{ comment.text|linebreaksbr }}</div>
         {% if comment.image %}
-          <div>
-            <img class="img-responsive rounded"
-                 src="{{ comment.image.url }}"
+          <div class="mb-1">
+            <img src="{{ comment.image.url }}"
                  alt=""
-                 loading="lazy"/>
+                 loading="lazy"
+                 class="img-responsive rounded"/>
           </div>
         {% endif %}
         <div class="d-flex justify-content-between">
           <div class="text-muted">{{ comment.date }}</div>
           <div>
             {% if request.user.is_anonymous %}
-              <a role="button"
-                 class="btn badge rounded-pill bg-light text-dark fs-6"
-                 href="{% url 'account_login' %}?next={{ request.path|urlencode }}">
+              <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
+                 class="btn badge rounded-pill bg-light text-dark fs-6">
                 <i class="fa-regular fa-heart"></i>
                 {{ comment.likers__count }}
               </a>
@@ -108,7 +108,7 @@
                       class="btn badge rounded-pill bg-light text-dark fs-6"
                       data-is-liked="y"
                       data-post-comment-pk="{{ comment.pk }}">
-                <i class="text-danger fa-solid fa-heart"></i>
+                <i class="fa-solid fa-heart text-danger"></i>
                 <span>{{ comment.likers__count }}</span>
               </button>
             {% else %}

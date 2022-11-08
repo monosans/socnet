@@ -19,39 +19,47 @@
         {% if subscriptions %}
           <div class="card mb-1">
             <div class="card-body">
-              <h3 class="text-center">{{ user }} - {% trans "subscriptions" %}</h3>
+              <h3 class="text-center">
+                <a href="{{ user.get_absolute_url }}" class="text-decoration-none">{{ user }}</a>
+                <div>{% trans "Subscriptions" %}</div>
+              </h3>
             </div>
           </div>
           {% for subscription in subscriptions %}
             <div class="card mb-1">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="avatar-thumbnail">
-                    {% if subscription.image %}
-                      <img class="rounded"
-                           alt=""
-                           loading="lazy"
-                           src="{{ subscription.image.url }}"/>
-                    {% endif %}
-                  </div>
-                  <div class="col ms-2 d-flex justify-content-between">
-                    <div class="text-break">
-                      <a href="{{ subscription.get_absolute_url }}">{{ subscription }}</a>
-                      {{ subscription.display_name_in_parentheses }}
+              <a href="{{ subscription.get_absolute_url }}"
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="avatar-thumbnail">
+                      {% if subscription.image %}
+                        <img src="{{ subscription.image.url }}"
+                             alt=""
+                             loading="lazy"
+                             class="rounded"/>
+                      {% endif %}
                     </div>
-                    {% if request.user == user %}
-                      <div>
-                        <button type="button" class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>
-                          {% trans "Unsubscribe" %}
-                        </button>
-                        <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>
-                          {% trans "Subscribe" %}
-                        </button>
+                    <div class="col ms-2">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="text-break">
+                          class="text-decoration-none">
+                          {{ subscription }}
+                          {{ subscription.display_name_in_parentheses }}
+                        </div>
+                        {% if request.user == user %}
+                          <div>
+                            <button type="button" class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>
+                              {% trans "Unsubscribe" %}
+                            </button>
+                            <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>
+                              {% trans "Subscribe" %}
+                            </button>
+                          </div>
+                        {% endif %}
                       </div>
-                    {% endif %}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           {% endfor %}
         {% else %}
