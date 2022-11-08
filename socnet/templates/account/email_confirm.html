@@ -1,6 +1,6 @@
 {% extends "card.html" %}
 
-{% load i18n account %}
+{% load i18n %}
 
 {% block title %}
   {% trans "Confirm email address" %}
@@ -9,8 +9,9 @@
   <h3 class="mb-3 text-center">{% trans "Confirm email address" %}</h3>
   {% if confirmation %}
     <div class="mb-3">
-      {% user_display confirmation.email_address.user as user_display %}
-      {% blocktrans with email=confirmation.email_address.email %}Confirm that <a href="mailto:{{ email }}">{{ email }}</a> is the email address of the user {{ user_display }}.{% endblocktrans %}
+      {% with email_address=confirmation.email_address %}
+        {% blocktrans with email=email_address.email user=email_address.user %}Confirm that <a href="mailto:{{ email }}">{{ email }}</a> is the email address of the user <a href="{{ user.get_absolute_url }}">{{ user }}</a>.{% endblocktrans %}
+      {% endwith %}
     </div>
     <form method="post">
       {% csrf_token %}
