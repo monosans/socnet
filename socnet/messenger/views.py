@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from time import mktime
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 from django.http import HttpResponse
@@ -41,6 +43,12 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
 @require_safe
 @login_required
 def chats_view(request: AuthedRequest) -> HttpResponse:
+    def chat_sort_key(chat: models.Chat) -> float:
+        message = chat.messages.first()
+        if not message:
+            return float("-inf")
+        return mktime(message.date.timetuple())
+
     prefetches = (
         Prefetch(
             "messages",
@@ -50,12 +58,11 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         ),
         Prefetch(
             "participants",
-            User.objects.only("display_name", "image", "username"),
+            User.objects.exclude(pk=request.user.pk).only(
+                "display_name", "image", "username"
+            ),
         ),
     )
     chats = request.user.chats.prefetch_related(*prefetches)
-    chats_with_interlocutor = (
-        (chat, chat.get_interlocutor(request.user)) for chat in chats
-    )
-    context = {"chats": chats_with_interlocutor}
+    context = {"chats": sorted(chats, key=chat_sort_key, reverse=True)}
     return render(request, "messenger/chats.html", context)

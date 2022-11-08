@@ -11,38 +11,42 @@
 {% block content %}
   <div class="row justify-content-center">
     <div class="col-xl-6">
-      {% for chat, interlocutor in chats %}
-        <div class="card mb-2">
-          <a href="{{ chat.get_absolute_url }}"
-             class="text-decoration-none text-dark">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="avatar-thumbnail">
-                  {% if interlocutor.image %}
-                    <img class="rounded"
-                         alt=""
-                         loading="lazy"
-                         src="{{ interlocutor.image.url }}"/>
-                  {% endif %}
-                </div>
-                <div class="col ms-2 d-flex justify-content-between align-items-center">
-                  {% with last_message=chat.messages.first %}
-                    <div class="text-break">
-                      {{ interlocutor }}
-                      {{ interlocutor.display_name_in_parentheses }}
-                      {% if last_message %}
-                        <div class="text-secondary">{{ last_message.text|truncatechars:30 }}</div>
-                      {% endif %}
-                    </div>
-                    {% if last_message %}
-                      <div class="text-secondary">{{ last_message.date }}</div>
+      {% for chat in chats %}
+        {% with interlocutor=chat.participants.all|first %}
+          <div class="card mb-2">
+            <a href="{{ chat.get_absolute_url }}"
+               class="text-dark text-decoration-none">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="avatar-thumbnail">
+                    {% if interlocutor.image %}
+                      <img src="{{ interlocutor.image.url }}"
+                           alt=""
+                           loading="lazy"
+                           class="rounded"/>
                     {% endif %}
-                  {% endwith %}
+                  </div>
+                  <div class="col ms-2 ">
+                    <div class="d-flex justify-content-between align-items-center">
+                      {% with last_message=chat.messages.first %}
+                        <div class="text-break">
+                          {{ interlocutor }}
+                          {{ interlocutor.display_name_in_parentheses }}
+                          {% if last_message %}
+                            <div class="text-secondary">{{ last_message.text|truncatechars:30 }}</div>
+                          {% endif %}
+                        </div>
+                        {% if last_message %}
+                          <div class="text-secondary">{{ last_message.date }}</div>
+                        {% endif %}
+                      {% endwith %}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
-        </div>
+            </a>
+          </div>
+        {% endwith %}
       {% empty %}
         <div class="card">
           <div class="card-body">

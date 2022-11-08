@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Generator
-
 from django.conf import settings
 from django.db import models
 from django.template import defaultfilters
@@ -9,7 +7,6 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from ..core.fields import NormalizedTextField
-from ..users.models import User
 
 
 class Chat(models.Model):
@@ -25,14 +22,6 @@ class Chat(models.Model):
 
     def get_absolute_url(self) -> str:
         return reverse("messenger:chat", args=(self.pk,))
-
-    def get_interlocutor(self, user: User) -> User:
-        interlocutor: Generator[User, None, None] = (
-            participant
-            for participant in self.participants.all()
-            if participant != user
-        )
-        return next(interlocutor)
 
 
 class Message(models.Model):
