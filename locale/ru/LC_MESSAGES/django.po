@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 18:22+0000\n"
+"POT-Creation-Date: 2022-11-08 19:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,8 +145,8 @@ msgid "Confirm email address"
 msgstr "Подтвердить адрес электронной почты"
 
 #, python-format
-msgid "Confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is the email address of the user %(user_display)s."
-msgstr "Подтвердите, что <a href=\"mailto:%(email)s\">%(email)s</a> - это адрес электронной почты пользователя %(user_display)s."
+msgid "Confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is the email address of the user <a href=\"%(user.get_absolute_url)s\">%(user)s</a>."
+msgstr "Подтвердите, что <a href=\"mailto:%(email)s\">%(email)s</a> - это адрес электронной почты пользователя <a href=\"%(user.get_absolute_url)s\">%(user)s</a>."
 
 msgid "Confirm"
 msgstr "Подтвердить"
@@ -213,8 +213,8 @@ msgid "We are sorry, but registration is currently closed."
 msgstr "Мы сожалеем, но регистрация в настоящее время закрыта."
 
 #, python-format
-msgid "You are already logged in as %(user_display)s."
-msgstr "Вы уже вошли как %(user_display)s."
+msgid "You are already logged in as <a href=\"%(user.get_absolute_url)s\">%(user)s</a>."
+msgstr "Вы уже вошли как <a href=\"%(user.get_absolute_url)s\">%(user)s</a>."
 
 msgid "Verify your email address"
 msgstr "Подтвердите свой адрес электронной почты"
@@ -245,7 +245,7 @@ msgid "Admin panel"
 msgstr "Админ-панель"
 
 msgid "Create post"
-msgstr "Создать поста"
+msgstr "Создать пост"
 
 msgid "Admin page"
 msgstr "Страница администрирования"
@@ -261,6 +261,9 @@ msgstr "Удалить"
 
 msgid "liked posts"
 msgstr "понравившиеся посты"
+
+msgid "Liked posts"
+msgstr "Понравившиеся посты"
 
 #, python-format
 msgid "%(user)s has no liked posts."
@@ -287,12 +290,18 @@ msgstr "Подпишитесь на интересующих вас пользо
 msgid "subscribers"
 msgstr "подписчики"
 
+msgid "Subscribers"
+msgstr "Подписчики"
+
 #, python-format
 msgid "%(user)s has no subscribers."
 msgstr "У %(user)s нет подписчиков."
 
 msgid "subscriptions"
 msgstr "подписки"
+
+msgid "Subscriptions"
+msgstr "Подписки"
 
 msgid "Unsubscribe"
 msgstr "Отписаться"
@@ -318,15 +327,6 @@ msgstr "Местонахождение"
 
 msgid "About me"
 msgstr "Обо мне"
-
-msgid "Subscriptions"
-msgstr "Подписки"
-
-msgid "Subscribers"
-msgstr "Подписчики"
-
-msgid "Liked posts"
-msgstr "Понравившиеся посты"
 
 #, python-format
 msgid "%(user)s has no posts."
@@ -359,9 +359,6 @@ msgstr "Изменить электронную почту"
 
 msgid "Save"
 msgstr "Сохранить"
-
-msgid "Search"
-msgstr "Поиск"
 
 msgid "No users found"
 msgstr "Пользователи не найдены"
