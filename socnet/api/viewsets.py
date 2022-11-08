@@ -20,7 +20,6 @@ class ChatViewSet(viewsets.ModelViewSet):
         Prefetch("participants", User.objects.only("pk")),
     )
     serializer_class = serializers.ChatSerializer
-    search_fields = ["participants__username"]
 
 
 class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -46,19 +45,18 @@ class GroupViewSet(viewsets.ModelViewSet):
         Prefetch("user_set", User.objects.only("pk")),
     )
     serializer_class = serializers.GroupSerializer
-    search_fields = ["name", "permissions__name", "permissions__codename"]
+    search_fields = ["name"]
 
 
 class LogEntryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = LogEntry.objects.all()
     serializer_class = serializers.LogEntrySerializer
-    search_fields = ["user__username"]
 
 
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = messenger_models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
-    search_fields = ["user__username", "text"]
+    search_fields = ["text"]
 
 
 class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
@@ -75,7 +73,7 @@ class PostCommentViewSet(viewsets.ModelViewSet):
         Prefetch("likers", User.objects.only("pk"))
     )
     serializer_class = serializers.PostCommentSerializer
-    search_fields = ["user__username", "text"]
+    search_fields = ["text"]
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -84,7 +82,7 @@ class PostViewSet(viewsets.ModelViewSet):
         Prefetch("likers", User.objects.only("pk")),
     )
     serializer_class = serializers.PostSerializer
-    search_fields = ["user__username", "text"]
+    search_fields = ["text"]
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -112,4 +110,4 @@ class UserViewSet(viewsets.ModelViewSet):
         Prefetch("subscriptions", User.objects.only("pk")),
     )
     serializer_class = serializers.UserSerializer
-    search_fields = ["username", "email"]
+    search_fields = ["username", "display_name", "email"]
