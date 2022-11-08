@@ -37,6 +37,7 @@ def edit_profile_view(request: AuthedRequest) -> HttpResponse:
         )
         if form.is_valid():
             form.save()
+            return redirect(request.user)
     else:
         form = forms.EditProfileForm(instance=request.user)
     context = {"form": form}
