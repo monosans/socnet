@@ -28,6 +28,7 @@
           {% for subscription in subscriptions %}
             <div class="card mb-1">
               <a href="{{ subscription.get_absolute_url }}"
+                 class="text-decoration-none">
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="avatar-thumbnail">
@@ -41,7 +42,6 @@
                     <div class="col ms-2">
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="text-break">
-                          class="text-decoration-none">
                           {{ subscription }}
                           {{ subscription.display_name_in_parentheses }}
                         </div>
