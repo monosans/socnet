@@ -172,7 +172,7 @@ ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "socnet.api.permissions.DjangoModelPermissionsWithViewPermissionCheck"
+        "socnet.api.permissions.ActualDjangoModelPermissions"
     ],
     "DEFAULT_PAGINATION_CLASS": (
         "rest_framework.pagination.LimitOffsetPagination"

@@ -5,7 +5,7 @@ from copy import deepcopy
 from rest_framework.permissions import DjangoModelPermissions
 
 
-class DjangoModelPermissionsWithViewPermissionCheck(  # type: ignore[misc]
+class ActualDjangoModelPermissions(  # type: ignore[misc]
     DjangoModelPermissions
 ):
     perms_map = deepcopy(DjangoModelPermissions.perms_map)
