@@ -9,9 +9,7 @@
   <h3 class="mb-3 text-center">{% trans "Confirm email address" %}</h3>
   {% if confirmation %}
     <div class="mb-3">
-      {% with email_address=confirmation.email_address %}
-        {% blocktrans with email=email_address.email user=email_address.user %}Confirm that <a href="mailto:{{ email }}">{{ email }}</a> is the email address of the user <a href="{{ user.get_absolute_url }}">{{ user }}</a>.{% endblocktrans %}
-      {% endwith %}
+      {% blocktrans with email=confirmation.email_address.email user=confirmation.email_address.user user_url=confirmation.email_address.user.get_absolute_url %}Confirm that <a href="mailto:{{ email }}">{{ email }}</a> is the email address of the user <a href="{{ user_url }}">{{ user }}</a>.{% endblocktrans %}
     </div>
     <form method="post">
       {% csrf_token %}
