@@ -56,7 +56,7 @@ class LogEntryViewSet(viewsets.ReadOnlyModelViewSet):
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = messenger_models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
-    search_fields = ["text"]
+    search_fields = ["@text"]
 
 
 class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
@@ -73,7 +73,7 @@ class PostCommentViewSet(viewsets.ModelViewSet):
         Prefetch("likers", User.objects.only("pk"))
     )
     serializer_class = serializers.PostCommentSerializer
-    search_fields = ["text"]
+    search_fields = ["@text"]
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -82,7 +82,7 @@ class PostViewSet(viewsets.ModelViewSet):
         Prefetch("likers", User.objects.only("pk")),
     )
     serializer_class = serializers.PostSerializer
-    search_fields = ["text"]
+    search_fields = ["@text"]
 
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -16,4 +16,4 @@ class ChatAdmin(admin.ModelAdmin[models.Chat]):
 class MessageAdmin(admin.ModelAdmin[models.Message]):
     list_display = ("id", "user", "chat", "date")
     list_filter = ("date", "user", "chat")
-    search_fields = ("text",)
+    search_fields = ("@text",)
