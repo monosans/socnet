@@ -1,32 +1,36 @@
 version: 2
-
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
-      time: "15:00"
+    allow:
+      - dependency-type: "all"
 
   - package-ecosystem: "docker"
     directory: "docker/caddy/"
     schedule:
       interval: "daily"
-      time: "15:00"
+    allow:
+      - dependency-type: "all"
 
   - package-ecosystem: "docker"
     directory: "docker/django/"
     schedule:
       interval: "daily"
-      time: "15:00"
+    allow:
+      - dependency-type: "all"
 
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
-      time: "15:00"
+    allow:
+      - dependency-type: "all"
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
-      time: "15:00"
+    allow:
+      - dependency-type: "all"
