@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Optional, Union
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
@@ -10,6 +11,7 @@ from django.db.models import Count, Prefetch, Q, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from django.views.decorators.http import (
     require_http_methods,
     require_POST,
@@ -70,6 +72,13 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             comment.user = request.user
             comment.save()
             form = forms.PostCommentCreationForm()
+        else:
+            # pylint: disable-next=consider-using-f-string
+            message = "{} {}".format(
+                _("An error occurred while creating the comment."),
+                _("Please try again."),
+            )
+            messages.error(request, message)
     else:
         form = forms.PostCommentCreationForm()
     comments_qs = (
