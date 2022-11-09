@@ -4,33 +4,23 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    allow:
-      - dependency-type: "all"
 
   - package-ecosystem: "docker"
     directory: "docker/caddy/"
     schedule:
       interval: "daily"
-    allow:
-      - dependency-type: "all"
 
   - package-ecosystem: "docker"
     directory: "docker/django/"
     schedule:
       interval: "daily"
-    allow:
-      - dependency-type: "all"
 
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
-    allow:
-      - dependency-type: "all"
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
-    allow:
-      - dependency-type: "all"
