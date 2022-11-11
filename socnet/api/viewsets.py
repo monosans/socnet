@@ -10,7 +10,7 @@ from rest_framework import viewsets
 from ..blog import models as blog_models
 from ..messenger import models as messenger_models
 from ..users.models import User
-from . import serializers
+from . import filters, serializers
 
 
 # pylint: disable=too-many-ancestors
@@ -20,6 +20,7 @@ class ChatViewSet(viewsets.ModelViewSet):
         Prefetch("participants", User.objects.only("pk")),
     )
     serializer_class = serializers.ChatSerializer
+    filterset_class = filters.ChatFilter
 
 
 class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
@@ -31,12 +32,13 @@ class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
         ),
     )
     serializer_class = serializers.ContentTypeSerializer
+    filterset_class = filters.ContentTypeFilter
 
 
 class EmailAddressViewSet(viewsets.ModelViewSet):
     queryset = EmailAddress.objects.all()
     serializer_class = serializers.EmailAddressSerializer
-    search_fields = ["email"]
+    filterset_class = filters.EmailAddressFilter
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -45,18 +47,19 @@ class GroupViewSet(viewsets.ModelViewSet):
         Prefetch("user_set", User.objects.only("pk")),
     )
     serializer_class = serializers.GroupSerializer
-    search_fields = ["name"]
+    filterset_class = filters.GroupFilter
 
 
 class LogEntryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = LogEntry.objects.all()
     serializer_class = serializers.LogEntrySerializer
+    filterset_class = filters.LogEntryFilter
 
 
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = messenger_models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
-    search_fields = ["@text"]
+    filterset_class = filters.MessageFilter
 
 
 class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
@@ -65,7 +68,7 @@ class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
         Prefetch("user_set", User.objects.only("pk")),
     )
     serializer_class = serializers.PermissionSerializer
-    search_fields = ["name", "codename"]
+    filterset_class = filters.PermissionFilter
 
 
 class PostCommentViewSet(viewsets.ModelViewSet):
@@ -73,7 +76,7 @@ class PostCommentViewSet(viewsets.ModelViewSet):
         Prefetch("likers", User.objects.only("pk"))
     )
     serializer_class = serializers.PostCommentSerializer
-    search_fields = ["@text"]
+    filterset_class = filters.PostCommentFilter
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -82,7 +85,7 @@ class PostViewSet(viewsets.ModelViewSet):
         Prefetch("likers", User.objects.only("pk")),
     )
     serializer_class = serializers.PostSerializer
-    search_fields = ["@text"]
+    filterset_class = filters.PostFilter
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -110,4 +113,4 @@ class UserViewSet(viewsets.ModelViewSet):
         Prefetch("subscriptions", User.objects.only("pk")),
     )
     serializer_class = serializers.UserSerializer
-    search_fields = ["username", "display_name", "email"]
+    filterset_class = filters.UserFilter

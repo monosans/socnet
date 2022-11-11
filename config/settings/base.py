@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     "channels",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_filters",
     "logentry_admin",
     "rest_framework",
     "socnet.api",
@@ -178,7 +179,7 @@ REST_FRAMEWORK = {
         "rest_framework.pagination.LimitOffsetPagination"
     ),
     "DEFAULT_FILTER_BACKENDS": [
-        "rest_framework.filters.SearchFilter",
+        "django_filters.rest_framework.DjangoFilterBackend",
         "rest_framework.filters.OrderingFilter",
     ],
     "PAGE_SIZE": 10,

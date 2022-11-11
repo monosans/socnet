@@ -27,7 +27,8 @@ Backend:
 - Django REST framework (DRF)
 - Django Channels (WebSockets)
 - Django Allauth
-- Django environ
+- Django Environ
+- Django Filter
 - PostgreSQL 15
 - Redis 7
 - Gunicorn + Uvicorn
