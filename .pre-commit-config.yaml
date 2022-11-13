@@ -23,7 +23,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.2.0
+    rev: v3.2.2
     hooks:
       - id: pyupgrade
         args: [--py38-plus, --keep-runtime-typing]
@@ -96,6 +96,6 @@ repos:
         require_serial: true
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.19.6
+    rev: v1.19.7
     hooks:
       - id: djlint-django
