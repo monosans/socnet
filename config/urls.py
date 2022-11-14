@@ -11,8 +11,7 @@ from django.urls import URLPattern, URLResolver, include, path
 
 from socnet.api import urls as api_urls
 from socnet.blog import urls as blog_urls
-from socnet.core import urls as core_urls
-from socnet.core import views as core_views
+from socnet.core import urls as core_urls, views as core_views
 from socnet.messenger import urls as messenger_urls
 from socnet.users import urls as users_urls
 
