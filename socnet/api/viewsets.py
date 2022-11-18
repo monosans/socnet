@@ -5,17 +5,13 @@ from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Prefetch
-from rest_framework import generics, viewsets
+from rest_framework import viewsets
 
 from ..blog import models as blog_models
 from ..messenger import models as messenger_models
 from ..users.models import User
 from . import filters, serializers
 
-# Monkeypatch to make generics work at runtime
-generics.GenericAPIView.__class_getitem__ = (  # type: ignore[attr-defined]
-    classmethod(lambda cls, *args, **kwargs: cls)
-)
 
 # pylint: disable=too-many-ancestors
 class ChatViewSet(viewsets.ModelViewSet[messenger_models.Chat]):
