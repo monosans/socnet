@@ -63,7 +63,7 @@ repos:
       - id: isort
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.990
+    rev: v0.991
     hooks:
       - id: mypy
         args: []
@@ -81,7 +81,7 @@ repos:
           - channels-redis==4.0.0
           - django-debug-toolbar==3.7.0
           - django-stubs==1.13.0
-          - djangorestframework-stubs==1.7.0
+          - djangorestframework-stubs==1.8.0
           - django-filter-stubs==0.1.2
           - pytest==7.2.0
           - factory-boy==3.2.1
