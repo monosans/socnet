@@ -14,7 +14,7 @@ from . import filters, serializers
 
 
 # pylint: disable=too-many-ancestors
-class ChatViewSet(viewsets.ModelViewSet):
+class ChatViewSet(viewsets.ModelViewSet[messenger_models.Chat]):
     queryset = messenger_models.Chat.objects.prefetch_related(
         Prefetch("messages", messenger_models.Message.objects.only("chat_id")),
         Prefetch("participants", User.objects.only("pk")),
@@ -23,7 +23,7 @@ class ChatViewSet(viewsets.ModelViewSet):
     filterset_class = filters.ChatFilter
 
 
-class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
+class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet[ContentType]):
     queryset = ContentType.objects.prefetch_related(
         Prefetch("logentry_set", LogEntry.objects.only("content_type_id")),
         Prefetch(
@@ -35,13 +35,13 @@ class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = filters.ContentTypeFilter
 
 
-class EmailAddressViewSet(viewsets.ModelViewSet):
+class EmailAddressViewSet(viewsets.ModelViewSet[EmailAddress]):
     queryset = EmailAddress.objects.all()
     serializer_class = serializers.EmailAddressSerializer
     filterset_class = filters.EmailAddressFilter
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(viewsets.ModelViewSet[auth_models.Group]):
     queryset = auth_models.Group.objects.prefetch_related(
         Prefetch("permissions", auth_models.Permission.objects.only("pk")),
         Prefetch("user_set", User.objects.only("pk")),
@@ -50,19 +50,19 @@ class GroupViewSet(viewsets.ModelViewSet):
     filterset_class = filters.GroupFilter
 
 
-class LogEntryViewSet(viewsets.ReadOnlyModelViewSet):
+class LogEntryViewSet(viewsets.ReadOnlyModelViewSet[LogEntry]):
     queryset = LogEntry.objects.all()
     serializer_class = serializers.LogEntrySerializer
     filterset_class = filters.LogEntryFilter
 
 
-class MessageViewSet(viewsets.ModelViewSet):
+class MessageViewSet(viewsets.ModelViewSet[messenger_models.Message]):
     queryset = messenger_models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
     filterset_class = filters.MessageFilter
 
 
-class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
+class PermissionViewSet(viewsets.ReadOnlyModelViewSet[auth_models.Permission]):
     queryset = auth_models.Permission.objects.prefetch_related(
         Prefetch("group_set", auth_models.Group.objects.only("pk")),
         Prefetch("user_set", User.objects.only("pk")),
@@ -71,7 +71,7 @@ class PermissionViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = filters.PermissionFilter
 
 
-class PostCommentViewSet(viewsets.ModelViewSet):
+class PostCommentViewSet(viewsets.ModelViewSet[blog_models.PostComment]):
     queryset = blog_models.PostComment.objects.prefetch_related(
         Prefetch("likers", User.objects.only("pk"))
     )
@@ -79,7 +79,7 @@ class PostCommentViewSet(viewsets.ModelViewSet):
     filterset_class = filters.PostCommentFilter
 
 
-class PostViewSet(viewsets.ModelViewSet):
+class PostViewSet(viewsets.ModelViewSet[blog_models.Post]):
     queryset = blog_models.Post.objects.prefetch_related(
         Prefetch("comments", blog_models.PostComment.objects.only("post_id")),
         Prefetch("likers", User.objects.only("pk")),
@@ -88,7 +88,7 @@ class PostViewSet(viewsets.ModelViewSet):
     filterset_class = filters.PostFilter
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ModelViewSet[User]):
     queryset = User.objects.prefetch_related(
         Prefetch("chats", messenger_models.Chat.objects.only("pk")),
         Prefetch("emailaddress_set", EmailAddress.objects.only("user_id")),
