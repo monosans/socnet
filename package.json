@@ -5,7 +5,7 @@
     "stylelint": "stylelint '**/*.css'"
   },
   "devDependencies": {
-    "eslint": "^8.26",
+    "eslint": "^8.28",
     "eslint-config-prettier": "^8.5",
     "prettier": "^2.7",
     "stylelint": "^14.13",
