@@ -52,12 +52,8 @@ def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 @login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     request.user.posts.filter(pk=pk).delete()
-    redirect_to = request.GET.get("next")
-    if redirect_to:
-        return redirect(redirect_to)
-    return redirect(
-        reverse("blog:user_posts", args=(request.user.get_username(),))
-    )
+    url = reverse("blog:user_posts", args=(request.user.get_username(),))
+    return redirect(url)
 
 
 @require_http_methods(["GET", "HEAD", "POST"])
