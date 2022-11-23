@@ -18,28 +18,14 @@ def _media_root(settings: LazySettings, tmp_path: Path) -> None:
 
 
 @pytest.fixture()
-def user(
-    # pylint: disable-next=unused-argument
-    db: None,
-) -> User:
-    return UserFactory()
-
-
-@pytest.fixture()
-def authed_client(
-    client: Client,
-    # pylint: disable-next=redefined-outer-name
-    user: User,
-) -> Client:
+def authed_client(client: Client) -> Client:
+    user = UserFactory()
     client.force_login(user)
     return client
 
 
 @pytest.fixture()
-def authed_client_user(
-    client: Client,
-    # pylint: disable-next=redefined-outer-name
-    user: User,
-) -> Tuple[Client, User]:
+def authed_client_user(client: Client) -> Tuple[Client, User]:
+    user = UserFactory()
     client.force_login(user)
     return client, user
