@@ -41,7 +41,7 @@
       }
       btn.removeAttribute("disabled");
     });
-  };
+  }
   for (const btn of document.querySelectorAll("[data-is-subscribed]")) {
     btn.addEventListener("click", handler);
   }

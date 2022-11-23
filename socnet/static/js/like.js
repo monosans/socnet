@@ -49,7 +49,7 @@
       iconClassList.toggle("fa-solid");
       btn.removeAttribute("disabled");
     });
-  };
+  }
   for (const btn of document.querySelectorAll("[data-is-liked]")) {
     btn.addEventListener("click", handler);
   }
