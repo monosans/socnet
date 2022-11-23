@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-  function handler(e) {
+  const handler = (e) => {
     const btn = e.currentTarget;
     btn.setAttribute("disabled", "");
     let url, value;
