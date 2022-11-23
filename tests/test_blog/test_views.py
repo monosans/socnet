@@ -4,7 +4,8 @@ from typing import Tuple
 
 import pytest
 from django.test import Client
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
+
 from socnet.blog import models
 from socnet.users.models import User
 
@@ -106,8 +107,7 @@ class TestPostCommentDelete:
         post_url = comment.post.get_absolute_url()
         with assert_count_diff(models.PostComment, -1):
             response = authed_client.post(
-                "{}?next={}".format(self.get_url(comment), post_url),
-                follow=True,
+                f"{self.get_url(comment)}?next={post_url}", follow=True
             )
             assert response.redirect_chain == [(post_url, 302)]
             assert response.status_code == 200
