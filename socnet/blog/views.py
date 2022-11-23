@@ -69,7 +69,6 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             comment.save()
             form = forms.PostCommentCreationForm()
         else:
-            # pylint: disable-next=consider-using-f-string
             message = "{} {}".format(
                 _("An error occurred while creating the comment."),
                 _("Please try again."),
