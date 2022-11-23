@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-  const handler = (e) => {
+  function handler(e) {
     const btn = e.currentTarget;
     btn.setAttribute("disabled", "");
     let url = "/api/subscription/",
