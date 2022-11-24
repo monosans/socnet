@@ -11,4 +11,4 @@ find /var/www/django/static -type f \
 	-exec brotli --force --best {} \+ \
 	-exec gzip --force --keep --best {} \+
 
-/usr/local/bin/gunicorn --config python:docker.django.gunicorn_config config.asgi:application
+exec /usr/local/bin/gunicorn --config python:docker.django.gunicorn_config config.asgi:application
