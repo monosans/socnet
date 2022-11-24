@@ -1,5 +1,8 @@
 -r base.txt
 
+# Required for uvicorn's --reload
+watchfiles==0.18.1
+
 django-debug-toolbar==3.7.0
 django-extra-checks==0.13.3
 
