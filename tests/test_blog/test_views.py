@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pylint: disable-next=no-name-in-module
 from abc import ABCMeta, abstractmethod
 from typing import Tuple
 
