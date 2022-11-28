@@ -11,6 +11,7 @@ from socnet.users.models import User
 
 from ..utils import assert_count_diff
 from . import factories
+from ..test_users.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -216,3 +217,37 @@ class TestPost:
         with assert_count_diff(models.PostComment, 0):
             response = authed_client.post(self.get_url(post))
         assert response.status_code == 200
+
+
+class TestPosts:
+    url = reverse_lazy("blog:posts")
+
+    def test_unauthed_get(self, client: Client) -> None:
+        response = client.get(self.url)
+        assert response.status_code == 200
+
+    def test_authed_get(self, authed_client: Client) -> None:
+        self.test_unauthed_get(authed_client)
+
+    def test_unauthed_get_search(self, client: Client) -> None:
+        response = client.get(f"{self.url}?q=query")
+        assert response.status_code == 200
+
+    def test_authed_get_search(self, authed_client: Client) -> None:
+        self.test_unauthed_get_search(authed_client)
+
+
+class TestLikedPosts:
+    def get_url(self, user: User) -> str:
+        return reverse("blog:liked_posts", args=(user.get_username(),))
+
+    def test_unauthed_get(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+        post = factories.PostFactory()
+        post.likers.add(user)
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+    
+    
