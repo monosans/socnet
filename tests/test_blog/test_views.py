@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from abc import ABCMeta, abstractmethod
 from typing import Tuple
 
 import pytest
@@ -9,9 +10,9 @@ from django.urls import reverse, reverse_lazy
 from socnet.blog import models
 from socnet.users.models import User
 
+from ..test_users.factories import UserFactory
 from ..utils import assert_count_diff
 from . import factories
-from ..test_users.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 
@@ -233,21 +234,73 @@ class TestPosts:
         response = client.get(f"{self.url}?q=query")
         assert response.status_code == 200
 
+    def test_unauthed_get_search_empty_q(self, client: Client) -> None:
+        response = client.get(f"{self.url}?q=")
+        assert response.status_code == 200
+
     def test_authed_get_search(self, authed_client: Client) -> None:
         self.test_unauthed_get_search(authed_client)
 
+    def test_unauthed_post(self, client: Client) -> None:
+        response = client.post(self.url)
+        assert response.status_code == 405
 
-class TestLikedPosts:
+    def test_authed_post(self, authed_client: Client) -> None:
+        response = authed_client.post(self.url)
+        assert response.status_code == 405
+
+
+class ABCUserTest(metaclass=ABCMeta):
+    @property
+    @abstractmethod
+    def viewname(self) -> str:
+        pass
+
     def get_url(self, user: User) -> str:
-        return reverse("blog:liked_posts", args=(user.get_username(),))
+        return reverse(self.viewname, args=(user.get_username(),))
 
     def test_unauthed_get(self, client: Client) -> None:
         user = UserFactory()
         response = client.get(self.get_url(user))
         assert response.status_code == 200
-        post = factories.PostFactory()
-        post.likers.add(user)
-        response = client.get(self.get_url(user))
-        assert response.status_code == 200
-    
-    
+
+    def test_authed_get(self, authed_client: Client) -> None:
+        self.test_unauthed_get(authed_client)
+
+    def test_unauthed_post(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.post(self.get_url(user))
+        assert response.status_code == 405
+
+    def test_authed_post(self, authed_client: Client) -> None:
+        self.test_unauthed_post(authed_client)
+
+
+class TestLikedPosts(ABCUserTest):
+    @property
+    def viewname(self) -> str:
+        return "blog:liked_posts"
+
+
+class TestUserPosts(ABCUserTest):
+    @property
+    def viewname(self) -> str:
+        return "blog:user_posts"
+
+
+class TestSubscribers(ABCUserTest):
+    @property
+    def viewname(self) -> str:
+        return "blog:subscribers"
+
+
+class TestSubscriptions(ABCUserTest):
+    @property
+    def viewname(self) -> str:
+        return "blog:subscriptions"
+
+
+class TestUser(ABCUserTest):
+    @property
+    def viewname(self) -> str:
+        return "blog:user"
