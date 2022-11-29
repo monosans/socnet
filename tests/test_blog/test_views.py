@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-# pylint: disable-next=no-name-in-module
-from abc import ABCMeta, abstractmethod
 from typing import Tuple
 
 import pytest
@@ -251,14 +249,169 @@ class TestPosts:
         assert response.status_code == 405
 
 
-class ABCUserTest(metaclass=ABCMeta):
-    @property
-    @abstractmethod
-    def viewname(self) -> str:
-        pass
-
+class TestLikedPosts:
     def get_url(self, user: User) -> str:
-        return reverse(self.viewname, args=(user.get_username(),))
+        return reverse("blog:liked_posts", args=(user.get_username(),))
+
+    def test_unauthed_get(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+        post = factories.PostFactory(user=user)
+        post.likers.add(user)
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_authed_get(self, authed_client: Client) -> None:
+        self.test_unauthed_get(authed_client)
+
+    def test_authed_get_self(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+        post = factories.PostFactory(user=user)
+        post.likers.add(user)
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_unauthed_post(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.post(self.get_url(user))
+        assert response.status_code == 405
+
+    def test_authed_post(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.post(self.get_url(user))
+        assert response.status_code == 405
+
+
+class TestUserPosts:
+    def get_url(self, user: User) -> str:
+        return reverse("blog:user_posts", args=(user.get_username(),))
+
+    def test_unauthed_get(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+        post = factories.PostFactory(user=user)
+        post.likers.add(user)
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_authed_get(self, authed_client: Client) -> None:
+        self.test_unauthed_get(authed_client)
+
+    def test_authed_get_self(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+        post = factories.PostFactory(user=user)
+        post.likers.add(user)
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_unauthed_post(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.post(self.get_url(user))
+        assert response.status_code == 405
+
+    def test_authed_post(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.post(self.get_url(user))
+        assert response.status_code == 405
+
+
+class TestSubscribers:
+    def get_url(self, user: User) -> str:
+        return reverse("blog:subscribers", args=(user.get_username(),))
+
+    def test_unauthed_get(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+        subscriber = UserFactory()
+        subscriber.subscriptions.add(user)
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_authed_get(self, authed_client: Client) -> None:
+        self.test_unauthed_get(authed_client)
+
+    def test_authed_get_self(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+        subscriber = UserFactory()
+        subscriber.subscriptions.add(user)
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_unauthed_post(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.post(self.get_url(user))
+        assert response.status_code == 405
+
+    def test_authed_post(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.post(self.get_url(user))
+        assert response.status_code == 405
+
+
+class TestSubscriptions:
+    def get_url(self, user: User) -> str:
+        return reverse("blog:subscriptions", args=(user.get_username(),))
+
+    def test_unauthed_get(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+        subscription = UserFactory()
+        user.subscriptions.add(subscription)
+        response = client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_authed_get(self, authed_client: Client) -> None:
+        self.test_unauthed_get(authed_client)
+
+    def test_authed_get_self(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+        subscription = UserFactory()
+        user.subscriptions.add(subscription)
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+
+    def test_unauthed_post(self, client: Client) -> None:
+        user = UserFactory()
+        response = client.post(self.get_url(user))
+        assert response.status_code == 405
+
+    def test_authed_post(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.post(self.get_url(user))
+        assert response.status_code == 405
+
+
+class TestUser:
+    def get_url(self, user: User) -> str:
+        return reverse("blog:user", args=(user.get_username(),))
 
     def test_unauthed_get(self, client: Client) -> None:
         user = UserFactory()
@@ -268,40 +421,21 @@ class ABCUserTest(metaclass=ABCMeta):
     def test_authed_get(self, authed_client: Client) -> None:
         self.test_unauthed_get(authed_client)
 
+    def test_authed_get_self(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.get(self.get_url(user))
+        assert response.status_code == 200
+
     def test_unauthed_post(self, client: Client) -> None:
         user = UserFactory()
         response = client.post(self.get_url(user))
         assert response.status_code == 405
 
-    def test_authed_post(self, authed_client: Client) -> None:
-        self.test_unauthed_post(authed_client)
-
-
-class TestLikedPosts(ABCUserTest):
-    @property
-    def viewname(self) -> str:
-        return "blog:liked_posts"
-
-
-class TestUserPosts(ABCUserTest):
-    @property
-    def viewname(self) -> str:
-        return "blog:user_posts"
-
-
-class TestSubscribers(ABCUserTest):
-    @property
-    def viewname(self) -> str:
-        return "blog:subscribers"
-
-
-class TestSubscriptions(ABCUserTest):
-    @property
-    def viewname(self) -> str:
-        return "blog:subscriptions"
-
-
-class TestUser(ABCUserTest):
-    @property
-    def viewname(self) -> str:
-        return "blog:user"
+    def test_authed_post(
+        self, authed_client_user: Tuple[Client, User]
+    ) -> None:
+        authed_client, user = authed_client_user
+        response = authed_client.post(self.get_url(user))
+        assert response.status_code == 405
