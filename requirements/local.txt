@@ -22,5 +22,6 @@ django-filter-stubs==0.1.2
 pytest==7.2.0
 pytest-django==4.5.2
 pytest-cov==4.0.0
+covdefaults==2.2.0
 django-coverage-plugin==2.0.4
 factory-boy==3.2.1

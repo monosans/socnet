@@ -4,6 +4,32 @@ target-version = ["py38"]
 skip-magic-trailing-comma = true
 preview = true
 
+[tool.coverage.report]
+exclude_lines = ["@(abc.)?abstractmethod", "if\\s+(settings.)?DEBUG\\s*:"]
+fail_under = 70
+
+[tool.coverage.run]
+omit = [
+    "*.txt",
+    "config/asgi.py",
+    "config/settings/local.py",
+    "config/settings/production.py",
+    "config/wsgi.py",
+    "manage.py",
+]
+plugins = ["covdefaults", "django_coverage_plugin"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings.test"
+
+[tool.djlint]
+ignore = "H006,H030,H031"
+indent = 2
+blank_line_after_tag = "load,extends"
+profile = "django"
+max_line_length = 80
+format_attribute_template_tags = true
+
 [tool.isort]
 py_version = 38
 profile = "black"
@@ -30,26 +56,6 @@ plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 [[tool.mypy.overrides]]
 module = "socnet.*.migrations.*"
 ignore_errors = true
-
-[tool.django-stubs]
-django_settings_module = "config.settings.test"
-
-[tool.djlint]
-ignore = "H006,H030,H031"
-indent = 2
-blank_line_after_tag = "load,extends"
-profile = "django"
-max_line_length = 80
-format_attribute_template_tags = true
-
-[tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "config.settings.test"
-FAIL_INVALID_TEMPLATE_VARS = true
-addopts = "--strict-markers --strict-config --cov --cov-branch"
-xfail_strict = true
-
-[tool.coverage.run]
-plugins = ["django_coverage_plugin"]
 
 [tool.pylint.main]
 ignore-paths = ["socnet/.*/migrations/.*"]
@@ -102,3 +108,9 @@ score = false
 
 [tool.pylint.string]
 check-str-concat-over-line-jumps = true
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+FAIL_INVALID_TEMPLATE_VARS = true
+addopts = "--strict-markers --strict-config"
+xfail_strict = true
