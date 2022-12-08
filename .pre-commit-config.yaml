@@ -23,7 +23,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.0
+    rev: v3.3.1
     hooks:
       - id: pyupgrade
         args: [--py38-plus, --keep-runtime-typing]
@@ -80,7 +80,7 @@ repos:
           - channels==4.0.0
           - channels-redis==4.0.0
           - django-debug-toolbar==3.7.0
-          - django-stubs==1.13.0
+          - django-stubs==1.13.1
           - djangorestframework-stubs==1.8.0
           - django-filter-stubs==0.1.2
           - pytest==7.2.0
