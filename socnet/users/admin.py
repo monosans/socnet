@@ -15,7 +15,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = deepcopy(BaseUserAdmin.add_fieldsets)
     add_fieldsets[0][1]["fields"] = ("email", *add_fieldsets[0][1]["fields"])
     add_form = forms.UserAdminCreationForm
-    fieldsets = (  # type: ignore[assignment]
+    fieldsets = (
         (
             None,
             {
