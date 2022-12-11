@@ -53,7 +53,7 @@ repos:
         exclude_types: [html]
 
   - repo: https://github.com/psf/black
-    rev: 22.10.0
+    rev: 22.12.0
     hooks:
       - id: black
 
@@ -79,7 +79,7 @@ repos:
           - djangorestframework==3.14.0
           - channels==4.0.0
           - channels-redis==4.0.0
-          - django-debug-toolbar==3.7.0
+          - django-debug-toolbar==3.8.1
           - django-stubs==1.13.1
           - djangorestframework-stubs==1.8.0
           - django-filter-stubs==0.1.2
