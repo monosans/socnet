@@ -4,5 +4,7 @@
 !locale/**/*.po
 !requirements/*.txt
 !socnet/**/*.py
+!socnet/static/
+!socnet/templates/
 !manage.py
 Dockerfile
