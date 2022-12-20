@@ -6,7 +6,6 @@ import sys
 
 
 def main() -> None:
-    # pylint: disable-next=no-member
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
     # pylint: disable-next=import-outside-toplevel
     from django.core.management import execute_from_command_line
