@@ -68,7 +68,7 @@ repos:
       - id: mypy
         args: []
         additional_dependencies:
-          - django-allauth==0.51.0
+          - django-allauth==0.52.0
           - django-cleanup==6.0.0
           - django-environ==0.9.0
           - django-filter==22.1
