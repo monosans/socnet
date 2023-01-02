@@ -29,7 +29,7 @@ repos:
         args: [--py38-plus, --keep-runtime-typing]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.30.0
+    rev: v8.31.0
     hooks:
       - id: eslint
         args: [--fix]
@@ -38,7 +38,7 @@ repos:
           - eslint-config-prettier
 
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v14.16.0
+    rev: v14.16.1
     hooks:
       - id: stylelint
         additional_dependencies:
