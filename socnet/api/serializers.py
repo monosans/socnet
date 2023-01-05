@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
@@ -9,6 +11,10 @@ from rest_framework import serializers
 from ..blog import models as blog_models
 from ..messenger import models as messenger_models
 from ..users.models import User
+
+
+class IdSerializer(serializers.Serializer[Any]):
+    id = serializers.IntegerField(min_value=1)
 
 
 class ChatSerializer(serializers.HyperlinkedModelSerializer):
