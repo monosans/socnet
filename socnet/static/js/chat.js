@@ -20,10 +20,10 @@
       text += line;
     }
     let html = '<div class="row mb-3"><div class="avatar-thumbnail">';
-    if (data.user__image) {
-      html += `<img src="${data.user__image}" alt="" class="rounded" loading="lazy"/>`;
+    if (data.user.image) {
+      html += `<img src="${data.user.image}" alt="" class="rounded" loading="lazy"/>`;
     }
-    html += `</div><div class="col ms-2"><div class="text-break"><div><a href="${data.user_href}" class="text-decoration-none">${data.user__username}</a> <span class="text-secondary">${data.date}</span></div><div class="me-2">${text}</div></div></div></div>`;
+    html += `</div><div class="col ms-2"><div class="text-break"><div><a href="${data.user.href}" class="text-decoration-none">${data.user.username}</a> <span class="text-secondary">${data.date}</span></div><div class="me-2">${text}</div></div></div></div>`;
     chatLog.innerHTML += html;
     chatLog.scrollTo(0, chatLog.scrollHeight);
   };

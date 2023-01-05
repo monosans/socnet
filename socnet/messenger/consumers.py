@@ -58,13 +58,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
             user=user, chat_id=self.room_name, text=content["message"]
         )
         await save_obj(message)
-        msg: Dict[str, str] = {
+        msg = {
             "type": "chat_message",
             "text": escape(message.text),
-            "user__username": user.get_username(),
-            "user__image": user.image.url if user.image else None,
             "date": message.formatted_date,
-            "user_href": user.get_absolute_url(),
+            "user": {
+                "username": user.get_username(),
+                "image": user.image.url if user.image else None,
+                "href": user.get_absolute_url(),
+            },
         }
         await self.channel_layer.group_send(self.room_group_name, msg)
 
