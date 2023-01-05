@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_filters",
+    "drf_spectacular",
     "logentry_admin",
     "rest_framework",
     "socnet.api",
@@ -172,17 +173,26 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
+    "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication"
+    ],
     "DEFAULT_PERMISSION_CLASSES": [
         "socnet.api.permissions.ActualDjangoModelPermissions"
     ],
-    "DEFAULT_PAGINATION_CLASS": (
-        "rest_framework.pagination.LimitOffsetPagination"
-    ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_FILTER_BACKENDS": [
         "django_filters.rest_framework.DjangoFilterBackend",
         "rest_framework.filters.OrderingFilter",
     ],
+    "DEFAULT_PAGINATION_CLASS": (
+        "rest_framework.pagination.LimitOffsetPagination"
+    ),
     "PAGE_SIZE": 10,
+}
+SPECTACULAR_SETTINGS = {
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"]
 }
 
 CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {

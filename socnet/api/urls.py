@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from django.urls import path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
 from . import views, viewsets
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 for prefix, viewset in (
     ("chats", viewsets.ChatViewSet),
     ("content_types", viewsets.ContentTypeViewSet),
@@ -28,4 +29,10 @@ urlpatterns = [
     path("post_like/", views.PostLikeView.as_view()),
     path("subscription/<int:pk>/", views.UserUnsubscribeView.as_view()),
     path("subscription/", views.UserSubscribeView.as_view()),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
 ]
