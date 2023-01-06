@@ -1,0 +1,21 @@
+services:
+  django:
+    command:
+      [
+        "/usr/local/bin/python3",
+        "-m",
+        "debugpy",
+        "--wait-for-client",
+        "--listen",
+        "0.0.0.0:5678",
+        "/usr/local/bin/uvicorn",
+        "config.asgi:application",
+        "--host",
+        "0.0.0.0",
+        "--reload",
+        "--reload-include",
+        "*.html",
+        "--no-server-header",
+      ]
+    ports:
+      - "5678:5678"

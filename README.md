@@ -58,7 +58,18 @@ Copy the `.env.template` file to `.env`. Set the settings you need in the `.env`
 docker compose build
 docker compose run --rm django python3 manage.py migrate
 docker compose run --rm django python3 manage.py compilemessages
+```
+
+#### Run without debugpy
+
+```bash
 docker compose up
+```
+
+#### Run with debugpy
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.debugpy.yml up
 ```
 
 ### Production
