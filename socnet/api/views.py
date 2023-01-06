@@ -13,7 +13,7 @@ from . import serializers
 from .types import AuthedRequest
 
 
-def validate_pk(data: Union[int, Dict[str, Any]]) -> Any:
+def _validate_pk(data: Union[int, Dict[str, Any]]) -> Any:
     if isinstance(data, int):
         data = {"id": data}
     serializer = serializers.IdSerializer(data=data)
@@ -29,7 +29,7 @@ class _UnlikeView(_AuthedAPIView):
     model: Type[Union[blog_models.Post, blog_models.PostComment]]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
-        qs = self.model.objects.filter(pk=validate_pk(pk))
+        qs = self.model.objects.filter(pk=_validate_pk(pk))
         obj = get_object_or_404(qs)
         obj.likers.remove(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -39,7 +39,7 @@ class _LikeView(_AuthedAPIView):
     model: Type[Union[blog_models.Post, blog_models.PostComment]]
 
     def post(self, request: AuthedRequest) -> Response:
-        qs = self.model.objects.filter(pk=validate_pk(request.data))
+        qs = self.model.objects.filter(pk=_validate_pk(request.data))
         obj = get_object_or_404(qs)
         obj.likers.add(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_201_CREATED)
@@ -63,7 +63,7 @@ class PostCommentLikeView(_LikeView):
 
 class UserUnsubscribeView(_AuthedAPIView):
     def delete(self, request: AuthedRequest, pk: int) -> Response:
-        qs = User.objects.filter(pk=validate_pk(pk))
+        qs = User.objects.filter(pk=_validate_pk(pk))
         user = get_object_or_404(qs)
         user.subscribers.remove(request.user)
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -71,7 +71,7 @@ class UserUnsubscribeView(_AuthedAPIView):
 
 class UserSubscribeView(_AuthedAPIView):
     def post(self, request: AuthedRequest) -> Response:
-        qs = User.objects.filter(pk=validate_pk(request.data))
+        qs = User.objects.filter(pk=_validate_pk(request.data))
         user = get_object_or_404(qs)
         try:
             user.subscribers.add(request.user)
