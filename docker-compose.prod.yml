@@ -22,7 +22,9 @@ services:
       - production_postgres_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:7
+    build:
+      context: .
+      dockerfile: ./docker/redis/Dockerfile
     networks:
       - redis
     restart: unless-stopped
