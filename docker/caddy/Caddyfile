@@ -6,11 +6,13 @@
 
 (common) {
 	header {
-		?Referrer-Policy "same-origin"
 		-Server
-		?Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-		?X-Content-Type-Options "nosniff"
-		?X-Frame-Options "DENY"
+		Content-Security-Policy "default-src 'none'; connect-src 'self'; font-src cdn.jsdelivr.net; script-src 'self' cdn.jsdelivr.net; style-src 'self' cdn.jsdelivr.net; img-src 'self'"
+		Permissions-Policy "interest-cohort=()"
+		Referrer-Policy "same-origin"
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
 	}
 
 	encode gzip
