@@ -15,10 +15,10 @@ from .types import AuthedRequest
 
 def _validate_pk(data: Union[int, Dict[str, Any]]) -> Any:
     if isinstance(data, int):
-        data = {"id": data}
-    serializer = serializers.IdSerializer(data=data)
+        data = {"pk": data}
+    serializer = serializers.PkSerializer(data=data)
     serializer.is_valid(raise_exception=True)
-    return serializer.validated_data["id"]
+    return serializer.validated_data["pk"]
 
 
 class _AuthedAPIView(views.APIView):

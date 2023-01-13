@@ -14,8 +14,8 @@ from ..users.models import User
 
 
 # pylint: disable-next=abstract-method
-class IdSerializer(serializers.Serializer[Any]):
-    id = serializers.IntegerField(min_value=1)
+class PkSerializer(serializers.Serializer[Any]):
+    pk = serializers.IntegerField(min_value=1)
 
 
 class ChatSerializer(serializers.HyperlinkedModelSerializer):
