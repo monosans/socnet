@@ -19,6 +19,7 @@ Social network built with Django Framework.
 
 - Docker
 - Docker Compose
+- Caddy
 
 Backend:
 
