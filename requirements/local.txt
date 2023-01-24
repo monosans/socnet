@@ -1,6 +1,6 @@
 -r base.txt
 
-debugpy==1.6.5
+debugpy==1.6.6
 
 # Required for uvicorn's --reload
 watchfiles==0.18.1
