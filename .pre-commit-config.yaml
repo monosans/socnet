@@ -81,10 +81,10 @@ repos:
           - channels==4.0.0
           - channels-redis==4.0.0
           - django-debug-toolbar==3.8.1
-          - django-stubs==1.13.2
+          - django-stubs==1.14.0
           - djangorestframework-stubs==1.8.0
           - django-filter-stubs==0.1.2
-          - pytest==7.2.0
+          - pytest==7.2.1
           - factory-boy==3.2.1
 
   - repo: local
@@ -97,6 +97,6 @@ repos:
         require_serial: true
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.19.12
+    rev: v1.19.13
     hooks:
       - id: djlint-django
