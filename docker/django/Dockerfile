@@ -5,7 +5,6 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# Required for psycopg2
 # hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install --no-install-recommends -y libpq-dev \
@@ -15,7 +14,6 @@ RUN apt-get update \
 
 FROM python as python-build-stage
 
-# Required for building Python packages
 # hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install --no-install-recommends -y build-essential \
@@ -27,7 +25,6 @@ ARG BUILD_ENVIRONMENT
 # Copy requirements to cache them
 COPY ./requirements/base.txt ./requirements/"${BUILD_ENVIRONMENT}".txt ./requirements/
 
-# Create wheels
 RUN pip wheel \
   -w /usr/src/app/wheels \
   -r ./requirements/"${BUILD_ENVIRONMENT}".txt \
@@ -39,7 +36,6 @@ RUN pip wheel \
 
 FROM python as python-base-run-stage
 
-# i18n
 # hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install --no-install-recommends -y gettext \
@@ -49,10 +45,8 @@ RUN apt-get update \
 
 FROM python-base-run-stage as python-local-run-stage
 
-# Copy wheels from build-stage
 COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 
-# Install wheels
 RUN pip install \
   --progress-bar off \
   --no-index \
@@ -75,7 +69,6 @@ FROM python-base-run-stage as python-production-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  # Static files compression
   && apt-get install --no-install-recommends -y brotli \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
@@ -84,10 +77,8 @@ RUN apt-get update \
   && mkdir -p /var/www/django/static /var/www/django/media \
   && chown django:django /var/www/django/static /var/www/django/media
 
-# Copy wheels from build-stage
 COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 
-# Install wheels
 RUN pip install \
   --progress-bar off \
   --no-index \
@@ -105,10 +96,8 @@ ENTRYPOINT ["bash", "/app/docker/django/entrypoint.prod.sh"]
 
 FROM python-base-run-stage as python-ci-run-stage
 
-# Copy wheels from build-stage
 COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 
-# Install wheels
 RUN pip install \
   --progress-bar off \
   --no-index \
