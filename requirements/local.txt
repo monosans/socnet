@@ -8,7 +8,7 @@ watchfiles==0.18.1
 django-debug-toolbar==3.8.1
 django-extra-checks==0.13.3
 
-pre-commit==3.0.3
+pre-commit==3.0.4
 black==23.1.0
 isort==5.12.0
 djlint==1.19.13
@@ -19,7 +19,6 @@ pylint-django==2.5.3
 mypy==0.991
 django-stubs==1.14.0
 djangorestframework-stubs==1.8.0
-django-filter-stubs==0.1.2
 
 pytest==7.2.1
 pytest-django==4.5.2

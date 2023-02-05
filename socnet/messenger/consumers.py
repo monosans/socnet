@@ -14,13 +14,13 @@ from ..users.models import User
 from . import models
 
 
-@database_sync_to_async  # type: ignore[misc]
+@database_sync_to_async
 def save_obj(obj: Model) -> None:
     obj.full_clean()
     obj.save()
 
 
-class ChatConsumer(AsyncJsonWebsocketConsumer):  # type: ignore[misc]
+class ChatConsumer(AsyncJsonWebsocketConsumer):
     channel_layer: Union[RedisChannelLayer, InMemoryChannelLayer]
 
     async def connect(self) -> None:

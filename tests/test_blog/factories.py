@@ -8,7 +8,7 @@ from socnet.blog import models
 from ..test_users.factories import UserFactory
 
 
-class PostFactory(DjangoModelFactory):  # type: ignore[misc]
+class PostFactory(DjangoModelFactory):
     user = SubFactory(UserFactory)
     text = Faker("text")
 
@@ -16,7 +16,7 @@ class PostFactory(DjangoModelFactory):  # type: ignore[misc]
         model = models.Post
 
 
-class PostCommentFactory(DjangoModelFactory):  # type: ignore[misc]
+class PostCommentFactory(DjangoModelFactory):
     post = SubFactory(PostFactory)
     user = SubFactory(UserFactory)
     text = Faker("text")

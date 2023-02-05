@@ -6,7 +6,7 @@ from factory.django import DjangoModelFactory
 from socnet.users.models import User
 
 
-class UserFactory(DjangoModelFactory):  # type: ignore[misc]
+class UserFactory(DjangoModelFactory):
     about = Faker("paragraph")
     birth_date = Faker("date_of_birth")
     display_name = Faker("name")
