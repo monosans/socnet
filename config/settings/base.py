@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "allauth",
     "allauth.account",
-    "channels",
     "crispy_forms",
     "crispy_bootstrap5",
     "django_filters",
