@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     "socnet.blog",
     "socnet.messenger",
     "socnet.users",
-    "django_cleanup",
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 AUTHENTICATION_BACKENDS = [
