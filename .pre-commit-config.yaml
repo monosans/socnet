@@ -29,7 +29,7 @@ repos:
         args: [--py38-plus, --keep-runtime-typing]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.33.0
+    rev: v8.34.0
     hooks:
       - id: eslint
         args: [--fix]
@@ -38,7 +38,7 @@ repos:
           - eslint-config-prettier
 
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v14.16.1
+    rev: v15.1.0
     hooks:
       - id: stylelint
         additional_dependencies:
@@ -69,12 +69,12 @@ repos:
         args: []
         additional_dependencies:
           - django-allauth==0.52.0
-          - django-cleanup==6.0.0
+          - django-cleanup==7.0.0
           - django-environ==0.9.0
           - django-filter==22.1
           - django-logentry-admin==1.1.0
           - psycopg2-binary==2.9.5
-          - django-crispy-forms==1.14.0
+          - django-crispy-forms==2.0
           - crispy-bootstrap5==0.7
           - djangorestframework==3.14.0
           - drf-spectacular==0.25.1
@@ -96,6 +96,6 @@ repos:
         require_serial: true
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.19.13
+    rev: v1.19.14
     hooks:
       - id: djlint-django
