@@ -38,7 +38,7 @@ repos:
           - eslint-config-prettier
 
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v15.1.0
+    rev: v15.2.0
     hooks:
       - id: stylelint
         additional_dependencies:
@@ -63,7 +63,7 @@ repos:
       - id: isort
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.0.0
+    rev: v1.0.1
     hooks:
       - id: mypy
         args: []
@@ -96,6 +96,6 @@ repos:
         require_serial: true
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.19.14
+    rev: v1.19.15
     hooks:
       - id: djlint-django
