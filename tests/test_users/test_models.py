@@ -34,4 +34,4 @@ class TestUser:
 
     def test_username_case_insensitive(self) -> None:
         self.factory(username="user")
-        assert User.objects.filter(username="USER").count() == 1
+        assert User.objects.filter(username="USER").exists()

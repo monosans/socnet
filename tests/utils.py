@@ -11,7 +11,5 @@ def assert_count_diff(
     model: Type[Model], diff: int
 ) -> Generator[None, None, None]:
     enter_count = model.objects.count()
-    try:
-        yield
-    finally:
-        assert model.objects.count() == enter_count + diff
+    yield
+    assert model.objects.count() == enter_count + diff
