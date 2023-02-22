@@ -14,15 +14,19 @@ pytestmark = pytest.mark.django_db
 class TestUser:
     factory = factories.UserFactory
 
-    def test_username_uppercase_forbidden(self) -> None:
-        user = self.factory.build(username="USER")
+    @pytest.mark.parametrize(
+        "username", ("User", "1user", "_user", "user_", "1", "_", "")
+    )
+    def test_username_forbidden_patterns(self, username: str) -> None:
+        user = self.factory.build(username=username)
         with pytest.raises(ValidationError):
             user.full_clean()
 
-    def test_username_lowercase_allowed(self) -> None:
-        user = self.factory.build(username="user")
+    @pytest.mark.parametrize("username", ("user", "user1", "user_user", "a"))
+    def test_username_allowed_patterns(self, username: str) -> None:
+        user = self.factory.build(username=username)
         user.full_clean()
-        assert user.get_username() == "user"
+        assert user.get_username() == username
 
     def test_username_unique(self) -> None:
         self.factory(username="user")
