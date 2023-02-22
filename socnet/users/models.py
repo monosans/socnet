@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime
 from typing import Optional
 
 from django.contrib.auth.models import AbstractUser
@@ -8,7 +8,6 @@ from django.contrib.postgres.fields import CICharField
 from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
-from django.utils.timezone import datetime
 from django.utils.translation import gettext_lazy as _
 
 from ..core.fields import (

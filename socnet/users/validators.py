@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime, timedelta
 
 from django.core.exceptions import ValidationError
-from django.utils.timezone import datetime, timedelta
 from django.utils.translation import gettext as _
 
 WORLD_RECORD_FOR_NUMBER_OF_DAYS_LIVED = timedelta(days=44724)
