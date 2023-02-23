@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date
 from typing import Optional
 
 from django.contrib.auth.models import AbstractUser
@@ -86,7 +86,7 @@ class User(AbstractUser):
         birth_date: Optional[date] = self.birth_date
         if birth_date is None:
             return None
-        today = datetime.today()
+        today = date.today()
         # subtract 1 or 0 based on if today precedes the birthdate's month/day
         one_or_zero = (today.month, today.day) < (
             birth_date.month,
