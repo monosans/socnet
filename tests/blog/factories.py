@@ -5,7 +5,7 @@ from factory.django import DjangoModelFactory
 
 from socnet.blog import models
 
-from ..test_users.factories import UserFactory
+from ..users.factories import UserFactory
 
 
 class PostFactory(DjangoModelFactory):
