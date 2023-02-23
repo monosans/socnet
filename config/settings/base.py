@@ -169,7 +169,6 @@ MESSAGE_TAGS = {messages.DEBUG: "", messages.ERROR: "danger"}
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],

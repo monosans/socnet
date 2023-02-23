@@ -5,7 +5,7 @@ from typing import Optional
 
 from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import CICharField
-from django.core.validators import RegexValidator
+from django.core.validators import validate_slug
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -29,11 +29,8 @@ class User(AbstractUser):
         max_length=32,
         unique=True,
         db_index=True,
-        help_text=_(
-            "Only lowercase English letters, numbers and _. "
-            + "Must begin with a letter and end with a letter or number."
-        ),
-        validators=(RegexValidator(r"^(?:[a-z]|[a-z][\d_a-z]*[\da-z])$"),),
+        help_text=_("Only English letters, numbers, underscores and hyphens."),
+        validators=(validate_slug,),
         error_messages={
             "unique": _("A user with that username already exists.")
         },
