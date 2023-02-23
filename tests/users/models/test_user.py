@@ -11,16 +11,16 @@ from .. import factories
 factory = factories.UserFactory
 
 
-@pytest.mark.parametrize(
-    "username", ("User", "1user", "_user", "user_", "1", "_", "")
-)
+@pytest.mark.parametrize("username", ("пользователь", "user!", ""))
 def test_username_forbidden_patterns(username: str) -> None:
     user = factory.build(username=username)
     with pytest.raises(ValidationError):
         user.full_clean()
 
 
-@pytest.mark.parametrize("username", ("user", "user1", "user_user", "a"))
+@pytest.mark.parametrize(
+    "username", ("user", "user_1", "user-_", "a", "-", "_", "1")
+)
 def test_username_allowed_patterns(username: str) -> None:
     user = factory.build(username=username)
     user.full_clean()
