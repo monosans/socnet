@@ -93,7 +93,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "username",
-                    socnet.core.fields.LowercaseCharField(
+                    models.CharField(
                         db_index=True,
                         error_messages={
                             "unique": (

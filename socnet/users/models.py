@@ -4,17 +4,13 @@ from datetime import date
 from typing import Optional
 
 from django.contrib.auth.models import AbstractUser
-from django.contrib.postgres.fields import CICharField
+from django.contrib.postgres.fields import CICharField, CIEmailField
 from django.core.validators import validate_slug
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from ..core.fields import (
-    LowercaseEmailField,
-    NormalizedCharField,
-    NormalizedTextField,
-)
+from ..core.fields import NormalizedCharField, NormalizedTextField
 from . import validators
 
 
@@ -38,7 +34,7 @@ class User(AbstractUser):
     display_name = models.CharField(
         verbose_name=_("display name"), max_length=64, blank=True
     )
-    email = LowercaseEmailField(verbose_name=_("email address"), unique=True)
+    email = CIEmailField(verbose_name=_("email address"), unique=True)
 
     birth_date = models.DateField(
         verbose_name=_("birth date"),

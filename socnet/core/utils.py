@@ -11,12 +11,6 @@ T = TypeVar("T")
 TModel = TypeVar("TModel", bound=Model)
 
 
-def lower_str(value: T) -> T:
-    if not isinstance(value, str):
-        return value
-    return value.lower()  # type: ignore[return-value]
-
-
 def normalize_str(value: T) -> T:
     if not isinstance(value, str):
         return value

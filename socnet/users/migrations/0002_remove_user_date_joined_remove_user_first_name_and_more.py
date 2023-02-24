@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="user",
             name="email",
-            field=socnet.core.fields.LowercaseEmailField(
+            field=models.EmailField(
                 max_length=254, unique=True, verbose_name="email address"
             ),
         ),
