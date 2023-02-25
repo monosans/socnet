@@ -64,15 +64,10 @@ repos:
           - psycopg2-binary==2.9.5
           - django-crispy-forms==2.0
           - crispy-bootstrap5==0.7
-          - djangorestframework==3.14.0
           - drf-spectacular==0.25.1
-          - channels==4.0.0
-          - channels-redis==4.0.0
-          - django-debug-toolbar==3.8.1
           - django-stubs==1.15.0
           - djangorestframework-stubs==1.9.1
           - pytest==7.2.1
-          - factory-boy==3.2.1
 
   - repo: https://github.com/Riverside-Healthcare/djLint
     rev: v1.19.15

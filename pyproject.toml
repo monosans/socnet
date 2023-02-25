@@ -30,7 +30,6 @@ max_line_length = 80
 format_attribute_template_tags = true
 
 [tool.mypy]
-ignore_missing_imports = true
 python_version = "3.8"
 disallow_subclassing_any = false
 disallow_untyped_calls = false
@@ -51,6 +50,34 @@ plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 [[tool.mypy.overrides]]
 module = "socnet.*.migrations.*"
 ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "allauth.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "channels.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "channels_redis.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "debug_toolbar.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "django_filters.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "environ.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "factory.*"
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
