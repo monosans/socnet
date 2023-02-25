@@ -13,7 +13,6 @@ from ..messenger import models as messenger_models
 from ..users.models import User
 
 
-# pylint: disable-next=abstract-method
 class PkSerializer(serializers.Serializer[Any]):
     pk = serializers.IntegerField(min_value=1)
 

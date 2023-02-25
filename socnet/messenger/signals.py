@@ -7,11 +7,16 @@ from django.utils.translation import gettext as _
 
 from . import exceptions, models
 
+ALLOWED_PARTICIPANTS_COUNT = 2
+
 
 def validate_chat_participants_count(
     instance: models.Chat, action: str, **kwargs: Any
 ) -> None:
-    if action == "post_add" and instance.participants.count() != 2:
+    if (
+        action == "post_add"
+        and instance.participants.count() == ALLOWED_PARTICIPANTS_COUNT
+    ):
         raise exceptions.ChatParticipantsCountError(
             _("The chat must have 2 participants.")
         )

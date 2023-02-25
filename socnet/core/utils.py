@@ -7,7 +7,6 @@ from django.db.models import Model, QuerySet
 from django.http import HttpRequest
 
 T = TypeVar("T")
-# pylint: disable-next=invalid-name
 TModel = TypeVar("TModel", bound=Model)
 
 

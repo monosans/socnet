@@ -36,16 +36,14 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         ):
             await self.close()
             return
-        # pylint: disable-next=attribute-defined-outside-init
         self.room_name = chat_pk
-        # pylint: disable-next=attribute-defined-outside-init
         self.room_group_name = f"chat_{self.room_name}"
         await self.channel_layer.group_add(
             self.room_group_name, self.channel_name
         )
         await self.accept()
 
-    async def disconnect(self, code: int) -> None:
+    async def disconnect(self, code: int) -> None:  # noqa: ARG002
         await self.channel_layer.group_discard(
             self.room_group_name, self.channel_name
         )

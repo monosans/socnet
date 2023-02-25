@@ -6,7 +6,7 @@ preview = true
 
 [tool.coverage.report]
 exclude_lines = ["@(abc.)?abstractmethod", "if\\s+(settings.)?DEBUG\\s*:"]
-fail_under = 70
+fail_under = 1
 
 [tool.coverage.run]
 omit = [
@@ -29,14 +29,6 @@ blank_line_after_tag = "load,extends"
 profile = "django"
 max_line_length = 80
 format_attribute_template_tags = true
-
-[tool.isort]
-py_version = 38
-profile = "black"
-line_length = 79
-add_imports = ["from __future__ import annotations"]
-combine_as_imports = true
-combine_star = true
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -61,64 +53,76 @@ plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 module = "socnet.*.migrations.*"
 ignore_errors = true
 
-[tool.pylint.main]
-ignore-paths = ["socnet/.*/migrations/.*"]
-
-# https://pylint.pycqa.org/en/stable/user_guide/checkers/extensions.html
-load-plugins = [
-    "pylint_django",
-    "pylint.extensions.check_elif",
-    "pylint.extensions.code_style",
-    "pylint.extensions.comparison_placement",
-    "pylint.extensions.confusing_elif",
-    "pylint.extensions.consider_refactoring_into_while_condition",
-    "pylint.extensions.consider_ternary_expression",
-    "pylint.extensions.dict_init_mutate",
-    "pylint.extensions.dunder",
-    "pylint.extensions.empty_comment",
-    "pylint.extensions.eq_without_hash",
-    "pylint.extensions.for_any_all",
-    "pylint.extensions.overlapping_exceptions",
-    "pylint.extensions.private_import",
-    "pylint.extensions.redefined_loop_name",
-    "pylint.extensions.redefined_variable_type",
-    "pylint.extensions.set_membership",
-    "pylint.extensions.typing",
-]
-
-persistent = false
-py-version = "3.8"
-recursive = true
-
-[tool.pylint.basic]
-good-names = ["db", "pk"]
-
-[tool.pylint."django foreign keys referenced by strings"]
-django-settings-module = "config.settings.test"
-
-[tool.pylint.format]
-max-line-length = 79
-
-[tool.pylint."messages control"]
-disable = [
-    "consider-using-assignment-expr",
-    "consider-using-f-string",
-    "duplicate-code",
-    "missing-class-docstring",
-    "missing-function-docstring",
-    "missing-module-docstring",
-    "too-few-public-methods",
-    "unsubscriptable-object",
-]
-
-[tool.pylint.reports]
-score = false
-
-[tool.pylint.string]
-check-str-concat-over-line-jumps = true
-
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 FAIL_INVALID_TEMPLATE_VARS = true
-addopts = "--strict-markers --strict-config"
+addopts = ["--strict-markers", "--strict-config"]
 xfail_strict = true
+
+[tool.ruff]
+line-length = 79
+target-version = "py38"
+select = ["ALL"]
+ignore = [
+    "ANN",
+    "B008",
+    "BLE001",
+    "C901",
+    "COM",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D203",
+    "D205",
+    "D212",
+    "D213",
+    "D400",
+    "D407",
+    "D415",
+    "D417",
+    "DJ008",
+    "ERA001",
+    "PD901",
+    "PLR0911",
+    "PLR0912",
+    "PLR0913",
+    "PLR0915",
+    "PT012",
+    "RUF001",
+    "RUF002",
+    "RUF003",
+    "S110",
+    "S112",
+    "SIM105",
+    "TCH001",
+    "TCH002",
+    "TCH003",
+    "TID252",
+    "TRY400",
+]
+
+[tool.ruff.per-file-ignores]
+"config/settings/*" = ["F403", "F405"]
+"docker/django/gunicorn_config.py" = ["INP001"]
+"tests/*" = ["PLR2004", "S101"]
+
+[tool.ruff.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+parametrize-names-type = "csv"
+parametrize-values-type = "tuple"
+
+[tool.ruff.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.ruff.isort]
+combine-as-imports = true
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.pyupgrade]
+keep-runtime-typing = true

@@ -27,7 +27,7 @@ class AuthedClient(NamedTuple):
     user: User
 
 
-@pytest.fixture()
+@pytest.fixture
 def authed_client(client: Client) -> AuthedClient:
     user = UserFactory()
     client.force_login(user)

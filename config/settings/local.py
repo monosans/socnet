@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import socket
 
-# pylint: disable-next=wildcard-import,unused-wildcard-import
 from .base import *
 
 DEBUG = True

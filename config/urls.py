@@ -30,7 +30,6 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
 ]
 
 if settings.DEBUG:
-    # pylint: disable-next=ungrouped-imports
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 

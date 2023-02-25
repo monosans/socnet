@@ -11,5 +11,5 @@ register = template.Library()
 
 @register.filter()
 def obj_admin_url(obj: Model) -> str:
-    urlname = admin_urlname(obj._meta, SafeString("change"))
+    urlname = admin_urlname(obj._meta, SafeString("change"))  # noqa: SLF001
     return reverse(urlname, args=(obj.pk,))

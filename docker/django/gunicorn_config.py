@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import multiprocessing
 
-# pylint: disable=invalid-name
 bind = "0.0.0.0:5000"
 workers = multiprocessing.cpu_count() * 2 + 1
 
@@ -12,5 +11,5 @@ workers = multiprocessing.cpu_count() * 2 + 1
 # max_requests_jitter = 100
 
 chdir = "/app"
-worker_tmp_dir = "/dev/shm"
+worker_tmp_dir = "/dev/shm"  # noqa: S108
 worker_class = "uvicorn.workers.UvicornWorker"

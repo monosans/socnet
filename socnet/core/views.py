@@ -16,8 +16,7 @@ from ..users.types import AuthedRequest
 @login_required
 def admin_site_login_view(
     request: AuthedRequest,
-    # pylint: disable-next=unused-argument
-    extra_context: Optional[Dict[str, Any]] = None,
+    extra_context: Optional[Dict[str, Any]] = None,  # noqa: ARG001
 ) -> HttpResponse:
     if not admin.site.has_permission(request):
         raise PermissionDenied

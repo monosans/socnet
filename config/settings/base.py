@@ -91,7 +91,7 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.ScryptPasswordHasher",
 ]
 
-_PASS = "django.contrib.auth.password_validation"
+_PASS = "django.contrib.auth.password_validation"  # noqa: S105
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": f"{_PASS}.MinimumLengthValidator"},
     {"NAME": f"{_PASS}.CommonPasswordValidator"},

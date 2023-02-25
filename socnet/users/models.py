@@ -8,6 +8,7 @@ from django.contrib.postgres.fields import CICharField, CIEmailField
 from django.core.validators import validate_slug
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from ..core.fields import NormalizedCharField, NormalizedTextField
@@ -79,7 +80,7 @@ class User(AbstractUser):
         birth_date: Optional[date] = self.birth_date
         if birth_date is None:
             return None
-        today = date.today()
+        today = timezone.now().date()
         # subtract 1 or 0 based on if today precedes the birthdate's month/day
         one_or_zero = (today.month, today.day) < (
             birth_date.month,
