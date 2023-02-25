@@ -7,9 +7,7 @@ from django.db.models import Model
 
 
 @contextmanager
-def assert_count_diff(
-    model: Type[Model], diff: int
-) -> Generator[None, None, None]:
+def assert_count_diff(model: Type[Model], diff: int) -> Generator[None, None, None]:
     enter_count = model.objects.count()
     yield
     assert model.objects.count() == enter_count + diff

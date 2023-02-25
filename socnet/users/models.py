@@ -28,9 +28,7 @@ class User(AbstractUser):
         db_index=True,
         help_text=_("Only English letters, numbers, underscores and hyphens."),
         validators=(validate_slug,),
-        error_messages={
-            "unique": _("A user with that username already exists.")
-        },
+        error_messages={"unique": _("A user with that username already exists.")},
     )
     display_name = models.CharField(
         verbose_name=_("display name"), max_length=64, blank=True
@@ -49,9 +47,7 @@ class User(AbstractUser):
     image = models.ImageField(
         verbose_name=_("image"), upload_to="user_images/", blank=True
     )
-    about = NormalizedTextField(
-        verbose_name=_("about me"), max_length=4096, blank=True
-    )
+    about = NormalizedTextField(verbose_name=_("about me"), max_length=4096, blank=True)
     subscriptions = models.ManyToManyField(
         to="self",
         related_name="subscribers",
@@ -82,8 +78,5 @@ class User(AbstractUser):
             return None
         today = timezone.now().date()
         # subtract 1 or 0 based on if today precedes the birthdate's month/day
-        one_or_zero = (today.month, today.day) < (
-            birth_date.month,
-            birth_date.day,
-        )
+        one_or_zero = (today.month, today.day) < (birth_date.month, birth_date.day)
         return today.year - birth_date.year - one_or_zero

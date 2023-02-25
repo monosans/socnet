@@ -58,8 +58,6 @@ def test_author_post_with_redirect(authed_client: AuthedClient) -> None:
     comment = factories.PostCommentFactory(user=user)
     post_url = comment.post.get_absolute_url()
     with assert_count_diff(models.PostComment, -1):
-        response = client.post(
-            f"{get_url(comment)}?next={post_url}", follow=True
-        )
+        response = client.post(f"{get_url(comment)}?next={post_url}", follow=True)
     assert response.redirect_chain == [(post_url, 302)]
     assert response.status_code == 200

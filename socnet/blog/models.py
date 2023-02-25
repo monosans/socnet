@@ -16,9 +16,7 @@ class Post(models.Model):
         related_name="posts",
         verbose_name=_("user"),
     )
-    text = NormalizedTextField(
-        verbose_name=_("text"), max_length=4096, blank=True
-    )
+    text = NormalizedTextField(verbose_name=_("text"), max_length=4096, blank=True)
     image = models.ImageField(
         verbose_name=_("image"), upload_to="post_images/%Y/%m/%d/", blank=True
     )
@@ -58,13 +56,9 @@ class PostComment(models.Model):
         related_name="post_comments",
         verbose_name=_("user"),
     )
-    text = NormalizedTextField(
-        verbose_name=_("text"), max_length=4096, blank=True
-    )
+    text = NormalizedTextField(verbose_name=_("text"), max_length=4096, blank=True)
     image = models.ImageField(
-        verbose_name=_("image"),
-        upload_to="post_comment_images/%Y/%m/%d/",
-        blank=True,
+        verbose_name=_("image"), upload_to="post_comment_images/%Y/%m/%d/", blank=True
     )
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
     likers = models.ManyToManyField(

@@ -40,9 +40,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "date",
-                    models.DateTimeField(
-                        auto_now_add=True, verbose_name="date/time"
-                    ),
+                    models.DateTimeField(auto_now_add=True, verbose_name="date/time"),
                 ),
             ],
             options={"verbose_name": "post", "verbose_name_plural": "posts"},
@@ -75,9 +73,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "date",
-                    models.DateTimeField(
-                        auto_now_add=True, verbose_name="date/time"
-                    ),
+                    models.DateTimeField(auto_now_add=True, verbose_name="date/time"),
                 ),
             ],
             options={

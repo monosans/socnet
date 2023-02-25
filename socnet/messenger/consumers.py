@@ -29,28 +29,20 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         if (
             user.is_anonymous
             or not await database_sync_to_async(
-                models.Chat.objects.filter(
-                    pk=chat_pk, participants=user
-                ).exists
+                models.Chat.objects.filter(pk=chat_pk, participants=user).exists
             )()
         ):
             await self.close()
             return
         self.room_name = chat_pk
         self.room_group_name = f"chat_{self.room_name}"
-        await self.channel_layer.group_add(
-            self.room_group_name, self.channel_name
-        )
+        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
         await self.accept()
 
     async def disconnect(self, code: int) -> None:  # noqa: ARG002
-        await self.channel_layer.group_discard(
-            self.room_group_name, self.channel_name
-        )
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
-    async def receive_json(
-        self, content: Dict[str, str], **kwargs: Any
-    ) -> None:
+    async def receive_json(self, content: Dict[str, str], **kwargs: Any) -> None:
         user: User = self.scope["user"]
         message = models.Message(
             user=user, chat_id=self.room_name, text=content["message"]

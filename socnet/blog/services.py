@@ -33,9 +33,7 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
 
 
 def get_subscriptions(username: str, field: str) -> User:
-    prefetch = Prefetch(
-        field, User.objects.only("display_name", "image", "username")
-    )
+    prefetch = Prefetch(field, User.objects.only("display_name", "image", "username"))
     qs = (
         User.objects.filter(username=username)
         .prefetch_related(prefetch)

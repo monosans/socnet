@@ -17,12 +17,8 @@ class Migration(migrations.Migration):
             name="username",
             field=django.contrib.postgres.fields.citext.CICharField(
                 db_index=True,
-                error_messages={
-                    "unique": "A user with that username already exists."
-                },
-                help_text=(
-                    "Only English letters, numbers, underscores and hyphens."
-                ),
+                error_messages={"unique": "A user with that username already exists."},
+                help_text="Only English letters, numbers, underscores and hyphens.",
                 max_length=32,
                 unique=True,
                 validators=[

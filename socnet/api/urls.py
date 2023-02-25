@@ -30,9 +30,5 @@ urlpatterns = [
     path("subscription/<int:pk>/", views.UserUnsubscribeView.as_view()),
     path("subscription/", views.UserSubscribeView.as_view()),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
-    path(
-        "",
-        SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger-ui",
-    ),
+    path("", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]

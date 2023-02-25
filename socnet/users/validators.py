@@ -13,8 +13,7 @@ def validate_birth_date(birth_date: date) -> None:
     today = timezone.now().date()
     if birth_date < today - WORLD_RECORD_FOR_NUMBER_OF_DAYS_LIVED:
         raise ValidationError(
-            _("You can't be older than the oldest human."),
-            code="unrealistically_old",
+            _("You can't be older than the oldest human."), code="unrealistically_old"
         )
     if birth_date > today:
         raise ValidationError(

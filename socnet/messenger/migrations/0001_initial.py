@@ -48,9 +48,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "date",
-                    models.DateTimeField(
-                        auto_now_add=True, verbose_name="date/time"
-                    ),
+                    models.DateTimeField(auto_now_add=True, verbose_name="date/time"),
                 ),
                 (
                     "chat",
@@ -62,9 +60,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={
-                "verbose_name": "message",
-                "verbose_name_plural": "messages",
-            },
+            options={"verbose_name": "message", "verbose_name_plural": "messages"},
         ),
     ]

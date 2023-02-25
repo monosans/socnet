@@ -26,8 +26,7 @@ class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet[ContentType]):
     queryset = ContentType.objects.prefetch_related(
         Prefetch("logentry_set", LogEntry.objects.only("content_type_id")),
         Prefetch(
-            "permission_set",
-            auth_models.Permission.objects.only("content_type_id"),
+            "permission_set", auth_models.Permission.objects.only("content_type_id")
         ),
     )
     serializer_class = serializers.ContentTypeSerializer
@@ -91,24 +90,15 @@ class UserViewSet(viewsets.ModelViewSet[User]):
     queryset = User.objects.prefetch_related(
         Prefetch("chats", messenger_models.Chat.objects.only("pk")),
         Prefetch("emailaddress_set", EmailAddress.objects.only("user_id")),
-        Prefetch(
-            "liked_comments", blog_models.PostComment.objects.only("user_id")
-        ),
+        Prefetch("liked_comments", blog_models.PostComment.objects.only("user_id")),
         Prefetch("liked_posts", blog_models.Post.objects.only("pk")),
         Prefetch("logentry_set", LogEntry.objects.only("user_id")),
-        Prefetch(
-            "outgoing_messages",
-            messenger_models.Message.objects.only("user_id"),
-        ),
-        Prefetch(
-            "post_comments", blog_models.PostComment.objects.only("user_id")
-        ),
+        Prefetch("outgoing_messages", messenger_models.Message.objects.only("user_id")),
+        Prefetch("post_comments", blog_models.PostComment.objects.only("user_id")),
         Prefetch("posts", blog_models.Post.objects.only("user_id")),
         Prefetch("subscribers", User.objects.only("pk")),
         Prefetch("groups", auth_models.Group.objects.only("pk")),
-        Prefetch(
-            "user_permissions", auth_models.Permission.objects.only("pk")
-        ),
+        Prefetch("user_permissions", auth_models.Permission.objects.only("pk")),
         Prefetch("subscriptions", User.objects.only("pk")),
     )
     serializer_class = serializers.UserSerializer

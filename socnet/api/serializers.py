@@ -35,10 +35,10 @@ class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
             many=True, read_only=True, view_name="logentry-detail"
         )
     )
-    permission_set: serializers.HyperlinkedRelatedField[
-        auth_models.Permission
-    ] = serializers.HyperlinkedRelatedField(
-        many=True, read_only=True, view_name="permission-detail"
+    permission_set: serializers.HyperlinkedRelatedField[auth_models.Permission] = (
+        serializers.HyperlinkedRelatedField(
+            many=True, read_only=True, view_name="permission-detail"
+        )
     )
 
     class Meta:
@@ -122,10 +122,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             many=True, read_only=True, view_name="emailaddress-detail"
         )
     )
-    liked_comments: serializers.HyperlinkedRelatedField[
-        blog_models.PostComment
-    ] = serializers.HyperlinkedRelatedField(
-        many=True, read_only=True, view_name="postcomment-detail"
+    liked_comments: serializers.HyperlinkedRelatedField[blog_models.PostComment] = (
+        serializers.HyperlinkedRelatedField(
+            many=True, read_only=True, view_name="postcomment-detail"
+        )
     )
     liked_posts: serializers.HyperlinkedRelatedField[blog_models.Post] = (
         serializers.HyperlinkedRelatedField(
@@ -137,15 +137,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             many=True, read_only=True, view_name="logentry-detail"
         )
     )
-    outgoing_messages: serializers.HyperlinkedRelatedField[
-        messenger_models.Message
-    ] = serializers.HyperlinkedRelatedField(
-        many=True, read_only=True, view_name="message-detail"
+    outgoing_messages: serializers.HyperlinkedRelatedField[messenger_models.Message] = (
+        serializers.HyperlinkedRelatedField(
+            many=True, read_only=True, view_name="message-detail"
+        )
     )
-    post_comments: serializers.HyperlinkedRelatedField[
-        blog_models.PostComment
-    ] = serializers.HyperlinkedRelatedField(
-        many=True, read_only=True, view_name="postcomment-detail"
+    post_comments: serializers.HyperlinkedRelatedField[blog_models.PostComment] = (
+        serializers.HyperlinkedRelatedField(
+            many=True, read_only=True, view_name="postcomment-detail"
+        )
     )
     posts: serializers.HyperlinkedRelatedField[blog_models.Post] = (
         serializers.HyperlinkedRelatedField(

@@ -16,17 +16,11 @@ urlpatterns = [
     path("post/<int:pk>/", views.post_view, name="post"),
     path("posts/", views.posts_view, name="posts"),
     path(
-        "user/<str:username>/liked_posts/",
-        views.liked_posts_view,
-        name="liked_posts",
+        "user/<str:username>/liked_posts/", views.liked_posts_view, name="liked_posts"
     ),
+    path("user/<str:username>/posts/", views.user_posts_view, name="user_posts"),
     path(
-        "user/<str:username>/posts/", views.user_posts_view, name="user_posts"
-    ),
-    path(
-        "user/<str:username>/subscribers/",
-        views.subscribers_view,
-        name="subscribers",
+        "user/<str:username>/subscribers/", views.subscribers_view, name="subscribers"
     ),
     path(
         "user/<str:username>/subscriptions/",

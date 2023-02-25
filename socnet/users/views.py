@@ -32,9 +32,7 @@ def delete_account_view(request: AuthedRequest) -> HttpResponse:
 @login_required
 def edit_profile_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
-        form = forms.EditProfileForm(
-            request.POST, request.FILES, instance=request.user
-        )
+        form = forms.EditProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect(request.user)

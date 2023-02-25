@@ -80,20 +80,14 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
         models.PostComment.objects.annotate(Count("likers"))
         .select_related("user")
         .order_by("pk")
-        .only(
-            "date", "image", "post_id", "text", "user__image", "user__username"
-        )
+        .only("date", "image", "post_id", "text", "user__image", "user__username")
     )
     if request.user.is_authenticated:
         comments_qs = comments_qs.annotate(  # type: ignore[assignment]
             is_liked=Q(pk__in=request.user.liked_comments.all())
         )
     prefetch = Prefetch("comments", comments_qs)
-    qs = (
-        services.get_posts_preview_qs(request)
-        .filter(pk=pk)
-        .prefetch_related(prefetch)
-    )
+    qs = services.get_posts_preview_qs(request).filter(pk=pk).prefetch_related(prefetch)
     post = get_object_or_404(qs)
     context = {"post": post, "form": form}
     return render(request, "blog/post.html", context)
@@ -109,11 +103,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             query: str = form.cleaned_data["q"]
             rank = SearchRank(vector="text", query=query)
-            posts = (
-                qs.annotate(rank=rank)
-                .filter(rank__gt=0)
-                .order_by("-rank", "-pk")
-            )
+            posts = qs.annotate(rank=rank).filter(rank__gt=0).order_by("-rank", "-pk")
     else:
         form = forms.PostSearchForm()
         if request.user.is_authenticated:
@@ -187,14 +177,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
             Count("subscribers", distinct=True),
             Count("subscriptions", distinct=True),
         )
-        .only(
-            "about",
-            "birth_date",
-            "display_name",
-            "image",
-            "location",
-            "username",
-        )
+        .only("about", "birth_date", "display_name", "image", "location", "username")
     )
     if request.user.is_authenticated:
         qs = qs.annotate(  # type: ignore[assignment]

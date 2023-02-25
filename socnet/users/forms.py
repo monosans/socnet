@@ -36,9 +36,7 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
 
 
 class UserSearchForm(forms.Form):
-    q = forms.Field(
-        widget=forms.Textarea({"rows": "2"}), label=_("Search query")
-    )
+    q = forms.Field(widget=forms.Textarea({"rows": "2"}), label=_("Search query"))
     search_fields = forms.MultipleChoiceField(
         choices=(
             ("username", _("Username")),
@@ -63,7 +61,6 @@ class AccountDeletionForm(InjectUserMixin, forms.Form):
         password = self.cleaned_data["password"]
         if not self.user.check_password(password):
             raise forms.ValidationError(
-                message=self.error_messages["invalid_password"],
-                code="invalid_password",
+                message=self.error_messages["invalid_password"], code="invalid_password"
             )
         return password

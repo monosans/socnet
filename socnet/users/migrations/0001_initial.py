@@ -31,10 +31,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                (
-                    "password",
-                    models.CharField(max_length=128, verbose_name="password"),
-                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
                 (
                     "last_login",
                     models.DateTimeField(
@@ -55,9 +52,7 @@ class Migration(migrations.Migration):
                 (
                     "email",
                     models.EmailField(
-                        blank=True,
-                        max_length=254,
-                        verbose_name="email address",
+                        blank=True, max_length=254, verbose_name="email address"
                     ),
                 ),
                 (
@@ -65,8 +60,7 @@ class Migration(migrations.Migration):
                     models.BooleanField(
                         default=False,
                         help_text=(
-                            "Designates whether the user can log into this"
-                            " admin site."
+                            "Designates whether the user can log into this admin site."
                         ),
                         verbose_name="staff status",
                     ),
@@ -86,8 +80,7 @@ class Migration(migrations.Migration):
                 (
                     "date_joined",
                     models.DateTimeField(
-                        default=django.utils.timezone.now,
-                        verbose_name="date joined",
+                        default=django.utils.timezone.now, verbose_name="date joined"
                     ),
                 ),
                 (
@@ -95,9 +88,7 @@ class Migration(migrations.Migration):
                     models.CharField(
                         db_index=True,
                         error_messages={
-                            "unique": (
-                                "A user with that username already exists."
-                            )
+                            "unique": "A user with that username already exists."
                         },
                         help_text=(
                             "No more than 30 characters. Only English letters,"
@@ -153,9 +144,7 @@ class Migration(migrations.Migration):
                     models.DateField(
                         blank=True,
                         null=True,
-                        validators=[
-                            socnet.users.validators.validate_birth_date
-                        ],
+                        validators=[socnet.users.validators.validate_birth_date],
                         verbose_name="birth date",
                     ),
                 ),
@@ -168,9 +157,7 @@ class Migration(migrations.Migration):
                 (
                     "image",
                     models.ImageField(
-                        blank=True,
-                        upload_to="user_images/",
-                        verbose_name="image",
+                        blank=True, upload_to="user_images/", verbose_name="image"
                     ),
                 ),
                 (

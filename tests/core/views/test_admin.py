@@ -9,8 +9,7 @@ from django.utils.safestring import mark_safe
 from ...conftest import AuthedClient
 
 pytestmark = pytest.mark.parametrize(
-    "url",
-    (reverse_lazy("admin:index"), reverse_lazy("django-admindocs-docroot")),
+    "url", (reverse_lazy("admin:index"), reverse_lazy("django-admindocs-docroot"))
 )
 
 
@@ -23,8 +22,7 @@ def test_unauthed(client: Client, url: str) -> None:
                 reverse("account_login"),
                 reverse("admin:login"),
                 urlencode(
-                    "?next={}".format(urlencode(url, mark_safe(""))),
-                    mark_safe(""),
+                    "?next={}".format(urlencode(url, mark_safe(""))), mark_safe("")
                 ),
             ),
             302,
