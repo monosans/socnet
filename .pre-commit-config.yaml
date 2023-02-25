@@ -32,7 +32,6 @@ repos:
       - id: stylelint
         additional_dependencies:
           - stylelint
-          - stylelint-config-prettier
           - stylelint-config-standard
 
   - repo: https://github.com/monosans/pre-commit-prettier
