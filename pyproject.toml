@@ -111,12 +111,6 @@ ignore = [
 "docker/django/gunicorn_config.py" = ["INP001"]
 "tests/*" = ["PLR2004", "S101"]
 
-[tool.ruff.flake8-pytest-style]
-fixture-parentheses = false
-mark-parentheses = false
-parametrize-names-type = "csv"
-parametrize-values-type = "tuple"
-
 [tool.ruff.flake8-unused-arguments]
 ignore-variadic-names = true
 
