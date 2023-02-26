@@ -105,8 +105,8 @@ msgstr "Не найдено (404)"
 msgid "Too Many Requests (429)"
 msgstr "Слишком много запросов (429)"
 
-msgid "Server Error (500)"
-msgstr "Ошибка сервера (500)"
+msgid "Internal Server Error (500)"
+msgstr "Внутренняя ошибка сервера (500)"
 
 msgid "Account is inactive"
 msgstr "Учётная запись неактивна"
