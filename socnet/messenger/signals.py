@@ -17,9 +17,8 @@ def validate_chat_participants_count(
         action == "post_add"
         and instance.participants.count() != ALLOWED_PARTICIPANTS_COUNT
     ):
-        raise exceptions.ChatParticipantsCountError(
-            _("The chat must have 2 participants.")
-        )
+        msg = _("The chat must have 2 participants.")
+        raise exceptions.ChatParticipantsCountError(msg)
 
 
 m2m_changed.connect(

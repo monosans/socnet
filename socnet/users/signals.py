@@ -13,7 +13,8 @@ def forbid_self_subscription(
     instance: User, action: str, pk_set: Set[int], **kwargs: Any
 ) -> None:
     if action == "pre_add" and instance.pk in pk_set:
-        raise exceptions.SelfSubscriptionError(_("You can't subscribe to yourself."))
+        msg = _("You can't subscribe to yourself.")
+        raise exceptions.SelfSubscriptionError(msg)
 
 
 m2m_changed.connect(forbid_self_subscription, sender=User.subscriptions.through)

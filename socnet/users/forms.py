@@ -60,7 +60,7 @@ class AccountDeletionForm(InjectUserMixin, forms.Form):
     def clean_password(self) -> Any:
         password = self.cleaned_data["password"]
         if not self.user.check_password(password):
-            raise forms.ValidationError(
-                message=self.error_messages["invalid_password"], code="invalid_password"
-            )
+            msg = self.error_messages["invalid_password"]
+            code = "invalid_password"
+            raise forms.ValidationError(msg, code)
         return password
