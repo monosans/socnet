@@ -48,7 +48,7 @@
           <form id="messageSendForm">
             <div class="input-group">
               {{ form.text }}
-              <button type="submit" class="btn btn-primary" id="messageSubmitBtn">
+              <button type="submit" class="btn btn-primary" id="messageSendBtn">
                 {% trans "Send" %}
               </button>
             </div>
@@ -57,5 +57,5 @@
       </div>
     </div>
   </div>
-  {{ chat.pk|json_script:"chat-pk" }}
+  {{ chat.pk|json_script:"chat_pk" }}
 {% endblock content %}

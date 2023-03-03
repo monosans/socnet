@@ -1,8 +1,10 @@
 "use strict";
 (() => {
-  function handler(e) {
-    const btn = e.currentTarget;
-    btn.disabled = true;
+  /**
+   * @param {EventTarget} btn
+   * @return {{url: string, options: RequestInit}}
+   */
+  function getRequest(btn) {
     let url = "/api/subscription/",
       method,
       body;
@@ -14,37 +16,52 @@
       method = "POST";
       body = JSON.stringify({ pk: btn.dataset.userPk });
     }
-    void fetch(url, {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
-          .value,
+    return {
+      url: url,
+      options: {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+            .value,
+        },
+        body: body,
       },
-      body: body,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return Promise.reject(response);
-        }
-      })
-      .then(() => {
-        for (const el of document.querySelectorAll(
-          `[data-is-subscribed][data-user-pk="${btn.dataset.userPk}"]`
-        )) {
-          el.classList.toggle("d-none");
-        }
-        const subscribers_count = document.querySelector(
-          '[id="subscribers_count"]'
-        );
-        if (subscribers_count) {
-          subscribers_count.innerHTML =
-            parseInt(subscribers_count.innerHTML) +
-            (method === "DELETE" ? -1 : 1);
-        }
-        btn.disabled = false;
-      });
+    };
   }
+
+  /**
+   * @param {Event} e
+   * @return {void}
+   */
+  async function handler(e) {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+
+    const request = getRequest(btn);
+    const response = await fetch(request.url, request.options);
+    if (!response.ok) {
+      throw new Error(response);
+    }
+
+    const subscribersCount = document.querySelector('[id="subscribers_count"]');
+    if (subscribersCount) {
+      subscribersCount.innerHTML =
+        parseInt(subscribersCount.innerHTML) +
+        (request.options.method === "DELETE" ? -1 : 1);
+    }
+
+    const userPk = btn.dataset.userPk;
+    const subBtns = document.querySelectorAll(
+      `[data-is-subscribed][data-user-pk="${userPk}"]`
+    );
+    for (const subBtn of subBtns) {
+      subBtn.classList.toggle("d-none");
+    }
+
+    btn.disabled = false;
+  }
+
   for (const btn of document.querySelectorAll("[data-is-subscribed]")) {
     btn.addEventListener("click", handler);
   }
