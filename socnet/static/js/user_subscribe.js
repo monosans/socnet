@@ -2,7 +2,7 @@
 (() => {
   function handler(e) {
     const btn = e.currentTarget;
-    btn.setAttribute("disabled", "");
+    btn.disabled = true;
     let url = "/api/subscription/",
       method,
       body;
@@ -39,7 +39,7 @@
           parseInt(subscribers_count.innerHTML) +
           (method === "DELETE" ? -1 : 1);
       }
-      btn.removeAttribute("disabled");
+      btn.disabled = false;
     });
   }
   for (const btn of document.querySelectorAll("[data-is-subscribed]")) {

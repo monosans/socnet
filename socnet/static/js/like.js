@@ -2,7 +2,7 @@
 (() => {
   function handler(e) {
     const btn = e.currentTarget;
-    btn.setAttribute("disabled", "");
+    btn.disabled = true;
     let url, value;
     if (btn.dataset.postPk) {
       url = "/api/post_like/";
@@ -47,7 +47,7 @@
       iconClassList.toggle("text-danger");
       iconClassList.toggle("fa-regular");
       iconClassList.toggle("fa-solid");
-      btn.removeAttribute("disabled");
+      btn.disabled = false;
     });
   }
   for (const btn of document.querySelectorAll("[data-is-liked]")) {
