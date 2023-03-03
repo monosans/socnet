@@ -22,25 +22,28 @@
           .value,
       },
       body: body,
-    }).then((value) => {
-      if (!value.ok) {
-        return;
-      }
-      for (const el of document.querySelectorAll(
-        `[data-is-subscribed][data-user-pk="${btn.dataset.userPk}"]`
-      )) {
-        el.classList.toggle("d-none");
-      }
-      const subscribers_count = document.querySelector(
-        '[id="subscribers_count"]'
-      );
-      if (subscribers_count) {
-        subscribers_count.innerHTML =
-          parseInt(subscribers_count.innerHTML) +
-          (method === "DELETE" ? -1 : 1);
-      }
-      btn.disabled = false;
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+      })
+      .then(() => {
+        for (const el of document.querySelectorAll(
+          `[data-is-subscribed][data-user-pk="${btn.dataset.userPk}"]`
+        )) {
+          el.classList.toggle("d-none");
+        }
+        const subscribers_count = document.querySelector(
+          '[id="subscribers_count"]'
+        );
+        if (subscribers_count) {
+          subscribers_count.innerHTML =
+            parseInt(subscribers_count.innerHTML) +
+            (method === "DELETE" ? -1 : 1);
+        }
+        btn.disabled = false;
+      });
   }
   for (const btn of document.querySelectorAll("[data-is-subscribed]")) {
     btn.addEventListener("click", handler);

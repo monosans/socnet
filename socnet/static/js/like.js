@@ -32,23 +32,26 @@
           .value,
       },
       body: body,
-    }).then((value) => {
-      if (!value.ok) {
-        return;
-      }
-      if (btn.dataset.isLiked === "y") {
-        span.innerHTML = likesCount - 1;
-        btn.dataset.isLiked = "n";
-      } else {
-        span.innerHTML = likesCount + 1;
-        btn.dataset.isLiked = "y";
-      }
-      const iconClassList = btn.querySelector("i").classList;
-      iconClassList.toggle("text-danger");
-      iconClassList.toggle("fa-regular");
-      iconClassList.toggle("fa-solid");
-      btn.disabled = false;
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+      })
+      .then(() => {
+        if (btn.dataset.isLiked === "y") {
+          span.innerHTML = likesCount - 1;
+          btn.dataset.isLiked = "n";
+        } else {
+          span.innerHTML = likesCount + 1;
+          btn.dataset.isLiked = "y";
+        }
+        const iconClassList = btn.querySelector("i").classList;
+        iconClassList.toggle("text-danger");
+        iconClassList.toggle("fa-regular");
+        iconClassList.toggle("fa-solid");
+        btn.disabled = false;
+      });
   }
   for (const btn of document.querySelectorAll("[data-is-liked]")) {
     btn.addEventListener("click", handler);
