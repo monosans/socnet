@@ -13,7 +13,9 @@
       url = "/api/post_comment_like/";
       value = btn.dataset.postCommentPk;
     } else {
-      throw new Error();
+      throw new Error(
+        "Button must contain data-post-pk or data-post-comment-pk attribute"
+      );
     }
 
     let method, body;
@@ -42,7 +44,7 @@
 
   /**
    * @param {Event} e
-   * @return {void}
+   * @return {Promise<void>}
    */
   async function handler(e) {
     const btn = e.currentTarget;
@@ -51,7 +53,8 @@
     const request = getRequest(btn);
     const response = await fetch(request.url, request.options);
     if (!response.ok) {
-      throw new Error(response);
+      Promise.reject(new Error(response));
+      return;
     }
 
     const span = btn.querySelector("span");

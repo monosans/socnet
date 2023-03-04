@@ -32,7 +32,7 @@
 
   /**
    * @param {Event} e
-   * @return {void}
+   * @return {Promise<void>}
    */
   async function handler(e) {
     const btn = e.currentTarget;
@@ -41,7 +41,8 @@
     const request = getRequest(btn);
     const response = await fetch(request.url, request.options);
     if (!response.ok) {
-      throw new Error(response);
+      Promise.reject(new Error(response));
+      return;
     }
 
     const subscribersCount = document.querySelector('[id="subscribers_count"]');
