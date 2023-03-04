@@ -24,6 +24,7 @@
     {% if request.method == "POST" %}
       <script async src="{% static 'js/prevent_post_on_refresh.js' %}"></script>
     {% endif %}
+    <script defer src="{% static 'js/trim_input.js' %}"></script>
     {% block javascript %}
     {% endblock javascript %}
   </head>

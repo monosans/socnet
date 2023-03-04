@@ -67,13 +67,6 @@
 
   const messageTextarea = document.getElementById("id_text");
 
-  const whiteSpaceRegex = /^\s+$/;
-  messageTextarea.addEventListener("input", () => {
-    if (whiteSpaceRegex.test(messageTextarea.value)) {
-      messageTextarea.value = "";
-    }
-  });
-
   const messageSendBtn = document.getElementById("messageSendBtn");
   messageTextarea.addEventListener("keyup", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
