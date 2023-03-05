@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static i18n %}
+{% load static i18n markdownify crispy_forms_tags %}
 
 {% block title %}
   {% trans "Chat" %} #{{ chat.pk }}
@@ -35,7 +35,7 @@
                          class="text-decoration-none">{{ message.user }}</a>
                       <span class="text-secondary">{{ message.formatted_date }}</span>
                     </div>
-                    <div class="me-2">{{ message.text|linebreaksbr }}</div>
+                    <div class="me-2 img-responsive">{{ message.text|markdownify }}</div>
                   </div>
                 </div>
               </div>
@@ -46,6 +46,7 @@
       <div class="card">
         <div class="card-body">
           <form id="messageSendForm">
+            {{ form|as_crispy_errors }}
             <div class="input-group">
               {{ form.text }}
               <button type="submit" class="btn btn-primary" id="messageSendBtn">

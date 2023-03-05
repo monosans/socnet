@@ -6,8 +6,6 @@ from django.template import defaultfilters
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from ..core.fields import NormalizedTextField
-
 
 class Chat(models.Model):
     participants = models.ManyToManyField(
@@ -37,7 +35,7 @@ class Message(models.Model):
         related_name="messages",
         verbose_name=_("chat"),
     )
-    text = NormalizedTextField(verbose_name=_("text"), max_length=4096)
+    text = models.TextField(verbose_name=_("text"), max_length=4096)
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
 
     class Meta:

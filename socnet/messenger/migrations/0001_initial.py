@@ -4,8 +4,6 @@ from __future__ import annotations
 import django.db.models.deletion
 from django.db import migrations, models
 
-import socnet.core.fields
-
 
 class Migration(migrations.Migration):
     initial = True
@@ -40,12 +38,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                (
-                    "text",
-                    socnet.core.fields.NormalizedTextField(
-                        max_length=4096, verbose_name="text"
-                    ),
-                ),
+                ("text", models.TextField(max_length=4096, verbose_name="text")),
                 (
                     "date",
                     models.DateTimeField(auto_now_add=True, verbose_name="date/time"),

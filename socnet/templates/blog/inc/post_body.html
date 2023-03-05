@@ -1,4 +1,4 @@
-{% load i18n obj_admin_url %}
+{% load i18n markdownify obj_admin_url %}
 
 <div class="card-title mb-1">
   {% if request.user.is_staff %}
@@ -58,15 +58,14 @@
     </div>
   </div>
 </div>
-<div class="ms-1">{{ post.text|linebreaksbr }}</div>
-{% if post.image %}
-  <div>
-    <img class="img-responsive rounded"
-         src="{{ post.image.url }}"
-         alt=""
-         loading="lazy"/>
-  </div>
-{% endif %}
+<div class="img-responsive">
+  <div class="ms-1">{{ post.text|markdownify }}</div>
+  {% if post.image %}
+    <div>
+      <img class="rounded" src="{{ post.image.url }}" alt="" loading="lazy"/>
+    </div>
+  {% endif %}
+</div>
 <div class="fs-4">
   {% if request.user.is_anonymous %}
     <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"

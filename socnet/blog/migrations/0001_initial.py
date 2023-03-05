@@ -3,8 +3,6 @@ from __future__ import annotations
 
 from django.db import migrations, models
 
-import socnet.core.fields
-
 
 class Migration(migrations.Migration):
     initial = True
@@ -26,9 +24,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "text",
-                    socnet.core.fields.NormalizedTextField(
-                        blank=True, max_length=4096, verbose_name="text"
-                    ),
+                    models.TextField(blank=True, max_length=4096, verbose_name="text"),
                 ),
                 (
                     "image",
@@ -59,9 +55,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "text",
-                    socnet.core.fields.NormalizedTextField(
-                        blank=True, max_length=4096, verbose_name="text"
-                    ),
+                    models.TextField(blank=True, max_length=4096, verbose_name="text"),
                 ),
                 (
                     "image",
