@@ -4,7 +4,8 @@ from typing import Any
 
 from django import forms
 from django.contrib.auth import forms as auth_forms
-from django.utils.translation import gettext_lazy as _
+from django.forms import ValidationError
+from django.utils.translation import gettext, gettext_lazy as _
 
 from .models import User
 
@@ -31,8 +32,24 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
 
     class Meta(auth_forms.UserChangeForm.Meta):
         model = User
-        fields = ("display_name", "image", "birth_date", "location", "about")
+        fields = (
+            "username",
+            "display_name",
+            "image",
+            "birth_date",
+            "location",
+            "about",
+        )
         widgets = {"birth_date": forms.DateInput({"type": "date"})}
+
+    def clean_username(self) -> str:
+        old_username: str = self.instance.username
+        new_username: str = self.cleaned_data["username"]
+        if old_username.lower() != new_username.lower():
+            msg = gettext("It is only allowed to change the letters case.")
+            code = "must_only_change_letters_case"
+            raise ValidationError(msg, code)
+        return new_username
 
 
 class UserSearchForm(forms.Form):
