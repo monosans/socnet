@@ -11,6 +11,7 @@ class PostAdmin(admin.ModelAdmin[models.Post]):
     list_display = ("id", "author", "date_created", "date_updated")
     list_filter = ("date_created", "date_updated", "author")
     search_fields = ("@content",)
+    readonly_fields = ("date_created", "date_updated")
 
 
 @admin.register(models.PostComment)
@@ -19,3 +20,4 @@ class PostCommentAdmin(admin.ModelAdmin[models.PostComment]):
     list_display = ("id", "author", "post", "date_created", "date_updated")
     list_filter = ("date_created", "date_updated", "author", "post")
     search_fields = ("@content",)
+    readonly_fields = ("date_created", "date_updated")
