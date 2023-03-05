@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-05 09:13+0000\n"
+"POT-Creation-Date: 2023-03-05 09:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,9 +39,6 @@ msgstr "пользователь"
 msgid "text"
 msgstr "текст"
 
-msgid "image"
-msgstr "изображение"
-
 msgid "date/time"
 msgstr "дата/время"
 
@@ -53,9 +50,6 @@ msgstr "пост"
 
 msgid "posts"
 msgstr "посты"
-
-msgid "You must provide either text or an image"
-msgstr "Вы должны предоставить либо текст, либо изображение"
 
 msgid "post comment"
 msgstr "комментарий к посту"
@@ -378,6 +372,9 @@ msgstr "Пользователи не найдены"
 msgid "Users"
 msgstr "Пользователи"
 
+msgid "It is only allowed to change the letters case."
+msgstr "Разрешается изменять только регистр букв."
+
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -413,6 +410,9 @@ msgstr "дата рождения"
 
 msgid "location"
 msgstr "местонахождение"
+
+msgid "image"
+msgstr "изображение"
 
 msgid "about me"
 msgstr "обо мне"
