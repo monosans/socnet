@@ -7,20 +7,15 @@ from django.utils.translation import gettext as _
 
 from . import exceptions, models
 
-ALLOWED_PARTICIPANTS_COUNT = 2
+ALLOWED_MEMBERS_COUNT = 2
 
 
-def validate_chat_participants_count(
+def validate_chat_members_count(
     instance: models.Chat, action: str, **kwargs: Any
 ) -> None:
-    if (
-        action == "post_add"
-        and instance.participants.count() != ALLOWED_PARTICIPANTS_COUNT
-    ):
-        msg = _("The chat must have 2 participants.")
-        raise exceptions.ChatParticipantsCountError(msg)
+    if action == "post_add" and instance.members.count() != ALLOWED_MEMBERS_COUNT:
+        msg = _("The chat must have 2 members.")
+        raise exceptions.ChatMembersCountError(msg)
 
 
-m2m_changed.connect(
-    validate_chat_participants_count, sender=models.Chat.participants.through
-)
+m2m_changed.connect(validate_chat_members_count, sender=models.Chat.members.through)

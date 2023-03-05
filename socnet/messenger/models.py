@@ -6,12 +6,12 @@ from django.template import defaultfilters
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from ..core.models import DateCreatedModel
+
 
 class Chat(models.Model):
-    participants = models.ManyToManyField(
-        to=settings.AUTH_USER_MODEL,
-        related_name="chats",
-        verbose_name=_("participants"),
+    members = models.ManyToManyField(
+        to=settings.AUTH_USER_MODEL, related_name="chats", verbose_name=_("members")
     )
 
     class Meta:
@@ -22,12 +22,12 @@ class Chat(models.Model):
         return reverse("messenger:chat", args=(self.pk,))
 
 
-class Message(models.Model):
-    user = models.ForeignKey(
+class Message(DateCreatedModel):
+    sender = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="outgoing_messages",
-        verbose_name=_("user"),
+        verbose_name=_("sender"),
     )
     chat = models.ForeignKey(
         to=Chat,
@@ -35,13 +35,12 @@ class Message(models.Model):
         related_name="messages",
         verbose_name=_("chat"),
     )
-    text = models.TextField(verbose_name=_("text"), max_length=4096)
-    date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
+    content = models.TextField(verbose_name=_("content"), max_length=4096)
 
     class Meta:
         verbose_name = _("message")
         verbose_name_plural = _("messages")
 
     @property
-    def formatted_date(self) -> str:
-        return defaultfilters.date(self.date, "Y-m-d H:i")
+    def formatted_date_created(self) -> str:
+        return defaultfilters.date(self.date_created, "Y-m-d H:i")

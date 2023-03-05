@@ -20,8 +20,8 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
         models.Post.objects.annotate(
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
-        .select_related("user")
-        .only("date", "text", "user__image", "user__username")
+        .select_related("author")
+        .only("date_created", "content", "author__image", "author__username")
     )
     if request.user.is_anonymous:
         return qs

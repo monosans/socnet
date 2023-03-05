@@ -39,13 +39,13 @@ def test_unauthed_post(client: Client) -> None:
 def test_authed_post(authed_client: AuthedClient) -> None:
     client, user = authed_client
     post = factories.PostFactory()
-    text = "comment text"
+    content = "comment content"
     with assert_count_diff(models.PostComment, 1):
-        response = client.post(get_url(post), data={"text": text})
+        response = client.post(get_url(post), data={"content": content})
     assert response.status_code == 200
     comment = models.PostComment.objects.order_by("-pk").get()
-    assert comment.user == user
-    assert comment.text == text
+    assert comment.author == user
+    assert comment.content == content
 
 
 def test_authed_post_empty(authed_client: AuthedClient) -> None:

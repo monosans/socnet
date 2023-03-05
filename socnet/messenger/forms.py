@@ -9,9 +9,9 @@ from . import models
 class MessageCreationForm(forms.ModelForm[models.Message]):
     class Meta:
         model = models.Message
-        fields = ("text",)
+        fields = ("content",)
         widgets = {
-            "text": forms.Textarea(
+            "content": forms.Textarea(
                 {"class": "form-control", "rows": 4, "placeholder": MARKDOWN_HELP_TEXT}
             )
         }

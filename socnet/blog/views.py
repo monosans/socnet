@@ -31,7 +31,7 @@ def create_post_view(request: AuthedRequest) -> HttpResponse:
         form = forms.PostCreationForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
+            post.author = request.user
             post.save()
             return redirect(post)
     else:
@@ -65,7 +65,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post_id = pk
-            comment.user = request.user
+            comment.author = request.user
             comment.save()
             form = forms.PostCommentCreationForm()
         else:
@@ -78,9 +78,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
         form = forms.PostCommentCreationForm()
     comments_qs = (
         models.PostComment.objects.annotate(Count("likers"))
-        .select_related("user")
+        .select_related("author")
         .order_by("pk")
-        .only("date", "post_id", "text", "user__image", "user__username")
+        .only("date_created", "post_id", "content", "author__image", "author__username")
     )
     if request.user.is_authenticated:
         comments_qs = comments_qs.annotate(  # type: ignore[assignment]
@@ -102,13 +102,13 @@ def posts_view(request: HttpRequest) -> HttpResponse:
         form = forms.PostSearchForm(request.GET)
         if form.is_valid():
             query: str = form.cleaned_data["q"]
-            rank = SearchRank(vector="text", query=query)
+            rank = SearchRank(vector="content", query=query)
             posts = qs.annotate(rank=rank).filter(rank__gt=0).order_by("-rank", "-pk")
     else:
         form = forms.PostSearchForm()
         if request.user.is_authenticated:
             subscribed_posts = qs.filter(
-                user__in=request.user.subscriptions.all()
+                author__in=request.user.subscriptions.all()
             ).order_by("-pk")
             posts, page_range = paginate(request, subscribed_posts, per_page=5)
     context = {"posts": posts, "page_range": page_range, "form": form}
@@ -136,7 +136,7 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
         .order_by("-pk")
-        .only("date", "text", "user_id")
+        .only("date_created", "content", "author_id")
     )
     if request.user.is_authenticated:
         posts = posts.annotate(  # type: ignore[assignment]

@@ -42,8 +42,8 @@
     {% endif %}
     <div class="row">
       <div class="avatar-thumbnail">
-        {% if comment.user.image %}
-          <img src="{{ comment.user.image.url }}"
+        {% if comment.author.image %}
+          <img src="{{ comment.author.image.url }}"
                alt=""
                loading="lazy"
                class="rounded"/>
@@ -52,12 +52,12 @@
       <div class="col ms-2">
         <div class="d-flex justify-content-between">
           <div class="text-break">
-            <a href="{{ comment.user.get_absolute_url }}"
+            <a href="{{ comment.author.get_absolute_url }}"
                class="text-decoration-none">
-              {{ comment.user }}
+              {{ comment.author }}
             </a>
           </div>
-          {% if comment.user == request.user %}
+          {% if comment.author == request.user %}
             <i class="fa-solid fa-xmark btn text-danger"
                data-bs-toggle="modal"
                data-bs-target="#comment{{ comment.pk }}_modal"></i>
@@ -86,9 +86,9 @@
             </div>
           {% endif %}
         </div>
-        <div class="text-break img-responsive">{{ comment.text|markdownify }}</div>
+        <div class="text-break img-responsive">{{ comment.content|markdownify }}</div>
         <div class="d-flex justify-content-between">
-          <div class="text-muted">{{ comment.date }}</div>
+          <div class="text-muted">{{ comment.date_created }}</div>
           <div>
             {% if request.user.is_anonymous %}
               <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"

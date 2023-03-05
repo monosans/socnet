@@ -16,7 +16,7 @@ from . import filters, serializers
 class ChatViewSet(viewsets.ModelViewSet[messenger_models.Chat]):
     queryset = messenger_models.Chat.objects.prefetch_related(
         Prefetch("messages", messenger_models.Message.objects.only("chat_id")),
-        Prefetch("participants", User.objects.only("pk")),
+        Prefetch("members", User.objects.only("pk")),
     )
     serializer_class = serializers.ChatSerializer
     filterset_class = filters.ChatFilter
@@ -93,9 +93,11 @@ class UserViewSet(viewsets.ModelViewSet[User]):
         Prefetch("liked_comments", blog_models.PostComment.objects.only("user_id")),
         Prefetch("liked_posts", blog_models.Post.objects.only("pk")),
         Prefetch("logentry_set", LogEntry.objects.only("user_id")),
-        Prefetch("outgoing_messages", messenger_models.Message.objects.only("user_id")),
-        Prefetch("post_comments", blog_models.PostComment.objects.only("user_id")),
-        Prefetch("posts", blog_models.Post.objects.only("user_id")),
+        Prefetch(
+            "outgoing_messages", messenger_models.Message.objects.only("sender_id")
+        ),
+        Prefetch("post_comments", blog_models.PostComment.objects.only("author_id")),
+        Prefetch("posts", blog_models.Post.objects.only("author_id")),
         Prefetch("subscribers", User.objects.only("pk")),
         Prefetch("groups", auth_models.Group.objects.only("pk")),
         Prefetch("user_permissions", auth_models.Permission.objects.only("pk")),

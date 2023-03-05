@@ -18,7 +18,7 @@ def test_unauthed_get(client: Client) -> None:
     user = UserFactory()
     response = client.get(get_url(user))
     assert response.status_code == 200
-    post = factories.PostFactory(user=user)
+    post = factories.PostFactory(author=user)
     post.likers.add(user)
     response = client.get(get_url(user))
     assert response.status_code == 200
@@ -32,7 +32,7 @@ def test_authed_get_self(authed_client: AuthedClient) -> None:
     client, user = authed_client
     response = client.get(get_url(user))
     assert response.status_code == 200
-    post = factories.PostFactory(user=user)
+    post = factories.PostFactory(author=user)
     post.likers.add(user)
     response = client.get(get_url(user))
     assert response.status_code == 200

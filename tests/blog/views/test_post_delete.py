@@ -37,7 +37,7 @@ def test_unauthed_post(client: Client) -> None:
 
 def test_author_post(authed_client: AuthedClient) -> None:
     client, user = authed_client
-    post = factories.PostFactory(user=user)
+    post = factories.PostFactory(author=user)
     with assert_count_diff(models.Post, -1):
         response = client.post(get_url(post), follow=True)
     assert response.redirect_chain == [

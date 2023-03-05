@@ -17,10 +17,10 @@ from . import forms, models
 @login_required
 def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
     chat, created = models.Chat.objects.filter(
-        participants__in=[request.user.pk]
-    ).get_or_create(participants__in=[pk])
+        members__in=[request.user.pk]
+    ).get_or_create(members__in=[pk])
     if created:
-        chat.participants.set([request.user.pk, pk])
+        chat.members.set([request.user.pk, pk])
     return redirect(chat)
 
 
@@ -29,9 +29,11 @@ def chat_get_or_create_view(request: AuthedRequest, pk: int) -> HttpResponse:
 def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
     prefetch = Prefetch(
         "messages",
-        models.Message.objects.select_related("user")
+        models.Message.objects.select_related("sender")
         .order_by("pk")
-        .only("chat_id", "date", "text", "user__image", "user__username"),
+        .only(
+            "chat_id", "date_created", "content", "sender__image", "sender__username"
+        ),
     )
     qs = request.user.chats.filter(pk=pk).prefetch_related(prefetch).only("pk")
     chat = get_object_or_404(qs)
@@ -47,17 +49,17 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         message = chat.messages.first()
         if not message:
             return float("-inf")
-        return mktime(message.date.timetuple())
+        return mktime(message.date_created.timetuple())
 
     prefetches = (
         Prefetch(
             "messages",
             models.Message.objects.order_by("chat_id", "-pk")
             .distinct("chat_id")
-            .only("chat_id", "date", "text"),
+            .only("chat_id", "date_created", "content"),
         ),
         Prefetch(
-            "participants",
+            "members",
             User.objects.exclude(pk=request.user.pk).only(
                 "display_name", "image", "username"
             ),

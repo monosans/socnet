@@ -97,9 +97,9 @@ class MessageFilter(FilterSet):
         model = messenger_models.Message
         fields = {
             **BASE_FIELDS,
-            "text": CHAR_FIELDS,
-            "date": DATETIME_FIELDS,
-            "user": ID_FIELDS,
+            "content": CHAR_FIELDS,
+            "date_created": DATETIME_FIELDS,
+            "sender": ID_FIELDS,
             "chat": ID_FIELDS,
         }
 
@@ -120,10 +120,10 @@ class PostCommentFilter(FilterSet):
         model = blog_models.PostComment
         fields = {
             **BASE_FIELDS,
-            "text": CHAR_FIELDS,
-            "date": DATETIME_FIELDS,
+            "content": CHAR_FIELDS,
+            "date_created": DATETIME_FIELDS,
             "post": ID_FIELDS,
-            "user": ID_FIELDS,
+            "author": ID_FIELDS,
         }
 
 
@@ -132,9 +132,9 @@ class PostFilter(FilterSet):
         model = blog_models.Post
         fields = {
             **BASE_FIELDS,
-            "text": CHAR_FIELDS,
-            "date": DATETIME_FIELDS,
-            "user": ID_FIELDS,
+            "content": CHAR_FIELDS,
+            "date_created": DATETIME_FIELDS,
+            "author": ID_FIELDS,
         }
 
 

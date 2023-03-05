@@ -8,24 +8,28 @@
   {% endif %}
   <div class="row align-items-center">
     <div class="avatar-thumbnail">
-      {% if post.user.image %}
-        <img src="{{ post.user.image.url }}" alt="" loading="lazy" class="rounded"/>
+      {% if post.author.image %}
+        <img src="{{ post.author.image.url }}"
+             alt=""
+             loading="lazy"
+             class="rounded"/>
       {% endif %}
     </div>
     <div class="col ms-2">
       <div class="d-flex justify-content-between">
         <div>
           <div class="text-break">
-            <a href="{{ post.user.get_absolute_url }}" class="text-decoration-none">
-              {{ post.user }}
+            <a href="{{ post.author.get_absolute_url }}"
+               class="text-decoration-none">
+              {{ post.author }}
             </a>
           </div>
           <a href="{{ post.get_absolute_url }}"
              class="text-decoration-none text-muted">
-            {{ post.date }}
+            {{ post.date_created }}
           </a>
         </div>
-        {% if post.user == request.user %}
+        {% if post.author == request.user %}
           <div>
             <i class="fa-solid fa-xmark btn text-danger"
                data-bs-toggle="modal"
@@ -58,7 +62,7 @@
     </div>
   </div>
 </div>
-<div class="ms-1 img-responsive">{{ post.text|markdownify }}</div>
+<div class="ms-1 img-responsive">{{ post.content|markdownify }}</div>
 <div class="fs-4">
   {% if request.user.is_anonymous %}
     <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"

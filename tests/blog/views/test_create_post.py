@@ -45,11 +45,11 @@ def test_authed_post_empty(authed_client: AuthedClient) -> None:
 
 def test_authed_post(authed_client: AuthedClient) -> None:
     client, user = authed_client
-    text = "post_text"
+    content = "post_content"
     with assert_count_diff(models.Post, 1):
-        response = client.post(url, data={"text": text}, follow=True)
+        response = client.post(url, data={"content": content}, follow=True)
     assert response.status_code == 200
     post = models.Post.objects.order_by("-pk").get()
-    assert post.user == user
-    assert post.text == text
+    assert post.author == user
+    assert post.content == content
     assert response.redirect_chain == [(post.get_absolute_url(), 302)]

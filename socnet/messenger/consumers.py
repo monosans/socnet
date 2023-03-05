@@ -29,7 +29,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         if (
             user.is_anonymous
             or not await database_sync_to_async(
-                models.Chat.objects.filter(pk=chat_pk, participants=user).exists
+                models.Chat.objects.filter(pk=chat_pk, members=user).exists
             )()
         ):
             await self.close()
@@ -43,19 +43,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     async def receive_json(self, content: Dict[str, str], **kwargs: Any) -> None:
-        user: User = self.scope["user"]
+        sender: User = self.scope["user"]
         message = models.Message(
-            user=user, chat_id=self.room_name, text=content["message"]
+            sender=sender, chat_id=self.room_name, content=content["message"]
         )
         await save_obj(message)
         msg = {
             "type": "chat_message",
-            "text": markdownify(message.text),
-            "date": message.formatted_date,
-            "user": {
-                "username": user.get_username(),
-                "image": user.image.url if user.image else None,
-                "href": user.get_absolute_url(),
+            "content": markdownify(message.content),
+            "date_created": message.formatted_date_created,
+            "sender": {
+                "username": sender.get_username(),
+                "image": sender.image.url if sender.image else None,
+                "href": sender.get_absolute_url(),
             },
         }
         await self.channel_layer.group_send(self.room_group_name, msg)

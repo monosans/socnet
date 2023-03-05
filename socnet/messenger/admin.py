@@ -7,13 +7,13 @@ from . import models
 
 @admin.register(models.Chat)
 class ChatAdmin(admin.ModelAdmin[models.Chat]):
-    filter_horizontal = ("participants",)
+    filter_horizontal = ("members",)
     list_display = ("id",)
-    list_filter = ("participants",)
+    list_filter = ("members",)
 
 
 @admin.register(models.Message)
 class MessageAdmin(admin.ModelAdmin[models.Message]):
-    list_display = ("id", "user", "chat", "date")
-    list_filter = ("date", "user", "chat")
-    search_fields = ("@text",)
+    list_display = ("id", "sender", "chat", "date_created")
+    list_filter = ("date_created", "sender", "chat")
+    search_fields = ("@content",)

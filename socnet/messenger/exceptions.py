@@ -1,5 +1,5 @@
 from __future__ import annotations
 
 
-class ChatParticipantsCountError(Exception):
+class ChatMembersCountError(Exception):
     pass

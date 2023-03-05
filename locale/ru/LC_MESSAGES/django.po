@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-05 09:53+0000\n"
+"POT-Creation-Date: 2023-03-05 15:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,14 +33,11 @@ msgstr "Поиск постов"
 msgid "Search query"
 msgstr "Поисковый запрос"
 
-msgid "user"
-msgstr "пользователь"
+msgid "author"
+msgstr "автор"
 
-msgid "text"
-msgstr "текст"
-
-msgid "date/time"
-msgstr "дата/время"
+msgid "content"
+msgstr "содержание"
 
 msgid "likers"
 msgstr "любители"
@@ -66,13 +63,19 @@ msgstr "Пожалуйста, попробуйте ещё раз."
 msgid "Core"
 msgstr "Основное"
 
+msgid "date created"
+msgstr "дата создания"
+
+msgid "date updated"
+msgstr "дата обновления"
+
 msgid "Supports a safe subset of HTML and Markdown."
 msgstr "Поддерживает безопасное подмножество HTML и Markdown."
 
 msgid "Messenger"
 msgstr "Мессенджер"
 
-msgid "participants"
+msgid "members"
 msgstr "участники"
 
 msgid "chat"
@@ -81,13 +84,16 @@ msgstr "чат"
 msgid "chats"
 msgstr "чаты"
 
+msgid "sender"
+msgstr "отправитель"
+
 msgid "message"
 msgstr "сообщение"
 
 msgid "messages"
 msgstr "сообщения"
 
-msgid "The chat must have 2 participants."
+msgid "The chat must have 2 members."
 msgstr "В чате должно быть 2 участника."
 
 msgid "Bad Request (400)"

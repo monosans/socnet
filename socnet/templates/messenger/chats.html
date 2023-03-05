@@ -12,7 +12,7 @@
   <div class="row justify-content-center">
     <div class="col-xl-6">
       {% for chat in chats %}
-        {% with interlocutor=chat.participants.all|first %}
+        {% with interlocutor=chat.members.all|first %}
           <div class="card mb-2">
             <a href="{{ chat.get_absolute_url }}"
                class="text-dark text-decoration-none">
@@ -36,7 +36,7 @@
                           {% endif %}
                         </div>
                         {% if last_message %}
-                          <div class="text-secondary">{{ last_message.date }}</div>
+                          <div class="text-secondary">{{ last_message.date_created }}</div>
                         {% endif %}
                       {% endwith %}
                     </div>

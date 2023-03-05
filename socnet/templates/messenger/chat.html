@@ -21,8 +21,8 @@
             {% for message in chat.messages.all %}
               <div class="row mb-3">
                 <div class="avatar-thumbnail">
-                  {% if message.user.image %}
-                    <img src="{{ message.user.image.url }}"
+                  {% if message.sender.image %}
+                    <img src="{{ message.sender.image.url }}"
                          alt=""
                          class="rounded"
                          loading="lazy"/>
@@ -31,11 +31,11 @@
                 <div class="col ms-2">
                   <div class="text-break">
                     <div>
-                      <a href="{{ message.user.get_absolute_url }}"
-                         class="text-decoration-none">{{ message.user }}</a>
-                      <span class="text-secondary">{{ message.formatted_date }}</span>
+                      <a href="{{ message.sender.get_absolute_url }}"
+                         class="text-decoration-none">{{ message.sender }}</a>
+                      <span class="text-secondary">{{ message.formatted_date_created }}</span>
                     </div>
-                    <div class="me-2 img-responsive">{{ message.text|markdownify }}</div>
+                    <div class="me-2 img-responsive">{{ message.content|markdownify }}</div>
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
           <form id="messageSendForm">
             {{ form|as_crispy_errors }}
             <div class="input-group">
-              {{ form.text }}
+              {{ form.content }}
               <button type="submit" class="btn btn-primary" id="messageSendBtn">
                 {% trans "Send" %}
               </button>

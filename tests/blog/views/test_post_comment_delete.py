@@ -46,7 +46,7 @@ def test_non_author_post(authed_client: AuthedClient) -> None:
 
 def test_author_post(authed_client: AuthedClient) -> None:
     client, user = authed_client
-    comment = factories.PostCommentFactory(user=user)
+    comment = factories.PostCommentFactory(author=user)
     with assert_count_diff(models.PostComment, -1):
         response = client.post(get_url(comment), follow=True)
     assert response.redirect_chain == [(user.get_absolute_url(), 302)]
@@ -55,7 +55,7 @@ def test_author_post(authed_client: AuthedClient) -> None:
 
 def test_author_post_with_redirect(authed_client: AuthedClient) -> None:
     client, user = authed_client
-    comment = factories.PostCommentFactory(user=user)
+    comment = factories.PostCommentFactory(author=user)
     post_url = comment.post.get_absolute_url()
     with assert_count_diff(models.PostComment, -1):
         response = client.post(f"{get_url(comment)}?next={post_url}", follow=True)
