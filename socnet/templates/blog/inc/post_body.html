@@ -58,14 +58,7 @@
     </div>
   </div>
 </div>
-<div class="img-responsive">
-  <div class="ms-1">{{ post.text|markdownify }}</div>
-  {% if post.image %}
-    <div>
-      <img class="rounded" src="{{ post.image.url }}" alt="" loading="lazy"/>
-    </div>
-  {% endif %}
-</div>
+<div class="ms-1 img-responsive">{{ post.text|markdownify }}</div>
 <div class="fs-4">
   {% if request.user.is_anonymous %}
     <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"

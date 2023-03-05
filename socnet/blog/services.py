@@ -21,7 +21,7 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
         .select_related("user")
-        .only("date", "image", "text", "user__image", "user__username")
+        .only("date", "text", "user__image", "user__username")
     )
     if request.user.is_anonymous:
         return qs

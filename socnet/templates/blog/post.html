@@ -86,14 +86,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="img-responsive">
-          <div class="text-break">{{ comment.text|markdownify }}</div>
-          {% if comment.image %}
-            <div class="mb-1">
-              <img src="{{ comment.image.url }}" alt="" loading="lazy" class="rounded"/>
-            </div>
-          {% endif %}
-        </div>
+        <div class="text-break img-responsive">{{ comment.text|markdownify }}</div>
         <div class="d-flex justify-content-between">
           <div class="text-muted">{{ comment.date }}</div>
           <div>

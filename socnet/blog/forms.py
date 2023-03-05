@@ -10,14 +10,14 @@ from . import models
 class PostCreationForm(forms.ModelForm[models.Post]):
     class Meta:
         model = models.Post
-        fields = ("text", "image")
+        fields = ("text",)
         help_texts = {"text": MARKDOWN_HELP_TEXT}
 
 
 class PostCommentCreationForm(forms.ModelForm[models.PostComment]):
     class Meta:
         model = models.PostComment
-        fields = ("text", "image")
+        fields = ("text",)
         help_texts = {"text": MARKDOWN_HELP_TEXT}
 
 

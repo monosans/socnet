@@ -14,10 +14,7 @@ class Post(models.Model):
         related_name="posts",
         verbose_name=_("user"),
     )
-    text = models.TextField(verbose_name=_("text"), max_length=4096, blank=True)
-    image = models.ImageField(
-        verbose_name=_("image"), upload_to="post_images/%Y/%m/%d/", blank=True
-    )
+    text = models.TextField(verbose_name=_("text"), max_length=4096)
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
     likers = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
@@ -33,12 +30,6 @@ class Post(models.Model):
     def get_absolute_url(self) -> str:
         return reverse("blog:post", args=(self.pk,))
 
-    def clean(self) -> None:
-        if not self.text and not self.image:
-            msg = gettext("You must provide either text or an image")
-            code = "must_provide_either_text_or_image"
-            raise ValidationError(msg, code)
-
 
 class PostComment(models.Model):
     post = models.ForeignKey(
@@ -53,10 +44,7 @@ class PostComment(models.Model):
         related_name="post_comments",
         verbose_name=_("user"),
     )
-    text = models.TextField(verbose_name=_("text"), max_length=4096, blank=True)
-    image = models.ImageField(
-        verbose_name=_("image"), upload_to="post_comment_images/%Y/%m/%d/", blank=True
-    )
+    text = models.TextField(verbose_name=_("text"), max_length=4096)
     date = models.DateTimeField(verbose_name=_("date/time"), auto_now_add=True)
     likers = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
@@ -68,9 +56,3 @@ class PostComment(models.Model):
     class Meta:
         verbose_name = _("post comment")
         verbose_name_plural = _("post comments")
-
-    def clean(self) -> None:
-        if not self.text and not self.image:
-            msg = gettext("You must provide either text or an image")
-            code = "must_provide_either_text_or_image"
-            raise ValidationError(msg, code)
