@@ -7,7 +7,7 @@
 {% endblock title %}
 {% block card_body %}
   <h3 class="mb-3 text-center">{% trans "Create post" %}</h3>
-  <form method="post" enctype="multipart/form-data">
+  <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit" class="btn btn-primary w-100">
