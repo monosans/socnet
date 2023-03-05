@@ -31,6 +31,10 @@
         </div>
         {% if post.author == request.user %}
           <div>
+            <a href="{% url 'blog:edit_post' post.pk %}"
+               class="text-decoration-none">
+              <i class="fa-solid fa-pen-to-square btn text-primary"></i>
+            </a>
             <i class="fa-solid fa-xmark btn text-danger"
                data-bs-toggle="modal"
                data-bs-target="#post{{ post.pk }}_modal"></i>

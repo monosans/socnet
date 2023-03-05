@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-05 17:22+0000\n"
+"POT-Creation-Date: 2023-03-05 20:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -259,6 +259,25 @@ msgstr "Админ-панель"
 msgid "Create post"
 msgstr "Создать пост"
 
+#, python-format
+msgid "Edit post comment #%(comment_pk)s"
+msgstr "Редактировать комментарий к посту №%(comment_pk)s"
+
+#, python-format
+msgid "Edit <a href=\"%(comment_url)s\" class=\"text-decoration-none\">post comment #%(comment_pk)s</a>"
+msgstr "Редактировать <a href=\"%(comment_url)s\" class=\"text-decoration-none\">комментарий к посту №%(comment_pk)s</a>"
+
+msgid "Save"
+msgstr "Сохранить"
+
+#, python-format
+msgid "Edit post #%(post_pk)s"
+msgstr "Редактировать пост №%(post_pk)s"
+
+#, python-format
+msgid "Edit <a href=\"%(post_url)s\" class=\"text-decoration-none\">post #%(post_pk)s</a>"
+msgstr "Редактировать <a href=\"%(post_url)s\" class=\"text-decoration-none\">пост №%(post_pk)s</a>"
+
 msgid "Admin page"
 msgstr "Страница администрирования"
 
@@ -370,9 +389,6 @@ msgstr "Редактировать профиль"
 
 msgid "Change email"
 msgstr "Изменить электронную почту"
-
-msgid "Save"
-msgstr "Сохранить"
 
 msgid "No users found"
 msgstr "Пользователи не найдены"

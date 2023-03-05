@@ -20,6 +20,6 @@ class DateUpdatedModel(models.Model):
         abstract = True
 
 
-class TimeStampedModel(DateCreatedModel, DateUpdatedModel):
+class TimestampedModel(DateCreatedModel, DateUpdatedModel):
     class Meta:
         abstract = True

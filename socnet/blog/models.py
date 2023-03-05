@@ -5,10 +5,10 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from ..core.models import DateCreatedModel
+from ..core.models import TimestampedModel
 
 
-class Post(DateCreatedModel):
+class Post(TimestampedModel):
     author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -31,7 +31,7 @@ class Post(DateCreatedModel):
         return reverse("blog:post", args=(self.pk,))
 
 
-class PostComment(DateCreatedModel):
+class PostComment(TimestampedModel):
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
@@ -55,3 +55,7 @@ class PostComment(DateCreatedModel):
     class Meta:
         verbose_name = _("post comment")
         verbose_name_plural = _("post comments")
+
+    def get_absolute_url(self) -> str:
+        post_url = reverse("blog:post", args=(self.post_id,))
+        return f"{post_url}#comment{self.pk}"

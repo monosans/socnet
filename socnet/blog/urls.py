@@ -8,6 +8,12 @@ app_name = "blog"
 urlpatterns = [
     path("create_post/", views.create_post_view, name="create_post"),
     path(
+        "edit_comment/<int:pk>/",
+        views.EditPostCommentView.as_view(),
+        name="edit_comment",
+    ),
+    path("edit_post/<int:pk>/", views.EditPostView.as_view(), name="edit_post"),
+    path(
         "post_comment/<int:pk>/delete/",
         views.post_comment_delete_view,
         name="post_comment_delete",

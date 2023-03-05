@@ -122,6 +122,7 @@ class PostCommentFilter(FilterSet):
             **BASE_FIELDS,
             "content": CHAR_FIELDS,
             "date_created": DATETIME_FIELDS,
+            "date_updated": DATETIME_FIELDS,
             "post": ID_FIELDS,
             "author": ID_FIELDS,
         }
@@ -134,6 +135,7 @@ class PostFilter(FilterSet):
             **BASE_FIELDS,
             "content": CHAR_FIELDS,
             "date_created": DATETIME_FIELDS,
+            "date_updated": DATETIME_FIELDS,
             "author": ID_FIELDS,
         }
 

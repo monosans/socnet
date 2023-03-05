@@ -1,0 +1,17 @@
+{% extends "card.html" %}
+
+{% load i18n crispy_forms_tags %}
+
+{% block title %}
+  {% blocktrans with comment_pk=object.pk %}Edit post comment #{{ comment_pk }}{% endblocktrans %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="mb-3 text-center">
+    {% blocktrans with comment_url=object.get_absolute_url comment_pk=object.pk %}Edit <a href="{{ comment_url }}" class="text-decoration-none">post comment #{{ comment_pk }}</a>{% endblocktrans %}
+  </h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary w-100">{% trans "Save" %}</button>
+  </form>
+{% endblock card_body %}

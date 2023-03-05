@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from typing import Optional, Union
+from typing import Any, Optional, TypeVar, Union
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
+from django.core.exceptions import PermissionDenied
 from django.core.paginator import Page
 from django.db.models import Count, Prefetch, Q, QuerySet
+from django.forms import ModelForm
+from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -17,11 +20,43 @@ from django.views.decorators.http import (
     require_POST,
     require_safe,
 )
+from django.views.generic import UpdateView
 
 from ..core.utils import paginate
 from ..users.models import User
 from ..users.types import AuthedRequest
 from . import forms, models, services
+
+T_BaseModelForm = TypeVar("T_BaseModelForm", bound=BaseModelForm[Any])
+T_Post = TypeVar("T_Post", bound=Union[models.Post, models.PostComment])
+
+
+class _BaseEditPostView(UpdateView[T_Post, T_BaseModelForm]):
+    fields = ("content",)
+
+    def get_object(self, queryset: Optional[QuerySet[T_Post]] = None) -> T_Post:
+        obj = super().get_object(queryset)
+        if obj.author_id != self.request.user.pk:
+            raise PermissionDenied
+        return obj
+
+
+class EditPostView(_BaseEditPostView[models.Post, ModelForm[models.Post]]):
+    model = models.Post
+    template_name = "blog/edit_post.html"
+
+    def get_queryset(self) -> QuerySet[models.Post]:
+        return super().get_queryset().only("author_id", *self.fields)
+
+
+class EditPostCommentView(
+    _BaseEditPostView[models.PostComment, ModelForm[models.PostComment]]
+):
+    model = models.PostComment
+    template_name = "blog/edit_comment.html"
+
+    def get_queryset(self) -> QuerySet[models.PostComment]:
+        return super().get_queryset().only("author_id", "post_id", *self.fields)
 
 
 @require_http_methods(["GET", "HEAD", "POST"])
