@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-05 15:13+0000\n"
+"POT-Creation-Date: 2023-03-05 17:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -281,8 +281,9 @@ msgstr "Понравившиеся посты"
 msgid "%(user)s has no liked posts."
 msgstr "У %(user)s нет понравившихся постов."
 
-msgid "Post"
-msgstr "Пост"
+#, python-format
+msgid "Post #%(post_pk)s"
+msgstr "Пост №%(post_pk)s"
 
 msgid "Comment"
 msgstr "Комментировать"
@@ -344,8 +345,9 @@ msgstr "Обо мне"
 msgid "%(user)s has no posts."
 msgstr "У %(user)s нет постов."
 
-msgid "Chat"
-msgstr "Чат"
+#, python-format
+msgid "Chat #%(chat_pk)s"
+msgstr "Чат №%(chat_pk)s"
 
 msgid "Send"
 msgstr "Отправить"

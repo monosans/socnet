@@ -3,7 +3,7 @@
 {% load static i18n markdownify crispy_forms_tags %}
 
 {% block title %}
-  {% trans "Chat" %} #{{ chat.pk }}
+  {% blocktrans with chat_pk=chat.pk%}Chat #{{ chat_pk }}{% endblocktrans %}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>

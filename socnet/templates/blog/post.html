@@ -3,7 +3,7 @@
 {% load static i18n crispy_forms_tags markdownify obj_admin_url %}
 
 {% block title %}
-  {% trans "Post" %} #{{ post.pk }}
+  {% blocktrans with post_pk=post.pk%}Post #{{ post_pk }}{% endblocktrans %}
 {% endblock title %}
 {% block css %}
   {% include "blog/inc/font_awesome.html" %}
