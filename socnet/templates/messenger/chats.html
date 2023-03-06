@@ -32,7 +32,7 @@
                         <div class="text-break">
                           {{ interlocutor }}
                           {% if last_message %}
-                            <div class="text-secondary">{{ last_message.text|truncatechars:30 }}</div>
+                            <div class="text-secondary">{{ last_message.content|truncatechars:30 }}</div>
                           {% endif %}
                         </div>
                         {% if last_message %}
