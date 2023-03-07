@@ -6,6 +6,7 @@
   {% blocktrans with chat_pk=chat.pk%}Chat #{{ chat_pk }}{% endblocktrans %}
 {% endblock title %}
 {% block css %}
+  {% include "inc/font_awesome.html" %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>
   <link rel="stylesheet" href="{% static 'css/chat.css' %}"/>
 {% endblock css %}
@@ -50,7 +51,7 @@
             <div class="input-group">
               {{ form.content }}
               <button type="submit" class="btn btn-primary" id="messageSendBtn">
-                {% trans "Send" %}
+                <i class="fa-solid fa-paper-plane px-2"></i>
               </button>
             </div>
           </form>
