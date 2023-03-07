@@ -31,6 +31,7 @@
                       {% with last_message=chat.messages.first %}
                         <div class="text-break">
                           {{ interlocutor }}
+                          {{ interlocutor.display_name_in_parentheses }}
                           {% if last_message %}
                             <div class="text-secondary">{{ last_message.content|truncatechars:30 }}</div>
                           {% endif %}

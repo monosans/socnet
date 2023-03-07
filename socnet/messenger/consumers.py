@@ -50,10 +50,13 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await save_obj(message)
         msg = {
             "type": "chat_message",
+            "pk": message.pk,
+            "href": message.get_absolute_url(),
             "content": markdownify(message.content),
             "date_created": message.formatted_date_created,
             "sender": {
                 "username": sender.get_username(),
+                "display_name": sender.display_name_in_parentheses,
                 "image": sender.image.url if sender.image else None,
                 "href": sender.get_absolute_url(),
             },

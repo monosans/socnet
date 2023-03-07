@@ -20,7 +20,7 @@
         <div class="card-body py-0">
           <div id="chat-log">
             {% for message in chat.messages.all %}
-              <div class="row mb-3">
+              <div class="row mb-3" id="message{{ message.pk }}">
                 <div class="avatar-thumbnail">
                   {% if message.sender.image %}
                     <img src="{{ message.sender.image.url }}"
@@ -33,8 +33,9 @@
                   <div class="text-break">
                     <div>
                       <a href="{{ message.sender.get_absolute_url }}"
-                         class="text-decoration-none">{{ message.sender }}</a>
-                      <span class="text-secondary">{{ message.formatted_date_created }}</span>
+                         class="text-decoration-none">{{ message.sender }} {{ message.sender.display_name_in_parentheses }}</a>
+                      <a href="{{ message.get_absolute_url }}"
+                         class="text-decoration-none text-secondary">{{ message.formatted_date_created }}</a>
                     </div>
                     <div class="me-2 img-responsive">{{ message.content|markdownify }}</div>
                   </div>

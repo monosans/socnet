@@ -32,7 +32,12 @@ def chat_view(request: AuthedRequest, pk: int) -> HttpResponse:
         models.Message.objects.select_related("sender")
         .order_by("pk")
         .only(
-            "chat_id", "date_created", "content", "sender__image", "sender__username"
+            "chat_id",
+            "date_created",
+            "content",
+            "sender__display_name",
+            "sender__image",
+            "sender__username",
         ),
     )
     qs = request.user.chats.filter(pk=pk).prefetch_related(prefetch).only("pk")

@@ -41,6 +41,10 @@ class Message(DateCreatedModel):
         verbose_name = _("message")
         verbose_name_plural = _("messages")
 
+    def get_absolute_url(self) -> str:
+        chat_url = reverse("messenger:chat", args=(self.chat_id,))
+        return f"{chat_url}#message{self.pk}"
+
     @property
     def formatted_date_created(self) -> str:
         return defaultfilters.date(self.date_created, "Y-m-d H:i")

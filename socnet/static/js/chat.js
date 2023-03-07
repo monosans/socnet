@@ -20,11 +20,11 @@
      * @return {void}
      */
     addNewMessage(data) {
-      let html = '<div class="row mb-3"><div class="avatar-thumbnail">';
+      let html = `<div class="row mb-3" id="${data.pk}"><div class="avatar-thumbnail">`;
       if (data.sender.image) {
         html += `<img src="${data.sender.image}" alt="" class="rounded" loading="lazy"/>`;
       }
-      html += `</div><div class="col ms-2"><div class="text-break"><div><a href="${data.sender.href}" class="text-decoration-none">${data.sender.username}</a> <span class="text-secondary">${data.date_created}</span></div><div class="me-2 img-responsive">${data.content}</div></div></div></div>`;
+      html += `</div><div class="col ms-2"><div class="text-break"><div><a href="${data.sender.href}" class="text-decoration-none">${data.sender.username} ${data.sender.display_name}</a> <a href="${data.href}" class="text-decoration-none text-secondary">${data.date_created}</a></div><div class="me-2 img-responsive">${data.content}</div></div></div></div>`;
       this.element.innerHTML += html;
     }
   }
@@ -63,6 +63,7 @@
   const messageSendBtn = document.getElementById("messageSendBtn");
   messageTextarea.addEventListener("keyup", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
+      messageTextarea.style.removeProperty("height");
       messageSendBtn.click();
     }
   });
