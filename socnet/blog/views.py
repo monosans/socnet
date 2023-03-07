@@ -4,6 +4,7 @@ from typing import Any, Optional, TypeVar, Union
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import SearchRank
 from django.core.exceptions import PermissionDenied
@@ -31,7 +32,7 @@ T_BaseModelForm = TypeVar("T_BaseModelForm", bound=BaseModelForm[Any])
 T_Post = TypeVar("T_Post", bound=Union[models.Post, models.PostComment])
 
 
-class _BaseEditPostView(UpdateView[T_Post, T_BaseModelForm]):
+class _BaseEditPostView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm]):
     fields = ("content",)
 
     def get_object(self, queryset: Optional[QuerySet[T_Post]] = None) -> T_Post:
