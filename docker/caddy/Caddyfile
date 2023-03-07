@@ -7,7 +7,7 @@
 (common) {
 	header {
 		-Server
-		Content-Security-Policy "default-src 'none'; connect-src 'self'; font-src cdn.jsdelivr.net; script-src 'self' cdn.jsdelivr.net; style-src 'self' cdn.jsdelivr.net; img-src 'self' data:;"
+		Content-Security-Policy "default-src 'none'; connect-src 'self'; font-src cdn.jsdelivr.net; script-src 'self' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net; img-src 'self' data:;"
 		Permissions-Policy "interest-cohort=()"
 		Referrer-Policy "same-origin"
 		Strict-Transport-Security "max-age=31536000"
