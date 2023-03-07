@@ -27,7 +27,7 @@ urlpatterns = [
     path("post_comment_like/", views.PostCommentLikeView.as_view()),
     path("post_like/<int:pk>/", views.PostUnlikeView.as_view()),
     path("post_like/", views.PostLikeView.as_view()),
-    path("subscription/<int:pk>/", views.UserUnsubscribeView.as_view()),
+    path("subscription/<str:username>/", views.UserUnsubscribeView.as_view()),
     path("subscription/", views.UserSubscribeView.as_view()),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),

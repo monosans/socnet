@@ -9,12 +9,12 @@
       method,
       body;
     if (btn.dataset.isSubscribed === "y") {
-      url += `${btn.dataset.userPk}/`;
+      url += `${btn.dataset.username}/`;
       method = "DELETE";
       body = null;
     } else {
       method = "POST";
-      body = JSON.stringify({ pk: btn.dataset.userPk });
+      body = JSON.stringify({ username: btn.dataset.username });
     }
     return {
       url: url,
@@ -52,9 +52,9 @@
         (request.options.method === "DELETE" ? -1 : 1);
     }
 
-    const userPk = btn.dataset.userPk;
+    const username = btn.dataset.username;
     const subBtns = document.querySelectorAll(
-      `[data-is-subscribed][data-user-pk="${userPk}"]`
+      `[data-is-subscribed][data-username="${username}"]`
     );
     for (const subBtn of subBtns) {
       subBtn.classList.toggle("d-none");

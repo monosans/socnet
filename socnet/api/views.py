@@ -21,6 +21,14 @@ def _validate_pk(data: Union[int, Dict[str, Any]]) -> Any:
     return serializer.validated_data["pk"]
 
 
+def _validate_username(data: Union[str, Dict[str, Any]]) -> Any:
+    if isinstance(data, str):
+        data = {"username": data}
+    serializer = serializers.UsernameSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    return serializer.validated_data["username"]
+
+
 class _AuthedAPIView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -62,8 +70,8 @@ class PostCommentLikeView(_LikeView):
 
 
 class UserUnsubscribeView(_AuthedAPIView):
-    def delete(self, request: AuthedRequest, pk: int) -> Response:
-        qs = User.objects.filter(pk=_validate_pk(pk))
+    def delete(self, request: AuthedRequest, username: str) -> Response:
+        qs = User.objects.filter(username=_validate_username(username))
         user = get_object_or_404(qs)
         user.subscribers.remove(request.user)
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -71,7 +79,7 @@ class UserUnsubscribeView(_AuthedAPIView):
 
 class UserSubscribeView(_AuthedAPIView):
     def post(self, request: AuthedRequest) -> Response:
-        qs = User.objects.filter(pk=_validate_pk(request.data))
+        qs = User.objects.filter(username=_validate_username(request.data))
         user = get_object_or_404(qs)
         try:
             user.subscribers.add(request.user)

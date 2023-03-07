@@ -46,14 +46,14 @@
                           {{ subscription.display_name_in_parentheses }}
                         </div>
                         {% if request.user == user %}
-                          <div>
-                            <button type="button" class="btn btn-primary" data-is-subscribed="y" data-user-pk={{ subscription.pk }}>
+                          <a href="#">
+                            <button type="button" class="btn btn-primary" data-is-subscribed="y" data-username={{ subscription.get_username }}>
                               {% trans "Unsubscribe" %}
                             </button>
-                            <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-user-pk={{ subscription.pk }}>
+                            <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-username={{ subscription.get_username }}>
                               {% trans "Subscribe" %}
                             </button>
-                          </div>
+                          </a>
                         {% endif %}
                       </div>
                     </div>

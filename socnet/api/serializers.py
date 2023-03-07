@@ -17,6 +17,10 @@ class PkSerializer(serializers.Serializer[Any]):
     pk = serializers.IntegerField(min_value=1)
 
 
+class UsernameSerializer(serializers.Serializer[Any]):
+    username = serializers.CharField(min_length=1)
+
+
 class ChatSerializer(serializers.HyperlinkedModelSerializer):
     messages: serializers.HyperlinkedRelatedField[messenger_models.Message] = (
         serializers.HyperlinkedRelatedField(
