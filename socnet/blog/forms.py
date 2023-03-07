@@ -24,7 +24,7 @@ class PostCommentCreationForm(forms.ModelForm[models.PostComment]):
 class PostSearchForm(forms.Form):
     q = forms.Field(
         widget=forms.Textarea(
-            {"rows": "1", "class": "form-control", "placeholder": _("Search posts")}
+            {"class": "form-control", "placeholder": _("Search posts")}
         ),
         label=_("Search query"),
     )

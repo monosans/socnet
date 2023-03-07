@@ -1,5 +1,9 @@
-.chat-log {
-  overflow-y: scroll;
+#chat-log {
   overflow-x: hidden;
-  height: 75vh;
+  overflow-y: scroll;
+  height: 70vh;
+}
+
+#id_content {
+  max-height: 15vh;
 }

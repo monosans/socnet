@@ -12,6 +12,6 @@ class MessageCreationForm(forms.ModelForm[models.Message]):
         fields = ("content",)
         widgets = {
             "content": forms.Textarea(
-                {"class": "form-control", "rows": 4, "placeholder": MARKDOWN_HELP_TEXT}
+                {"class": "form-control", "placeholder": MARKDOWN_HELP_TEXT}
             )
         }
