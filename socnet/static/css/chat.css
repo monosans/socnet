@@ -4,6 +4,7 @@
   height: 70vh;
 }
 
+/* stylelint-disable-next-line selector-id-pattern */
 #id_content {
   max-height: 15vh;
 }
