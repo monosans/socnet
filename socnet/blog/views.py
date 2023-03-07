@@ -64,7 +64,7 @@ class EditPostCommentView(
 @login_required
 def create_post_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
-        form = forms.PostCreationForm(request.POST, request.FILES)
+        form = forms.PostCreationForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -97,7 +97,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "POST":
         if request.user.is_anonymous:
             return redirect_to_login(next=request.path)
-        form = forms.PostCommentCreationForm(request.POST, request.FILES)
+        form = forms.PostCommentCreationForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post_id = pk
