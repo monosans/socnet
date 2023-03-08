@@ -98,6 +98,9 @@
             <a href="{{ comment.get_absolute_url }}"
                class="text-decoration-none text-muted">
               {{ comment.date_created }}
+              {% if comment.date_created|date:"U" != comment.date_updated|date:"U" %}
+                ({% trans "last edited" %} {{ comment.date_updated }})
+              {% endif %}
             </a>
             <div>
               {% if request.user.is_anonymous %}

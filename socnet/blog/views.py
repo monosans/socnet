@@ -124,7 +124,14 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
         models.PostComment.objects.annotate(Count("likers"))
         .select_related("author")
         .order_by("pk")
-        .only("date_created", "post_id", "content", "author__image", "author__username")
+        .only(
+            "date_created",
+            "date_updated",
+            "post_id",
+            "content",
+            "author__image",
+            "author__username",
+        )
     )
     if request.user.is_authenticated:
         comments_qs = comments_qs.annotate(  # type: ignore[assignment]
@@ -180,7 +187,7 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
         .order_by("-pk")
-        .only("date_created", "content", "author_id")
+        .only("date_created", "date_updated", "content", "author_id")
     )
     if request.user.is_authenticated:
         posts = posts.annotate(  # type: ignore[assignment]
