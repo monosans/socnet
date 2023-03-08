@@ -47,8 +47,8 @@
 
     const subscribersCount = document.querySelector('[id="subscribers_count"]');
     if (subscribersCount) {
-      subscribersCount.innerHTML =
-        parseInt(subscribersCount.innerHTML) +
+      subscribersCount.textContent =
+        parseInt(subscribersCount.textContent) +
         (request.options.method === "DELETE" ? -1 : 1);
     }
 

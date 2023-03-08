@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-  const textareas = document.getElementsByTagName("textarea");
+  const textareas = document.querySelectorAll("textarea");
   for (const textarea of textareas) {
     textarea.rows = 1;
   }

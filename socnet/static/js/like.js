@@ -58,12 +58,12 @@
     }
 
     const span = btn.querySelector("span");
-    const likesCount = parseInt(span.innerHTML);
+    const likesCount = parseInt(span.textContent);
     if (btn.dataset.isLiked === "y") {
-      span.innerHTML = likesCount - 1;
+      span.textContent = likesCount - 1;
       btn.dataset.isLiked = "n";
     } else {
-      span.innerHTML = likesCount + 1;
+      span.textContent = likesCount + 1;
       btn.dataset.isLiked = "y";
     }
 

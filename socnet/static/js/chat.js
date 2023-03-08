@@ -5,7 +5,7 @@
      * @param {string} id
      */
     constructor(id) {
-      this.element = document.getElementById(id);
+      this.element = document.querySelector(`#${id}`);
     }
 
     /**
@@ -60,7 +60,7 @@
    * @return {WebSocket}
    */
   function createChatWebSocket() {
-    const chatPk = document.getElementById("chat_pk").textContent;
+    const chatPk = document.querySelector("#chat_pk").textContent;
     const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
     return new WebSocket(
       `${wsProtocol}://${window.location.host}/ws/chat/${chatPk}/`
@@ -82,9 +82,9 @@
   const chatWs = createChatWebSocket();
   registerOnMessageHandler(chatWs);
 
-  const messageTextarea = document.getElementById("id_content");
+  const messageTextarea = document.querySelector("#id_content");
 
-  const messageSendBtn = document.getElementById("messageSendBtn");
+  const messageSendBtn = document.querySelector("#messageSendBtn");
   messageTextarea.addEventListener("keyup", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       messageTextarea.style.removeProperty("height");
@@ -92,7 +92,7 @@
     }
   });
 
-  document.getElementById("messageSendForm").addEventListener("submit", (e) => {
+  document.querySelector("#messageSendForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const data = JSON.stringify({
       message: messageTextarea.value,
