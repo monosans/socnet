@@ -17,15 +17,15 @@
       body = JSON.stringify({ username: btn.dataset.username });
     }
     return {
-      url: url,
+      url,
       options: {
-        method: method,
+        method,
         headers: {
           "Content-Type": "application/json",
           "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
             .value,
         },
-        body: body,
+        body,
       },
     };
   }
@@ -41,8 +41,7 @@
     const request = getRequest(btn);
     const response = await fetch(request.url, request.options);
     if (!response.ok) {
-      Promise.reject(new Error(response));
-      return;
+      throw new Error(response);
     }
 
     const subscribersCount = document.querySelector('[id="subscribers_count"]');

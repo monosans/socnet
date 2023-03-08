@@ -18,8 +18,7 @@
     }
   }
 
-  const inputs = document.querySelectorAll(textInputSelectors);
-  for (const input of inputs) {
+  for (const input of document.querySelectorAll(textInputSelectors)) {
     input.addEventListener("input", cleanWhitespaceInput);
   }
 
@@ -28,14 +27,12 @@
    * @return {void}
    */
   function trimInputs(e) {
-    const inputs = e.currentTarget.querySelectorAll(textInputSelectors);
-    for (const input of inputs) {
+    for (const input of e.currentTarget.querySelectorAll(textInputSelectors)) {
       input.value = input.value.trim();
     }
   }
 
-  const forms = document.querySelectorAll("form");
-  for (const form of forms) {
+  for (const form of document.querySelectorAll("form")) {
     form.addEventListener("submit", trimInputs);
   }
 })();
