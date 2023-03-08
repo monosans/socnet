@@ -21,7 +21,7 @@
      */
     addNewMessage(data) {
       const html = `
-<div class="row mb-3" id="${data.pk}">
+<div class="row mb-3" id="message${data.pk}">
   <div class="avatar-thumbnail">
     ${
       data.sender.image
