@@ -168,15 +168,10 @@ def posts_view(request: HttpRequest) -> HttpResponse:
 
 @require_safe
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
-    prefetch_qs = services.get_posts_preview_qs(request).order_by("-pk")
-    prefetch = Prefetch("liked_posts", prefetch_qs)
-    qs = (
-        User.objects.filter(username=username)
-        .prefetch_related(prefetch)
-        .only("username")
-    )
+    qs = User.objects.filter(username=username).only("username")
     user = get_object_or_404(qs)
-    context = {"user": user}
+    posts = services.get_posts_preview_qs(request).filter(likers=user).order_by("-pk")
+    context = {"user": user, "posts": posts}
     return render(request, "blog/liked_posts.html", context)
 
 
