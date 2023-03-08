@@ -6,13 +6,13 @@ from django.utils.translation import gettext_lazy as _
 from . import models
 
 
-class PostCreationForm(forms.ModelForm[models.Post]):
+class PostForm(forms.ModelForm[models.Post]):
     class Meta:
         model = models.Post
         fields = ("content",)
 
 
-class PostCommentCreationForm(forms.ModelForm[models.PostComment]):
+class PostCommentForm(forms.ModelForm[models.PostComment]):
     class Meta:
         model = models.PostComment
         fields = ("content",)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Optional, TypeVar, Union
+from typing import Optional, TypeVar, Union
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,8 +10,6 @@ from django.contrib.postgres.search import SearchRank
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Page
 from django.db.models import Count, Prefetch, Q, QuerySet
-from django.forms import ModelForm
-from django.forms.models import BaseModelForm
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -28,50 +26,60 @@ from ..users.models import User
 from ..users.types import AuthedRequest
 from . import forms, models, services
 
-T_BaseModelForm = TypeVar("T_BaseModelForm", bound=BaseModelForm[Any])
+T_BaseModelForm = TypeVar(
+    "T_BaseModelForm", bound=Union[forms.PostForm, forms.PostCommentForm]
+)
 T_Post = TypeVar("T_Post", bound=Union[models.Post, models.PostComment])
 
 
 class _BaseEditPostView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm]):
-    fields = ("content",)
-
     def get_object(self, queryset: Optional[QuerySet[T_Post]] = None) -> T_Post:
         obj = super().get_object(queryset)
         if obj.author_id != self.request.user.pk:
             raise PermissionDenied
         return obj
 
+    def form_valid(self, form: T_BaseModelForm) -> HttpResponse:
+        self.object = form.save(commit=False)  # type: ignore[assignment]
+        self.object.save(update_fields=(*form.Meta.fields, "date_updated"))
+        form.save_m2m()
+        return redirect(self.object)
 
-class EditPostView(_BaseEditPostView[models.Post, ModelForm[models.Post]]):
+
+class EditPostView(_BaseEditPostView[models.Post, forms.PostForm]):
     model = models.Post
+    form_class = forms.PostForm
     template_name = "blog/edit_post.html"
 
     def get_queryset(self) -> QuerySet[models.Post]:
-        return super().get_queryset().only("author_id", *self.fields)
+        return super().get_queryset().only("author_id", *self.form_class.Meta.fields)
 
 
-class EditPostCommentView(
-    _BaseEditPostView[models.PostComment, ModelForm[models.PostComment]]
-):
+class EditPostCommentView(_BaseEditPostView[models.PostComment, forms.PostCommentForm]):
     model = models.PostComment
+    form_class = forms.PostCommentForm
     template_name = "blog/edit_comment.html"
 
     def get_queryset(self) -> QuerySet[models.PostComment]:
-        return super().get_queryset().only("author_id", "post_id", *self.fields)
+        return (
+            super()
+            .get_queryset()
+            .only("author_id", "post_id", *self.form_class.Meta.fields)
+        )
 
 
 @require_http_methods(["GET", "HEAD", "POST"])
 @login_required
 def create_post_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
-        form = forms.PostCreationForm(request.POST)
+        form = forms.PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
             return redirect(post)
     else:
-        form = forms.PostCreationForm()
+        form = forms.PostForm()
     context = {"form": form}
     return render(request, "blog/create_post.html", context)
 
@@ -97,13 +105,13 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "POST":
         if request.user.is_anonymous:
             return redirect_to_login(next=request.path)
-        form = forms.PostCommentCreationForm(request.POST)
+        form = forms.PostCommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post_id = pk
             comment.author = request.user
             comment.save()
-            form = forms.PostCommentCreationForm()
+            form = forms.PostCommentForm()
         else:
             message = "{} {}".format(
                 _("An error occurred while creating the comment."),
@@ -111,7 +119,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             )
             messages.error(request, message)
     else:
-        form = forms.PostCommentCreationForm()
+        form = forms.PostCommentForm()
     comments_qs = (
         models.PostComment.objects.annotate(Count("likers"))
         .select_related("author")
