@@ -6,7 +6,7 @@ from django.template import defaultfilters
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from ..core.models import DateCreatedModel
+from ..core.models import DateCreatedModel, MarkdownContentModel
 
 
 class Chat(models.Model):
@@ -22,7 +22,7 @@ class Chat(models.Model):
         return reverse("messenger:chat", args=(self.pk,))
 
 
-class Message(DateCreatedModel):
+class Message(MarkdownContentModel, DateCreatedModel):
     sender = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -35,7 +35,6 @@ class Message(DateCreatedModel):
         related_name="messages",
         verbose_name=_("chat"),
     )
-    content = models.TextField(verbose_name=_("content"), max_length=4096)
 
     class Meta:
         verbose_name = _("message")

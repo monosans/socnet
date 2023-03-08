@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django import forms
 
-from ..core.templatetags.markdownify import MARKDOWN_HELP_TEXT
+from ..core.models import MARKDOWN_HELP_TEXT
 from . import models
 
 

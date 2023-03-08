@@ -5,17 +5,16 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from ..core.models import TimestampedModel
+from ..core.models import MarkdownContentModel, TimestampedModel
 
 
-class Post(TimestampedModel):
+class Post(MarkdownContentModel, TimestampedModel):
     author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="posts",
         verbose_name=_("author"),
     )
-    content = models.TextField(verbose_name=_("content"), max_length=4096)
     likers = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
         related_name="liked_posts",
@@ -31,7 +30,7 @@ class Post(TimestampedModel):
         return reverse("blog:post", args=(self.pk,))
 
 
-class PostComment(TimestampedModel):
+class PostComment(MarkdownContentModel, TimestampedModel):
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
@@ -44,7 +43,6 @@ class PostComment(TimestampedModel):
         related_name="post_comments",
         verbose_name=_("author"),
     )
-    content = models.TextField(verbose_name=_("content"), max_length=4096)
     likers = models.ManyToManyField(
         to=settings.AUTH_USER_MODEL,
         related_name="liked_comments",
