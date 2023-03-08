@@ -29,7 +29,10 @@ def lazy_img(tree: lxml.etree._Element) -> None:  # noqa: SLF001
 @register.filter()
 def markdownify(value: str) -> SafeString:
     sanitized_html = nh3.clean(md.convert(value))
-    tree = lxml.html.fromstring(sanitized_html)
+    try:
+        tree = lxml.html.fromstring(sanitized_html)
+    except lxml.etree.LxmlError:
+        return mark_safe(sanitized_html)
     bootstrapify(tree)
     lazy_img(tree)
     tree_str = lxml.etree.tostring(tree, encoding=str, method="html")
