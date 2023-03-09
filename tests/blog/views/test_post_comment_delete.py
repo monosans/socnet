@@ -11,7 +11,7 @@ from .. import factories
 
 
 def get_url(comment: models.PostComment) -> str:
-    return reverse("blog:post_comment_delete", args=(comment.pk,))
+    return reverse("blog:comment_delete", args=(comment.pk,))
 
 
 def test_unauthed_get(client: Client) -> None:

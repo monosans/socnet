@@ -30,7 +30,7 @@
                class="btn btn-primary w-100 mb-2">
               {% trans "Edit" %}
             </a>
-            <a href="{% url 'blog:create_post' %}" class="btn btn-primary w-100">
+            <a href="{% url 'blog:post_create' %}" class="btn btn-primary w-100">
               {% trans "Create post" %}
             </a>
           {% elif request.user.is_authenticated %}

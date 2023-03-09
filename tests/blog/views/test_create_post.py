@@ -8,7 +8,7 @@ from socnet.blog import models
 from ...conftest import AuthedClient
 from ...utils import assert_count_diff
 
-url = reverse_lazy("blog:create_post")
+url = reverse_lazy("blog:post_create")
 
 
 def test_unauthed_get(client: Client) -> None:

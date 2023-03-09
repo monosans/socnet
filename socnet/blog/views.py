@@ -46,19 +46,19 @@ class _BaseEditPostView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm])
         return HttpResponseRedirect(self.get_success_url())
 
 
-class EditPostView(_BaseEditPostView[models.Post, forms.PostForm]):
+class PostUpdateView(_BaseEditPostView[models.Post, forms.PostForm]):
     model = models.Post
     form_class = forms.PostForm
-    template_name = "blog/edit_post.html"
+    template_name = "blog/post_update.html"
 
     def get_queryset(self) -> QuerySet[models.Post]:
         return super().get_queryset().only("author_id", *self.form_class.Meta.fields)
 
 
-class EditPostCommentView(_BaseEditPostView[models.PostComment, forms.PostCommentForm]):
+class CommentUpdateView(_BaseEditPostView[models.PostComment, forms.PostCommentForm]):
     model = models.PostComment
     form_class = forms.PostCommentForm
-    template_name = "blog/edit_comment.html"
+    template_name = "blog/comment_update.html"
 
     def get_queryset(self) -> QuerySet[models.PostComment]:
         return (
@@ -68,9 +68,9 @@ class EditPostCommentView(_BaseEditPostView[models.PostComment, forms.PostCommen
         )
 
 
-class CreatePostView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]):
+class PostCreateView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]):
     form_class = forms.PostForm
-    template_name = "blog/create_post.html"
+    template_name = "blog/post_create.html"
 
     def form_valid(self, form: forms.PostForm) -> HttpResponse:
         form.instance.author = self.request.user  # type: ignore[assignment]
@@ -79,7 +79,7 @@ class CreatePostView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]
 
 @require_POST
 @login_required
-def post_comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
+def comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     request.user.post_comments.filter(pk=pk).delete()
     redirect_to = request.GET.get("next", request.user)
     return redirect(redirect_to)

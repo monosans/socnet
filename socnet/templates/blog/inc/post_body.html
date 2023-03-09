@@ -34,7 +34,7 @@
         </div>
         {% if post.author == request.user %}
           <div>
-            <a href="{% url 'blog:edit_post' post.pk %}"
+            <a href="{% url 'blog:post_update' post.pk %}"
                class="text-decoration-none">
               <i class="fa-solid fa-pen-to-square btn text-primary"></i>
             </a>
