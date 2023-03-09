@@ -13,15 +13,6 @@ from ..users.models import User
 from . import filters, serializers
 
 
-class ChatViewSet(viewsets.ModelViewSet[messenger_models.Chat]):
-    queryset = messenger_models.Chat.objects.prefetch_related(
-        Prefetch("messages", messenger_models.Message.objects.only("chat_id")),
-        Prefetch("members", User.objects.only("pk")),
-    )
-    serializer_class = serializers.ChatSerializer
-    filterset_class = filters.ChatFilter
-
-
 class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet[ContentType]):
     queryset = ContentType.objects.prefetch_related(
         Prefetch("logentry_set", LogEntry.objects.only("content_type_id")),
@@ -88,7 +79,6 @@ class PostViewSet(viewsets.ModelViewSet[blog_models.Post]):
 
 class UserViewSet(viewsets.ModelViewSet[User]):
     queryset = User.objects.prefetch_related(
-        Prefetch("chats", messenger_models.Chat.objects.only("pk")),
         Prefetch("emailaddress_set", EmailAddress.objects.only("user_id")),
         Prefetch("liked_comments", blog_models.PostComment.objects.only("user_id")),
         Prefetch("liked_posts", blog_models.Post.objects.only("pk")),

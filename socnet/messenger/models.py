@@ -3,23 +3,9 @@ from __future__ import annotations
 from django.conf import settings
 from django.db import models
 from django.template import defaultfilters
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from ..core.models import DateCreatedModel, MarkdownContentModel
-
-
-class Chat(models.Model):
-    members = models.ManyToManyField(
-        to=settings.AUTH_USER_MODEL, related_name="chats", verbose_name=_("members")
-    )
-
-    class Meta:
-        verbose_name = _("chat")
-        verbose_name_plural = _("chats")
-
-    def get_absolute_url(self) -> str:
-        return reverse("messenger:chat", args=(self.pk,))
 
 
 class Message(MarkdownContentModel, DateCreatedModel):
@@ -29,20 +15,16 @@ class Message(MarkdownContentModel, DateCreatedModel):
         related_name="outgoing_messages",
         verbose_name=_("sender"),
     )
-    chat = models.ForeignKey(
-        to=Chat,
+    recipient = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="messages",
-        verbose_name=_("chat"),
+        related_name="incoming_messages",
+        verbose_name=_("recipient"),
     )
 
     class Meta:
         verbose_name = _("message")
         verbose_name_plural = _("messages")
-
-    def get_absolute_url(self) -> str:
-        chat_url = reverse("messenger:chat", args=(self.chat_id,))
-        return f"{chat_url}#message{self.pk}"
 
     @property
     def formatted_date_created(self) -> str:

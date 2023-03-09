@@ -8,7 +8,6 @@ from . import views, viewsets
 
 router = routers.SimpleRouter()
 for prefix, viewset in (
-    ("chats", viewsets.ChatViewSet),
     ("content_types", viewsets.ContentTypeViewSet),
     ("email_addresses", viewsets.EmailAddressViewSet),
     ("groups", viewsets.GroupViewSet),

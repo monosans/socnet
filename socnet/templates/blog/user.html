@@ -34,13 +34,10 @@
               {% trans "Create post" %}
             </a>
           {% elif request.user.is_authenticated %}
-            <form action="{% url 'messenger:chat_get_or_create' user.pk %}"
-                  method="post">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-primary w-100 mb-2">
-                {% trans "Write message" %}
-              </button>
-            </form>
+            <a href="{% url 'messenger:chat' user.get_username %}"
+               class="btn btn-primary w-100 mb-2">
+              {% trans "Write message" %}
+            </a>
             <div>
               {% if user.is_subscription %}
                 <button type="button" class="btn btn-light w-100" data-is-subscribed="y" data-username={{ user.get_username }}>

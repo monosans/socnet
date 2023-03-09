@@ -21,18 +21,6 @@ class UsernameSerializer(serializers.Serializer[Any]):
     username = serializers.CharField(min_length=1)
 
 
-class ChatSerializer(serializers.HyperlinkedModelSerializer):
-    messages: serializers.HyperlinkedRelatedField[messenger_models.Message] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="message-detail"
-        )
-    )
-
-    class Meta:
-        model = messenger_models.Chat
-        fields = "__all__"
-
-
 class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
     logentry_set: serializers.HyperlinkedRelatedField[LogEntry] = (
         serializers.HyperlinkedRelatedField(
@@ -116,11 +104,6 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    chats: serializers.HyperlinkedRelatedField[messenger_models.Chat] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="chat-detail"
-        )
-    )
     emailaddress_set: serializers.HyperlinkedRelatedField[EmailAddress] = (
         serializers.HyperlinkedRelatedField(
             many=True, read_only=True, view_name="emailaddress-detail"

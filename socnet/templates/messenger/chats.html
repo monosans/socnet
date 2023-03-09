@@ -12,41 +12,36 @@
   <div class="row justify-content-center">
     <div class="col-xl-6">
       {% for chat in chats %}
-        {% with interlocutor=chat.members.all|first %}
-          <div class="card mb-2">
-            <a href="{{ chat.get_absolute_url }}"
-               class="text-dark text-decoration-none">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="avatar-thumbnail">
-                    {% if interlocutor.image %}
-                      <img src="{{ interlocutor.image.url }}"
-                           alt=""
-                           loading="lazy"
-                           class="rounded"/>
-                    {% endif %}
-                  </div>
-                  <div class="col ms-2 ">
-                    <div class="d-flex justify-content-between align-items-center">
-                      {% with last_message=chat.messages.first %}
-                        <div class="text-break">
-                          {{ interlocutor }}
-                          {{ interlocutor.display_name_in_parentheses }}
-                          {% if last_message %}
-                            <div class="text-secondary">{{ last_message.content|truncatechars:30 }}</div>
-                          {% endif %}
+        <div class="card mb-2">
+          <a href="{% url 'messenger:chat' chat.get_username %}"
+             class="text-dark text-decoration-none">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="avatar-thumbnail">
+                  {% if chat.image %}
+                    <img src="{{ chat.image.url }}" alt="" loading="lazy" class="rounded"/>
+                  {% endif %}
+                </div>
+                <div class="col ms-2 ">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-break">
+                      {{ chat.get_username }}
+                      {{ chat.display_name_in_parentheses }}
+                      {% if chat.last_message_content %}
+                        <div class="text-secondary">
+                          {{ chat.last_message_content|truncatechars:30 }}
                         </div>
-                        {% if last_message %}
-                          <div class="text-secondary">{{ last_message.date_created }}</div>
-                        {% endif %}
-                      {% endwith %}
+                      {% endif %}
                     </div>
+                    {% if chat.last_message_date %}
+                      <div class="text-secondary">{{ chat.last_message_date }}</div>
+                    {% endif %}
                   </div>
                 </div>
               </div>
-            </a>
-          </div>
-        {% endwith %}
+            </div>
+          </a>
+        </div>
       {% empty %}
         <div class="card">
           <div class="card-body">

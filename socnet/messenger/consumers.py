@@ -25,33 +25,26 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     async def connect(self) -> None:
         user: Union[User, AnonymousUser] = self.scope["user"]
-        chat_pk = int(self.scope["url_route"]["kwargs"]["chat_pk"])
-        if (
-            user.is_anonymous
-            or not await database_sync_to_async(
-                models.Chat.objects.filter(pk=chat_pk, members=user).exists
-            )()
-        ):
+        if user.is_anonymous:
             await self.close()
             return
-        self.room_name = chat_pk
-        self.room_group_name = f"chat_{self.room_name}"
-        await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+        self.interlocutor_pk = int(self.scope["url_route"]["kwargs"]["interlocutor_pk"])
+        self.group = "chat{}_{}".format(*sorted((user.pk, self.interlocutor_pk)))
+        await self.channel_layer.group_add(self.group, self.channel_name)
         await self.accept()
 
     async def disconnect(self, code: int) -> None:  # noqa: ARG002
-        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+        await self.channel_layer.group_discard(self.group, self.channel_name)
 
     async def receive_json(self, content: Dict[str, str], **kwargs: Any) -> None:
         sender: User = self.scope["user"]
         message = models.Message(
-            sender=sender, chat_id=self.room_name, content=content["message"]
+            sender=sender, recipient_id=self.interlocutor_pk, content=content["message"]
         )
         await save_obj(message)
         msg = {
             "type": "chat_message",
             "pk": message.pk,
-            "href": message.get_absolute_url(),
             "content": markdownify(message.content),
             "date_created": message.formatted_date_created,
             "sender": {
@@ -61,7 +54,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "href": sender.get_absolute_url(),
             },
         }
-        await self.channel_layer.group_send(self.room_group_name, msg)
+        await self.channel_layer.group_send(self.group, msg)
 
     async def chat_message(self, event: Dict[str, Any]) -> None:
         await self.send_json(event)

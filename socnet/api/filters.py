@@ -43,12 +43,6 @@ NULLABLE = ["isnull"]
 BASE_FIELDS = {"id": ID_FIELDS}
 
 
-class ChatFilter(FilterSet):
-    class Meta:
-        model = messenger_models.Chat
-        fields = BASE_FIELDS.copy()
-
-
 class ContentTypeFilter(FilterSet):
     class Meta:
         model = ContentType
@@ -98,7 +92,7 @@ class MessageFilter(FilterSet):
             content=CHAR_FIELDS,
             date_created=DATETIME_FIELDS,
             sender=ID_FIELDS,
-            chat=ID_FIELDS,
+            recipient=ID_FIELDS,
         )
 
 

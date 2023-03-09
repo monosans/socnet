@@ -40,12 +40,7 @@
                 <a href="${data.sender.href}" class="text-decoration-none">
                   ${data.sender.username} ${data.sender.display_name}
                 </a>
-                <a
-                  href="${data.href}"
-                  class="text-decoration-none text-secondary"
-                >
-                  ${data.date_created}
-                </a>
+                ${data.date_created}
               </div>
               <div class="me-2 img-responsive">${data.content}</div>
             </div>
@@ -63,10 +58,11 @@
    * @return {WebSocket}
    */
   function createChatWebSocket() {
-    const chatPk = document.querySelector("#chat_pk").textContent;
+    const interlocutor_pk =
+      document.querySelector("#interlocutor_pk").textContent;
     const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
     return new WebSocket(
-      `${wsProtocol}://${window.location.host}/ws/chat/${chatPk}/`
+      `${wsProtocol}://${window.location.host}/ws/chat/${interlocutor_pk}/`
     );
   }
 
