@@ -43,7 +43,7 @@ class _BaseEditPostView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm])
         self.object = form.save(commit=False)  # type: ignore[assignment]
         self.object.save(update_fields=(*form.Meta.fields, "date_updated"))
         form.save_m2m()
-        return redirect(self.object)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class EditPostView(_BaseEditPostView[models.Post, forms.PostForm]):
