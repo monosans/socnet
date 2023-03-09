@@ -148,7 +148,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 def posts_view(request: HttpRequest) -> HttpResponse:
     posts: Optional[Union[QuerySet[models.Post], Page[models.Post]]] = None
     page_range = None
-    qs = services.get_posts_preview_qs(request)
+    qs = services.get_posts_preview_qs(request, wrap_is_liked=True)
     if "q" in request.GET:
         form = forms.PostSearchForm(request.GET)
         if form.is_valid():
