@@ -10,7 +10,7 @@ from django.contrib.postgres.search import SearchRank
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Page
 from django.db.models import Count, Prefetch, Q, QuerySet
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext as _
@@ -19,7 +19,7 @@ from django.views.decorators.http import (
     require_POST,
     require_safe,
 )
-from django.views.generic import UpdateView
+from django.views.generic import CreateView, UpdateView
 
 from ..core.utils import paginate
 from ..users.models import User
@@ -68,20 +68,16 @@ class EditPostCommentView(_BaseEditPostView[models.PostComment, forms.PostCommen
         )
 
 
-@require_http_methods(["GET", "HEAD", "POST"])
-@login_required
-def create_post_view(request: AuthedRequest) -> HttpResponse:
-    if request.method == "POST":
-        form = forms.PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect(post)
-    else:
-        form = forms.PostForm()
-    context = {"form": form}
-    return render(request, "blog/create_post.html", context)
+class CreatePostView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]):
+    form_class = forms.PostForm
+    template_name = "blog/create_post.html"
+
+    def form_valid(self, form: forms.PostForm) -> HttpResponse:
+        post = form.save(commit=False)
+        post.author = self.request.user  # type: ignore[assignment]
+        post.save()
+        self.object = post  # type: ignore[assignment]
+        return HttpResponseRedirect(self.get_success_url())
 
 
 @require_POST

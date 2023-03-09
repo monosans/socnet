@@ -6,7 +6,7 @@ from . import views
 
 app_name = "blog"
 urlpatterns = [
-    path("create_post/", views.create_post_view, name="create_post"),
+    path("create_post/", views.CreatePostView.as_view(), name="create_post"),
     path(
         "edit_comment/<int:pk>/",
         views.EditPostCommentView.as_view(),
