@@ -14,7 +14,9 @@ from . import forms, models
 @require_safe
 @login_required
 def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
-    qs = User.objects.only("username").filter(username=username)
+    qs = User.objects.only("username", "display_name", "image").filter(
+        username=username
+    )
     interlocutor = get_object_or_404(qs)
     messages = (
         models.Message.objects.only(

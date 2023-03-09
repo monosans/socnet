@@ -1,7 +1,7 @@
 #chat-log {
   overflow-x: hidden;
   overflow-y: scroll;
-  height: 70vh;
+  height: 57vh;
 }
 
 /* stylelint-disable-next-line selector-id-pattern */

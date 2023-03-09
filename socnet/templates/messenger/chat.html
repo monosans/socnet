@@ -16,8 +16,25 @@
 {% block content %}
   <div class="row justify-content-center">
     <div class="col-xl-6">
-      <div class="card">
-        <div class="card-body py-0">
+      <div class="card mb-1">
+        <div class="card-body text-center">
+          <a href="{{ interlocutor.get_absolute_url }}"
+             class="text-decoration-none text-dark">
+            {% if interlocutor.image %}
+              <span class="avatar-thumbnail">
+                <img class="rounded"
+                     src="{{ interlocutor.image.url }}"
+                     alt=""
+                     loading="lazy"/>
+              </span>
+            {% endif %}
+            {{ interlocutor }}
+            {{ interlocutor.display_name_in_parentheses }}
+          </a>
+        </div>
+      </div>
+      <div class="card mb-1">
+        <div class="card-body">
           <div id="chat-log">
             {% for message in messages_ %}
               <div class="row mb-3" id="message{{ message.pk }}">
