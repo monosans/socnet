@@ -14,7 +14,7 @@ for prefix, viewset in (
     ("log_entries", viewsets.LogEntryViewSet),
     ("messages", viewsets.MessageViewSet),
     ("permissions", viewsets.PermissionViewSet),
-    ("post_comments", viewsets.PostCommentViewSet),
+    ("comments", viewsets.CommentViewSet),
     ("posts", viewsets.PostViewSet),
     ("users", viewsets.UserViewSet),
 ):
@@ -22,8 +22,8 @@ for prefix, viewset in (
 
 urlpatterns = [
     *router.urls,
-    path("post_comment_like/<int:pk>/", views.PostCommentUnlikeView.as_view()),
-    path("post_comment_like/", views.PostCommentLikeView.as_view()),
+    path("comment_like/<int:pk>/", views.CommentUnlikeView.as_view()),
+    path("comment_like/", views.CommentLikeView.as_view()),
     path("post_like/<int:pk>/", views.PostUnlikeView.as_view()),
     path("post_like/", views.PostLikeView.as_view()),
     path("subscription/<str:username>/", views.UserUnsubscribeView.as_view()),

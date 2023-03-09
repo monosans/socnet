@@ -60,17 +60,17 @@ class PermissionViewSet(viewsets.ReadOnlyModelViewSet[auth_models.Permission]):
     filterset_class = filters.PermissionFilter
 
 
-class PostCommentViewSet(viewsets.ModelViewSet[blog_models.PostComment]):
-    queryset = blog_models.PostComment.objects.prefetch_related(
+class CommentViewSet(viewsets.ModelViewSet[blog_models.Comment]):
+    queryset = blog_models.Comment.objects.prefetch_related(
         Prefetch("likers", User.objects.only("pk"))
     )
-    serializer_class = serializers.PostCommentSerializer
-    filterset_class = filters.PostCommentFilter
+    serializer_class = serializers.CommentSerializer
+    filterset_class = filters.CommentFilter
 
 
 class PostViewSet(viewsets.ModelViewSet[blog_models.Post]):
     queryset = blog_models.Post.objects.prefetch_related(
-        Prefetch("comments", blog_models.PostComment.objects.only("post_id")),
+        Prefetch("comments", blog_models.Comment.objects.only("post_id")),
         Prefetch("likers", User.objects.only("pk")),
     )
     serializer_class = serializers.PostSerializer
@@ -80,13 +80,13 @@ class PostViewSet(viewsets.ModelViewSet[blog_models.Post]):
 class UserViewSet(viewsets.ModelViewSet[User]):
     queryset = User.objects.prefetch_related(
         Prefetch("emailaddress_set", EmailAddress.objects.only("user_id")),
-        Prefetch("liked_comments", blog_models.PostComment.objects.only("user_id")),
+        Prefetch("liked_comments", blog_models.Comment.objects.only("user_id")),
         Prefetch("liked_posts", blog_models.Post.objects.only("pk")),
         Prefetch("logentry_set", LogEntry.objects.only("user_id")),
         Prefetch(
             "outgoing_messages", messenger_models.Message.objects.only("sender_id")
         ),
-        Prefetch("post_comments", blog_models.PostComment.objects.only("author_id")),
+        Prefetch("comments", blog_models.Comment.objects.only("author_id")),
         Prefetch("posts", blog_models.Post.objects.only("author_id")),
         Prefetch("subscribers", User.objects.only("pk")),
         Prefetch("groups", auth_models.Group.objects.only("pk")),

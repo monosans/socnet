@@ -107,9 +107,9 @@ class PermissionFilter(FilterSet):
         )
 
 
-class PostCommentFilter(FilterSet):
+class CommentFilter(FilterSet):
     class Meta:
-        model = blog_models.PostComment
+        model = blog_models.Comment
         fields = dict(
             BASE_FIELDS,
             content=CHAR_FIELDS,

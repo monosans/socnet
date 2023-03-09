@@ -30,7 +30,7 @@ class Post(MarkdownContentModel, TimestampedModel):
         return reverse("blog:post", args=(self.pk,))
 
 
-class PostComment(MarkdownContentModel, TimestampedModel):
+class Comment(MarkdownContentModel, TimestampedModel):
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,
@@ -40,7 +40,7 @@ class PostComment(MarkdownContentModel, TimestampedModel):
     author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="post_comments",
+        related_name="comments",
         verbose_name=_("author"),
     )
     likers = models.ManyToManyField(
@@ -51,8 +51,8 @@ class PostComment(MarkdownContentModel, TimestampedModel):
     )
 
     class Meta:
-        verbose_name = _("post comment")
-        verbose_name_plural = _("post comments")
+        verbose_name = _("comment")
+        verbose_name_plural = _("comments")
 
     def get_absolute_url(self) -> str:
         post_url = reverse("blog:post", args=(self.post_id,))

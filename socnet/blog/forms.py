@@ -12,9 +12,9 @@ class PostForm(forms.ModelForm[models.Post]):
         fields = ("content",)
 
 
-class PostCommentForm(forms.ModelForm[models.PostComment]):
+class CommentForm(forms.ModelForm[models.Comment]):
     class Meta:
-        model = models.PostComment
+        model = models.Comment
         fields = ("content",)
 
 

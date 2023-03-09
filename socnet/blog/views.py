@@ -27,12 +27,12 @@ from ..users.types import AuthedRequest
 from . import forms, models, services
 
 T_BaseModelForm = TypeVar(
-    "T_BaseModelForm", bound=Union[forms.PostForm, forms.PostCommentForm]
+    "T_BaseModelForm", bound=Union[forms.PostForm, forms.CommentForm]
 )
-T_Post = TypeVar("T_Post", bound=Union[models.Post, models.PostComment])
+T_Post = TypeVar("T_Post", bound=Union[models.Post, models.Comment])
 
 
-class _BaseEditPostView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm]):
+class _BasePostUpdateView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm]):
     def get_object(self, queryset: Optional[QuerySet[T_Post]] = None) -> T_Post:
         obj = super().get_object(queryset)
         if obj.author_id != self.request.user.pk:
@@ -46,7 +46,7 @@ class _BaseEditPostView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm])
         return HttpResponseRedirect(self.get_success_url())
 
 
-class PostUpdateView(_BaseEditPostView[models.Post, forms.PostForm]):
+class PostUpdateView(_BasePostUpdateView[models.Post, forms.PostForm]):
     model = models.Post
     form_class = forms.PostForm
     template_name = "blog/post_update.html"
@@ -55,12 +55,12 @@ class PostUpdateView(_BaseEditPostView[models.Post, forms.PostForm]):
         return super().get_queryset().only("author_id", *self.form_class.Meta.fields)
 
 
-class CommentUpdateView(_BaseEditPostView[models.PostComment, forms.PostCommentForm]):
-    model = models.PostComment
-    form_class = forms.PostCommentForm
+class CommentUpdateView(_BasePostUpdateView[models.Comment, forms.CommentForm]):
+    model = models.Comment
+    form_class = forms.CommentForm
     template_name = "blog/comment_update.html"
 
-    def get_queryset(self) -> QuerySet[models.PostComment]:
+    def get_queryset(self) -> QuerySet[models.Comment]:
         return (
             super()
             .get_queryset()
@@ -80,7 +80,7 @@ class PostCreateView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]
 @require_POST
 @login_required
 def comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    request.user.post_comments.filter(pk=pk).delete()
+    request.user.comments.filter(pk=pk).delete()
     redirect_to = request.GET.get("next", request.user)
     return redirect(redirect_to)
 
@@ -98,12 +98,12 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "POST":
         if request.user.is_anonymous:
             return redirect_to_login(next=request.path)
-        form = forms.PostCommentForm(request.POST)
+        form = forms.CommentForm(request.POST)
         if form.is_valid():
             form.instance.post_id = pk
             form.instance.author = request.user
             form.save()
-            form = forms.PostCommentForm()
+            form = forms.CommentForm()
         else:
             message = "{} {}".format(
                 _("An error occurred while creating the comment."),
@@ -111,9 +111,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             )
             messages.error(request, message)
     else:
-        form = forms.PostCommentForm()
+        form = forms.CommentForm()
     comments_qs = (
-        models.PostComment.objects.annotate(Count("likers"))
+        models.Comment.objects.annotate(Count("likers"))
         .select_related("author")
         .order_by("pk")
         .only(

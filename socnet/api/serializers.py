@@ -85,16 +85,16 @@ class PermissionSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
-class PostCommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = blog_models.PostComment
+        model = blog_models.Comment
         fields = "__all__"
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
-    comments: serializers.HyperlinkedRelatedField[blog_models.PostComment] = (
+    comments: serializers.HyperlinkedRelatedField[blog_models.Comment] = (
         serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="postcomment-detail"
+            many=True, read_only=True, view_name="comment-detail"
         )
     )
 
@@ -109,9 +109,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             many=True, read_only=True, view_name="emailaddress-detail"
         )
     )
-    liked_comments: serializers.HyperlinkedRelatedField[blog_models.PostComment] = (
+    liked_comments: serializers.HyperlinkedRelatedField[blog_models.Comment] = (
         serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="postcomment-detail"
+            many=True, read_only=True, view_name="comment-detail"
         )
     )
     liked_posts: serializers.HyperlinkedRelatedField[blog_models.Post] = (
@@ -129,9 +129,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             many=True, read_only=True, view_name="message-detail"
         )
     )
-    post_comments: serializers.HyperlinkedRelatedField[blog_models.PostComment] = (
+    comments: serializers.HyperlinkedRelatedField[blog_models.Comment] = (
         serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="postcomment-detail"
+            many=True, read_only=True, view_name="comment-detail"
         )
     )
     posts: serializers.HyperlinkedRelatedField[blog_models.Post] = (

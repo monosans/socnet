@@ -34,7 +34,7 @@ class _AuthedAPIView(views.APIView):
 
 
 class _UnlikeView(_AuthedAPIView):
-    model: Type[Union[blog_models.Post, blog_models.PostComment]]
+    model: Type[Union[blog_models.Post, blog_models.Comment]]
 
     def delete(self, request: AuthedRequest, pk: int) -> Response:
         qs = self.model.objects.filter(pk=_validate_pk(pk))
@@ -44,7 +44,7 @@ class _UnlikeView(_AuthedAPIView):
 
 
 class _LikeView(_AuthedAPIView):
-    model: Type[Union[blog_models.Post, blog_models.PostComment]]
+    model: Type[Union[blog_models.Post, blog_models.Comment]]
 
     def post(self, request: AuthedRequest) -> Response:
         qs = self.model.objects.filter(pk=_validate_pk(request.data))
@@ -61,12 +61,12 @@ class PostLikeView(_LikeView):
     model = blog_models.Post
 
 
-class PostCommentUnlikeView(_UnlikeView):
-    model = blog_models.PostComment
+class CommentUnlikeView(_UnlikeView):
+    model = blog_models.Comment
 
 
-class PostCommentLikeView(_LikeView):
-    model = blog_models.PostComment
+class CommentLikeView(_LikeView):
+    model = blog_models.Comment
 
 
 class UserUnsubscribeView(_AuthedAPIView):

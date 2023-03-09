@@ -16,10 +16,10 @@ class PostFactory(DjangoModelFactory):
         model = models.Post
 
 
-class PostCommentFactory(DjangoModelFactory):
+class CommentFactory(DjangoModelFactory):
     post = SubFactory(PostFactory)
     author = SubFactory(UserFactory)
     content = Faker("text")
 
     class Meta:
-        model = models.PostComment
+        model = models.Comment

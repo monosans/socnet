@@ -14,8 +14,8 @@ class PostAdmin(admin.ModelAdmin[models.Post]):
     readonly_fields = ("date_created", "date_updated")
 
 
-@admin.register(models.PostComment)
-class PostCommentAdmin(admin.ModelAdmin[models.PostComment]):
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin[models.Comment]):
     filter_horizontal = ("likers",)
     list_display = ("id", "author", "post", "date_created", "date_updated")
     list_filter = ("date_created", "date_updated", "author", "post")
