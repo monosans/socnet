@@ -73,11 +73,8 @@ class CreatePostView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]
     template_name = "blog/create_post.html"
 
     def form_valid(self, form: forms.PostForm) -> HttpResponse:
-        post = form.save(commit=False)
-        post.author = self.request.user  # type: ignore[assignment]
-        post.save()
-        self.object = post  # type: ignore[assignment]
-        return HttpResponseRedirect(self.get_success_url())
+        form.instance.author = self.request.user  # type: ignore[assignment]
+        return super().form_valid(form)
 
 
 @require_POST
@@ -103,10 +100,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             return redirect_to_login(next=request.path)
         form = forms.PostCommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post_id = pk
-            comment.author = request.user
-            comment.save()
+            form.instance.post_id = pk
+            form.instance.author = request.user
+            form.save()
             form = forms.PostCommentForm()
         else:
             message = "{} {}".format(
