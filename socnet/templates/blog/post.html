@@ -60,10 +60,12 @@
             </div>
             {% if comment.author == request.user or comment.post.author == request.user %}
               <div>
-                <a href="{% url 'blog:comment_update' comment.pk %}"
-                   class="text-decoration-none">
-                  <i class="fa-solid fa-pen-to-square btn text-primary"></i>
-                </a>
+                {% if comment.author == request.user %}
+                  <a href="{% url 'blog:comment_update' comment.pk %}"
+                     class="text-decoration-none">
+                    <i class="fa-solid fa-pen-to-square btn text-primary"></i>
+                  </a>
+                {% endif %}
                 <i class="fa-solid fa-xmark btn text-danger"
                    data-bs-toggle="modal"
                    data-bs-target="#comment{{ comment.pk }}_modal"></i>
