@@ -58,7 +58,7 @@
                 {{ comment.author }}
               </a>
             </div>
-            {% if comment.author == request.user %}
+            {% if comment.author == request.user or comment.post.author == request.user %}
               <div>
                 <a href="{% url 'blog:comment_update' comment.pk %}"
                    class="text-decoration-none">

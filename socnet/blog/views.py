@@ -80,7 +80,9 @@ class PostCreateView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]
 @require_POST
 @login_required
 def comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    request.user.comments.filter(pk=pk).delete()
+    models.Comment.objects.filter(
+        Q(author=request.user) | Q(post__author=request.user), pk=pk
+    ).delete()
     redirect_to = request.GET.get("next", request.user)
     return redirect(redirect_to)
 
@@ -88,7 +90,7 @@ def comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 @require_POST
 @login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
-    request.user.posts.filter(pk=pk).delete()
+    models.Post.objects.filter(pk=pk, author=request.user).delete()
     url = reverse("blog:user_posts", args=(request.user.get_username(),))
     return redirect(url)
 
