@@ -8,18 +8,32 @@
 {% block card_body %}
   <h3 class="mb-3 text-center">{% trans "Edit profile" %}</h3>
   <div class="mb-3 text-center">
-    <div class="mb-1">
-      <a href="{% url 'account_change_password' %}" class="btn btn-primary">
-        {% trans "Change password" %}
-      </a>
-      <a href="{% url 'account_email' %}" class="btn btn-primary">
-        {% trans "Change email" %}
-      </a>
+    <div class="row gx-2 mb-1">
+      <div class="col-6">
+        <a href="{% url 'account_change_password' %}"
+           class="btn btn-primary w-100 h-100">
+          {% trans "Change password" %}
+        </a>
+      </div>
+      <div class="col-6">
+        <a href="{% url 'account_email' %}" class="btn btn-primary w-100 h-100">
+          {% trans "Change email" %}
+        </a>
+      </div>
     </div>
-    <div>
-      <a href="{% url 'users:delete_account' %}" class="btn btn-danger">
-        {% trans "Delete account" %}
-      </a>
+    <div class="row gx-2">
+      <div class="col-6">
+        <a href="{% url 'two-factor-setup' %}"
+           class="btn btn-primary w-100 h-100">
+          {% trans "Setup two-factor authentication" %}
+        </a>
+      </div>
+      <div class="col-6">
+        <a href="{% url 'users:delete_account' %}"
+           class="btn btn-danger w-100 h-100">
+          {% trans "Delete account" %}
+        </a>
+      </div>
     </div>
   </div>
   <form method="post" enctype="multipart/form-data">

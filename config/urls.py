@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import List, Union
 
 from allauth import urls as allauth_urls
+from allauth_2fa import urls as allauth_2fa_urls
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs_urls
@@ -23,6 +24,7 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path("admin/", admin.site.urls),
     path("api/", include(api_urls)),
     path("messenger/", include(messenger_urls)),
+    path("", include(allauth_2fa_urls)),
     path("", include(allauth_urls)),
     path("", include(core_urls)),
     path("", include(blog_urls)),

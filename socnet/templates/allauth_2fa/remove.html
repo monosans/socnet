@@ -1,0 +1,22 @@
+{% extends "card.html" %}
+
+{% load i18n crispy_forms_tags %}
+
+{% block title %}
+  {% trans "Disable two-factor authentication" %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="mb-3 text-center">
+    {% trans "Disable two-factor authentication" %}
+  </h3>
+  <div>
+    {% trans "Enter a valid authentication token to disable two-factor authentication:" %}
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary w-100">
+      {% trans "Disable two-factor authentication" %}
+    </button>
+  </form>
+{% endblock card_body %}

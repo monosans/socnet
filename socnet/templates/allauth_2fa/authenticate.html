@@ -1,0 +1,17 @@
+{% extends "card.html" %}
+
+{% load i18n crispy_forms_tags %}
+
+{% block title %}
+  {% trans "Two-factor authentication" %}
+{% endblock title %}
+{% block card_body %}
+  <h3 class="mb-3 text-center">{% trans "Two-factor authentication" %}</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary w-100">
+      {% trans "Log in" %}
+    </button>
+  </form>
+{% endblock card_body %}
