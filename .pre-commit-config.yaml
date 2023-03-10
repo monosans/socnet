@@ -56,11 +56,13 @@ repos:
       - id: mypy
         args: []
         additional_dependencies:
+          - django-allauth-2fa==0.10.0
           - django-allauth==0.52.0
           - django-cleanup==7.0.0
           - django-environ==0.10.0
           - django-filter==22.1
           - django-logentry-admin==1.1.0
+          - django_otp==1.1.6
           - psycopg2-binary==2.9.5
           - nh3==0.2.8
           - django-crispy-forms==2.0

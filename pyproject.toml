@@ -52,6 +52,10 @@ module = "socnet.*.migrations.*"
 ignore_errors = true
 
 [[tool.mypy.overrides]]
+module = "allauth_2fa.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
 module = "allauth.*"
 ignore_missing_imports = true
 
@@ -69,6 +73,10 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "django_filters.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "django_otp.*"
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
