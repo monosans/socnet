@@ -15,11 +15,6 @@ updates:
     schedule:
       interval: "daily"
 
-  - package-ecosystem: "docker"
-    directory: "docker/redis/"
-    schedule:
-      interval: "daily"
-
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
