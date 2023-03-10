@@ -36,4 +36,5 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = (*BaseUserAdmin.filter_horizontal, "subscriptions")
     form = forms.UserAdminChangeForm
     list_display = ("id", "username", "email", "display_name", "is_staff")
+    list_filter = (*BaseUserAdmin.list_filter, "birth_date")
     search_fields = ("username", "display_name", "email")
