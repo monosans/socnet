@@ -7,10 +7,10 @@
   function getRequest(btn) {
     let url, value;
     if (btn.dataset.postPk) {
-      url = "/api/post_like/";
+      url = "/api/post-likes/";
       value = btn.dataset.postPk;
     } else if (btn.dataset.postCommentPk) {
-      url = "/api/comment_like/";
+      url = "/api/comment-likes/";
       value = btn.dataset.postCommentPk;
     } else {
       throw new Error(

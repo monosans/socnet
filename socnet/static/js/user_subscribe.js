@@ -5,7 +5,7 @@
    * @return {{url: string, options: RequestInit}}
    */
   function getRequest(btn) {
-    let url = "/api/subscription/",
+    let url = "/api/subscriptions/",
       method,
       body;
     if (btn.dataset.isSubscribed === "y") {

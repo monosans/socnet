@@ -8,18 +8,18 @@ from . import viewsets
 
 router = routers.SimpleRouter()
 for prefix, viewset, basename in (
-    ("content_types", viewsets.ContentTypeViewSet, None),
-    ("email_addresses", viewsets.EmailAddressViewSet, None),
+    ("comment-likes", viewsets.CommentLikeViewSet, "comment_likes"),
+    ("post-likes", viewsets.PostLikeViewSet, "post_likes"),
+    ("subscriptions", viewsets.SubscriptionViewSet, "subscriptions"),
+    ("comments", viewsets.CommentViewSet, None),
+    ("content-types", viewsets.ContentTypeViewSet, None),
+    ("email-addresses", viewsets.EmailAddressViewSet, None),
     ("groups", viewsets.GroupViewSet, None),
-    ("log_entries", viewsets.LogEntryViewSet, None),
+    ("log-entries", viewsets.LogEntryViewSet, None),
     ("messages", viewsets.MessageViewSet, None),
     ("permissions", viewsets.PermissionViewSet, None),
-    ("comments", viewsets.CommentViewSet, None),
     ("posts", viewsets.PostViewSet, None),
     ("users", viewsets.UserViewSet, None),
-    ("comment_like", viewsets.CommentLikeViewSet, "comment_like"),
-    ("post_like", viewsets.PostLikeViewSet, "post_like"),
-    ("subscription", viewsets.SubscriptionViewSet, "subscription"),
 ):
     router.register(prefix, viewset, basename)
 
