@@ -1,16 +1,70 @@
 from __future__ import annotations
 
+from typing import Type, Union
+
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Prefetch
-from rest_framework import viewsets
+from rest_framework import permissions, status, viewsets
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
+from rest_framework.viewsets import ViewSet
 
 from ..blog import models as blog_models
 from ..messenger import models as messenger_models
+from ..users.exceptions import SelfSubscriptionError
 from ..users.models import User
 from . import filters, serializers
+from .types import AuthedRequest
+
+
+class _AuthedViewSet(ViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+
+
+class _LikeViewSet(_AuthedViewSet):
+    model: Type[Union[blog_models.Post, blog_models.Comment]]
+
+    def create(self, request: AuthedRequest) -> Response:
+        qs = self.model.objects.filter(pk=serializers.validate_pk(request.data))
+        obj = get_object_or_404(qs)
+        obj.likers.add(request.user)  # type: ignore[attr-defined]
+        return Response(status=status.HTTP_201_CREATED)
+
+    def destroy(self, request: AuthedRequest, pk: str) -> Response:
+        qs = self.model.objects.filter(pk=serializers.validate_pk(pk))
+        obj = get_object_or_404(qs)
+        obj.likers.remove(request.user)  # type: ignore[attr-defined]
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class PostLikeViewSet(_LikeViewSet):
+    model = blog_models.Post
+
+
+class CommentLikeViewSet(_LikeViewSet):
+    model = blog_models.Comment
+
+
+class SubscriptionViewSet(_AuthedViewSet):
+    lookup_field = "username"
+
+    def create(self, request: AuthedRequest) -> Response:
+        qs = User.objects.filter(username=serializers.validate_username(request.data))
+        user = get_object_or_404(qs)
+        try:
+            user.subscribers.add(request.user)
+        except SelfSubscriptionError:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_201_CREATED)
+
+    def destroy(self, request: AuthedRequest, username: str) -> Response:
+        qs = User.objects.filter(username=serializers.validate_username(username))
+        user = get_object_or_404(qs)
+        user.subscribers.remove(request.user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet[ContentType]):

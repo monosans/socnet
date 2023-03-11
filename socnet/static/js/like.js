@@ -10,7 +10,7 @@
       url = "/api/post_like/";
       value = btn.dataset.postPk;
     } else if (btn.dataset.postCommentPk) {
-      url = "/api/post_comment_like/";
+      url = "/api/comment_like/";
       value = btn.dataset.postCommentPk;
     } else {
       throw new Error(

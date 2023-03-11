@@ -4,30 +4,27 @@ from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
-from . import views, viewsets
+from . import viewsets
 
 router = routers.SimpleRouter()
-for prefix, viewset in (
-    ("content_types", viewsets.ContentTypeViewSet),
-    ("email_addresses", viewsets.EmailAddressViewSet),
-    ("groups", viewsets.GroupViewSet),
-    ("log_entries", viewsets.LogEntryViewSet),
-    ("messages", viewsets.MessageViewSet),
-    ("permissions", viewsets.PermissionViewSet),
-    ("comments", viewsets.CommentViewSet),
-    ("posts", viewsets.PostViewSet),
-    ("users", viewsets.UserViewSet),
+for prefix, viewset, basename in (
+    ("content_types", viewsets.ContentTypeViewSet, None),
+    ("email_addresses", viewsets.EmailAddressViewSet, None),
+    ("groups", viewsets.GroupViewSet, None),
+    ("log_entries", viewsets.LogEntryViewSet, None),
+    ("messages", viewsets.MessageViewSet, None),
+    ("permissions", viewsets.PermissionViewSet, None),
+    ("comments", viewsets.CommentViewSet, None),
+    ("posts", viewsets.PostViewSet, None),
+    ("users", viewsets.UserViewSet, None),
+    ("comment_like", viewsets.CommentLikeViewSet, "comment_like"),
+    ("post_like", viewsets.PostLikeViewSet, "post_like"),
+    ("subscription", viewsets.SubscriptionViewSet, "subscription"),
 ):
-    router.register(prefix, viewset)
+    router.register(prefix, viewset, basename)
 
 urlpatterns = [
     *router.urls,
-    path("comment_like/<int:pk>/", views.CommentUnlikeView.as_view()),
-    path("comment_like/", views.CommentLikeView.as_view()),
-    path("post_like/<int:pk>/", views.PostUnlikeView.as_view()),
-    path("post_like/", views.PostLikeView.as_view()),
-    path("subscription/<str:username>/", views.UserUnsubscribeView.as_view()),
-    path("subscription/", views.UserSubscribeView.as_view()),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
 ]

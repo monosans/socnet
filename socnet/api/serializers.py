@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Dict, Union
 
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
@@ -19,6 +19,22 @@ class PkSerializer(serializers.Serializer[Any]):
 
 class UsernameSerializer(serializers.Serializer[Any]):
     username = serializers.CharField(min_length=1)
+
+
+def validate_pk(data: Any) -> Any:
+    if not isinstance(data, dict):
+        data = {"pk": data}
+    serializer = PkSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    return serializer.validated_data["pk"]
+
+
+def validate_username(data: Union[str, Dict[str, Any]]) -> Any:
+    if isinstance(data, str):
+        data = {"username": data}
+    serializer = UsernameSerializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    return serializer.validated_data["username"]
 
 
 class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
