@@ -30,41 +30,28 @@ def validate_pk(data: Any) -> Any:
 
 
 def validate_username(data: Union[str, Dict[str, Any]]) -> Any:
-    if isinstance(data, str):
+    if not isinstance(data, dict):
         data = {"username": data}
     serializer = UsernameSerializer(data=data)
     serializer.is_valid(raise_exception=True)
     return serializer.validated_data["username"]
 
 
-class ContentTypeSerializer(serializers.HyperlinkedModelSerializer):
-    logentry_set: serializers.HyperlinkedRelatedField[LogEntry] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="logentry-detail"
-        )
-    )
-    permission_set: serializers.HyperlinkedRelatedField[auth_models.Permission] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="permission-detail"
-        )
-    )
-
+class ContentTypeSerializer(serializers.ModelSerializer[ContentType]):
     class Meta:
         model = ContentType
         fields = "__all__"
 
 
-class EmailAddressSerializer(serializers.HyperlinkedModelSerializer):
+class EmailAddressSerializer(serializers.ModelSerializer[EmailAddress]):
     class Meta:
         model = EmailAddress
         fields = "__all__"
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    user_set: serializers.HyperlinkedRelatedField[User] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="user-detail"
-        )
+class GroupSerializer(serializers.ModelSerializer[auth_models.Group]):
+    user_set: serializers.RelatedField[User, Any, Any] = serializers.RelatedField(
+        many=True, read_only=True
     )
 
     class Meta:
@@ -72,28 +59,24 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
-class LogEntrySerializer(serializers.HyperlinkedModelSerializer):
+class LogEntrySerializer(serializers.ModelSerializer[LogEntry]):
     class Meta:
         model = LogEntry
         fields = "__all__"
 
 
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
+class MessageSerializer(serializers.ModelSerializer[messenger_models.Message]):
     class Meta:
         model = messenger_models.Message
         fields = "__all__"
 
 
-class PermissionSerializer(serializers.HyperlinkedModelSerializer):
-    group_set: serializers.HyperlinkedRelatedField[auth_models.Group] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="group-detail"
-        )
+class PermissionSerializer(serializers.ModelSerializer[auth_models.Permission]):
+    group_set: serializers.RelatedField[auth_models.Group, Any, Any] = (
+        serializers.RelatedField(many=True, read_only=True)
     )
-    user_set: serializers.HyperlinkedRelatedField[User] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="user-detail"
-        )
+    user_set: serializers.RelatedField[User, Any, Any] = serializers.RelatedField(
+        many=True, read_only=True
     )
 
     class Meta:
@@ -101,66 +84,30 @@ class PermissionSerializer(serializers.HyperlinkedModelSerializer):
         fields = "__all__"
 
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.ModelSerializer[blog_models.Comment]):
     class Meta:
         model = blog_models.Comment
         fields = "__all__"
 
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
-    comments: serializers.HyperlinkedRelatedField[blog_models.Comment] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="comment-detail"
-        )
-    )
-
+class PostSerializer(serializers.ModelSerializer[blog_models.Post]):
     class Meta:
         model = blog_models.Post
         fields = "__all__"
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    emailaddress_set: serializers.HyperlinkedRelatedField[EmailAddress] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="emailaddress-detail"
-        )
+class UserSerializer(serializers.ModelSerializer[User]):
+    liked_comments: serializers.RelatedField[blog_models.Comment, Any, Any] = (
+        serializers.RelatedField(many=True, read_only=True)
     )
-    liked_comments: serializers.HyperlinkedRelatedField[blog_models.Comment] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="comment-detail"
-        )
+    liked_posts: serializers.RelatedField[blog_models.Post, Any, Any] = (
+        serializers.RelatedField(many=True, read_only=True)
     )
-    liked_posts: serializers.HyperlinkedRelatedField[blog_models.Post] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="post-detail"
-        )
-    )
-    logentry_set: serializers.HyperlinkedRelatedField[LogEntry] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="logentry-detail"
-        )
-    )
-    outgoing_messages: serializers.HyperlinkedRelatedField[messenger_models.Message] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="message-detail"
-        )
-    )
-    comments: serializers.HyperlinkedRelatedField[blog_models.Comment] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="comment-detail"
-        )
-    )
-    posts: serializers.HyperlinkedRelatedField[blog_models.Post] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="post-detail"
-        )
-    )
-    subscribers: serializers.HyperlinkedRelatedField[User] = (
-        serializers.HyperlinkedRelatedField(
-            many=True, read_only=True, view_name="user-detail"
-        )
+    subscribers: serializers.RelatedField[User, Any, Any] = serializers.RelatedField(
+        many=True, read_only=True
     )
 
     class Meta:
         model = User
         fields = "__all__"
+        exclude = ("password",)
