@@ -194,3 +194,5 @@ SPECTACULAR_SETTINGS = {"SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdmi
 CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {
     "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 }
+
+OTP_ADMIN_HIDE_SENSITIVE_DATA = True
