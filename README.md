@@ -27,7 +27,7 @@ English and Russian languages ​​are supported. The language is selected base
 
 - All of the above
 - Use Django admin panel
-- Use a REST API that supports all CRUD operations and filtering
+- Use a REST API that has a Swagger UI and supports all CRUD operations and filtering
 
 ## Tech Stack
 
