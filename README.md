@@ -15,7 +15,7 @@ English and Russian languages ​​are supported. The language is selected base
 - Register and confirm their account by email
 - Sign in
 - Reset and change their password
-- Use two-factor authentication
+- Use two-factor authentication with one-time passwords
 - Provide information about themselves in their profile
 - Write real-time messages with Markdown and HTML support to other users using WebSockets
 - Create, edit, like and delete posts and comments with Markdown and HTML support
