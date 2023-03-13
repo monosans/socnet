@@ -7,6 +7,7 @@ from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Prefetch
+from drf_spectacular.utils import extend_schema
 from rest_framework import permissions, status, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -26,15 +27,21 @@ class _AuthedViewSet(ViewSet):
 
 class _LikeViewSet(_AuthedViewSet):
     model: Type[Union[blog_models.Post, blog_models.Comment]]
+    serializer_class = serializers.PkSerializer
 
+    @extend_schema(responses=None)
     def create(self, request: AuthedRequest) -> Response:
-        qs = self.model.objects.filter(pk=serializers.validate_pk(request.data))
+        pk = serializers.validate_single_field(
+            self.serializer_class, "pk", request.data
+        )
+        qs = self.model.objects.filter(pk=pk)
         obj = get_object_or_404(qs)
         obj.likers.add(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_201_CREATED)
 
-    def destroy(self, request: AuthedRequest, pk: str) -> Response:
-        qs = self.model.objects.filter(pk=serializers.validate_pk(pk))
+    def destroy(self, request: AuthedRequest, pk: int) -> Response:
+        valid_pk = serializers.validate_single_field(self.serializer_class, "pk", pk)
+        qs = self.model.objects.filter(pk=valid_pk)
         obj = get_object_or_404(qs)
         obj.likers.remove(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -50,9 +57,14 @@ class CommentLikeViewSet(_LikeViewSet):
 
 class SubscriptionViewSet(_AuthedViewSet):
     lookup_field = "username"
+    serializer_class = serializers.UsernameSerializer
 
+    @extend_schema(responses=None)
     def create(self, request: AuthedRequest) -> Response:
-        qs = User.objects.filter(username=serializers.validate_username(request.data))
+        username = serializers.validate_single_field(
+            self.serializer_class, self.lookup_field, request.data
+        )
+        qs = User.objects.filter(username=username)
         user = get_object_or_404(qs)
         try:
             user.subscribers.add(request.user)
@@ -61,7 +73,10 @@ class SubscriptionViewSet(_AuthedViewSet):
         return Response(status=status.HTTP_201_CREATED)
 
     def destroy(self, request: AuthedRequest, username: str) -> Response:
-        qs = User.objects.filter(username=serializers.validate_username(username))
+        valid_username = serializers.validate_single_field(
+            self.serializer_class, self.lookup_field, username
+        )
+        qs = User.objects.filter(username=valid_username)
         user = get_object_or_404(qs)
         user.subscribers.remove(request.user)
         return Response(status=status.HTTP_204_NO_CONTENT)
