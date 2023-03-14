@@ -29,6 +29,12 @@ English and Russian languages ​​are supported. The language is selected base
 - Use Django admin panel
 - Use a REST API that has a Swagger UI and supports all CRUD operations and filtering
 
+## DB schema
+
+Generated with [django-extensions](https://github.com/django-extensions/django-extensions).
+
+![](https://user-images.githubusercontent.com/76561516/224795816-22bf775e-ced0-44ca-a8ef-b3501179a182.png)
+
 ## Tech Stack
 
 - Docker
