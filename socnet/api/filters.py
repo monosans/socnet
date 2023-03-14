@@ -20,15 +20,15 @@ IGNORED_LOOKUPS = frozenset(("trigram_similar", "trigram_word_similar", "unaccen
 
 def generate_filterset(serializer: Type[ModelSerializer[Any]]) -> FilterSet:
     model = serializer.Meta.model
-    serializer_fields = getattr(serializer.Meta, "fields", None)
-    serializer_exclude = getattr(serializer.Meta, "exclude", None)
-    fields = {
-        field.attname: _get_lookups(field)
-        for field in _get_filterable_fields(
-            model, serializer_fields, serializer_exclude  # type: ignore[arg-type]
-        )
+    filterable_fields = _get_filterable_fields(
+        model,  # type: ignore[arg-type]
+        getattr(serializer.Meta, "fields", None),
+        getattr(serializer.Meta, "exclude", None),
+    )
+    filterset_fields = {
+        field.attname: _get_lookups(field) for field in filterable_fields
     }
-    meta = type("Meta", (), {"model": model, "fields": fields})
+    meta = type("Meta", (), {"model": model, "fields": filterset_fields})
     return type(f"{model.__name__}FilterSet", (FilterSet,), {"Meta": meta})
 
 
@@ -43,8 +43,7 @@ def _get_filterable_fields(
 
 
 def _get_lookups(field: models.Field[Any, Any]) -> List[str]:
-    lookups = list(field.get_lookups())
-    return [lookup for lookup in lookups if lookup not in IGNORED_LOOKUPS]
+    return [lookup for lookup in field.get_lookups() if lookup not in IGNORED_LOOKUPS]
 
 
 def _should_be_filterable(
