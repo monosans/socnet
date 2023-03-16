@@ -26,7 +26,7 @@ nh3==0.2.8
 
 typing-extensions==4.5.0; python_version < '3.10'
 
-uvicorn==0.21.0
+uvicorn==0.21.1
 httptools==0.5.0
 uvloop==0.17.0; implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')
 websockets==10.4
