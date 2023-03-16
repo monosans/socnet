@@ -65,17 +65,17 @@
               {% trans "Subscribe" %}
             </a>
           {% endif %}
+          {% if request.user.is_staff %}
+            <a href="{{ user|obj_admin_url }}" class="btn btn-primary w-100 mt-2">
+              {% trans "Admin page" %}
+            </a>
+          {% endif %}
         </div>
       </div>
     </div>
     <div class="col-12 col-xl-9">
       <div class="card h-100">
         <div class="card-body">
-          {% if request.user.is_staff %}
-            <div class="text-end">
-              <a href="{{ user|obj_admin_url }}" class="btn btn-outline-primary">{% trans "Admin page" %}</a>
-            </div>
-          {% endif %}
           <div class="ms-2">
             <h4>{{ user }}</h4>
             <h4>{{ user.display_name }}</h4>

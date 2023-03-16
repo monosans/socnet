@@ -15,6 +15,10 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css"
           crossorigin="anonymous"
           referrerpolicy="no-referrer"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"/>
     {% block css %}
     {% endblock css %}
     {% if request.method == "POST" %}
@@ -38,6 +42,15 @@
       <div class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
           <div class="container">
+            <a href="{% url 'core:index' %}"
+               class="navbar-brand text-bg-primary rounded px-2 py-1">
+              <i class="fa-solid fa-s"></i>
+              <i class="fa-solid fa-o"></i>
+              <i class="fa-solid fa-c"></i>
+              <i class="fa-solid fa-n"></i>
+              <i class="fa-solid fa-e"></i>
+              <i class="fa-solid fa-t"></i>
+            </a>
             <button type="button"
                     class="navbar-toggler"
                     data-bs-toggle="collapse"
@@ -54,7 +67,8 @@
                                 {% if user_url == request.path %}
                                   active
                                 {% endif %}">
-                        {% trans "My page" %}
+                        <i class="fa-solid fa-user text-primary"></i>
+                        {% trans "My profile" %}
                       </a>
                     {% endwith %}
                   </li>
@@ -65,6 +79,7 @@
                               {% if url_posts == request.path %}
                                 active
                               {% endif %}">
+                      <i class="fa-solid fa-newspaper text-primary"></i>
                       {% trans "Posts" %}
                     </a>
                   </li>
@@ -75,6 +90,7 @@
                               {% if url_chats == request.path %}
                                 active
                               {% endif %}">
+                      <i class="fa-solid fa-message text-primary"></i>
                       {% trans "Messenger" %}
                     </a>
                   </li>
@@ -86,6 +102,7 @@
                               {% if url_posts == request.path %}
                                 active
                               {% endif %}">
+                      <i class="fa-solid fa-newspaper text-primary"></i>
                       {% trans "Posts" %}
                     </a>
                   </li>
@@ -97,51 +114,68 @@
                             {% if url_search_users == request.path %}
                               active
                             {% endif %}">
+                    <i class="fa-solid fa-magnifying-glass text-primary"></i>
                     {% trans "Search users" %}
                   </a>
                 </li>
                 {% if request.user.is_staff %}
                   <li class="nav-item">
                     <a href="{% url 'admin:index' %}" class="nav-link">
+                      <i class="fa-solid fa-toolbox text-primary"></i>
                       {% trans "Admin panel" %}
                     </a>
                   </li>
                 {% endif %}
               </ul>
               <ul class="navbar-nav ms-auto">
-                {% if request.user.is_authenticated %}
-                  <li class="nav-item">
-                    {% url "account_logout" as url_logout %}
-                    <a href="{{ url_logout }}"
-                       class="nav-link
-                              {% if url_logout == request.path %}
-                                active
-                              {% endif %}">
-                      {% trans "Log out" %}
+                <li class="nav-item dropdown">
+                  {% if request.user.is_authenticated %}
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown">
+                      <i class="fa-solid fa-gear text-primary"></i>
+                      {{ request.user.get_username }}
                     </a>
-                  </li>
-                {% else %}
-                  <li class="nav-item">
-                    {% url "account_login" as url_login %}
-                    <a href="{{ url_login }}"
-                       class="nav-link
-                              {% if url_login == request.path %}
-                                active
-                              {% endif %}">
-                      {% trans "Log in" %}
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    {% url "account_signup" as url_signup %}
-                    <a href="{{ url_signup }}"
-                       class="nav-link
-                              {% if url_signup == request.path %}
-                                active
-                              {% endif %}">
-                      {% trans "Register" %}
-                    </a>
-                  </li>
-                {% endif %}
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="{% url "users:account_security" %}" class="dropdown-item">
+                          <i class="fa-solid fa-shield text-primary"></i>
+                          {% trans "Security" %}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url "account_logout" %}" class="dropdown-item">
+                          <i class="fa-solid fa-right-from-bracket text-primary"></i>
+                          {% trans "Log out" %}
+                        </a>
+                      </li>
+                    </ul>
+                  {% else %}
+                    <li class="nav-item">
+                      {% url "account_login" as url_login %}
+                      <a href="{{ url_login }}"
+                         class="nav-link
+                                {% if url_login == request.path %}
+                                  active
+                                {% endif %}">
+                        <i class="fa-solid fa-user text-primary"></i>
+                        {% trans "Log in" %}
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      {% url "account_signup" as url_signup %}
+                      <a href="{{ url_signup }}"
+                         class="nav-link
+                                {% if url_signup == request.path %}
+                                  active
+                                {% endif %}">
+                        <i class="fa-solid fa-clipboard-list text-primary"></i>
+                        {% trans "Register" %}
+                      </a>
+                    </li>
+                  {% endif %}
+                </li>
               </ul>
             </div>
           </div>

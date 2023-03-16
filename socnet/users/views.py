@@ -8,6 +8,7 @@ from django.contrib.postgres.search import SearchRank, SearchVector
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods, require_safe
+from django.views.generic import TemplateView
 
 from . import forms
 from .models import User
@@ -26,6 +27,10 @@ def delete_account_view(request: AuthedRequest) -> HttpResponse:
         form = forms.AccountDeletionForm(request.user)
     context = {"form": form}
     return render(request, "users/delete_account.html", context)
+
+
+class AccountSecurityView(TemplateView):
+    template_name = "users/account_security.html"
 
 
 @require_http_methods(["GET", "HEAD", "POST"])

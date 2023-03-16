@@ -1,11 +1,6 @@
 {% load i18n markdownify obj_admin_url %}
 
 <div class="card-title mb-1">
-  {% if request.user.is_staff %}
-    <div class="mb-1 text-end">
-      <a href="{{ post|obj_admin_url }}" class="btn btn-outline-primary">{% trans "Admin page" %}</a>
-    </div>
-  {% endif %}
   <div class="row align-items-center">
     <div class="avatar-thumbnail">
       {% if post.author.image %}
@@ -25,45 +20,70 @@
             </a>
           </div>
           <a href="{{ post.get_absolute_url }}"
-             class="text-decoration-none text-muted">
+             class="text-decoration-none text-secondary">
             {{ post.date_created }}
             {% if post.date_created|date:"U" != post.date_updated|date:"U" %}
               ({% trans "last edited" %} {{ post.date_updated }})
             {% endif %}
           </a>
         </div>
-        {% if post.author == request.user %}
-          <div>
-            <a href="{% url 'blog:post_update' post.pk %}"
-               class="text-decoration-none">
-              <i class="fa-solid fa-pen-to-square btn text-primary"></i>
-            </a>
-            <i class="fa-solid fa-xmark btn text-danger"
-               data-bs-toggle="modal"
-               data-bs-target="#post{{ post.pk }}_modal"></i>
-          </div>
-          <div class="modal fade" id="post{{ post.pk }}_modal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">{% trans "Delete post" %}</h5>
-                  <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                  {% trans "Are you sure you want to delete your post?" %}
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    {% trans "Close" %}
+        {% if request.user.is_staff or post.author == request.user %}
+          <div class="dropdown">
+            <button class="btn" type="button" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-ellipsis text-secondary"></i>
+            </button>
+            <ul class="dropdown-menu">
+              {% if request.user.is_staff %}
+                <li>
+                  <a href="{{ post|obj_admin_url }}" class="dropdown-item">
+                    <i class="fa-solid fa-toolbox text-primary"></i>
+                    {% trans "Admin page" %}
+                  </a>
+                </li>
+              {% endif %}
+              {% if post.author == request.user %}
+                <li>
+                  <a href="{% url 'blog:post_update' post.pk %}" class="dropdown-item">
+                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+                    {% trans "Edit" %}
+                  </a>
+                </li>
+                <li>
+                  <button type="button"
+                          class="dropdown-item"
+                          data-bs-toggle="modal"
+                          data-bs-target="#post{{ post.pk }}_modal">
+                    <i class="fa-solid fa-xmark text-danger"></i>
+                    {% trans "Delete" %}
                   </button>
-                  <form action="{% url 'blog:post_delete' post.pk %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
-                  </form>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          {% if post.author == request.user %}
+            <div class="modal fade" id="post{{ post.pk }}_modal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{% trans "Delete post" %}</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                    {% trans "Are you sure you want to delete your post?" %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      {% trans "Close" %}
+                    </button>
+                    <form action="{% url 'blog:post_delete' post.pk %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          {% endif %}
         {% endif %}
       </div>
     </div>
@@ -73,21 +93,21 @@
 <div class="fs-4">
   {% if request.user.is_anonymous %}
     <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-       class="btn badge rounded-pill bg-light text-dark">
+       class="btn badge rounded-pill text-bg-light">
       <i class="fa-regular fa-heart"></i>
       <span>{{ post.likers__count }}</span>
     </a>
   {% elif post.is_liked %}
     <button type="button"
-            class="btn badge rounded-pill bg-light text-dark"
+            class="btn badge rounded-pill text-bg-light"
             data-is-liked="y"
             data-post-pk="{{ post.pk }}">
-      <i class="text-danger fa-solid fa-heart"></i>
+      <i class="fa-solid fa-heart text-danger"></i>
       <span>{{ post.likers__count }}</span>
     </button>
   {% else %}
     <button type="button"
-            class="btn badge rounded-pill bg-light text-dark"
+            class="btn badge rounded-pill text-bg-light"
             data-is-liked="n"
             data-post-pk="{{ post.pk }}">
       <i class="fa-regular fa-heart"></i>
@@ -95,7 +115,7 @@
     </button>
   {% endif %}
   <a href="{{ post.get_absolute_url }}"
-     class="btn badge rounded-pill bg-light text-dark">
+     class="btn badge rounded-pill text-bg-light">
     <i class="fa-regular fa-comment"></i>
     {{ post.comments__count }}
   </a>

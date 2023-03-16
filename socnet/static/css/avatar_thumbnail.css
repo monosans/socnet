@@ -1,9 +1,9 @@
 .avatar-thumbnail {
-  width: 50px;
-  max-height: 50px;
+  width: 48px;
+  max-height: 48px;
 }
 
 .avatar-thumbnail > img {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 48px;
+  max-height: 48px;
 }
