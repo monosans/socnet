@@ -6,6 +6,6 @@ from . import views
 
 app_name = "messenger"
 urlpatterns = [
-    path("<str:username>/", views.chat_view, name="chat"),
+    path("<slug:username>/", views.chat_view, name="chat"),
     path("", views.chats_view, name="chats"),
 ]

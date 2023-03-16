@@ -17,14 +17,14 @@ urlpatterns = [
         name="comment_update",
     ),
     path("comment/<int:pk>/delete/", views.comment_delete_view, name="comment_delete"),
-    path("user/<str:username>/", views.user_view, name="user"),
-    path("user/<str:username>/posts/", views.user_posts_view, name="user_posts"),
-    path("user/<str:username>/liked/", views.liked_posts_view, name="liked_posts"),
+    path("user/<slug:username>/", views.user_view, name="user"),
+    path("user/<slug:username>/posts/", views.user_posts_view, name="user_posts"),
+    path("user/<slug:username>/liked/", views.liked_posts_view, name="liked_posts"),
     path(
-        "user/<str:username>/subscribers/", views.subscribers_view, name="subscribers"
+        "user/<slug:username>/subscribers/", views.subscribers_view, name="subscribers"
     ),
     path(
-        "user/<str:username>/subscriptions/",
+        "user/<slug:username>/subscriptions/",
         views.subscriptions_view,
         name="subscriptions",
     ),
