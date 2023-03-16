@@ -45,7 +45,7 @@ repos:
       - id: black
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.255
+    rev: v0.0.256
     hooks:
       - id: ruff
         args: [--fix]
@@ -57,18 +57,19 @@ repos:
         args: []
         additional_dependencies:
           - django-allauth-2fa==0.10.0
-          - django-allauth==0.52.0
+          - django-allauth==0.53.0
           - django-cleanup==7.0.0
           - django-environ==0.10.0
           - django-filter==22.1
           - django-logentry-admin==1.1.0
           - django_otp==1.1.6
           - psycopg2-binary==2.9.5
-          - nh3==0.2.8
           - django-crispy-forms==2.0
           - crispy-bootstrap5==0.7
           - drf-spectacular==0.26.0
-          - django-stubs==1.15.0
+          - nh3==0.2.8
+          - typing-extensions==4.5.0; python_version < '3.10'
+          - django-stubs==1.16.0
           - djangorestframework-stubs==1.9.1
           - lxml-stubs==0.4.0
           - types-Markdown==3.4.2.5
