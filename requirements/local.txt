@@ -15,7 +15,7 @@ djlint==1.19.16
 ruff==0.0.256
 
 mypy==1.1.1
-django-stubs==1.15.0
+django-stubs==1.16.0
 djangorestframework-stubs==1.9.1
 lxml-stubs==0.4.0
 types-Markdown==3.4.2.5
