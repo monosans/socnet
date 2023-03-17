@@ -25,7 +25,7 @@ repos:
           - eslint-config-prettier
 
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v15.2.0
+    rev: v15.3.0
     hooks:
       - id: stylelint
         args: [--fix]
