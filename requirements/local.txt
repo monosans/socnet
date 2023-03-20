@@ -12,7 +12,7 @@ pre-commit==3.1.1
 black==23.1.0
 djlint==1.19.16
 
-ruff==0.0.256
+ruff==0.0.257
 
 mypy==1.1.1
 django-stubs==1.16.0
