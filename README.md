@@ -1,8 +1,8 @@
 # SocNet
 
-[![CI](https://github.com/monosans/socnet/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/monosans/socnet/actions/workflows/ci.yml)
+[![CI](https://github.com/monosans/socnet/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/monosans/socnet/actions/workflows/ci.yml?query=event%3Apush+branch%3Amain)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/monosans/socnet/main.svg)](https://results.pre-commit.ci/latest/github/monosans/socnet/main)
-[![codecov](https://codecov.io/gh/monosans/socnet/branch/main/graph/badge.svg)](https://codecov.io/gh/monosans/socnet)
+[![Coverage](https://img.shields.io/codecov/c/github/monosans/socnet/main)](https://codecov.io/gh/monosans/socnet)
 
 Social network built with Django Framework.
 
