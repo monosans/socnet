@@ -17,7 +17,7 @@ ruff==0.0.260
 mypy==1.1.1
 django-stubs==1.16.0
 djangorestframework-stubs==1.10.0
-lxml-stubs==0.4.0
+types-lxml==2023.3.28
 types-Markdown==3.4.2.6
 
 pytest==7.2.2
