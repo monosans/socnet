@@ -18,7 +18,7 @@ IGNORED_FIELDS = (
 IGNORED_LOOKUPS = frozenset(("trigram_similar", "trigram_word_similar", "unaccent"))
 
 
-def generate_filterset(serializer: Type[ModelSerializer[Any]]) -> FilterSet:
+def generate_filterset(serializer: Type[ModelSerializer[Any]]) -> Type[FilterSet]:
     model = serializer.Meta.model
     filterable_fields = _get_filterable_fields(
         model,  # type: ignore[arg-type]
