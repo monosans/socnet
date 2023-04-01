@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchRank, SearchVector
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
-from django.views.decorators.http import require_http_methods, require_safe
 from django.views.generic import TemplateView
 
 from . import forms
@@ -15,7 +14,6 @@ from .models import User
 from .types import AuthedRequest
 
 
-@require_http_methods(["GET", "HEAD", "POST"])
 @login_required
 def delete_account_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
@@ -33,7 +31,6 @@ class AccountSecurityView(TemplateView):
     template_name = "users/account_security.html"
 
 
-@require_http_methods(["GET", "HEAD", "POST"])
 @login_required
 def edit_profile_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
@@ -47,7 +44,6 @@ def edit_profile_view(request: AuthedRequest) -> HttpResponse:
     return render(request, "users/edit_profile.html", context)
 
 
-@require_safe
 def search_users_view(request: HttpRequest) -> HttpResponse:
     users = None
     if request.GET:

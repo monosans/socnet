@@ -14,11 +14,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from django.views.decorators.http import (
-    require_http_methods,
-    require_POST,
-    require_safe,
-)
+from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, UpdateView
 
 from ..core.utils import paginate
@@ -95,7 +91,6 @@ def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     return redirect(url)
 
 
-@require_http_methods(["GET", "HEAD", "POST"])
 def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "POST":
         if request.user.is_anonymous:
@@ -138,7 +133,6 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "blog/post.html", context)
 
 
-@require_safe
 def posts_view(request: HttpRequest) -> HttpResponse:
     posts: Optional[Union[QuerySet[models.Post], Page[models.Post]]] = None
     page_range = None
@@ -160,7 +154,6 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     return render(request, "blog/posts.html", context)
 
 
-@require_safe
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = User.objects.filter(username=username).only("username")
     user = get_object_or_404(qs)
@@ -169,7 +162,6 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "blog/liked_posts.html", context)
 
 
-@require_safe
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     posts = (
         models.Post.objects.annotate(
@@ -193,21 +185,18 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "blog/user_posts.html", context)
 
 
-@require_safe
 def subscribers_view(request: HttpRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscribers")
     context = {"user": user}
     return render(request, "blog/subscribers.html", context)
 
 
-@require_safe
 def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
     user = services.get_subscriptions(username, "subscriptions")
     context = {"user": user}
     return render(request, "blog/subscriptions.html", context)
 
 
-@require_safe
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = (
         User.objects.filter(username=username)

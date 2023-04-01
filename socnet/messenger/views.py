@@ -4,14 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import OuterRef, Q, Subquery
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.views.decorators.http import require_safe
 
 from ..users.models import User
 from ..users.types import AuthedRequest
 from . import forms, models
 
 
-@require_safe
 @login_required
 def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
     qs = User.objects.only("username", "display_name", "image").filter(
@@ -37,7 +35,6 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
     return render(request, "messenger/chat.html", context)
 
 
-@require_safe
 @login_required
 def chats_view(request: AuthedRequest) -> HttpResponse:
     last_message = models.Message.objects.filter(
