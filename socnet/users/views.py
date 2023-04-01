@@ -4,6 +4,7 @@ from typing import List
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.postgres.search import SearchRank, SearchVector
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -27,7 +28,7 @@ def delete_account_view(request: AuthedRequest) -> HttpResponse:
     return render(request, "users/delete_account.html", context)
 
 
-class AccountSecurityView(TemplateView):
+class AccountSecurityView(LoginRequiredMixin, TemplateView):
     template_name = "users/account_security.html"
 
 
