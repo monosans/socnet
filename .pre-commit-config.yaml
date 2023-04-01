@@ -16,7 +16,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.36.0
+    rev: v8.37.0
     hooks:
       - id: eslint
         args: [--fix]
@@ -40,12 +40,12 @@ repos:
         exclude_types: [html]
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.259
+    rev: v0.0.260
     hooks:
       - id: ruff
         args: [--fix]
@@ -57,7 +57,7 @@ repos:
         args: []
         additional_dependencies:
           - django-allauth-2fa==0.10.0
-          - django-allauth==0.53.1
+          - django-allauth==0.54.0
           - django-cleanup==7.0.0
           - django-environ==0.10.0
           - django-filter==23.1
