@@ -12,7 +12,6 @@ from django.core.paginator import Page
 from django.db.models import Count, Prefetch, Q, QuerySet
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, UpdateView
@@ -87,8 +86,7 @@ def comment_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
 @login_required
 def post_delete_view(request: AuthedRequest, pk: int) -> HttpResponse:
     models.Post.objects.filter(pk=pk, author=request.user).delete()
-    url = reverse("blog:user_posts", args=(request.user.get_username(),))
-    return redirect(url)
+    return redirect("blog:user_posts", request.user.get_username())
 
 
 def post_view(request: HttpRequest, pk: int) -> HttpResponse:
