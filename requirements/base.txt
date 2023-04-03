@@ -1,4 +1,4 @@
-Django[argon2]==4.1.7
+Django[argon2]==4.2
 django-allauth-2fa==0.10.0
 django-allauth==0.54.0
 django-cleanup==7.0.0
