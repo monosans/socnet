@@ -21,10 +21,15 @@ class UserAdminChangeForm(auth_forms.UserChangeForm[User]):
         model = User
 
 
-class UserAdminCreationForm(auth_forms.UserCreationForm[User]):
-    class Meta(auth_forms.UserCreationForm.Meta):
+class UserAdminCreationForm(
+    auth_forms.BaseUserCreationForm[User]  # type: ignore[name-defined]
+):
+    class Meta(auth_forms.BaseUserCreationForm.Meta):  # type: ignore[name-defined]
         model = User
-        fields = ("email", *auth_forms.UserCreationForm.Meta.fields)
+        fields = (
+            "email",
+            *auth_forms.BaseUserCreationForm.Meta.fields,  # type: ignore[attr-defined]
+        )
 
 
 class EditProfileForm(auth_forms.UserChangeForm[User]):
