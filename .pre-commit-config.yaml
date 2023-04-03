@@ -63,7 +63,7 @@ repos:
           - django-filter==23.1
           - django-logentry-admin==1.1.0
           - django_otp==1.1.6
-          - psycopg2-binary==2.9.6
+          - psycopg[binary]==3.1.8
           - django-crispy-forms==2.0
           - crispy-bootstrap5==0.7
           - drf-spectacular==0.26.1

@@ -9,7 +9,7 @@ django-otp==1.1.6
 django-stubs-ext==0.8.0
 docutils==0.19
 Pillow==9.5.0
-psycopg2-binary==2.9.6
+psycopg[binary]==3.1.8
 
 django-crispy-forms==2.0
 crispy-bootstrap5==0.7
