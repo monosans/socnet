@@ -5,12 +5,6 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# hadolint ignore=DL3008
-RUN apt-get update \
-  && apt-get install --no-install-recommends -y libpq-dev \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
-
 
 FROM python as python-build-stage
 
