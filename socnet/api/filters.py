@@ -15,7 +15,14 @@ IGNORED_FIELDS = (
     models.ManyToManyField,
     GenericForeignKey,
 )
-IGNORED_LOOKUPS = frozenset(("trigram_similar", "trigram_word_similar", "unaccent"))
+IGNORED_LOOKUPS = frozenset(
+    (
+        "trigram_similar",
+        "trigram_strict_word_similar",
+        "trigram_word_similar",
+        "unaccent",
+    )
+)
 
 
 def generate_filterset(serializer: Type[ModelSerializer[Any]]) -> Type[FilterSet]:
