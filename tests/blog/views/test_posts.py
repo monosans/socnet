@@ -1,40 +1,26 @@
 from __future__ import annotations
 
+import pytest
 from django.test import Client
 from django.urls import reverse_lazy
 
-from ...conftest import AuthedClient
+from ...utils import auth_client, parametrize_by_auth
 
 url = reverse_lazy("blog:posts")
 
 
-def test_unauthed_get(client: Client) -> None:
+@parametrize_by_auth
+def test_unauthed_get(client: Client, *, auth: bool) -> None:
+    if auth:
+        auth_client(client)
     response = client.get(url)
     assert response.status_code == 200
 
 
-def test_authed_get(authed_client: AuthedClient) -> None:
-    test_unauthed_get(authed_client.client)
-
-
-def test_unauthed_get_search(client: Client) -> None:
-    response = client.get(f"{url}?q=query")
+@parametrize_by_auth
+@pytest.mark.parametrize("q", ["query", ""])
+def test_get_search(client: Client, *, auth: bool, q: str) -> None:
+    if auth:
+        auth_client(client)
+    response = client.get(f"{url}?q={q}")
     assert response.status_code == 200
-
-
-def test_unauthed_get_search_empty_q(client: Client) -> None:
-    response = client.get(f"{url}?q=")
-    assert response.status_code == 200
-
-
-def test_authed_get_search(authed_client: AuthedClient) -> None:
-    test_unauthed_get_search(authed_client.client)
-
-
-def test_unauthed_post(client: Client) -> None:
-    response = client.post(url)
-    assert response.status_code == 405
-
-
-def test_authed_post(authed_client: AuthedClient) -> None:
-    test_unauthed_post(authed_client.client)

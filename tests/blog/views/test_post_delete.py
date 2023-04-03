@@ -5,8 +5,7 @@ from django.urls import reverse
 
 from socnet.blog import models
 
-from ...conftest import AuthedClient
-from ...utils import assert_count_diff
+from ...utils import assert_count_diff, auth_client, parametrize_by_auth
 from .. import factories
 
 
@@ -14,15 +13,14 @@ def get_url(post: models.Post) -> str:
     return reverse("blog:post_delete", args=(post.pk,))
 
 
-def test_unauthed_get(client: Client) -> None:
+@parametrize_by_auth
+def test_unauthed_get(client: Client, *, auth: bool) -> None:
+    if auth:
+        auth_client(client)
     post = factories.PostFactory()
     with assert_count_diff(models.Post, 0):
         response = client.get(get_url(post))
     assert response.status_code == 405
-
-
-def test_authed_get(authed_client: AuthedClient) -> None:
-    test_unauthed_get(authed_client.client)
 
 
 def test_unauthed_post(client: Client) -> None:
@@ -35,10 +33,10 @@ def test_unauthed_post(client: Client) -> None:
     assert response.status_code == 200
 
 
-def test_author_post(authed_client: AuthedClient) -> None:
-    client, user = authed_client
-    post = factories.PostFactory(author=user)
-    with assert_count_diff(models.Post, -1):
+def test_non_author_post(client: Client) -> None:
+    user = auth_client(client)
+    post = factories.PostFactory()
+    with assert_count_diff(models.Post, 0):
         response = client.post(get_url(post), follow=True)
     assert response.redirect_chain == [
         (reverse("blog:user_posts", args=(user.get_username(),)), 302)
@@ -46,10 +44,10 @@ def test_author_post(authed_client: AuthedClient) -> None:
     assert response.status_code == 200
 
 
-def test_non_author_post(authed_client: AuthedClient) -> None:
-    client, user = authed_client
-    post = factories.PostFactory()
-    with assert_count_diff(models.Post, 0):
+def test_author_post(client: Client) -> None:
+    user = auth_client(client)
+    post = factories.PostFactory(author=user)
+    with assert_count_diff(models.Post, -1):
         response = client.post(get_url(post), follow=True)
     assert response.redirect_chain == [
         (reverse("blog:user_posts", args=(user.get_username(),)), 302)

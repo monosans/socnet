@@ -6,7 +6,7 @@ from django.test import Client
 from django.urls import reverse, reverse_lazy
 from django.utils.safestring import mark_safe
 
-from ...conftest import AuthedClient
+from ...utils import auth_client
 
 pytestmark = pytest.mark.parametrize(
     "url", (reverse_lazy("admin:index"), reverse_lazy("django-admindocs-docroot"))
@@ -31,8 +31,8 @@ def test_unauthed(client: Client, url: str) -> None:
     assert response.status_code == 200
 
 
-def test_non_admin(authed_client: AuthedClient, url: str) -> None:
-    client = authed_client.client
+def test_non_admin(client: Client, url: str) -> None:
+    auth_client(client)
     response = client.get(url, follow=True)
     assert response.redirect_chain == [
         ("{}?next={}".format(reverse("admin:login"), url), 302)

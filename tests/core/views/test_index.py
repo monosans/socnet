@@ -3,7 +3,7 @@ from __future__ import annotations
 from django.test import Client
 from django.urls import reverse, reverse_lazy
 
-from ...conftest import AuthedClient
+from ...utils import auth_client
 
 url = reverse_lazy("core:index")
 
@@ -16,8 +16,8 @@ def test_unauthed(client: Client) -> None:
     assert response.status_code == 200
 
 
-def test_authed(authed_client: AuthedClient) -> None:
-    client, user = authed_client
+def test_authed(client: Client) -> None:
+    user = auth_client(client)
     response = client.get(url, follow=True)
     assert response.redirect_chain == [(user.get_absolute_url(), 302)]
     assert response.status_code == 200

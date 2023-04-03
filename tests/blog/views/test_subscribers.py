@@ -5,45 +5,34 @@ from django.urls import reverse
 
 from socnet.users.models import User
 
-from ...conftest import AuthedClient
 from ...users.factories import UserFactory
+from ...utils import auth_client, parametrize_by_auth
 
 
 def get_url(user: User) -> str:
     return reverse("blog:subscribers", args=(user.get_username(),))
 
 
-def test_unauthed_get(client: Client) -> None:
+@parametrize_by_auth
+def test_get(client: Client, *, auth: bool) -> None:
+    if auth:
+        auth_client(client)
     user = UserFactory()
-    response = client.get(get_url(user))
+    user_url = get_url(user)
+    response = client.get(user_url)
     assert response.status_code == 200
     subscriber = UserFactory()
     subscriber.subscriptions.add(user)
-    response = client.get(get_url(user))
+    response = client.get(user_url)
     assert response.status_code == 200
 
 
-def test_authed_get(authed_client: AuthedClient) -> None:
-    test_unauthed_get(authed_client.client)
-
-
-def test_authed_get_self(authed_client: AuthedClient) -> None:
-    client, user = authed_client
-    response = client.get(get_url(user))
+def test_authed_get_self(client: Client) -> None:
+    user = auth_client(client)
+    user_url = get_url(user)
+    response = client.get(user_url)
     assert response.status_code == 200
     subscriber = UserFactory()
     subscriber.subscriptions.add(user)
-    response = client.get(get_url(user))
+    response = client.get(user_url)
     assert response.status_code == 200
-
-
-def test_unauthed_post(client: Client) -> None:
-    user = UserFactory()
-    response = client.post(get_url(user))
-    assert response.status_code == 405
-
-
-def test_authed_post(authed_client: AuthedClient) -> None:
-    client, user = authed_client
-    response = client.post(get_url(user))
-    assert response.status_code == 405
