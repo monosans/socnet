@@ -4,7 +4,6 @@ from datetime import date
 from typing import Optional
 
 from django.contrib.auth.models import AbstractUser
-from django.contrib.postgres.fields import CICharField, CIEmailField
 from django.core.validators import validate_slug
 from django.db import models
 from django.urls import reverse
@@ -21,7 +20,7 @@ class User(AbstractUser):
     last_login = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
 
-    username = CICharField(
+    username = models.CharField(
         verbose_name=_("username"),
         max_length=32,
         unique=True,
@@ -29,11 +28,14 @@ class User(AbstractUser):
         help_text=_("Only English letters, numbers, underscores and hyphens."),
         validators=(validate_slug,),
         error_messages={"unique": _("A user with that username already exists.")},
+        db_collation="case_insensitive",
     )
     display_name = models.CharField(
         verbose_name=_("display name"), max_length=64, blank=True
     )
-    email = CIEmailField(verbose_name=_("email address"), unique=True)
+    email = models.EmailField(
+        verbose_name=_("email address"), unique=True, db_collation="case_insensitive"
+    )
 
     birth_date = models.DateField(
         verbose_name=_("birth date"),
