@@ -44,7 +44,7 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 ### Backend
 
 - Python 3.8+
-- Django 4.1
+- Django 4.2
 - Django REST framework (DRF)
 - Django Channels (WebSockets)
 - Django Filter
