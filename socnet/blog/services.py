@@ -15,9 +15,7 @@ from ..users.models import User
 from . import models
 
 
-def get_posts_preview_qs(
-    request: HttpRequest, *, wrap_is_liked: bool = False
-) -> QuerySet[models.Post]:
+def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
     qs = (
         models.Post.objects.annotate(
             Count("comments", distinct=True), Count("likers", distinct=True)
@@ -33,9 +31,7 @@ def get_posts_preview_qs(
     )
     if request.user.is_anonymous:
         return qs
-    q = Q(pk__in=request.user.liked_posts.all())
-    expr = ExpressionWrapper(q, BooleanField()) if wrap_is_liked else q
-    return qs.annotate(is_liked=expr)
+    return qs.annotate(is_liked=Q(pk__in=request.user.liked_posts.all()))
 
 
 def get_subscriptions(username: str, field: str) -> User:
