@@ -39,7 +39,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     async def receive_json(self, content: Dict[str, str], **kwargs: Any) -> None:
         sender: User = self.scope["user"]
         message = models.Message(
-            sender=sender, recipient_id=self.interlocutor_pk, content=content["message"]
+            content=content["message"], recipient_id=self.interlocutor_pk, sender=sender
         )
         await save_obj(message)
         msg = {
@@ -48,10 +48,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "content": markdownify(message.content),
             "date_created": message.formatted_date_created,
             "sender": {
-                "username": sender.get_username(),
+                "href": sender.get_absolute_url(),
                 "display_name": sender.display_name_in_parentheses,
                 "image": sender.image.url if sender.image else None,
-                "href": sender.get_absolute_url(),
+                "username": sender.get_username(),
             },
         }
         await self.channel_layer.group_send(self.group, msg)

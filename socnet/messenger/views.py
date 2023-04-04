@@ -43,10 +43,10 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
     ).order_by("-pk")
     chats = (
         User.objects.distinct()
-        .only("username", "display_name", "image")
+        .only("display_name", "image", "username")
         .annotate(
-            last_message_date=Subquery(last_message.values("date_created")[:1]),
             last_message_content=Subquery(last_message.values("content")[:1]),
+            last_message_date=Subquery(last_message.values("date_created")[:1]),
         )
         .filter(
             Q(incoming_messages__sender=request.user)

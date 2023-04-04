@@ -95,8 +95,8 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             return redirect_to_login(next=request.path)
         form = forms.CommentForm(request.POST)
         if form.is_valid():
-            form.instance.post_id = pk
             form.instance.author = request.user
+            form.instance.post_id = pk
             form.save()
             form = forms.CommentForm()
         else:
@@ -108,24 +108,27 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     else:
         form = forms.CommentForm()
     comments_qs = (
-        models.Comment.objects.annotate(Count("likers"))
-        .select_related("author")
-        .order_by("pk")
-        .only(
+        models.Comment.objects.only(
+            "content",
             "date_created",
             "date_updated",
             "post_id",
-            "content",
             "author__image",
             "author__username",
         )
+        .annotate(Count("likers"))
+        .select_related("author")
+        .order_by("pk")
     )
-    if request.user.is_authenticated:
-        comments_qs = comments_qs.annotate(  # type: ignore[assignment]
-            is_liked=Q(pk__in=request.user.liked_comments.all())
-        )
-    prefetch = Prefetch("comments", comments_qs)
-    qs = services.get_posts_preview_qs(request).filter(pk=pk).prefetch_related(prefetch)
+    prefetch = Prefetch(
+        "comments",
+        (
+            comments_qs.annotate(is_liked=Q(pk__in=request.user.liked_comments.all()))
+            if request.user.is_authenticated
+            else comments_qs
+        ),
+    )
+    qs = services.get_posts_preview_qs(request).prefetch_related(prefetch).filter(pk=pk)
     post = get_object_or_404(qs)
     context = {"post": post, "form": form}
     return render(request, "blog/post.html", context)
@@ -153,7 +156,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
 
 
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
-    qs = User.objects.filter(username=username).only("username")
+    qs = User.objects.only("username").filter(username=username)
     user = get_object_or_404(qs)
     posts = services.get_posts_preview_qs(request).filter(likers=user).order_by("-pk")
     context = {"user": user, "posts": posts}
@@ -162,21 +165,22 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     posts = (
-        models.Post.objects.annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
+        models.Post.objects.only("author_id", "content", "date_created", "date_updated")
+        .annotate(Count("comments", distinct=True), Count("likers", distinct=True))
         .order_by("-pk")
-        .only("date_created", "date_updated", "content", "author_id")
     )
-    if request.user.is_authenticated:
-        posts = posts.annotate(  # type: ignore[assignment]
-            is_liked=Q(pk__in=request.user.liked_posts.all())
-        )
-    prefetch = Prefetch("posts", posts)
+    prefetch = Prefetch(
+        "posts",
+        (
+            posts.annotate(is_liked=Q(pk__in=request.user.liked_posts.all()))
+            if request.user.is_authenticated
+            else posts
+        ),
+    )
     qs = (
-        User.objects.filter(username=username)
+        User.objects.only("image", "username")
         .prefetch_related(prefetch)
-        .only("image", "username")
+        .filter(username=username)
     )
     user = get_object_or_404(qs)
     context = {"user": user}
@@ -197,19 +201,21 @@ def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
 
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = (
-        User.objects.filter(username=username)
+        User.objects.only(
+            "about", "birth_date", "display_name", "image", "location", "username"
+        )
         .annotate(
             Count("liked_posts", distinct=True),
             Count("posts", distinct=True),
             Count("subscribers", distinct=True),
             Count("subscriptions", distinct=True),
         )
-        .only("about", "birth_date", "display_name", "image", "location", "username")
+        .filter(username=username)
     )
-    if request.user.is_authenticated:
-        qs = qs.annotate(  # type: ignore[assignment]
-            is_subscription=Q(pk__in=request.user.subscriptions.all())
-        )
-    user = get_object_or_404(qs)
+    user = get_object_or_404(
+        qs.annotate(is_subscription=Q(pk__in=request.user.subscriptions.all()))
+        if request.user.is_authenticated
+        else qs
+    )
     context = {"user": user}
     return render(request, "blog/user.html", context)

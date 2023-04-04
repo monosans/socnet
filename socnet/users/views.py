@@ -54,10 +54,10 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
             search_fields: List[str] = form.cleaned_data["search_fields"]
             rank = SearchRank(vector=SearchVector(*search_fields), query=query)
             users = (
-                User.objects.annotate(rank=rank)
+                User.objects.only("display_name", "image", "username")
+                .annotate(rank=rank)
                 .filter(rank__gt=0)
                 .order_by("-rank", "username")
-                .only("display_name", "image", "username")
             )
     else:
         form = forms.UserSearchForm()

@@ -10,17 +10,15 @@ from . import models
 
 def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
     qs = (
-        models.Post.objects.annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
-        .select_related("author")
-        .only(
+        models.Post.objects.only(
+            "content",
             "date_created",
             "date_updated",
-            "content",
             "author__image",
             "author__username",
         )
+        .annotate(Count("comments", distinct=True), Count("likers", distinct=True))
+        .select_related("author")
     )
     if request.user.is_anonymous:
         return qs
@@ -30,8 +28,8 @@ def get_posts_preview_qs(request: HttpRequest) -> QuerySet[models.Post]:
 def get_subscriptions(username: str, field: str) -> User:
     prefetch = Prefetch(field, User.objects.only("display_name", "image", "username"))
     qs = (
-        User.objects.filter(username=username)
+        User.objects.only("username")
         .prefetch_related(prefetch)
-        .only("username")
+        .filter(username=username)
     )
     return get_object_or_404(qs)
