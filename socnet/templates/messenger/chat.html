@@ -50,7 +50,7 @@
                     <div>
                       <a href="{{ message.sender.get_absolute_url }}"
                          class="text-decoration-none">{{ message.sender }} {{ message.sender.display_name_in_parentheses }}</a>
-                      {{ message.formatted_date_created }}
+                      <span class="text-secondary">{{ message.formatted_date_created }}</span>
                     </div>
                     <div class="me-2 img-responsive">{{ message.content|markdownify }}</div>
                   </div>

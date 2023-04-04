@@ -40,7 +40,7 @@
                 <a href="${data.sender.href}" class="text-decoration-none">
                   ${data.sender.username} ${data.sender.display_name}
                 </a>
-                ${data.date_created}
+                <span class="text-secondary">${data.date_created}</span>
               </div>
               <div class="me-2 img-responsive">${data.content}</div>
             </div>
