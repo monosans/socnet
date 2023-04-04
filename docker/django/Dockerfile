@@ -5,18 +5,12 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# hadolint ignore=DL3008
-RUN apt-get update \
-  && apt-get install --no-install-recommends -y libpq-dev \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
-
 
 FROM python as python-build-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y build-essential \
+  && apt-get install --no-install-recommends -y build-essential libpq-dev \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
@@ -38,7 +32,7 @@ FROM python as python-base-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y gettext \
+  && apt-get install --no-install-recommends -y gettext libpq-dev \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
