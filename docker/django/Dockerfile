@@ -28,16 +28,13 @@ RUN pip wheel \
   --no-color
 
 
-FROM python as python-base-run-stage
+FROM python as python-ci-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install --no-install-recommends -y gettext libpq-dev \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
-
-
-FROM python-base-run-stage as python-local-run-stage
 
 COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 
@@ -49,6 +46,11 @@ RUN pip install \
   --no-color \
   && rm -rf /wheels/
 
+ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
+
+
+FROM python-ci-run-stage as python-local-run-stage
+
 ARG UID GID
 
 RUN groupadd -g "${GID}" -r django \
@@ -56,14 +58,12 @@ RUN groupadd -g "${GID}" -r django \
 
 USER django
 
-ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
 
-
-FROM python-base-run-stage as python-production-run-stage
+FROM python as python-production-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y brotli \
+  && apt-get install --no-install-recommends -y brotli gettext libpq-dev \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd -r django \
@@ -86,18 +86,3 @@ COPY --chown=django:django . .
 USER django
 
 ENTRYPOINT ["bash", "/app/docker/django/entrypoint.prod.sh"]
-
-
-FROM python-base-run-stage as python-ci-run-stage
-
-COPY --from=python-build-stage /usr/src/app/wheels /wheels/
-
-RUN pip install \
-  --progress-bar off \
-  --no-index \
-  -f /wheels/ /wheels/* \
-  --no-cache-dir \
-  --no-color \
-  && rm -rf /wheels/
-
-ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
