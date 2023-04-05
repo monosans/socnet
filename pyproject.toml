@@ -4,7 +4,10 @@ skip-magic-trailing-comma = true
 preview = true
 
 [tool.coverage.report]
-exclude_lines = ["@(abc.)?abstractmethod", "if\\s+(settings.)?DEBUG\\s*:"]
+exclude_lines = [
+    "^\\s*@(?:abc\\.)?abstractmethod$",
+    "^\\s*if\\s+(?:settings\\.)?DEBUG\\s*:$",
+]
 fail_under = 1
 
 [tool.coverage.run]
