@@ -45,7 +45,7 @@ repos:
       - id: black
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.260
+    rev: v0.0.261
     hooks:
       - id: ruff
         args: [--fix]
@@ -72,7 +72,7 @@ repos:
           - django-stubs==1.16.0
           - djangorestframework-stubs==1.10.0
           - types-lxml==2023.3.28
-          - types-Markdown==3.4.2.6
+          - types-Markdown==3.4.2.7
           - pytest==7.2.2
 
   - repo: https://github.com/Riverside-Healthcare/djLint
