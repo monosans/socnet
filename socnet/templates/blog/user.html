@@ -27,9 +27,7 @@
           {% endif %}
           {% if request.user == user %}
             <a href="{% url 'users:edit_profile' %}"
-               class="btn btn-primary w-100 mb-2">
-              {% trans "Edit" %}
-            </a>
+               class="btn btn-primary w-100 mb-2">{% trans "Edit" %}</a>
             <a href="{% url 'blog:post_create' %}" class="btn btn-primary w-100">
               {% trans "Create post" %}
             </a>
@@ -61,9 +59,7 @@
               {% trans "Write message" %}
             </a>
             <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-               class="btn btn-primary w-100">
-              {% trans "Subscribe" %}
-            </a>
+               class="btn btn-primary w-100">{% trans "Subscribe" %}</a>
           {% endif %}
           {% if request.user.is_staff %}
             <a href="{{ user|obj_admin_url }}" class="btn btn-primary w-100 mt-2">
@@ -120,9 +116,7 @@
                 <td>{% trans "Subscribers" %}</td>
                 <td>
                   <a href="{% url 'blog:subscribers' user.get_username %}"
-                     id="subscribers_count">
-                    {{ user.subscribers__count }}
-                  </a>
+                     id="subscribers_count">{{ user.subscribers__count }}</a>
                 </td>
               </tr>
               <tr>
