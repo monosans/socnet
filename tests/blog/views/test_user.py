@@ -22,5 +22,6 @@ def test_get(client: Client, *, auth: bool, self: bool) -> None:
         user = UserFactory()
     else:
         user = UserFactory()
-    response = client.get(get_url(user))
+    url = get_url(user)
+    response = client.get(url)
     assert response.status_code == 200

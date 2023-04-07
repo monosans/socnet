@@ -6,8 +6,10 @@ from django.urls import reverse
 
 from socnet.blog import models
 
-from ...utils import ClientMethods, assert_count_diff, auth_client
+from ...utils import ClientMethods, auth_client
 from .. import factories
+
+factory = factories.PostFactory
 
 
 def get_url(post: models.Post) -> str:
@@ -21,31 +23,33 @@ def get_url(post: models.Post) -> str:
 def test_empty_request(client: Client, *, auth: bool, method: ClientMethods) -> None:
     if auth:
         auth_client(client)
-    post = factories.PostFactory()
+    post = factory()
     url = get_url(post)
-    with assert_count_diff(models.Comment, 0):
-        response = client.get(url) if method == ClientMethods.GET else client.post(url)
+    response = client.get(url) if method == ClientMethods.GET else client.post(url)
     assert response.status_code == 200
+    assert not models.Comment.objects.exists()
 
 
 def test_unauthed_post(client: Client) -> None:
-    post = factories.PostFactory()
+    post = factory()
     url = get_url(post)
-    with assert_count_diff(models.Comment, 0):
-        response = client.post(url, follow=True)
+    response = client.post(url, follow=True)
     assert response.redirect_chain == [
         ("{}?next={}".format(reverse("account_login"), url), 302)
     ]
     assert response.status_code == 200
+    assert not models.Comment.objects.exists()
 
 
 def test_authed_post(client: Client) -> None:
     user = auth_client(client)
-    post = factories.PostFactory()
-    content = " comment content "
-    with assert_count_diff(models.Comment, 1):
-        response = client.post(get_url(post), data={"content": content})
+    post = factory()
+    url = get_url(post)
+    comment_content = factories.CommentFactory.build().content
+    response = client.post(url, data={"content": comment_content})
     assert response.status_code == 200
-    comment = models.Comment.objects.order_by("-pk").get()
+    comment = models.Comment.objects.last()
+    assert comment is not None
     assert comment.author == user
-    assert comment.content == content.strip()
+    assert comment.post == post
+    assert comment.content == comment_content.strip()

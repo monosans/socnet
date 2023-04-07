@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-from contextlib import contextmanager
 from enum import Enum, auto
-from typing import Generator, Type
+from typing import Any
 
 import pytest
-from django.db.models import Model
 from django.test import Client
 
 from socnet.users.models import User
@@ -13,15 +11,8 @@ from socnet.users.models import User
 from .users.factories import UserFactory
 
 
-@contextmanager
-def assert_count_diff(model: Type[Model], diff: int) -> Generator[None, None, None]:
-    enter_count = model.objects.count()
-    yield
-    assert model.objects.count() == enter_count + diff
-
-
-def auth_client(client: Client) -> User:
-    user = UserFactory()
+def auth_client(client: Client, **kwargs: Any) -> User:
+    user = UserFactory(**kwargs)
     client.force_login(user)
     return user
 

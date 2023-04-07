@@ -18,21 +18,21 @@ def test_get(client: Client, *, auth: bool) -> None:
     if auth:
         auth_client(client)
     user = UserFactory()
-    user_url = get_url(user)
-    response = client.get(user_url)
+    url = get_url(user)
+    response = client.get(url)
     assert response.status_code == 200
     subscription = UserFactory()
     user.subscriptions.add(subscription)
-    response = client.get(user_url)
+    response = client.get(url)
     assert response.status_code == 200
 
 
 def test_authed_get_self(client: Client) -> None:
     user = auth_client(client)
-    user_url = get_url(user)
-    response = client.get(user_url)
+    url = get_url(user)
+    response = client.get(url)
     assert response.status_code == 200
     subscription = UserFactory()
     user.subscriptions.add(subscription)
-    response = client.get(user_url)
+    response = client.get(url)
     assert response.status_code == 200
