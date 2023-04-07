@@ -60,4 +60,4 @@ def _should_be_filterable(
         return fields == "__all__" or field.attname in fields
     if exclude:
         return field.attname not in exclude
-    raise ValueError
+    raise ValueError  # pragma: no cover
