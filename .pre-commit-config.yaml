@@ -51,7 +51,7 @@ repos:
         args: [--fix]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.1.1
+    rev: v1.2.0
     hooks:
       - id: mypy
         args: []
@@ -76,6 +76,6 @@ repos:
           - pytest==7.2.2
 
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.19.16
+    rev: v1.19.17
     hooks:
       - id: djlint-django
