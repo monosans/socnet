@@ -59,6 +59,8 @@ def test_author_get(client: Client) -> None:
     url = get_url(comment)
     response = client.get(url)
     assert response.status_code == 200
+    new_comment = models.Comment.objects.only("date_updated").get(pk=comment.pk)
+    assert comment.date_updated == new_comment.date_updated
 
 
 def test_author_post(client: Client) -> None:
@@ -76,9 +78,19 @@ def test_author_post(client: Client) -> None:
         )
     ]
     assert response.status_code == 200
-    updated_comment = models.Comment.objects.only(
-        "author_id", "content", "date_updated"
-    ).get(pk=comment.pk)
+    updated_comment = models.Comment.objects.get(pk=comment.pk)
     assert updated_comment.author_id == comment.author_id
     assert updated_comment.content == new_content.strip()
+    assert updated_comment.date_created == comment.date_created
     assert updated_comment.date_updated != comment.date_updated
+    assert updated_comment.post_id == comment.post_id
+
+
+def test_author_post_empty(client: Client) -> None:
+    user = auth_client(client)
+    comment = factory(author=user)
+    url = get_url(comment)
+    response = client.post(url)
+    assert response.status_code == 200
+    updated_comment = models.Comment.objects.only("date_updated").get(pk=comment.pk)
+    assert updated_comment.date_updated == comment.date_updated

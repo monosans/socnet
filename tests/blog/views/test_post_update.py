@@ -59,6 +59,8 @@ def test_author_get(client: Client) -> None:
     url = get_url(post)
     response = client.get(url)
     assert response.status_code == 200
+    new_post = models.Post.objects.only("date_updated").get(pk=post.pk)
+    assert post.date_updated == new_post.date_updated
 
 
 def test_author_post(client: Client) -> None:
@@ -69,9 +71,18 @@ def test_author_post(client: Client) -> None:
     response = client.post(url, data={"content": new_content}, follow=True)
     assert response.redirect_chain == [(reverse("blog:post", args=(post.pk,)), 302)]
     assert response.status_code == 200
-    updated_post = models.Post.objects.only("author_id", "content", "date_updated").get(
-        pk=post.pk
-    )
+    updated_post = models.Post.objects.get(pk=post.pk)
     assert updated_post.author_id == post.author_id
     assert updated_post.content == new_content.strip()
+    assert updated_post.date_created == post.date_created
     assert updated_post.date_updated != post.date_updated
+
+
+def test_author_post_empty(client: Client) -> None:
+    user = auth_client(client)
+    post = factory(author=user)
+    url = get_url(post)
+    response = client.post(url)
+    assert response.status_code == 200
+    updated_comment = models.Post.objects.only("date_updated").get(pk=post.pk)
+    assert updated_comment.date_updated == post.date_updated

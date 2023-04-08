@@ -40,8 +40,8 @@ def test_authed_post(client: Client) -> None:
     content = factory.build().content
     response = client.post(url, data={"content": content}, follow=True)
     assert response.status_code == 200
-    post = models.Post.objects.last()
+    post = models.Post.objects.only("author_id", "content").last()
     assert post is not None
-    assert post.author == user
-    assert post.content == content.strip()
     assert response.redirect_chain == [(post.get_absolute_url(), 302)]
+    assert post.author_id == user.pk
+    assert post.content == content.strip()

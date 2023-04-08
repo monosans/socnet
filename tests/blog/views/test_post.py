@@ -48,8 +48,8 @@ def test_authed_post(client: Client) -> None:
     comment_content = factories.CommentFactory.build().content
     response = client.post(url, data={"content": comment_content})
     assert response.status_code == 200
-    comment = models.Comment.objects.last()
+    comment = models.Comment.objects.only("author_id", "content", "post_id").last()
     assert comment is not None
-    assert comment.author == user
-    assert comment.post == post
+    assert comment.author_id == user.pk
     assert comment.content == comment_content.strip()
+    assert comment.post_id == post.pk
