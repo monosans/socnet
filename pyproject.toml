@@ -1,3 +1,76 @@
+[tool.poetry]
+name = ""
+version = "0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = { version = "4.2", extras = ["argon2"] }
+django-allauth-2fa = "0.10.0"
+django-allauth = "0.54.0"
+django-cleanup = "7.0.0"
+django-environ = "0.10.0"
+django-filter = "23.1"
+django-logentry-admin = "1.1.0"
+django-otp = "1.1.6"
+django-stubs-ext = "0.8.0"
+docutils = "0.19"
+Pillow = "9.5.0"
+psycopg = { version = "3.1.8", extras = ["c"] }
+
+django-crispy-forms = "2.0"
+crispy-bootstrap5 = "0.7"
+
+djangorestframework = "3.14.0"
+drf-spectacular = "0.26.1"
+
+channels = "4.0.0"
+channels-redis = "4.1.0"
+
+lxml = "4.9.2"
+Markdown = "3.4.3"
+nh3 = "0.2.9"
+
+typing-extensions = { version = "4.5.0", python = "<3.10" }
+
+uvicorn = "0.21.1"
+httptools = "0.5.0"
+uvloop = { version = "0.17.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
+websockets = "11.0.1"
+
+[tool.poetry.group.local.dependencies]
+debugpy = "1.6.7"
+
+# Required for uvicorn's --reload"
+watchfiles = "0.19.0"
+
+django-debug-toolbar = "4.0.0"
+django-extra-checks = "0.13.3"
+
+pre-commit = "3.2.2"
+black = "23.3.0"
+djlint = "1.22.0"
+
+ruff = "0.0.261"
+
+mypy = "1.2.0"
+django-stubs = "1.16.0"
+djangorestframework-stubs = "1.10.0"
+types-lxml = "2023.3.28"
+types-Markdown = "3.4.2.7"
+
+pytest = "7.3.0"
+pytest-django = "4.5.2"
+pytest-cov = "4.0.0"
+covdefaults = "2.3.0"
+django-coverage-plugin = "3.0.0"
+factory-boy = "3.2.1"
+
+[tool.poetry.group.production.dependencies]
+gunicorn = "20.1.0"
+redis = { version = "4.5.4", extras = ["hiredis"] }
+
 [tool.black]
 target-version = ["py38"]
 skip-magic-trailing-comma = true
@@ -159,3 +232,7 @@ required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.pyupgrade]
 keep-runtime-typing = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

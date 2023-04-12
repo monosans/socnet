@@ -1,4 +1,0 @@
--r base.txt
-
-gunicorn==20.1.0
-redis[hiredis]==4.5.4

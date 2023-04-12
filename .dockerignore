@@ -2,9 +2,10 @@
 !config/**/*.py
 !docker/
 !locale/**/*.po
-!requirements/*.txt
 !socnet/**/*.py
 !socnet/static/
 !socnet/templates/
 !manage.py
+!poetry.lock
+!pyproject.toml
 Dockerfile

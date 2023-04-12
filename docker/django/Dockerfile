@@ -8,21 +8,35 @@ WORKDIR /app
 
 FROM python as python-build-stage
 
-# hadolint ignore=DL3008
+# hadolint ignore=DL3008,DL3013
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y build-essential libpq-dev \
+  && apt-get install -y --no-install-recommends build-essential libpq-dev \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
-
-ARG BUILD_ENVIRONMENT
-
-# Copy requirements to cache them
-COPY ./requirements/base.txt ./requirements/"${BUILD_ENVIRONMENT}".txt ./requirements/
-
-RUN pip wheel \
-  -w /usr/src/app/wheels \
-  -r ./requirements/"${BUILD_ENVIRONMENT}".txt \
+  && rm -rf /var/lib/apt/lists/* \
+  && pip install \
   --progress-bar off \
+  --no-cache-dir \
+  --disable-pip-version-check \
+  --no-color \
+  poetry
+
+COPY ./poetry.lock ./pyproject.toml ./
+
+ARG POETRY_GROUPS
+
+# hadolint ignore=DL4006
+RUN poetry export \
+  --without-urls \
+  --only="${POETRY_GROUPS}" \
+  --no-ansi \
+  --no-interaction \
+  --no-cache | \
+  pip wheel \
+  --wheel-dir /usr/src/app/wheels \
+  -r /dev/stdin \
+  --progress-bar off \
+  --no-deps \
+  --require-hashes \
   --no-cache-dir \
   --disable-pip-version-check \
   --no-color
@@ -32,7 +46,7 @@ FROM python as python-ci-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y gettext libpq-dev \
+  && apt-get install -y --no-install-recommends gettext libpq-dev \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
@@ -41,8 +55,9 @@ COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 RUN pip install \
   --progress-bar off \
   --no-index \
-  -f /wheels/ /wheels/* \
+  --find-links /wheels/ /wheels/* \
   --no-cache-dir \
+  --disable-pip-version-check \
   --no-color \
   && rm -rf /wheels/
 
@@ -53,8 +68,8 @@ FROM python-ci-run-stage as python-local-run-stage
 
 ARG UID GID
 
-RUN groupadd -g "${GID}" -r django \
-  && useradd -g django -l -r -u "${UID}" django
+RUN groupadd --gid "${GID}" --system django \
+  && useradd --gid django --no-log-init --system --uid "${UID}" django
 
 USER django
 
@@ -66,8 +81,8 @@ RUN apt-get update \
   && apt-get install --no-install-recommends -y brotli gettext libpq-dev \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
-  && groupadd -r django \
-  && useradd -g django -r django \
+  && groupadd --system django \
+  && useradd --gid django --system django \
   && mkdir -p /var/www/django/static /var/www/django/media \
   && chown django:django /var/www/django/static /var/www/django/media
 
@@ -76,8 +91,9 @@ COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 RUN pip install \
   --progress-bar off \
   --no-index \
-  -f /wheels/ /wheels/* \
+  --find-links /wheels/ /wheels/* \
   --no-cache-dir \
+  --disable-pip-version-check \
   --no-color \
   && rm -rf /wheels/
 
