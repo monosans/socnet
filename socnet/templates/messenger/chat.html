@@ -6,8 +6,8 @@
   {% blocktrans %}Chat with {{ interlocutor }}{% endblocktrans %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}"/>
-  <link rel="stylesheet" href="{% static 'css/chat.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
 {% endblock css %}
 {% block javascript %}
   <script defer src="{% static 'js/chat.js' %}"></script>
@@ -24,7 +24,7 @@
                 <img class="rounded"
                      src="{{ interlocutor.image.url }}"
                      alt=""
-                     loading="lazy"/>
+                     loading="lazy" />
               </span>
             {% endif %}
             {{ interlocutor }}
@@ -42,7 +42,7 @@
                     <img src="{{ message.sender.image.url }}"
                          alt=""
                          class="rounded"
-                         loading="lazy"/>
+                         loading="lazy" />
                   {% endif %}
                 </div>
                 <div class="col ms-2">

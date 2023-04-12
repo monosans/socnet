@@ -99,6 +99,7 @@ django_settings_module = "config.settings.test"
 
 [tool.djlint]
 ignore = "H006,H030,H031"
+include = "H017,H035"
 indent = 2
 blank_line_after_tag = "load,extends"
 profile = "django"

@@ -27,7 +27,7 @@
                                {% if emailaddress.primary or emailaddress__count == 1 %}
                                  checked="checked"
                                {% endif %}
-                               value="{{ emailaddress.email }}"/>
+                               value="{{ emailaddress.email }}" />
                         {{ emailaddress.email }}
                         {% if emailaddress.verified %}
                           {% trans "Verified" %}

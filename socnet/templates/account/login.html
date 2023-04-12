@@ -16,7 +16,7 @@
     {% if redirect_field_value %}
       <input type="hidden"
              name="{{ redirect_field_name }}"
-             value="{{ redirect_field_value }}"/>
+             value="{{ redirect_field_value }}" />
     {% endif %}
     <div class="mb-3 text-center">
       <a href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>
