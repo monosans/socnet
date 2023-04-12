@@ -8,6 +8,7 @@ from channels.layers import InMemoryChannelLayer
 from channels_redis.core import RedisChannelLayer
 from django.contrib.auth.models import AnonymousUser
 from django.db.models import Model
+from django.utils.html import escape
 
 from ..core.templatetags.markdownify import markdownify
 from ..users.models import User
@@ -49,7 +50,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "date_created": message.formatted_date_created,
             "sender": {
                 "href": sender.get_absolute_url(),
-                "display_name": sender.display_name_in_parentheses,
+                "display_name": escape(sender.display_name_in_parentheses),
                 "image": sender.image.url if sender.image else None,
                 "username": sender.get_username(),
             },
