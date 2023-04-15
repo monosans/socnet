@@ -23,7 +23,7 @@ django-crispy-forms = "2.0"
 crispy-bootstrap5 = "0.7"
 
 djangorestframework = "3.14.0"
-drf-spectacular = "0.26.1"
+drf-spectacular = "0.26.2"
 
 channels = "4.0.0"
 channels-redis = "4.1.0"
