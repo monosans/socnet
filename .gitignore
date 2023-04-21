@@ -547,6 +547,9 @@ poetry.toml
 # ruff
 .ruff_cache/
 
+# LSP config files
+pyrightconfig.json
+
 ### Redis ###
 # Ignore redis binary dump (dump.rdb) files
 
