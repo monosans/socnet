@@ -17,7 +17,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.38.0
+    rev: v8.39.0
     hooks:
       - id: eslint
         args: [--fix]
@@ -26,7 +26,7 @@ repos:
           - eslint-config-prettier
 
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v15.5.0
+    rev: v15.6.0
     hooks:
       - id: stylelint
         args: [--fix]
@@ -35,7 +35,7 @@ repos:
           - stylelint-config-standard
 
   - repo: https://github.com/monosans/pre-commit-prettier
-    rev: v2.8.7
+    rev: v2.8.8
     hooks:
       - id: prettier
         exclude_types: [html]
