@@ -85,7 +85,6 @@ fail_under = 1
 
 [tool.coverage.run]
 omit = [
-    "*.txt",
     "config/asgi.py",
     "config/settings/local.py",
     "config/settings/production.py",
