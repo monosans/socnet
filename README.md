@@ -72,7 +72,7 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 
 ### Configuration
 
-Copy the `.env.template` file to `.env`. Set the settings you need in the `.env` file.
+Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` file.
 
 ### Development
 
