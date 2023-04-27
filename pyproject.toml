@@ -14,7 +14,7 @@ django-environ = "0.10.0"
 django-filter = "23.1"
 django-logentry-admin = "1.1.0"
 django-otp = "1.1.6"
-django-stubs-ext = "0.8.0"
+django-stubs-ext = "4.2.0"
 docutils = "0.19"
 Pillow = "9.5.0"
 psycopg = { version = "3.1.8", extras = ["c"] }
