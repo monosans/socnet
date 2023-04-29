@@ -14,7 +14,7 @@ env = environ.Env()
 env.smart_cast = False
 
 # Needed for running mypy outside of docker
-if env.bool("READ_ENV_TEMPLATE", default=True):  # pragma: no cover
+if env.bool("READ_ENV_EXAMPLE", default=True):  # pragma: no cover
     env.read_env(str(BASE_DIR / ".env.example"))
 
 APPS_DIR = BASE_DIR / "socnet"
@@ -145,18 +145,13 @@ X_FRAME_OPTIONS = "DENY"
 
 EMAIL_TIMEOUT = 5
 
-ADMINS = [(env.str("ADMIN_NAME"), env.str("ADMIN_EMAIL"))]
-MANAGERS = ADMINS
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": (
-                "%(levelname)s %(asctime)s %(module)s "
-                "%(process)d %(thread)d %(message)s"
-            )
+            "format": "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
         }
     },
     "handlers": {
@@ -166,7 +161,13 @@ LOGGING = {
             "formatter": "verbose",
         }
     },
-    "root": {"level": "INFO", "handlers": ["console"]},
+    "root": {"level": "DEBUG", "handlers": ["console"]},
+    "loggers": {
+        "django": {},
+        "MARKDOWN": {"level": "INFO"},
+        "psycopg": {"level": "DEBUG"},
+        "uvicorn": {},
+    },
 }
 
 MESSAGE_TAGS = {messages.DEBUG: "", messages.ERROR: "danger"}

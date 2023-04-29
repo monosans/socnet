@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Optional
+
 from .base import *
 
 ALLOWED_HOSTS = [env.str("DOMAIN_NAME")]
@@ -40,41 +42,27 @@ EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 STATIC_ROOT = "/var/www/django/static"
 MEDIA_ROOT = "/var/www/django/media"
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
-    "formatters": {
-        "verbose": {
-            "format": (
-                "%(levelname)s %(asctime)s %(module)s "
-                "%(process)d %(thread)d %(message)s"
-            )
-        }
-    },
-    "handlers": {
-        "mail_admins": {
+LOGGING["loggers"]["gunicorn"] = {}  # type: ignore[index]
+_SENTRY_DSN: Optional[str] = env.str("SENTRY_DSN", None)
+if _SENTRY_DSN:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.integrations.redis import RedisIntegration
+
+    sentry_sdk.init(
+        dsn=_SENTRY_DSN,
+        integrations=(DjangoIntegration(), RedisIntegration()),
+        traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", 0.0),
+    )
+    LOGGING["loggers"]["sentry_sdk"] = {}  # type: ignore[index]
+else:
+    _ADMIN_EMAILS: Optional[str] = env.str("ADMIN_EMAILS", None)
+    if _ADMIN_EMAILS:
+        from email.utils import getaddresses
+
+        ADMINS = getaddresses([_ADMIN_EMAILS])
+        LOGGING["handlers"]["mail_admins"] = {  # type: ignore[index]
             "level": "ERROR",
-            "filters": ["require_debug_false"],
             "class": "django.utils.log.AdminEmailHandler",
-        },
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        },
-    },
-    "root": {"level": "INFO", "handlers": ["console"]},
-    "loggers": {
-        "django.request": {
-            "handlers": ["mail_admins"],
-            "level": "ERROR",
-            "propagate": True,
-        },
-        "django.security.DisallowedHost": {
-            "level": "ERROR",
-            "handlers": ["console", "mail_admins"],
-            "propagate": True,
-        },
-    },
-}
+        }
+        LOGGING["root"]["handlers"].append("mail_admins")  # type: ignore[index]

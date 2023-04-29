@@ -17,7 +17,6 @@ django-otp = "1.1.6"
 django-stubs-ext = "4.2.0"
 docutils = "0.19"
 Pillow = "9.5.0"
-psycopg = { version = "3.1.8", extras = ["c"] }
 
 django-crispy-forms = "2.0"
 crispy-bootstrap5 = "0.7"
@@ -32,6 +31,8 @@ lxml = "4.9.2"
 Markdown = "3.4.3"
 nh3 = "0.2.11"
 
+sentry-sdk = { version = "1.21.1", extras = ["django"] }
+
 typing-extensions = { version = "4.5.0", python = "<3.10" }
 
 uvicorn = "0.22.0"
@@ -40,6 +41,8 @@ uvloop = { version = "0.17.0", markers = "implementation_name == 'cpython' and (
 websockets = "11.0.2"
 
 [tool.poetry.group.local.dependencies]
+psycopg = { version = "3.1.8", extras = ["binary"] }
+
 debugpy = "1.6.7"
 
 # Required for uvicorn's --reload"
@@ -69,6 +72,7 @@ factory-boy = "3.2.1"
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "20.1.0"
+psycopg = { version = "3.1.8", extras = ["c"] }
 redis = { version = "4.5.4", extras = ["hiredis"] }
 
 [tool.black]

@@ -7,7 +7,7 @@ services:
       - postgres
     env_file: ./.env
     environment:
-      - READ_ENV_TEMPLATE=False
+      - READ_ENV_EXAMPLE=False
     networks:
       - postgres
     restart: unless-stopped

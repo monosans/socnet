@@ -53,6 +53,7 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 - Django OTP
 - Django Crispy Forms
 - Django Environ
+- Sentry
 - lxml
 - pytest
 - PostgreSQL 15
