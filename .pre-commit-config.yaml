@@ -40,6 +40,12 @@ repos:
       - id: prettier
         exclude_types: [html]
 
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: "1.13.0"
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, "4.2"]
+
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
