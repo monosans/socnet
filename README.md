@@ -28,6 +28,7 @@ English and Russian languages ​​are supported. The language is selected base
 - All of the above
 - Use Django admin panel
 - Use a REST API that has a Swagger UI and supports all CRUD operations and filtering
+- Receive error notifications in [Sentry](https://sentry.io/) or by email
 
 ## DB schema
 
@@ -46,7 +47,8 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 - Python 3.8+
 - Django 4.2
 - Django REST framework (DRF)
-- Django Channels (WebSockets)
+- DRF Spectacular
+- Django Channels
 - Django Filter
 - Django Allauth
 - Django Allauth 2FA
@@ -54,11 +56,14 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 - Django Crispy Forms
 - Django Environ
 - Sentry
+- WebSockets
 - lxml
-- pytest
+- pytest + factory-boy
+- mypy
+- Gunicorn + Uvicorn
 - PostgreSQL 15
 - Redis 7
-- Gunicorn + Uvicorn
+- etc.
 
 ### Frontend
 
@@ -78,8 +83,10 @@ Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` 
 ### Development
 
 ```bash
-# Build a container
+# Build services
 docker compose build --no-cache --pull
+# Pull service images
+docker compose pull --ignore-pull-failures
 # Run DB migrations
 docker compose run --rm django python3 manage.py migrate
 # Create a superuser if you want
@@ -95,11 +102,13 @@ docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-co
 
 ### Production
 
-To run this in production, you need to specify a domain name and email settings in `.env`.
+To run this in production, you need to specify the production settings in `.env`.
 
 ```bash
-# Build a container
+# Build services
 docker compose -f docker-compose.yml -f docker-compose.prod.yml build --no-cache --pull
+# Pull service images
+docker compose -f docker-compose.yml -f docker-compose.prod.yml pull --ignore-pull-failures
 # Run DB migrations
 docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py migrate
 # Create a superuser if you want
