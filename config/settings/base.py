@@ -166,7 +166,7 @@ LOGGING = {
         "django": {},
         "MARKDOWN": {"level": "INFO"},
         "psycopg": {"level": "INFO"},
-        "uvicorn": {},
+        "uvicorn": {"level": "NOTSET", "propagate": True},
     },
 }
 
