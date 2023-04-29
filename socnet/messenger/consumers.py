@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Union
+from typing import TYPE_CHECKING, Any, Dict, Union
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from channels.layers import InMemoryChannelLayer
-from channels_redis.core import RedisChannelLayer
 from django.contrib.auth.models import AnonymousUser
 from django.db.models import Model
 from django.utils.html import escape
@@ -13,6 +11,10 @@ from django.utils.html import escape
 from ..core.templatetags.markdownify import markdownify
 from ..users.models import User
 from . import models
+
+if TYPE_CHECKING:
+    from channels.layers import InMemoryChannelLayer
+    from channels_redis.core import RedisChannelLayer
 
 
 @database_sync_to_async
