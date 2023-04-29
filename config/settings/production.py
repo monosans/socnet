@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from .base import *
 
 ALLOWED_HOSTS = [env.str("DOMAIN_NAME")]
@@ -43,7 +41,7 @@ STATIC_ROOT = "/var/www/django/static"
 MEDIA_ROOT = "/var/www/django/media"
 
 LOGGING["loggers"]["gunicorn"] = {}  # type: ignore[index]
-_SENTRY_DSN: Optional[str] = env.str("SENTRY_DSN", None)
+_SENTRY_DSN = env.str("SENTRY_DSN", None)
 if _SENTRY_DSN:
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
@@ -56,7 +54,7 @@ if _SENTRY_DSN:
     )
     LOGGING["loggers"]["sentry_sdk"] = {}  # type: ignore[index]
 else:
-    _ADMIN_EMAILS: Optional[str] = env.str("ADMIN_EMAILS", None)
+    _ADMIN_EMAILS = env.str("ADMIN_EMAILS", None)
     if _ADMIN_EMAILS:
         from email.utils import getaddresses
 
