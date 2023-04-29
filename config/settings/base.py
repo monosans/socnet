@@ -165,7 +165,7 @@ LOGGING = {
     "loggers": {
         "django": {},
         "MARKDOWN": {"level": "INFO"},
-        "psycopg": {"level": "DEBUG"},
+        "psycopg": {"level": "INFO"},
         "uvicorn": {},
     },
 }
