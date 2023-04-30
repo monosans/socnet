@@ -21,20 +21,20 @@ from ..users.models import User
 from ..users.types import AuthedRequest
 from . import forms, models, services
 
-T_BaseModelForm = TypeVar(
-    "T_BaseModelForm", bound=Union[forms.PostForm, forms.CommentForm]
+TBaseModelForm = TypeVar(
+    "TBaseModelForm", bound=Union[forms.PostForm, forms.CommentForm]
 )
-T_Post = TypeVar("T_Post", bound=Union[models.Post, models.Comment])
+TPost = TypeVar("TPost", bound=Union[models.Post, models.Comment])
 
 
-class _BasePostUpdateView(LoginRequiredMixin, UpdateView[T_Post, T_BaseModelForm]):
-    def get_object(self, queryset: Optional[QuerySet[T_Post]] = None) -> T_Post:
+class _BasePostUpdateView(LoginRequiredMixin, UpdateView[TPost, TBaseModelForm]):
+    def get_object(self, queryset: Optional[QuerySet[TPost]] = None) -> TPost:
         obj = super().get_object(queryset)
         if obj.author_id != self.request.user.pk:
             raise PermissionDenied
         return obj
 
-    def form_valid(self, form: T_BaseModelForm) -> HttpResponse:
+    def form_valid(self, form: TBaseModelForm) -> HttpResponse:
         self.object = form.save(commit=False)  # type: ignore[assignment]
         self.object.save(update_fields=(*form.Meta.fields, "date_updated"))
         form.save_m2m()

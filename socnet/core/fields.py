@@ -6,8 +6,8 @@ from django.db.models import CharField, Model, TextField
 
 from . import utils
 
-_ST = TypeVar("_ST")
-_GT = TypeVar("_GT")
+_ST = TypeVar("_ST", contravariant=True)
+_GT = TypeVar("_GT", covariant=True)
 
 
 class NormalizedCharField(CharField[_ST, _GT]):
