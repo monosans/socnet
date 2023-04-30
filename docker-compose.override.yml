@@ -10,13 +10,15 @@ services:
     command:
       [
         "/usr/local/bin/uvicorn",
-        "config.asgi:application",
         "--host",
         "0.0.0.0",
         "--reload",
         "--reload-include",
         "*.html",
+        "--log-config",
+        "docker/django/logging_config.json",
         "--no-server-header",
+        "config.asgi:application",
       ]
     ports:
       - "8000:8000"

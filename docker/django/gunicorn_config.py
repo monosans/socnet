@@ -1,7 +1,9 @@
 """https://docs.gunicorn.org/en/stable/settings.html"""
 from __future__ import annotations
 
+import json
 import multiprocessing
+from pathlib import Path
 
 bind = "0.0.0.0:5000"
 workers = multiprocessing.cpu_count() * 2 + 1
@@ -13,3 +15,9 @@ max_requests_jitter = 100
 chdir = "/app"
 worker_tmp_dir = "/dev/shm"  # noqa: S108
 worker_class = "uvicorn.workers.UvicornWorker"
+
+accesslog: None = None
+errorlog: None = None
+logconfig_dict = json.loads(
+    Path("docker", "django", "logging_config.json").read_bytes()
+)

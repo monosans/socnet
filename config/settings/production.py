@@ -40,7 +40,6 @@ EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 STATIC_ROOT = "/var/www/django/static"
 MEDIA_ROOT = "/var/www/django/media"
 
-LOGGING["loggers"]["gunicorn"] = {}  # type: ignore[index]
 _SENTRY_DSN = env.str("SENTRY_DSN", None)
 if _SENTRY_DSN:
     import sentry_sdk
@@ -52,15 +51,9 @@ if _SENTRY_DSN:
         integrations=(DjangoIntegration(), RedisIntegration()),
         traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", 0.0),
     )
-    LOGGING["loggers"]["sentry_sdk"] = {}  # type: ignore[index]
 else:
     _ADMIN_EMAILS = env.str("ADMIN_EMAILS", None)
     if _ADMIN_EMAILS:
         from email.utils import getaddresses
 
         ADMINS = getaddresses([_ADMIN_EMAILS])
-        LOGGING["handlers"]["mail_admins"] = {  # type: ignore[index]
-            "level": "ERROR",
-            "class": "django.utils.log.AdminEmailHandler",
-        }
-        LOGGING["root"]["handlers"].append("mail_admins")  # type: ignore[index]

@@ -1,8 +1,17 @@
 """https://docs.djangoproject.com/en/4.2/ref/settings/"""
 from __future__ import annotations
 
+import json
+import logging
+import logging.config
 from pathlib import Path
 from typing import Any, Dict
+
+# Set up logging only if it has not already been set up by uvicorn or gunicorn
+if not logging.root.handlers:
+    logging.config.dictConfig(
+        json.loads(Path("docker", "django", "logging_config.json").read_bytes())
+    )
 
 import environ
 from django.contrib.messages import constants as messages
@@ -145,30 +154,7 @@ X_FRAME_OPTIONS = "DENY"
 
 EMAIL_TIMEOUT = 5
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
-            "datefmt": "%Y-%m-%d %H:%M:%S",
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        }
-    },
-    "root": {"level": "DEBUG", "handlers": ["console"]},
-    "loggers": {
-        "django": {},
-        "MARKDOWN": {"level": "INFO"},
-        "psycopg": {"level": "INFO"},
-        "uvicorn": {"level": "NOTSET", "propagate": True},
-    },
-}
+LOGGING_CONFIG: None = None
 
 MESSAGE_TAGS = {messages.DEBUG: "", messages.ERROR: "danger"}
 
