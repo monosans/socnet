@@ -1,5 +1,6 @@
 **
 !config/**/*.py
+!config/settings/logging.json
 !docker/
 !locale/**/*.po
 !socnet/**/*.py
