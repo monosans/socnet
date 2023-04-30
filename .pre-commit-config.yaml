@@ -61,7 +61,7 @@ repos:
           - django-allauth>=0.54,<0.55
           - django-cleanup>=7,<8
           - django-environ>=0.10,<0.11
-          - django-filter>=23.1
+          - django-filter>=23.2
           - django-logentry-admin>=1.1,<2
           - django_otp>=1.1,<2
           - django-crispy-forms>=2,<3
