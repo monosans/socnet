@@ -18,6 +18,4 @@ worker_class = "uvicorn.workers.UvicornWorker"
 
 accesslog: None = None
 errorlog: None = None
-logconfig_dict = json.loads(
-    Path("docker", "django", "logging_config.json").read_bytes()
-)
+logconfig_dict = json.loads(Path("config", "settings", "logging.json").read_bytes())

@@ -7,17 +7,19 @@ import logging.config
 from pathlib import Path
 from typing import Any, Dict
 
+current_file = Path(__file__).resolve(strict=True)
+
 # Set up logging only if it has not already been set up by uvicorn or gunicorn
 if not logging.root.handlers:
     logging.config.dictConfig(
-        json.loads(Path("docker", "django", "logging_config.json").read_bytes())
+        json.loads(current_file.with_name("logging.json").read_bytes())
     )
 
-import environ
-from django.contrib.messages import constants as messages
-from django.utils.translation import gettext_lazy as _
+import environ  # noqa: E402
+from django.contrib.messages import constants as messages  # noqa: E402
+from django.utils.translation import gettext_lazy as _  # noqa: E402
 
-BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+BASE_DIR = current_file.parents[2]
 
 env = environ.Env()
 env.smart_cast = False

@@ -16,7 +16,7 @@ services:
         "--reload-include",
         "*.html",
         "--log-config",
-        "docker/django/logging_config.json",
+        "config/settings/logging.json",
         "--no-server-header",
         "config.asgi:application",
       ]
