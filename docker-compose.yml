@@ -11,13 +11,11 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-
   postgres:
     image: postgres:15
     env_file: ./.env
     networks:
       - postgres
     restart: unless-stopped
-
 networks:
   postgres:

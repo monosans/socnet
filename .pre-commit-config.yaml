@@ -13,49 +13,49 @@ repos:
       - id: end-of-file-fixer
       - id: fix-byte-order-marker
       - id: mixed-line-ending
-        args: [--fix=lf]
+        args:
+          - --fix=lf
       - id: trailing-whitespace
-
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: v8.39.0
     hooks:
       - id: eslint
-        args: [--fix]
+        args:
+          - --fix
         additional_dependencies:
           - eslint
           - eslint-config-prettier
-
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
     rev: v15.6.0
     hooks:
       - id: stylelint
-        args: [--fix]
+        args:
+          - --fix
         additional_dependencies:
           - stylelint
           - stylelint-config-standard
-
   - repo: https://github.com/monosans/pre-commit-prettier
     rev: v2.8.8
     hooks:
       - id: prettier
-        exclude_types: [html]
-
+        exclude_types:
+          - html
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
       - id: black
-
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.0.263
     hooks:
       - id: ruff
-        args: [--fix]
-
+        args:
+          - --fix
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.2.0
     hooks:
       - id: mypy
-        args: ["--scripts-are-modules"]
+        args:
+          - --scripts-are-modules
         additional_dependencies:
           - django-allauth-2fa>=0.10,<0.11
           - django-allauth>=0.54,<0.55
@@ -76,7 +76,6 @@ repos:
           - types-lxml>=2023.3.28
           - types-Markdown>=3.4,<4
           - pytest>=7.3,<8
-
   - repo: https://github.com/Riverside-Healthcare/djLint
     rev: v1.25.0
     hooks:
