@@ -259,8 +259,8 @@ msgstr "Настройка двухфакторной аутентификаци
 msgid "Step 1"
 msgstr "Шаг 1"
 
-msgid "Scan the QR code below with the token generator of your choice (for example, Aegis Authenticator on Android and Ravio OTP on iOS)."
-msgstr "Отсканируйте приведённый ниже QR-код с помощью выбранного вами генератора токенов (например, Aegis Authenticator на Android и Ravio OTP на iOS)."
+msgid "Scan the QR code below with the token generator of your choice (for example, Aegis Authenticator on Android and Raivo OTP on iOS)."
+msgstr "Отсканируйте приведённый ниже QR-код с помощью выбранного вами генератора токенов (например, Aegis Authenticator на Android и Raivo OTP на iOS)."
 
 msgid "Step 2"
 msgstr "Шаг 2"
