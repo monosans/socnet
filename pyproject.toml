@@ -45,7 +45,7 @@ psycopg = { version = "3.1.9", extras = ["binary"] }
 
 debugpy = "1.6.7"
 
-# Required for uvicorn's --reload"
+# Required for uvicorn's --reload
 watchfiles = "0.19.0"
 
 django-debug-toolbar = "4.0.0"
@@ -170,7 +170,7 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 FAIL_INVALID_TEMPLATE_VARS = true
-addopts = ["--strict-markers", "--strict-config"]
+addopts = ["--strict-config", "--strict-markers"]
 xfail_strict = true
 
 [tool.ruff]
@@ -178,7 +178,6 @@ target-version = "py38"
 select = ["ALL"]
 ignore = [
     "ANN",
-    "B008",
     "BLE001",
     "C901",
     "COM",
@@ -226,6 +225,9 @@ ignore = [
 "config/settings/*" = ["F403", "F405"]
 "docker/django/gunicorn_config.py" = ["INP001"]
 "tests/*" = ["PLR2004", "S101"]
+
+[tool.ruff.flake8-gettext]
+extend-function-names = ["gettext_lazy"]
 
 [tool.ruff.flake8-unused-arguments]
 ignore-variadic-names = true
