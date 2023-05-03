@@ -2624,14 +2624,14 @@ dev = ["black", "isort", "lxml (>=4.9,<5.0)", "mypy (>=1.1.0,<1.2.0)", "pyright 
 
 [[package]]
 name = "types-markdown"
-version = "3.4.2.7"
+version = "3.4.2.8"
 description = "Typing stubs for Markdown"
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-Markdown-3.4.2.7.tar.gz", hash = "sha256:ecea668b1e5aaa8fb4f7067622af3c3341cb9145baa4d939b7c75d3e1eb26f7f"},
-    {file = "types_Markdown-3.4.2.7-py3-none-any.whl", hash = "sha256:7fd3ecb487f1d41c043fa24c00258ab7e1fe37585ee6ad016a1a3c03bca34f73"},
+    {file = "types-Markdown-3.4.2.8.tar.gz", hash = "sha256:f4114d44ebd660edfa5e68366971ff32c44c90dce584158faa1abe6bf8075bd8"},
+    {file = "types_Markdown-3.4.2.8-py3-none-any.whl", hash = "sha256:737594dc97dd38da72a2f90f5591c36a17003c913dd629a15145f3b221daf95d"},
 ]
 
 [[package]]
@@ -2957,4 +2957,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "7dc01a84a3b8de5d75484f84bab9ce5deb1aac881ac48407d3a868ab69a7ba31"
+content-hash = "9b77f42de64c20b9e5b7bb6825fe226828251870101f5d517f27f76a40b331dc"
