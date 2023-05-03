@@ -61,7 +61,7 @@ mypy = "1.2.0"
 django-stubs = "4.2.0"
 djangorestframework-stubs = "3.14.0"
 types-lxml = "2023.3.28"
-types-Markdown = "3.4.2.7"
+types-Markdown = "3.4.2.8"
 
 pytest = "7.3.1"
 pytest-django = "4.5.2"
