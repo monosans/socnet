@@ -6,7 +6,7 @@ authors = []
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Django = { version = "4.2", extras = ["argon2"] }
+Django = { version = "4.2.1", extras = ["argon2"] }
 django-allauth-2fa = "0.10.0"
 django-allauth = "0.54.0"
 django-cleanup = "7.0.0"
