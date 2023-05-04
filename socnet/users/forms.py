@@ -52,7 +52,7 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
 
 
 class UserSearchForm(forms.Form):
-    q = forms.Field(widget=forms.Textarea, label=_("Search query"))
+    q = forms.CharField(widget=forms.Textarea, label=_("Search query"))
     search_fields = forms.MultipleChoiceField(
         choices=(
             ("username", _("Username")),
@@ -67,7 +67,7 @@ class UserSearchForm(forms.Form):
 
 class AccountDeletionForm(InjectUserMixin, forms.Form):
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}),
+        widget=forms.PasswordInput({"autocomplete": "current-password"}),
         label=_("Password"),
     )
 

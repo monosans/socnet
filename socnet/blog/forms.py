@@ -21,7 +21,7 @@ class CommentForm(forms.ModelForm[models.Comment]):
 
 
 class PostSearchForm(forms.Form):
-    q = forms.Field(
+    q = forms.CharField(
         widget=forms.Textarea(
             {"class": "form-control", "placeholder": _("Search posts")}
         )
