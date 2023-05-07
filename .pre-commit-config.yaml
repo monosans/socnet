@@ -17,7 +17,7 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.39.0
+    rev: v8.40.0
     hooks:
       - id: eslint
         args:
@@ -45,7 +45,7 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.264
+    rev: v0.0.265
     hooks:
       - id: ruff
         args:
