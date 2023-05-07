@@ -5,12 +5,10 @@ import lxml.html
 import nh3
 from django import template
 from django.utils.safestring import SafeString, mark_safe
-from markdown import Markdown
+from pyromark import Markdown
 
 register = template.Library()
-md = Markdown(
-    extensions=("abbr", "def_list", "fenced_code", "tables", "nl2br", "sane_lists")
-)
+md = Markdown(extensions=("tables", "strikethrough"))
 
 
 @register.filter("markdownify")

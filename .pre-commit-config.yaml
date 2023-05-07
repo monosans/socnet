@@ -67,6 +67,7 @@ repos:
           - django-crispy-forms<3
           - crispy-bootstrap5<0.8
           - drf-spectacular<0.27
+          - pyromark<0.2
           - nh3<0.3
           - sentry-sdk<2
           - typing-extensions<5; python_version < "3.10"
@@ -74,7 +75,6 @@ repos:
           - django-stubs<5
           - djangorestframework-stubs<4
           - types-lxml
-          - types-Markdown<4
           - pytest<8
   - repo: https://github.com/Riverside-Healthcare/djLint
     rev: v1.25.0

@@ -28,7 +28,7 @@ channels = "4.0.0"
 channels-redis = "4.1.0"
 
 lxml = "4.9.2"
-Markdown = "3.4.3"
+pyromark = "0.1.0"
 nh3 = "0.2.11"
 
 sentry-sdk = { version = "1.22.1", extras = ["django"] }
@@ -61,7 +61,6 @@ mypy = "1.2.0"
 django-stubs = "4.2.0"
 djangorestframework-stubs = "3.14.0"
 types-lxml = "2023.3.28"
-types-Markdown = "3.4.2.8"
 
 pytest = "7.3.1"
 pytest-django = "4.5.2"

@@ -41,7 +41,6 @@
       "level": "INFO",
       "handlers": ["console", "mail_admins"]
     },
-    "MARKDOWN": { "level": "INFO" },
     "psycopg": { "level": "INFO" },
     "watchfiles.main": { "level": "WARNING" }
   }
