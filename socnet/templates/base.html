@@ -63,8 +63,7 @@
                   <li class="nav-item">
                     {% with user_url=request.user.get_absolute_url %}
                       <a href="{{ user_url }}"
-                         class="nav-link
-                                {% if user_url == request.path %}active{% endif %}">
+                         class="nav-link{% if user_url == request.path %} active{% endif %}">
                         <i class="fa-solid fa-user text-primary"></i>
                         {% translate "My profile" %}
                       </a>
@@ -73,8 +72,7 @@
                   <li class="nav-item">
                     {% url "blog:posts" as url_posts %}
                     <a href="{{ url_posts }}"
-                       class="nav-link
-                              {% if url_posts == request.path %}active{% endif %}">
+                       class="nav-link{% if url_posts == request.path %} active{% endif %}">
                       <i class="fa-solid fa-newspaper text-primary"></i>
                       {% translate "Posts" %}
                     </a>
@@ -82,8 +80,7 @@
                   <li class="nav-item">
                     {% url "messenger:chats" as url_chats %}
                     <a href="{{ url_chats }}"
-                       class="nav-link
-                              {% if url_chats == request.path %}active{% endif %}">
+                       class="nav-link{% if url_chats == request.path %} active{% endif %}">
                       <i class="fa-solid fa-message text-primary"></i>
                       {% translate "Messenger" %}
                     </a>
@@ -92,8 +89,7 @@
                   <li class="nav-item">
                     {% url "blog:posts" as url_posts %}
                     <a href="{{ url_posts }}"
-                       class="nav-link
-                              {% if url_posts == request.path %}active{% endif %}">
+                       class="nav-link{% if url_posts == request.path %} active{% endif %}">
                       <i class="fa-solid fa-newspaper text-primary"></i>
                       {% translate "Posts" %}
                     </a>
@@ -102,8 +98,7 @@
                 <li class="nav-item">
                   {% url "users:search_users" as url_search_users %}
                   <a href="{{ url_search_users }}"
-                     class="nav-link
-                            {% if url_search_users == request.path %}active{% endif %}">
+                     class="nav-link{% if url_search_users == request.path %} active{% endif %}">
                     <i class="fa-solid fa-magnifying-glass text-primary"></i>
                     {% translate "Search users" %}
                   </a>
@@ -145,8 +140,7 @@
                     <li class="nav-item">
                       {% url "account_login" as url_login %}
                       <a href="{{ url_login }}"
-                         class="nav-link
-                                {% if url_login == request.path %}active{% endif %}">
+                         class="nav-link{% if url_login == request.path %} active{% endif %}">
                         <i class="fa-solid fa-user text-primary"></i>
                         {% translate "Log in" %}
                       </a>
@@ -154,8 +148,7 @@
                     <li class="nav-item">
                       {% url "account_signup" as url_signup %}
                       <a href="{{ url_signup }}"
-                         class="nav-link
-                                {% if url_signup == request.path %}active{% endif %}">
+                         class="nav-link{% if url_signup == request.path %} active{% endif %}">
                         <i class="fa-solid fa-clipboard-list text-primary"></i>
                         {% translate "Register" %}
                       </a>
