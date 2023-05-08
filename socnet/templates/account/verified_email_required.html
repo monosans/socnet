@@ -3,18 +3,20 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Verify your email address" %}
+  {% translate "Verify your email address" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="mb-3 text-center">{% trans "Verify your email address" %}</h3>
+  <h3 class="mb-3 text-center">{% translate "Verify your email address" %}</h3>
   <div class="mb-3">
-    {% trans "This part of the site requires us to verify that you are who you say you are. To do this, we require you to verify ownership of your email address." %}
+    {% translate "This part of the site requires us to verify that you are who you say you are. To do this, we require you to verify ownership of your email address." %}
   </div>
   <div class="mb-3">
-    {% trans "We have sent you an email for verification. Click on the link in this email. If you don't see the verification email in your main mailbox, check your spam folder." %}
+    {% translate "We have sent you an email for verification. Click on the link in this email. If you don't see the verification email in your main mailbox, check your spam folder." %}
   </div>
   <div>
     {% url "account_email" as email_url %}
-    {% blocktrans %}You can still <a href="{{ email_url }}">change your email address</a>.{% endblocktrans %}
+    {% blocktranslate trimmed %}
+      You can still <a href="{{ email_url }}">change your email address</a>.
+    {% endblocktranslate %}
   </div>
 {% endblock card_body %}

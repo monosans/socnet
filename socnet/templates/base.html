@@ -66,7 +66,7 @@
                          class="nav-link
                                 {% if user_url == request.path %}active{% endif %}">
                         <i class="fa-solid fa-user text-primary"></i>
-                        {% trans "My profile" %}
+                        {% translate "My profile" %}
                       </a>
                     {% endwith %}
                   </li>
@@ -76,7 +76,7 @@
                        class="nav-link
                               {% if url_posts == request.path %}active{% endif %}">
                       <i class="fa-solid fa-newspaper text-primary"></i>
-                      {% trans "Posts" %}
+                      {% translate "Posts" %}
                     </a>
                   </li>
                   <li class="nav-item">
@@ -85,7 +85,7 @@
                        class="nav-link
                               {% if url_chats == request.path %}active{% endif %}">
                       <i class="fa-solid fa-message text-primary"></i>
-                      {% trans "Messenger" %}
+                      {% translate "Messenger" %}
                     </a>
                   </li>
                 {% else %}
@@ -95,7 +95,7 @@
                        class="nav-link
                               {% if url_posts == request.path %}active{% endif %}">
                       <i class="fa-solid fa-newspaper text-primary"></i>
-                      {% trans "Posts" %}
+                      {% translate "Posts" %}
                     </a>
                   </li>
                 {% endif %}
@@ -105,14 +105,14 @@
                      class="nav-link
                             {% if url_search_users == request.path %}active{% endif %}">
                     <i class="fa-solid fa-magnifying-glass text-primary"></i>
-                    {% trans "Search users" %}
+                    {% translate "Search users" %}
                   </a>
                 </li>
                 {% if request.user.is_staff %}
                   <li class="nav-item">
                     <a href="{% url 'admin:index' %}" class="nav-link">
                       <i class="fa-solid fa-toolbox text-primary"></i>
-                      {% trans "Admin panel" %}
+                      {% translate "Admin panel" %}
                     </a>
                   </li>
                 {% endif %}
@@ -131,13 +131,13 @@
                       <li>
                         <a href="{% url "users:account_security" %}" class="dropdown-item">
                           <i class="fa-solid fa-shield text-primary"></i>
-                          {% trans "Security" %}
+                          {% translate "Security" %}
                         </a>
                       </li>
                       <li>
                         <a href="{% url "account_logout" %}" class="dropdown-item">
                           <i class="fa-solid fa-right-from-bracket text-primary"></i>
-                          {% trans "Log out" %}
+                          {% translate "Log out" %}
                         </a>
                       </li>
                     </ul>
@@ -148,7 +148,7 @@
                          class="nav-link
                                 {% if url_login == request.path %}active{% endif %}">
                         <i class="fa-solid fa-user text-primary"></i>
-                        {% trans "Log in" %}
+                        {% translate "Log in" %}
                       </a>
                     </li>
                     <li class="nav-item">
@@ -157,7 +157,7 @@
                          class="nav-link
                                 {% if url_signup == request.path %}active{% endif %}">
                         <i class="fa-solid fa-clipboard-list text-primary"></i>
-                        {% trans "Register" %}
+                        {% translate "Register" %}
                       </a>
                     </li>
                   {% endif %}

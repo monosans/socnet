@@ -2,6 +2,8 @@
 
 {% if user.is_authenticated %}
   <div class="mb-3">
-    {% blocktrans with user_url=user.get_absolute_url %}You are already logged in as <a href="{{ user_url }}">{{ user }}</a>.{% endblocktrans %}
+    {% blocktranslate trimmed with user_url=user.get_absolute_url %}
+      You are already logged in as <a href="{{ user_url }}">{{ user }}</a>.
+    {% endblocktranslate %}
   </div>
 {% endif %}

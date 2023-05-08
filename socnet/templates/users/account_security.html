@@ -3,28 +3,28 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Account security" %}
+  {% translate "Account security" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="mb-3 text-center">{% trans "Account security" %}</h3>
+  <h3 class="mb-3 text-center">{% translate "Account security" %}</h3>
   <a href="{% url 'account_change_password' %}"
      class="btn btn-outline-primary btn-lg text-start w-100 mb-2">
     <i class="fa-solid fa-key"></i>
-    {% trans "Change password" %}
+    {% translate "Change password" %}
   </a>
   <a href="{% url 'account_email' %}"
      class="btn-outline-primary btn btn-lg text-start w-100 mb-2">
     <i class="fa-solid fa-envelope"></i>
-    {% trans "Change email" %}
+    {% translate "Change email" %}
   </a>
   <a href="{% url 'two-factor-setup' %}"
      class="btn btn-outline-primary btn-lg text-start w-100 mb-2">
     <i class="fa-solid fa-fingerprint"></i>
-    {% trans "Two-factor authentication" %}
+    {% translate "Two-factor authentication" %}
   </a>
   <a href="{% url 'users:delete_account' %}"
      class="btn btn-outline-danger btn-lg text-start w-100">
     <i class="fa-solid fa-trash"></i>
-    {% trans "Delete account" %}
+    {% translate "Delete account" %}
   </a>
 {% endblock card_body %}

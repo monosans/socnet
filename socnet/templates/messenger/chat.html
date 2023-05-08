@@ -3,7 +3,9 @@
 {% load static i18n markdownify crispy_forms_tags %}
 
 {% block title %}
-  {% blocktrans %}Chat with {{ interlocutor }}{% endblocktrans %}
+  {% blocktranslate trimmed %}
+    Chat with {{ interlocutor }}
+  {% endblocktranslate %}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />

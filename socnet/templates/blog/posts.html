@@ -3,7 +3,7 @@
 {% load static i18n crispy_forms_tags %}
 
 {% block title %}
-  {% trans "Posts" %}
+  {% translate "Posts" %}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
@@ -38,10 +38,10 @@
             <div class="text-center">
               {% if request.GET %}
                 {% if form.is_valid %}
-                  {% trans "No posts found." %}
+                  {% translate "No posts found." %}
                 {% endif %}
               {% else %}
-                {% trans "Subscribe to users you are interested in, so that their posts are displayed here." %}
+                {% translate "Subscribe to users you are interested in, so that their posts are displayed here." %}
               {% endif %}
             </div>
           </div>

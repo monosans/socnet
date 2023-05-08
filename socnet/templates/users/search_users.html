@@ -3,7 +3,7 @@
 {% load static i18n crispy_forms_tags %}
 
 {% block title %}
-  {% trans "Search users" %}
+  {% translate "Search users" %}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
@@ -13,11 +13,11 @@
     <div class="col-xl-6">
       <div class="card">
         <div class="card-body">
-          <h3 class="mb-3 text-center">{% trans "Search users" %}</h3>
+          <h3 class="mb-3 text-center">{% translate "Search users" %}</h3>
           <form method="get">
             {{ form|crispy }}
             <button type="submit" class="btn btn-primary w-100">
-              {% trans "Search users" %}
+              {% translate "Search users" %}
             </button>
           </form>
         </div>
@@ -47,7 +47,7 @@
           {% if form.is_valid %}
             <div class="card mt-1">
               <div class="card-body">
-                <div class="text-center">{% trans "No users found" %}</div>
+                <div class="text-center">{% translate "No users found" %}</div>
               </div>
             </div>
           {% endif %}

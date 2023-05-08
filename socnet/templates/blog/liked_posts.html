@@ -3,7 +3,7 @@
 {% load static i18n %}
 
 {% block title %}
-  {{ user }} - {% trans "liked posts" %}
+  {{ user }} - {% translate "liked posts" %}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
@@ -21,7 +21,7 @@
           <div class="card-body">
             <h3 class="text-center">
               <a href="{{ user.get_absolute_url }}" class="text-decoration-none">{{ user }}</a>
-              <div>{% trans "Liked posts" %}</div>
+              <div>{% translate "Liked posts" %}</div>
             </h3>
           </div>
         </div>
@@ -30,7 +30,9 @@
         <div class="card">
           <div class="card-body">
             <div class="text-center">
-              {% blocktrans %}{{ user }} has no liked posts.{% endblocktrans %}
+              {% blocktranslate trimmed %}
+                {{ user }} has no liked posts.
+              {% endblocktranslate %}
             </div>
           </div>
         </div>

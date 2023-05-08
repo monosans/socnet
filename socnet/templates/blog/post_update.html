@@ -3,15 +3,21 @@
 {% load i18n crispy_forms_tags %}
 
 {% block title %}
-  {% blocktrans with post_pk=object.pk %}Edit post #{{ post_pk }}{% endblocktrans %}
+  {% blocktranslate trimmed with post_pk=object.pk %}
+    Edit post #{{ post_pk }}
+  {% endblocktranslate %}
 {% endblock title %}
 {% block card_body %}
   <h3 class="mb-3 text-center">
-    {% blocktrans with post_url=post.get_absolute_url post_pk=object.pk %}Edit <a href="{{ post_url }}" class="text-decoration-none">post #{{ post_pk }}</a>{% endblocktrans %}
+    {% blocktranslate trimmed with post_url=post.get_absolute_url post_pk=object.pk %}
+      Edit <a href="{{ post_url }}" class="text-decoration-none">post #{{ post_pk }}</a>
+    {% endblocktranslate %}
   </h3>
   <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="btn btn-primary w-100">{% trans "Save" %}</button>
+    <button type="submit" class="btn btn-primary w-100">
+      {% translate "Save" %}
+    </button>
   </form>
 {% endblock card_body %}

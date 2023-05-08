@@ -3,11 +3,11 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Log out" %}
+  {% translate "Log out" %}
 {% endblock title %}
 {% block card_body %}
-  <h3 class="mb-3 text-center">{% trans "Log out" %}</h3>
-  <div class="mb-3">{% trans "Are you sure you want to log out?" %}</div>
+  <h3 class="mb-3 text-center">{% translate "Log out" %}</h3>
+  <div class="mb-3">{% translate "Are you sure you want to log out?" %}</div>
   <form method="post">
     {% csrf_token %}
     {% if redirect_field_value %}
@@ -16,7 +16,7 @@
              value="{{ redirect_field_value }}" />
     {% endif %}
     <button type="submit" class="btn btn-primary w-100">
-      {% trans "Log out" %}
+      {% translate "Log out" %}
     </button>
   </form>
 {% endblock card_body %}

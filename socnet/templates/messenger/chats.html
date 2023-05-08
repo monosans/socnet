@@ -3,7 +3,7 @@
 {% load static i18n %}
 
 {% block title %}
-  {% trans "Chats" %}
+  {% translate "Chats" %}
 {% endblock title %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
@@ -45,7 +45,7 @@
       {% empty %}
         <div class="card">
           <div class="card-body">
-            <div class="text-center">{% trans "You have no chats." %}</div>
+            <div class="text-center">{% translate "You have no chats." %}</div>
           </div>
         </div>
       {% endfor %}

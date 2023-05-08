@@ -27,43 +27,43 @@
           {% endif %}
           {% if request.user == user %}
             <a href="{% url 'users:edit_profile' %}"
-               class="btn btn-primary w-100 mb-2">{% trans "Edit" %}</a>
+               class="btn btn-primary w-100 mb-2">{% translate "Edit" %}</a>
             <a href="{% url 'blog:post_create' %}" class="btn btn-primary w-100">
-              {% trans "Create post" %}
+              {% translate "Create post" %}
             </a>
           {% elif request.user.is_authenticated %}
             <a href="{% url 'messenger:chat' user.get_username %}"
                class="btn btn-primary w-100 mb-2">
-              {% trans "Write message" %}
+              {% translate "Write message" %}
             </a>
             <div>
               {% if user.is_subscription %}
                 <button type="button" class="btn btn-light w-100" data-is-subscribed="y" data-username={{ user.get_username }}>
-                  {% trans "Unsubscribe" %}
+                  {% translate "Unsubscribe" %}
                 </button>
                 <button type="button" class="btn btn-primary w-100 d-none" data-is-subscribed="n" data-username={{ user.get_username }}>
-                  {% trans "Subscribe" %}
+                  {% translate "Subscribe" %}
                 </button>
               {% else %}
                 <button type="button" class="btn btn-light w-100 d-none" data-is-subscribed="y" data-username={{ user.get_username }}>
-                  {% trans "Unsubscribe" %}
+                  {% translate "Unsubscribe" %}
                 </button>
                 <button type="button" class="btn btn-primary w-100" data-is-subscribed="n" data-username={{ user.get_username }}>
-                  {% trans "Subscribe" %}
+                  {% translate "Subscribe" %}
                 </button>
               {% endif %}
             </div>
           {% else %}
             <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
                class="btn btn-primary w-100 mb-2">
-              {% trans "Write message" %}
+              {% translate "Write message" %}
             </a>
             <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-               class="btn btn-primary w-100">{% trans "Subscribe" %}</a>
+               class="btn btn-primary w-100">{% translate "Subscribe" %}</a>
           {% endif %}
           {% if request.user.is_staff %}
             <a href="{{ user|obj_admin_url }}" class="btn btn-primary w-100 mt-2">
-              {% trans "Admin page" %}
+              {% translate "Admin page" %}
             </a>
           {% endif %}
         </div>
@@ -80,24 +80,24 @@
             <tbody>
               {% if user.birth_date %}
                 <tr>
-                  <td>{% trans "Birth date" %}</td>
+                  <td>{% translate "Birth date" %}</td>
                   <td>{{ user.birth_date }} ({{ user.age }})</td>
                 </tr>
               {% endif %}
               {% if user.location %}
                 <tr>
-                  <td>{% trans "Location" %}</td>
+                  <td>{% translate "Location" %}</td>
                   <td class="text-break">{{ user.location }}</td>
                 </tr>
               {% endif %}
               {% if user.about %}
                 <tr>
-                  <td>{% trans "About me" %}</td>
+                  <td>{% translate "About me" %}</td>
                   <td class="text-break">{{ user.about|linebreaksbr }}</td>
                 </tr>
               {% endif %}
               <tr>
-                <td>{% trans "Posts" %}</td>
+                <td>{% translate "Posts" %}</td>
                 <td>
                   <a href="{% url 'blog:user_posts' user.get_username %}">
                     {{ user.posts__count }}
@@ -105,7 +105,7 @@
                 </td>
               </tr>
               <tr>
-                <td>{% trans "Subscriptions" %}</td>
+                <td>{% translate "Subscriptions" %}</td>
                 <td>
                   <a href="{% url 'blog:subscriptions' user.get_username %}">
                     {{ user.subscriptions__count }}
@@ -113,14 +113,14 @@
                 </td>
               </tr>
               <tr>
-                <td>{% trans "Subscribers" %}</td>
+                <td>{% translate "Subscribers" %}</td>
                 <td>
                   <a href="{% url 'blog:subscribers' user.get_username %}"
                      id="subscribers_count">{{ user.subscribers__count }}</a>
                 </td>
               </tr>
               <tr>
-                <td>{% trans "Liked posts" %}</td>
+                <td>{% translate "Liked posts" %}</td>
                 <td>
                   <a href="{% url 'blog:liked_posts' user.get_username %}">
                     {{ user.liked_posts__count }}
