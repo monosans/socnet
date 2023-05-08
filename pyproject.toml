@@ -38,7 +38,7 @@ typing-extensions = { version = "4.5.0", python = "<3.10" }
 uvicorn = "0.22.0"
 httptools = "0.5.0"
 uvloop = { version = "0.17.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
-websockets = "11.0.2"
+websockets = "11.0.3"
 
 [tool.poetry.group.local.dependencies]
 psycopg = { version = "3.1.9", extras = ["binary"] }
