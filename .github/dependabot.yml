@@ -4,24 +4,24 @@ updates:
     directory: docker/caddy/
     schedule:
       interval: daily
-      time: 05:00
+      time: "05:00"
   - package-ecosystem: docker
     directory: docker/django/
     schedule:
       interval: daily
-      time: 05:00
+      time: "05:00"
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
-      time: 05:00
+      time: "05:00"
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
-      time: 05:00
+      time: "05:00"
   - package-ecosystem: pip
     directory: /
     schedule:
       interval: daily
-      time: 05:00
+      time: "05:00"
