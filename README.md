@@ -1,6 +1,6 @@
 # SocNet
 
-[![CI](https://github.com/monosans/socnet/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/monosans/socnet/actions/workflows/ci.yml?query=event%3Apush+branch%3Amain)
+[![CI](https://github.com/monosans/socnet/actions/workflows/ci.yml/badge.svg)](https://github.com/monosans/socnet/actions/workflows/ci.yml)
 
 Social network built with Django Framework.
 
