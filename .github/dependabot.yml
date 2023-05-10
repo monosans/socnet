@@ -1,22 +1,27 @@
 version: 2
 updates:
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: daily
   - package-ecosystem: docker
     directory: docker/caddy/
     schedule:
       interval: daily
+      time: 05:00
   - package-ecosystem: docker
     directory: docker/django/
     schedule:
       interval: daily
-  - package-ecosystem: pip
+      time: 05:00
+  - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
+      time: 05:00
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
+      time: 05:00
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: daily
+      time: 05:00

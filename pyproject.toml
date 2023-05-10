@@ -64,7 +64,7 @@ types-lxml = "2023.3.28"
 
 pytest = "7.3.1"
 pytest-django = "4.5.2"
-pytest-cov = "4.0.0"
+coverage = { version = "7.2.5", extras = ["toml"] }
 covdefaults = "2.3.0"
 django-coverage-plugin = "3.0.0"
 factory-boy = "3.2.1"
@@ -84,10 +84,12 @@ exclude_lines = [
     "^\\s*@(?:abc\\.)?abstractmethod$",
     "^\\s*if\\s+(?:settings\\.)?DEBUG\\s*:$",
 ]
-fail_under = 1
+fail_under = 75
 
 [tool.coverage.run]
 omit = [
+    ".venv/*",
+    "node_modules/*",
     "config/asgi.py",
     "config/settings/local.py",
     "config/settings/production.py",

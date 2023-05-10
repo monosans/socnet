@@ -8,15 +8,24 @@ on:
   pull_request:
   workflow_dispatch:
 jobs:
-  pytest:
+  run-pytest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: cp .env.example .env
+        id: checkout
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --no-cache --pull
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run django pytest --cov --cov-report=xml
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down
-      - uses: codecov/codecov-action@v3
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django coverage run -m pytest
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run django coverage report
+      - if: ${{ steps.checkout.conclusion == 'success' }}
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down
+  run-pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          files: ./coverage.xml
+          python-version: 3.x
+      - run: pipx install pre-commit
+      - run: pre-commit run --all-files
