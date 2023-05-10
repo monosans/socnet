@@ -1,4 +1,6 @@
 {
+  "name": "socnet",
+  "private": true,
   "scripts": {
     "eslint": "eslint --fix .",
     "format": "prettier --write . '!**/*.html'",
