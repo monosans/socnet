@@ -13,12 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cp .env.example .env
-        id: checkout
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --no-cache --pull
+        id: build
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django coverage run -m pytest
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run django coverage report
-      - if: ${{ steps.checkout.conclusion == 'success' }}
+      - if: ${{ steps.checkout.build == 'success' }}
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down
   run-pre-commit:
     runs-on: ubuntu-latest
