@@ -15,7 +15,7 @@ django-filter = "23.2"
 django-logentry-admin = "1.1.0"
 django-otp = "1.1.6"
 django-stubs-ext = "4.2.0"
-docutils = "0.19"
+docutils = "0.20"
 Pillow = "9.5.0"
 
 django-crispy-forms = "2.0"
