@@ -1,12 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: docker
-    directory: docker/caddy/
+    directory: /docker/caddy/
     schedule:
       interval: daily
       time: "05:00"
   - package-ecosystem: docker
-    directory: docker/django/
+    directory: /docker/django/
     schedule:
       interval: daily
       time: "05:00"
