@@ -1,6 +1,4 @@
 name: CI
-env:
-  DOCKER_BUILDKIT: 1
 on:
   push:
     branches:
@@ -13,6 +11,8 @@ concurrency:
 jobs:
   run-pytest:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: "1"
     steps:
       - uses: actions/checkout@v3
       - run: cp .env.example .env
