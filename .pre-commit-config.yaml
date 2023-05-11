@@ -77,6 +77,6 @@ repos:
           - types-lxml
           - pytest<8
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.27.0
+    rev: v1.27.1
     hooks:
       - id: djlint-django
