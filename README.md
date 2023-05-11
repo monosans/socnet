@@ -82,7 +82,7 @@ Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` 
 
 ```bash
 # Build services
-docker compose build --no-cache --pull
+docker compose build --pull
 # Pull service images
 docker compose pull --ignore-pull-failures
 # Run DB migrations
@@ -104,7 +104,7 @@ To run this in production, you need to specify the production settings in `.env`
 
 ```bash
 # Build services
-docker compose -f docker-compose.yml -f docker-compose.prod.yml build --no-cache --pull
+docker compose -f docker-compose.yml -f docker-compose.prod.yml build --pull
 # Pull service images
 docker compose -f docker-compose.yml -f docker-compose.prod.yml pull --ignore-pull-failures
 # Run DB migrations
