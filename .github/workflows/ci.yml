@@ -16,19 +16,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cp .env.example .env
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --no-cache --pull
-        id: build
+      - id: build
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --no-cache --pull
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django coverage run -m pytest
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run django coverage report
-      - if: ${{ steps.checkout.build == 'success' }}
+      - if: ${{ steps.build.conclusion == 'success' }}
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down
   run-pre-commit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.x
       - run: pipx install pre-commit
       - run: pre-commit run --all-files
