@@ -1,20 +1,21 @@
 from __future__ import annotations
 
-from typing import Any, Optional, TypeVar
+from typing import Any, Type, TypeVar
 
-from django.db.models import CharField, Model, TextField
+from django.db.models import CharField, Field, TextField
 
-from . import utils
+from . import decorators, utils
 
-_ST = TypeVar("_ST", contravariant=True)
-_GT = TypeVar("_GT", covariant=True)
-
-
-class NormalizedCharField(CharField[_ST, _GT]):
-    def clean(self, value: Any, model_instance: Optional[Model]) -> Any:
-        return utils.normalize_str(super().clean(value, model_instance))
+TField = TypeVar("TField", bound=Field[Any, Any])
 
 
-class NormalizedTextField(TextField[_ST, _GT]):
-    def clean(self, value: Any, model_instance: Optional[Model]) -> Any:
-        return utils.normalize_str(super().clean(value, model_instance))
+def create_normalized_str_field(field: Type[TField]) -> Type[TField]:
+    return type(
+        f"Normalized{field.__name__}",
+        (field,),
+        {"clean": decorators.process_returned_value(utils.normalize_str)(field.clean)},
+    )
+
+
+NormalizedCharField = create_normalized_str_field(CharField)
+NormalizedTextField = create_normalized_str_field(TextField)

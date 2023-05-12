@@ -15,7 +15,7 @@ def normalize_str(value: T) -> T:
         return value
     return "\n".join(  # type: ignore[return-value]
         " ".join(line.split())
-        for line in filter(None, (line.strip() for line in value.splitlines()))
+        for line in filter(None, map(str.strip, value.splitlines()))
     )
 
 
