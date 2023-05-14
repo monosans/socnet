@@ -38,18 +38,28 @@
                       </div>
                     {% endfor %}
                   </div>
-                  <button type="submit" name="action_primary" class="btn btn-primary">
-                    {% translate "Make primary" %}
-                  </button>
-                  <button type="submit" name="action_send" class="btn btn-primary">
-                    {% translate "Resend verification" %}
-                  </button>
-                  <button type="button"
-                          class="btn btn-danger"
-                          data-bs-toggle="modal"
-                          data-bs-target="#emailRemove">
-                    {% translate "Remove" %}
-                  </button>
+                  <div class="row">
+                    <div class="col">
+                      <button type="submit"
+                              name="action_primary"
+                              class="btn btn-primary w-100 h-100">
+                        {% translate "Make primary" %}
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="submit" name="action_send" class="btn btn-primary w-100 h-100">
+                        {% translate "Resend verification" %}
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="button"
+                              class="btn btn-danger w-100 h-100"
+                              data-bs-toggle="modal"
+                              data-bs-target="#emailRemove">
+                        {% translate "Remove" %}
+                      </button>
+                    </div>
+                  </div>
                   <div class="modal fade" id="emailRemove" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
@@ -81,7 +91,7 @@
         </div>
       </div>
       {% if can_add_email %}
-        <div class="card mt-4">
+        <div class="card mt-3">
           <div class="card-body">
             <h3 class="text-center">{% translate "Add email address" %}</h3>
             <form method="post">

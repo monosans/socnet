@@ -1,11 +1,11 @@
 {% if page_range %}
   <ul class="pagination justify-content-center">
     {% for page in page_range %}
-      {% if page == posts.paginator.ELLIPSIS %}
+      {% if page == object_list.paginator.ELLIPSIS %}
         <li class="page-item">
           <div class="page-link">{{ page }}</div>
         </li>
-      {% elif page == posts.number %}
+      {% elif page == object_list.number %}
         <li class="page-item active">
           <div class="page-link">{{ page }}</div>
         </li>

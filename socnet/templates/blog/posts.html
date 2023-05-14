@@ -31,17 +31,15 @@
       </div>
       {% if posts %}
         {% include "blog/inc/posts_preview.html" %}
-        {% include "inc/pagination.html" %}
+        {% include "inc/pagination.html" with object_list=posts %}
       {% else %}
         <div class="card">
           <div class="card-body">
             <div class="text-center">
-              {% if request.GET %}
-                {% if form.is_valid %}
-                  {% translate "No posts found." %}
-                {% endif %}
-              {% else %}
+              {% if not request.GET %}
                 {% translate "Subscribe to users you are interested in, so that their posts are displayed here." %}
+              {% elif form.is_valid %}
+                {% translate "No posts found." %}
               {% endif %}
             </div>
           </div>

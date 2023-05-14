@@ -1,0 +1,19 @@
+:root,
+[data-bs-theme="light"] {
+  --bg-color: var(--bs-light);
+}
+
+[data-bs-theme="dark"] {
+  --bg-color: var(--bs-dark-bg-subtle);
+}
+
+:root,
+body,
+.bg-color {
+  background-color: var(--bg-color);
+}
+
+.text-bg-color {
+  background-color: var(--bg-color);
+  color: var(--bs-body-color);
+}

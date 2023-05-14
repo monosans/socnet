@@ -38,17 +38,29 @@
             </a>
             <div>
               {% if user.is_subscription %}
-                <button type="button" class="btn btn-light w-100" data-is-subscribed="y" data-username={{ user.get_username }}>
+                <button type="button"
+                        class="btn btn-outline-primary w-100"
+                        data-is-subscribed="y"
+                        data-username="{{ user.get_username }}">
                   {% translate "Unsubscribe" %}
                 </button>
-                <button type="button" class="btn btn-primary w-100 d-none" data-is-subscribed="n" data-username={{ user.get_username }}>
+                <button type="button"
+                        class="btn btn-primary w-100 d-none"
+                        data-is-subscribed="n"
+                        data-username="{{ user.get_username }}">
                   {% translate "Subscribe" %}
                 </button>
               {% else %}
-                <button type="button" class="btn btn-light w-100 d-none" data-is-subscribed="y" data-username={{ user.get_username }}>
+                <button type="button"
+                        class="btn btn-outline-primary w-100 d-none"
+                        data-is-subscribed="y"
+                        data-username="{{ user.get_username }}">
                   {% translate "Unsubscribe" %}
                 </button>
-                <button type="button" class="btn btn-primary w-100" data-is-subscribed="n" data-username={{ user.get_username }}>
+                <button type="button"
+                        class="btn btn-primary w-100"
+                        data-is-subscribed="n"
+                        data-username="{{ user.get_username }}">
                   {% translate "Subscribe" %}
                 </button>
               {% endif %}

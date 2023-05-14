@@ -8,6 +8,8 @@ Social network built with Django Framework.
 
 English and Russian languages ​​are supported. The language is selected based on the browser settings.
 
+A light and dark theme with a switch is supported. The default is the browser theme.
+
 ### Regular users
 
 - Register and confirm their account by email

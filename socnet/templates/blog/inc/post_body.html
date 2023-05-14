@@ -1,6 +1,6 @@
 {% load i18n markdownify obj_admin_url %}
 
-<div class="card-title mb-1">
+<div class="mb-1">
   <div class="row align-items-center">
     <div class="avatar-thumbnail">
       {% if post.author.image %}
@@ -30,7 +30,7 @@
             <button class="btn" type="button" data-bs-toggle="dropdown">
               <i class="fa-solid fa-ellipsis text-secondary"></i>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-end">
               {% if request.user.is_staff %}
                 <li>
                   <a href="{{ post|obj_admin_url }}" class="dropdown-item">
@@ -64,7 +64,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">{% translate "Delete post" %}</h5>
-                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
                     {% translate "Are you sure you want to delete your post?" %}
@@ -91,13 +91,13 @@
 <div class="fs-4">
   {% if request.user.is_anonymous %}
     <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-       class="btn badge rounded-pill text-bg-light">
+       class="btn badge rounded-pill text-bg-color">
       <i class="fa-regular fa-heart"></i>
       <span>{{ post.likers__count }}</span>
     </a>
   {% elif post.is_liked %}
     <button type="button"
-            class="btn badge rounded-pill text-bg-light"
+            class="btn badge rounded-pill text-bg-color"
             data-is-liked="y"
             data-post-pk="{{ post.pk }}">
       <i class="fa-solid fa-heart text-danger"></i>
@@ -105,7 +105,7 @@
     </button>
   {% else %}
     <button type="button"
-            class="btn badge rounded-pill text-bg-light"
+            class="btn badge rounded-pill text-bg-color"
             data-is-liked="n"
             data-post-pk="{{ post.pk }}">
       <i class="fa-regular fa-heart"></i>
@@ -113,7 +113,7 @@
     </button>
   {% endif %}
   <a href="{{ post.get_absolute_url }}"
-     class="btn badge rounded-pill text-bg-light">
+     class="btn badge rounded-pill text-bg-color">
     <i class="fa-regular fa-comment"></i>
     {{ post.comments__count }}
   </a>

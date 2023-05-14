@@ -51,9 +51,9 @@
             {% if request.user.is_staff or comment.author == request.user or comment.post.author == request.user %}
               <div class="dropdown">
                 <button class="btn" type="button" data-bs-toggle="dropdown">
-                  <i class="fa-solid fa-ellipsis"></i>
+                  <i class="fa-solid fa-ellipsis text-secondary"></i>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-end">
                   {% if request.user.is_staff %}
                     <li>
                       <a href="{{ comment|obj_admin_url }}" class="dropdown-item">
@@ -89,8 +89,8 @@
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title">{% translate "Delete post comment" %}</h5>
-                        <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                        <h5 class="modal-title">{% translate "Delete comment" %}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                       </div>
                       <div class="modal-body">
                         {% translate "Are you sure you want to delete your comment?" %}
@@ -123,13 +123,13 @@
             <div>
               {% if request.user.is_anonymous %}
                 <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-                   class="btn badge rounded-pill text-bg-light fs-6">
+                   class="btn badge rounded-pill text-bg-color fs-6">
                   <i class="fa-regular fa-heart"></i>
                   {{ comment.likers__count }}
                 </a>
               {% elif comment.is_liked %}
                 <button type="button"
-                        class="btn badge rounded-pill text-bg-light fs-6"
+                        class="btn badge rounded-pill text-bg-color fs-6"
                         data-is-liked="y"
                         data-post-comment-pk="{{ comment.pk }}">
                   <i class="fa-solid fa-heart text-danger"></i>
@@ -137,7 +137,7 @@
                 </button>
               {% else %}
                 <button type="button"
-                        class="btn badge rounded-pill text-bg-light fs-6"
+                        class="btn badge rounded-pill text-bg-color fs-6"
                         data-is-liked="n"
                         data-post-comment-pk="{{ comment.pk }}">
                   <i class="fa-regular fa-heart"></i>

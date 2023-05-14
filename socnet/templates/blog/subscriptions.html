@@ -47,10 +47,16 @@
                         </div>
                         {% if request.user == user %}
                           <a href="#">
-                            <button type="button" class="btn btn-primary" data-is-subscribed="y" data-username={{ subscription.get_username }}>
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    data-is-subscribed="y"
+                                    data-username="{{ subscription.get_username }}">
                               {% translate "Unsubscribe" %}
                             </button>
-                            <button type="button" class="btn btn-light d-none" data-is-subscribed="n" data-username={{ subscription.get_username }}>
+                            <button type="button"
+                                    class="btn btn-outline-primary d-none"
+                                    data-is-subscribed="n"
+                                    data-username="{{ subscription.get_username }}">
                               {% translate "Subscribe" %}
                             </button>
                           </a>

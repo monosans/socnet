@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-16 20:19+0000\n"
+"POT-Creation-Date: 2023-05-14 18:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -286,13 +286,22 @@ msgstr "Админ-панель"
 msgid "Security"
 msgstr "Безопасность"
 
-#, python-format
-msgid "Edit post comment #%(comment_pk)s"
-msgstr "Редактировать комментарий к посту №%(comment_pk)s"
+msgid "Light"
+msgstr "Светлый"
+
+msgid "Dark"
+msgstr "Тёмный"
+
+msgid "Auto"
+msgstr "Автоматически"
 
 #, python-format
-msgid "Edit <a href=\"%(comment_url)s\" class=\"text-decoration-none\">post comment #%(comment_pk)s</a>"
-msgstr "Редактировать <a href=\"%(comment_url)s\" class=\"text-decoration-none\">комментарий к посту №%(comment_pk)s</a>"
+msgid "Edit comment #%(comment_pk)s"
+msgstr "Редактировать комментарий №%(comment_pk)s"
+
+#, python-format
+msgid "Edit <a href=\"%(comment_url)s\" class=\"text-decoration-none\">comment #%(comment_pk)s</a>"
+msgstr "Редактировать <a href=\"%(comment_url)s\" class=\"text-decoration-none\">комментарий №%(comment_pk)s</a>"
 
 msgid "Save"
 msgstr "Сохранить"
@@ -332,8 +341,8 @@ msgstr "Пост №%(post_pk)s"
 msgid "Comment"
 msgstr "Комментировать"
 
-msgid "Delete post comment"
-msgstr "Удалить комментарий к посту"
+msgid "Delete comment"
+msgstr "Удалить комментарий"
 
 msgid "Are you sure you want to delete your comment?"
 msgstr "Вы уверены, что хотите удалить свой комментарий?"
@@ -349,11 +358,11 @@ msgstr "Редактировать пост №%(post_pk)s"
 msgid "Edit <a href=\"%(post_url)s\" class=\"text-decoration-none\">post #%(post_pk)s</a>"
 msgstr "Редактировать <a href=\"%(post_url)s\" class=\"text-decoration-none\">пост №%(post_pk)s</a>"
 
-msgid "No posts found."
-msgstr "Посты не найдены."
-
 msgid "Subscribe to users you are interested in, so that their posts are displayed here."
 msgstr "Подпишитесь на интересующих вас пользователей, чтобы их посты отображались здесь."
+
+msgid "No posts found."
+msgstr "Посты не найдены."
 
 msgid "subscribers"
 msgstr "подписчики"

@@ -4,13 +4,13 @@
 
 {% block title %}
   {% blocktranslate trimmed with comment_pk=object.pk %}
-    Edit post comment #{{ comment_pk }}
+    Edit comment #{{ comment_pk }}
   {% endblocktranslate %}
 {% endblock title %}
 {% block card_body %}
   <h3 class="mb-3 text-center">
     {% blocktranslate trimmed with comment_url=object.get_absolute_url comment_pk=object.pk %}
-      Edit <a href="{{ comment_url }}" class="text-decoration-none">post comment #{{ comment_pk }}</a>
+      Edit <a href="{{ comment_url }}" class="text-decoration-none">comment #{{ comment_pk }}</a>
     {% endblocktranslate %}
   </h3>
   <form method="post">
