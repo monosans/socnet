@@ -27,7 +27,7 @@
       window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : theme;
-    document.documentElement.setAttribute("data-bs-theme", themeAttribute);
+    document.documentElement.dataset.bsTheme = themeAttribute;
 
     const activeDropdownTheme = themeSwitcher.querySelector(
       ".dropdown-item.active"
@@ -50,10 +50,11 @@
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", () => setTheme(getTheme()));
 
-  const toggles = themeSwitcher.querySelectorAll("[data-bs-theme-value]");
-  for (const toggle of toggles) {
+  for (const toggle of themeSwitcher.querySelectorAll(
+    "[data-bs-theme-value]"
+  )) {
     toggle.addEventListener("click", (e) => {
-      const theme = e.currentTarget.getAttribute("data-bs-theme-value");
+      const theme = e.currentTarget.dataset.bsThemeValue;
       localStorage.setItem("theme", theme);
       setTheme(theme);
     });

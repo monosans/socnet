@@ -13,12 +13,11 @@
     }
   }
 
-  const textInputSelectors = [
+  for (const input of document.querySelectorAll([
     'input[type="text"]',
     "input:not([type])",
     "textarea",
-  ];
-  for (const input of document.querySelectorAll(textInputSelectors)) {
+  ])) {
     input.addEventListener("input", cleanWhitespaceInput);
   }
 })();

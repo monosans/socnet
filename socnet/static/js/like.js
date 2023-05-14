@@ -9,12 +9,12 @@
     if (btn.dataset.postPk) {
       url = "/api/post-likes/";
       value = btn.dataset.postPk;
-    } else if (btn.dataset.postCommentPk) {
+    } else if (btn.dataset.commentPk) {
       url = "/api/comment-likes/";
-      value = btn.dataset.postCommentPk;
+      value = btn.dataset.commentPk;
     } else {
       throw new Error(
-        "Button must contain data-post-pk or data-post-comment-pk attribute"
+        "Like button must contain data-post-pk or data-comment-pk attribute"
       );
     }
 

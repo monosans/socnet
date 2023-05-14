@@ -86,7 +86,6 @@
   const messageSendBtn = document.querySelector("#messageSendBtn");
   messageTextarea.addEventListener("keyup", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      messageTextarea.style.removeProperty("height");
       messageSendBtn.click();
     }
   });
@@ -97,6 +96,7 @@
       message: messageTextarea.value,
     });
     messageTextarea.value = "";
+    messageTextarea.style.removeProperty("height");
     messageTextarea.focus();
     chatWs.send(data);
   });
