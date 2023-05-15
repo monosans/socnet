@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING, Any, Dict, Union
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.contrib.auth.models import AnonymousUser
+from django.core.exceptions import ValidationError
 from django.db.models import Model
 from django.utils.html import escape
 
@@ -15,6 +17,8 @@ from . import models
 if TYPE_CHECKING:
     from channels.layers import InMemoryChannelLayer
     from channels_redis.core import RedisChannelLayer
+
+logger = logging.getLogger("socnet.messenger")
 
 
 @database_sync_to_async
@@ -44,7 +48,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         message = models.Message(
             content=content["message"], recipient_id=self.interlocutor_pk, sender=sender
         )
-        await save_obj(message)
+        try:
+            await save_obj(message)
+        except ValidationError:
+            logger.exception("")
+            return
         msg = {
             "type": "chat_message",
             "pk": message.pk,
