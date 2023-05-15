@@ -6,7 +6,7 @@
   {{ user }}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/img_avatar.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/avatar.css' %}" />
 {% endblock css %}
 {% block javascript %}
   <script defer src="{% static 'js/user_subscribe.js' %}"></script>
@@ -22,7 +22,7 @@
               <img src="{{ user.image.url }}"
                    alt=""
                    loading="lazy"
-                   class="img-thumbnail img-avatar mb-2" />
+                   class="img-thumbnail avatar mb-2" />
             </div>
           {% endif %}
           {% if request.user == user %}

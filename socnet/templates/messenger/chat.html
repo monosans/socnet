@@ -36,7 +36,7 @@
       </div>
       <div class="card mb-1">
         <div class="card-body">
-          <div id="chat-log">
+          <div id="chat-log" class="overflow-x-hidden overflow-y-scroll">
             {% for message in messages_ %}
               <div class="row mb-3" id="message{{ message.pk }}">
                 <div class="avatar-thumbnail">
