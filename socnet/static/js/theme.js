@@ -1,17 +1,20 @@
 "use strict";
 (() => {
   const themeSwitcher = document.querySelector("#themeSwitcher");
-  const currentThemeIcon = themeSwitcher.querySelector("#currentThemeIcon");
+  const currentThemeIcon = document.querySelector("#currentThemeIcon");
 
   /**
-   * @return {void}
+   * @return {string}
    */
   function getTheme() {
     const storedTheme = localStorage.getItem("theme");
-    if (["light", "dark", "auto"].includes(storedTheme)) {
-      return storedTheme;
-    }
+    return ["light", "dark"].includes(storedTheme) ? storedTheme : "auto";
+  }
 
+  /**
+   * @return {string}
+   */
+  function getAutoTheme() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
@@ -22,25 +25,20 @@
    * @return {void}
    */
   function setTheme(theme) {
-    const themeAttribute =
-      theme === "auto" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : theme;
-    document.documentElement.dataset.bsTheme = themeAttribute;
+    document.documentElement.dataset.bsTheme =
+      theme === "auto" ? getAutoTheme() : theme;
 
-    const activeDropdownTheme = themeSwitcher.querySelector(
-      ".dropdown-item.active"
-    );
-    const dropdownThemeToActivate = themeSwitcher.querySelector(
+    const activeDropdown = themeSwitcher.querySelector(".dropdown-item.active");
+    const activeDropdownIcon = activeDropdown.querySelector("i");
+    const dropdownToActivate = themeSwitcher.querySelector(
       `[data-bs-theme-value="${theme}"]`
     );
-    const dropdownToActivateIcon = dropdownThemeToActivate.querySelector("i");
+    const dropdownToActivateIcon = dropdownToActivate.querySelector("i");
 
-    activeDropdownTheme.classList.remove("active");
-    dropdownThemeToActivate.classList.add("active");
+    activeDropdown.classList.remove("active");
+    dropdownToActivate.classList.add("active");
 
-    activeDropdownTheme.querySelector("i").classList.add("text-primary");
+    activeDropdownIcon.classList.add("text-primary");
     currentThemeIcon.className = dropdownToActivateIcon.className;
     dropdownToActivateIcon.classList.remove("text-primary");
   }
