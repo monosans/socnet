@@ -31,7 +31,7 @@ lxml = "4.9.2"
 pyromark = "0.1.0"
 nh3 = "0.2.11"
 
-sentry-sdk = { version = "1.22.2", extras = ["django"] }
+sentry-sdk = { version = "1.23.0", extras = ["django"] }
 
 typing-extensions = { version = "4.5.0", python = "<3.10" }
 
