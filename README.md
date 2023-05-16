@@ -14,13 +14,15 @@ A light and dark theme with a switch is supported. The default is the browser th
 
 - Register and confirm their account by email
 - Sign in
+- Add backup email addresses in case they lose access to the primary address
 - Reset and change their password
-- Use two-factor authentication with one-time passwords
+- Use two-factor authentication with one-time passwords via mobile authenticator
 - Provide information about themselves in their profile
 - Write real-time messages with Markdown and HTML support to other users using WebSockets
 - Create, edit, like and delete posts and comments with Markdown and HTML support
 - Subscribe to other users to see their posts in their news feed
-- Search for posts by text or for other users
+- Search for posts by text
+- Search for users by selectable fields
 - Delete their account
 
 ### Administrators
