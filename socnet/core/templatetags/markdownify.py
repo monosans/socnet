@@ -1,29 +1,15 @@
 from __future__ import annotations
 
-import lxml.etree
-import lxml.html
-import nh3
 from django import template
-from django.utils.safestring import SafeString, mark_safe
-from pyromark import Markdown
+from django.utils.safestring import mark_safe
+
+from socnet.core import decorators
+
+from ..markdown import markdownify
 
 register = template.Library()
-md = Markdown(extensions=("tables", "strikethrough"))
 
 
-@register.filter("markdownify")
-def markdownify_filter(value: str) -> SafeString:
-    return mark_safe(markdownify(value))
-
-
-def markdownify(value: str) -> str:
-    html = nh3.clean(md.convert(value))
-    try:
-        tree = lxml.html.fromstring(html)
-    except lxml.etree.LxmlError:
-        return html
-    for table in tree.iter("table"):
-        table.attrib["class"] = "table"
-    for img in tree.iter("img"):
-        img.attrib["loading"] = "lazy"
-    return lxml.etree.tostring(tree, encoding=str, method="html")
+register.filter(
+    "markdownify", decorators.process_returned_value(mark_safe)(markdownify)
+)

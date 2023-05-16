@@ -10,7 +10,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Model
 from django.utils.html import escape
 
-from ..core.templatetags.markdownify import markdownify
+from ..core.markdown import markdownify
 from ..users.models import User
 from . import models
 
