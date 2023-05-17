@@ -40,42 +40,66 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 
 ## Tech Stack
 
+### Containerization
+
 - Docker
 - Docker Compose
-- Caddy
 
 ### Backend
 
 - Python 3.8+
 - Django 4.2
-- Django REST framework (DRF)
-- DRF Spectacular
-- Django Channels
-- Django Filter
-- Django Allauth
-- Django Allauth 2FA
-- Django OTP
-- Django Crispy Forms
-- Django Environ
-- Sentry
-- WebSockets
-- pytest + factory-boy
-- mypy
-- Gunicorn + Uvicorn
-- PostgreSQL 15
-- Redis 7
+- django-allauth-2fa
+- django-allauth
+- django-cleanup
+- django-environ
+- django-filter
+- django-logentry-admin
+- django-otp
+- django-crispy-forms
+- crispy-bootstrap5
+- djangorestframework
+- drf-spectacular
+- channels
+- channels-redis
+- sentry-sdk
+- websockets
 
-- Rust
-- PyO3
+Markdown parsing and HTML sanitization are implemented in Rust in the `socnet_rs` package using the following libraries:
+
+- ammonia
 - pulldown-cmark
-- Ammonia
+- pyo3
+
+### Databases
+
+- PostgreSQL 15 for persistent data
+- Redis 7 for cache and as a layer for Channels
 
 ### Frontend
 
-- HTML + Django template language
-- Bootstrap CSS 5
-- JavaScript
+- HTML with Django Template language
+- Bootstrap CSS 5.3
 - Font Awesome 6
+- JavaScript
+
+### Web servers
+
+- Caddy
+- gunicorn
+- uvicorn
+
+### Testing
+
+- pytest
+- factory-boy
+
+### Linting
+
+- mypy
+- ruff
+- eslint
+- stylelint
 
 ## Installation
 
