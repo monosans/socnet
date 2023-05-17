@@ -10,7 +10,8 @@ FROM python as python-build-stage
 
 # hadolint ignore=DL3008,DL3013
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential libpq-dev \
+  && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
+  && curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && pip install \
@@ -20,12 +21,16 @@ RUN apt-get update \
   --no-color \
   poetry
 
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 COPY ./poetry.lock ./pyproject.toml ./
+COPY ./socnet_rs/ ./socnet_rs/
 
 ARG POETRY_GROUPS
 
 # hadolint ignore=DL4006
 RUN poetry export \
+  --without-hashes \
   --without-urls \
   --only="${POETRY_GROUPS}" \
   --no-ansi \
@@ -36,7 +41,6 @@ RUN poetry export \
   -r /dev/stdin \
   --progress-bar off \
   --no-deps \
-  --require-hashes \
   --no-cache-dir \
   --disable-pip-version-check \
   --no-color

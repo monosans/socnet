@@ -1,5 +1,10 @@
 version: 2
 updates:
+  - package-ecosystem: cargo
+    directory: /socnet_rs/
+    schedule:
+      interval: daily
+      time: "04:30"
   - package-ecosystem: docker
     directory: /docker/caddy/
     schedule:

@@ -4,8 +4,7 @@ from django import template
 from django.utils.safestring import mark_safe
 
 from socnet.core import decorators
-
-from ..markdown import markdownify
+from socnet_rs import markdownify
 
 register = template.Library()
 

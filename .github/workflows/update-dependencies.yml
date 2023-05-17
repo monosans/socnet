@@ -12,6 +12,9 @@ jobs:
     strategy:
       matrix:
         include:
+          - cmd: cargo update --manifest-path socnet_rs/Cargo.toml
+            commit-msg: Update socnet_rs/Cargo.lock
+            branch: update/socnet-rs-cargo-lock
           - cmd: npm update --lockfile-version 2
             commit-msg: Update package-lock.json
             branch: update/npm-lock

@@ -6,6 +6,11 @@
 !socnet/**/*.py
 !socnet/static/
 !socnet/templates/
+!socnet_rs/src/lib.rs
+!socnet_rs/Cargo.toml
+!socnet_rs/Cargo.lock
+!socnet_rs/socnet_rs.pyi
+!socnet_rs/pyproject.toml
 !manage.py
 !poetry.lock
 !pyproject.toml

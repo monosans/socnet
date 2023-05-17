@@ -59,13 +59,16 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 - Django Environ
 - Sentry
 - WebSockets
-- lxml
 - pytest + factory-boy
 - mypy
 - Gunicorn + Uvicorn
 - PostgreSQL 15
 - Redis 7
-- etc.
+
+- Rust
+- PyO3
+- pulldown-cmark
+- Ammonia
 
 ### Frontend
 
