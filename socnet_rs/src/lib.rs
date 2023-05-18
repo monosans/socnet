@@ -19,11 +19,13 @@ static CMARK_OPTIONS: Lazy<pulldown_cmark::Options> = Lazy::new(|| {
 });
 
 #[pyfunction]
-fn markdownify(text: &str) -> String {
-    let parser = pulldown_cmark::Parser::new_ext(text, *CMARK_OPTIONS);
-    let mut html = String::new();
-    pulldown_cmark::html::push_html(&mut html, parser);
-    AMMONIA.clean(&html).to_string()
+fn markdownify(py: Python, text: &str) -> String {
+    py.allow_threads(|| {
+        let parser = pulldown_cmark::Parser::new_ext(text, *CMARK_OPTIONS);
+        let mut html = String::new();
+        pulldown_cmark::html::push_html(&mut html, parser);
+        AMMONIA.clean(&html).to_string()
+    })
 }
 
 #[pymodule]
