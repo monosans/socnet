@@ -65,7 +65,7 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 - sentry-sdk
 - websockets
 
-Markdown parsing and HTML sanitization are implemented in Rust in the `socnet_rs` package using the following libraries:
+Markdown parsing, HTML sanitization and some other things are implemented in Rust in the `socnet_rs` package using the following libraries:
 
 - ammonia
 - pulldown-cmark
