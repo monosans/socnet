@@ -1,12 +1,8 @@
 from __future__ import annotations
 
-from typing import TypeVar
-
 import pytest
 
 from socnet_rs import normalize_str
-
-T = TypeVar("T")
 
 
 @pytest.mark.parametrize(
@@ -19,7 +15,7 @@ T = TypeVar("T")
         ),
     ],
 )
-def test_normalize_str(given: T, expected: T) -> None:
+def test_normalize_str(given: str, expected: str) -> None:
     assert normalize_str(given) == expected
 
 
@@ -28,4 +24,4 @@ def test_type_error() -> None:
         TypeError,
         match="argument 'text': 'int' object cannot be converted to 'PyString'",
     ):
-        normalize_str(0)
+        normalize_str(0)  # type: ignore[arg-type]
