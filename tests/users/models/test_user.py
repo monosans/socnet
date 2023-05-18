@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import timedelta
 
 import pytest
@@ -14,10 +15,29 @@ from .. import factories
 factory = factories.UserFactory
 
 
-@pytest.mark.parametrize("username", ["пользователь", "user!", ""])
-def test_username_forbidden_patterns(username: str) -> None:
+@pytest.mark.parametrize(
+    ("username", "exc_str"),
+    [
+        (
+            "пользователь",
+            re.escape(
+                "{'username': ['Enter a valid “slug” consisting of letters, numbers,"
+                " underscores or hyphens.']}"
+            ),
+        ),
+        (
+            "user!",
+            re.escape(
+                "{'username': ['Enter a valid “slug” consisting of letters, numbers,"
+                " underscores or hyphens.']}"
+            ),
+        ),
+        ("", re.escape("{'username': ['This field cannot be blank.']}")),
+    ],
+)
+def test_username_forbidden_patterns(username: str, exc_str: str) -> None:
     user = factory.build(username=username)
-    with pytest.raises(ValidationError):
+    with pytest.raises(ValidationError, match=exc_str):
         user.full_clean()
 
 
@@ -31,9 +51,14 @@ def test_username_allowed_patterns(username: str) -> None:
 def test_username_unique() -> None:
     factory(username="user")
     user2 = factory.build(username="user")
-    with pytest.raises(ValidationError):
+    exc_str = re.escape("{'username': ['A user with that username already exists.']}")
+    with pytest.raises(ValidationError, match=exc_str):
         user2.full_clean()
-    with pytest.raises(IntegrityError):
+    exc_str = re.escape(
+        "duplicate key value violates unique constraint"
+        ' "users_user_username_key"\nDETAIL:  Key (username)=(user) already exists.'
+    )
+    with pytest.raises(IntegrityError, match=exc_str):
         user2.save()
 
 
@@ -44,14 +69,18 @@ def test_username_case_insensitive() -> None:
 
 def test_birth_date_unrealistically_old() -> None:
     user = factory.build(birth_date="1900-01-01")
-    with pytest.raises(ValidationError):
+    exc_str = re.escape(
+        "{'birth_date': [\"You can't be older than the oldest human.\"]}"
+    )
+    with pytest.raises(ValidationError, match=exc_str):
         user.full_clean()
 
 
 def test_birth_date_in_future() -> None:
     tomorrow = timezone.now() + timedelta(days=1)
     user = factory.build(birth_date=tomorrow)
-    with pytest.raises(ValidationError):
+    exc_str = re.escape("{'birth_date': ['Are you from the future?']}")
+    with pytest.raises(ValidationError, match=exc_str):
         user.full_clean()
 
 
