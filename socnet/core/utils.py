@@ -6,17 +6,7 @@ from django.core.paginator import Page, Paginator
 from django.db.models import Model, QuerySet
 from django.http import HttpRequest
 
-T = TypeVar("T")
 TModel = TypeVar("TModel", bound=Model)
-
-
-def normalize_str(value: T) -> T:
-    if not isinstance(value, str):
-        return value
-    return "\n".join(  # type: ignore[return-value]
-        " ".join(line.split())
-        for line in filter(None, map(str.strip, value.splitlines()))
-    )
 
 
 def paginate(

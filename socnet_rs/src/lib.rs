@@ -28,8 +28,20 @@ fn markdownify(py: Python, text: &str) -> String {
     })
 }
 
+#[pyfunction]
+fn normalize_str(py: Python, text: &str) -> String {
+    py.allow_threads(|| {
+        text.lines()
+            .filter(|line| !line.trim().is_empty())
+            .map(|line| line.split_whitespace().collect::<Vec<_>>().join(" "))
+            .collect::<Vec<_>>()
+            .join("\n")
+    })
+}
+
 #[pymodule]
 fn socnet_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(markdownify, m)?)?;
+    m.add_function(wrap_pyfunction!(normalize_str, m)?)?;
     Ok(())
 }
