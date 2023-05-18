@@ -9,20 +9,23 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 jobs:
-  run-pytest:
+  run-pytest-mypy:
     runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: "1"
     steps:
       - uses: actions/checkout@v3
       - run: cp .env.example .env
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml pull --ignore-buildable
       - id: build
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --pull
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django coverage run -m pytest
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run django coverage report
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django coverage report
       - if: ${{ steps.build.conclusion == 'success' }}
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django mypy .
+      - if: ${{ steps.build.conclusion == 'success' }}
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down --remove-orphans
   run-pre-commit:
     runs-on: ubuntu-latest
     steps:
