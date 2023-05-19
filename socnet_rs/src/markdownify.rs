@@ -20,7 +20,7 @@ static CMARK_OPTIONS: Lazy<pulldown_cmark::Options> = Lazy::new(|| {
 
 #[pyfunction]
 pub fn markdownify(py: Python, text: &str) -> String {
-    py.allow_threads(|| {
+    py.allow_threads(move || {
         let html = {
             let parser = pulldown_cmark::Parser::new_ext(text, *CMARK_OPTIONS);
             let mut html = String::new();
