@@ -52,7 +52,7 @@ django-extra-checks = "0.13.3"
 
 pre-commit = "3.3.2"
 black = "23.3.0"
-djlint = "1.27.2"
+djlint = "1.28.0"
 
 ruff = "0.0.269"
 
