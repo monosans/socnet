@@ -1,6 +1,6 @@
 {% extends "card.html" %}
 
-{% load static i18n crispy_forms_tags markdownify obj_admin_url %}
+{% load static i18n django_bootstrap5 markdownify obj_admin_url %}
 
 {% block title %}
   {% blocktranslate trimmed with post_pk=post.pk %}
@@ -21,7 +21,7 @@
   {% if request.user.is_authenticated %}
     <form method="post">
       {% csrf_token %}
-      {{ form|crispy }}
+      {% bootstrap_form form %}
       <button type="submit" class="btn btn-primary w-100">
         {% translate "Comment" %}
       </button>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static i18n markdownify crispy_forms_tags %}
+{% load i18n static django_bootstrap5 markdownify %}
 
 {% block title %}
   {% blocktranslate trimmed %}
@@ -65,7 +65,7 @@
       <div class="card">
         <div class="card-body">
           <form id="messageSendForm">
-            {{ form|as_crispy_errors }}
+            {% bootstrap_form_errors form %}
             <div class="input-group">
               {{ form.content }}
               <button type="submit" class="btn btn-primary" id="messageSendBtn">

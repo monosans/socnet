@@ -74,12 +74,12 @@ INSTALLED_APPS = [
     "django_otp.plugins.otp_totp",
     "django_otp.plugins.otp_static",
     "allauth_2fa",
-    "crispy_forms",
-    "crispy_bootstrap5",
+    "django_bootstrap5",
     "django_filters",
     "drf_spectacular",
     "logentry_admin",
     "rest_framework",
+    "socnet.account",
     "socnet.api",
     "socnet.core",
     "socnet.blog",
@@ -145,9 +145,6 @@ TEMPLATES = [
         },
     }
 ]
-
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = True

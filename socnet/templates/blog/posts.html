@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static i18n crispy_forms_tags %}
+{% load static i18n django_bootstrap5 %}
 
 {% block title %}
   {% translate "Posts" %}
@@ -19,7 +19,7 @@
       <div class="card mb-2">
         <div class="card-body">
           <form method="get">
-            {{ form|as_crispy_errors }}
+            {% bootstrap_form_errors form %}
             <div class="input-group">
               {{ form.q }}
               <button type="submit" class="btn btn-primary">

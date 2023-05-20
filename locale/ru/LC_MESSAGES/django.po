@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-14 19:47+0000\n"
+"POT-Creation-Date: 2023-05-20 16:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,16 @@ msgstr "Английский"
 
 msgid "Russian"
 msgstr "Русский"
+
+msgctxt "field label"
+msgid "Login"
+msgstr "Логин"
+
+msgid "Password (again)"
+msgstr "Пароль (ещё раз)"
+
+msgid "Email"
+msgstr "Электронная почта"
 
 msgid "Blog"
 msgstr "Блог"
@@ -238,8 +248,8 @@ msgstr "Двухфакторная аутентификация"
 msgid "Two-factor authentication backup tokens"
 msgstr "Резервные токены двухфакторной аутентификации"
 
-msgid "Backup tokens have been generated, but for security reasons are not disclosed here. Click the button below to generate new ones."
-msgstr "Резервные токены были сгенерированы, но по соображениям безопасности здесь не раскрываются. Нажмите кнопку ниже, чтобы сгенерировать новые."
+msgid "Backup tokens have been generated, but are not disclosed here for security reasons. Click the button below to generate new ones."
+msgstr "Резервные токены были сгенерированы, но не раскрываются здесь по соображениям безопасности. Нажмите кнопку ниже, чтобы сгенерировать новые."
 
 msgid "No tokens. Click the button below to generate them."
 msgstr "Нет токенов. Нажмите кнопку ниже, чтобы сгенерировать их."
@@ -250,17 +260,14 @@ msgstr "Сгенерировать резервные токены"
 msgid "Disable two-factor authentication"
 msgstr "Отключить двухфакторную аутентификацию"
 
-msgid "Enter a valid authentication token to disable two-factor authentication:"
-msgstr "Введите действительный токен аутентификации, чтобы отключить двухфакторную аутентификацию:"
-
 msgid "Setup two-factor authentication"
 msgstr "Настройка двухфакторной аутентификации"
 
 msgid "Step 1"
 msgstr "Шаг 1"
 
-msgid "Scan the QR code below with the token generator of your choice (for example, Aegis Authenticator on Android and Raivo OTP on iOS)."
-msgstr "Отсканируйте приведённый ниже QR-код с помощью выбранного вами генератора токенов (например, Aegis Authenticator на Android и Raivo OTP на iOS)."
+msgid "Scan the QR code below with the token generator (for example, Aegis Authenticator on Android and Raivo OTP on iOS)."
+msgstr "Отсканируйте приведённый ниже QR-код с помощью генератора токенов (например, Aegis Authenticator на Android и Raivo OTP на iOS)."
 
 msgid "Step 2"
 msgstr "Шаг 2"

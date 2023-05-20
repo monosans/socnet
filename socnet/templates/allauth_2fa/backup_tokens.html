@@ -16,7 +16,7 @@
           {% for token in backup_tokens %}<li>{{ token.token }}</li>{% endfor %}
         </ul>
       {% else %}
-        {% translate "Backup tokens have been generated, but for security reasons are not disclosed here. Click the button below to generate new ones." %}
+        {% translate "Backup tokens have been generated, but are not disclosed here for security reasons. Click the button below to generate new ones." %}
       {% endif %}
     {% else %}
       {% translate "No tokens. Click the button below to generate them." %}

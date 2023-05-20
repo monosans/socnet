@@ -1,6 +1,6 @@
 {% extends "card.html" %}
 
-{% load i18n crispy_forms_tags %}
+{% load i18n django_bootstrap5 %}
 
 {% block title %}
   {% translate "Delete account" %}
@@ -14,7 +14,7 @@
   </div>
   <form method="post">
     {% csrf_token %}
-    {{ form|crispy }}
+    {% bootstrap_form form layout="floating" %}
     <button type="submit" class="btn btn-danger w-100">
       {% translate "Delete" %}
     </button>

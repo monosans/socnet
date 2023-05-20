@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n crispy_forms_tags %}
+{% load i18n django_bootstrap5 %}
 
 {% block title %}
   {% translate "Email addresses" %}
@@ -93,10 +93,10 @@
       {% if can_add_email %}
         <div class="card mt-3">
           <div class="card-body">
-            <h3 class="text-center">{% translate "Add email address" %}</h3>
+            <h3 class="mb-3 text-center">{% translate "Add email address" %}</h3>
             <form method="post">
               {% csrf_token %}
-              {{ form|crispy }}
+              {% bootstrap_form form %}
               <button type="submit" name="action_add" class="btn btn-primary w-100">
                 {% translate "Add email address" %}
               </button>

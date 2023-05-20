@@ -524,24 +524,6 @@ tomli = {version = "*", optional = true, markers = "python_full_version <= \"3.1
 toml = ["tomli"]
 
 [[package]]
-name = "crispy-bootstrap5"
-version = "0.7"
-description = "Bootstrap5 template pack for django-crispy-forms"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "crispy-bootstrap5-0.7.tar.gz", hash = "sha256:0745a67199619149b7feca87dab7a45664876ed50fb582b38fd2aeb3f8a8d869"},
-    {file = "crispy_bootstrap5-0.7-py3-none-any.whl", hash = "sha256:f3ff1ef5cb379fe80b1b02e245008f276444098a4bdb8d855bed84c623798a85"},
-]
-
-[package.dependencies]
-django = ">=3.2"
-django-crispy-forms = ">=1.13.0"
-
-[package.extras]
-test = ["pytest", "pytest-django"]
-
-[[package]]
 name = "cryptography"
 version = "40.0.2"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
@@ -703,6 +685,20 @@ django-otp = ">=0.6.0"
 qrcode = ">=5.3"
 
 [[package]]
+name = "django-bootstrap5"
+version = "23.1"
+description = "Bootstrap 5 for Django"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-bootstrap5-23.1.tar.gz", hash = "sha256:3a3748b1ce1a2a73c2eca851c2926e7b6e5a317815e4da7ced6b1807c4792b1a"},
+    {file = "django_bootstrap5-23.1-py3-none-any.whl", hash = "sha256:d0b1997528b8a557968cf1ac7ff4c68659897779011a5a42816fb1ad9e57d6ae"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-cleanup"
 version = "7.0.0"
 description = "Deletes old files."
@@ -726,20 +722,6 @@ files = [
 
 [package.dependencies]
 coverage = "*"
-
-[[package]]
-name = "django-crispy-forms"
-version = "2.0"
-description = "Best way to have Django DRY forms"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django-crispy-forms-2.0.tar.gz", hash = "sha256:90193b068bf948d9c68449bc8260afed1a8e2afe11ee0bac8c4ebfaeb175b322"},
-    {file = "django_crispy_forms-2.0-py3-none-any.whl", hash = "sha256:d1d4e585929058a9ab3b797666ea5b69320b9ba7937f9d146d32173246a6fd13"},
-]
-
-[package.dependencies]
-django = ">=3.2"
 
 [[package]]
 name = "django-debug-toolbar"
@@ -2640,4 +2622,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "0641eace766f4001d26176f785d7676345e5b5a7bb123f1186cbcd29932639c5"
+content-hash = "4dc5fddfd7552bf6dd286c7e2d20dac973ed20d593ccf26697c27f1998a9e0c8"

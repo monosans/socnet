@@ -1,6 +1,6 @@
 {% extends "card.html" %}
 
-{% load i18n crispy_forms_tags %}
+{% load i18n django_bootstrap5 %}
 
 {% block title %}
   {% translate "Log in" %}
@@ -14,7 +14,7 @@
   </div>
   <form method="post">
     {% csrf_token %}
-    {{ form|crispy }}
+    {% bootstrap_form form layout="floating" %}
     {% if redirect_field_value %}
       <input type="hidden"
              name="{{ redirect_field_name }}"

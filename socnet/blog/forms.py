@@ -24,5 +24,6 @@ class PostSearchForm(forms.Form):
     q = forms.CharField(
         widget=forms.Textarea(
             {"class": "form-control", "placeholder": _("Search posts")}
-        )
+        ),
+        label="",
     )

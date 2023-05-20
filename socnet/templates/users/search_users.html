@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static i18n crispy_forms_tags %}
+{% load i18n static django_bootstrap5 %}
 
 {% block title %}
   {% translate "Search users" %}
@@ -15,7 +15,7 @@
         <div class="card-body">
           <h3 class="mb-3 text-center">{% translate "Search users" %}</h3>
           <form method="get">
-            {{ form|crispy }}
+            {% bootstrap_form form layout="floating" %}
             <button type="submit" class="btn btn-primary w-100">
               {% translate "Search users" %}
             </button>

@@ -51,13 +51,12 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 - Django 4.2
 - django-allauth-2fa
 - django-allauth
+- django-bootstrap5
 - django-cleanup
 - django-environ
 - django-filter
 - django-logentry-admin
 - django-otp
-- django-crispy-forms
-- crispy-bootstrap5
 - djangorestframework
 - drf-spectacular
 - channels
