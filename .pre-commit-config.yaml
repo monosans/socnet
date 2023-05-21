@@ -17,7 +17,7 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.40.0
+    rev: v8.41.0
     hooks:
       - id: eslint
         args:
