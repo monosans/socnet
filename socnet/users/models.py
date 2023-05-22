@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from datetime import date
+from pathlib import Path
 from typing import Optional
+from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import validate_slug
@@ -12,6 +14,10 @@ from django.utils.translation import gettext_lazy as _
 
 from ..core.fields import NormalizedCharField, NormalizedTextField
 from . import validators
+
+
+def image_upload_to(instance: User, filename: str) -> str:  # noqa: ARG001
+    return uuid4().hex + Path(filename).suffix
 
 
 class User(AbstractUser):
@@ -47,7 +53,7 @@ class User(AbstractUser):
         verbose_name=_("location"), max_length=128, blank=True
     )
     image = models.ImageField(
-        verbose_name=_("image"), upload_to="user_images/", blank=True
+        verbose_name=_("image"), upload_to=image_upload_to, blank=True
     )
     about = NormalizedTextField(verbose_name=_("about me"), max_length=4096, blank=True)
     subscriptions = models.ManyToManyField(
