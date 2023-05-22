@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from datetime import date
-from pathlib import Path
 from typing import Optional
 from uuid import uuid4
 
@@ -12,12 +11,12 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from ..core.fields import NormalizedCharField, NormalizedTextField
+from ..core.fields import NormalizedCharField, NormalizedTextField, WebpImageField
 from . import validators
 
 
 def image_upload_to(instance: User, filename: str) -> str:  # noqa: ARG001
-    return uuid4().hex + Path(filename).suffix
+    return f"{uuid4().hex}.webp"
 
 
 class User(AbstractUser):
@@ -52,7 +51,7 @@ class User(AbstractUser):
     location = NormalizedCharField(
         verbose_name=_("location"), max_length=128, blank=True
     )
-    image = models.ImageField(
+    image = WebpImageField(
         verbose_name=_("image"), upload_to=image_upload_to, blank=True
     )
     about = NormalizedTextField(verbose_name=_("about me"), max_length=4096, blank=True)

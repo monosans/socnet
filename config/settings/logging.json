@@ -41,6 +41,7 @@
       "level": "INFO",
       "handlers": ["console", "mail_admins"]
     },
+    "PIL": { "level": "INFO" },
     "psycopg": { "level": "INFO" },
     "uvicorn.error": { "level": "INFO" },
     "watchfiles.main": { "level": "WARNING" }
