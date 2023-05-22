@@ -38,7 +38,7 @@ class WebpImageFieldFile(ImageFieldFile):
         with BytesIO() as buffer:
             image.save(buffer, "WEBP")
             webp_data = buffer.getvalue()
-        webp_file = ContentFile(content=webp_data)
+        webp_file = ContentFile(webp_data)
         return super().save(name, webp_file, save)
 
 
