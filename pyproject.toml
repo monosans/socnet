@@ -61,7 +61,7 @@ types-Pillow = "9.5.0.4"
 
 pytest = "7.3.1"
 pytest-django = "4.5.2"
-coverage = { version = "7.2.5", extras = ["toml"] }
+coverage = { version = "7.2.6", extras = ["toml"] }
 covdefaults = "2.3.0"
 django-coverage-plugin = "3.0.0"
 factory-boy = "3.2.1"
