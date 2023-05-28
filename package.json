@@ -2,7 +2,7 @@
   "name": "socnet",
   "private": true,
   "scripts": {
-    "eslint": "eslint --fix .",
+    "eslint": "eslint --ext js,mjs --fix .",
     "format": "prettier --write . '!**/*.html'",
     "stylelint": "stylelint '**/*.css'"
   },
@@ -16,29 +16,54 @@
   "eslintConfig": {
     "env": {
       "browser": true,
-      "es2021": true
+      "es2020": true
     },
     "extends": [
-      "eslint:recommended",
+      "eslint:all",
       "prettier"
     ],
     "parserOptions": {
-      "ecmaVersion": "latest"
+      "sourceType": "module"
     },
     "rules": {
       "curly": "error",
-      "eqeqeq": "error",
-      "no-implicit-globals": [
+      "func-style": [
+        "error",
+        "declaration"
+      ],
+      "id-length": "off",
+      "init-declarations": "off",
+      "max-lines-per-function": "off",
+      "max-statements": "off",
+      "new-cap": [
         "error",
         {
-          "lexicalBindings": true
+          "newIsCap": false
         }
       ],
-      "no-var": "error",
-      "prefer-const": "error",
-      "strict": [
+      "no-magic-numbers": "off",
+      "no-new": "off",
+      "no-ternary": "off",
+      "no-void": [
         "error",
-        "global"
+        {
+          "allowAsStatement": true
+        }
+      ],
+      "one-var": [
+        "error",
+        "never"
+      ],
+      "radix": [
+        "error",
+        "as-needed"
+      ],
+      "sort-keys": [
+        "error",
+        "asc",
+        {
+          "allowLineSeparatedGroups": true
+        }
       ]
     }
   },

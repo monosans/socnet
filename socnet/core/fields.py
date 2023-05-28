@@ -1,17 +1,28 @@
 from __future__ import annotations
 
+from functools import partial
 from io import BytesIO
 from typing import Any, Type, TypeVar
 
 from django.core.files.base import ContentFile, File
-from django.db.models import CharField, Field, ImageField, TextField
+from django.db.models import (
+    CharField,
+    DateTimeField,
+    Field,
+    ImageField,
+    Model,
+    TextField,
+)
 from django.db.models.fields.files import ImageFieldFile
+from django.utils import timezone
 from PIL import Image, ImageOps
 
 from socnet_rs import normalize_str
 
 from . import decorators
 
+_ST = TypeVar("_ST", contravariant=True)
+_GT = TypeVar("_GT", covariant=True)
 TField = TypeVar("TField", bound=Field[Any, Any])
 
 
@@ -25,6 +36,18 @@ def create_normalized_str_field(field: Type[TField]) -> Type[TField]:
 
 NormalizedCharField = create_normalized_str_field(CharField)
 NormalizedTextField = create_normalized_str_field(TextField)
+
+
+class _NullAutoNowDateTimeField(DateTimeField[_ST, _GT]):
+    def pre_save(self, model_instance: Model, add: bool) -> Any:  # noqa: FBT001
+        value = None if add else timezone.now()
+        setattr(model_instance, self.attname, value)
+        return value
+
+
+NullAutoNowDateTimeField = partial(
+    _NullAutoNowDateTimeField, auto_now=True, auto_now_add=False, null=True
+)
 
 
 class WebpImageFieldFile(ImageFieldFile):

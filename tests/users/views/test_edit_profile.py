@@ -43,17 +43,28 @@ def test_authed_get(client: Client) -> None:
 
 def test_edit_username(client: Client) -> None:
     user = auth_client(client)
-    new_username = UserFactory.build().username
-    response = client.post(url, data={"username": new_username})
+    generated_user = UserFactory.build()
+    response = client.post(
+        url,
+        data={
+            "username": generated_user.username,
+            "display_name": generated_user.display_name,
+        },
+    )
     assert response.status_code == 200
-    new_user = User.objects.only("username").get(pk=user.pk)
+    new_user = User.objects.only("username", "display_name").get(pk=user.pk)
     assert user.username == new_user.username
+    assert user.display_name == new_user.display_name
 
 
 def test_edit_username_case(client: Client) -> None:
     user = auth_client(client)
     new_username = user.username.swapcase()
-    response = client.post(url, data={"username": new_username}, follow=True)
+    response = client.post(
+        url,
+        data={"username": new_username, "display_name": user.display_name},
+        follow=True,
+    )
     assert response.status_code == 200
     new_user = User.objects.only("username").get(pk=user.pk)
     assert response.redirect_chain == [(new_user.get_absolute_url(), 302)]

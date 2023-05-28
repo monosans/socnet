@@ -23,7 +23,7 @@ class UserAdminChangeForm(auth_forms.UserChangeForm[User]):
 class UserAdminCreationForm(auth_forms.BaseUserCreationForm[User]):
     class Meta(auth_forms.BaseUserCreationForm.Meta):
         model = User
-        fields = ("email", *auth_forms.BaseUserCreationForm.Meta.fields)
+        fields = ("display_name", "email", *auth_forms.BaseUserCreationForm.Meta.fields)
 
 
 class EditProfileForm(auth_forms.UserChangeForm[User]):
@@ -32,19 +32,23 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
     class Meta(auth_forms.UserChangeForm.Meta):
         model = User
         fields = (
-            "username",
             "display_name",
+            "username",
             "image",
             "birth_date",
             "location",
             "about",
+            "show_last_login",
         )
-        widgets = {"birth_date": forms.DateInput({"type": "date"})}
+        widgets = {
+            "birth_date": forms.DateInput({"type": "date"}),
+            "about": forms.Textarea({"rows": 1}),
+        }
 
     def clean_username(self) -> str:
-        old_username: str = self.instance.username
+        old_username = self.instance.username
         new_username: str = self.cleaned_data["username"]
-        if old_username.lower() != new_username.lower():
+        if old_username.casefold() != new_username.casefold():
             msg = gettext("It is only allowed to change the letters case.")
             code = "must_only_change_letters_case"
             raise forms.ValidationError(msg, code)
@@ -52,11 +56,11 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
 
 
 class UserSearchForm(forms.Form):
-    q = forms.CharField(widget=forms.Textarea, label=_("Search query"))
+    q = forms.CharField(widget=forms.Textarea({"rows": 1}), label=_("Search query"))
     search_fields = forms.MultipleChoiceField(
         choices=(
-            ("username", _("Username")),
             ("display_name", _("Display name")),
+            ("username", _("Username")),
             ("location", _("Location")),
             ("about", _("About me")),
         ),
@@ -73,8 +77,8 @@ class AccountDeletionForm(InjectUserMixin, forms.Form):
 
     error_messages = {"invalid_password": _("Invalid password.")}
 
-    def clean_password(self) -> Any:
-        password = self.cleaned_data["password"]
+    def clean_password(self) -> str:
+        password: str = self.cleaned_data["password"]
         if not self.user.check_password(password):
             msg = self.error_messages["invalid_password"]
             code = "invalid_password"

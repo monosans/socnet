@@ -45,7 +45,7 @@ def test_username_forbidden_patterns(username: str, exc_str: str) -> None:
 def test_username_allowed_patterns(username: str) -> None:
     user = factory.build(username=username)
     user.full_clean()
-    assert user.get_username() == username
+    assert user.username == username
 
 
 def test_username_unique() -> None:

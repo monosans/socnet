@@ -1,44 +1,42 @@
-{% extends "base.html" %}
+{% extends "col.html" %}
 
 {% load static i18n %}
 
 {% block title %}
-  {{ user }} - {% translate "posts" %}
+  {{ user.display_name }} ({{ user.username }}) - {% translate "posts" %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}" />
+  {% if posts %}
+    {% include "blog/inc/post_css.html" %}
+  {% endif %}
 {% endblock css %}
 {% block javascript %}
-  <script defer src="{% static 'js/like.js' %}"></script>
+  {% if posts %}
+    {% include "blog/inc/post_js.html" %}
+  {% endif %}
 {% endblock javascript %}
-{% block content %}
-  {% csrf_token %}
-  <div class="row justify-content-center">
-    <div class="col-xl-6">
-      {% with posts=user.posts.all %}
-        {% if posts %}
-          <div class="card mb-2">
-            <div class="card-body">
-              <h3 class="text-center">
-                <a href="{{ user.get_absolute_url }}" class="text-decoration-none">{{ user }}</a>
-                <div>{% translate "Posts" %}</div>
-              </h3>
-            </div>
-          </div>
-          {% include "blog/inc/posts_preview.html" %}
-        {% else %}
-          <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                {% blocktranslate trimmed %}
-                  {{ user }} has no posts.
-                {% endblocktranslate %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      {% endwith %}
+{% block col %}
+  {% if posts %}
+    <div class="card">
+      <div class="card-body">
+        <h3 class="mb-0 text-center">
+          <a href="{{ user.get_absolute_url }}"
+             class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ user.display_name }} ({{ user.username }})</a>
+          <div>{% translate "Posts" %}</div>
+        </h3>
+      </div>
     </div>
-  </div>
-{% endblock content %}
+    {% csrf_token %}
+    {% include "blog/inc/posts_preview.html" %}
+  {% else %}
+    <div class="card">
+      <div class="card-body text-center">
+        {% blocktranslate trimmed with display_name=user.display_name username=user.username user_url=user.get_absolute_url %}
+          <a href="{{ user_url }}"
+             class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ display_name }} ({{ username }})</a>
+          has no posts.
+        {% endblocktranslate %}
+      </div>
+    </div>
+  {% endif %}
+{% endblock col %}

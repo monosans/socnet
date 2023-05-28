@@ -3,11 +3,9 @@
 {% load i18n %}
 
 {% block title %}
-  {% translate "Registration is closed" %}
+  {% translate "Sign-up is closed" %}
 {% endblock title %}
-{% block card_body %}
-  <h3 class="mb-3 text-center">{% translate "Registration is closed" %}</h3>
-  <div>
-    {% translate "We are sorry, but registration is currently closed." %}
-  </div>
-{% endblock card_body %}
+{% block card %}
+  <h3 class="mb-3 text-center">{% translate "Sign-up is closed" %}</h3>
+  {% translate "We are sorry, but sign-up is currently closed." %}
+{% endblock card %}

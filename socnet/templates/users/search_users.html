@@ -1,58 +1,52 @@
-{% extends "base.html" %}
+{% extends "list_group.html" %}
 
 {% load i18n static django_bootstrap5 %}
 
 {% block title %}
-  {% translate "Search users" %}
+  {% blocktranslate context "noun" %}Search users{% endblocktranslate %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  {% if users %}
+    <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  {% endif %}
 {% endblock css %}
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col-xl-6">
-      <div class="card">
-        <div class="card-body">
-          <h3 class="mb-3 text-center">{% translate "Search users" %}</h3>
-          <form method="get">
-            {% bootstrap_form form layout="floating" %}
-            <button type="submit" class="btn btn-primary w-100">
-              {% translate "Search users" %}
-            </button>
-          </form>
-        </div>
-      </div>
-      {% if request.GET %}
-        {% for user in users %}
-          <div class="card mt-1">
-            <a href="{{ user.get_absolute_url }}" class="text-decoration-none">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="avatar-thumbnail">
-                    {% if user.image %}
-                      <img src="{{ user.image.url }}"  alt="" loading="lazy" class="rounded" />
-                    {% endif %}
-                  </div>
-                  <div class="col ms-2">
-                    <div class="text-break">
-                      {{ user }}
-                      {{ user.display_name_in_parentheses }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        {% empty %}
-          {% if form.is_valid %}
-            <div class="card mt-1">
-              <div class="card-body">
-                <div class="text-center">{% translate "No users found" %}</div>
-              </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    </div>
+{% block javascript %}
+  <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
+{% endblock javascript %}
+{% block list_group %}
+  <div class="list-group-item">
+    <h3 class="mb-3 text-center">
+      {% blocktranslate context "noun" %}Search users{% endblocktranslate %}
+    </h3>
+    <form method="get">
+      {% bootstrap_form form layout="floating" %}
+      <button type="submit" class="btn btn-primary w-100">
+        {% blocktranslate context "verb" %}Search{% endblocktranslate %}
+      </button>
+    </form>
   </div>
-{% endblock content %}
+  {% if request.GET %}
+    {% for user in users %}
+      <a href="{{ user.get_absolute_url }}"
+         class="list-group-item list-group-item-action d-flex align-items-center">
+        <div class="avatar-thumbnail d-flex align-items-center justify-content-center me-2">
+          {% if user.image %}
+            <img src="{{ user.image.url }}" loading="lazy" class="rounded" />
+          {% else %}
+            <i class="fa-solid fa-user text-secondary"></i>
+          {% endif %}
+        </div>
+        <div class="text-break">
+          <span class="text-body">{{ user.display_name }}</span>
+          <span class="text-secondary">@{{ user.username }}</span>
+        </div>
+      </a>
+    {% empty %}
+      {% if form.is_valid %}
+        <div class="card mt-1">
+          <div class="card-body text-center">{% translate "No users found." %}</div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endblock list_group %}

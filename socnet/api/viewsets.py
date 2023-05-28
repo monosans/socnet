@@ -34,16 +34,16 @@ class _LikeViewSet(_AuthedViewSet):
         pk = serializers.validate_single_field(
             self.serializer_class, "pk", request.data
         )
-        qs = self.model.objects.filter(pk=pk)
+        qs = self.model.objects.filter(pk=pk)  # type: ignore[misc]
         obj = get_object_or_404(qs)
-        obj.likers.add(request.user)  # type: ignore[attr-defined]
+        obj.likers.add(request.user)
         return Response(status=status.HTTP_201_CREATED)
 
     def destroy(self, request: AuthedRequest, pk: int) -> Response:
         valid_pk = serializers.validate_single_field(self.serializer_class, "pk", pk)
-        qs = self.model.objects.filter(pk=valid_pk)
+        qs = self.model.objects.filter(pk=valid_pk)  # type: ignore[misc]
         obj = get_object_or_404(qs)
-        obj.likers.remove(request.user)  # type: ignore[attr-defined]
+        obj.likers.remove(request.user)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

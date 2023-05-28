@@ -5,8 +5,22 @@ use std::collections::HashMap;
 static AMMONIA: Lazy<ammonia::Builder> = Lazy::new(|| {
     let mut cleaner = ammonia::Builder::default();
     cleaner.set_tag_attribute_values(HashMap::from([
-        ("img", HashMap::from([("loading", "lazy")])),
-        ("table", HashMap::from([("class", "table")])),
+        (
+            "a",
+            HashMap::from([(
+                "class",
+                "link-underline link-underline-opacity-0 link-underline-opacity-100-hover",
+            )]),
+        ),
+        (
+            "img",
+            HashMap::from([
+                ("class", "rounded"),
+                ("loading", "lazy"),
+                ("role", "button"),
+            ]),
+        ),
+        ("table", HashMap::from([("class", "table w-auto")])),
     ]));
     cleaner
 });

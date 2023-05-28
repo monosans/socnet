@@ -7,6 +7,7 @@ from . import views
 app_name = "blog"
 
 post_patterns = [
+    path("", views.posts_view, name="posts"),
     path("<int:pk>/", views.post_view, name="post"),
     path("create/", views.PostCreateView.as_view(), name="post_create"),
     path("<int:pk>/edit/", views.PostUpdateView.as_view(), name="post_update"),
@@ -24,8 +25,7 @@ user_patterns = [
     path("subscriptions/", views.subscriptions_view, name="subscriptions"),
 ]
 urlpatterns = [
-    path("posts/", views.posts_view, name="posts"),
     path("post/", include(post_patterns)),
     path("comment/<int:pk>/", include(comment_patterns)),
-    path("user/<slug:username>/", include(user_patterns)),
+    path("@<slug:username>/", include(user_patterns)),
 ]

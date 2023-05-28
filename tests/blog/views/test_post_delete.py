@@ -45,7 +45,7 @@ def test_authed_post(client: Client, *, is_author: bool) -> None:
     url = get_url(post)
     response = client.post(url, follow=True)
     assert response.redirect_chain == [
-        (reverse("blog:user_posts", args=(user.get_username(),)), 302)
+        (reverse("blog:user_posts", args=(user.username,)), 302)
     ]
     assert response.status_code == 200
     assert is_author != models.Post.objects.filter(pk=post.pk).exists()

@@ -1,14 +1,10 @@
-{% extends "base.html" %}
+{% extends "col.html" %}
 
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col-xl-6">
-      <div class="card">
-        <div class="card-body">
-          {% block card_body %}
-          {% endblock card_body %}
-        </div>
-      </div>
+{% block col %}
+  <div class="card">
+    <div class="card-body">
+      {% block card %}
+      {% endblock card %}
     </div>
   </div>
-{% endblock content %}
+{% endblock col %}

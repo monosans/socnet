@@ -3,20 +3,23 @@
 {% load i18n django_bootstrap5 %}
 
 {% block title %}
-  {% translate "Delete account" %}
+  {% blocktranslate context "noun" %}Delete account{% endblocktranslate %}
 {% endblock title %}
-{% block card_body %}
-  <h3 class="mb-3 text-center">{% translate "Delete account" %}</h3>
-  <div class="mb-3">
-    {% blocktranslate trimmed %}
-      Are you sure you want to delete the <span class="fw-bolder">{{ user }}</span> account? All data associated with this account will be deleted.
-    {% endblocktranslate %}
-  </div>
-  <form method="post">
+{% block card %}
+  <h3 class="mb-3 text-center">
+    {% blocktranslate context "noun" %}Delete account{% endblocktranslate %}
+  </h3>
+  {% blocktranslate trimmed with display_name=user.display_name username=user.username user_url=user.get_absolute_url %}
+    Are you sure you want to delete the
+    <a href="{{ user_url }}"
+       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ display_name }} ({{ username }})</a>
+    account? All data associated with this account will be deleted.
+  {% endblocktranslate %}
+  <form method="post" class="mt-3">
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
     <button type="submit" class="btn btn-danger w-100">
       {% translate "Delete" %}
     </button>
   </form>
-{% endblock card_body %}
+{% endblock card %}

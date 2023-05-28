@@ -5,13 +5,13 @@
 {% block title %}
   {% translate "Two-factor authentication" %}
 {% endblock title %}
-{% block card_body %}
+{% block card %}
   <h3 class="mb-3 text-center">{% translate "Two-factor authentication" %}</h3>
   <form method="post">
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
     <button type="submit" class="btn btn-primary w-100">
-      {% translate "Log in" %}
+      {% blocktranslate context "verb" %}Log in{% endblocktranslate %}
     </button>
   </form>
-{% endblock card_body %}
+{% endblock card %}

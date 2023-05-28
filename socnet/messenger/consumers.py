@@ -1,17 +1,17 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Any, Dict, Union
+from typing import TYPE_CHECKING, Any, Dict, Literal, TypedDict, Union
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
 from django.db.models import Model
-from django.utils.html import escape
 
 from socnet_rs import markdownify
 
+from ..core.utils import dt_to_epoch
 from ..users.models import User
 from . import models
 
@@ -28,6 +28,14 @@ def save_obj(obj: Model) -> None:
     obj.save()
 
 
+class ChatMessageEvent(TypedDict):
+    type: Literal["chat_message"]  # noqa: A003
+    pk: int
+    content: str
+    created_epoch: int
+    sender: str
+
+
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     channel_layer: Union[RedisChannelLayer, InMemoryChannelLayer]
 
@@ -42,6 +50,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, code: int) -> None:  # noqa: ARG002
+        if not hasattr(self, "group"):
+            return
         await self.channel_layer.group_discard(self.group, self.channel_name)
 
     async def receive_json(self, content: Dict[str, str], **kwargs: Any) -> None:
@@ -54,19 +64,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         except ValidationError:
             logger.exception("")
             return
-        msg = {
-            "type": "chat_message",
-            "pk": message.pk,
-            "content": markdownify(message.content),
-            "date_created": message.formatted_date_created,
-            "sender": {
-                "href": sender.get_absolute_url(),
-                "display_name": escape(sender.display_name_in_parentheses),
-                "image": sender.image.url if sender.image else None,
-                "username": sender.get_username(),
-            },
-        }
+        msg = ChatMessageEvent(
+            type="chat_message",
+            pk=message.pk,
+            content=markdownify(message.content),
+            created_epoch=dt_to_epoch(message.date_created),
+            sender=sender.username,
+        )
         await self.channel_layer.group_send(self.group, msg)
 
-    async def chat_message(self, event: Dict[str, Any]) -> None:
-        await self.send_json(event)
+    async def chat_message(self, event: ChatMessageEvent) -> None:
+        content = {k: v for k, v in event.items() if k != "type"}
+        await self.send_json(content)

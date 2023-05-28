@@ -10,7 +10,7 @@ from ...utils import auth_client, parametrize_by_auth_self
 
 
 def get_url(user: User) -> str:
-    return reverse("blog:user", args=(user.get_username(),))
+    return reverse("blog:user", args=(user.username,))
 
 
 @parametrize_by_auth_self

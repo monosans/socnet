@@ -17,3 +17,15 @@ body,
   background-color: var(--bg-color);
   color: var(--bs-body-color);
 }
+
+.card {
+  --bs-card-border-color: var(--bs-border-color);
+}
+
+.list-group-item {
+  padding: 1rem;
+}
+
+h3.list-group-item {
+  margin-bottom: 0;
+}

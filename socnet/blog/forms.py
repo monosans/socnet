@@ -1,29 +1,48 @@
 from __future__ import annotations
 
-from django import forms
-from django.utils.translation import gettext_lazy as _
+from typing import TypeVar
 
+from django import forms
+from django.utils.translation import pgettext_lazy
+
+from ..core.models import MarkdownContentModel
 from . import models
 
+TMarkdownContentModel = TypeVar("TMarkdownContentModel", bound=MarkdownContentModel)
 
-class PostForm(forms.ModelForm[models.Post]):
+
+class MarkdownContentModelForm(forms.ModelForm[TMarkdownContentModel]):
     class Meta:
-        model = models.Post
-        fields = ("content",)
         labels = {"content": ""}
+        widgets = {"content": forms.Textarea({"rows": 2})}
+
+    def clean_content(self) -> str:
+        old_content = self.instance.content
+        new_content: str = self.cleaned_data["content"]
+        self.content_has_changed = old_content != new_content
+        return new_content
 
 
-class CommentForm(forms.ModelForm[models.Comment]):
-    class Meta:
+class PostForm(MarkdownContentModelForm[models.Post]):
+    class Meta(MarkdownContentModelForm.Meta):
+        model = models.Post
+        fields = ("content", "allow_commenting")
+
+
+class CommentForm(MarkdownContentModelForm[models.Comment]):
+    class Meta(MarkdownContentModelForm.Meta):
         model = models.Comment
         fields = ("content",)
-        labels = {"content": ""}
 
 
 class PostSearchForm(forms.Form):
     q = forms.CharField(
         widget=forms.Textarea(
-            {"class": "form-control", "placeholder": _("Search posts")}
+            {
+                "class": "form-control",
+                "placeholder": pgettext_lazy("noun", "Search posts"),
+                "rows": 2,
+            }
         ),
         label="",
     )

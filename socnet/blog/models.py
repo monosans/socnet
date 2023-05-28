@@ -21,6 +21,11 @@ class Post(MarkdownContentModel, TimestampedModel):
         verbose_name=_("likers"),
         blank=True,
     )
+    allow_commenting = models.BooleanField(
+        verbose_name=_("allow commenting"),
+        default=True,
+        help_text=_("You can comment on your posts regardless of this setting."),
+    )
 
     class Meta:
         verbose_name = _("post")

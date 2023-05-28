@@ -5,28 +5,27 @@
 {% block title %}
   {% translate "Two-factor authentication backup tokens" %}
 {% endblock title %}
-{% block card_body %}
+{% block card %}
   <h3 class="mb-3 text-center">
     {% translate "Two-factor authentication backup tokens" %}
   </h3>
-  <div class="mb-3">
-    {% if backup_tokens %}
-      {% if reveal_tokens %}
-        <ul>
-          {% for token in backup_tokens %}<li>{{ token.token }}</li>{% endfor %}
-        </ul>
-      {% else %}
-        {% translate "Backup tokens have been generated, but are not disclosed here for security reasons. Click the button below to generate new ones." %}
-      {% endif %}
+  {% if backup_tokens %}
+    {% if reveal_tokens %}
+      <ul>
+        {% for token in backup_tokens %}<li>{{ token.token }}</li>{% endfor %}
+      </ul>
     {% else %}
-      {% translate "No tokens. Click the button below to generate them." %}
+      {% translate "Backup tokens have been generated, but are not disclosed here for security reasons. Click the button below to generate new ones." %}
     {% endif %}
-  </div>
-  <form method="post" class="mb-2">
+  {% else %}
+    {% translate "No tokens. Click the button below to generate them." %}
+  {% endif %}
+  <form method="post" class="mt-3">
     {% csrf_token %}
     <button type="submit" class="btn btn-primary w-100">
       {% translate "Generate backup tokens" %}
     </button>
   </form>
-  <a href="{% url 'two-factor-remove' %}">{% translate "Disable two-factor authentication" %}</a>
-{% endblock card_body %}
+  <a href="{% url 'two-factor-remove' %}"
+     class="btn btn-danger mt-2 w-100">{% blocktranslate context "verb" %}Disable two-factor authentication{% endblocktranslate %}</a>
+{% endblock card %}

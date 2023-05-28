@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-20 16:15+0000\n"
+"POT-Creation-Date: 2023-05-28 15:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,12 +24,11 @@ msgstr "Английский"
 msgid "Russian"
 msgstr "Русский"
 
-msgctxt "field label"
-msgid "Login"
-msgstr "Логин"
-
 msgid "Password (again)"
 msgstr "Пароль (ещё раз)"
+
+msgid "Username or email"
+msgstr "Имя пользователя или электронная почта"
 
 msgid "Email"
 msgstr "Электронная почта"
@@ -37,6 +36,7 @@ msgstr "Электронная почта"
 msgid "Blog"
 msgstr "Блог"
 
+msgctxt "noun"
 msgid "Search posts"
 msgstr "Поиск постов"
 
@@ -45,6 +45,12 @@ msgstr "автор"
 
 msgid "likers"
 msgstr "любители"
+
+msgid "allow commenting"
+msgstr "разрешить комментирование"
+
+msgid "You can comment on your posts regardless of this setting."
+msgstr "Вы можете комментировать свои посты независимо от этой настройки."
 
 msgid "post"
 msgstr "пост"
@@ -65,13 +71,13 @@ msgid "Please try again."
 msgstr "Пожалуйста, попробуйте ещё раз."
 
 msgid "Core"
-msgstr "Основное"
-
-msgid "Supports a safe subset of HTML and Markdown."
-msgstr "Поддерживает безопасное подмножество HTML и Markdown."
+msgstr "Ядро"
 
 msgid "content"
 msgstr "содержание"
+
+msgid "Supports a safe subset of HTML and Markdown."
+msgstr "Поддерживает безопасное подмножество HTML и Markdown."
 
 msgid "date created"
 msgstr "дата создания"
@@ -118,14 +124,8 @@ msgstr "Эта учётная запись неактивна."
 msgid "Email addresses"
 msgstr "Адреса электронной почты"
 
-msgid "The following email addresses are associated with your account:"
-msgstr "С вашей учётной записью связаны следующие адреса электронной почты:"
-
 msgid "Verified"
 msgstr "Подтверждён"
-
-msgid "Unverified"
-msgstr "Не подтвержден"
 
 msgid "Primary"
 msgstr "Основной"
@@ -145,42 +145,62 @@ msgstr "Вы действительно хотите удалить выбран
 msgid "Close"
 msgstr "Закрыть"
 
-msgid "You currently do not have an email address set up. You should add an email address so you can receive notifications, reset your password, etc."
+msgid "You do not currently have an email address set up. You should add an email address so you can receive notifications, reset your password, etc."
 msgstr "В настоящее время у вас не установлен адрес электронной почты. Вам следует добавить адрес электронной почты, чтобы вы могли получать уведомления, сбрасывать пароль и т.д."
 
+msgctxt "noun"
 msgid "Add email address"
-msgstr "Добавить адрес электронной почты"
+msgstr "Добавление адреса электронной почты"
 
+msgid "Add"
+msgstr "Добавить"
+
+msgctxt "noun"
 msgid "Confirm email address"
-msgstr "Подтвердить адрес электронной почты"
+msgstr "Подтверждение адреса электронной почты"
 
 #, python-format
-msgid "Confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is the email address of the user <a href=\"%(user_url)s\">%(user)s</a>."
-msgstr "Подтвердите, что <a href=\"mailto:%(email)s\">%(email)s</a> - это адрес электронной почты пользователя <a href=\"%(user_url)s\">%(user)s</a>."
+msgid "Confirm that <a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a> is the email address of user <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a>."
+msgstr "Подтвердите, что <a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a> - это адрес электронной почты пользователя <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a>."
 
 msgid "Confirm"
 msgstr "Подтвердить"
 
 #, python-format
-msgid "This email confirmation link has expired or is invalid. <a href=\"%(email_url)s\">Send a new email confirmation request</a>."
-msgstr "Срок действия этой ссылки на подтверждение электронной почты истёк или она недействительна. <a href=\"%(email_url)s\">Отправьте новый запрос на подтверждение электронной почты</a>."
+msgid "This email confirmation link has expired or is invalid. <a href=\"%(email_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">Send a new email confirmation request</a>."
+msgstr "Срок действия этой ссылки на подтверждение электронной почты истёк или она недействительна. <a href=\"%(email_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">Отправьте новый запрос на подтверждение электронной почты</a>."
 
+msgctxt "noun"
 msgid "Log in"
-msgstr "Войти"
-
-#, python-format
-msgid "If you don't have an account yet, <a href=\"%(signup_url)s\">register</a>."
-msgstr "Если у вас ещё нет учётной записи, <a href=\"%(signup_url)s\">зарегистрируйтесь</a>."
+msgstr "Вход"
 
 msgid "Forgot password?"
 msgstr "Забыли пароль?"
 
+msgctxt "verb"
+msgid "Log in"
+msgstr "Войти"
+
+#, python-format
+msgid "If you don't have an account yet, <a href=\"%(signup_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">sign up</a>."
+msgstr "Если у вас ещё нет учётной записи, <a href=\"%(signup_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">зарегистрируйтесь</a>."
+
+msgctxt "noun"
 msgid "Log out"
-msgstr "Выйти"
+msgstr "Выход"
 
 msgid "Are you sure you want to log out?"
 msgstr "Вы уверены, что хотите выйти?"
 
+msgctxt "verb"
+msgid "Log out"
+msgstr "Выйти"
+
+msgctxt "noun"
+msgid "Change password"
+msgstr "Смена пароля"
+
+msgctxt "verb"
 msgid "Change password"
 msgstr "Изменить пароль"
 
@@ -188,59 +208,67 @@ msgid "Password reset"
 msgstr "Сброс пароля"
 
 msgid "Forgot your password? Enter your email address below and we'll send you an email allowing you to reset it."
-msgstr "Забыли свой пароль? Введите свой адрес электронной почты ниже, и мы отправим вам электронное письмо, позволяющее сбросить его."
+msgstr "Забыли пароль? Введите свой адрес электронной почты ниже, и мы отправим вам письмо, позволяющее сбросить его."
 
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
-msgid "We have sent you an email. If you didn't receive it, check your spam folder."
+msgid "We have sent you an email. If you did not receive it, check your spam folder."
 msgstr "Мы отправили вам электронное письмо. Если вы его не получили, проверьте папку \"Спам\"."
 
 msgid "Bad token"
 msgstr "Плохой токен"
 
 #, python-format
-msgid "The password reset link was invalid, possibly because it has already been used. Request a <a href=\"%(passwd_reset_url)s\">new password reset</a>."
-msgstr "Ссылка на сброс пароля недействительна, возможно, потому, что она уже использовалась. Запросите <a href=\"%(passwd_reset_url)s\">новый сброс пароля</a>."
+msgid "The password reset link is invalid, possibly because it has already been used. Request a <a href=\"%(passwd_reset_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">new password reset</a>."
+msgstr "Ссылка на сброс пароля недействительна, возможно, потому, что она уже использовалась. Запросите <a href=\"%(passwd_reset_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">новый сброс пароля</a>."
 
 msgid "Your password has been changed."
 msgstr "Ваш пароль был изменён."
 
+msgctxt "noun"
+msgid "Set password"
+msgstr "Установка пароля"
+
+msgctxt "verb"
 msgid "Set password"
 msgstr "Установить пароль"
 
-msgid "Register"
+msgid "Sign-up"
+msgstr "Регистрация"
+
+msgid "Sign up"
 msgstr "Зарегистрироваться"
 
 #, python-format
-msgid "If you already have an account, <a href=\"%(login_url)s\">log in</a>."
-msgstr "Если у вас уже есть учётная запись, <a href=\"%(login_url)s\">войдите</a>."
+msgid "If you already have an account, <a href=\"%(login_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">log in</a>."
+msgstr "Если у вас уже есть учётная запись, <a href=\"%(login_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">войдите</a>."
 
-msgid "Registration is closed"
+msgid "Sign-up is closed"
 msgstr "Регистрация закрыта"
 
-msgid "We are sorry, but registration is currently closed."
+msgid "We are sorry, but sign-up is currently closed."
 msgstr "Мы сожалеем, но регистрация в настоящее время закрыта."
 
 #, python-format
-msgid "You are already logged in as <a href=\"%(user_url)s\">%(user)s</a>."
-msgstr "Вы уже вошли как <a href=\"%(user_url)s\">%(user)s</a>."
+msgid "You are already logged in as <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a>."
+msgstr "Вы уже вошли как <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a>."
 
 msgid "Verify your email address"
 msgstr "Подтвердите свой адрес электронной почты"
 
-msgid "We have sent you an email for verification. Follow the link provided to complete the registration process. If you don't see the verification email in your main mailbox, check your spam folder."
-msgstr "Мы отправили вам электронное письмо для подтверждения. Перейдите по указанной ссылке, чтобы завершить процесс регистрации. Если вы не видите письмо для подтверждения в своём основном почтовом ящике, проверьте папку \"Спам\"."
+msgid "We have sent you an email for verification. Follow the link provided to complete the sign-up process. If you do not see the verification email in your main mailbox, check your spam folder."
+msgstr "Мы отправили вам электронное письмо для подтверждения. Перейдите по указанной ссылке, чтобы завершить процесс регистрации. Если вы не видите письмо с подтверждением в своём основном почтовом ящике, проверьте папку \"Спам\"."
 
 msgid "This part of the site requires us to verify that you are who you say you are. To do this, we require you to verify ownership of your email address."
-msgstr "Эта часть сайта требует от нас подтверждения того, что вы являетесь тем, за кого себя выдаёте. Для этого мы требуем, чтобы вы подтвердили право собственности на свой адрес электронной почты."
+msgstr "Эта часть сайта требует от нас подтверждения того, что вы являетесь тем, за кого себя выдаете. Для этого мы просим вас подтвердить право собственности на ваш адрес электронной почты."
 
-msgid "We have sent you an email for verification. Click on the link in this email. If you don't see the verification email in your main mailbox, check your spam folder."
-msgstr "Мы отправили вам электронное письмо для подтверждения. Нажмите на ссылку в этом письме. Если вы не видите письмо для подтверждения в своём основном почтовом ящике, проверьте папку \"Спам\"."
+msgid "We have sent you an email for verification. Click on the link in that email. If you do not see the verification email in your main mailbox, check your spam folder."
+msgstr "Мы отправили вам электронное письмо для подтверждения. Нажмите на ссылку в этом письме. Если вы не видите письмо с подтверждением в своём основном почтовом ящике, проверьте папку \"Спам\"."
 
 #, python-format
-msgid "You can still <a href=\"%(email_url)s\">change your email address</a>."
-msgstr "Вы всё ещё можете <a href=\"%(email_url)s\">изменить свой адрес электронной почты</a>."
+msgid "You can still <a href=\"%(email_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">change your email address</a>."
+msgstr "Вы всё ещё можете <a href=\"%(email_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">изменить свой адрес электронной почты</a>."
 
 msgid "Two-factor authentication"
 msgstr "Двухфакторная аутентификация"
@@ -257,8 +285,16 @@ msgstr "Нет токенов. Нажмите кнопку ниже, чтобы 
 msgid "Generate backup tokens"
 msgstr "Сгенерировать резервные токены"
 
+msgctxt "verb"
 msgid "Disable two-factor authentication"
 msgstr "Отключить двухфакторную аутентификацию"
+
+msgctxt "noun"
+msgid "Disable two-factor authentication"
+msgstr "Отключение двухфакторной аутентификации"
+
+msgid "Disable"
+msgstr "Отключить"
 
 msgid "Setup two-factor authentication"
 msgstr "Настройка двухфакторной аутентификации"
@@ -266,8 +302,8 @@ msgstr "Настройка двухфакторной аутентификаци
 msgid "Step 1"
 msgstr "Шаг 1"
 
-msgid "Scan the QR code below with the token generator (for example, Aegis Authenticator on Android and Raivo OTP on iOS)."
-msgstr "Отсканируйте приведённый ниже QR-код с помощью генератора токенов (например, Aegis Authenticator на Android и Raivo OTP на iOS)."
+msgid "Scan the QR code below with a token generator (such as Aegis Authenticator on Android or Raivo OTP on iOS)."
+msgstr "Отсканируйте приведённый ниже QR-код с помощью генератора токенов (например, Aegis Authenticator на Android или Raivo OTP на iOS)."
 
 msgid "Step 2"
 msgstr "Шаг 2"
@@ -284,8 +320,9 @@ msgstr "Мой профиль"
 msgid "Posts"
 msgstr "Посты"
 
+msgctxt "noun"
 msgid "Search users"
-msgstr "Искать пользователей"
+msgstr "Поиск пользователей"
 
 msgid "Admin panel"
 msgstr "Админ-панель"
@@ -303,18 +340,17 @@ msgid "Auto"
 msgstr "Автоматически"
 
 #, python-format
+msgctxt "noun"
 msgid "Edit comment #%(comment_pk)s"
-msgstr "Редактировать комментарий №%(comment_pk)s"
+msgstr "Редактирование комментария №%(comment_pk)s"
 
 #, python-format
-msgid "Edit <a href=\"%(comment_url)s\" class=\"text-decoration-none\">comment #%(comment_pk)s</a>"
-msgstr "Редактировать <a href=\"%(comment_url)s\" class=\"text-decoration-none\">комментарий №%(comment_pk)s</a>"
+msgctxt "noun"
+msgid "Edit <a href=\"%(comment_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">comment #%(comment_pk)s</a>"
+msgstr "Редактирование <a href=\"%(comment_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">комментария №%(comment_pk)s</a>"
 
 msgid "Save"
 msgstr "Сохранить"
-
-msgid "last edited"
-msgstr "последнее редактирование"
 
 msgid "Admin page"
 msgstr "Страница администрирования"
@@ -325,11 +361,16 @@ msgstr "Редактировать"
 msgid "Delete"
 msgstr "Удалить"
 
+#, fuzzy
+msgctxt "noun"
 msgid "Delete post"
-msgstr "Удалить пост"
+msgstr "Удаление поста"
 
 msgid "Are you sure you want to delete your post?"
 msgstr "Вы уверены, что хотите удалить свой пост?"
+
+msgid "last edited"
+msgstr "последнее редактирование"
 
 msgid "liked posts"
 msgstr "понравившиеся посты"
@@ -338,32 +379,48 @@ msgid "Liked posts"
 msgstr "Понравившиеся посты"
 
 #, python-format
-msgid "%(user)s has no liked posts."
-msgstr "У %(user)s нет понравившихся постов."
+msgid "<a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> has no liked posts."
+msgstr "У <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> нет понравившихся постов."
 
 #, python-format
 msgid "Post #%(post_pk)s"
 msgstr "Пост №%(post_pk)s"
 
+msgid "The author has restricted commenting on this post."
+msgstr "Автор ограничил комментирование этого поста."
+
+#, python-format
+msgid "<a href=\"%(url_login)s?next=%(next)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">Log in</a> to comment."
+msgstr "<a href=\"%(url_login)s?next=%(next)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">Войдите</a>, чтобы комментировать."
+
+msgctxt "verb"
 msgid "Comment"
 msgstr "Комментировать"
 
+#, fuzzy
+msgctxt "noun"
 msgid "Delete comment"
-msgstr "Удалить комментарий"
+msgstr "Удаление комментария"
 
 msgid "Are you sure you want to delete the comment?"
 msgstr "Вы уверены, что хотите удалить комментарий?"
 
+msgctxt "noun"
 msgid "Create post"
-msgstr "Создать пост"
+msgstr "Создание поста"
+
+msgid "Create"
+msgstr "Создать"
 
 #, python-format
+msgctxt "noun"
 msgid "Edit post #%(post_pk)s"
-msgstr "Редактировать пост №%(post_pk)s"
+msgstr "Редактирование поста №%(post_pk)s"
 
 #, python-format
-msgid "Edit <a href=\"%(post_url)s\" class=\"text-decoration-none\">post #%(post_pk)s</a>"
-msgstr "Редактировать <a href=\"%(post_url)s\" class=\"text-decoration-none\">пост №%(post_pk)s</a>"
+msgctxt "noun"
+msgid "Edit <a href=\"%(post_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">post #%(post_pk)s</a>"
+msgstr "Редактирование <a href=\"%(post_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">поста №%(post_pk)s</a>"
 
 msgid "Subscribe to users you are interested in, so that their posts are displayed here."
 msgstr "Подпишитесь на интересующих вас пользователей, чтобы их посты отображались здесь."
@@ -378,8 +435,8 @@ msgid "Subscribers"
 msgstr "Подписчики"
 
 #, python-format
-msgid "%(user)s has no subscribers."
-msgstr "У %(user)s нет подписчиков."
+msgid "<a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> has no subscribers."
+msgstr "У <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> нет подписчиков."
 
 msgid "subscriptions"
 msgstr "подписки"
@@ -387,18 +444,29 @@ msgstr "подписки"
 msgid "Subscriptions"
 msgstr "Подписки"
 
-msgid "Unsubscribe"
-msgstr "Отписаться"
-
 msgid "Subscribe"
 msgstr "Подписаться"
 
+msgid "Unsubscribe"
+msgstr "Отписаться"
+
 #, python-format
-msgid "%(user)s has no subscriptions."
-msgstr "У %(user)s нет подписок."
+msgid "<a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> has no subscriptions."
+msgstr "У <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> нет подписок."
+
+msgctxt "verb"
+msgid "Create post"
+msgstr "Создать пост"
 
 msgid "Write message"
 msgstr "Написать сообщение"
+
+msgid "Signed up"
+msgstr "Зарегистрировался"
+
+#, fuzzy
+msgid "Last login"
+msgstr "Последний вход"
 
 msgid "Birth date"
 msgstr "Дата рождения"
@@ -410,12 +478,12 @@ msgid "About me"
 msgstr "Обо мне"
 
 #, python-format
-msgid "%(user)s has no posts."
-msgstr "У %(user)s нет постов."
+msgid "<a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> has no posts."
+msgstr "У <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> нет постов."
 
 #, python-format
-msgid "Chat with %(interlocutor)s"
-msgstr "Чат с %(interlocutor)s"
+msgid "Chat with %(display_name)s (%(username)s)"
+msgstr "Чат с %(display_name)s (%(username)s)"
 
 msgid "Chats"
 msgstr "Чаты"
@@ -426,21 +494,28 @@ msgstr "У вас нет чатов."
 msgid "Account security"
 msgstr "Безопасность учётной записи"
 
+msgctxt "noun"
 msgid "Change email"
-msgstr "Изменить электронную почту"
+msgstr "Изменение электронной почты"
 
+msgctxt "noun"
 msgid "Delete account"
-msgstr "Удалить учётную запись"
+msgstr "Удаление учётной записи"
 
 #, python-format
-msgid "Are you sure you want to delete the <span class=\"fw-bolder\">%(user)s</span> account? All data associated with this account will be deleted."
-msgstr "Вы уверены, что хотите удалить учётную запись <span class=\"fw-bolder\">%(user)s</span>? Все данные, связанные с этой учётной записью, будут удалены."
+msgid "Are you sure you want to delete the <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a> account? All data associated with this account will be deleted."
+msgstr "Вы уверены, что хотите удалить учётную запись <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a>? Все данные, связанные с этой учётной записью, будут удалены."
 
+msgctxt "noun"
 msgid "Edit profile"
-msgstr "Редактировать профиль"
+msgstr "Редактирование профиля"
 
-msgid "No users found"
-msgstr "Пользователи не найдены"
+msgctxt "verb"
+msgid "Search"
+msgstr "Искать"
+
+msgid "No users found."
+msgstr "Пользователи не найдены."
 
 msgid "Users"
 msgstr "Пользователи"
@@ -451,11 +526,11 @@ msgstr "Разрешается изменять только регистр бу
 msgid "Search query"
 msgstr "Поисковый запрос"
 
-msgid "Username"
-msgstr "Имя пользователя"
-
 msgid "Display name"
 msgstr "Отображаемое имя"
+
+msgid "Username"
+msgstr "Имя пользователя"
 
 msgid "Fields to search"
 msgstr "Поля для поиска"
@@ -481,6 +556,9 @@ msgstr "отображаемое имя"
 msgid "email address"
 msgstr "адрес электронной почты"
 
+msgid "show last login time in profile"
+msgstr "показывать время последнего входа в профиле"
+
 msgid "birth date"
 msgstr "дата рождения"
 
@@ -496,8 +574,8 @@ msgstr "обо мне"
 msgid "You can't subscribe to yourself."
 msgstr "Вы не можете подписаться на себя."
 
-msgid "You can't be older than the oldest human."
-msgstr "Вы не можете быть старше самого старого человека."
+msgid "Birth date is implausible."
+msgstr "Дата рождения неправдоподобна."
 
-msgid "Are you from the future?"
-msgstr "Вы из будущего?"
+msgid "Birth date cannot be in the future."
+msgstr "Дата рождения не может быть в будущем."

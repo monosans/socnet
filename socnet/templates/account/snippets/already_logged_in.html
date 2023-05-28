@@ -2,8 +2,10 @@
 
 {% if user.is_authenticated %}
   <div class="mb-3">
-    {% blocktranslate trimmed with user_url=user.get_absolute_url %}
-      You are already logged in as <a href="{{ user_url }}">{{ user }}</a>.
+    {% blocktranslate trimmed with display_name=user.display_name username=user.username user_url=user.get_absolute_url %}
+      You are already logged in as
+      <a href="{{ user_url }}"
+         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ display_name }} ({{ username }})</a>.
     {% endblocktranslate %}
   </div>
 {% endif %}

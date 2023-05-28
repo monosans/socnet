@@ -1,50 +1,44 @@
-{% extends "base.html" %}
+{% extends "col.html" %}
 
-{% load static i18n django_bootstrap5 %}
+{% load i18n static django_bootstrap5 %}
 
 {% block title %}
   {% translate "Posts" %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}" />
+  {% if posts %}
+    {% include "blog/inc/post_css.html" %}
+  {% endif %}
 {% endblock css %}
 {% block javascript %}
-  <script defer src="{% static 'js/like.js' %}"></script>
+  {% if posts %}
+    {% include "blog/inc/post_js.html" %}
+  {% endif %}
+  <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
 {% endblock javascript %}
-{% block content %}
-  {% csrf_token %}
-  <div class="row justify-content-center">
-    <div class="col-xl-6">
-      <div class="card mb-2">
-        <div class="card-body">
-          <form method="get">
-            {% bootstrap_form_errors form %}
-            <div class="input-group">
-              {{ form.q }}
-              <button type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-      {% if posts %}
-        {% include "blog/inc/posts_preview.html" %}
-        {% include "inc/pagination.html" with object_list=posts %}
-      {% else %}
-        <div class="card">
-          <div class="card-body">
-            <div class="text-center">
-              {% if not request.GET %}
-                {% translate "Subscribe to users you are interested in, so that their posts are displayed here." %}
-              {% elif form.is_valid %}
-                {% translate "No posts found." %}
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      {% endif %}
+{% block col %}
+  <form method="get">
+    {% bootstrap_form_errors form %}
+    <div class="input-group">
+      {{ form.q }}
+      <button type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
-  </div>
-{% endblock content %}
+  </form>
+  {% if posts %}
+    {% csrf_token %}
+    {% include "blog/inc/posts_preview.html" %}
+    {% include "inc/pagination.html" with object_list=posts %}
+  {% elif not request.GET %}
+    <div class="card mt-2">
+      <div class="card-body text-center">
+        {% translate "Subscribe to users you are interested in, so that their posts are displayed here." %}
+      </div>
+    </div>
+  {% elif form.is_valid %}
+    <div class="card mt-2">
+      <div class="card-body text-center">{% translate "No posts found." %}</div>
+    </div>
+  {% endif %}
+{% endblock col %}

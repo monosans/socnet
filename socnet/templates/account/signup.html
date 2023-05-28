@@ -1,27 +1,31 @@
-{% extends "card.html" %}
+{% extends "list_group.html" %}
 
 {% load i18n django_bootstrap5 %}
 
 {% block title %}
-  {% translate "Register" %}
+  {% translate "Sign-up" %}
 {% endblock title %}
-{% block card_body %}
-  <h3 class="mb-3 text-center">{% translate "Register" %}</h3>
-  <div class="mb-3">
+{% block list_group %}
+  <div class="list-group-item">
+    <h3 class="mb-3 text-center">{% translate "Sign-up" %}</h3>
+    <form method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {% bootstrap_form form layout="floating" %}
+      {% if redirect_field_value %}
+        <input type="hidden"
+               name="{{ redirect_field_name }}"
+               value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button type="submit" class="btn btn-primary w-100">
+        {% translate "Sign up" %}
+      </button>
+    </form>
+  </div>
+  <div class="list-group-item text-center">
     {% blocktranslate trimmed %}
-      If you already have an account, <a href="{{ login_url }}">log in</a>.
+      If you already have an account,
+      <a href="{{ login_url }}"
+         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">log in</a>.
     {% endblocktranslate %}
   </div>
-  <form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form layout="floating" %}
-    {% if redirect_field_value %}
-      <input type="hidden"
-             name="{{ redirect_field_name }}"
-             value="{{ redirect_field_value }}" />
-    {% endif %}
-    <button type="submit" class="btn btn-primary w-100">
-      {% translate "Register" %}
-    </button>
-  </form>
-{% endblock card_body %}
+{% endblock list_group %}

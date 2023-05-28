@@ -20,6 +20,8 @@ repos:
     rev: v8.41.0
     hooks:
       - id: eslint
+        files: \.m?js$
+        types: [file]
         args:
           - --fix
         additional_dependencies:

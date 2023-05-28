@@ -1,153 +1,151 @@
-{% extends "card.html" %}
+{% extends "list_group.html" %}
 
-{% load static i18n django_bootstrap5 markdownify obj_admin_url %}
+{% load i18n static django_bootstrap5 markdownify obj_admin_url %}
 
 {% block title %}
-  {% blocktranslate trimmed with post_pk=post.pk %}
-    Post #{{ post_pk }}
-  {% endblocktranslate %}
+  {% blocktranslate with post_pk=post.pk %}Post #{{ post_pk }}{% endblocktranslate %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/img_responsive.css' %}" />
+  {% include "blog/inc/post_css.html" %}
 {% endblock css %}
 {% block javascript %}
-  <script defer src="{% static 'js/like.js' %}"></script>
-{% endblock javascript %}
-{% block card_body %}
-  {% csrf_token %}
-  {% include "blog/inc/post_body.html" %}
-  <hr />
-  {% if request.user.is_authenticated %}
-    <form method="post">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      <button type="submit" class="btn btn-primary w-100">
-        {% translate "Comment" %}
-      </button>
-    </form>
-  {% else %}
-    <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-       class="btn btn-primary w-100">{% translate "Comment" %}</a>
+  {% if post.allow_commenting or request.user == post.author %}
+    <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
   {% endif %}
+  {% include "blog/inc/post_js.html" %}
+{% endblock javascript %}
+{% block list_group %}
+  <div class="list-group-item">{% include "blog/inc/post_body.html" %}</div>
+  <div class="list-group-item">
+    {% if not post.allow_commenting and request.user != post.author %}
+      <div class="text-center">
+        {% translate "The author has restricted commenting on this post." %}
+      </div>
+    {% elif request.user.is_anonymous %}
+      <div class="text-center">
+        {% url 'account_login' as url_login %}
+        {% blocktranslate trimmed with next=request.path|urlencode %}
+          <a href="{{ url_login }}?next={{ next }}"
+             class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">Log in</a>
+          to comment.
+        {% endblocktranslate %}
+      </div>
+    {% else %}
+      <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary w-100">
+          {% blocktranslate context "verb" %}Comment{% endblocktranslate %}
+        </button>
+      </form>
+    {% endif %}
+  </div>
   {% for comment in post.comments.all %}
-    <hr class="mt-3" />
-    <div id="comment{{ comment.pk }}">
-      <div class="row">
-        <div class="avatar-thumbnail">
-          {% if comment.author.image %}
-            <img src="{{ comment.author.image.url }}"
-                 alt=""
-                 loading="lazy"
-                 class="rounded" />
-          {% endif %}
-        </div>
-        <div class="col ms-2">
-          <div class="d-flex justify-content-between">
-            <div class="text-break">
-              <a href="{{ comment.author.get_absolute_url }}"
-                 class="text-decoration-none">{{ comment.author }}</a>
+    <div id="comment{{ comment.pk }}" class="list-group-item">
+      <div class="d-flex justify-content-between mb-1">
+        <a href="{{ comment.author.get_absolute_url }}"
+           class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">
+          <div class="d-flex">
+            <div class="avatar-thumbnail me-2">
+              {% if comment.author.image %}
+                <img src="{{ comment.author.image.url }}" loading="lazy" class="rounded" />
+              {% else %}
+                <i class="fa-solid fa-user text-secondary"></i>
+              {% endif %}
             </div>
-            {% if request.user.is_staff or comment.author == request.user or comment.post.author == request.user %}
-              <div class="dropdown">
-                <button class="btn" type="button" data-bs-toggle="dropdown">
-                  <i class="fa-solid fa-ellipsis text-secondary"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  {% if request.user.is_staff %}
-                    <li>
-                      <a href="{{ comment|obj_admin_url }}" class="dropdown-item">
-                        <i class="fa-solid fa-toolbox text-primary"></i>
-                        {% translate "Admin page" %}
-                      </a>
-                    </li>
-                  {% endif %}
-                  {% if comment.author == request.user %}
-                    <li>
-                      <a href="{% url 'blog:comment_update' comment.pk %}"
-                         class="dropdown-item">
-                        <i class="fa-solid fa-pen-to-square text-primary"></i>
-                        {% translate "Edit" %}
-                      </a>
-                    </li>
-                  {% endif %}
-                  {% if comment.author == request.user or comment.post.author == request.user %}
-                    <li>
-                      <button type="button"
-                              class="dropdown-item"
-                              data-bs-toggle="modal"
-                              data-bs-target="#comment{{ comment.pk }}_modal">
-                        <i class="fa-solid fa-xmark text-danger"></i>
-                        {% translate "Delete" %}
+            <div class="text-break">
+              {{ comment.author.display_name }}
+              <span class="text-secondary">@{{ comment.author.username }}</span>
+            </div>
+          </div>
+        </a>
+        {% if request.user.is_staff or request.user == comment.author or request.user == comment.post.author %}
+          <div>
+            <div class="dropdown">
+              <button class="btn" type="button" data-bs-toggle="dropdown">
+                <i class="fa-solid fa-ellipsis text-secondary"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                {% if request.user.is_staff %}
+                  <li>
+                    <a href="{{ comment|obj_admin_url }}" class="dropdown-item"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin page" %}</a>
+                  </li>
+                {% endif %}
+                {% if request.user == comment.author %}
+                  <li>
+                    <a href="{% url 'blog:comment_update' comment.pk %}"
+                       class="dropdown-item"><i class="fa-solid fa-pen-to-square text-primary"></i> {% translate "Edit" %}</a>
+                  </li>
+                {% endif %}
+                {% if request.user == comment.author or request.user == comment.post.author %}
+                  <li>
+                    <button type="button"
+                            class="dropdown-item"
+                            data-bs-toggle="modal"
+                            data-bs-target="#comment{{ comment.pk }}Modal">
+                      <i class="fa-solid fa-xmark text-danger"></i>
+                      {% translate "Delete" %}
+                    </button>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+            {% if request.user == comment.author or request.user == comment.post.author %}
+              <div class="modal fade" id="comment{{ comment.pk }}Modal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">
+                        {% blocktranslate context "noun" %}Delete comment{% endblocktranslate %}
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      {% translate "Are you sure you want to delete the comment?" %}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        {% translate "Close" %}
                       </button>
-                    </li>
-                  {% endif %}
-                </ul>
-              </div>
-              {% if comment.author == request.user or comment.post.author == request.user %}
-                <div class="modal fade" id="comment{{ comment.pk }}_modal" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">{% translate "Delete comment" %}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                      </div>
-                      <div class="modal-body">
-                        {% translate "Are you sure you want to delete the comment?" %}
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                          {% translate "Close" %}
-                        </button>
-                        <form action="{% url 'blog:comment_delete' comment.pk %}?next={{ post.get_absolute_url }}"
-                              method="post">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-danger">{% translate "Delete" %}</button>
-                        </form>
-                      </div>
+                      <form method="post"
+                            action="{% url 'blog:comment_delete' comment.pk %}?next={{ post.get_absolute_url }}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">{% translate "Delete" %}</button>
+                      </form>
                     </div>
                   </div>
                 </div>
-              {% endif %}
+              </div>
             {% endif %}
           </div>
-          <div class="text-break img-responsive">{{ comment.content|markdownify }}</div>
-          <div class="d-flex justify-content-between">
-            <a href="{{ comment.get_absolute_url }}"
-               class="text-decoration-none text-secondary">
-              {{ comment.date_created }}
-              {% if comment.date_created|date:"U" != comment.date_updated|date:"U" %}
-                ({% translate "last edited" %} {{ comment.date_updated }})
-              {% endif %}
-            </a>
-            <div>
-              {% if request.user.is_anonymous %}
-                <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-                   class="btn badge rounded-pill text-bg-color fs-6">
-                  <i class="fa-regular fa-heart"></i>
-                  {{ comment.likers__count }}
-                </a>
-              {% elif comment.is_liked %}
-                <button type="button"
-                        class="btn badge rounded-pill text-bg-color fs-6"
-                        data-is-liked="y"
-                        data-comment-pk="{{ comment.pk }}">
-                  <i class="fa-solid fa-heart text-danger"></i>
-                  <span>{{ comment.likers__count }}</span>
-                </button>
-              {% else %}
-                <button type="button"
-                        class="btn badge rounded-pill text-bg-color fs-6"
-                        data-is-liked="n"
-                        data-comment-pk="{{ comment.pk }}">
-                  <i class="fa-regular fa-heart"></i>
-                  <span>{{ comment.likers__count }}</span>
-                </button>
-              {% endif %}
-            </div>
-          </div>
-        </div>
+        {% endif %}
+      </div>
+      <div class="markdown-container text-break">
+        {{ comment.content|markdownify }}
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        {% include "blog/inc/timestamp.html" with object=comment %}
+        {% if request.user.is_anonymous %}
+          <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
+             class="btn badge rounded-pill text-bg-color fs-6"><i class="fa-regular fa-heart"></i> <span data-unformatted-number="{{ comment.likers__count }}"></span></a>
+        {% elif comment.is_liked %}
+          <button type="button"
+                  class="btn badge rounded-pill text-bg-color fs-6"
+                  data-is-liked="y"
+                  data-comment-pk="{{ comment.pk }}">
+            <i class="fa-solid fa-heart text-danger"></i>
+            <span data-unformatted-number="{{ comment.likers__count }}"></span>
+          </button>
+        {% else %}
+          <button type="button"
+                  class="btn badge rounded-pill text-bg-color fs-6"
+                  data-is-liked="n"
+                  data-comment-pk="{{ comment.pk }}">
+            <i class="fa-regular fa-heart"></i>
+            <span data-unformatted-number="{{ comment.likers__count }}"></span>
+          </button>
+        {% endif %}
       </div>
     </div>
   {% endfor %}
-{% endblock card_body %}
+{% endblock list_group %}

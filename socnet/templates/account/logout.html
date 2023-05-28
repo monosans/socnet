@@ -3,12 +3,14 @@
 {% load i18n %}
 
 {% block title %}
-  {% translate "Log out" %}
+  {% blocktranslate context "noun" %}Log out{% endblocktranslate %}
 {% endblock title %}
-{% block card_body %}
-  <h3 class="mb-3 text-center">{% translate "Log out" %}</h3>
-  <div class="mb-3">{% translate "Are you sure you want to log out?" %}</div>
-  <form method="post">
+{% block card %}
+  <h3 class="mb-3 text-center">
+    {% blocktranslate context "noun" %}Log out{% endblocktranslate %}
+  </h3>
+  {% translate "Are you sure you want to log out?" %}
+  <form method="post" action="{% url 'account_logout' %}" class="mt-3">
     {% csrf_token %}
     {% if redirect_field_value %}
       <input type="hidden"
@@ -16,7 +18,7 @@
              value="{{ redirect_field_value }}" />
     {% endif %}
     <button type="submit" class="btn btn-primary w-100">
-      {% translate "Log out" %}
+      {% blocktranslate context "verb" %}Log out{% endblocktranslate %}
     </button>
   </form>
-{% endblock card_body %}
+{% endblock card %}

@@ -3,28 +3,35 @@
 {% load i18n %}
 
 {% block title %}
-  {% translate "Confirm email address" %}
+  {% blocktranslate context "noun" %}Confirm email address{% endblocktranslate %}
 {% endblock title %}
-{% block card_body %}
-  <h3 class="mb-3 text-center">{% translate "Confirm email address" %}</h3>
+{% block card %}
+  <h3 class="mb-3 text-center">
+    {% blocktranslate context "noun" %}Confirm email address{% endblocktranslate %}
+  </h3>
   {% if confirmation %}
-    <div class="mb-3">
-      {% blocktranslate trimmed with email=confirmation.email_address.email user=confirmation.email_address.user user_url=confirmation.email_address.user.get_absolute_url %}
-        Confirm that <a href="mailto:{{ email }}">{{ email }}</a> is the email address of the user <a href="{{ user_url }}">{{ user }}</a>.
-      {% endblocktranslate %}
-    </div>
-    <form method="post">
+    {% blocktranslate trimmed with email=confirmation.email_address.email display_name=confirmation.email_address.user.display_name username=confirmation.email_address.user.username user_url=confirmation.email_address.user.get_absolute_url %}
+      Confirm that
+      <a href="mailto:{{ email }}"
+         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ email }}</a>
+      is the email address of user
+      <a href="{{ user_url }}"
+         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ display_name }} ({{ username }})</a>.
+    {% endblocktranslate %}
+    <form method="post"
+          action="{% url 'account_confirm_email' confirmation.key %}"
+          class="mt-3">
       {% csrf_token %}
       <button type="submit" class="btn btn-primary w-100">
         {% translate "Confirm" %}
       </button>
     </form>
   {% else %}
-    <div>
-      {% url "account_email" as email_url %}
-      {% blocktranslate trimmed %}
-        This email confirmation link has expired or is invalid. <a href="{{ email_url }}">Send a new email confirmation request</a>.
-      {% endblocktranslate %}
-    </div>
+    {% url "account_email" as email_url %}
+    {% blocktranslate trimmed %}
+      This email confirmation link has expired or is invalid.
+      <a href="{{ email_url }}"
+         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">Send a new email confirmation request</a>.
+    {% endblocktranslate %}
   {% endif %}
-{% endblock card_body %}
+{% endblock card %}

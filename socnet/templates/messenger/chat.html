@@ -1,81 +1,91 @@
-{% extends "base.html" %}
+{% extends "list_group.html" %}
 
 {% load i18n static django_bootstrap5 markdownify %}
 
 {% block title %}
-  {% blocktranslate trimmed %}
-    Chat with {{ interlocutor }}
-  {% endblocktranslate %}
+  {% blocktranslate with display_name=interlocutor.display_name username=interlocutor.username %}Chat with {{ display_name }} ({{ username }}){% endblocktranslate %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
   <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/markdown_container.css' %}" />
+  {% include "inc/viewerjs_css.html" %}
 {% endblock css %}
 {% block javascript %}
-  <script defer src="{% static 'js/chat.js' %}"></script>
+  <script type="module" src="{% static 'js/chat.mjs' %}"></script>
+  <script type="module" src="{% static 'js/date_formatter.mjs' %}"></script>
+  <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
+  {% if messages_ %}
+    <script type="module" src="{% static 'js/viewer_markdown.mjs' %}"></script>
+  {% endif %}
+  <script id="data" type="application/json">
+    {
+      "interlocutorPk": {{ interlocutor.pk }},
+      "users": {
+        {% if request.user != interlocutor %}
+        "{{ interlocutor.username|lower }}": {
+          "href": "{{ interlocutor.get_absolute_url }}",
+          {% if interlocutor.image %}"image": "{{ interlocutor.image.url }}",{% endif %}
+          "display_name": "{{ interlocutor.display_name }}"
+        },
+        {% endif %}
+        "{{ request.user.username|lower }}": {
+          "href": "{{ request.user.get_absolute_url }}",
+          {% if request.user.image %}"image": "{{ request.user.image.url }}",{% endif %}
+          "display_name": "{{ request.user.display_name }}"
+        }
+      }
+    }
+  </script>
 {% endblock javascript %}
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col-xl-6">
-      <div class="card mb-1">
-        <div class="card-body text-center">
-          <a href="{{ interlocutor.get_absolute_url }}"
-             class="text-decoration-none">
-            {% if interlocutor.image %}
-              <span class="avatar-thumbnail">
-                <img class="rounded"
-                     src="{{ interlocutor.image.url }}"
-                     alt=""
-                     loading="lazy" />
-              </span>
-            {% endif %}
-            {{ interlocutor }}
-            {{ interlocutor.display_name_in_parentheses }}
-          </a>
+{% block list_group %}
+  <a href="{{ interlocutor.get_absolute_url }}"
+     class="list-group-item list-group-item-action">
+    <div class="d-flex align-items-center justify-content-center">
+      {% if interlocutor.image %}
+        <div class="avatar-thumbnail-no-height me-2">
+          <img src="{{ interlocutor.image.url }}" loading="lazy" class="rounded" />
         </div>
-      </div>
-      <div class="card mb-1">
-        <div class="card-body">
-          <div id="chat-log" class="overflow-x-hidden overflow-y-scroll">
-            {% for message in messages_ %}
-              <div class="row mb-3" id="message{{ message.pk }}">
-                <div class="avatar-thumbnail">
-                  {% if message.sender.image %}
-                    <img src="{{ message.sender.image.url }}"
-                         alt=""
-                         class="rounded"
-                         loading="lazy" />
-                  {% endif %}
-                </div>
-                <div class="col ms-2">
-                  <div class="text-break">
-                    <div>
-                      <a href="{{ message.sender.get_absolute_url }}"
-                         class="text-decoration-none">{{ message.sender }} {{ message.sender.display_name_in_parentheses }}</a>
-                      <span class="text-secondary">{{ message.formatted_date_created }}</span>
-                    </div>
-                    <div class="me-2 img-responsive">{{ message.content|markdownify }}</div>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <form id="messageSendForm">
-            {% bootstrap_form_errors form %}
-            <div class="input-group">
-              {{ form.content }}
-              <button type="submit" class="btn btn-primary" id="messageSendBtn">
-                <i class="fa-solid fa-paper-plane px-2"></i>
-              </button>
-            </div>
-          </form>
-        </div>
+      {% endif %}
+      <div class="text-body text-break">
+        {{ interlocutor.display_name }}
+        ({{ interlocutor.username }})
       </div>
     </div>
+  </a>
+  <div class="list-group-item p-0">
+    <div id="chat-log" class="p-3 overflow-x-hidden overflow-y-scroll">
+      {% for message in messages_ %}
+        <div id="msg{{ message.pk }}" class="d-flex mb-1">
+          <a href="{{ message.sender.get_absolute_url }}"
+             class="avatar-thumbnail d-flex align-items-center me-2">
+            {% if message.sender.image %}
+              <img src="{{ message.sender.image.url }}" loading="lazy" class="rounded" />
+            {% else %}
+              <i class="fa-solid fa-user text-secondary"></i>
+            {% endif %}
+          </a>
+          <div>
+            <a href="{{ message.sender.get_absolute_url }}"
+               class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break">{{ message.sender.display_name }} <span class="text-secondary">@{{ message.sender.username }}</span></a>
+            <div class="text-secondary" data-epoch="{{ message.date_created_epoch }}">
+            </div>
+          </div>
+        </div>
+        <div class="markdown-container text-break">
+          {{ message.content|markdownify }}
+        </div>
+      {% endfor %}
+    </div>
   </div>
-  {{ interlocutor.pk|json_script:"interlocutor_pk" }}
-{% endblock content %}
+  <form id="messageSendForm" class="list-group-item p-0">
+    <div class="input-group">
+      {{ form.content }}
+      <button type="submit"
+              class="btn btn-primary rounded-top-0"
+              id="messageSendBtn">
+        <i class="fa-solid fa-paper-plane px-2"></i>
+      </button>
+    </div>
+  </form>
+{% endblock list_group %}

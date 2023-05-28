@@ -16,14 +16,16 @@ A light and dark theme with a switch is supported. The default is the browser th
 - Sign in
 - Add backup email addresses in case they lose access to the primary address
 - Reset and change their password
-- Use two-factor authentication with one-time passwords via mobile authenticator
+- Use two-factor authentication with time-based one-time passwords (TOTP)
 - Provide information about themselves in their profile
 - Write real-time messages with Markdown and HTML support to other users using WebSockets
 - Create, edit, like and delete posts and comments with Markdown and HTML support
+- View images in posts, comments and messages as a gallery using [viewerjs](https://fengyuanchen.github.io/viewerjs/)
 - Subscribe to other users to see their posts in their news feed
 - Search for posts by text
 - Search for users by selectable fields
 - Delete their account
+- And a lot of other little things
 
 ### Administrators
 
@@ -36,7 +38,7 @@ A light and dark theme with a switch is supported. The default is the browser th
 
 Generated with [django-extensions](https://github.com/django-extensions/django-extensions).
 
-![](https://user-images.githubusercontent.com/76561516/224795816-22bf775e-ced0-44ca-a8ef-b3501179a182.png)
+![](https://github.com/monosans/socnet/assets/76561516/08b8f834-40f7-4b45-9fca-089209207256)
 
 ## Tech Stack
 
@@ -81,6 +83,8 @@ Markdown parsing, HTML sanitization and some other things are implemented in Rus
 - Bootstrap CSS 5.3
 - Font Awesome 6
 - JavaScript
+- viewerjs
+- luxon
 
 ### Web servers
 

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "list_group.html" %}
 
 {% load i18n static %}
 
@@ -6,49 +6,39 @@
   {% translate "Chats" %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  {% if chats %}
+    <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  {% endif %}
 {% endblock css %}
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col-xl-6">
-      {% for chat in chats %}
-        <div class="card mb-2">
-          <a href="{% url 'messenger:chat' chat.get_username %}"
-             class="text-body text-decoration-none">
-            <div class="card-body">
-              <div class="row align-items-center">
-                <div class="avatar-thumbnail">
-                  {% if chat.image %}
-                    <img src="{{ chat.image.url }}" alt="" loading="lazy" class="rounded" />
-                  {% endif %}
-                </div>
-                <div class="col ms-2 ">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="text-break">
-                      {{ chat }}
-                      {{ chat.display_name_in_parentheses }}
-                      {% if chat.last_message_content %}
-                        <div class="text-secondary">
-                          {{ chat.last_message_content|truncatechars:30 }}
-                        </div>
-                      {% endif %}
-                    </div>
-                    {% if chat.last_message_date %}
-                      <div class="text-secondary">{{ chat.last_message_date }}</div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
+{% block javascript %}
+  {% if chats %}
+    <script type="module" src="{% static 'js/date_formatter.mjs' %}"></script>
+  {% endif %}
+{% endblock javascript %}
+{% block list_group %}
+  {% if chats %}
+    {% for chat in chats %}
+      <a href="{% url 'messenger:chat' chat.username %}"
+         class="d-flex align-items-center list-group-item list-group-item-action">
+        <div class="avatar-thumbnail d-flex align-items-center justify-content-center me-2">
+          {% if chat.image %}
+            <img src="{{ chat.image.url }}" loading="lazy" class="rounded" />
+          {% else %}
+            <i class="fa-solid fa-user text-secondary"></i>
+          {% endif %}
         </div>
-      {% empty %}
-        <div class="card">
-          <div class="card-body">
-            <div class="text-center">{% translate "You have no chats." %}</div>
-          </div>
+        <div class="text-break">
+          <span class="text-body">{{ chat.display_name }}</span>
+          <span class="text-secondary">@{{ chat.username }}</span>
+          <div class="text-secondary">{{ chat.last_message_truncated_content }}</div>
         </div>
-      {% endfor %}
+        <div class="ms-auto text-secondary"
+             data-epoch="{{ chat.last_message_date_epoch }}"></div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <div class="list-group-item text-center">
+      {% translate "You have no chats." %}
     </div>
-  </div>
-{% endblock content %}
+  {% endif %}
+{% endblock list_group %}

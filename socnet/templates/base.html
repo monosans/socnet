@@ -12,201 +12,136 @@
       {% endblock title %}
     | SocNet</title>
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'css/colors.css' %}" />
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap_overrides.css' %}" />
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" />
     {% block css %}
     {% endblock css %}
     {% if request.method == "POST" %}
-      <script async src="{% static 'js/prevent_post_on_refresh.js' %}"></script>
+      <script async
+              type="module"
+              src="{% static 'js/prevent_post_on_refresh.mjs' %}"></script>
     {% endif %}
-    <script defer
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
-    <script defer src="{% static 'js/theme.js' %}"></script>
-    <script defer
-            src="https://cdn.jsdelivr.net/npm/autosize@6/dist/autosize.min.js"
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
-    <script defer src="{% static 'js/apply_autosize.js' %}"></script>
-    <script defer src="{% static 'js/trim_input.js' %}"></script>
+    <script type="module"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/+esm"></script>
+    <script type="module" src="{% static 'js/theme.mjs' %}"></script>
+    <script type="module" src="{% static 'js/trim_input.mjs' %}"></script>
     {% block javascript %}
     {% endblock javascript %}
   </head>
   <body>
-    <div class="mb-3">
-      <div class="sticky-top">
-        <nav class="navbar navbar-expand-lg bg-body border-bottom">
-          <div class="container">
-            <a href="{% url 'core:index' %}"
-               class="navbar-brand text-bg-primary rounded px-2 py-1">
-              <i class="fa-solid fa-s"></i>
-              <i class="fa-solid fa-o"></i>
-              <i class="fa-solid fa-c"></i>
-              <i class="fa-solid fa-n"></i>
-              <i class="fa-solid fa-e"></i>
-              <i class="fa-solid fa-t"></i>
-            </a>
-            <button type="button"
-                    class="navbar-toggler"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                {% if request.user.is_authenticated %}
-                  <li class="nav-item">
-                    {% with user_url=request.user.get_absolute_url %}
-                      <a href="{{ user_url }}"
-                         class="nav-link{% if user_url == request.path %} active{% endif %}">
-                        <i class="fa-solid fa-user text-primary"></i>
-                        {% translate "My profile" %}
-                      </a>
-                    {% endwith %}
-                  </li>
-                  <li class="nav-item">
-                    {% url "blog:posts" as url_posts %}
-                    <a href="{{ url_posts }}"
-                       class="nav-link{% if url_posts == request.path %} active{% endif %}">
-                      <i class="fa-solid fa-newspaper text-primary"></i>
-                      {% translate "Posts" %}
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    {% url "messenger:chats" as url_chats %}
-                    <a href="{{ url_chats }}"
-                       class="nav-link{% if url_chats == request.path %} active{% endif %}">
-                      <i class="fa-solid fa-message text-primary"></i>
-                      {% translate "Messenger" %}
-                    </a>
-                  </li>
-                {% else %}
-                  <li class="nav-item">
-                    {% url "blog:posts" as url_posts %}
-                    <a href="{{ url_posts }}"
-                       class="nav-link{% if url_posts == request.path %} active{% endif %}">
-                      <i class="fa-solid fa-newspaper text-primary"></i>
-                      {% translate "Posts" %}
-                    </a>
-                  </li>
-                {% endif %}
+    <div class="mb-3 sticky-top">
+      <nav class="navbar navbar-expand-xl bg-body border-bottom">
+        <div class="container">
+          <a href="{% url 'core:index' %}"
+             class="navbar-brand text-bg-primary rounded px-2 py-1"><i class="fa-solid fa-s"></i> <i class="fa-solid fa-o"></i> <i class="fa-solid fa-c"></i> <i class="fa-solid fa-n"></i> <i class="fa-solid fa-e"></i> <i class="fa-solid fa-t"></i></a>
+          <button type="button"
+                  class="navbar-toggler"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                  {% url "users:search_users" as url_search_users %}
-                  <a href="{{ url_search_users }}"
-                     class="nav-link{% if url_search_users == request.path %} active{% endif %}">
-                    <i class="fa-solid fa-magnifying-glass text-primary"></i>
-                    {% translate "Search users" %}
-                  </a>
+                  {% with user_url=request.user.get_absolute_url %}
+                    <a href="{{ user_url }}"
+                       class="nav-link{% if user_url == request.path %} active{% endif %}"><i class="fa-solid fa-user text-primary"></i> {% translate "My profile" %}</a>
+                  {% endwith %}
                 </li>
-                {% if request.user.is_staff %}
-                  <li class="nav-item">
-                    <a href="{% url 'admin:index' %}" class="nav-link">
-                      <i class="fa-solid fa-toolbox text-primary"></i>
-                      {% translate "Admin panel" %}
-                    </a>
-                  </li>
-                {% endif %}
-              </ul>
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                  {% if request.user.is_authenticated %}
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       role="button"
-                       data-bs-toggle="dropdown">
-                      <i class="fa-solid fa-gear text-primary"></i>
-                      {{ request.user }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                      <li>
-                        {% url "users:account_security" as url_account_security %}
-                        {% if url_account_security == request.path %}
-                          <a href="{{ url_account_security }}" class="dropdown-item active">
-                            <i class="fa-solid fa-shield"></i>
-                            {% translate "Security" %}
-                          </a>
-                        {% else %}
-                          <a href="{{ url_account_security }}" class="dropdown-item">
-                            <i class="fa-solid fa-shield text-primary"></i>
-                            {% translate "Security" %}
-                          </a>
-                        {% endif %}
-                      </li>
-                      <li>
-                        {% url "account_logout" as url_account_logout %}
-                        {% if url_account_logout == request.path %}
-                          <a href="{{ url_account_logout }}" class="dropdown-item active">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            {% translate "Log out" %}
-                          </a>
-                        {% else %}
-                          <a href="{{ url_account_logout }}" class="dropdown-item">
-                            <i class="fa-solid fa-right-from-bracket text-primary"></i>
-                            {% translate "Log out" %}
-                          </a>
-                        {% endif %}
-                      </li>
-                    </ul>
-                  {% else %}
-                    <li class="nav-item">
-                      {% url "account_login" as url_login %}
-                      <a href="{{ url_login }}"
-                         class="nav-link{% if url_login == request.path %} active{% endif %}">
-                        <i class="fa-solid fa-user text-primary"></i>
-                        {% translate "Log in" %}
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      {% url "account_signup" as url_signup %}
-                      <a href="{{ url_signup }}"
-                         class="nav-link{% if url_signup == request.path %} active{% endif %}">
-                        <i class="fa-solid fa-clipboard-list text-primary"></i>
-                        {% translate "Register" %}
-                      </a>
-                    </li>
-                  {% endif %}
+                <li class="nav-item">
+                  {% url "blog:posts" as url_posts %}
+                  <a href="{{ url_posts }}"
+                     class="nav-link{% if url_posts == request.path %} active{% endif %}"><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
                 </li>
-                <li id="themeSwitcher" class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle"
-                     href="#"
-                     role="button"
-                     data-bs-toggle="dropdown">
-                    <i id="currentThemeIcon"
-                       class="fa-solid fa-circle-half-stroke text-primary"></i>
-                  </a>
+                <li class="nav-item">
+                  {% url "messenger:chats" as url_chats %}
+                  <a href="{{ url_chats }}"
+                     class="nav-link{% if url_chats == request.path %} active{% endif %}"><i class="fa-solid fa-message text-primary"></i> {% translate "Messenger" %}</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  {% url "blog:posts" as url_posts %}
+                  <a href="{{ url_posts }}"
+                     class="nav-link{% if url_posts == request.path %} active{% endif %}"><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                {% url "users:search_users" as url_search_users %}
+                <a href="{{ url_search_users }}"
+                   class="nav-link{% if url_search_users == request.path %} active{% endif %}"><i class="fa-solid fa-magnifying-glass text-primary"></i> {% blocktranslate context "noun" %}Search users{% endblocktranslate %}</a>
+              </li>
+              {% if request.user.is_staff %}
+                <li class="nav-item">
+                  <a href="{% url 'admin:index' %}" class="nav-link"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin panel" %}</a>
+                </li>
+              {% endif %}
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                {% if request.user.is_authenticated %}
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa-solid fa-gear text-primary"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <button type="button" class="dropdown-item" data-bs-theme-value="light">
-                        <i class="fa-solid fa-sun text-primary"></i>
-                        {% translate "Light" %}
-                      </button>
+                      {% url "users:account_security" as url_account_security %}
+                      {% if url_account_security == request.path %}
+                        <a href="{{ url_account_security }}" class="dropdown-item active"><i class="fa-solid fa-shield"></i> {% translate "Security" %}</a>
+                      {% else %}
+                        <a href="{{ url_account_security }}" class="dropdown-item"><i class="fa-solid fa-shield text-primary"></i> {% translate "Security" %}</a>
+                      {% endif %}
                     </li>
                     <li>
-                      <button type="button" class="dropdown-item active" data-bs-theme-value="dark">
-                        <i class="fa-solid fa-moon"></i>
-                        {% translate "Dark" %}
-                      </button>
-                    </li>
-                    <li>
-                      <button type="button" class="dropdown-item" data-bs-theme-value="auto">
-                        <i class="fa-solid fa-circle-half-stroke text-primary"></i>
-                        {% translate "Auto" %}
-                      </button>
+                      {% url "account_logout" as url_account_logout %}
+                      {% if url_account_logout == request.path %}
+                        <a href="{{ url_account_logout }}" class="dropdown-item active"><i class="fa-solid fa-right-from-bracket"></i> {% blocktranslate context "noun" %}Log out{% endblocktranslate %}</a>
+                      {% else %}
+                        <a href="{{ url_account_logout }}" class="dropdown-item"><i class="fa-solid fa-right-from-bracket text-primary"></i> {% blocktranslate context "noun" %}Log out{% endblocktranslate %}</a>
+                      {% endif %}
                     </li>
                   </ul>
-                </li>
-              </ul>
-            </div>
+                {% else %}
+                  <li class="nav-item">
+                    {% url "account_login" as url_login %}
+                    <a href="{{ url_login }}"
+                       class="nav-link{% if url_login == request.path %} active{% endif %}"><i class="fa-solid fa-user text-primary"></i> {% blocktranslate context "noun" %}Log in{% endblocktranslate %}</a>
+                  </li>
+                  <li class="nav-item">
+                    {% url "account_signup" as url_signup %}
+                    <a href="{{ url_signup }}"
+                       class="nav-link{% if url_signup == request.path %} active{% endif %}"><i class="fa-solid fa-clipboard-list text-primary"></i> {% translate "Sign-up" %}</a>
+                  </li>
+                {% endif %}
+              </li>
+              <li id="themeSwitcher" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i id="currentThemeIcon"
+   class="fa-solid fa-circle-half-stroke text-primary"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <button type="button" class="dropdown-item" data-bs-theme-value="light">
+                      <i class="fa-solid fa-sun text-primary"></i>
+                      {% translate "Light" %}
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="dropdown-item active" data-bs-theme-value="dark">
+                      <i class="fa-solid fa-moon"></i>
+                      {% translate "Dark" %}
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="dropdown-item" data-bs-theme-value="auto">
+                      <i class="fa-solid fa-circle-half-stroke text-primary"></i>
+                      {% translate "Auto" %}
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </div>
     <div class="container">
       {% for message in messages %}

@@ -1,20 +1,24 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Dict
 
 from allauth.account import forms as allauth_forms
 from allauth_2fa import forms as allauth_2fa_forms
-from django.utils.translation import gettext, gettext_lazy as _, pgettext_lazy
+from django import forms
+from django.utils.translation import gettext, gettext_lazy
+
+from ..users.models import User
 
 # Needed to redefine translation
-pgettext_lazy("field label", "Login")
-_("Password (again)")
+gettext_lazy("Password (again)")
 
 
 class LoginForm(allauth_forms.LoginForm):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.fields["login"].widget.attrs["placeholder"] = self.fields["login"].label
+        label = gettext("Username or email")
+        self.fields["login"].label = label
+        self.fields["login"].widget.attrs["placeholder"] = label
 
 
 class AddEmailForm(allauth_forms.AddEmailForm):
@@ -32,8 +36,17 @@ class ResetPasswordForm(allauth_forms.ResetPasswordForm):
 
 
 class SignupForm(allauth_forms.SignupForm):
+    fields: Dict[str, forms.Field]
+
+    display_name = User._meta.get_field("display_name").formfield()  # noqa: SLF001
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
+        fields_order = ("display_name", "email", "username", "password1", "password2")
+        self.fields = {
+            field_name: self.fields[field_name] for field_name in fields_order
+        }
+
         label = gettext("Email")
         self.fields["email"].label = label
         self.fields["email"].widget.attrs["placeholder"] = label

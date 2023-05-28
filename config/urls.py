@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs_urls
 from django.urls import URLPattern, URLResolver, include, path
 
-from socnet.account import urls as account_urls
+from socnet.allauth import urls as allauth_urls
 from socnet.api import urls as api_urls
 from socnet.blog import urls as blog_urls
 from socnet.core import urls as core_urls, views as core_views
@@ -23,7 +23,7 @@ urlpatterns: List[Union[URLPattern, URLResolver]] = [
     path("admin/", admin.site.urls),
     path("api/", include(api_urls)),
     path("messenger/", include(messenger_urls)),
-    path("", include(account_urls)),
+    path("", include(allauth_urls)),
     path("", include(core_urls)),
     path("", include(blog_urls)),
     path("", include(users_urls)),

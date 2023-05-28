@@ -79,7 +79,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "logentry_admin",
     "rest_framework",
-    "socnet.account",
+    "socnet.allauth",
     "socnet.api",
     "socnet.core",
     "socnet.blog",
@@ -160,7 +160,7 @@ MESSAGE_TAGS = {messages.DEBUG: "", messages.ERROR: "danger"}
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_ADAPTER = "allauth_2fa.adapter.OTPAdapter"
+ACCOUNT_ADAPTER = "socnet.allauth.adapter.AuthAdapter"
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],

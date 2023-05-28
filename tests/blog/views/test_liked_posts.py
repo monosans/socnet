@@ -11,7 +11,7 @@ from .. import factories
 
 
 def get_url(user: User) -> str:
-    return reverse("blog:liked_posts", args=(user.get_username(),))
+    return reverse("blog:liked_posts", args=(user.username,))
 
 
 @parametrize_by_auth_self

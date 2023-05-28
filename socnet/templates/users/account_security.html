@@ -1,30 +1,19 @@
-{% extends "card.html" %}
+{% extends "list_group.html" %}
 
 {% load i18n %}
 
 {% block title %}
   {% translate "Account security" %}
 {% endblock title %}
-{% block card_body %}
-  <h3 class="mb-3 text-center">{% translate "Account security" %}</h3>
+{% block list_group %}
+  <h3 class="list-group-item text-center">{% translate "Account security" %}</h3>
   <a href="{% url 'account_change_password' %}"
-     class="btn btn-outline-primary btn-lg text-start w-100 mb-2">
-    <i class="fa-solid fa-key"></i>
-    {% translate "Change password" %}
-  </a>
+     class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-key text-primary me-1"></i> {% blocktranslate context "noun" %}Change password{% endblocktranslate %}</a>
   <a href="{% url 'account_email' %}"
-     class="btn-outline-primary btn btn-lg text-start w-100 mb-2">
-    <i class="fa-solid fa-envelope"></i>
-    {% translate "Change email" %}
-  </a>
+     class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-envelope text-primary me-1"></i> {% blocktranslate context "noun" %}Change email{% endblocktranslate %}</a>
   <a href="{% url 'two-factor-setup' %}"
-     class="btn btn-outline-primary btn-lg text-start w-100 mb-2">
-    <i class="fa-solid fa-fingerprint"></i>
-    {% translate "Two-factor authentication" %}
-  </a>
+     class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-fingerprint text-primary me-1"></i> {% translate "Two-factor authentication" %}</a>
   <a href="{% url 'users:delete_account' %}"
-     class="btn btn-outline-danger btn-lg text-start w-100">
-    <i class="fa-solid fa-trash"></i>
-    {% translate "Delete account" %}
-  </a>
-{% endblock card_body %}
+     class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-trash text-danger me-1"></i> {% blocktranslate context "noun" %}Delete account{% endblocktranslate %}</a>
+</div>
+{% endblock list_group %}

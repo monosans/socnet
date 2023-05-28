@@ -46,10 +46,11 @@ def test_authed_post(client: Client) -> None:
     post = factory()
     url = get_url(post)
     comment_content = factories.CommentFactory.build().content
-    response = client.post(url, data={"content": comment_content})
+    response = client.post(url, data={"content": comment_content}, follow=True)
     assert response.status_code == 200
     comment = models.Comment.objects.only("author_id", "content", "post_id").last()
     assert comment is not None
+    assert response.redirect_chain == [(comment.get_absolute_url(), 302)]
     assert comment.author_id == user.pk
     assert comment.content == comment_content.strip()
     assert comment.post_id == post.pk

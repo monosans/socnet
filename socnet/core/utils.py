@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import datetime
+import time
 from typing import Iterator, Optional, Tuple, TypeVar, Union
 
 from django.core.paginator import Page, Paginator
@@ -7,6 +9,10 @@ from django.db.models import Model, QuerySet
 from django.http import HttpRequest
 
 TModel = TypeVar("TModel", bound=Model)
+
+
+def dt_to_epoch(dt: datetime.date) -> int:
+    return int(time.mktime(dt.timetuple()))
 
 
 def paginate(

@@ -20,9 +20,7 @@ def image_upload_to(instance: User, filename: str) -> str:  # noqa: ARG001
 
 
 class User(AbstractUser):
-    date_joined = None  # type: ignore[assignment]
     first_name = None  # type: ignore[assignment]
-    last_login = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
 
     username = models.CharField(
@@ -35,13 +33,14 @@ class User(AbstractUser):
         error_messages={"unique": _("A user with that username already exists.")},
         db_collation="case_insensitive",
     )
-    display_name = models.CharField(
-        verbose_name=_("display name"), max_length=64, blank=True
-    )
+    display_name = models.CharField(verbose_name=_("display name"), max_length=64)
     email = models.EmailField(
         verbose_name=_("email address"), unique=True, db_collation="case_insensitive"
     )
 
+    show_last_login = models.BooleanField(
+        verbose_name=_("show last login time in profile"), default=True
+    )
     birth_date = models.DateField(
         verbose_name=_("birth date"),
         blank=True,
@@ -64,7 +63,7 @@ class User(AbstractUser):
     )
 
     def get_absolute_url(self) -> str:
-        return reverse("blog:user", args=(self.get_username(),))
+        return reverse("blog:user", args=(self.username,))
 
     def get_full_name(self) -> str:
         return self.display_name
@@ -73,17 +72,10 @@ class User(AbstractUser):
         return self.display_name
 
     @property
-    def display_name_in_parentheses(self) -> str:
-        if not self.display_name:
-            return ""
-        return f"({self.display_name})"
-
-    @property
     def age(self) -> Optional[int]:
-        birth_date: Optional[date] = self.birth_date
-        if birth_date is None:
+        bd: Optional[date] = self.birth_date
+        if bd is None:
             return None
         today = timezone.now().date()
-        # subtract 1 or 0 based on if today precedes the birthdate's month/day
-        one_or_zero = (today.month, today.day) < (birth_date.month, birth_date.day)
-        return today.year - birth_date.year - one_or_zero
+        is_bd_later = (today.month, today.day) < (bd.month, bd.day)
+        return today.year - bd.year - is_bd_later

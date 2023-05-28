@@ -1,64 +1,45 @@
-{% extends "base.html" %}
+{% extends "list_group.html" %}
 
 {% load static i18n %}
 
 {% block title %}
-  {{ user }} - {% translate "subscribers" %}
+  {{ user.display_name }} ({{ user.username }}) - {% translate "subscribers" %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  {% if subscribers %}
+    <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  {% endif %}
 {% endblock css %}
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col-xl-6">
-      {% with subscribers=user.subscribers.all %}
-        {% if subscribers %}
-          <div class="card mb-1">
-            <div class="card-body">
-              <h3 class="text-center">
-                <a href="{{ user.get_absolute_url }}" class="text-decoration-none">
-                  {{ user }}
-                </a>
-                <div>{% translate "Subscribers" %}</div>
-              </h3>
-            </div>
-          </div>
-          {% for subscriber in subscribers %}
-            <div class="card mb-1">
-              <a href="{{ subscriber.get_absolute_url }}" class="text-decoration-none">
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="avatar-thumbnail">
-                      {% if subscriber.image %}
-                        <img src="{{ subscriber.image.url }}"
-                             alt=""
-                             loading="lazy"
-                             class="rounded" />
-                      {% endif %}
-                    </div>
-                    <div class="col ms-2">
-                      <div class="text-break">
-                        {{ subscriber }}
-                        {{ subscriber.display_name_in_parentheses }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          {% endfor %}
-        {% else %}
-          <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                {% blocktranslate trimmed %}
-                  {{ user }} has no subscribers.
-                {% endblocktranslate %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      {% endwith %}
+{% block list_group %}
+  {% if subscribers %}
+    <h3 class="list-group-item text-center">
+      <a href="{{ user.get_absolute_url }}"
+         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ user.display_name }} ({{ user.username }})</a>
+      <div>{% translate "Subscribers" %}</div>
+    </h3>
+    {% for subscriber in subscribers %}
+      <a href="{{ subscriber.get_absolute_url }}"
+         class="list-group-item list-group-item-action d-flex align-items-center">
+        <div class="avatar-thumbnail d-flex align-items-center justify-content-center me-2">
+          {% if subscriber.image %}
+            <img src="{{ subscriber.image.url }}" loading="lazy" class="rounded" />
+          {% else %}
+            <i class="fa-solid fa-user text-secondary"></i>
+          {% endif %}
+        </div>
+        <div class="text-break">
+          <span class="text-body">{{ subscriber.display_name }}</span>
+          <span class="text-secondary">@{{ subscriber.username }}</span>
+        </div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <div class="list-group-item text-center">
+      {% blocktranslate trimmed with display_name=user.display_name username=user.username user_url=user.get_absolute_url %}
+        <a href="{{ user_url }}"
+           class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ display_name }} ({{ username }})</a>
+        has no subscribers.
+      {% endblocktranslate %}
     </div>
-  </div>
-{% endblock content %}
+  {% endif %}
+{% endblock list_group %}

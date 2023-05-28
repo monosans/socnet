@@ -8,8 +8,8 @@ from . import models
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin[models.Post]):
     filter_horizontal = ("likers",)
-    list_display = ("id", "author", "date_created", "date_updated")
-    list_filter = ("date_created", "date_updated", "author")
+    list_display = ("id", "author", "date_created", "date_updated", "allow_commenting")
+    list_filter = ("author", "date_created", "date_updated", "allow_commenting")
     search_fields = ("@content",)
     readonly_fields = ("date_created", "date_updated")
 
@@ -18,6 +18,6 @@ class PostAdmin(admin.ModelAdmin[models.Post]):
 class CommentAdmin(admin.ModelAdmin[models.Comment]):
     filter_horizontal = ("likers",)
     list_display = ("id", "author", "post", "date_created", "date_updated")
-    list_filter = ("date_created", "date_updated", "author", "post")
+    list_filter = ("author", "date_created", "date_updated", "post")
     search_fields = ("@content",)
     readonly_fields = ("date_created", "date_updated")

@@ -1,17 +1,22 @@
 {% extends "card.html" %}
 
-{% load i18n django_bootstrap5 %}
+{% load i18n static django_bootstrap5 %}
 
 {% block title %}
-  {% translate "Create post" %}
+  {% blocktranslate context "noun" %}Create post{% endblocktranslate %}
 {% endblock title %}
-{% block card_body %}
-  <h3 class="mb-3 text-center">{% translate "Create post" %}</h3>
+{% block javascript %}
+  <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
+{% endblock javascript %}
+{% block card %}
+  <h3 class="mb-3 text-center">
+    {% blocktranslate context "noun" %}Create post{% endblocktranslate %}
+  </h3>
   <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
     <button type="submit" class="btn btn-primary w-100">
-      {% translate "Create post" %}
+      {% translate "Create" %}
     </button>
   </form>
-{% endblock card_body %}
+{% endblock card %}
