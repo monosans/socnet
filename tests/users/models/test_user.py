@@ -69,9 +69,7 @@ def test_username_case_insensitive() -> None:
 
 def test_birth_date_unrealistically_old() -> None:
     user = factory.build(birth_date="1900-01-01")
-    exc_str = re.escape(
-        "{'birth_date': [\"You can't be older than the oldest human.\"]}"
-    )
+    exc_str = re.escape("{'birth_date': ['Birth date is implausible.']}")
     with pytest.raises(ValidationError, match=exc_str):
         user.full_clean()
 
@@ -79,7 +77,7 @@ def test_birth_date_unrealistically_old() -> None:
 def test_birth_date_in_future() -> None:
     tomorrow = timezone.now() + timedelta(days=1)
     user = factory.build(birth_date=tomorrow)
-    exc_str = re.escape("{'birth_date': ['Are you from the future?']}")
+    exc_str = re.escape("{'birth_date': ['Birth date cannot be in the future.']}")
     with pytest.raises(ValidationError, match=exc_str):
         user.full_clean()
 
