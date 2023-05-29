@@ -1,32 +1,26 @@
-/**
- * @typedef {Object} User
- * @property {string} href
- * @property {string} [image]
- * @property {string} display_name
- */
+interface User {
+  href: string;
+  image?: string;
+  displayName: string;
+}
 
-/**
- * @typedef {Object} ChatMessageEvent
- * @property {number} pk
- * @property {string} content
- * @property {number} created_epoch
- * @property {string} sender
- */
+interface ChatMessageEvent {
+  pk: number;
+  content: string;
+  createdEpoch: number;
+  sender: string;
+}
 
-/**
- * @type {{readonly interlocutorPk: number, readonly users: Object.<string, User>}}
- */
-const chatData = JSON.parse(document.querySelector("#data").textContent);
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const chatData: {
+  interlocutorPk: number;
+  users: Record<string, User>;
+} = JSON.parse(document.querySelector("#data")!.textContent!);
 
-/**
- * @type {HTMLElement}
- */
-const messageSendBtn = document.querySelector("#messageSendBtn");
+const messageSendBtn = document.querySelector<HTMLElement>("#messageSendBtn")!;
 
-/**
- * @type {HTMLTextAreaElement}
- */
-const messageTextarea = document.querySelector("#id_content");
+const messageTextarea =
+  document.querySelector<HTMLTextAreaElement>("#id_content")!;
 
 messageTextarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -36,24 +30,17 @@ messageTextarea.addEventListener("keyup", (e) => {
 messageTextarea.focus();
 
 const chatLog = {
-  /**
-   * @type {HTMLElement}
-   */
-  element: document.querySelector("#chat-log"),
+  element: document.querySelector("#chat-log")!,
 
-  /**
-   * @param {ChatMessageEvent} data
-   * @return {void}
-   */
-  addNewMessage(data) {
+  addNewMessage(data: ChatMessageEvent): void {
     const id = `msg${data.pk}`;
-    const sender = chatData.users[data.sender.toLowerCase()];
+    const sender = chatData.users[data.sender.toLowerCase()]!;
     const html = `
       <div id="${id}" class="d-flex mb-1">
         <a href="${sender.href}"
             class="avatar-thumbnail d-flex align-items-center me-2">
           ${
-            sender.image
+            sender.image !== undefined
               ? `<img src="${sender.image}" loading="lazy" class="rounded" />`
               : '<i class="fa-solid fa-user text-secondary"></i>'
           }
@@ -61,9 +48,9 @@ const chatLog = {
         <div>
           <a href="${sender.href}"
               class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break">${
-                sender.display_name
+                sender.displayName
               } <span class="text-secondary">@${data.sender}</span></a>
-          <div class="text-secondary" data-epoch="${data.created_epoch}">
+          <div class="text-secondary" data-epoch="${data.createdEpoch}">
           </div>
         </div>
       </div>
@@ -73,30 +60,27 @@ const chatLog = {
     `;
     this.element.insertAdjacentHTML("beforeend", html);
 
-    void import("./viewer_gallery.mjs").then((createGallery) => {
-      createGallery.default(document.querySelector(`#${id}`));
-    });
+    void import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm").then(
+      (viewer) => {
+        new viewer.default(document.querySelector(id)!, { button: false });
+      }
+    );
   },
 
-  /**
-   * @return {void}
-   */
-  scrollToEnd() {
+  scrollToEnd(): void {
     this.element.scrollTo(0, this.element.scrollHeight);
   },
 };
 chatLog.scrollToEnd();
 
-const chatWs = (() => {
+const chatWs = ((): WebSocket => {
   const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
   const ws = new WebSocket(
     `${wsProtocol}://${window.location.host}/ws/chat/${chatData.interlocutorPk}/`
   );
-  ws.onmessage = (e) => {
-    /**
-     * @type {ChatMessageEvent}
-     */
-    const data = JSON.parse(e.data);
+  ws.onmessage = (e: MessageEvent<string>): void => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data: ChatMessageEvent = JSON.parse(e.data);
 
     chatLog.addNewMessage(data);
     chatLog.scrollToEnd();
@@ -104,10 +88,7 @@ const chatWs = (() => {
   return ws;
 })();
 
-/**
- * @type {HTMLFormElement}
- */
-const messageSendForm = document.querySelector("#messageSendForm");
+const messageSendForm = document.querySelector("#messageSendForm")!;
 
 messageSendForm.addEventListener("submit", (e) => {
   e.preventDefault();

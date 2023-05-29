@@ -25,5 +25,20 @@ services:
   postgres:
     volumes:
       - socnet_local_postgres_data:/var/lib/postgresql/data
+  tsc:
+    image: socnet_tsc
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+      target: node
+    command:
+      - npx
+      - tsc
+      - --watch
+      - --preserveWatchOutput
+    restart: unless-stopped
+    user: node
+    volumes:
+      - .:/app
 volumes:
   socnet_local_postgres_data:

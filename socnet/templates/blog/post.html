@@ -10,7 +10,7 @@
 {% endblock css %}
 {% block javascript %}
   {% if post.allow_commenting or request.user == post.author %}
-    <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
+    <script type="module" src="{% static 'js/autosize.js' %}"></script>
   {% endif %}
   {% include "blog/inc/post_js.html" %}
 {% endblock javascript %}

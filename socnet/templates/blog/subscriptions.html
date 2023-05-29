@@ -12,7 +12,7 @@
 {% endblock css %}
 {% block javascript %}
   {% if subscriptions and user == request.user %}
-    <script type="module" src="{% static 'js/user_subscribe.mjs' %}"></script>
+    <script type="module" src="{% static 'js/user_subscribe.js' %}"></script>
   {% endif %}
 {% endblock javascript %}
 {% block list_group %}

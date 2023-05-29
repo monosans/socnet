@@ -1,8 +1,8 @@
 {% load static %}
 
-<script type="module" src="{% static 'js/number_formatter.mjs' %}"></script>
-<script type="module" src="{% static 'js/date_formatter.mjs' %}"></script>
+<script type="module" src="{% static 'js/number_formatter.js' %}"></script>
+<script type="module" src="{% static 'js/date_formatter.js' %}"></script>
 {% if request.user.is_authenticated %}
-  <script type="module" src="{% static 'js/like.mjs' %}"></script>
+  <script type="module" src="{% static 'js/like.js' %}"></script>
 {% endif %}
-<script type="module" src="{% static 'js/viewer_markdown.mjs' %}"></script>
+<script type="module" src="{% static 'js/viewer_markdown.js' %}"></script>

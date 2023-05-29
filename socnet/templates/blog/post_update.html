@@ -6,7 +6,7 @@
   {% blocktranslate with post_pk=object.pk context "noun" %}Edit post #{{ post_pk }}{% endblocktranslate %}
 {% endblock title %}
 {% block javascript %}
-  <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
+  <script type="module" src="{% static 'js/autosize.js' %}"></script>
 {% endblock javascript %}
 {% block card %}
   <h3 class="mb-3 text-center">

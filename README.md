@@ -82,7 +82,7 @@ Markdown parsing, HTML sanitization and some other things are implemented in Rus
 - HTML with Django Template language
 - Bootstrap CSS 5.3
 - Font Awesome 6
-- JavaScript
+- TypeScript
 - viewerjs
 - luxon
 

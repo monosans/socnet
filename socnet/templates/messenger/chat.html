@@ -12,11 +12,11 @@
   {% include "inc/viewerjs_css.html" %}
 {% endblock css %}
 {% block javascript %}
-  <script type="module" src="{% static 'js/chat.mjs' %}"></script>
-  <script type="module" src="{% static 'js/date_formatter.mjs' %}"></script>
-  <script type="module" src="{% static 'js/autosize.mjs' %}"></script>
+  <script type="module" src="{% static 'js/chat.js' %}"></script>
+  <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
+  <script type="module" src="{% static 'js/autosize.js' %}"></script>
   {% if messages_ %}
-    <script type="module" src="{% static 'js/viewer_markdown.mjs' %}"></script>
+    <script type="module" src="{% static 'js/viewer_markdown.js' %}"></script>
   {% endif %}
   <script id="data" type="application/json">
     {
@@ -26,13 +26,13 @@
         "{{ interlocutor.username|lower }}": {
           "href": "{{ interlocutor.get_absolute_url }}",
           {% if interlocutor.image %}"image": "{{ interlocutor.image.url }}",{% endif %}
-          "display_name": "{{ interlocutor.display_name }}"
+          "displayName": "{{ interlocutor.display_name }}"
         },
         {% endif %}
         "{{ request.user.username|lower }}": {
           "href": "{{ request.user.get_absolute_url }}",
           {% if request.user.image %}"image": "{{ request.user.image.url }}",{% endif %}
-          "display_name": "{{ request.user.display_name }}"
+          "displayName": "{{ request.user.display_name }}"
         }
       }
     }

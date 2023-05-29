@@ -670,3 +670,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/database,django,jetbrains+all,linux,macos,node,notepadpp,python,redis,rust,sublimetext,vim,visualstudiocode,windows
 
 !Cargo.lock
+socnet/static/public/js/

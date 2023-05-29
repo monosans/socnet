@@ -1,38 +1,30 @@
-const themeSwitcher = document.querySelector("#themeSwitcher");
-const currentThemeIcon = document.querySelector("#currentThemeIcon");
+const themeSwitcher = document.querySelector("#themeSwitcher")!;
+const currentThemeIcon = document.querySelector("#currentThemeIcon")!;
 
-/**
- * @return {string}
- */
-function getTheme() {
+function getTheme(): "auto" | "dark" | "light" {
   const storedTheme = localStorage.getItem("theme");
-  return ["light", "dark"].includes(storedTheme) ? storedTheme : "auto";
+  return storedTheme === "light" || storedTheme === "dark"
+    ? storedTheme
+    : "auto";
 }
 
-/**
- * @return {string}
- */
-function getAutoTheme() {
+function getAutoTheme(): "dark" | "light" {
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 }
 
-/**
- * @param {string} theme
- * @return {void}
- */
-function setTheme(theme) {
-  document.documentElement.dataset.bsTheme =
+function setTheme(theme: string): void {
+  document.documentElement.dataset["bsTheme"] =
     theme === "auto" ? getAutoTheme() : theme;
 
-  const activeDropdown = themeSwitcher.querySelector(".dropdown-item.active");
-  const activeDropdownIcon = activeDropdown.querySelector("i");
+  const activeDropdown = themeSwitcher.querySelector(".dropdown-item.active")!;
+  const activeDropdownIcon = activeDropdown.querySelector("i")!;
 
   const dropdownToActivate = themeSwitcher.querySelector(
     `[data-bs-theme-value="${theme}"]`
-  );
-  const dropdownToActivateIcon = dropdownToActivate.querySelector("i");
+  )!;
+  const dropdownToActivateIcon = dropdownToActivate.querySelector("i")!;
 
   activeDropdown.classList.remove("active");
   dropdownToActivate.classList.add("active");
@@ -47,12 +39,8 @@ window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", () => setTheme(getTheme()));
 
-/**
- * @param {{readonly currentTarget: HTMLOrSVGElement}} e
- * @return {Promise<void>}
- */
-function toggleHandler(e) {
-  const theme = e.currentTarget.dataset.bsThemeValue;
+function toggleHandler(e: Event): void {
+  const theme = (e.currentTarget! as HTMLElement).dataset["bsThemeValue"]!;
   localStorage.setItem("theme", theme);
   setTheme(theme);
 }

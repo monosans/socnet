@@ -1,3 +1,20 @@
+FROM node:bullseye-slim as node
+
+WORKDIR /app
+
+COPY ./package.json ./package-lock.json ./
+
+RUN npm ci && npm cache clean --force
+
+
+FROM node as node-tsc
+
+COPY ./tsconfig.json ./tsconfig.json
+COPY ./socnet/static/private/ts/ ./socnet/static/private/ts/
+
+RUN npx tsc
+
+
 FROM python:3.11-slim-bullseye as python
 
 ENV PYTHONUNBUFFERED=1 \
@@ -54,7 +71,7 @@ RUN apt-get update \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
-COPY --from=python-build-stage /usr/src/app/wheels /wheels/
+COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
 RUN pip install \
   --progress-bar off \
@@ -90,7 +107,7 @@ RUN apt-get update \
   && mkdir -p /var/www/django/static /var/www/django/media \
   && chown django:django /var/www/django/static /var/www/django/media
 
-COPY --from=python-build-stage /usr/src/app/wheels /wheels/
+COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
 RUN pip install \
   --progress-bar off \
@@ -102,6 +119,7 @@ RUN pip install \
   && rm -rf /wheels/
 
 COPY --chown=django:django . .
+COPY --chown=django:django --from=node-tsc /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 

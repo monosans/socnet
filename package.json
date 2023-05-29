@@ -2,68 +2,59 @@
   "name": "socnet",
   "private": true,
   "scripts": {
-    "eslint": "eslint --ext js,mjs --fix .",
+    "eslint": "eslint --fix .",
     "format": "prettier --write . '!**/*.html'",
     "stylelint": "stylelint '**/*.css'"
   },
   "devDependencies": {
+    "@types/autosize": "4.0.1",
+    "@types/luxon": "3.3.0",
+    "@typescript-eslint/eslint-plugin": "5.59.7",
+    "@typescript-eslint/parser": "5.59.7",
     "eslint": "8.41.0",
     "eslint-config-prettier": "8.8.0",
     "prettier": "2.8.8",
     "stylelint": "15.6.2",
-    "stylelint-config-standard": "33.0.0"
+    "stylelint-config-standard": "33.0.0",
+    "typescript": "5.0.4",
+    "viewerjs": "1.11.3"
   },
   "eslintConfig": {
-    "env": {
-      "browser": true,
-      "es2020": true
-    },
     "extends": [
-      "eslint:all",
+      "plugin:@typescript-eslint/all",
       "prettier"
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-      "sourceType": "module"
+      "ecmaVersion": 6,
+      "project": "./tsconfig.json"
     },
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "root": true,
     "rules": {
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/init-declarations": "off",
+      "@typescript-eslint/naming-convention": "off",
+      "@typescript-eslint/no-confusing-void-expression": [
+        "error",
+        {
+          "ignoreArrowShorthand": true
+        }
+      ],
+      "@typescript-eslint/no-magic-numbers": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/prefer-readonly-parameter-types": "off",
       "curly": "error",
+      "eqeqeq": "error",
       "func-style": [
         "error",
         "declaration"
       ],
-      "id-length": "off",
-      "init-declarations": "off",
-      "max-lines-per-function": "off",
-      "max-statements": "off",
-      "new-cap": [
-        "error",
-        {
-          "newIsCap": false
-        }
-      ],
-      "no-magic-numbers": "off",
-      "no-new": "off",
-      "no-ternary": "off",
-      "no-void": [
-        "error",
-        {
-          "allowAsStatement": true
-        }
-      ],
       "one-var": [
         "error",
         "never"
-      ],
-      "radix": [
-        "error",
-        "as-needed"
-      ],
-      "sort-keys": [
-        "error",
-        "asc",
-        {
-          "allowLineSeparatedGroups": true
-        }
       ]
     }
   },

@@ -126,7 +126,7 @@ MIDDLEWARE = [
 ]
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
+STATICFILES_DIRS = [str(APPS_DIR / "static" / "public")]
 
 MEDIA_URL = "media/"
 

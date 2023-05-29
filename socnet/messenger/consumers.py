@@ -32,7 +32,7 @@ class ChatMessageEvent(TypedDict):
     type: Literal["chat_message"]  # noqa: A003
     pk: int
     content: str
-    created_epoch: int
+    createdEpoch: int
     sender: str
 
 
@@ -68,7 +68,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             type="chat_message",
             pk=message.pk,
             content=markdownify(message.content),
-            created_epoch=dt_to_epoch(message.date_created),
+            createdEpoch=dt_to_epoch(message.date_created),
             sender=sender.username,
         )
         await self.channel_layer.group_send(self.group, msg)
