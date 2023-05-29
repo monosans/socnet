@@ -17,16 +17,14 @@ function getRequest(dataset: DOMStringMap): {
     body = JSON.stringify({ username: dataset["username"] });
   }
 
-  const csrfToken: HTMLInputElement = document.querySelector(
-    "[name=csrfmiddlewaretoken]"
-  )!;
-
   return {
     options: {
       body,
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken.value,
+        "X-CSRFToken": document.querySelector<HTMLInputElement>(
+          "[name=csrfmiddlewaretoken]"
+        )!.value,
       },
       method,
     },
