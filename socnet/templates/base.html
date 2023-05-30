@@ -12,7 +12,7 @@
       {% endblock title %}
     | SocNet</title>
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" />
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{% static 'css/bootstrap_overrides.css' %}" />
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" />
@@ -23,8 +23,7 @@
               type="module"
               src="{% static 'js/prevent_post_on_refresh.js' %}"></script>
     {% endif %}
-    <script type="module"
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/+esm"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@5/+esm"></script>
     <script type="module" src="{% static 'js/theme.js' %}"></script>
     <script type="module" src="{% static 'js/trim_input.js' %}"></script>
     {% block javascript %}
