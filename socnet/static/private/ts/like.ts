@@ -7,10 +7,10 @@ function getRequest(dataset: DOMStringMap): {
   let value;
   let url;
 
-  if (dataset["postPk"] !== undefined) {
+  if (dataset["postPk"]) {
     url = "/api/post-likes/";
     value = dataset["postPk"];
-  } else if (dataset["commentPk"] !== undefined) {
+  } else if (dataset["commentPk"]) {
     url = "/api/comment-likes/";
     value = dataset["commentPk"];
   } else {

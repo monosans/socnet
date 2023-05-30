@@ -40,7 +40,7 @@ const chatLog = {
         <a href="${sender.href}"
             class="avatar-thumbnail d-flex align-items-center me-2">
           ${
-            sender.image !== undefined
+            sender.image
               ? `<img src="${sender.image}" loading="lazy" class="rounded" />`
               : '<i class="fa-solid fa-user text-secondary"></i>'
           }
