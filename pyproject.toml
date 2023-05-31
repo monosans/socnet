@@ -231,6 +231,9 @@ ignore = [
 [tool.ruff.flake8-gettext]
 extend-function-names = ["gettext_lazy"]
 
+[tool.ruff.flake8-self]
+ignore-names = ["_meta"]
+
 [tool.ruff.flake8-unused-arguments]
 ignore-variadic-names = true
 

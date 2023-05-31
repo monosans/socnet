@@ -42,7 +42,7 @@ def generate_filterset(serializer: Type[ModelSerializer[Any]]) -> Type[FilterSet
 def _get_filterable_fields(
     model: models.Model, fields: SerializerFields, exclude: SerializerExclude
 ) -> Generator[models.Field[Any, Any], None, None]:
-    for field in model._meta.get_fields():  # noqa: SLF001
+    for field in model._meta.get_fields():
         if not isinstance(field, IGNORED_FIELDS) and _should_be_filterable(
             field, fields, exclude
         ):

@@ -38,7 +38,7 @@ class ResetPasswordForm(allauth_forms.ResetPasswordForm):
 class SignupForm(allauth_forms.SignupForm):
     fields: Dict[str, forms.Field]
 
-    display_name = User._meta.get_field("display_name").formfield()  # noqa: SLF001
+    display_name = User._meta.get_field("display_name").formfield()
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
