@@ -110,10 +110,10 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             form.instance.post_id = pk
             comment = form.save()
             return redirect(comment)
-        message = "{} {}".format(
-            _("An error occurred while creating the comment."), _("Please try again.")
+        messages.error(
+            request,
+            _("An error occurred while creating the comment. Please try again."),
         )
-        messages.error(request, message)
     else:
         form = forms.CommentForm()
     comments_qs = (
