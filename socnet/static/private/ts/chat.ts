@@ -32,7 +32,7 @@ messageTextarea.focus();
 const chatLog = {
   element: document.querySelector("#chat-log")!,
 
-  addNewMessage(data: ChatMessageEvent): void {
+  async addNewMessage(data: ChatMessageEvent): Promise<void> {
     const id = `msg${data.pk}`;
     const sender = chatData.users[data.sender.toLowerCase()]!;
     const html = `
@@ -60,11 +60,8 @@ const chatLog = {
     `;
     this.element.insertAdjacentHTML("beforeend", html);
 
-    void import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm").then(
-      (viewer) => {
-        new viewer.default(document.querySelector(id)!, { button: false });
-      }
-    );
+    const viewer = await import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm");
+    new viewer.default(document.querySelector(id)!, { button: false });
   },
 
   scrollToEnd(): void {
@@ -82,7 +79,7 @@ const chatWs = ((): WebSocket => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: ChatMessageEvent = JSON.parse(e.data);
 
-    chatLog.addNewMessage(data);
+    void chatLog.addNewMessage(data);
     chatLog.scrollToEnd();
   };
   return ws;
