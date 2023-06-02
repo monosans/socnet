@@ -1,7 +1,9 @@
 const options = { locale: navigator.language === "ru" ? "ru" : "en" };
 
-void (async function formatDates(): Promise<void> {
-  const elements = document.querySelectorAll<HTMLElement>("[data-epoch]");
+export default async function formatDates(
+  parentNode: ParentNode
+): Promise<void> {
+  const elements = parentNode.querySelectorAll<HTMLElement>("[data-epoch]");
 
   if (elements.length) {
     const { DateTime } = await import(
@@ -19,6 +21,9 @@ void (async function formatDates(): Promise<void> {
       }
     }
   }
+}
 
-  setTimeout(formatDates, 1000);
+void (async function formatAllDates(): Promise<void> {
+  await formatDates(document);
+  setTimeout(formatAllDates, 1000);
 })();

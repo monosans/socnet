@@ -1,3 +1,5 @@
+import formatDates from "./date_formatter.js";
+
 interface User {
   href: string;
   image?: string;
@@ -32,6 +34,10 @@ messageTextarea.focus();
 const chatLog = {
   element: document.querySelector("#chat-log")!,
 
+  scrollToEnd(): void {
+    this.element.scrollTo(0, this.element.scrollHeight);
+  },
+
   async addNewMessage(data: ChatMessageEvent): Promise<void> {
     const id = `msg${data.pk}`;
     const sender = chatData.users[data.sender.toLowerCase()]!;
@@ -60,12 +66,13 @@ const chatLog = {
     `;
     this.element.insertAdjacentHTML("beforeend", html);
 
-    const viewer = await import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm");
-    new viewer.default(document.querySelector(id)!, { button: false });
-  },
-
-  scrollToEnd(): void {
-    this.element.scrollTo(0, this.element.scrollHeight);
+    const messageElement = document.querySelector<HTMLElement>(`#${id}`)!;
+    await Promise.all([
+      formatDates(messageElement),
+      import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm").then((viewer) => {
+        new viewer.default(messageElement, { button: false });
+      }),
+    ]);
   },
 };
 chatLog.scrollToEnd();
