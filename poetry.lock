@@ -920,18 +920,18 @@ pytz = "*"
 
 [[package]]
 name = "djangorestframework-stubs"
-version = "3.14.0"
+version = "3.14.1"
 description = "PEP-484 stubs for django-rest-framework"
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "djangorestframework-stubs-3.14.0.tar.gz", hash = "sha256:bbcb8b312581b9543992619cc191b77a5c0ea0c17a2d44752906c3d51a532cca"},
-    {file = "djangorestframework_stubs-3.14.0-py3-none-any.whl", hash = "sha256:c15de85f1b34200e157886238505c74b55de0fe0a20c37791b30a3f83c28a0c0"},
+    {file = "djangorestframework-stubs-3.14.1.tar.gz", hash = "sha256:a1c6619148f08c4070fdf8b92ce2b2b47e10c9610fb25ae27baf2baefb1bf613"},
+    {file = "djangorestframework_stubs-3.14.1-py3-none-any.whl", hash = "sha256:67816705adffc8407fd5469b102abc2db9987afca68dd6f7d21b66369008a940"},
 ]
 
 [package.dependencies]
-django-stubs = ">=1.13.0"
+django-stubs = ">=4.2.1"
 mypy = ">=0.991"
 requests = ">=2.0.0"
 types-PyYAML = ">=5.4.3"
@@ -939,7 +939,7 @@ types-requests = ">=0.1.12"
 typing-extensions = ">=3.10.0"
 
 [package.extras]
-compatible-mypy = ["mypy (>=1.2.0,<1.3)"]
+compatible-mypy = ["mypy (>=1.3.0,<1.4)"]
 coreapi = ["coreapi (>=2.0.0)"]
 markdown = ["types-Markdown (>=0.1.5)"]
 
@@ -2761,4 +2761,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "7c64d53a48540ba683bc453e3f5c1d431ee76f479db0fe3f071b4a67e3269a93"
+content-hash = "5ad92167cd3100a1b0a839f05565c2751c5aba5684c2875428929ff3a75a78d0"
