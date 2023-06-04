@@ -40,10 +40,7 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
             "about",
             "show_last_login",
         )
-        widgets = {
-            "birth_date": forms.DateInput({"type": "date"}),
-            "about": forms.Textarea({"rows": 1}),
-        }
+        widgets = {"about": forms.Textarea({"rows": 1})}
 
     def clean_username(self) -> str:
         old_username = self.instance.username
