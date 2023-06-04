@@ -43,8 +43,8 @@
       </a>
     {% empty %}
       {% if form.is_valid %}
-        <div class="card mt-1">
-          <div class="card-body text-center">{% translate "No users found." %}</div>
+        <div class="list-group-item text-center">
+          {% translate "No users found." %}
         </div>
       {% endif %}
     {% endfor %}
