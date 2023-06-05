@@ -725,18 +725,18 @@ qrcode = ">=5.3"
 
 [[package]]
 name = "django-bootstrap5"
-version = "23.1"
+version = "23.3"
 description = "Bootstrap 5 for Django"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "django-bootstrap5-23.1.tar.gz", hash = "sha256:3a3748b1ce1a2a73c2eca851c2926e7b6e5a317815e4da7ced6b1807c4792b1a"},
-    {file = "django_bootstrap5-23.1-py3-none-any.whl", hash = "sha256:d0b1997528b8a557968cf1ac7ff4c68659897779011a5a42816fb1ad9e57d6ae"},
+    {file = "django_bootstrap5-23.3-py3-none-any.whl", hash = "sha256:ca1bb2f40175ed1c1725f52f249a574bf629b33b5a0af3bec0eab1de6d72836c"},
+    {file = "django_bootstrap5-23.3.tar.gz", hash = "sha256:21e1956a8a819370decc5d365ce4f4207761cb065afec5a7df8c4c8c49507f2e"},
 ]
 
 [package.dependencies]
-Django = ">=3.2"
+django = ">=3.2"
 
 [[package]]
 name = "django-cleanup"
@@ -2762,4 +2762,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "e0423acfb3b6ea5de22cf9955d334a40ac23a97c376048e621b018bad8aa6830"
+content-hash = "5eae533da0c03f0ef9d6a8af1b8e3a8dc9adced75db7b344d82fd28c89c934d0"
