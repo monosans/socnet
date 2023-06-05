@@ -39,14 +39,10 @@ class SignupForm(allauth_forms.SignupForm):
     fields: Dict[str, forms.Field]
 
     display_name = User._meta.get_field("display_name").formfield()
+    field_order = ("display_name", "email", "username", "password1", "password2")
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        fields_order = ("display_name", "email", "username", "password1", "password2")
-        self.fields = {
-            field_name: self.fields[field_name] for field_name in fields_order
-        }
-
         label = gettext("Email")
         self.fields["email"].label = label
         self.fields["email"].widget.attrs["placeholder"] = label
