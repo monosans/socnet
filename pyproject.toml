@@ -12,7 +12,7 @@ socnet-rs = { path = "socnet_rs", develop = false }
 Django = { version = "4.2.1", extras = ["argon2"] }
 django-allauth-2fa = "0.10.0"
 django-allauth = "0.54.0"
-django-bootstrap5 = "23.1.0"
+django-bootstrap5 = "23.3"
 django-cleanup = "7.0.0"
 django-environ = "0.10.0"
 django-filter = "23.2"
