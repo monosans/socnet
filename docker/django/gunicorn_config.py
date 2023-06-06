@@ -1,4 +1,4 @@
-"""https://docs.gunicorn.org/en/stable/settings.html"""
+# https://docs.gunicorn.org/en/stable/settings.html
 from __future__ import annotations
 
 import json

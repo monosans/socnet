@@ -1,4 +1,4 @@
-"""https://docs.djangoproject.com/en/4.2/ref/settings/"""
+# https://docs.djangoproject.com/en/4.2/ref/settings/
 from __future__ import annotations
 
 import json

@@ -1,7 +1,5 @@
-"""
-https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
-https://channels.readthedocs.io/en/latest/introduction.html#django-integration
-"""
+# https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
+# https://channels.readthedocs.io/en/latest/introduction.html#django-integration
 from __future__ import annotations
 
 import os
