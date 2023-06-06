@@ -10,7 +10,7 @@
 		Content-Security-Policy "default-src 'none'; connect-src 'self'; font-src 'self' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:;"
 		Permissions-Policy "interest-cohort=()"
 		Referrer-Policy "same-origin"
-		Strict-Transport-Security "max-age=31536000"
+		Strict-Transport-Security "max-age=86400"
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 	}
