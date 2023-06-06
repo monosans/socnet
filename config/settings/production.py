@@ -6,8 +6,7 @@ ALLOWED_HOSTS = [env.str("DOMAIN_NAME")]
 
 DATABASES["default"]["CONN_MAX_AGE"] = 60
 
-MIDDLEWARE.remove("django.middleware.security.SecurityMiddleware")
-MIDDLEWARE.remove("django.middleware.clickjacking.XFrameOptionsMiddleware")
+MIDDLEWARE.remove("socnet.core.middleware.ResponseHeadersMiddleware")
 
 _REDIS_HOST = "redis"
 _REDIS_PORT = 6379
@@ -27,11 +26,8 @@ CHANNEL_LAYERS["default"] = {
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-
-SECURE_HSTS_SECONDS = 86400
 
 EMAIL_HOST = env.str("EMAIL_HOST")
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
