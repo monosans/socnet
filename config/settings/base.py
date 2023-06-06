@@ -5,7 +5,6 @@ import json
 import logging
 import logging.config
 from pathlib import Path
-from typing import Any, Dict
 
 current_file = Path(__file__).resolve(strict=True)
 
@@ -14,6 +13,8 @@ if not logging.root.handlers:
     logging.config.dictConfig(
         json.loads(current_file.with_name("logging.json").read_bytes())
     )
+
+from typing import Any, Dict  # noqa: E402
 
 import environ  # noqa: E402
 from django.contrib.messages import constants as messages  # noqa: E402
@@ -106,11 +107,10 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.ScryptPasswordHasher",
 ]
 
-_PASS = "django.contrib.auth.password_validation"  # noqa: S105
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": f"{_PASS}.MinimumLengthValidator"},
-    {"NAME": f"{_PASS}.CommonPasswordValidator"},
-    {"NAME": f"{_PASS}.NumericPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 MIDDLEWARE = [
