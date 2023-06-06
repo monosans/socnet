@@ -36,8 +36,6 @@ www.{$DOMAIN_NAME} {
 {$DOMAIN_NAME} {
 	import common_with_error_handling
 
-	respond /favicon.ico 404
-
 	respond /robots.txt 200 {
 		body "User-agent: *
 Disallow: /"

@@ -5,4 +5,7 @@ from django.urls import path
 from . import views
 
 app_name = "core"
-urlpatterns = [path("", views.index_view, name="index")]
+urlpatterns = [
+    path("manifest.json", views.ManifestView.as_view(), name="manifest"),
+    path("", views.index_view, name="index"),
+]

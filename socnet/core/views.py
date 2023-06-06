@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
 
 from ..users.types import AuthedRequest
 
@@ -25,3 +26,8 @@ def admin_site_login_view(
 @login_required
 def index_view(request: AuthedRequest) -> HttpResponse:
     return redirect(request.user)
+
+
+class ManifestView(TemplateView):
+    template_name = "site.webmanifest"
+    content_type = "application/json"
