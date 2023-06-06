@@ -39,6 +39,12 @@ EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 
 STATIC_ROOT = "/var/www/django/static"
 MEDIA_ROOT = "/var/www/django/media"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+    },
+}
 
 _SENTRY_DSN = env.str("SENTRY_DSN", None)
 if _SENTRY_DSN:
