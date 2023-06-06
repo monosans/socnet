@@ -36,6 +36,13 @@ www.{$DOMAIN_NAME} {
 {$DOMAIN_NAME} {
 	import common_with_error_handling
 
+	respond /favicon.ico 404
+
+	respond /robots.txt 200 {
+		body "User-agent: *
+Disallow: /"
+	}
+
 	handle_path /static/* {
 		# STATIC_ROOT
 		root * /var/www/django/static
@@ -50,7 +57,5 @@ www.{$DOMAIN_NAME} {
 		file_server
 	}
 
-	handle {
-		reverse_proxy django:5000
-	}
+	reverse_proxy django:5000
 }
