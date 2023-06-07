@@ -29,8 +29,6 @@ repos:
     rev: v2.8.8
     hooks:
       - id: prettier
-        exclude_types:
-          - html
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
