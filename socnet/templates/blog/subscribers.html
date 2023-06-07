@@ -14,7 +14,7 @@
   {% if subscribers %}
     <h3 class="list-group-item text-center">
       <a href="{{ user.get_absolute_url }}"
-         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ user.display_name }} ({{ user.username }})</a>
+         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break">{{ user.display_name }} ({{ user.username }})</a>
       <div>{% translate "Subscribers" %}</div>
     </h3>
     {% for subscriber in subscribers %}
