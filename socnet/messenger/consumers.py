@@ -45,7 +45,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             await self.close()
             return
         self.interlocutor_pk = int(self.scope["url_route"]["kwargs"]["interlocutor_pk"])
-        self.group = "chat{}_{}".format(*sorted((user.pk, self.interlocutor_pk)))
+        members = [user.pk, self.interlocutor_pk]
+        members.sort()
+        self.group = "chat%d_%d" % tuple(members)
         await self.channel_layer.group_add(self.group, self.channel_name)
         await self.accept()
 
