@@ -27,11 +27,11 @@
 }
 
 # Redirect "www" to "non-www"
-www.{$DOMAIN_NAME} {
-	import common_with_error_handling
+# www.{$DOMAIN_NAME} {
+# 	import common_with_error_handling
 
-	redir https://{$DOMAIN_NAME}{uri}
-}
+# 	redir https://{$DOMAIN_NAME}{uri}
+# }
 
 {$DOMAIN_NAME} {
 	import common_with_error_handling
