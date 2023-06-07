@@ -1,15 +1,16 @@
 # https://docs.djangoproject.com/en/4.2/ref/settings/
 from __future__ import annotations
 
-import json
 import logging
-import logging.config
 from pathlib import Path
 
 current_file = Path(__file__).resolve(strict=True)
 
 # Set up logging only if it has not already been set up by uvicorn or gunicorn
 if not logging.root.handlers:
+    import json
+    import logging.config
+
     logging.config.dictConfig(
         json.loads(current_file.with_name("logging.json").read_bytes())
     )
@@ -114,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 MIDDLEWARE = [
-    "socnet.core.middleware.ResponseHeadersMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -122,6 +122,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django_otp.middleware.OTPMiddleware",
+    "djangorestframework_camel_case.middleware.CamelCaseMiddleWare",
+    "socnet.core.middleware.ResponseHeadersMiddleware",
 ]
 
 STATIC_URL = "static/"
@@ -160,7 +162,14 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_ADAPTER = "socnet.allauth.adapter.AuthAdapter"
 
 REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
+    "DEFAULT_RENDERER_CLASSES": [
+        "djangorestframework_camel_case.render.CamelCaseJSONRenderer"
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
+        "djangorestframework_camel_case.parser.CamelCaseFormParser",
+        "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
+    ],
     "DEFAULT_PERMISSION_CLASSES": [
         "socnet.api.permissions.ActualDjangoModelPermissions"
     ],
@@ -173,8 +182,13 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 SPECTACULAR_SETTINGS = {
-    "TITLE": "SocNet API",
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+    "POSTPROCESSING_HOOKS": [
+        "drf_spectacular.hooks.postprocess_schema_enums",
+        "drf_spectacular.contrib.djangorestframework_camel_case.camelize_serializer_fields",
+    ],
+    "CAMELIZE_NAMES": True,
+    "TITLE": "SocNet API",
 }
 
 CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {

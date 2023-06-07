@@ -881,6 +881,16 @@ django = ">=3.0"
 pytz = "*"
 
 [[package]]
+name = "djangorestframework-camel-case"
+version = "1.4.2"
+description = "Camel case JSON support for Django REST framework."
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "djangorestframework-camel-case-1.4.2.tar.gz", hash = "sha256:cdae75846648abb6585c7470639a1d2fb064dc45f8e8b62aaa50be7f1a7a61f4"},
+]
+
+[[package]]
 name = "djangorestframework-stubs"
 version = "3.14.1"
 description = "PEP-484 stubs for django-rest-framework"
@@ -2647,4 +2657,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "ccabfca38317cf0a007397b7f0926e3d800ce84069d4f1692db94b1ce4b0da45"
+content-hash = "28f660c4e478227c1f959a64f725c693ec68bad2a7848a48e577595a45b56b15"
