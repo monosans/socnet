@@ -8,8 +8,8 @@ DATABASES["default"]["CONN_MAX_AGE"] = 60
 
 MIDDLEWARE.remove("socnet.core.middleware.ResponseHeadersMiddleware")
 
-_REDIS_HOST = "redis"
-_REDIS_PORT = 6379
+_REDIS_HOST = env.str("REDIS_HOST")
+_REDIS_PORT = env.int("REDIS_PORT")
 _REDIS_URL = f"redis://{_REDIS_HOST}:{_REDIS_PORT}"
 CACHES = {
     "default": {
