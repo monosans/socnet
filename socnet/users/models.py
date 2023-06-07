@@ -27,7 +27,6 @@ class User(AbstractUser):
         verbose_name=_("username"),
         max_length=32,
         unique=True,
-        db_index=True,
         help_text=_("Only English letters, numbers, underscores and hyphens."),
         validators=(validate_slug,),
         error_messages={"unique": _("A user with that username already exists.")},
