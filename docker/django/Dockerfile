@@ -12,7 +12,7 @@ FROM node as node-tsc
 COPY ./tsconfig.json ./tsconfig.json
 COPY ./socnet/static/private/ts/ ./socnet/static/private/ts/
 
-RUN npx tsc
+RUN npx tsc && rm ./socnet/static/public/js/types.js
 
 
 FROM python:3.11-slim-bullseye as python
