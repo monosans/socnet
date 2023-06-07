@@ -172,7 +172,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
 }
-SPECTACULAR_SETTINGS = {"SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"]}
+SPECTACULAR_SETTINGS = {
+    "TITLE": "SocNet API",
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+}
 
 CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {
     "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
