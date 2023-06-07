@@ -24,3 +24,4 @@ class Message(MarkdownContentModel, DateCreatedModel):
     class Meta:
         verbose_name = _("message")
         verbose_name_plural = _("messages")
+        indexes = [models.Index(fields=["-id"])]
