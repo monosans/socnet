@@ -5,8 +5,9 @@ from typing import Any, Dict, Optional
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
+from django.templatetags.static import static
 from django.views.generic import TemplateView
 
 from ..users.types import AuthedRequest
@@ -26,6 +27,10 @@ def admin_site_login_view(
 @login_required
 def index_view(request: AuthedRequest) -> HttpResponse:
     return redirect(request.user)
+
+
+def favicon_view(request: HttpRequest) -> HttpResponse:  # noqa: ARG001
+    return redirect(static("img/favicon.ico"))
 
 
 class ManifestView(TemplateView):
