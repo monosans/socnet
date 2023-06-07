@@ -44,8 +44,8 @@ class EmailAddressSerializer(serializers.ModelSerializer[EmailAddress]):
 
 
 class GroupSerializer(serializers.ModelSerializer[auth_models.Group]):
-    user_set: serializers.RelatedField[User, Any, Any] = serializers.RelatedField(
-        many=True, read_only=True
+    user_set: serializers.PrimaryKeyRelatedField[User] = (
+        serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     )
 
     class Meta:
@@ -66,11 +66,11 @@ class MessageSerializer(serializers.ModelSerializer[messenger_models.Message]):
 
 
 class PermissionSerializer(serializers.ModelSerializer[auth_models.Permission]):
-    group_set: serializers.RelatedField[auth_models.Group, Any, Any] = (
-        serializers.RelatedField(many=True, read_only=True)
+    group_set: serializers.PrimaryKeyRelatedField[auth_models.Group] = (
+        serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     )
-    user_set: serializers.RelatedField[User, Any, Any] = serializers.RelatedField(
-        many=True, read_only=True
+    user_set: serializers.PrimaryKeyRelatedField[User] = (
+        serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     )
 
     class Meta:
@@ -91,14 +91,14 @@ class PostSerializer(serializers.ModelSerializer[blog_models.Post]):
 
 
 class UserSerializer(serializers.ModelSerializer[User]):
-    liked_comments: serializers.RelatedField[blog_models.Comment, Any, Any] = (
-        serializers.RelatedField(many=True, read_only=True)
+    liked_comments: serializers.PrimaryKeyRelatedField[blog_models.Comment] = (
+        serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     )
-    liked_posts: serializers.RelatedField[blog_models.Post, Any, Any] = (
-        serializers.RelatedField(many=True, read_only=True)
+    liked_posts: serializers.PrimaryKeyRelatedField[blog_models.Post] = (
+        serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     )
-    subscribers: serializers.RelatedField[User, Any, Any] = serializers.RelatedField(
-        many=True, read_only=True
+    subscribers: serializers.PrimaryKeyRelatedField[User] = (
+        serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     )
 
     class Meta:
