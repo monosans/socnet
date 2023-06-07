@@ -27,6 +27,7 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
             Q(sender=request.user, recipient=interlocutor)
             | Q(sender=interlocutor, recipient=request.user)
         )
+        .order_by("pk")
     )
     form = forms.MessageCreationForm()
     context = {"messages_": messages, "interlocutor": interlocutor, "form": form}
@@ -61,7 +62,7 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
             Q(incoming_messages__sender=request.user)
             | Q(outgoing_messages__recipient=request.user)
         )
-        .order_by("-last_message_date_epoch")
+        .order_by(-Subquery(last_message.values("pk")[:1]))
     )
     context = {"chats": chats}
     return render(request, "messenger/chats.html", context)

@@ -32,7 +32,10 @@ def get_posts_preview_qs(
 
 
 def get_subscriptions(username: str, field: str) -> User:
-    prefetch = Prefetch(field, User.objects.only("display_name", "image", "username"))
+    prefetch = Prefetch(
+        field,
+        User.objects.only("display_name", "image", "username").order_by("username"),
+    )
     qs = (
         User.objects.only("display_name", "username")
         .prefetch_related(prefetch)
