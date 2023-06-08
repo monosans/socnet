@@ -62,7 +62,7 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
             Q(incoming_messages__sender=request.user)
             | Q(outgoing_messages__recipient=request.user)
         )
-        .order_by(-Subquery(last_message.values("pk")[:1]))
+        .order_by("-last_message_date_epoch")
     )
     context = {"chats": chats}
     return render(request, "messenger/chats.html", context)
