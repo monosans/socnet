@@ -19,7 +19,8 @@ const chatData: {
   users: Record<string, User>;
 } = JSON.parse(document.querySelector("#data")!.textContent!);
 
-const messageSendBtn = document.querySelector<HTMLElement>("#messageSendBtn")!;
+const messageSendBtn =
+  document.querySelector<HTMLButtonElement>("#messageSendBtn")!;
 
 const messageTextarea =
   document.querySelector<HTMLTextAreaElement>("#id_content")!;
@@ -35,7 +36,7 @@ const chatLog = {
   element: document.querySelector("#chat-log")!,
 
   scrollToEnd(): void {
-    this.element.scrollTo(0, this.element.scrollHeight);
+    this.element.scrollTop = this.element.scrollHeight;
   },
 
   async addNewMessage(data: ChatMessageEvent): Promise<void> {
@@ -88,6 +89,12 @@ const chatWs = ((): WebSocket => {
 
     void chatLog.addNewMessage(data);
     chatLog.scrollToEnd();
+  };
+  ws.onclose = (e): void => {
+    messageSendBtn.disabled = true;
+    if (e.code === 1006 || e.code === 1011 || e.code === 1012) {
+      location.reload();
+    }
   };
   return ws;
 })();
