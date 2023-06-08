@@ -4,7 +4,7 @@
 	email {$TLS_EMAIL}
 }
 
-(common) {
+(headers) {
 	header {
 		-Server
 		Content-Security-Policy "default-src 'none'; connect-src 'self'; font-src 'self' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:;"
@@ -14,31 +14,32 @@
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 	}
-
-	encode gzip
 }
 
-(common_with_error_handling) {
-	import common
+(common) {
+	import headers
 
 	handle_errors {
-		import common
+		import headers
+		encode gzip
 	}
 }
 
 # Redirect "www" to "non-www"
 # www.{$DOMAIN_NAME} {
-# 	import common_with_error_handling
-
+# 	import common
 # 	redir https://{$DOMAIN_NAME}{uri}
+# 	encode gzip
 # }
 
 {$DOMAIN_NAME} {
-	import common_with_error_handling
+	import common
 
-	respond /robots.txt 200 {
-		body "User-agent: *
+	handle /robots.txt {
+		respond 200 {
+			body "User-agent: *
 Disallow: /"
+		}
 	}
 
 	handle_path /static/* {
@@ -53,7 +54,11 @@ Disallow: /"
 		# MEDIA_ROOT
 		root * /var/www/django/media
 		file_server
+		encode gzip
 	}
 
-	reverse_proxy django:5000
+	handle {
+		reverse_proxy django:5000
+		encode gzip
+	}
 }

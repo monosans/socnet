@@ -6,6 +6,7 @@ python3 /app/manage.py migrate --noinput
 python3 /app/manage.py collectstatic --noinput --clear
 python3 /app/manage.py compilemessages
 
+# Compress static files with brotli and gzip
 find /var/www/django/static -type f \
 	! \( \
 	-iname '*.jpg' -o \
@@ -35,7 +36,24 @@ find /var/www/django/static -type f \
 	-iname '*.mpg' -o \
 	-iname '*.webm' -o \
 	-iname '*.wmv' \) \
-	-exec brotli --force --best {} \+ \
+	-exec brotli --force --keep --best {} \+ \
 	-exec gzip --force --keep --best {} \+
+
+# Delete compressed files if they are not smaller than the original
+find /var/www/django/static -type f | while read -r file; do
+	if [[ ${file} == *.br || ${file} == *.gz ]]; then
+		continue
+	fi
+	orig_size=$(stat -c %s "${file}")
+	for ext in br gz; do
+		compr_file="${file}.${ext}"
+		if [[ -e ${compr_file} ]]; then
+			compr_size=$(stat -c %s "${compr_file}")
+			if ((compr_size >= orig_size)); then
+				rm "${compr_file}"
+			fi
+		fi
+	done
+done
 
 exec /usr/local/bin/gunicorn --config python:docker.django.gunicorn_config config.asgi:application
