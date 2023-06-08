@@ -29,7 +29,7 @@ drf-spectacular = "0.26.2"
 channels = "4.0.0"
 channels-redis = "4.1.0"
 
-sentry-sdk = { version = "1.25.0", extras = ["django"] }
+sentry-sdk = { version = "1.25.1", extras = ["django"] }
 
 typing-extensions = { version = "4.6.3", python = "<3.10" }
 
