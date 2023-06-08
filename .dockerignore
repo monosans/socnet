@@ -5,6 +5,7 @@
 !./locale/**/*.po
 !./socnet/**/*.py
 !./socnet/static/
+./socnet/static/public/js/
 !./socnet/templates/
 !./socnet_rs/src/
 !./socnet_rs/Cargo.toml
