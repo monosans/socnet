@@ -40,10 +40,7 @@ find /var/www/django/static -type f \
 	-exec gzip --force --keep --best {} \+
 
 # Delete compressed files if they are not smaller than the original
-find /var/www/django/static -type f | while read -r file; do
-	if [[ ${file} == *.br || ${file} == *.gz ]]; then
-		continue
-	fi
+find /var/www/django/static -type f ! \( -iname '*.br' -o -iname '*.gz' \) | while read -r file; do
 	orig_size=$(stat -c %s "${file}")
 	for ext in br gz; do
 		compr_file="${file}.${ext}"
