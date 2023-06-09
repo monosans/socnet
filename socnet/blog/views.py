@@ -159,7 +159,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
             posts = (
                 qs.annotate(similarity=TrigramWordSimilarity(q, "content"))
                 .filter(similarity__gte=0.6)
-                .order_by("-similarity", "-pk")
+                .order_by("-pk")
             )
     else:
         form = forms.PostSearchForm()
