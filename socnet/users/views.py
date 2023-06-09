@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from functools import reduce
+from operator import add
 from typing import List
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.postgres.search import SearchRank, SearchVector
+from django.contrib.postgres.search import TrigramWordSimilarity
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
@@ -52,12 +54,14 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             query: str = form.cleaned_data["q"]
             search_fields: List[str] = form.cleaned_data["search_fields"]
-            rank = SearchRank(vector=SearchVector(*search_fields), query=query)
+            similarity = reduce(
+                add, (TrigramWordSimilarity(query, field) for field in search_fields)
+            )
             users = (
                 User.objects.only("display_name", "image", "username")
-                .annotate(rank=rank)
-                .filter(rank__gt=0)
-                .order_by("-rank")
+                .annotate(similarity=similarity)
+                .filter(similarity__gte=0.6)
+                .order_by("-similarity")
             )
     else:
         form = forms.UserSearchForm()

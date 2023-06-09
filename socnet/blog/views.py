@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
-from django.contrib.postgres.search import SearchRank
+from django.contrib.postgres.search import TrigramWordSimilarity
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Page
 from django.db.models import Case, Count, Prefetch, Q, QuerySet, When
@@ -151,20 +151,29 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     posts: Optional[Union[QuerySet[models.Post], Page[models.Post]]] = None
     page_range = None
     qs = services.get_posts_preview_qs(request)
-    if "q" in request.GET:
+    is_search = bool(request.GET.get("q"))
+    if is_search:
         form = forms.PostSearchForm(request.GET)
         if form.is_valid():
-            query: str = form.cleaned_data["q"]
-            rank = SearchRank(vector="content", query=query)
-            posts = qs.annotate(rank=rank).filter(rank__gt=0).order_by("-rank", "-pk")
+            q: str = form.cleaned_data["q"]
+            posts = (
+                qs.annotate(similarity=TrigramWordSimilarity(q, "content"))
+                .filter(similarity__gte=0.6)
+                .order_by("-similarity", "-pk")
+            )
     else:
         form = forms.PostSearchForm()
         if request.user.is_authenticated:
             subscribed_posts = qs.filter(
                 author__in=request.user.subscriptions.all()
             ).order_by("-pk")
-            posts, page_range = paginate(request, subscribed_posts, per_page=5)
-    context = {"posts": posts, "page_range": page_range, "form": form}
+            posts, page_range = paginate(request, subscribed_posts, per_page=10)
+    context = {
+        "posts": posts,
+        "page_range": page_range,
+        "is_search": is_search,
+        "form": form,
+    }
     return render(request, "blog/posts.html", context)
 
 
