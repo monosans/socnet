@@ -26,13 +26,15 @@
         "{{ interlocutor.username|lower }}": {
           "href": "{{ interlocutor.get_absolute_url }}",
           {% if interlocutor.image %}"image": "{{ interlocutor.image.url }}",{% endif %}
-          "displayName": "{{ interlocutor.display_name }}"
+          "displayName": "{{ interlocutor.display_name }}",
+          "isCurrentUser": false
         },
         {% endif %}
         "{{ request.user.username|lower }}": {
           "href": "{{ request.user.get_absolute_url }}",
           {% if request.user.image %}"image": "{{ request.user.image.url }}",{% endif %}
-          "displayName": "{{ request.user.display_name }}"
+          "displayName": "{{ request.user.display_name }}",
+          "isCurrentUser": true
         }
       }
     }

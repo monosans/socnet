@@ -4,6 +4,7 @@ interface User {
   href: string;
   image?: string;
   displayName: string;
+  isCurrentUser: boolean;
 }
 
 interface ChatMessageEvent {
@@ -18,6 +19,10 @@ const chatData: {
   interlocutorPk: number;
   users: Record<string, User>;
 } = JSON.parse(document.querySelector("#data")!.textContent!);
+
+function getSender(data: ChatMessageEvent): User {
+  return chatData.users[data.sender.toLowerCase()];
+}
 
 const messageSendBtn =
   document.querySelector<HTMLButtonElement>("#messageSendBtn")!;
@@ -41,7 +46,7 @@ const chatLog = {
 
   async addNewMessage(data: ChatMessageEvent): Promise<void> {
     const id = `msg${data.pk}`;
-    const sender = chatData.users[data.sender.toLowerCase()]!;
+    const sender = getSender(data);
     const html = `
       <div id="${id}" class="d-flex mb-1">
         <a href="${sender.href}"
@@ -88,7 +93,9 @@ const chatWs = ((): WebSocket => {
     const data: ChatMessageEvent = JSON.parse(e.data);
 
     void chatLog.addNewMessage(data);
-    chatLog.scrollToEnd();
+    if (getSender(data).isCurrentUser) {
+      chatLog.scrollToEnd();
+    }
   };
   ws.onclose = (e): void => {
     messageSendBtn.disabled = true;
