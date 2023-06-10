@@ -4,7 +4,7 @@ set -euo pipefail
 
 python3 /app/manage.py migrate --noinput
 python3 /app/manage.py collectstatic --noinput --clear
-python3 /app/manage.py compilemessages
+python3 /app/manage.py compilemessages -i site-packages
 
 # Compress static files with brotli and gzip
 find /var/www/django/static -type f \
