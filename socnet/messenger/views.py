@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import TrigramWordSimilarity
 from django.db.models import OuterRef, Q, Subquery
 from django.db.models.functions import Extract, Substr
 from django.http import HttpResponse
@@ -36,6 +37,38 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
 
 @login_required
 def chats_view(request: AuthedRequest) -> HttpResponse:
+    if bool(request.GET.get("q")):
+        form = forms.MessageSearchForm(request.GET)
+        if form.is_valid():
+            q: str = form.cleaned_data["q"]
+            messages = (
+                models.Message.objects.only(
+                    "recipient__display_name",
+                    "recipient__image",
+                    "recipient__username",
+                    "sender__display_name",
+                    "sender__image",
+                    "sender__username",
+                )
+                .annotate(
+                    date_created_epoch=Extract("date_created", "epoch"),
+                    similarity=TrigramWordSimilarity(q, "content"),
+                    truncated_content=Substr("content", 1, 30),
+                )
+                .select_related("recipient", "sender")
+                .filter(
+                    Q(sender=request.user) | Q(recipient=request.user),
+                    similarity__gte=0.6,
+                )
+                .order_by("-pk")
+            )
+            msgs_with_interluctor = (
+                (msg, msg.recipient if msg.sender == request.user else msg.sender)
+                for msg in messages
+            )
+        context = {"messages_": msgs_with_interluctor, "form": form}
+        return render(request, "messenger/messages_search.html", context)
+    form = forms.MessageSearchForm()
     last_message = (
         models.Message.objects.annotate(
             date_created_epoch=Extract("date_created", "epoch"),
@@ -64,5 +97,5 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         )
         .order_by("-last_message_date_epoch")
     )
-    context = {"chats": chats}
+    context = {"chats": chats, "form": form}
     return render(request, "messenger/chats.html", context)

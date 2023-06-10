@@ -1,0 +1,64 @@
+{% extends "list_group.html" %}
+
+{% load i18n static %}
+
+{% block title %}
+  {% blocktranslate context "noun" %}Search messages{% endblocktranslate %}
+{% endblock title %}
+{% block css %}
+  {% if messages_ %}
+    <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+  {% endif %}
+{% endblock css %}
+{% block javascript %}
+  {% if messages_ %}
+    <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
+  {% endif %}
+  <script type="module" src="{% static 'js/autosize.js' %}"></script>
+{% endblock javascript %}
+{% block list_group %}
+  <form class="list-group-item p-0">
+    <div class="input-group">
+      {{ form.q }}
+      <button type="submit" class="btn btn-primary rounded-bottom-0">
+        <i class="fa-solid fa-magnifying-glass px-2"></i>
+      </button>
+    </div>
+  </form>
+  {% for message, interlocutor in messages_ %}
+    <a href="{% url 'messenger:chat' interlocutor.username %}#msg{{ message.pk }}"
+       class="d-flex align-items-center list-group-item list-group-item-action">
+      <div class="avatar-thumbnail d-flex align-items-center justify-content-center me-2">
+        {% if interlocutor.image %}
+          <img src="{{ interlocutor.image.url }}" loading="lazy" class="rounded" />
+        {% else %}
+          <i class="fa-solid fa-user text-secondary"></i>
+        {% endif %}
+      </div>
+      <div class="text-break">
+        <span class="text-body">{{ interlocutor.display_name }}</span>
+        <span class="text-secondary">@{{ interlocutor.username }}</span>
+        {% if message.sender == interlocutor %}
+          <div class="text-secondary">{{ message.truncated_content }}</div>
+        {% else %}
+          <div class="d-flex align-items-center">
+            <span class="avatar-thumbnail-font-size d-flex align-items-center justify-content-center me-2">
+              {% if message.sender.image %}
+                <img src="{{ message.sender.image.url }}" loading="lazy" class="rounded" />
+              {% else %}
+                <i class="fa-solid fa-user text-secondary"></i>
+              {% endif %}
+            </span>
+            <span class="text-secondary">{{ message.truncated_content }}</span>
+          </div>
+        {% endif %}
+      </div>
+      <div class="ms-auto text-secondary"
+           data-epoch="{{ message.date_created_epoch }}"></div>
+    </a>
+  {% empty %}
+    <div class="list-group-item text-center">
+      {% translate "No messages found." %}
+    </div>
+  {% endfor %}
+{% endblock list_group %}

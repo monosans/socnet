@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-01 07:19+0000\n"
+"POT-Creation-Date: 2023-06-10 11:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,6 +84,10 @@ msgstr "дата обновления"
 
 msgid "Messenger"
 msgstr "Мессенджер"
+
+msgctxt "noun"
+msgid "Search messages"
+msgstr "Поиск сообщений"
 
 msgid "sender"
 msgstr "отправитель"
@@ -484,6 +488,9 @@ msgstr "Чаты"
 
 msgid "You have no chats."
 msgstr "У вас нет чатов."
+
+msgid "No messages found."
+msgstr "Сообщения не найдены."
 
 msgid "Account security"
 msgstr "Безопасность учётной записи"

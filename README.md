@@ -22,8 +22,9 @@ Social network built with Django Framework.
 - Create, edit, like and delete posts and comments with Markdown and HTML support
 - View images in posts, comments and messages as a gallery using [viewerjs](https://fengyuanchen.github.io/viewerjs/)
 - Subscribe to other users to see their posts in their news feed
-- Search for posts by text
-- Search for users by selectable fields
+- Inexact search for posts by text
+- Inexact search for messages by text
+- Inexact search for users by selectable fields
 - Delete their account
 - And a lot of other little things
 

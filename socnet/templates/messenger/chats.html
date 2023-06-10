@@ -13,10 +13,19 @@
 {% block javascript %}
   {% if chats %}
     <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
+    <script type="module" src="{% static 'js/autosize.js' %}"></script>
   {% endif %}
 {% endblock javascript %}
 {% block list_group %}
   {% if chats %}
+    <form class="list-group-item p-0">
+      <div class="input-group">
+        {{ form.q }}
+        <button type="submit" class="btn btn-primary rounded-bottom-0">
+          <i class="fa-solid fa-magnifying-glass px-2"></i>
+        </button>
+      </div>
+    </form>
     {% for chat in chats %}
       <a href="{% url 'messenger:chat' chat.username %}"
          class="d-flex align-items-center list-group-item list-group-item-action">

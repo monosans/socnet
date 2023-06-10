@@ -18,3 +18,13 @@
 .avatar-thumbnail-no-height i {
   font-size: 48px;
 }
+
+.avatar-thumbnail-font-size {
+  width: calc(var(--bs-body-font-size) * var(--bs-body-line-height));
+  height: calc(var(--bs-body-font-size) * var(--bs-body-line-height));
+}
+
+.avatar-thumbnail-font-size img {
+  max-width: calc(var(--bs-body-font-size) * var(--bs-body-line-height));
+  max-height: calc(var(--bs-body-font-size) * var(--bs-body-line-height));
+}
