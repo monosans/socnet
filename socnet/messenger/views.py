@@ -37,7 +37,7 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
 
 @login_required
 def chats_view(request: AuthedRequest) -> HttpResponse:
-    if bool(request.GET.get("q")):
+    if request.GET.get("q"):
         form = forms.MessageSearchForm(request.GET)
         if form.is_valid():
             q: str = form.cleaned_data["q"]
