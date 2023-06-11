@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any, Dict
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import TrigramWordSimilarity
 from django.db.models import OuterRef, Q, Subquery
@@ -62,11 +64,13 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
                 )
                 .order_by("-pk")
             )
-            msgs_with_interluctor = (
+            msgs_with_interluctor = [
                 (msg, msg.recipient if msg.sender == request.user else msg.sender)
                 for msg in messages
-            )
-        context = {"messages_": msgs_with_interluctor, "form": form}
+            ]
+        else:
+            msgs_with_interluctor = None
+        context: Dict[str, Any] = {"messages_": msgs_with_interluctor, "form": form}
         return render(request, "messenger/messages_search.html", context)
     form = forms.MessageSearchForm()
     last_message = (
