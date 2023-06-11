@@ -64,13 +64,13 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
                 )
                 .order_by("-pk")
             )
-            msgs_with_interluctor = [
+            msgs_with_interlocutor = [
                 (msg, msg.recipient if msg.sender == request.user else msg.sender)
                 for msg in messages
             ]
         else:
-            msgs_with_interluctor = None
-        context: Dict[str, Any] = {"messages_": msgs_with_interluctor, "form": form}
+            msgs_with_interlocutor = None
+        context: Dict[str, Any] = {"messages_": msgs_with_interlocutor, "form": form}
         return render(request, "messenger/messages_search.html", context)
     form = forms.MessageSearchForm()
     last_message = (
