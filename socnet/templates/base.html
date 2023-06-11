@@ -33,7 +33,7 @@
   <body>
     <div class="mb-3 sticky-top">
       <nav class="navbar navbar-expand-xl bg-body border-bottom">
-        <div class="container">
+        <div class="container-xxl">
           <a href="{% url 'core:index' %}"
              class="navbar-brand text-bg-primary rounded px-2 py-1"><i class="fa-solid fa-s"></i> <i class="fa-solid fa-o"></i> <i class="fa-solid fa-c"></i> <i class="fa-solid fa-n"></i> <i class="fa-solid fa-e"></i> <i class="fa-solid fa-t"></i></a>
           <button type="button"
@@ -145,7 +145,7 @@
         </div>
       </nav>
     </div>
-    <div class="container">
+    <div class="container-xxl">
       {% for message in messages %}
         <div class="alert alert-{{ message.tags|default:'primary' }} alert-dismissible fade show"
              role="alert">
