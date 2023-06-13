@@ -40,7 +40,7 @@ repos:
         args:
           - --fix
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.30.2
+    rev: v1.31.0
     hooks:
       - id: djlint-reformat
       - id: djlint
