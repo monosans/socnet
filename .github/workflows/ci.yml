@@ -9,6 +9,28 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 jobs:
+  run-clippy:
+    runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: -Dwarnings
+    steps:
+      - uses: actions/checkout@v3
+      - run: cargo clippy --all-targets --all-features -- -Wclippy::pedantic
+  run-eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: npm
+      - run: npm ci
+      - run: npx eslint .
+  run-pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: pipx run pre-commit run --all-files
   run-pytest-mypy:
     runs-on: ubuntu-latest
     env:
@@ -26,21 +48,6 @@ jobs:
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django mypy .
       - if: ${{ steps.build.conclusion == 'success' }}
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down --remove-orphans
-  run-pre-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: pipx run pre-commit run --all-files
-  run-eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: latest
-          cache: npm
-      - run: npm ci
-      - run: npx eslint .
   run-tsc:
     runs-on: ubuntu-latest
     steps:
