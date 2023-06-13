@@ -15,7 +15,7 @@ jobs:
       RUSTFLAGS: -Dwarnings
     steps:
       - uses: actions/checkout@v3
-      - run: cargo clippy --all-targets --all-features -- -Wclippy::pedantic
+      - run: cd socnet_rs && cargo clippy --all-targets --all-features -- -Wclippy::pedantic
   run-eslint:
     runs-on: ubuntu-latest
     steps:
