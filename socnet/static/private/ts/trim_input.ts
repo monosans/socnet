@@ -1,4 +1,4 @@
-const whiteSpaceRegex = /^\s+$/u;
+const whiteSpaceRegex = /^\s+$/;
 
 function cleanWhitespaceInput(e: Event): void {
   const input = e.currentTarget! as HTMLInputElement;
