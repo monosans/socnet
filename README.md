@@ -146,8 +146,6 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml build --pull
 docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py migrate
 # Create a superuser if you want
 docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py createsuperuser
-# Compile translations
-docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py compilemessages -i site-packages
 # Run
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
