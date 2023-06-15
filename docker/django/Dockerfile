@@ -1,4 +1,4 @@
-FROM node:bullseye-slim as node
+FROM node:bookworm-slim as node
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ COPY ./socnet/static/private/ts/ ./socnet/static/private/ts/
 RUN npx tsc && rm ./socnet/static/public/js/types.js
 
 
-FROM python:3.11-slim-bullseye as python
+FROM python:3.11-slim-bookworm as python
 
 ENV PYTHONUNBUFFERED=1 \
   PYTHONDONTWRITEBYTECODE=1
