@@ -14,7 +14,7 @@
     "eslint": "8.42.0",
     "eslint-config-prettier": "8.8.0",
     "prettier": "2.8.8",
-    "stylelint": "15.7.0",
+    "stylelint": "15.8.0",
     "stylelint-config-standard": "33.0.0",
     "typescript": "5.1.3",
     "viewerjs": "1.11.3"
