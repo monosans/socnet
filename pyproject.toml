@@ -70,7 +70,7 @@ factory-boy = "3.2.1"
 [tool.poetry.group.production.dependencies]
 gunicorn = "20.1.0"
 psycopg = { version = "3.1.9", extras = ["c"] }
-redis = { version = "4.5.5", extras = ["hiredis"] }
+redis = { version = "4.6.0", extras = ["hiredis"] }
 
 [tool.black]
 target-version = ["py38"]
