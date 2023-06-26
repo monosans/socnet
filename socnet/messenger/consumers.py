@@ -29,7 +29,7 @@ def save_obj(obj: Model) -> None:
 
 
 class ChatMessageEvent(TypedDict):
-    type: Literal["chat_message"]  # noqa: A003
+    type: Literal["chat_message"]
     pk: int
     content: str
     createdEpoch: int
