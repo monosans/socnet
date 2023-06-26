@@ -17,7 +17,7 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v15.8.0
+    rev: v15.9.0
     hooks:
       - id: stylelint
         args:
@@ -34,13 +34,13 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.272
+    rev: v0.0.275
     hooks:
       - id: ruff
         args:
           - --fix
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.31.0
+    rev: v1.31.1
     hooks:
       - id: djlint-reformat
       - id: djlint
