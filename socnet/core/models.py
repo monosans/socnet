@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django_stubs_ext.db.models import TypedModelMeta
 
 from .fields import NullAutoNowDateTimeField
 from .querysets import TimestampedModelQuerySet
@@ -14,7 +15,7 @@ class MarkdownContentModel(models.Model):
         help_text=_("Supports a safe subset of HTML and Markdown."),
     )
 
-    class Meta:
+    class Meta(TypedModelMeta):
         abstract = True
 
 
@@ -23,19 +24,19 @@ class DateCreatedModel(models.Model):
         verbose_name=_("date created"), auto_now_add=True
     )
 
-    class Meta:
+    class Meta(TypedModelMeta):
         abstract = True
 
 
 class DateUpdatedModel(models.Model):
     date_updated = NullAutoNowDateTimeField(verbose_name=_("date updated"))
 
-    class Meta:
+    class Meta(TypedModelMeta):
         abstract = True
 
 
 class TimestampedModel(DateCreatedModel, DateUpdatedModel):
     objects = TimestampedModelQuerySet.as_manager()
 
-    class Meta:
+    class Meta(TypedModelMeta):
         abstract = True

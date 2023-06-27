@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django_stubs_ext.db.models import TypedModelMeta
 
 from ..core.models import MarkdownContentModel, TimestampedModel
 
@@ -29,7 +30,7 @@ class Post(MarkdownContentModel, TimestampedModel):
         ),
     )
 
-    class Meta:
+    class Meta(TypedModelMeta):
         verbose_name = _("post")
         verbose_name_plural = _("posts")
 
@@ -57,7 +58,7 @@ class Comment(MarkdownContentModel, TimestampedModel):
         blank=True,
     )
 
-    class Meta:
+    class Meta(TypedModelMeta):
         verbose_name = _("comment")
         verbose_name_plural = _("comments")
 
