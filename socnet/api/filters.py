@@ -18,7 +18,9 @@ IGNORED_FIELDS = (
 IGNORED_LOOKUPS = frozenset(("unaccent",))
 
 
-def generate_filterset(serializer: Type[ModelSerializer[Any]]) -> Type[FilterSet]:
+def generate_filterset(
+    serializer: Type[ModelSerializer[Any]],
+) -> Type[FilterSet]:
     model = serializer.Meta.model
     filterable_fields = _get_filterable_fields(
         model,  # type: ignore[arg-type]
@@ -43,11 +45,17 @@ def _get_filterable_fields(
 
 
 def _get_lookups(field: models.Field[Any, Any]) -> List[str]:
-    return [lookup for lookup in field.get_lookups() if lookup not in IGNORED_LOOKUPS]
+    return [
+        lookup
+        for lookup in field.get_lookups()
+        if lookup not in IGNORED_LOOKUPS
+    ]
 
 
 def _should_be_filterable(
-    field: models.Field[Any, Any], fields: SerializerFields, exclude: SerializerExclude
+    field: models.Field[Any, Any],
+    fields: SerializerFields,
+    exclude: SerializerExclude,
 ) -> bool:
     if fields:
         return fields == "__all__" or field.attname in fields

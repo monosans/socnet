@@ -16,16 +16,20 @@ class Migration(migrations.Migration):
             name="username",
             field=models.CharField(
                 db_collation="case_insensitive",
-                error_messages={"unique": "A user with that username already exists."},
-                help_text="Only English letters, numbers, underscores and hyphens.",
+                error_messages={
+                    "unique": "A user with that username already exists."
+                },
+                help_text=(
+                    "Only English letters, numbers, underscores and hyphens."
+                ),
                 max_length=32,
                 unique=True,
                 validators=[
                     django.core.validators.RegexValidator(
                         re.compile("^[-a-zA-Z0-9_]+\\Z"),
                         (
-                            "Enter a valid “slug” consisting of letters, numbers,"
-                            " underscores or hyphens."
+                            "Enter a valid “slug” consisting of letters,"
+                            " numbers, underscores or hyphens."
                         ),
                         "invalid",
                     )

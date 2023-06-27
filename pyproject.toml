@@ -74,6 +74,7 @@ redis = { version = "4.6.0", extras = ["hiredis"] }
 
 [tool.black]
 target-version = ["py38"]
+line-length = 80
 skip-magic-trailing-comma = true
 preview = true
 
@@ -174,6 +175,7 @@ xfail_strict = true
 
 [tool.ruff]
 target-version = "py38"
+line-length = 80
 select = ["ALL"]
 ignore = [
     "ANN",

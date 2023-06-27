@@ -30,7 +30,9 @@ def test_unauthed(client: Client, method: ClientMethods) -> None:
 @parametrize_by_get_post
 def test_authed(client: Client, method: ClientMethods) -> None:
     auth_client(client)
-    response = client.get(url) if method == ClientMethods.GET else client.post(url)
+    response = (
+        client.get(url) if method == ClientMethods.GET else client.post(url)
+    )
     assert response.status_code == 200
     assert not models.Post.objects.exists()
 

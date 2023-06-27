@@ -23,7 +23,11 @@ class UserAdminChangeForm(auth_forms.UserChangeForm[User]):
 class UserAdminCreationForm(auth_forms.BaseUserCreationForm[User]):
     class Meta(auth_forms.BaseUserCreationForm.Meta):
         model = User
-        fields = ("display_name", "email", *auth_forms.BaseUserCreationForm.Meta.fields)
+        fields = (
+            "display_name",
+            "email",
+            *auth_forms.BaseUserCreationForm.Meta.fields,
+        )
 
 
 class EditProfileForm(auth_forms.UserChangeForm[User]):
@@ -53,7 +57,9 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
 
 
 class UserSearchForm(forms.Form):
-    q = forms.CharField(widget=forms.Textarea({"rows": 1}), label=_("Search query"))
+    q = forms.CharField(
+        widget=forms.Textarea({"rows": 1}), label=_("Search query")
+    )
     search_fields = forms.MultipleChoiceField(
         choices=(
             ("display_name", _("Display name")),

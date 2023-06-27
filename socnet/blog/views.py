@@ -28,7 +28,9 @@ TBaseModelForm = TypeVar(
 TPost = TypeVar("TPost", bound=Union[models.Post, models.Comment])
 
 
-class _BasePostUpdateView(LoginRequiredMixin, UpdateView[TPost, TBaseModelForm]):
+class _BasePostUpdateView(
+    LoginRequiredMixin, UpdateView[TPost, TBaseModelForm]
+):
     def get_object(self, queryset: Optional[QuerySet[TPost]] = None) -> TPost:
         obj = super().get_object(queryset)
         if obj.author_id != self.request.user.pk:
@@ -53,7 +55,11 @@ class PostUpdateView(_BasePostUpdateView[models.Post, forms.PostForm]):
     template_name = "blog/post_update.html"
 
     def get_queryset(self) -> QuerySet[models.Post]:
-        return super().get_queryset().only("author_id", *self.form_class.Meta.fields)
+        return (
+            super()
+            .get_queryset()
+            .only("author_id", *self.form_class.Meta.fields)
+        )
 
 
 class CommentUpdateView(_BasePostUpdateView[models.Comment, forms.CommentForm]):
@@ -69,7 +75,9 @@ class CommentUpdateView(_BasePostUpdateView[models.Comment, forms.CommentForm]):
         )
 
 
-class PostCreateView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]):
+class PostCreateView(
+    LoginRequiredMixin, CreateView[models.Post, forms.PostForm]
+):
     form_class = forms.PostForm
     template_name = "blog/post_create.html"
 
@@ -112,7 +120,10 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             return redirect(comment)
         messages.error(
             request,
-            _("An error occurred while creating the comment. Please try again."),
+            _(
+                "An error occurred while creating the comment. Please try"
+                " again."
+            ),
         )
     else:
         form = forms.CommentForm()
@@ -132,7 +143,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     prefetch = Prefetch(
         "comments",
         (
-            comments_qs.annotate(is_liked=Q(pk__in=request.user.liked_comments.all()))
+            comments_qs.annotate(
+                is_liked=Q(pk__in=request.user.liked_comments.all())
+            )
             if request.user.is_authenticated
             else comments_qs
         ),
@@ -180,7 +193,11 @@ def posts_view(request: HttpRequest) -> HttpResponse:
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = User.objects.only("display_name", "username").filter(username=username)
     user = get_object_or_404(qs)
-    posts = services.get_posts_preview_qs(request).filter(likers=user).order_by("-pk")
+    posts = (
+        services.get_posts_preview_qs(request)
+        .filter(likers=user)
+        .order_by("-pk")
+    )
     context = {"user": user, "posts": posts}
     return render(request, "blog/liked_posts.html", context)
 
@@ -189,7 +206,9 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     posts = (
         models.Post.objects.only("allow_commenting", "author_id", "content")
         .annotate_epoch_dates()
-        .annotate(Count("comments", distinct=True), Count("likers", distinct=True))
+        .annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
         .order_by("-pk")
     )
     prefetch = Prefetch(
@@ -225,7 +244,12 @@ def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = (
         User.objects.only(
-            "about", "birth_date", "display_name", "image", "location", "username"
+            "about",
+            "birth_date",
+            "display_name",
+            "image",
+            "location",
+            "username",
         )
         .annotate(
             Count("liked_posts", distinct=True),

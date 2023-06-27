@@ -30,7 +30,11 @@ def create_normalized_str_field(field: Type[TField]) -> Type[TField]:
     return type(
         f"Normalized{field.__name__}",
         (field,),
-        {"clean": decorators.process_returned_value(normalize_str)(field.clean)},
+        {
+            "clean": decorators.process_returned_value(normalize_str)(
+                field.clean
+            )
+        },
     )
 
 

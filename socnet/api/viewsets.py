@@ -40,7 +40,9 @@ class _LikeViewSet(_AuthedViewSet):
         return Response(status=status.HTTP_201_CREATED)
 
     def destroy(self, request: AuthedRequest, pk: int) -> Response:
-        valid_pk = serializers.validate_single_field(self.serializer_class, "pk", pk)
+        valid_pk = serializers.validate_single_field(
+            self.serializer_class, "pk", pk
+        )
         qs = self.model.objects.filter(pk=valid_pk)  # type: ignore[misc]
         obj = get_object_or_404(qs)
         obj.likers.remove(request.user)

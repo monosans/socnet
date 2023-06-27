@@ -8,7 +8,10 @@ import socnet.users.models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("users", "0007_case_insensitive_collation_squashed_0009_drop_extension_citext")
+        (
+            "users",
+            "0007_case_insensitive_collation_squashed_0009_drop_extension_citext",
+        )
     ]
 
     operations = [

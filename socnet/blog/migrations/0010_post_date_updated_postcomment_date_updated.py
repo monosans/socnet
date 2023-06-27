@@ -5,17 +5,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    dependencies = [("blog", "0009_alter_post_content_alter_postcomment_content")]
+    dependencies = [
+        ("blog", "0009_alter_post_content_alter_postcomment_content")
+    ]
 
     operations = [
         migrations.AddField(
             model_name="post",
             name="date_updated",
-            field=models.DateTimeField(auto_now=True, verbose_name="date updated"),
+            field=models.DateTimeField(
+                auto_now=True, verbose_name="date updated"
+            ),
         ),
         migrations.AddField(
             model_name="postcomment",
             name="date_updated",
-            field=models.DateTimeField(auto_now=True, verbose_name="date updated"),
+            field=models.DateTimeField(
+                auto_now=True, verbose_name="date updated"
+            ),
         ),
     ]

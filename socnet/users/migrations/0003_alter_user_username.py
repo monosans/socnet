@@ -8,7 +8,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("users", "0002_remove_user_date_joined_remove_user_first_name_and_more")
+        (
+            "users",
+            "0002_remove_user_date_joined_remove_user_first_name_and_more",
+        )
     ]
 
     operations = [
@@ -17,7 +20,9 @@ class Migration(migrations.Migration):
             name="username",
             field=django.contrib.postgres.fields.citext.CICharField(
                 db_index=True,
-                error_messages={"unique": "A user with that username already exists."},
+                error_messages={
+                    "unique": "A user with that username already exists."
+                },
                 help_text=(
                     "No more than 32 characters. Only lowercase English"
                     " letters, numbers and _. Must begin with a letter and end"

@@ -8,5 +8,7 @@ class Migration(migrations.Migration):
     dependencies = [("messenger", "0004_alter_message_date_created")]
 
     operations = [
-        migrations.RenameField(model_name="message", old_name="user", new_name="sender")
+        migrations.RenameField(
+            model_name="message", old_name="user", new_name="sender"
+        )
     ]

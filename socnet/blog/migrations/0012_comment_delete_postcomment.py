@@ -28,7 +28,9 @@ class Migration(migrations.Migration):
                 (
                     "content",
                     models.TextField(
-                        help_text="Supports a safe subset of HTML and Markdown.",
+                        help_text=(
+                            "Supports a safe subset of HTML and Markdown."
+                        ),
                         max_length=4096,
                         verbose_name="content",
                     ),
@@ -41,7 +43,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "date_updated",
-                    models.DateTimeField(auto_now=True, verbose_name="date updated"),
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="date updated"
+                    ),
                 ),
                 (
                     "author",
@@ -71,7 +75,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "comment", "verbose_name_plural": "comments"},
+            options={
+                "verbose_name": "comment",
+                "verbose_name_plural": "comments",
+            },
         ),
         migrations.DeleteModel(name="PostComment"),
     ]

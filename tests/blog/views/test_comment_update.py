@@ -46,7 +46,9 @@ def test_non_author(client: Client, method: ClientMethods, data: Any) -> None:
     comment = factory()
     url = get_url(comment)
     response = (
-        client.get(url) if method == ClientMethods.GET else client.post(url, data=data)
+        client.get(url)
+        if method == ClientMethods.GET
+        else client.post(url, data=data)
     )
     assert response.status_code == 403
     new_comment = models.Comment.objects.only("date_updated").get(pk=comment.pk)
@@ -92,5 +94,7 @@ def test_author_post_empty(client: Client) -> None:
     url = get_url(comment)
     response = client.post(url)
     assert response.status_code == 200
-    updated_comment = models.Comment.objects.only("date_updated").get(pk=comment.pk)
+    updated_comment = models.Comment.objects.only("date_updated").get(
+        pk=comment.pk
+    )
     assert updated_comment.date_updated == comment.date_updated

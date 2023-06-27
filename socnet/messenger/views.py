@@ -22,7 +22,10 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
     interlocutor = get_object_or_404(qs)
     messages = (
         models.Message.objects.only(
-            "content", "sender__display_name", "sender__image", "sender__username"
+            "content",
+            "sender__display_name",
+            "sender__image",
+            "sender__username",
         )
         .annotate(date_created_epoch=Extract("date_created", "epoch"))
         .select_related("sender")
@@ -33,7 +36,11 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
         .order_by("pk")
     )
     form = forms.MessageCreationForm()
-    context = {"messages_": messages, "interlocutor": interlocutor, "form": form}
+    context = {
+        "messages_": messages,
+        "interlocutor": interlocutor,
+        "form": form,
+    }
     return render(request, "messenger/chat.html", context)
 
 
@@ -65,12 +72,18 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
                 .order_by("-pk")
             )
             msgs_with_interlocutor = [
-                (msg, msg.recipient if msg.sender == request.user else msg.sender)
+                (
+                    msg,
+                    msg.recipient if msg.sender == request.user else msg.sender,
+                )
                 for msg in messages
             ]
         else:
             msgs_with_interlocutor = None
-        context: Dict[str, Any] = {"messages_": msgs_with_interlocutor, "form": form}
+        context: Dict[str, Any] = {
+            "messages_": msgs_with_interlocutor,
+            "form": form,
+        }
         return render(request, "messenger/messages_search.html", context)
     form = forms.MessageSearchForm()
     last_message = (

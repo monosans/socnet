@@ -38,10 +38,15 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("text", models.TextField(max_length=4096, verbose_name="text")),
+                (
+                    "text",
+                    models.TextField(max_length=4096, verbose_name="text"),
+                ),
                 (
                     "date",
-                    models.DateTimeField(auto_now_add=True, verbose_name="date/time"),
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="date/time"
+                    ),
                 ),
                 (
                     "chat",
@@ -53,6 +58,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "message", "verbose_name_plural": "messages"},
+            options={
+                "verbose_name": "message",
+                "verbose_name_plural": "messages",
+            },
         ),
     ]

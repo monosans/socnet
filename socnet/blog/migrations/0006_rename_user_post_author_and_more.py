@@ -8,7 +8,9 @@ class Migration(migrations.Migration):
     dependencies = [("blog", "0005_alter_post_date_created_and_more")]
 
     operations = [
-        migrations.RenameField(model_name="post", old_name="user", new_name="author"),
+        migrations.RenameField(
+            model_name="post", old_name="user", new_name="author"
+        ),
         migrations.RenameField(
             model_name="postcomment", old_name="user", new_name="author"
         ),

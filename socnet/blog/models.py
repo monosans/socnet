@@ -24,7 +24,9 @@ class Post(MarkdownContentModel, TimestampedModel):
     allow_commenting = models.BooleanField(
         verbose_name=_("allow commenting"),
         default=True,
-        help_text=_("You can comment on your posts regardless of this setting."),
+        help_text=_(
+            "You can comment on your posts regardless of this setting."
+        ),
     )
 
     class Meta:

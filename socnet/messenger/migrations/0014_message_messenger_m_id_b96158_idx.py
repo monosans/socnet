@@ -10,6 +10,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddIndex(
             model_name="message",
-            index=models.Index(fields=["-id"], name="messenger_m_id_b96158_idx"),
+            index=models.Index(
+                fields=["-id"], name="messenger_m_id_b96158_idx"
+            ),
         )
     ]

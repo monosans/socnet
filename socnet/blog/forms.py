@@ -8,7 +8,9 @@ from django.utils.translation import pgettext_lazy
 from ..core.models import MarkdownContentModel
 from . import models
 
-TMarkdownContentModel = TypeVar("TMarkdownContentModel", bound=MarkdownContentModel)
+TMarkdownContentModel = TypeVar(
+    "TMarkdownContentModel", bound=MarkdownContentModel
+)
 
 
 class MarkdownContentModelForm(forms.ModelForm[TMarkdownContentModel]):

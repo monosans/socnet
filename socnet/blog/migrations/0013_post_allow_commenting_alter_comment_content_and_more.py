@@ -15,7 +15,9 @@ class Migration(migrations.Migration):
             name="allow_commenting",
             field=models.BooleanField(
                 default=True,
-                help_text="You can comment on your posts regardless of this setting.",
+                help_text=(
+                    "You can comment on your posts regardless of this setting."
+                ),
                 verbose_name="allow commenting",
             ),
         ),

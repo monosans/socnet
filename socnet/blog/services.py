@@ -23,7 +23,9 @@ def get_posts_preview_qs(
             *extra_fields,
         )
         .annotate_epoch_dates()
-        .annotate(Count("comments", distinct=True), Count("likers", distinct=True))
+        .annotate(
+            Count("comments", distinct=True), Count("likers", distinct=True)
+        )
         .select_related("author")
     )
     if request.user.is_anonymous:
@@ -34,7 +36,9 @@ def get_posts_preview_qs(
 def get_subscriptions(username: str, field: str) -> User:
     prefetch = Prefetch(
         field,
-        User.objects.only("display_name", "image", "username").order_by("username"),
+        User.objects.only("display_name", "image", "username").order_by(
+            "username"
+        ),
     )
     qs = (
         User.objects.only("display_name", "username")

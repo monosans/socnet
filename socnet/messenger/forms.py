@@ -14,7 +14,9 @@ class MessageCreationForm(forms.ModelForm[models.Message]):
             "content": forms.Textarea(
                 {
                     "class": "form-control border-0 rounded-top-0",
-                    "placeholder": models.Message._meta.get_field("content").help_text,
+                    "placeholder": models.Message._meta.get_field(
+                        "content"
+                    ).help_text,
                     "rows": 2,
                 }
             )

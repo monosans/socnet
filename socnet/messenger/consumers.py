@@ -44,7 +44,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         if user.is_anonymous:
             await self.close()
             return
-        self.interlocutor_pk = int(self.scope["url_route"]["kwargs"]["interlocutor_pk"])
+        self.interlocutor_pk = int(
+            self.scope["url_route"]["kwargs"]["interlocutor_pk"]
+        )
         members = [user.pk, self.interlocutor_pk]
         members.sort()
         self.group = "chat%d_%d" % tuple(members)
@@ -56,10 +58,14 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             return
         await self.channel_layer.group_discard(self.group, self.channel_name)
 
-    async def receive_json(self, content: Dict[str, str], **kwargs: Any) -> None:
+    async def receive_json(
+        self, content: Dict[str, str], **kwargs: Any
+    ) -> None:
         sender: User = self.scope["user"]
         message = models.Message(
-            content=content["message"], recipient_id=self.interlocutor_pk, sender=sender
+            content=content["message"],
+            recipient_id=self.interlocutor_pk,
+            sender=sender,
         )
         try:
             await save_obj(message)
