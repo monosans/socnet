@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: rustup toolchain install nightly --profile minimal --component rustfmt --allow-downgrade
+      - run: rustup toolchain install nightly --profile minimal --component rustfmt --no-self-update --allow-downgrade
       - run: cd socnet_rs && cargo +nightly fmt --check
   run-tsc:
     runs-on: ubuntu-latest
