@@ -1,6 +1,7 @@
+use std::collections::HashMap;
+
 use once_cell::sync::Lazy;
 use pyo3::prelude::*;
-use std::collections::HashMap;
 
 static AMMONIA: Lazy<ammonia::Builder> = Lazy::new(|| {
     let mut cleaner = ammonia::Builder::default();
@@ -9,7 +10,8 @@ static AMMONIA: Lazy<ammonia::Builder> = Lazy::new(|| {
             "a",
             HashMap::from([(
                 "class",
-                "link-underline link-underline-opacity-0 link-underline-opacity-100-hover",
+                "link-underline link-underline-opacity-0 \
+                 link-underline-opacity-100-hover",
             )]),
         ),
         (
