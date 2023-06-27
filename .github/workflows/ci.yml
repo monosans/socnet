@@ -40,8 +40,7 @@ jobs:
       - id: build
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --pull
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django coverage run -m pytest
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django coverage report
+      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django pytest --cov
       - if: ${{ steps.build.conclusion == 'success' }}
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django mypy .
       - if: ${{ steps.build.conclusion == 'success' }}
