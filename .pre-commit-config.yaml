@@ -29,6 +29,9 @@ repos:
     rev: v2.8.8
     hooks:
       - id: prettier
+        additional_dependencies:
+          - prettier
+          - "@ianvs/prettier-plugin-sort-imports"
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
