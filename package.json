@@ -10,7 +10,7 @@
     "@types/autosize": "4.0.1",
     "@types/luxon": "3.3.0",
     "@typescript-eslint/eslint-plugin": "5.60.1",
-    "@typescript-eslint/parser": "5.60.0",
+    "@typescript-eslint/parser": "5.60.1",
     "eslint": "8.43.0",
     "eslint-config-prettier": "8.8.0",
     "prettier": "2.8.8",
