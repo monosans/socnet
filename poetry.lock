@@ -892,17 +892,17 @@ files = [
 
 [[package]]
 name = "djangorestframework-stubs"
-version = "3.14.1"
+version = "3.14.2"
 description = "PEP-484 stubs for django-rest-framework"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "djangorestframework-stubs-3.14.1.tar.gz", hash = "sha256:a1c6619148f08c4070fdf8b92ce2b2b47e10c9610fb25ae27baf2baefb1bf613"},
-    {file = "djangorestframework_stubs-3.14.1-py3-none-any.whl", hash = "sha256:67816705adffc8407fd5469b102abc2db9987afca68dd6f7d21b66369008a940"},
+    {file = "djangorestframework-stubs-3.14.2.tar.gz", hash = "sha256:4a9169253d2d46885a007c085d64e96efc8a78bd938c747e9ad0654725c4e7d0"},
+    {file = "djangorestframework_stubs-3.14.2-py3-none-any.whl", hash = "sha256:38f078cdf80228bd73e3ff5dcf00263f847da37c30d113e0fc8fda09f9dbc89a"},
 ]
 
 [package.dependencies]
-django-stubs = ">=4.2.1"
+django-stubs = ">=4.2.2"
 mypy = ">=0.991"
 requests = ">=2.0.0"
 types-PyYAML = ">=5.4.3"
@@ -910,7 +910,7 @@ types-requests = ">=0.1.12"
 typing-extensions = ">=3.10.0"
 
 [package.extras]
-compatible-mypy = ["mypy (>=1.3.0,<1.4)"]
+compatible-mypy = ["mypy (==1.4.*)"]
 coreapi = ["coreapi (>=2.0.0)"]
 markdown = ["types-Markdown (>=0.1.5)"]
 
@@ -1018,13 +1018,13 @@ doc = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-spelling"]
 
 [[package]]
 name = "faker"
-version = "18.11.1"
+version = "18.11.2"
 description = "Faker is a Python package that generates fake data for you."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "Faker-18.11.1-py3-none-any.whl", hash = "sha256:02980fe15acd58861305568bae0a277680792a505a5a45a309d352f79c452dd1"},
-    {file = "Faker-18.11.1.tar.gz", hash = "sha256:df4ee36d058a6a96de9d5e645571ef8536946a0b62db841494f8a3bc3bcdc5af"},
+    {file = "Faker-18.11.2-py3-none-any.whl", hash = "sha256:21c2c29638e98502f3bba9ad6a4f07a4b09c5e2150bb491ff02411a5888f6955"},
+    {file = "Faker-18.11.2.tar.gz", hash = "sha256:ec6e2824bb1d3546b36c156324b9df6bca5a3d6d03adf991e6a5586756dcab9d"},
 ]
 
 [package.dependencies]
@@ -2657,4 +2657,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "9c1457eb68f3f5dfdf9f0e787a81525e2a358b108a9f64f382a55f3f4fd604ab"
+content-hash = "b83ab0614893f441cd08a3f60870d5a2d26cfc0895d2bbaad9fd85d32386e05d"
