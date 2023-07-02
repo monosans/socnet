@@ -57,6 +57,12 @@
       ],
       "@typescript-eslint/no-magic-numbers": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/parameter-properties": [
+        "error",
+        {
+          "prefer": "parameter-property"
+        }
+      ],
       "@typescript-eslint/prefer-readonly-parameter-types": "off",
       "@typescript-eslint/strict-boolean-expressions": [
         "error",
