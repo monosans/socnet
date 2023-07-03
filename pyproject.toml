@@ -31,7 +31,7 @@ channels-redis = "4.1.0"
 
 sentry-sdk = { version = "1.26.0", extras = ["django"] }
 
-typing-extensions = { version = "4.7.0", python = "<3.10" }
+typing-extensions = { version = "4.7.1", python = "<3.10" }
 
 uvicorn = "0.22.0"
 httptools = "0.5.0"
