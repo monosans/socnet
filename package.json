@@ -1,11 +1,6 @@
 {
   "name": "socnet",
   "private": true,
-  "scripts": {
-    "eslint": "eslint --fix .",
-    "format": "prettier --write . '!**/*.html'",
-    "stylelint": "stylelint '**/*.css'"
-  },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.0.2",
     "@types/autosize": "4.0.1",
