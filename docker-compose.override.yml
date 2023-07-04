@@ -22,7 +22,7 @@ services:
       - 8000:8000
     volumes:
       - .:/app
-      - socnet_local_javascript:/app/socnet/static/public/js/:ro
+      - socnet_local_javascript:/app/socnet/static/public/js
   postgres:
     volumes:
       - socnet_local_postgres_data:/var/lib/postgresql/data
@@ -40,9 +40,9 @@ services:
     restart: unless-stopped
     user: node
     volumes:
-      - ./socnet/static/private/ts/:/app/socnet/static/private/ts/:ro
-      - ./tsconfig.json:/app/tsconfig.json:ro
-      - socnet_local_javascript:/app/socnet/static/public/js/
+      - ./socnet/static/private/ts:/app/socnet/static/private/ts
+      - ./tsconfig.json:/app/tsconfig.json
+      - socnet_local_javascript:/app/socnet/static/public/js
 volumes:
   socnet_local_postgres_data:
   socnet_local_javascript:
