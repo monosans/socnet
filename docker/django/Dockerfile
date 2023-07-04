@@ -4,7 +4,11 @@ WORKDIR /app
 
 COPY ./package.json ./package-lock.json ./
 
-RUN npm ci && npm cache clean --force
+RUN mkdir -p ./socnet/static/public/js && \
+  chown node:node ./socnet/static/public/js && \
+  npm ci && \
+  npm cache clean --force && \
+  rm package.json package-lock.json
 
 
 FROM node as node-tsc
