@@ -28,7 +28,7 @@
   "root": { "level": "DEBUG", "handlers": ["console", "mail_admins"] },
   "loggers": {
     "django.db.backends": { "level": "INFO" },
-    "django.request": { "level": "ERROR" },
+    "django.request": { "level": "INFO" },
     "django.template": { "level": "INFO" },
     "environ.environ": { "level": "INFO" },
     "factory.generate": { "level": "INFO" },
