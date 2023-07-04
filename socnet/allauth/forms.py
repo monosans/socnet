@@ -13,19 +13,19 @@ from ..users.models import User
 gettext_lazy("Password (again)")
 
 
+class AddEmailForm(allauth_forms.AddEmailForm):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields["email"].label = ""
+        del self.fields["email"].widget.attrs["placeholder"]
+
+
 class LoginForm(allauth_forms.LoginForm):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         label = gettext("Username or email")
         self.fields["login"].label = label
         self.fields["login"].widget.attrs["placeholder"] = label
-
-
-class AddEmailForm(allauth_forms.AddEmailForm):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-        self.fields["email"].label = ""
-        del self.fields["email"].widget.attrs["placeholder"]
 
 
 class ResetPasswordForm(allauth_forms.ResetPasswordForm):

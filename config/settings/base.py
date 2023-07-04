@@ -165,6 +165,14 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_ADAPTER = "socnet.allauth.adapter.AuthAdapter"
+ACCOUNT_FORMS = {
+    "add_email": "socnet.allauth.forms.AddEmailForm",
+    "login": "socnet.allauth.forms.LoginForm",
+    "reset_password": "socnet.allauth.forms.ResetPasswordForm",
+    "signup": "socnet.allauth.forms.SignupForm",
+}
+ALLAUTH_2FA_FORMS = {"setup": "socnet.allauth.forms.TOTPDeviceForm"}
+OTP_ADMIN_HIDE_SENSITIVE_DATA = True
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
@@ -201,5 +209,3 @@ SPECTACULAR_SETTINGS = {
 CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {
     "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 }
-
-OTP_ADMIN_HIDE_SENSITIVE_DATA = True
