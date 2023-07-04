@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from allauth.account.urls import urlpatterns as allauth_urlpatterns
 from allauth_2fa.urls import urlpatterns as allauth_2fa_urlpatterns
-from django.urls import path, include
+from django.urls import include, path
 
 urlpatterns = [
     path("", include(allauth_urlpatterns)),
