@@ -682,19 +682,19 @@ requests-oauthlib = ">=0.3.0"
 
 [[package]]
 name = "django-allauth-2fa"
-version = "0.10.0"
+version = "0.11.0"
 description = "Adds two factor authentication to django-allauth"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "django-allauth-2fa-0.10.0.tar.gz", hash = "sha256:b71fc02320f983aca00876f0d7c669ed2af07cf7f61e9b30144d3d27740f79cd"},
-    {file = "django_allauth_2fa-0.10.0-py3-none-any.whl", hash = "sha256:7123edaf8b561f020a0d3dd323f396867043bdb7de7f191b41730f240ba06d37"},
+    {file = "django_allauth_2fa-0.11.0-py3-none-any.whl", hash = "sha256:a4cb72359a94e429b3bc035f0c8c5a4a809b4120a0e6c22a1e11a6ced09fb478"},
+    {file = "django_allauth_2fa-0.11.0.tar.gz", hash = "sha256:43e0ebb5913123607da38e8a964d38242d7c8c77d37bd17e2e529ee062790ec1"},
 ]
 
 [package.dependencies]
-django = ">=2.2"
-django-allauth = ">=0.41.0"
-django-otp = ">=0.6.0"
+django = ">=3.2"
+django-allauth = ">=0.53.0"
+django-otp = ">=1.1.0"
 qrcode = ">=5.3"
 
 [[package]]
@@ -2663,4 +2663,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "d18bfe329c2ecb6d20ad58b04a9c83aabfd0204a615a9ace609d982227a590c3"
+content-hash = "50dd3ddad2c963a3ef7c9e664ecefe75972858ad250378d59df658ac0353b9fb"

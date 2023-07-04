@@ -57,4 +57,4 @@ class SignupForm(allauth_forms.SignupForm):
 class TOTPDeviceForm(allauth_2fa_forms.TOTPDeviceForm):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.fields["token"].label = ""
+        self.fields["otp_token"].label = ""
