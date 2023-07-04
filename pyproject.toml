@@ -53,7 +53,7 @@ pre-commit = "3.3.3"
 black = "23.3.0"
 djlint = "1.31.1"
 
-ruff = "0.0.275"
+ruff = "0.0.276"
 
 mypy = "1.4.1"
 django-stubs = "4.2.3"
