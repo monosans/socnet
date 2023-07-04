@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-10 11:50+0000\n"
+"POT-Creation-Date: 2023-07-04 20:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,6 +305,10 @@ msgstr "Шаг 1"
 
 msgid "Scan the QR code below with a token generator (such as Aegis Authenticator on Android or Raivo OTP on iOS)."
 msgstr "Отсканируйте приведённый ниже QR-код с помощью генератора токенов (например, Aegis Authenticator на Android или Raivo OTP на iOS)."
+
+#, python-format
+msgid "Secret: %(secret)s"
+msgstr "Секрет: %(secret)s"
 
 msgid "Step 2"
 msgstr "Шаг 2"
