@@ -30,7 +30,7 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier
+          - "prettier@2"
           - "@ianvs/prettier-plugin-sort-imports"
   - repo: https://github.com/psf/black
     rev: 23.3.0
