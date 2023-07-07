@@ -34,7 +34,7 @@ sentry-sdk = { version = "1.27.0", extras = ["django"] }
 typing-extensions = { version = "4.7.1", python = "<3.10" }
 
 uvicorn = "0.22.0"
-httptools = "0.5.0"
+httptools = "0.6.0"
 uvloop = { version = "0.17.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
 websockets = "11.0.3"
 
