@@ -194,7 +194,14 @@ target-version = "py38"
 "tests/*" = ["PLR2004", "S101"]
 
 [tool.ruff.flake8-gettext]
-extend-function-names = ["gettext_lazy"]
+extend-function-names = [
+  "pgettext",
+  "gettext_lazy",
+  "pgettext_lazy",
+  "npgettext",
+  "ngettext_lazy",
+  "npgettext_lazy",
+]
 
 [tool.ruff.flake8-self]
 ignore-names = ["_meta"]
