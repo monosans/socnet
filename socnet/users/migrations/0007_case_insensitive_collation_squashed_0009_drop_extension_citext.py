@@ -51,10 +51,8 @@ class Migration(migrations.Migration):
                 validators=[
                     django.core.validators.RegexValidator(
                         re.compile("^[-a-zA-Z0-9_]+\\Z"),
-                        (
-                            "Enter a valid “slug” consisting of letters,"
-                            " numbers, underscores or hyphens."
-                        ),
+                        "Enter a valid “slug” consisting of letters,"
+                        " numbers, underscores or hyphens.",
                         "invalid",
                     )
                 ],
