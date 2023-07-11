@@ -27,22 +27,16 @@ static AMMONIA: Lazy<ammonia::Builder> = Lazy::new(|| {
     cleaner
 });
 
-static CMARK_OPTIONS: Lazy<pulldown_cmark::Options> = Lazy::new(|| {
-    let mut options = pulldown_cmark::Options::empty();
-    options.insert(pulldown_cmark::Options::ENABLE_TABLES);
-    options.insert(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
-    options
-});
+const CMARK_OPTIONS: pulldown_cmark::Options =
+    pulldown_cmark::Options::ENABLE_TABLES
+        .union(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
 
 #[pyfunction]
 pub fn markdownify(py: Python, text: &str) -> String {
     py.allow_threads(move || {
-        let html = {
-            let parser = pulldown_cmark::Parser::new_ext(text, *CMARK_OPTIONS);
-            let mut html = String::new();
-            pulldown_cmark::html::push_html(&mut html, parser);
-            html
-        };
+        let parser = pulldown_cmark::Parser::new_ext(text, CMARK_OPTIONS);
+        let mut html = String::new();
+        pulldown_cmark::html::push_html(&mut html, parser);
         AMMONIA.clean(&html).to_string()
     })
 }
