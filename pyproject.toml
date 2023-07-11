@@ -64,7 +64,7 @@ pytest = "7.4.0"
 pytest-django = "4.5.2"
 pytest-cov = "4.1.0"
 covdefaults = "2.3.0"
-django-coverage-plugin = "3.0.0"
+django-coverage-plugin = "3.1.0"
 factory-boy = "3.2.1"
 
 [tool.poetry.group.production.dependencies]
