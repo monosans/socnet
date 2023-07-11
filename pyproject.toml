@@ -50,7 +50,7 @@ django-debug-toolbar = "4.1.0"
 django-extra-checks = "0.13.3"
 
 pre-commit = "3.3.3"
-black = "23.3.0"
+black = "23.7.0"
 djlint = "1.31.1"
 
 ruff = "0.0.277"
