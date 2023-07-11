@@ -40,10 +40,7 @@ messageTextarea.focus();
 const chatLog = {
   element: document.querySelector("#chat-log")!,
 
-  scrollToEnd(): void {
-    this.element.scrollTop = this.element.scrollHeight;
-  },
-
+  // eslint-disable-next-line sort-keys
   async addNewMessage(data: ChatMessageEvent): Promise<void> {
     const id = `msg${data.pk}`;
     const sender = getSender(data);
@@ -75,10 +72,17 @@ const chatLog = {
     const messageElement = document.querySelector<HTMLElement>(`#${id}`)!;
     await Promise.all([
       formatDates(messageElement),
-      import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm").then((viewer) => {
-        new viewer.default(messageElement, { button: false });
-      }),
+      import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm").then(
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        ({ default: Viewer }) => {
+          new Viewer(messageElement, { button: false });
+        }
+      ),
     ]);
+  },
+
+  scrollToEnd(): void {
+    this.element.scrollTop = this.element.scrollHeight;
   },
 };
 chatLog.scrollToEnd();

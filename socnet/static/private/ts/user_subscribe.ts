@@ -20,12 +20,15 @@ function getRequest(dataset: DOMStringMap): {
   return {
     options: {
       body,
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": document.querySelector<HTMLInputElement>(
-          "[name=csrfmiddlewaretoken]"
-        )!.value,
-      },
+      headers: [
+        ["Content-Type", "application/json"],
+        [
+          "X-CSRFToken",
+          document.querySelector<HTMLInputElement>(
+            "[name=csrfmiddlewaretoken]"
+          )!.value,
+        ],
+      ],
       method,
     },
     url,

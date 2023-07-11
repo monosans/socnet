@@ -6,6 +6,7 @@ export default async function formatDates(
   const elements = parentNode.querySelectorAll<HTMLElement>("[data-epoch]");
 
   if (elements.length) {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { DateTime } = await import(
       "https://cdn.jsdelivr.net/npm/luxon@3/+esm"
     );
