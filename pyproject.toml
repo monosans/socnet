@@ -6,12 +6,11 @@ authors = []
 
 [tool.poetry.dependencies]
 python = "^3.8"
-
-socnet-rs = { path = "socnet_rs", develop = false }
-
+channels = "4.0.0"
+channels-redis = "4.1.0"
 Django = { version = "4.2.3", extras = ["argon2"] }
-django-allauth-2fa = "0.11.0"
 django-allauth = "0.54.0"
+django-allauth-2fa = "0.11.0"
 django-bootstrap5 = "23.3"
 django-cleanup = "8.0.0"
 django-environ = "0.10.0"
@@ -19,53 +18,39 @@ django-filter = "23.2"
 django-logentry-admin = "1.1.0"
 django-otp = "1.2.2"
 django-stubs-ext = "4.2.2"
-docutils = "0.20.1"
-Pillow = "10.0.0"
-
 djangorestframework = "3.14.0"
 djangorestframework-camel-case = "1.4.2"
+docutils = "0.20.1"
 drf-spectacular = "0.26.3"
-
-channels = "4.0.0"
-channels-redis = "4.1.0"
-
-sentry-sdk = { version = "1.28.0", extras = ["django"] }
-
-typing-extensions = { version = "4.7.1", python = "<3.10" }
-
-uvicorn = "0.22.0"
 httptools = "0.6.0"
+Pillow = "10.0.0"
+sentry-sdk = { version = "1.28.0", extras = ["django"] }
+socnet-rs = { path = "socnet_rs", develop = false }
+typing-extensions = { version = "4.7.1", python = "<3.10" }
+uvicorn = "0.22.0"
 uvloop = { version = "0.17.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
 websockets = "11.0.3"
 
 [tool.poetry.group.local.dependencies]
-psycopg = { version = "3.1.9", extras = ["binary"] }
-
+black = "23.7.0"
+covdefaults = "2.3.0"
 debugpy = "1.6.7"
-
-# Required for uvicorn's --reload
-watchfiles = "0.19.0"
-
+django-coverage-plugin = "3.1.0"
 django-debug-toolbar = "4.1.0"
 django-extra-checks = "0.13.3"
-
-pre-commit = "3.3.3"
-black = "23.7.0"
-djlint = "1.31.1"
-
-ruff = "0.0.277"
-
-mypy = "1.4.1"
 django-stubs = "4.2.3"
 djangorestframework-stubs = "3.14.2"
-types-Pillow = "10.0.0.0"
-
-pytest = "7.4.0"
-pytest-django = "4.5.2"
-pytest-cov = "4.1.0"
-covdefaults = "2.3.0"
-django-coverage-plugin = "3.1.0"
+djlint = "1.31.1"
 factory-boy = "3.2.1"
+mypy = "1.4.1"
+pre-commit = "3.3.3"
+psycopg = { version = "3.1.9", extras = ["binary"] }
+pytest = "7.4.0"
+pytest-cov = "4.1.0"
+pytest-django = "4.5.2"
+ruff = "0.0.277"
+types-Pillow = "10.0.0.0"
+watchfiles = "0.19.0"
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "20.1.0"
@@ -73,27 +58,27 @@ psycopg = { version = "3.1.9", extras = ["c"] }
 redis = { version = "4.6.0", extras = ["hiredis"] }
 
 [tool.black]
-target-version = ["py38"]
 line-length = 80
+target-version = ["py37"]
 skip-magic-trailing-comma = true
 preview = true
 
 [tool.coverage.report]
 exclude_lines = [
-    "^\\s*@(?:abc\\.)?abstractmethod$",
-    "^\\s*if\\s+(?:settings\\.)?DEBUG\\s*:$",
+  "^\\s*@(?:abc\\.)?abstractmethod$",
+  "^\\s*if\\s+(?:settings\\.)?DEBUG\\s*:$",
 ]
 fail_under = 75
 
 [tool.coverage.run]
 omit = [
-    ".venv/*",
-    "node_modules/*",
-    "config/asgi.py",
-    "config/settings/local.py",
-    "config/settings/production.py",
-    "config/wsgi.py",
-    "manage.py",
+  ".venv/*",
+  "node_modules/*",
+  "config/asgi.py",
+  "config/settings/local.py",
+  "config/settings/production.py",
+  "config/wsgi.py",
+  "manage.py",
 ]
 plugins = ["covdefaults", "django_coverage_plugin"]
 
@@ -117,55 +102,29 @@ disallow_untyped_decorators = false
 warn_unreachable = true
 local_partial_types = true
 enable_error_code = [
-    "redundant-self",
-    "redundant-expr",
-    "possibly-undefined",
-    "truthy-bool",
-    "truthy-iterable",
-    "ignore-without-code",
-    "unused-awaitable",
+  "redundant-self",
+  "redundant-expr",
+  "possibly-undefined",
+  "truthy-bool",
+  "truthy-iterable",
+  "ignore-without-code",
+  "unused-awaitable",
 ]
 strict = true
 plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 
 [[tool.mypy.overrides]]
-module = "socnet.*.migrations.*"
-ignore_errors = true
-
-[[tool.mypy.overrides]]
-module = "allauth_2fa.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "allauth.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "channels.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "channels_redis.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "debug_toolbar.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "django_filters.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "django_otp.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "environ.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "factory.*"
+module = [
+  "allauth_2fa.*",
+  "allauth.*",
+  "channels.*",
+  "channels_redis.*",
+  "debug_toolbar.*",
+  "django_filters.*",
+  "django_otp.*",
+  "environ.*",
+  "factory.*",
+]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
@@ -175,57 +134,58 @@ addopts = ["--strict-config", "--strict-markers"]
 xfail_strict = true
 
 [tool.ruff]
-target-version = "py38"
+ignore = [
+  "ANN",
+  "BLE001",
+  "C901",
+  "COM",
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "D105",
+  "D106",
+  "D107",
+  "D203",
+  "D205",
+  "D212",
+  "D213",
+  "D400",
+  "D401",
+  "D407",
+  "D415",
+  "D417",
+  "DJ008",
+  "ERA001",
+  "FBT002",
+  "PD901",
+  "PERF203",
+  "PLR0911",
+  "PLR0912",
+  "PLR0913",
+  "PLR0915",
+  "PT012",
+  "RUF001",
+  "RUF002",
+  "RUF003",
+  "RUF012",
+  "RUF013",
+  "S110",
+  "S112",
+  "S308",
+  "S311",
+  "SIM105",
+  "TCH001",
+  "TCH002",
+  "TCH003",
+  "TID252",
+  "TRY400",
+]
+ignore-init-module-imports = true
 line-length = 80
 select = ["ALL"]
-ignore = [
-    "ANN",
-    "BLE001",
-    "C901",
-    "COM",
-    "D100",
-    "D101",
-    "D102",
-    "D103",
-    "D104",
-    "D105",
-    "D106",
-    "D107",
-    "D203",
-    "D205",
-    "D212",
-    "D213",
-    "D400",
-    "D401",
-    "D407",
-    "D415",
-    "D417",
-    "DJ008",
-    "ERA001",
-    "FBT002",
-    "PD901",
-    "PERF203",
-    "PLR0911",
-    "PLR0912",
-    "PLR0913",
-    "PLR0915",
-    "PT012",
-    "RUF001",
-    "RUF002",
-    "RUF003",
-    "RUF012",
-    "RUF013",
-    "S110",
-    "S112",
-    "S308",
-    "S311",
-    "SIM105",
-    "TCH001",
-    "TCH002",
-    "TCH003",
-    "TID252",
-    "TRY400",
-]
+target-version = "py38"
 
 [tool.ruff.per-file-ignores]
 "config/settings/*" = ["F403", "F405"]
