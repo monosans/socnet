@@ -21,8 +21,8 @@ from socnet_rs import normalize_str
 
 from . import decorators
 
-_ST = TypeVar("_ST", contravariant=True)
-_GT = TypeVar("_GT", covariant=True)
+T_contra = TypeVar("T_contra", contravariant=True)
+T_co = TypeVar("T_co", covariant=True)
 TField = TypeVar("TField", bound=Field[Any, Any])
 
 
@@ -42,7 +42,7 @@ NormalizedCharField = create_normalized_str_field(CharField)
 NormalizedTextField = create_normalized_str_field(TextField)
 
 
-class _NullAutoNowDateTimeField(DateTimeField[_ST, _GT]):
+class _NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
     def pre_save(self, model_instance: Model, add: bool) -> Any:  # noqa: FBT001
         value = None if add else timezone.now()
         setattr(model_instance, self.attname, value)
