@@ -3,6 +3,7 @@ name = ""
 version = "0"
 description = ""
 authors = []
+classifiers = ["Private :: Do Not Upload"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
