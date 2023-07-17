@@ -3,7 +3,7 @@ const formatter = new Intl.NumberFormat(
   {
     // @ts-expect-error
     notation: "compact",
-  }
+  },
 );
 
 export default function formatNumber(element: HTMLOrSVGElement & Node): void {

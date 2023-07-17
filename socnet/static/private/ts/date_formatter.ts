@@ -1,7 +1,7 @@
 const options = { locale: navigator.language === "ru" ? "ru" : "en" };
 
 export default async function formatDates(
-  parentNode: ParentNode
+  parentNode: ParentNode,
 ): Promise<void> {
   const elements = parentNode.querySelectorAll<HTMLElement>("[data-epoch]");
 

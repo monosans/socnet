@@ -15,7 +15,7 @@ function getRequest(dataset: DOMStringMap): {
     value = dataset["commentPk"];
   } else {
     throw new Error(
-      "Like button must contain data-post-pk or data-comment-pk attribute"
+      "Like button must contain data-post-pk or data-comment-pk attribute",
     );
   }
 
@@ -38,7 +38,7 @@ function getRequest(dataset: DOMStringMap): {
         [
           "X-CSRFToken",
           document.querySelector<HTMLInputElement>(
-            "[name=csrfmiddlewaretoken]"
+            "[name=csrfmiddlewaretoken]",
           )!.value,
         ],
       ],
@@ -56,7 +56,7 @@ async function handler(e: Event): Promise<void> {
   const response = await fetch(request.url, request.options);
   if (!response.ok) {
     throw new Error(
-      `Like API returned status ${response.status} (${response.statusText})`
+      `Like API returned status ${response.status} (${response.statusText})`,
     );
   }
 
@@ -81,7 +81,7 @@ async function handler(e: Event): Promise<void> {
 }
 
 for (const btn of document.querySelectorAll<HTMLButtonElement>(
-  "[data-is-liked]"
+  "[data-is-liked]",
 )) {
   btn.addEventListener("click", (e) => void handler(e));
 }

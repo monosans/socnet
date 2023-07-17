@@ -8,7 +8,7 @@ function cleanWhitespaceInput(e: Event): void {
 }
 
 for (const input of document.querySelectorAll(
-  'input[type="text"], input:not([type]), textarea'
+  'input[type="text"], input:not([type]), textarea',
 )) {
   input.addEventListener("input", cleanWhitespaceInput);
 }

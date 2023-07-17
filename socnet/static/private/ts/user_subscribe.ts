@@ -25,7 +25,7 @@ function getRequest(dataset: DOMStringMap): {
         [
           "X-CSRFToken",
           document.querySelector<HTMLInputElement>(
-            "[name=csrfmiddlewaretoken]"
+            "[name=csrfmiddlewaretoken]",
           )!.value,
         ],
       ],
@@ -43,7 +43,7 @@ async function handler(e: Event): Promise<void> {
   const response = await fetch(request.url, request.options);
   if (!response.ok) {
     throw new Error(
-      `Subscribe API returned status ${response.status} (${response.statusText})`
+      `Subscribe API returned status ${response.status} (${response.statusText})`,
     );
   }
 
@@ -54,7 +54,7 @@ async function handler(e: Event): Promise<void> {
 
   if (subscribersCount) {
     const unformattedNumber = parseInt(
-      subscribersCount.dataset["unformattedNumber"]!
+      subscribersCount.dataset["unformattedNumber"]!,
     );
     subscribersCount.dataset["unformattedNumber"] = (
       unformattedNumber + (isSubscribe ? 1 : -1)

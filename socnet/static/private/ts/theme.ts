@@ -22,7 +22,7 @@ function setTheme(theme: string): void {
   const activeDropdownIcon = activeDropdown.querySelector("i")!;
 
   const dropdownToActivate = themeSwitcher.querySelector(
-    `[data-bs-theme-value="${theme}"]`
+    `[data-bs-theme-value="${theme}"]`,
   )!;
   const dropdownToActivateIcon = dropdownToActivate.querySelector("i")!;
 

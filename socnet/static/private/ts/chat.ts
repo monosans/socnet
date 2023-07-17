@@ -76,7 +76,7 @@ const chatLog = {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         ({ default: Viewer }) => {
           new Viewer(messageElement, { button: false });
-        }
+        },
       ),
     ]);
   },
@@ -90,7 +90,7 @@ chatLog.scrollToEnd();
 const chatWs = ((): WebSocket => {
   const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
   const ws = new WebSocket(
-    `${wsProtocol}://${window.location.host}/ws/chat/${chatData.interlocutorPk}/`
+    `${wsProtocol}://${window.location.host}/ws/chat/${chatData.interlocutorPk}/`,
   );
   ws.onmessage = (e: MessageEvent<string>): void => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
