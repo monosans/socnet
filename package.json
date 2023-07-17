@@ -2,7 +2,7 @@
   "name": "socnet",
   "private": true,
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "4.0.2",
+    "@ianvs/prettier-plugin-sort-imports": "4.1.0",
     "@types/autosize": "4.0.1",
     "@types/luxon": "3.3.0",
     "@typescript-eslint/eslint-plugin": "6.0.0",
