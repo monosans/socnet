@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from factory import Faker
-from factory.django import DjangoModelFactory
+from factory.django import DjangoModelFactory, Password
 
 from socnet.users.models import User
 
@@ -12,7 +12,7 @@ class UserFactory(DjangoModelFactory):
     display_name = Faker("name")
     email = Faker("email")
     location = Faker("address")
-    password = Faker("password")
+    password = Password("pw")
     username = Faker("user_name")
 
     class Meta:

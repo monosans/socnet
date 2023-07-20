@@ -193,7 +193,7 @@ target-version = "py38"
 "config/settings/*" = ["F403", "F405"]
 "docker/django/gunicorn_config.py" = ["INP001"]
 "socnet/*/migrations/*" = ["SLF001"]
-"tests/*" = ["PLR2004", "S101"]
+"tests/*" = ["PLR2004", "S101", "S105", "S106", "S107"]
 
 [tool.ruff.flake8-gettext]
 extend-function-names = [
