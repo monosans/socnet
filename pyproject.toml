@@ -51,7 +51,7 @@ psycopg = { version = "3.1.9", extras = ["binary"] }
 pytest = "7.4.0"
 pytest-cov = "4.1.0"
 pytest-django = "4.5.2"
-ruff = "0.0.280"
+ruff = "0.0.281"
 types-Pillow = "10.0.0.2"
 watchfiles = "0.19.0"
 
