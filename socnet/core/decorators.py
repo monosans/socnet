@@ -1,13 +1,9 @@
 from __future__ import annotations
 
 import functools
-import sys
-from typing import Callable, TypeVar
+from typing import Callable
 
-if sys.version_info < (3, 10):  # pragma: <3.10 cover
-    from typing_extensions import ParamSpec
-else:  # pragma: >=3.10 cover
-    from typing import ParamSpec
+from typing_extensions import ParamSpec, TypeVar
 
 T = TypeVar("T")
 T2 = TypeVar("T2")

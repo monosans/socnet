@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import datetime
 import time
-from typing import Iterator, Optional, Tuple, TypeVar, Union
+from typing import Iterator, Optional, Tuple, Union
 
 from django.core.paginator import Page, Paginator
 from django.db.models import Model, QuerySet
 from django.http import HttpRequest
+from typing_extensions import TypeVar
 
 TModel = TypeVar("TModel", bound=Model)
 

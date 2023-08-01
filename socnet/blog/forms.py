@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from typing import TypeVar
-
 from django import forms
 from django.utils.translation import pgettext_lazy
+from typing_extensions import TypeVar
 
 from ..core.models import MarkdownContentModel
 from . import models

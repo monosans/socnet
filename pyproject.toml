@@ -29,7 +29,7 @@ httptools = "0.6.0"
 Pillow = "10.0.0"
 sentry-sdk = { version = "1.29.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
-typing-extensions = { version = "4.7.1", python = "<3.10" }
+typing-extensions = "4.7.1"
 uvicorn = "0.23.2"
 uvloop = { version = "0.17.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
 websockets = "11.0.3"
