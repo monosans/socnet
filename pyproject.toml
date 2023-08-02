@@ -27,7 +27,7 @@ docutils = "0.20.1"
 drf-spectacular = "0.26.4"
 httptools = "0.6.0"
 Pillow = "10.0.0"
-sentry-sdk = { version = "1.29.0", extras = ["django"] }
+sentry-sdk = { version = "1.29.2", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.7.1"
 uvicorn = "0.23.2"
