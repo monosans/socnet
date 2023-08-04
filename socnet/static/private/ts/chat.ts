@@ -1,5 +1,9 @@
 import formatDates from "./date_formatter.js";
 
+function randomNumber(min: number, max: number): number {
+  return Math.random() * (max - min) + min;
+}
+
 interface User {
   href: string;
   image?: string;
@@ -92,7 +96,7 @@ const chatWs = ((): WebSocket => {
   const ws = new WebSocket(
     `${wsProtocol}://${window.location.host}/ws/chat/${chatData.interlocutorPk}/`,
   );
-  ws.onmessage = (e: MessageEvent<string>): void => {
+  ws.addEventListener("message", (e: MessageEvent<string>) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: ChatMessageEvent = JSON.parse(e.data);
 
@@ -100,13 +104,15 @@ const chatWs = ((): WebSocket => {
     if (getSender(data).isCurrentUser) {
       chatLog.scrollToEnd();
     }
-  };
-  ws.onclose = (e): void => {
+  });
+  ws.addEventListener("close", (e) => {
     messageSendBtn.disabled = true;
-    if (e.code === 1006 || e.code === 1011 || e.code === 1012) {
+    if (e.code === 1006 || e.code === 1011) {
       location.reload();
+    } else if (e.code === 1012) {
+      setTimeout(() => location.reload(), randomNumber(5000, 30000));
     }
-  };
+  });
   return ws;
 })();
 

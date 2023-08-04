@@ -7,10 +7,14 @@ const formatter = new Intl.NumberFormat(
 );
 
 export default function formatNumber(element: HTMLOrSVGElement & Node): void {
-  const unformattedNumber = parseInt(element.dataset["unformattedNumber"]!);
+  const unformattedNumber = Number.parseInt(
+    element.dataset["unformattedNumber"]!,
+  );
   element.textContent = formatter.format(unformattedNumber);
 }
 
-document
-  .querySelectorAll<HTMLElement>("[data-unformatted-number]")
-  .forEach(formatNumber);
+for (const el of document.querySelectorAll<HTMLElement>(
+  "[data-unformatted-number]",
+)) {
+  formatNumber(el);
+}

@@ -12,7 +12,10 @@ export default async function formatDates(
     );
     const relativeOptions = { base: DateTime.now() };
     for (const el of elements) {
-      const dt = DateTime.fromSeconds(parseInt(el.dataset["epoch"]!), options);
+      const dt = DateTime.fromSeconds(
+        Number.parseInt(el.dataset["epoch"]!),
+        options,
+      );
       const relativeDt = dt.toRelative(relativeOptions);
       if (el.textContent !== relativeDt) {
         el.textContent = relativeDt;

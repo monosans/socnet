@@ -53,7 +53,7 @@ async function handler(e: Event): Promise<void> {
     document.querySelector<HTMLElement>("#subscribersCount");
 
   if (subscribersCount) {
-    const unformattedNumber = parseInt(
+    const unformattedNumber = Number.parseInt(
       subscribersCount.dataset["unformattedNumber"]!,
     );
     subscribersCount.dataset["unformattedNumber"] = (

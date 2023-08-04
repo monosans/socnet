@@ -62,7 +62,7 @@ async function handler(e: Event): Promise<void> {
 
   const span = btn.querySelector("span")!;
 
-  const unformattedNumber = parseInt(span.dataset["unformattedNumber"]!);
+  const unformattedNumber = Number.parseInt(span.dataset["unformattedNumber"]!);
   if (btn.dataset["isLiked"] === "y") {
     btn.dataset["isLiked"] = "n";
     span.dataset["unformattedNumber"] = (unformattedNumber - 1).toString();
