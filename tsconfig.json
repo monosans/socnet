@@ -1,24 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "ES2020",
-    "moduleResolution": "NodeNext",
-
-    "outDir": "./socnet/static/public/js/",
-    "removeComments": true,
-
-    "strict": true,
+    "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "exactOptionalPropertyTypes": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "strict": true,
+
+    "module": "ES2020",
+    "moduleResolution": "NodeNext",
+
+    "newLine": "lf",
+    "outDir": "./socnet/static/public/js/",
+    "removeComments": true,
 
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "useDefineForClassFields": true
+
+    "target": "ES2017",
+    "useDefineForClassFields": true,
+
+    "skipLibCheck": true
   }
 }
