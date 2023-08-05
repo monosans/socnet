@@ -18,6 +18,8 @@
     "outDir": "./socnet/static/public/js/",
     "removeComments": true,
 
+    "checkJs": true,
+
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
