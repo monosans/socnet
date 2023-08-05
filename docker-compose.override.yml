@@ -22,27 +22,25 @@ services:
       - 8000:8000
     volumes:
       - .:/app
-      - socnet_local_javascript:/app/socnet/static/public/js
   postgres:
     volumes:
       - socnet_local_postgres_data:/var/lib/postgresql/data
-  tsc:
-    image: socnet_tsc
+  esbuild:
+    image: socnet_esbuild
     build:
       context: .
       dockerfile: ./docker/django/Dockerfile
       target: node
     command:
-      - npx
-      - tsc
-      - --watch
-      - --preserveWatchOutput
+      - npm
+      - run
+      - watch
     restart: unless-stopped
     user: node
     volumes:
-      - ./socnet/static/private/ts:/app/socnet/static/private/ts
+      - ./socnet/static:/app/socnet/static
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json
-      - socnet_local_javascript:/app/socnet/static/public/js
 volumes:
   socnet_local_postgres_data:
-  socnet_local_javascript:

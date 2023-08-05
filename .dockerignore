@@ -5,6 +5,7 @@
 !./locale/**/*.po
 !./socnet/**/*.py
 !./socnet/static/
+./socnet/static/public/css/
 ./socnet/static/public/js/
 !./socnet/templates/
 !./socnet_rs/src/

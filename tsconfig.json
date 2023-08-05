@@ -1,4 +1,5 @@
 {
+  "exclude": ["socnet/static/public/js/"],
   "compilerOptions": {
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -15,7 +16,7 @@
     "moduleResolution": "NodeNext",
 
     "newLine": "lf",
-    "outDir": "./socnet/static/public/js/",
+    "noEmit": true,
     "removeComments": true,
 
     "checkJs": true,
@@ -23,7 +24,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
-    "target": "ES2017",
+    "target": "ES6",
     "useDefineForClassFields": true,
 
     "skipLibCheck": true

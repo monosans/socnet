@@ -4,19 +4,17 @@ WORKDIR /app
 
 COPY ./package.json ./package-lock.json ./
 
-RUN mkdir -p ./socnet/static/public/js && \
-  chown node:node ./socnet/static/public/js && \
-  npm ci && \
-  npm cache clean --force && \
-  rm package.json package-lock.json
+RUN npm ci && \
+  npm cache clean --force
 
 
 FROM node as node-tsc
 
 COPY ./tsconfig.json ./tsconfig.json
-COPY ./socnet/static/private/ts/ ./socnet/static/private/ts/
+COPY ./socnet/static/private/css/ ./socnet/static/private/css/
+COPY ./socnet/static/private/js/ ./socnet/static/private/js/
 
-RUN npx tsc && rm ./socnet/static/public/js/types.js
+RUN npm run build
 
 
 FROM python:3.11-slim-bookworm as python
