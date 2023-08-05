@@ -81,9 +81,9 @@ Markdown parsing, HTML sanitization and some other things are implemented in Rus
 ### Frontend
 
 - HTML with Django Template language
-- Bootstrap CSS 5.3
+- Bootstrap CSS 5.x
 - Font Awesome 6
-- TypeScript
+- TypeScript (compiled and minified with esbuild)
 - viewerjs
 - luxon
 
