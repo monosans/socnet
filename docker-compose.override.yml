@@ -35,6 +35,7 @@ services:
       - npm
       - run
       - watch
+    networks: []
     restart: unless-stopped
     user: node
     volumes:
