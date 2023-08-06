@@ -5,23 +5,23 @@ function randomNumber(min: number, max: number): number {
 }
 
 interface User {
-  href: string;
-  image?: string;
-  displayName: string;
-  isCurrentUser: boolean;
+  readonly href: string;
+  readonly image?: string;
+  readonly displayName: string;
+  readonly isCurrentUser: boolean;
 }
 
 interface ChatMessageEvent {
-  pk: number;
-  content: string;
-  createdEpoch: number;
-  sender: string;
+  readonly pk: number;
+  readonly content: string;
+  readonly createdEpoch: number;
+  readonly sender: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const chatData: {
-  interlocutorPk: number;
-  users: Record<string, User>;
+  readonly interlocutorPk: number;
+  readonly users: Record<string, User>;
 } = JSON.parse(document.querySelector("#data")!.textContent!);
 
 function getSender(data: ChatMessageEvent): User {
