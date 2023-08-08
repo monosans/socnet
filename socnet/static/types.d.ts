@@ -1,5 +1,5 @@
 declare module "https://cdn.jsdelivr.net/npm/autosize@6/+esm" {
-  export { default } from "autosize";
+  export * as default from "autosize";
 }
 
 declare module "https://cdn.jsdelivr.net/npm/luxon@3/+esm" {
