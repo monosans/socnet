@@ -36,7 +36,6 @@ services:
       - run
       - watch
     networks: []
-    restart: unless-stopped
     user: node
     volumes:
       - ./socnet/static:/app/socnet/static

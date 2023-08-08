@@ -10,12 +10,10 @@ services:
       - READ_ENV_EXAMPLE=False
     networks:
       - django-postgres
-    restart: unless-stopped
   postgres:
     image: postgres:15
     env_file: ./.env
     networks:
       - django-postgres
-    restart: unless-stopped
 networks:
   django-postgres:
