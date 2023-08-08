@@ -8,7 +8,7 @@ RUN npm ci && \
   npm cache clean --force
 
 
-FROM node as node-tsc
+FROM node as node-esbuild
 
 COPY ./tsconfig.json ./tsconfig.json
 COPY ./socnet/static/private/css/ ./socnet/static/private/css/
@@ -121,7 +121,7 @@ RUN pip install \
   && rm -rf /wheels/
 
 COPY --chown=django:django . .
-COPY --chown=django:django --from=node-tsc /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY --chown=django:django --from=node-esbuild /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 
