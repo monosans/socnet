@@ -36,8 +36,9 @@ updates:
       interval: daily
       time: "04:30"
     groups:
-      django-stubs:
+      mypy:
         patterns:
           - django-stubs
           - django-stubs-ext
           - djangorestframework-stubs
+          - mypy

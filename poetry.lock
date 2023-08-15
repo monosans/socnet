@@ -834,7 +834,10 @@ files = [
 [package.dependencies]
 django = "*"
 django-stubs-ext = ">=4.2.2"
-mypy = ">=1.0.0"
+mypy = [
+    {version = ">=1.0.0"},
+    {version = "==1.4.*", optional = true, markers = "extra == \"compatible-mypy\""},
+]
 tomli = {version = "*", markers = "python_version < \"3.11\""}
 types-pytz = "*"
 types-PyYAML = "*"
@@ -896,7 +899,10 @@ files = [
 
 [package.dependencies]
 django-stubs = ">=4.2.2"
-mypy = ">=0.991"
+mypy = [
+    {version = ">=0.991"},
+    {version = "==1.4.*", optional = true, markers = "extra == \"compatible-mypy\""},
+]
 requests = ">=2.0.0"
 types-PyYAML = ">=5.4.3"
 types-requests = ">=0.1.12"
@@ -2756,4 +2762,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "5aae141e7bcf9282e519c28be781ffbcf3fb5ef4423f6ad7ead3583851d21c8f"
+content-hash = "060fdc861f638551ba0cf9d406c7a42a4483896b9b675a7fffa2e89261fad936"
