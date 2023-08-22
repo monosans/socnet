@@ -91,6 +91,7 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
 ]
 
+ADMIN_URL = env.str("ADMIN_URL").strip("/")
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",

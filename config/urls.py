@@ -19,8 +19,8 @@ from socnet.users import urls as users_urls
 admin.site.login = core_views.admin_site_login_view  # type: ignore[assignment]
 
 urlpatterns: List[Union[URLPattern, URLResolver]] = [
-    path("admin/doc/", include(admindocs_urls)),
-    path("admin/", admin.site.urls),
+    path(f"{settings.ADMIN_URL}/doc/", include(admindocs_urls)),
+    path(f"{settings.ADMIN_URL}/", admin.site.urls),
     path("api/", include(api_urls)),
     path("messenger/", include(messenger_urls)),
     path("", include(allauth_urls)),
