@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import django_minify_html.middleware
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseBase
 from django.utils.deprecation import MiddlewareMixin
@@ -30,3 +31,12 @@ class ResponseHeadersMiddleware(MiddlewareMixin):
         for header, value in HEADERS:
             response.headers.setdefault(header, value)
         return response
+
+
+class MinifyHtmlMiddleware(django_minify_html.middleware.MinifyHtmlMiddleware):
+    minify_args = {
+        "do_not_minify_doctype": True,
+        "ensure_spec_compliant_unquoted_attribute_values": True,
+        "minify_css": True,
+        "minify_js": True,
+    }

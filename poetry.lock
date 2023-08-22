@@ -805,6 +805,21 @@ files = [
 Django = ">=2.2"
 
 [[package]]
+name = "django-minify-html"
+version = "1.6.0"
+description = "Use minify-html, the extremely fast HTML + JS + CSS minifier, with Django."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_minify_html-1.6.0-py3-none-any.whl", hash = "sha256:204278441f1e9fa003e40813c0a596f8ab974864bb79c2756a28351cad0b4f64"},
+    {file = "django_minify_html-1.6.0.tar.gz", hash = "sha256:f1771330832ed67a3452f14313fcf1f1bab3c6862bd62066da215d53571f6bfd"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+minify-html = "*"
+
+[[package]]
 name = "django-otp"
 version = "1.2.2"
 description = "A pluggable framework for adding two-factor authentication to Django using one-time passwords."
@@ -1374,6 +1389,32 @@ files = [
 [package.dependencies]
 importlib-resources = {version = ">=1.4.0", markers = "python_version < \"3.9\""}
 referencing = ">=0.28.0"
+
+[[package]]
+name = "minify-html"
+version = "0.11.1"
+description = "Extremely fast and smart HTML + JS + CSS minifier"
+optional = false
+python-versions = "*"
+files = [
+    {file = "minify_html-0.11.1-cp310-cp310-macosx_10_7_x86_64.whl", hash = "sha256:c29ed4cccaf2a50866a1aeee4243685684f1322f298f115d718641148be040c8"},
+    {file = "minify_html-0.11.1-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:b2160f2e317420d2be8b9a76872f9beb494c7ac9a1d003a6751787a4788faaeb"},
+    {file = "minify_html-0.11.1-cp310-cp310-manylinux_2_34_aarch64.whl", hash = "sha256:004aca44d8246ea54f9124c41946a7033c70b93344113032cab647040bab8d14"},
+    {file = "minify_html-0.11.1-cp310-none-win_amd64.whl", hash = "sha256:19a203a0b3ae5eb3e0922363418b15e1cf591e0ad803d4205436e34d5b08af6c"},
+    {file = "minify_html-0.11.1-cp311-cp311-macosx_10_7_x86_64.whl", hash = "sha256:ade22a9b8e08da6374613db3d0b7e1e67858bbffb84149f3b8adebdd8c2c6903"},
+    {file = "minify_html-0.11.1-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:a40ecdbe8044caaf204aaece3649568d2f54f165092e5598e994d0e8cd752de3"},
+    {file = "minify_html-0.11.1-cp311-cp311-manylinux_2_34_aarch64.whl", hash = "sha256:efc8ecf9aa2ca29a76bcd77aa2281166b8e8380e5246318c1412da2cfe9836c5"},
+    {file = "minify_html-0.11.1-cp311-none-win_amd64.whl", hash = "sha256:7d8cae5e228164f9bd20ee6d49b298df0a21b652c7c84c8adccb9139d6e77f0c"},
+    {file = "minify_html-0.11.1-cp38-cp38-macosx_10_7_x86_64.whl", hash = "sha256:d9cb1339ae8847f25a17006415e134d171b2a8ed53b89b02a21309cc1fafbc28"},
+    {file = "minify_html-0.11.1-cp38-cp38-manylinux_2_28_x86_64.whl", hash = "sha256:fb5304dbdc7f6a05bf908455728c1a61305144901a3505f350c30dc364dd3c05"},
+    {file = "minify_html-0.11.1-cp38-cp38-manylinux_2_34_aarch64.whl", hash = "sha256:52fc09e40a845f597468b6c681f9abb14acb83fa33e24ea2749fb5c5481cc20e"},
+    {file = "minify_html-0.11.1-cp38-none-win_amd64.whl", hash = "sha256:acb7b9f2a0cf9d25e5a94e6a5c05c254f66cbfe7d4e0ef75ca6fb656198c1d26"},
+    {file = "minify_html-0.11.1-cp39-cp39-macosx_10_7_x86_64.whl", hash = "sha256:46d2b1058d550136a0fab43f800353841a7c39d9f62beefe9deef7b019f0611f"},
+    {file = "minify_html-0.11.1-cp39-cp39-manylinux_2_28_x86_64.whl", hash = "sha256:6d033759d248416820573c1ab93d0f92579a9ae91373a2615f1d88ff1754429c"},
+    {file = "minify_html-0.11.1-cp39-cp39-manylinux_2_34_aarch64.whl", hash = "sha256:365a662d8ec020af17019ce6cd052de5561c31084ac315f71aa50a85cc08ad74"},
+    {file = "minify_html-0.11.1-cp39-none-win_amd64.whl", hash = "sha256:d82c5f97440abcf2f99cfc0bed6fdaedf4dabeb00bd69e9bce8b29037ef0c8c6"},
+    {file = "minify_html-0.11.1.tar.gz", hash = "sha256:5346566f3ae76c4d9914214bf5b4cacc90a5b0fed8d052aaf066c58d3d4a20b1"},
+]
 
 [[package]]
 name = "msgpack"
@@ -2763,4 +2804,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "42e988b4ab425e7086a415b7890bb131663c4d860655589941b6b91c9e134e8f"
+content-hash = "41ff0d703f2bbb8607a07f850e15d6e149f95c656f5ff11674400bfbdc05bffb"
