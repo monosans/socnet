@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-import django_minify_html.middleware
+from typing import TYPE_CHECKING
+
+from django.http import HttpResponse
 from django.http.request import HttpRequest
 from django.http.response import HttpResponseBase
 from django.utils.deprecation import MiddlewareMixin
+
+import socnet_rs
 
 HEADERS = (
     (
@@ -33,11 +37,22 @@ class ResponseHeadersMiddleware(MiddlewareMixin):
         return response
 
 
-class MinifyHtmlMiddleware(django_minify_html.middleware.MinifyHtmlMiddleware):
-    minify_args = {
-        "do_not_minify_doctype": True,
-        "ensure_spec_compliant_unquoted_attribute_values": True,
-        "keep_spaces_between_attributes": True,
-        "minify_css": True,
-        "minify_js": True,
-    }
+class MinifyHtmlMiddleware(MiddlewareMixin):
+    """Based on https://github.com/adamchainz/django-minify-html."""
+
+    def process_response(
+        self, request: HttpRequest, response: HttpResponseBase  # noqa: ARG002
+    ) -> HttpResponseBase:
+        if (
+            not getattr(response, "streaming", False)
+            and response.get("Content-Encoding", "") == ""
+            and response.get("Content-Type", "").split(";", 1)[0] == "text/html"
+        ):
+            if TYPE_CHECKING:
+                assert isinstance(response, HttpResponse)
+            content = response.content.decode(response.charset)
+            minified_content = socnet_rs.minify_html(content)
+            response.content = minified_content
+            if "Content-Length" in response:
+                response["Content-Length"] = len(minified_content)
+        return response
