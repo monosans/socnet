@@ -8,16 +8,8 @@ services:
         - GID=${GID:-1000}
         - UID=${UID:-1000}
     command:
-      - /usr/local/bin/uvicorn
-      - --host
-      - 0.0.0.0
-      - --reload
-      - --reload-include
-      - "*.html"
-      - --log-config
-      - config/settings/logging.json
-      - --no-server-header
-      - config.asgi:application
+      - bash
+      - /app/docker/django/start.sh
     ports:
       - 8000:8000
     volumes:

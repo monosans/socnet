@@ -7,7 +7,7 @@ services:
         - POETRY_GROUPS=main,production
     command:
       - bash
-      - /app/docker/django/start.sh
+      - /app/docker/django/start.prod.sh
     depends_on:
       - redis
     environment:
