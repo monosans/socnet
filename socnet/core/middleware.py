@@ -38,7 +38,7 @@ class ResponseHeadersMiddleware(MiddlewareMixin):
 
 
 class MinifyHtmlMiddleware(MiddlewareMixin):
-    """Based on https://github.com/adamchainz/django-minify-html."""
+    """Based on https://github.com/adamchainz/django-minify-html"""
 
     def process_response(
         self, request: HttpRequest, response: HttpResponseBase  # noqa: ARG002
