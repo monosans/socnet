@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-26 15:08+0000\n"
+"POT-Creation-Date: 2023-08-23 09:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,14 +24,14 @@ msgstr "Английский"
 msgid "Russian"
 msgstr "Русский"
 
+msgid "Email"
+msgstr "Электронная почта"
+
 msgid "Password (again)"
 msgstr "Пароль (ещё раз)"
 
 msgid "Username or email"
 msgstr "Имя пользователя или электронная почта"
-
-msgid "Email"
-msgstr "Электронная почта"
 
 msgid "Blog"
 msgstr "Блог"

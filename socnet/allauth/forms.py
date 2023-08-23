@@ -11,6 +11,7 @@ from typing_extensions import Any
 from ..users.models import User
 
 # Needed to redefine translation
+gettext_lazy("Email")
 gettext_lazy("Password (again)")
 
 
@@ -50,9 +51,9 @@ class SignupForm(allauth_forms.SignupForm):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        label = gettext("Email")
-        self.fields["email"].label = label
-        self.fields["email"].widget.attrs["placeholder"] = label
+        self.fields["email"].widget.attrs["placeholder"] = self.fields[
+            "email"
+        ].label
 
 
 class TOTPDeviceForm(allauth_2fa_forms.TOTPDeviceForm):
