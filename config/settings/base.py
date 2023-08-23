@@ -206,7 +206,7 @@ SPECTACULAR_SETTINGS = {
         "drf_spectacular.contrib.djangorestframework_camel_case.camelize_serializer_fields",
     ],
     "CAMELIZE_NAMES": True,
-    "TITLE": "SocNet API",
+    "TITLE": "API | SocNet",
 }
 
 CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {
