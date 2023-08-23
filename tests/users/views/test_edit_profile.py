@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Dict
 
 from django.forms import model_to_dict
 from django.test import Client
 from django.urls import reverse, reverse_lazy
+from typing_extensions import Any
 
 from socnet.users.forms import EditProfileForm
 from socnet.users.models import User

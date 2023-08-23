@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal, Optional, Sequence, Union
+from typing import Optional, Sequence, Union
 
 from rest_framework.request import Request
-from typing_extensions import TypeAlias
+from typing_extensions import Literal, TypeAlias
 
 from ..users.models import User
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Dict
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import TrigramWordSimilarity
@@ -8,6 +8,7 @@ from django.db.models import OuterRef, Q, Subquery
 from django.db.models.functions import Extract, Substr
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from typing_extensions import Any
 
 from ..users.models import User
 from ..users.types import AuthedRequest

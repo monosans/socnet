@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from typing import Any, Set
+from typing import Set
 
 from django.db.models.signals import m2m_changed
 from django.utils.translation import gettext as _
+from typing_extensions import Any
 
 from . import exceptions
 from .models import User

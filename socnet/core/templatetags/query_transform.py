@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-from typing import Literal
-
 from django import template
 from django.http import HttpRequest
-from typing_extensions import Protocol
+from typing_extensions import Literal, Protocol
 
 register = template.Library()
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from functools import partial
 from io import BytesIO
-from typing import Any, Type
+from typing import Type
 
 from django.core.files.base import ContentFile, File
 from django.db.models import (
@@ -16,7 +16,7 @@ from django.db.models import (
 from django.db.models.fields.files import ImageFieldFile
 from django.utils import timezone
 from PIL import Image, ImageOps
-from typing_extensions import TypeVar
+from typing_extensions import Any, TypeVar
 
 from socnet_rs import normalize_str
 

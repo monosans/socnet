@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Dict
 
 from allauth.account import forms as allauth_forms
 from allauth_2fa import forms as allauth_2fa_forms
 from django import forms
 from django.utils.translation import gettext, gettext_lazy
+from typing_extensions import Any
 
 from ..users.models import User
 

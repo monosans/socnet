@@ -15,11 +15,12 @@ if not logging.root.handlers:
         json.loads(current_file.with_name("logging.json").read_bytes())
     )
 
-from typing import Any, Dict  # noqa: E402
+from typing import Dict  # noqa: E402
 
 import environ  # noqa: E402
 from django.contrib.messages import constants as messages  # noqa: E402
 from django.utils.translation import gettext_lazy as _  # noqa: E402
+from typing_extensions import Any  # noqa: E402
 
 BASE_DIR = current_file.parents[2]
 

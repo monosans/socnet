@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.templatetags.static import static
 from django.views.generic import TemplateView
+from typing_extensions import Any
 
 from ..users.types import AuthedRequest
 

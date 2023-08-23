@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, Generator, List, Type
+from typing import Generator, List, Type
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django_filters import FilterSet
 from rest_framework.serializers import ModelSerializer
+from typing_extensions import Any
 
 from .types import SerializerExclude, SerializerFields
 

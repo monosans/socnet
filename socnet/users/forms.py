@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
-
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import gettext, gettext_lazy as _
+from typing_extensions import Any
 
 from .models import User
 

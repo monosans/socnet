@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-from typing import Any, Type
+from typing import Type
 
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
+from typing_extensions import Any
 
 from ..blog import models as blog_models
 from ..messenger import models as messenger_models

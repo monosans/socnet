@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from enum import Enum, auto
-from typing import Any
 
 import pytest
 from django.test import Client
+from typing_extensions import Any
 
 from socnet.users.models import User
 

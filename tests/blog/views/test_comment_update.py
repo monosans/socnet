@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
-
 import pytest
 from django.test import Client
 from django.urls import reverse
+from typing_extensions import Any
 
 from socnet.blog import models
 
