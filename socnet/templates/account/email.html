@@ -9,96 +9,94 @@
   <div class="card">
     <div class="card-body">
       <h3 class="mb-3 text-center">{% translate "Email addresses" %}</h3>
-      {% with emailaddress_set=user.emailaddress_set.all %}
-        {% if emailaddress_set %}
-          <form method="post" action="{% url 'account_email' %}">
-            {% csrf_token %}
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
+      {% if emailaddresses %}
+        <form method="post" action="{% url 'account_email' %}">
+          {% csrf_token %}
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col" class="text-center">{% translate "Verified" %}</th>
+                  <th scope="col" class="text-center">{% translate "Primary" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for emailaddress in emailaddresses %}
                   <tr>
-                    <th scope="col"></th>
-                    <th scope="col" class="text-center">{% translate "Verified" %}</th>
-                    <th scope="col" class="text-center">{% translate "Primary" %}</th>
+                    <td>
+                      <input type="radio"
+                             name="email"
+                             {% if emailaddress.primary or emailaddresses|length == 1 %}checked{% endif %}
+                             value="{{ emailaddress.email }}" />
+                      <a href="mailto:{{ emailaddress.email }}"
+                         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ emailaddress.email }}</a>
+                    </td>
+                    <td class="text-center">
+                      {% if emailaddress.verified %}
+                        <i class="fa-solid fa-check text-success"></i>
+                      {% else %}
+                        <i class="fa-solid fa-xmark text-danger"></i>
+                      {% endif %}
+                    </td>
+                    <td class="text-center">
+                      {% if emailaddress.primary %}
+                        <i class="fa-solid fa-check text-success"></i>
+                      {% else %}
+                        <i class="fa-solid fa-xmark text-danger"></i>
+                      {% endif %}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {% for emailaddress in emailaddress_set %}
-                    <tr>
-                      <td>
-                        <input type="radio"
-                               name="email"
-                               {% if emailaddress.primary or emailaddress_set.count == 1 %}checked{% endif %}
-                               value="{{ emailaddress.email }}" />
-                        <a href="mailto:{{ emailaddress.email }}"
-                           class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ emailaddress.email }}</a>
-                      </td>
-                      <td class="text-center">
-                        {% if emailaddress.verified %}
-                          <i class="fa-solid fa-check text-success"></i>
-                        {% else %}
-                          <i class="fa-solid fa-xmark text-danger"></i>
-                        {% endif %}
-                      </td>
-                      <td class="text-center">
-                        {% if emailaddress.primary %}
-                          <i class="fa-solid fa-check text-success"></i>
-                        {% else %}
-                          <i class="fa-solid fa-xmark text-danger"></i>
-                        {% endif %}
-                      </td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-12 col-xl-4 mb-2 mb-xl-0">
+              <button type="submit"
+                      name="action_primary"
+                      class="btn btn-primary w-100 h-100">
+                {% translate "Make primary" %}
+              </button>
             </div>
-            <div class="row">
-              <div class="col-12 col-xl-4 mb-2 mb-xl-0">
-                <button type="submit"
-                        name="action_primary"
-                        class="btn btn-primary w-100 h-100">
-                  {% translate "Make primary" %}
-                </button>
-              </div>
-              <div class="col-12 col-xl-4 mb-2 mb-xl-0">
-                <button type="submit" name="action_send" class="btn btn-primary w-100 h-100">
-                  {% translate "Resend verification" %}
-                </button>
-              </div>
-              <div class="col-12 col-xl-4 mb-2 mb-xl-0">
-                <button type="button"
-                        class="btn btn-danger w-100 h-100"
-                        data-bs-toggle="modal"
-                        data-bs-target="#emailRemove">
-                  {% translate "Remove" %}
-                </button>
-              </div>
+            <div class="col-12 col-xl-4 mb-2 mb-xl-0">
+              <button type="submit" name="action_send" class="btn btn-primary w-100 h-100">
+                {% translate "Resend verification" %}
+              </button>
             </div>
-            <div class="modal fade" id="emailRemove" tabindex="-1">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                    {% translate "Do you really want to remove the selected email address?" %}
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      {% translate "Close" %}
-                    </button>
-                    <button type="submit" name="action_remove" class="btn btn-danger">
-                      {% translate "Remove" %}
-                    </button>
-                  </div>
+            <div class="col-12 col-xl-4 mb-2 mb-xl-0">
+              <button type="button"
+                      class="btn btn-danger w-100 h-100"
+                      data-bs-toggle="modal"
+                      data-bs-target="#emailRemove">
+                {% translate "Remove" %}
+              </button>
+            </div>
+          </div>
+          <div class="modal fade" id="emailRemove" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  {% translate "Do you really want to remove the selected email address?" %}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    {% translate "Close" %}
+                  </button>
+                  <button type="submit" name="action_remove" class="btn btn-danger">
+                    {% translate "Remove" %}
+                  </button>
                 </div>
               </div>
             </div>
-          </form>
-        {% else %}
-          {% translate "You do not currently have an email address set up. You should add an email address so you can receive notifications, reset your password, etc." %}
-        {% endif %}
-      {% endwith %}
+          </div>
+        </form>
+      {% else %}
+        {% include "account/snippets/warn_no_email.html" %}
+      {% endif %}
     </div>
   </div>
   {% if can_add_email %}

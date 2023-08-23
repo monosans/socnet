@@ -1,0 +1,55 @@
+{% extends "col.html" %}
+
+{% load i18n django_bootstrap5 %}
+
+{% block title %}
+  {% translate "Email address" %}
+{% endblock title %}
+{% block col %}
+  <div class="card">
+    <div class="card-body">
+      <h3 class="text-center">{% translate "Email address" %}</h3>
+      {% if emailaddresses %}
+        {% if current_emailaddress %}
+          <div class="mt-3">
+            {% blocktranslate trimmed with email=current_emailaddress.email %}
+              <a href="mailto:{{ email }}"
+                 class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ email }}</a> is associated with your account.
+            {% endblocktranslate %}
+          </div>
+        {% endif %}
+        {% if new_emailaddress %}
+          <div class="mt-1">
+            {% blocktranslate trimmed with email=new_emailaddress.email %}
+              <a href="mailto:{{ email }}"
+                 class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ email }}</a> is pending verification.
+            {% endblocktranslate %}
+          </div>
+          <form method="post" action="{% url 'account_email' %}" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="email" value="{{ new_emailaddress.email }}" />
+            <button type="submit" name="action_send" class="btn btn-primary w-100">
+              {% translate "Resend verification" %}
+            </button>
+          </form>
+        {% endif %}
+      {% else %}
+        <div class="mt-3">{% include "account/snippets/warn_no_email.html" %}</div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h3 class="text-center">
+        {% blocktranslate context "noun" %}Change email{% endblocktranslate %}
+      </h3>
+      <form method="post" action="{% url 'account_email' %}" class="mt-3">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" name="action_add" class="btn btn-primary w-100">
+          {% translate "Change" %}
+        </button>
+      </form>
+    </div>
+  </div>
+{% endblock col %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-23 09:27+0000\n"
+"POT-Creation-Date: 2023-08-23 13:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,15 +149,30 @@ msgstr "Вы действительно хотите удалить выбран
 msgid "Close"
 msgstr "Закрыть"
 
-msgid "You do not currently have an email address set up. You should add an email address so you can receive notifications, reset your password, etc."
-msgstr "В настоящее время у вас не установлен адрес электронной почты. Вам следует добавить адрес электронной почты, чтобы вы могли получать уведомления, сбрасывать пароль и т.д."
-
 msgctxt "noun"
 msgid "Add email address"
 msgstr "Добавление адреса электронной почты"
 
 msgid "Add"
 msgstr "Добавить"
+
+msgid "Email address"
+msgstr "Адрес электронной почты"
+
+#, python-format
+msgid "<a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a> is associated with your account."
+msgstr "<a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a> связан с вашей учётной записью.."
+
+#, python-format
+msgid "<a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a> is pending verification."
+msgstr "<a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a> ожидает подтверждения."
+
+msgctxt "noun"
+msgid "Change email"
+msgstr "Изменение электронной почты"
+
+msgid "Change"
+msgstr "Изменить"
 
 msgctxt "noun"
 msgid "Confirm email address"
@@ -169,6 +184,10 @@ msgstr "Подтвердите, что <a href=\"mailto:%(email)s\" class=\"link
 
 msgid "Confirm"
 msgstr "Подтвердить"
+
+#, python-format
+msgid "Unable to confirm <a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a> because it has already been confirmed by another account."
+msgstr "Невозможно подтвердить <a href=\"mailto:%(email)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(email)s</a>, поскольку он уже был подтверждён другой учётной записью."
 
 #, python-format
 msgid "This email confirmation link has expired or is invalid. <a href=\"%(email_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">Send a new email confirmation request</a>."
@@ -257,6 +276,9 @@ msgstr "Мы сожалеем, но регистрация в настоящее
 #, python-format
 msgid "You are already logged in as <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a>."
 msgstr "Вы уже вошли как <a href=\"%(user_url)s\" class=\"link-underline link-underline-opacity-0 link-underline-opacity-100-hover\">%(display_name)s (%(username)s)</a>."
+
+msgid "You do not currently have an email address set up. You should add an email address so you can receive notifications, reset your password, etc."
+msgstr "В настоящее время у вас не установлен адрес электронной почты. Вам следует добавить адрес электронной почты, чтобы вы могли получать уведомления, сбрасывать пароль и т.д."
 
 msgid "Verify your email address"
 msgstr "Подтвердите свой адрес электронной почты"
@@ -501,10 +523,6 @@ msgstr "Сообщения не найдены."
 
 msgid "Account security"
 msgstr "Безопасность учётной записи"
-
-msgctxt "noun"
-msgid "Change email"
-msgstr "Изменение электронной почты"
 
 msgctxt "noun"
 msgid "Delete account"
