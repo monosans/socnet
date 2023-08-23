@@ -25,7 +25,7 @@ function getRequest(dataset: DOMStringMap): {
         [
           "X-CSRFToken",
           document.querySelector<HTMLInputElement>(
-            "[name=csrfmiddlewaretoken]",
+            '[name="csrfmiddlewaretoken"]',
           )!.value,
         ],
       ],
