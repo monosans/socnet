@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import Generator, List, Type
+from typing import Generator, List, Type, no_type_check
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django_filters import FilterSet
 from rest_framework.serializers import ModelSerializer
-from typing_extensions import Any
+from typing_extensions import Any, Protocol, TypeVar
 
 from .types import SerializerExclude, SerializerFields
 
@@ -19,12 +19,29 @@ IGNORED_FIELDS = (
 IGNORED_LOOKUPS = frozenset(("unaccent",))
 
 
+class HasModelSerializer(Protocol):
+    serializer_class: Type[ModelSerializer[Any]]
+
+
+THasModelSerializer = TypeVar("THasModelSerializer", bound=HasModelSerializer)
+
+
+@no_type_check
 def generate_filterset(
+    view: Type[THasModelSerializer], /
+) -> Type[THasModelSerializer]:
+    view.filterset_class = generate_filterset_from_serializer(
+        view.serializer_class
+    )
+    return view
+
+
+def generate_filterset_from_serializer(
     serializer: Type[ModelSerializer[Any]],
 ) -> Type[FilterSet]:
     model = serializer.Meta.model
     filterable_fields = _get_filterable_fields(
-        model,  # type: ignore[arg-type]
+        model,
         getattr(serializer.Meta, "fields", None),
         getattr(serializer.Meta, "exclude", None),
     )
@@ -36,7 +53,9 @@ def generate_filterset(
 
 
 def _get_filterable_fields(
-    model: models.Model, fields: SerializerFields, exclude: SerializerExclude
+    model: Type[models.Model],
+    fields: SerializerFields,
+    exclude: SerializerExclude,
 ) -> Generator[models.Field[Any, Any], None, None]:
     for field in model._meta.get_fields():
         if not isinstance(field, IGNORED_FIELDS) and _should_be_filterable(

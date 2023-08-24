@@ -17,7 +17,8 @@ from ..blog import models as blog_models
 from ..messenger import models as messenger_models
 from ..users.exceptions import SelfSubscriptionError
 from ..users.models import User
-from . import filters, serializers
+from . import serializers
+from .filters import generate_filterset
 from .types import AuthedRequest
 
 
@@ -84,64 +85,65 @@ class SubscriptionViewSet(_AuthedViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+@generate_filterset
 class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet[ContentType]):
     queryset = ContentType.objects.all()
     serializer_class = serializers.ContentTypeSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class EmailAddressViewSet(viewsets.ModelViewSet[EmailAddress]):
     queryset = EmailAddress.objects.all()
     serializer_class = serializers.EmailAddressSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class GroupViewSet(viewsets.ModelViewSet[auth_models.Group]):
     queryset = auth_models.Group.objects.prefetch_related(
         Prefetch("permissions", auth_models.Permission.objects.only("pk")),
         Prefetch("user_set", User.objects.only("pk")),
     )
     serializer_class = serializers.GroupSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class LogEntryViewSet(viewsets.ReadOnlyModelViewSet[LogEntry]):
     queryset = LogEntry.objects.all()
     serializer_class = serializers.LogEntrySerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class MessageViewSet(viewsets.ModelViewSet[messenger_models.Message]):
     queryset = messenger_models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class PermissionViewSet(viewsets.ReadOnlyModelViewSet[auth_models.Permission]):
     queryset = auth_models.Permission.objects.prefetch_related(
         Prefetch("group_set", auth_models.Group.objects.only("pk")),
         Prefetch("user_set", User.objects.only("pk")),
     )
     serializer_class = serializers.PermissionSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class CommentViewSet(viewsets.ModelViewSet[blog_models.Comment]):
     queryset = blog_models.Comment.objects.prefetch_related(
         Prefetch("likers", User.objects.only("pk"))
     )
     serializer_class = serializers.CommentSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class PostViewSet(viewsets.ModelViewSet[blog_models.Post]):
     queryset = blog_models.Post.objects.prefetch_related(
         Prefetch("likers", User.objects.only("pk"))
     )
     serializer_class = serializers.PostSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
 
 
+@generate_filterset
 class UserViewSet(viewsets.ModelViewSet[User]):
     queryset = User.objects.defer("password").prefetch_related(
         Prefetch("groups", auth_models.Group.objects.only("pk")),
@@ -152,4 +154,3 @@ class UserViewSet(viewsets.ModelViewSet[User]):
         Prefetch("user_permissions", auth_models.Permission.objects.only("pk")),
     )
     serializer_class = serializers.UserSerializer
-    filterset_class = filters.generate_filterset(serializer_class)
