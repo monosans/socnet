@@ -1,10 +1,7 @@
-const formatter = new Intl.NumberFormat(
-  navigator.language === "ru" ? "ru" : "en",
-  {
-    // @ts-expect-error
-    notation: "compact",
-  },
-);
+const formatter = new Intl.NumberFormat(document.documentElement.lang, {
+  // @ts-expect-error
+  notation: "compact",
+});
 
 export default function formatNumber(element: HTMLOrSVGElement & Node): void {
   const unformattedNumber = Number.parseInt(

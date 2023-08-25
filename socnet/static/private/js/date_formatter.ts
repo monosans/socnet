@@ -1,4 +1,4 @@
-const options = { locale: navigator.language === "ru" ? "ru" : "en" };
+const options = { locale: document.documentElement.lang };
 
 export default async function formatDates(
   parentNode: ParentNode,
