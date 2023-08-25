@@ -1,6 +1,7 @@
 {
   "name": "socnet",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "npm run esbuild-base -- --minify",
     "esbuild-base": "esbuild \"./socnet/static/private/**/*\" --format=esm --outdir=./socnet/static/public/ --platform=browser --target=chrome63,edge79,safari11.1,firefox67,opera50",
@@ -19,7 +20,7 @@
     "prettier-plugin-packagejson": "2.4.5",
     "stylelint": "15.10.3",
     "stylelint-config-standard": "34.0.0",
-    "typescript": "5.1.6",
+    "typescript": "5.2.2",
     "viewerjs": "1.11.4"
   }
 }
