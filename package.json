@@ -1,6 +1,7 @@
 {
   "name": "socnet",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "npm run esbuild-base -- --minify",
     "esbuild-base": "esbuild \"./socnet/static/private/**/*\" --format=esm --outdir=./socnet/static/public/ --platform=browser --target=chrome63,edge79,safari11.1,firefox67,opera50",

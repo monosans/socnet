@@ -12,8 +12,7 @@
     "noUnusedParameters": true,
     "strict": true,
 
-    "module": "ES2020",
-    "moduleResolution": "NodeNext",
+    "module": "Node16",
 
     "newLine": "lf",
     "noEmit": true,
