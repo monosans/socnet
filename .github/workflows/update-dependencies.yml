@@ -15,7 +15,7 @@ jobs:
           - cmd: cargo update --manifest-path socnet_rs/Cargo.toml
             commit-msg: Update socnet_rs/Cargo.lock
             branch: update/socnet-rs-cargo-lock
-          - cmd: npm update --lockfile-version 3
+          - cmd: npm update --package-lock-only --lockfile-version 3
             commit-msg: Update package-lock.json
             branch: update/npm-lock
           - cmd: pipx run poetry lock --no-interaction
