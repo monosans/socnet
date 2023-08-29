@@ -18,11 +18,10 @@ interface ChatMessageEvent {
   readonly sender: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const chatData: {
+const chatData = JSON.parse(document.querySelector("#data")!.textContent!) as {
   readonly interlocutorPk: number;
   readonly users: Record<string, User>;
-} = JSON.parse(document.querySelector("#data")!.textContent!);
+};
 
 function getSender(data: ChatMessageEvent): User {
   return chatData.users[data.sender.toLowerCase()];
@@ -97,8 +96,7 @@ const chatWs = ((): WebSocket => {
     `${wsProtocol}://${window.location.host}/ws/chat/${chatData.interlocutorPk}/`,
   );
   ws.addEventListener("message", (e: MessageEvent<string>) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const data: ChatMessageEvent = JSON.parse(e.data);
+    const data = JSON.parse(e.data) as ChatMessageEvent;
 
     void chatLog.addNewMessage(data);
     if (getSender(data).isCurrentUser) {
