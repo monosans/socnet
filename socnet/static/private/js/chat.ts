@@ -108,7 +108,7 @@ const chatWs = ((): WebSocket => {
     if (e.code === 1006 || e.code === 1011) {
       location.reload();
     } else if (e.code === 1012) {
-      setTimeout(() => location.reload(), randomNumber(5000, 30000));
+      setTimeout(() => location.reload(), randomNumber(5000, 30_000));
     }
   });
   return ws;
