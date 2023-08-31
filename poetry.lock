@@ -750,13 +750,13 @@ sqlparse = ">=0.2"
 
 [[package]]
 name = "django-environ"
-version = "0.10.0"
+version = "0.11.1"
 description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
 optional = false
-python-versions = ">=3.5,<4"
+python-versions = ">=3.6,<4"
 files = [
-    {file = "django-environ-0.10.0.tar.gz", hash = "sha256:b3559a91439c9d774a9e0c1ced872364772c612cdf6dc919506a2b13f7a77225"},
-    {file = "django_environ-0.10.0-py2.py3-none-any.whl", hash = "sha256:510f8c9c1d0a38b0815f91504270c29440a0cf44fab07f55942fa8d31bbb9be6"},
+    {file = "django-environ-0.11.1.tar.gz", hash = "sha256:f50dde64c024dfac76279dfd7dade8da994e376d38c3374623ce99490f1534dd"},
+    {file = "django_environ-0.11.1-py2.py3-none-any.whl", hash = "sha256:3b8a0f7f02e6c2999776123f7b5afca4eda4b2b3d8bb5fc3805b2cf476c50018"},
 ]
 
 [package.extras]
@@ -2780,4 +2780,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "b332696e6cb58cb5868ef3dbc7d410c19e4918c83b96fa2c34a081274515cb04"
+content-hash = "a29379dc757450e3e5714f42b26e43017d2bb13c360e7c44fc75a2473f8550a5"
