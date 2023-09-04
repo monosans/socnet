@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Generator, List, Type, no_type_check
+from typing import Iterator, List, Type, no_type_check
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
@@ -56,7 +56,7 @@ def _get_filterable_fields(
     model: Type[models.Model],
     fields: SerializerFields,
     exclude: SerializerExclude,
-) -> Generator[models.Field[Any, Any], None, None]:
+) -> Iterator[models.Field[Any, Any]]:
     for field in model._meta.get_fields():
         if not isinstance(field, IGNORED_FIELDS) and _should_be_filterable(
             field, fields, exclude
