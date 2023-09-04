@@ -48,7 +48,7 @@ factory-boy = "3.3.0"
 mypy = "1.4.1"
 pre-commit = "3.4.0"
 psycopg = { version = "3.1.10", extras = ["binary"] }
-pytest = "7.4.0"
+pytest = "7.4.1"
 pytest-cov = "4.1.0"
 pytest-django = "4.5.2"
 ruff = "0.0.287"
