@@ -12,12 +12,12 @@ jobs:
   run-clippy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: cd socnet_rs && cargo +stable clippy --all-targets --all-features -- -Dwarnings -Wclippy::pedantic
   run-eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
@@ -27,14 +27,14 @@ jobs:
   run-pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: pipx run pre-commit run --all-files
   run-pytest-mypy:
     runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: "1"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: cp .env.example .env
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml pull --ignore-buildable
       - id: build
@@ -48,13 +48,13 @@ jobs:
   run-rustfmt:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: rustup toolchain install nightly --profile minimal --component rustfmt --no-self-update --allow-downgrade
       - run: cd socnet_rs && cargo +nightly fmt --check
   run-tsc:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version-file: .nvmrc
