@@ -11,7 +11,7 @@ classifiers = ["Private :: Do Not Upload"]
 python = "^3.8"
 channels = "4.0.0"
 channels-redis = "4.1.0"
-Django = { version = "4.2.4", extras = ["argon2"] }
+Django = { version = "4.2.5", extras = ["argon2"] }
 django-allauth = "0.55.2"
 django-allauth-2fa = "0.11.1"
 django-bootstrap5 = "23.3"
