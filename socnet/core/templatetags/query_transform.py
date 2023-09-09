@@ -8,8 +8,7 @@ register = template.Library()
 
 
 class Context(Protocol):
-    def __getitem__(self, __key: Literal["request"]) -> HttpRequest:
-        ...
+    def __getitem__(self, __key: Literal["request"]) -> HttpRequest: ...
 
 
 @register.simple_tag(takes_context=True)
