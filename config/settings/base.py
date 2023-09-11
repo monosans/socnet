@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     "django_filters",
     "drf_spectacular",
+    "drf_standardized_errors",
     "logentry_admin",
     "rest_framework",
     "socnet.allauth",
@@ -130,7 +131,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django_otp.middleware.OTPMiddleware",
-    "djangorestframework_camel_case.middleware.CamelCaseMiddleWare",
     "socnet.core.middleware.ResponseHeadersMiddleware",
 ]
 
@@ -178,18 +178,10 @@ ALLAUTH_2FA_FORMS = {"setup": "socnet.allauth.forms.TOTPDeviceForm"}
 OTP_ADMIN_HIDE_SENSITIVE_DATA = True
 
 REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": [
-        "djangorestframework_camel_case.render.CamelCaseJSONRenderer"
-    ],
-    "DEFAULT_PARSER_CLASSES": [
-        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
-        "djangorestframework_camel_case.parser.CamelCaseFormParser",
-        "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
-    ],
     "DEFAULT_PERMISSION_CLASSES": [
         "socnet.api.permissions.ActualDjangoModelPermissions"
     ],
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_standardized_errors.openapi.AutoSchema",
     "DEFAULT_FILTER_BACKENDS": [
         "django_filters.rest_framework.DjangoFilterBackend",
         "rest_framework.filters.OrderingFilter",
@@ -198,14 +190,57 @@ REST_FRAMEWORK = {
         "rest_framework.pagination.LimitOffsetPagination"
     ),
     "PAGE_SIZE": 10,
+    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
 }
 SPECTACULAR_SETTINGS = {
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
     "POSTPROCESSING_HOOKS": [
-        "drf_spectacular.hooks.postprocess_schema_enums",
-        "drf_spectacular.contrib.djangorestframework_camel_case.camelize_serializer_fields",
+        "drf_standardized_errors.openapi_hooks.postprocess_schema_enums"
     ],
-    "CAMELIZE_NAMES": True,
+    "ENUM_NAME_OVERRIDES": {
+        "ValidationErrorEnum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ValidationErrorEnum.values"
+        ),
+        "ClientErrorEnum": (
+            "drf_standardized_errors.openapi_serializers.ClientErrorEnum.values"
+        ),
+        "ServerErrorEnum": (
+            "drf_standardized_errors.openapi_serializers.ServerErrorEnum.values"
+        ),
+        "ErrorCode401Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode401Enum.values"
+        ),
+        "ErrorCode403Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode403Enum.values"
+        ),
+        "ErrorCode404Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode404Enum.values"
+        ),
+        "ErrorCode405Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode405Enum.values"
+        ),
+        "ErrorCode406Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode406Enum.values"
+        ),
+        "ErrorCode415Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode415Enum.values"
+        ),
+        "ErrorCode429Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode429Enum.values"
+        ),
+        "ErrorCode500Enum": (
+            "drf_standardized_errors.openapi_serializers."
+            "ErrorCode500Enum.values"
+        ),
+    },
     "TITLE": "API | SocNet",
 }
 
