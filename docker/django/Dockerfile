@@ -121,6 +121,7 @@ RUN pip install \
   && rm -rf /wheels/
 
 COPY --chown=django:django . .
+COPY --chown=django:django --from=node-esbuild /app/socnet/static/public/css/ /app/socnet/static/public/css/
 COPY --chown=django:django --from=node-esbuild /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
