@@ -123,6 +123,7 @@ module = [
   "channels_redis.*",
   "debug_toolbar.*",
   "django_filters.*",
+  "django_otp.*",
   "environ.*",
   "factory.*",
 ]
