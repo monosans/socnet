@@ -73,11 +73,7 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "allauth",
     "allauth.account",
-    "allauth.socialaccount",
-    "django_otp",
-    "django_otp.plugins.otp_totp",
-    "django_otp.plugins.otp_static",
-    "allauth_2fa",
+    "allauth.mfa",
     "django_bootstrap5",
     "django_filters",
     "drf_spectacular",
@@ -130,7 +126,6 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django_otp.middleware.OTPMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "socnet.core.middleware.ResponseHeadersMiddleware",
 ]
@@ -168,15 +163,13 @@ MESSAGE_TAGS = {messages.DEBUG: "", messages.ERROR: "danger"}
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_ADAPTER = "socnet.allauth.adapter.AuthAdapter"
+ACCOUNT_ADAPTER = "socnet.allauth.adapter.AccountAdapter"
 ACCOUNT_FORMS = {
     "add_email": "socnet.allauth.forms.AddEmailForm",
     "login": "socnet.allauth.forms.LoginForm",
     "reset_password": "socnet.allauth.forms.ResetPasswordForm",
     "signup": "socnet.allauth.forms.SignupForm",
 }
-ALLAUTH_2FA_FORMS = {"setup": "socnet.allauth.forms.TOTPDeviceForm"}
-OTP_ADMIN_HIDE_SENSITIVE_DATA = True
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [

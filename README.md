@@ -35,11 +35,50 @@ Social network built with Django Framework.
 - Use a REST API that has a Swagger UI and supports all CRUD operations and filtering
 - Receive error notifications in [Sentry](https://sentry.io/) or by email
 
-## DB schema
+## Installation
 
-Generated with [django-extensions](https://github.com/django-extensions/django-extensions).
+[Install `Docker Compose`](https://docs.docker.com/compose/install/).
 
-![](https://github.com/monosans/socnet/assets/76561516/08b8f834-40f7-4b45-9fca-089209207256)
+### Configuration
+
+Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` file.
+
+### Development
+
+```bash
+# Pull service images
+docker compose pull --ignore-buildable
+# Build services
+docker compose build --pull
+# Run DB migrations
+docker compose run --rm django python3 manage.py migrate
+# Create a superuser if you want
+docker compose run --rm django python3 manage.py createsuperuser
+# Compile translations
+docker compose run --rm django python3 manage.py compilemessages -i site-packages
+
+# Run without debugpy
+docker compose up
+# Or run with debugpy
+docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.debugpy.yml up
+```
+
+### Production
+
+To run this in production, you need to specify the production settings in `.env`.
+
+```bash
+# Pull service images
+docker compose -f docker-compose.yml -f docker-compose.prod.yml pull --ignore-buildable
+# Build services
+docker compose -f docker-compose.yml -f docker-compose.prod.yml build --pull
+# Run DB migrations
+docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py migrate
+# Create a superuser if you want
+docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py createsuperuser
+# Run
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
 
 ## Tech Stack
 
@@ -52,14 +91,12 @@ Generated with [django-extensions](https://github.com/django-extensions/django-e
 
 - Python 3.8+
 - Django 4.2
-- django-allauth-2fa
 - django-allauth
 - django-bootstrap5
 - django-cleanup
 - django-environ
 - django-filter
 - django-logentry-admin
-- django-otp
 - djangorestframework
 - drf-spectacular
 - channels
@@ -106,47 +143,10 @@ Markdown parsing, HTML minification and sanitization, and a few other things are
 - eslint
 - stylelint
 
-## Installation
+## DB schema
 
-[Install `Docker Compose`](https://docs.docker.com/compose/install/).
+![](https://github.com/monosans/socnet/assets/76561516/f8d077b5-bb2c-4834-941e-3375ef56ba48)
 
-### Configuration
+## License
 
-Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` file.
-
-### Development
-
-```bash
-# Pull service images
-docker compose pull --ignore-buildable
-# Build services
-docker compose build --pull
-# Run DB migrations
-docker compose run --rm django python3 manage.py migrate
-# Create a superuser if you want
-docker compose run --rm django python3 manage.py createsuperuser
-# Compile translations
-docker compose run --rm django python3 manage.py compilemessages -i site-packages
-
-# Run without debugpy
-docker compose up
-# Or run with debugpy
-docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.debugpy.yml up
-```
-
-### Production
-
-To run this in production, you need to specify the production settings in `.env`.
-
-```bash
-# Pull service images
-docker compose -f docker-compose.yml -f docker-compose.prod.yml pull --ignore-buildable
-# Build services
-docker compose -f docker-compose.yml -f docker-compose.prod.yml build --pull
-# Run DB migrations
-docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py migrate
-# Create a superuser if you want
-docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py createsuperuser
-# Run
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
+[MIT](LICENSE)

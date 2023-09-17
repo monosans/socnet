@@ -671,29 +671,13 @@ files = [
 Django = ">=3.2"
 pyjwt = {version = ">=1.7", extras = ["crypto"]}
 python3-openid = ">=3.0.8"
+qrcode = {version = ">=7.0.0", optional = true, markers = "extra == \"mfa\""}
 requests = ">=2.0.0"
 requests-oauthlib = ">=0.3.0"
 
 [package.extras]
 mfa = ["qrcode (>=7.0.0)"]
 saml = ["python3-saml (>=1.15.0,<2.0.0)"]
-
-[[package]]
-name = "django-allauth-2fa"
-version = "0.11.1"
-description = "Adds two factor authentication to django-allauth"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django_allauth_2fa-0.11.1-py3-none-any.whl", hash = "sha256:2f2d61dd488f66ad45e59780b061f5abe96caea9c3466e3ee4ea50ea1faebef6"},
-    {file = "django_allauth_2fa-0.11.1.tar.gz", hash = "sha256:02ffdf1025836f072c2f6ec0964494589cf1d52362f663f9ff6d9ca61a7b6962"},
-]
-
-[package.dependencies]
-django = ">=3.2"
-django-allauth = ">=0.53.0"
-django-otp = ">=1.1.0"
-qrcode = ">=5.3"
 
 [[package]]
 name = "django-bootstrap5"
@@ -807,23 +791,6 @@ files = [
 
 [package.dependencies]
 Django = ">=2.2"
-
-[[package]]
-name = "django-otp"
-version = "1.2.2"
-description = "A pluggable framework for adding two-factor authentication to Django using one-time passwords."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django_otp-1.2.2-py3-none-any.whl", hash = "sha256:90765d5dac238a719f9550ac05681dd6307f513a81a10b6adb879b4abc6bc1a3"},
-    {file = "django_otp-1.2.2.tar.gz", hash = "sha256:007a6354dabb3a1a54574bf73abf045ebbde0bb8734a38e2ed7845ba450f345e"},
-]
-
-[package.dependencies]
-django = ">=3.2"
-
-[package.extras]
-qrcode = ["qrcode"]
 
 [[package]]
 name = "django-stubs"
@@ -2792,4 +2759,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "24b6ebe29639fe54a072a70c04afccc0fda0d26b2d7f540b53e0c798a8361d55"
+content-hash = "876c9e04c10403b5a1abb07cfcf0b3f00e967971453b0eb56cdc042bcb8114bf"

@@ -1,0 +1,14 @@
+{% extends "mfa/totp/base.html" %}
+
+{% load i18n django_bootstrap5 %}
+
+{% block card %}
+  <h3 class="mb-0 text-center">{% translate "Two-factor authentication" %}</h3>
+  <form method="post" action="{% url 'mfa_deactivate_totp' %}" class="mt-3">
+    {% csrf_token %}
+    {% bootstrap_form form layout="floating" %}
+    <button type="submit" class="btn btn-danger w-100">
+      {% translate "Disable" %}
+    </button>
+  </form>
+{% endblock card %}

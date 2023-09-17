@@ -12,14 +12,12 @@ python = "^3.8"
 channels = "4.0.0"
 channels-redis = "4.1.0"
 Django = { version = "4.2.5", extras = ["argon2"] }
-django-allauth = "0.56.1"
-django-allauth-2fa = "0.11.1"
+django-allauth = { version = "0.56.1", extras = ["mfa"] }
 django-bootstrap5 = "23.3"
 django-cleanup = "8.0.0"
 django-environ = "0.11.2"
 django-filter = "23.2"
 django-logentry-admin = "1.1.0"
-django-otp = "1.2.2"
 django-stubs-ext = "4.2.2"
 djangorestframework = "3.14.0"
 docutils = "0.20.1"
@@ -123,7 +121,6 @@ module = [
   "channels_redis.*",
   "debug_toolbar.*",
   "django_filters.*",
-  "django_otp.*",
   "environ.*",
   "factory.*",
 ]

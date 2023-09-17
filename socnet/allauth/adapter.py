@@ -1,14 +1,14 @@
 from __future__ import annotations
 
+from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.forms import SignupForm
 from allauth.account.utils import user_field
-from allauth_2fa.adapter import OTPAdapter
 from django.http import HttpRequest
 
 from ..users.models import User
 
 
-class AuthAdapter(OTPAdapter):
+class AccountAdapter(DefaultAccountAdapter):
     def save_user(
         self,
         request: HttpRequest,

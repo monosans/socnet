@@ -11,7 +11,7 @@
      class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-key text-primary me-1"></i> {% blocktranslate context "noun" %}Change password{% endblocktranslate %}</a>
   <a href="{% url 'account_email' %}"
      class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-envelope text-primary me-1"></i> {% blocktranslate context "noun" %}Change email{% endblocktranslate %}</a>
-  <a href="{% url 'two-factor-setup' %}"
+  <a href="{% url 'mfa_index' %}"
      class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-fingerprint text-primary me-1"></i> {% translate "Two-factor authentication" %}</a>
   <a href="{% url 'users:delete_account' %}"
      class="list-group-item list-group-item-action text-body"><i class="fa-solid fa-trash text-danger me-1"></i> {% blocktranslate context "noun" %}Delete account{% endblocktranslate %}</a>

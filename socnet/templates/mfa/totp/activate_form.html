@@ -1,0 +1,31 @@
+{% extends "mfa/totp/base.html" %}
+
+{% load i18n static django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/qr_code.css' %}" />
+{% endblock css %}
+{% block card %}
+  <h3 class="mb-0 text-center">{% translate "Two-factor authentication" %}</h3>
+  <div class="d-flex mt-3">
+    <div class="qr-code">{{ totp_svg|safe }}</div>
+    <div class="ms-3">
+      {% translate "Scan the QR code with a token generator (such as Aegis Authenticator on Android or Raivo OTP on iOS)." %}
+    </div>
+  </div>
+  <div class="form-floating mt-3">
+    <input type="text"
+           disabled
+           value="{{ form.secret }}"
+           placeholder="{% translate 'Authenticator secret' %}"
+           class="form-control" />
+    <label class="form-label">{% translate "Authenticator secret" %}</label>
+  </div>
+  <form method="post" action="{% url 'mfa_activate_totp' %}" class="mt-3">
+    {% csrf_token %}
+    {% bootstrap_form form layout="floating" %}
+    <button type="submit" class="btn btn-primary w-100">
+      {% translate "Enable" %}
+    </button>
+  </form>
+{% endblock card %}
