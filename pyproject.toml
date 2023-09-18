@@ -24,7 +24,7 @@ docutils = "0.20.1"
 drf-spectacular = "0.26.4"
 drf-standardized-errors = { version = "0.12.5", extras = ["openapi"] }
 httptools = "0.6.0"
-Pillow = "10.0.0"
+Pillow = "10.0.1"
 sentry-sdk = { version = "1.31.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.8.0"
