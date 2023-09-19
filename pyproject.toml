@@ -41,7 +41,7 @@ django-debug-toolbar = "4.2.0"
 django-extra-checks = "0.13.3"
 django-stubs = { version = "4.2.4", extras = ["compatible-mypy"] }
 djangorestframework-stubs = "3.14.2"
-djlint = "1.32.1"
+djlint = "1.33.0"
 factory-boy = "3.3.0"
 mypy = "1.5.1"
 pre-commit = "3.4.0"
