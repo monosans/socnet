@@ -45,7 +45,7 @@ djlint = "1.34.0"
 factory-boy = "3.3.0"
 mypy = "1.5.1"
 pre-commit = "3.4.0"
-psycopg = { version = "3.1.10", extras = ["binary"] }
+psycopg = { version = "3.1.11", extras = ["binary"] }
 pytest = "7.4.2"
 pytest-cov = "4.1.0"
 pytest-django = "4.5.2"
@@ -55,7 +55,7 @@ watchfiles = "0.20.0"
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "21.2.0"
-psycopg = { version = "3.1.10", extras = ["c"] }
+psycopg = { version = "3.1.11", extras = ["c"] }
 redis = { version = "5.0.0", extras = ["hiredis"] }
 
 [tool.black]
