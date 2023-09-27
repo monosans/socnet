@@ -56,7 +56,7 @@ watchfiles = "0.20.0"
 [tool.poetry.group.production.dependencies]
 gunicorn = "21.2.0"
 psycopg = { version = "3.1.11", extras = ["c"] }
-redis = { version = "5.0.0", extras = ["hiredis"] }
+redis = { version = "5.0.1", extras = ["hiredis"] }
 
 [tool.black]
 line-length = 80
