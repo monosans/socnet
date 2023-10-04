@@ -40,7 +40,7 @@ django-coverage-plugin = "3.1.0"
 django-debug-toolbar = "4.2.0"
 django-extra-checks = "0.13.3"
 django-stubs = { version = "4.2.4", extras = ["compatible-mypy"] }
-djangorestframework-stubs = "3.14.2"
+djangorestframework-stubs = { version = "3.14.3", extras = ["compatible-mypy"] }
 djlint = "1.34.0"
 factory-boy = "3.3.0"
 mypy = "1.5.1"
