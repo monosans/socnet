@@ -25,7 +25,7 @@ drf-spectacular = "0.26.5"
 drf-standardized-errors = { version = "0.12.5", extras = ["openapi"] }
 httptools = "0.6.0"
 Pillow = "10.0.1"
-sentry-sdk = { version = "1.31.0", extras = ["django"] }
+sentry-sdk = { version = "1.32.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.8.0"
 uvicorn = "0.23.2"
