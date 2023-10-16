@@ -51,7 +51,7 @@ pytest-cov = "4.1.0"
 pytest-django = "4.5.2"
 ruff = "0.0.292"
 types-Pillow = "10.0.0.3"
-watchfiles = "0.20.0"
+watchfiles = "0.21.0"
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "21.2.0"
