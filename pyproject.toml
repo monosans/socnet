@@ -23,7 +23,7 @@ djangorestframework = "3.14.0"
 docutils = "0.20.1"
 drf-spectacular = "0.26.5"
 drf-standardized-errors = { version = "0.12.5", extras = ["openapi"] }
-httptools = "0.6.0"
+httptools = "0.6.1"
 Pillow = "10.1.0"
 sentry-sdk = { version = "1.32.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
