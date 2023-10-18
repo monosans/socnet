@@ -33,7 +33,7 @@ uvloop = { version = "0.18.0", markers = "implementation_name == 'cpython' and (
 websockets = "11.0.3"
 
 [tool.poetry.group.local.dependencies]
-black = "23.9.1"
+black = "23.10.0"
 covdefaults = "2.3.0"
 debugpy = "1.8.0"
 django-coverage-plugin = "3.1.0"
