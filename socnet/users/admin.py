@@ -40,7 +40,7 @@ class UserAdmin(BaseUserAdmin):
         BaseUserAdmin.fieldsets[2],  # type: ignore[index]
     )
     filter_horizontal = (*BaseUserAdmin.filter_horizontal, "subscriptions")
-    form = forms.UserAdminChangeForm
+    form = forms.UserAdminChangeForm  # type: ignore[assignment]
     list_display = ("id", "username", "email", "display_name", "is_staff")
     list_filter = (*BaseUserAdmin.list_filter, "date_joined", "last_login")
     readonly_fields = ("date_joined", "last_login")
