@@ -30,7 +30,7 @@ socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.8.0"
 uvicorn = "0.23.2"
 uvloop = { version = "0.19.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
-websockets = "11.0.3"
+websockets = "12.0"
 
 [tool.poetry.group.local.dependencies]
 black = "23.10.0"
