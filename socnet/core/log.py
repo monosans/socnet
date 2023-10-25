@@ -3,11 +3,10 @@ from __future__ import annotations
 import logging
 
 from django.conf import settings
+from typing_extensions import override
 
 
 class RequireAdmins(logging.Filter):
-    def filter(
-        self,  # noqa: PLR6301
-        record: logging.LogRecord,  # noqa: ARG002
-    ) -> bool:
+    @override
+    def filter(self, record: logging.LogRecord) -> bool:
         return settings.configured and bool(settings.ADMINS)

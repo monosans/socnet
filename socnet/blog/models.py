@@ -9,7 +9,9 @@ from django_stubs_ext.db.models import TypedModelMeta
 from ..core.models import MarkdownContentModel, TimestampedModel
 
 
-class Post(MarkdownContentModel, TimestampedModel):
+class Post(  # type: ignore[explicit-override]
+    MarkdownContentModel, TimestampedModel
+):
     author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -38,7 +40,9 @@ class Post(MarkdownContentModel, TimestampedModel):
         return reverse("blog:post", args=(self.pk,))
 
 
-class Comment(MarkdownContentModel, TimestampedModel):
+class Comment(  # type: ignore[explicit-override]
+    MarkdownContentModel, TimestampedModel
+):
     post = models.ForeignKey(
         to=Post,
         on_delete=models.CASCADE,

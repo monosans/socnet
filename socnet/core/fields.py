@@ -16,7 +16,7 @@ from django.db.models import (
 from django.db.models.fields.files import ImageFieldFile
 from django.utils import timezone
 from PIL import Image, ImageOps
-from typing_extensions import Any, TypeVar
+from typing_extensions import Any, TypeVar, override
 
 from socnet_rs import normalize_str
 
@@ -44,6 +44,7 @@ NormalizedTextField = create_normalized_str_field(TextField)
 
 
 class _NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
+    @override
     def pre_save(self, model_instance: Model, add: bool) -> Any:  # noqa: FBT001
         value = None if add else timezone.now()
         setattr(model_instance, self.attname, value)
@@ -56,6 +57,7 @@ NullAutoNowDateTimeField = partial(
 
 
 class WebpImageFieldFile(ImageFieldFile):
+    @override
     def save(
         self,
         name: str,

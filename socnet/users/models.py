@@ -10,6 +10,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from typing_extensions import override
 
 from ..core.fields import (
     NormalizedCharField,
@@ -23,7 +24,7 @@ def image_upload_to(instance: User, filename: str) -> str:  # noqa: ARG001
     return f"{uuid4().hex}.webp"
 
 
-class User(AbstractUser):
+class User(AbstractUser):  # type: ignore[explicit-override]
     first_name = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
 
@@ -76,9 +77,11 @@ class User(AbstractUser):
     def get_absolute_url(self) -> str:
         return reverse("blog:user", args=(self.username,))
 
+    @override
     def get_full_name(self) -> str:
         return self.display_name
 
+    @override
     def get_short_name(self) -> str:
         return self.display_name
 

@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, UpdateView
-from typing_extensions import TypeVar
+from typing_extensions import TypeVar, override
 
 from ..core.utils import paginate
 from ..users.models import User
@@ -32,12 +32,14 @@ TPost = TypeVar("TPost", bound=Union[models.Post, models.Comment])
 class _BasePostUpdateView(
     LoginRequiredMixin, UpdateView[TPost, TBaseModelForm]
 ):
+    @override
     def get_object(self, queryset: Optional[QuerySet[TPost]] = None) -> TPost:
         obj = super().get_object(queryset)
         if obj.author_id != self.request.user.pk:
             raise PermissionDenied
         return obj
 
+    @override
     def form_valid(self, form: TBaseModelForm) -> HttpResponse:
         self.object = form.save(commit=False)  # type: ignore[assignment]
         update_fields = (
@@ -55,6 +57,7 @@ class PostUpdateView(_BasePostUpdateView[models.Post, forms.PostForm]):
     form_class = forms.PostForm
     template_name = "blog/post_update.html"
 
+    @override
     def get_queryset(self) -> QuerySet[models.Post]:
         return (
             super()
@@ -68,6 +71,7 @@ class CommentUpdateView(_BasePostUpdateView[models.Comment, forms.CommentForm]):
     form_class = forms.CommentForm
     template_name = "blog/comment_update.html"
 
+    @override
     def get_queryset(self) -> QuerySet[models.Comment]:
         return (
             super()
@@ -82,6 +86,7 @@ class PostCreateView(
     form_class = forms.PostForm
     template_name = "blog/post_create.html"
 
+    @override
     def form_valid(self, form: forms.PostForm) -> HttpResponse:
         form.instance.author = self.request.user  # type: ignore[assignment]
         return super().form_valid(form)
