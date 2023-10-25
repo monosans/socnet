@@ -57,7 +57,10 @@ NullAutoNowDateTimeField = partial(
 
 class WebpImageFieldFile(ImageFieldFile):
     def save(
-        self, name: str, content: File[bytes], save: bool = True  # noqa: FBT001
+        self,
+        name: str,
+        content: File[bytes],
+        save: bool = True,  # noqa: FBT001
     ) -> None:
         if content.file is None:
             return super().save(name, content, save)

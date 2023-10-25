@@ -8,5 +8,7 @@ class UsersConfig(AppConfig):
     name = "socnet.users"
     verbose_name = _("Users")
 
-    def ready(self) -> None:
+    def ready(
+        self,  # noqa: PLR6301
+    ) -> None:
         from . import signals  # noqa: F401
