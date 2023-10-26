@@ -27,9 +27,7 @@ THasModelSerializer = TypeVar("THasModelSerializer", bound=HasModelSerializer)
 
 
 @no_type_check
-def generate_filterset(
-    view: Type[THasModelSerializer], /
-) -> Type[THasModelSerializer]:
+def generate_filterset(view: THasModelSerializer, /) -> THasModelSerializer:
     view.filterset_class = generate_filterset_from_serializer(
         view.serializer_class
     )
