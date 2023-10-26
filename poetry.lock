@@ -890,13 +890,13 @@ sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
 name = "drf-standardized-errors"
-version = "0.12.5"
+version = "0.12.6"
 description = "Standardize your API error responses."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "drf-standardized-errors-0.12.5.tar.gz", hash = "sha256:20db40c4f4288c36046ee6e0e3727539fbe3306d60f6f1aa88326629022f69c4"},
-    {file = "drf_standardized_errors-0.12.5-py3-none-any.whl", hash = "sha256:46eda8c7442730a7d0069f6213ea588e5c386dc2858a14b9a3ae08e78fd8975d"},
+    {file = "drf_standardized_errors-0.12.6-py3-none-any.whl", hash = "sha256:6f71d895427a5c4658c7c653ebd3755840514e0cc6a433e484808ad5191b22ee"},
+    {file = "drf_standardized_errors-0.12.6.tar.gz", hash = "sha256:f71d5fce12bca8d1ce41cc65024014efbddb35c6b51a193db9a938b57385100d"},
 ]
 
 [package.dependencies]
@@ -2776,4 +2776,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "f5dfdd7c067b9d6095fa3ffac05702e66316bfda8d1caf7f1c8e2d5d1ff8cb91"
+content-hash = "90577b06e9d3ccaba6784288ac3e13e5ed618152958536e93be4ae6c96c46745"
