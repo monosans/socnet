@@ -38,7 +38,7 @@ RUN apt-get update \
   --no-cache-dir \
   --disable-pip-version-check \
   --no-color \
-  poetry
+  poetry poetry-plugin-export
 
 ENV PATH="/root/.cargo/bin:${PATH}"
 
