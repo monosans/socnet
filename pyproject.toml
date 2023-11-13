@@ -50,7 +50,7 @@ pytest = "7.4.3"
 pytest-cov = "4.1.0"
 pytest-django = "4.7.0"
 ruff = "0.1.5"
-types-Pillow = "10.1.0.1"
+types-Pillow = "10.1.0.2"
 watchfiles = "0.21.0"
 
 [tool.poetry.group.production.dependencies]
