@@ -58,5 +58,5 @@ class MinifyHtmlMiddleware(MiddlewareMixin):
             minified_content = socnet_rs.minify_html(content)
             response.content = minified_content
             if "Content-Length" in response:
-                response["Content-Length"] = len(minified_content)
+                response["Content-Length"] = len(response.content)
         return response
