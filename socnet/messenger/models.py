@@ -27,4 +27,3 @@ class Message(  # type: ignore[explicit-override]
     class Meta(TypedModelMeta):
         verbose_name = _("message")
         verbose_name_plural = _("messages")
-        indexes = [models.Index(fields=["-id"])]
