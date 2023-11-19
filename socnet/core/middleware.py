@@ -29,8 +29,8 @@ HEADERS = (
 
 
 class ResponseHeadersMiddleware(MiddlewareMixin):
-    def process_response(
-        self,  # noqa: PLR6301
+    def process_response(  # noqa: PLR6301
+        self,
         request: HttpRequest,  # noqa: ARG002
         response: HttpResponseBase,
     ) -> HttpResponseBase:
@@ -42,8 +42,8 @@ class ResponseHeadersMiddleware(MiddlewareMixin):
 class MinifyHtmlMiddleware(MiddlewareMixin):
     """Based on https://github.com/adamchainz/django-minify-html"""
 
-    def process_response(
-        self,  # noqa: PLR6301
+    def process_response(  # noqa: PLR6301
+        self,
         request: HttpRequest,  # noqa: ARG002
         response: HttpResponseBase,
     ) -> HttpResponseBase:
