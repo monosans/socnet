@@ -1,32 +1,18 @@
 {
+  "extends": "@tsconfig/strictest",
   "exclude": ["socnet/static/public/js/"],
   "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strict": true,
+    "noUncheckedIndexedAccess": false,
 
-    "module": "Node16",
+    "module": "node16",
 
     "newLine": "lf",
     "noEmit": true,
     "removeComments": true,
 
-    "checkJs": true,
-
     "allowSyntheticDefaultImports": false,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
 
-    "target": "ES6",
-    "useDefineForClassFields": true,
-
-    "skipLibCheck": true
+    "target": "es6",
+    "useDefineForClassFields": true
   }
 }
