@@ -26,7 +26,7 @@ drf-standardized-errors = { version = "0.12.6", extras = ["openapi"] }
 httptools = "0.6.1"
 Pillow = "10.1.0"
 python-json-logger = "2.0.7"
-sentry-sdk = { version = "1.36.0", extras = ["django"] }
+sentry-sdk = { version = "1.37.1", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.8.0"
 uvicorn = "0.24.0.post1"
