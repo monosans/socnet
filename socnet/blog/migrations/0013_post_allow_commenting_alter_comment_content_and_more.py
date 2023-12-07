@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="comment",
             name="date_updated",
-            field=socnet.core.fields._NullAutoNowDateTimeField(
+            field=socnet.core.fields.NullAutoNowDateTimeField(
                 auto_now=True, null=True, verbose_name="date updated"
             ),
         ),
@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="post",
             name="date_updated",
-            field=socnet.core.fields._NullAutoNowDateTimeField(
+            field=socnet.core.fields.NullAutoNowDateTimeField(
                 auto_now=True, null=True, verbose_name="date updated"
             ),
         ),

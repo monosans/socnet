@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from functools import partial
 from io import BytesIO
 from typing import Type
 
@@ -21,6 +20,7 @@ from typing_extensions import Any, TypeVar, override
 from socnet_rs import normalize_str
 
 from . import decorators
+from .utils import copy_type_hints
 
 T_contra = TypeVar("T_contra", contravariant=True)
 T_co = TypeVar("T_co", covariant=True)
@@ -43,17 +43,19 @@ NormalizedCharField = create_normalized_str_field(CharField)
 NormalizedTextField = create_normalized_str_field(TextField)
 
 
-class _NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
+class NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
+    @copy_type_hints(DateTimeField.__init__)
+    def __init__(self, **kwargs: Any) -> None:
+        kwargs["auto_now"] = True
+        kwargs["auto_now_add"] = False
+        kwargs["null"] = True
+        super().__init__(**kwargs)
+
     @override
     def pre_save(self, model_instance: Model, add: bool) -> Any:  # noqa: FBT001
         value = None if add else timezone.now()
         setattr(model_instance, self.attname, value)
         return value
-
-
-NullAutoNowDateTimeField = partial(
-    _NullAutoNowDateTimeField, auto_now=True, auto_now_add=False, null=True
-)
 
 
 class WebpImageFieldFile(ImageFieldFile):
