@@ -11,7 +11,7 @@ P = ParamSpec("P")
 
 
 def process_returned_value(
-    processor: Callable[[T], T2]
+    processor: Callable[[T], T2],
 ) -> Callable[[Callable[P, T]], Callable[P, T2]]:
     def decorator(f: Callable[P, T]) -> Callable[P, T2]:
         def wrapper(*args: P.args, **kwargs: P.kwargs) -> T2:

@@ -35,7 +35,7 @@ def generate_filterset(view: THasModelSerializer, /) -> THasModelSerializer:
 
 
 def generate_filterset_from_serializer(
-    serializer: Type[ModelSerializer[Any]]
+    serializer: Type[ModelSerializer[Any]],
 ) -> Type[FilterSet]:
     model = serializer.Meta.model
     filterable_fields = _get_filterable_fields(

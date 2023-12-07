@@ -52,7 +52,7 @@ class NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
         super().__init__(**kwargs)
 
     @override
-    def pre_save(self, model_instance: Model, add: bool) -> Any:  # noqa: FBT001
+    def pre_save(self, model_instance: Model, add: bool) -> Any:
         value = None if add else timezone.now()
         setattr(model_instance, self.attname, value)
         return value
@@ -60,12 +60,7 @@ class NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
 
 class WebpImageFieldFile(ImageFieldFile):
     @override
-    def save(
-        self,
-        name: str,
-        content: File[bytes],
-        save: bool = True,  # noqa: FBT001
-    ) -> None:
+    def save(self, name: str, content: File[bytes], save: bool = True) -> None:
         if content.file is None:
             return super().save(name, content, save)
         content.file.seek(0)
