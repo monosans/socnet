@@ -2,18 +2,31 @@ from __future__ import annotations
 
 import datetime
 import time
-from typing import Iterator, Optional, Tuple, Union
+from typing import Callable, Iterator, Optional, Tuple, Union
 
 from django.core.paginator import Page, Paginator
 from django.db.models import Model, QuerySet
 from django.http import HttpRequest
-from typing_extensions import TypeVar
+from typing_extensions import Any, ParamSpec, TypeVar
+
+T = TypeVar("T")
+P = ParamSpec("P")
 
 TModel = TypeVar("TModel", bound=Model)
 
 
 def dt_to_epoch(dt: datetime.date) -> int:
     return int(time.mktime(dt.timetuple()))
+
+
+def copy_type_hints(
+    _f: Callable[P, Any],
+    /,
+) -> Callable[[Callable[..., T]], Callable[P, T]]:
+    def wrapper(func: Callable[..., T]) -> Callable[P, T]:
+        return func
+
+    return wrapper
 
 
 def paginate(
