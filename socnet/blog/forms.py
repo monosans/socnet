@@ -38,12 +38,10 @@ class CommentForm(MarkdownContentModelForm[models.Comment]):
 
 class PostSearchForm(forms.Form):
     q = forms.CharField(
-        widget=forms.Textarea(
-            {
-                "class": "form-control",
-                "placeholder": pgettext_lazy("noun", "Search posts"),
-                "rows": 2,
-            }
-        ),
+        widget=forms.Textarea({
+            "class": "form-control",
+            "placeholder": pgettext_lazy("noun", "Search posts"),
+            "rows": 2,
+        }),
         label="",
     )

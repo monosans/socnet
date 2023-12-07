@@ -11,26 +11,22 @@ class MessageCreationForm(forms.ModelForm[models.Message]):
         model = models.Message
         fields = ("content",)
         widgets = {
-            "content": forms.Textarea(
-                {
-                    "class": "form-control border-0 rounded-top-0",
-                    "placeholder": models.Message._meta.get_field(
-                        "content"
-                    ).help_text,
-                    "rows": 2,
-                }
-            )
+            "content": forms.Textarea({
+                "class": "form-control border-0 rounded-top-0",
+                "placeholder": models.Message._meta.get_field(
+                    "content"
+                ).help_text,
+                "rows": 2,
+            })
         }
 
 
 class MessageSearchForm(forms.Form):
     q = forms.CharField(
-        widget=forms.Textarea(
-            {
-                "class": "form-control border-0 rounded-bottom-0",
-                "placeholder": pgettext_lazy("noun", "Search messages"),
-                "rows": 2,
-            }
-        ),
+        widget=forms.Textarea({
+            "class": "form-control border-0 rounded-bottom-0",
+            "placeholder": pgettext_lazy("noun", "Search messages"),
+            "rows": 2,
+        }),
         label="",
     )
