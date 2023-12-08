@@ -11,7 +11,7 @@ crate-type = ["cdylib"]
 [dependencies]
 ammonia = "=3.3.0"
 minify-html = "=0.11.1"
-once_cell = { version = "=1.18.0", features = ["parking_lot"] }
+once_cell = { version = "=1.19.0", features = ["parking_lot"] }
 pulldown-cmark = { version = "=0.9.3", default-features = false, features = [
   "simd",
 ] }
