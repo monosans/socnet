@@ -46,7 +46,10 @@ NormalizedTextField = create_normalized_str_field(TextField)
 class NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
     @copy_type_hints(DateTimeField.__init__)
     def __init__(self, **kwargs: Any) -> None:
-        super().__init__(**kwargs, auto_now=True, auto_now_add=False, null=True)
+        kwargs["auto_now"] = True
+        kwargs["auto_now_add"] = False
+        kwargs["null"] = True
+        super().__init__(**kwargs)
 
     @override
     def pre_save(self, model_instance: Model, add: bool) -> Any:
