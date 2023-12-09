@@ -20,7 +20,6 @@ from typing_extensions import Any, TypeVar, override
 from socnet_rs import normalize_str
 
 from . import decorators
-from .utils import copy_type_hints
 
 T_contra = TypeVar("T_contra", contravariant=True)
 T_co = TypeVar("T_co", covariant=True)
@@ -44,7 +43,7 @@ NormalizedTextField = create_normalized_str_field(TextField)
 
 
 class NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
-    @copy_type_hints(DateTimeField.__init__)
+    @decorators.copy_type_hints(DateTimeField.__init__)
     def __init__(self, **kwargs: Any) -> None:
         kwargs["auto_now"] = True
         kwargs["auto_now_add"] = False
