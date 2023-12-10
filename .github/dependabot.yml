@@ -6,7 +6,7 @@ updates:
       interval: daily
       time: "02:30"
     groups:
-      minor:
+      cargo-semver-minor:
         patterns:
           - "*"
         update-types:
@@ -17,44 +17,23 @@ updates:
     schedule:
       interval: daily
       time: "02:30"
-    groups:
-      minor:
-        patterns:
-          - "*"
-        update-types:
-          - minor
-          - patch
   - package-ecosystem: docker
     directory: /docker/django/
     schedule:
       interval: daily
       time: "02:30"
-    groups:
-      minor:
-        patterns:
-          - "*"
-        update-types:
-          - minor
-          - patch
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
       time: "02:30"
-    groups:
-      minor:
-        patterns:
-          - "*"
-        update-types:
-          - minor
-          - patch
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
       time: "02:30"
     groups:
-      minor:
+      npm-semver-minor:
         patterns:
           - "*"
         update-types:
@@ -66,7 +45,7 @@ updates:
       interval: daily
       time: "02:30"
     groups:
-      minor:
+      pip-semver-minor:
         patterns:
           - "*"
         update-types:
