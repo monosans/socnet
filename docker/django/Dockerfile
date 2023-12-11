@@ -17,7 +17,7 @@ COPY ./socnet/static/private/js/ ./socnet/static/private/js/
 RUN npm run build
 
 
-FROM python:3.12-slim-bookworm as python
+FROM python:3.11-slim-bookworm as python
 
 ENV PYTHONUNBUFFERED=1 \
   PYTHONDONTWRITEBYTECODE=1
