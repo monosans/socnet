@@ -22,13 +22,6 @@ updates:
     schedule:
       interval: daily
       time: "02:30"
-    groups:
-      docker-semver-minor:
-        patterns:
-          - "*"
-        update-types:
-          - minor
-          - patch
   - package-ecosystem: github-actions
     directory: /
     schedule:
