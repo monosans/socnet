@@ -616,12 +616,12 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-allauth"
-version = "0.58.2"
+version = "0.59.0"
 description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "django-allauth-0.58.2.tar.gz", hash = "sha256:b2ad19223e561ef333a54d6c03d52144b0148ce79822eaf708424a0d829f24c8"},
+    {file = "django-allauth-0.59.0.tar.gz", hash = "sha256:ec19efb80b34d2f18bd831eab9b10b6301f58d1cce9f39af35f497b7e5b0a141"},
 ]
 
 [package.dependencies]
@@ -2270,13 +2270,13 @@ files = [
 
 [[package]]
 name = "sentry-sdk"
-version = "1.38.0"
+version = "1.39.0"
 description = "Python client for Sentry (https://sentry.io)"
 optional = false
 python-versions = "*"
 files = [
-    {file = "sentry-sdk-1.38.0.tar.gz", hash = "sha256:8feab81de6bbf64f53279b085bd3820e3e737403b0a0d9317f73a2c3374ae359"},
-    {file = "sentry_sdk-1.38.0-py2.py3-none-any.whl", hash = "sha256:0017fa73b8ae2d4e57fd2522ee3df30453715b29d2692142793ec5d5f90b94a6"},
+    {file = "sentry-sdk-1.39.0.tar.gz", hash = "sha256:67f62238af273eebd6432f85116dc6cd5422d4bc02df886514e8139e755f48e4"},
+    {file = "sentry_sdk-1.39.0-py2.py3-none-any.whl", hash = "sha256:9d3644b7c36a2c290f0d3275cba250202773f37545ef9097c8bcf561c6f5cdea"},
 ]
 
 [package.dependencies]
@@ -2303,7 +2303,7 @@ huey = ["huey (>=2)"]
 loguru = ["loguru (>=0.5)"]
 opentelemetry = ["opentelemetry-distro (>=0.35b0)"]
 opentelemetry-experimental = ["opentelemetry-distro (>=0.40b0,<1.0)", "opentelemetry-instrumentation-aiohttp-client (>=0.40b0,<1.0)", "opentelemetry-instrumentation-django (>=0.40b0,<1.0)", "opentelemetry-instrumentation-fastapi (>=0.40b0,<1.0)", "opentelemetry-instrumentation-flask (>=0.40b0,<1.0)", "opentelemetry-instrumentation-requests (>=0.40b0,<1.0)", "opentelemetry-instrumentation-sqlite3 (>=0.40b0,<1.0)", "opentelemetry-instrumentation-urllib (>=0.40b0,<1.0)"]
-pure-eval = ["asttokens", "executing", "pure-eval"]
+pure-eval = ["asttokens", "executing", "pure_eval"]
 pymongo = ["pymongo (>=3.1)"]
 pyspark = ["pyspark (>=2.4.4)"]
 quart = ["blinker (>=1.1)", "quart (>=0.16.1)"]
@@ -2777,4 +2777,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "0ddce8682bc6698f913735d5fbb48f7a5048e7b4c1bf9618afd6fc7b3366e21d"
+content-hash = "dee77d6c0ad01c4529e012e526320032a1063be728ac655cdb04ed8705bdc3a7"
