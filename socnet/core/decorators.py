@@ -11,8 +11,7 @@ P = ParamSpec("P")
 
 
 def copy_type_hints(
-    _f: Callable[P, Any],
-    /,
+    _f: Callable[P, Any], /
 ) -> Callable[[Callable[..., T]], Callable[P, T]]:
     def wrapper(func: Callable[..., T]) -> Callable[P, T]:
         return func

@@ -51,6 +51,6 @@ class SignupForm(allauth_forms.SignupForm):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.fields["email"].widget.attrs["placeholder"] = self.fields[
-            "email"
-        ].label
+        self.fields["email"].widget.attrs["placeholder"] = (
+            self.fields["email"].label
+        )
