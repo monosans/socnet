@@ -832,13 +832,13 @@ markdown = ["types-Markdown (>=0.1.5)"]
 
 [[package]]
 name = "djlint"
-version = "1.34.0"
+version = "1.34.1"
 description = "HTML Template Linter and Formatter"
 optional = false
 python-versions = ">=3.8.0,<4.0.0"
 files = [
-    {file = "djlint-1.34.0-py3-none-any.whl", hash = "sha256:bdc26cc607dee8b46e262654eb0fbac7862c34d68172c8adc25a0b56fc7d8173"},
-    {file = "djlint-1.34.0.tar.gz", hash = "sha256:60b4f4ca99fd83106603bdd466f35314fda33776f3a6e70ea9d674da9d0ad053"},
+    {file = "djlint-1.34.1-py3-none-any.whl", hash = "sha256:96ff1c464fb6f061130ebc88663a2ea524d7ec51f4b56221a2b3f0320a3cfce8"},
+    {file = "djlint-1.34.1.tar.gz", hash = "sha256:db93fa008d19eaadb0454edf1704931d14469d48508daba2df9941111f408346"},
 ]
 
 [package.dependencies]
@@ -849,7 +849,7 @@ html-tag-names = ">=0.1.2,<0.2.0"
 html-void-elements = ">=0.1.0,<0.2.0"
 jsbeautifier = ">=1.14.4,<2.0.0"
 json5 = ">=0.9.11,<0.10.0"
-pathspec = ">=0.11.0,<0.12.0"
+pathspec = ">=0.12.0,<0.13.0"
 PyYAML = ">=6.0,<7.0"
 regex = ">=2023.0.0,<2024.0.0"
 tomli = {version = ">=2.0.1,<3.0.0", markers = "python_version < \"3.11\""}
@@ -1504,13 +1504,13 @@ files = [
 
 [[package]]
 name = "pathspec"
-version = "0.11.2"
+version = "0.12.1"
 description = "Utility library for gitignore style pattern matching of file paths."
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pathspec-0.11.2-py3-none-any.whl", hash = "sha256:1d6ed233af05e679efb96b1851550ea95bbb64b7c490b0f5aa52996c11e92a20"},
-    {file = "pathspec-0.11.2.tar.gz", hash = "sha256:e0d8d0ac2f12da61956eb2306b69f9469b42f4deb0f3cb6ed47b9cce9996ced3"},
+    {file = "pathspec-0.12.1-py3-none-any.whl", hash = "sha256:a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08"},
+    {file = "pathspec-0.12.1.tar.gz", hash = "sha256:a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"},
 ]
 
 [[package]]
@@ -2531,13 +2531,13 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "uvicorn"
-version = "0.24.0.post1"
+version = "0.25.0"
 description = "The lightning-fast ASGI server."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "uvicorn-0.24.0.post1-py3-none-any.whl", hash = "sha256:7c84fea70c619d4a710153482c0d230929af7bcf76c7bfa6de151f0a3a80121e"},
-    {file = "uvicorn-0.24.0.post1.tar.gz", hash = "sha256:09c8e5a79dc466bdf28dead50093957db184de356fcdc48697bad3bde4c2588e"},
+    {file = "uvicorn-0.25.0-py3-none-any.whl", hash = "sha256:ce107f5d9bd02b4636001a77a4e74aab5e1e2b146868ebbad565237145af444c"},
+    {file = "uvicorn-0.25.0.tar.gz", hash = "sha256:6dddbad1d7ee0f5140aba5ec138ddc9612c5109399903828b4874c9937f009c2"},
 ]
 
 [package.dependencies]
@@ -2798,4 +2798,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "b111a03ff807d0b846c3beec40469801baa3bb2e0de7c523292089f2e5304aca"
+content-hash = "f6421d876460fd449305701c243a5b5272c482e6127f167f0149298375f271d6"
