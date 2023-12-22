@@ -1,7 +1,5 @@
-# https://docs.djangoproject.com/en/4.2/topics/http/urls/
+# https://docs.djangoproject.com/en/5.0/topics/http/urls/
 from __future__ import annotations
-
-from typing import List, Union
 
 from django.conf import settings
 from django.contrib import admin
@@ -18,7 +16,7 @@ from socnet.users import urls as users_urls
 # https://django-allauth.readthedocs.io/en/latest/advanced.html#admin
 admin.site.login = core_views.admin_site_login_view  # type: ignore[assignment]
 
-urlpatterns: List[Union[URLPattern, URLResolver]] = [
+urlpatterns: list[URLPattern | URLResolver] = [
     path(f"{settings.ADMIN_URL}/doc/", include(admindocs_urls)),
     path(f"{settings.ADMIN_URL}/", admin.site.urls),
     path("api/", include(api_urls)),

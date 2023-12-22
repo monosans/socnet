@@ -1,4 +1,4 @@
-# https://docs.djangoproject.com/en/4.2/ref/settings/
+# https://docs.djangoproject.com/en/5.0/ref/settings/
 from __future__ import annotations
 
 import logging
@@ -15,7 +15,6 @@ if not logging.root.handlers:
         json.loads(current_file.with_name("logging.json").read_bytes())
     )
 
-from typing import Dict  # noqa: E402
 
 import environ  # noqa: E402
 from django.contrib.messages import constants as messages  # noqa: E402
@@ -99,7 +98,7 @@ LOGIN_REDIRECT_URL = "core:index"
 LOGIN_URL = "account_login"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-# https://docs.djangoproject.com/en/4.2/topics/auth/passwords/#using-argon2-with-django
+# https://docs.djangoproject.com/en/5.0/topics/auth/passwords/#using-argon2-with-django
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -238,6 +237,6 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "API | SocNet",
 }
 
-CHANNEL_LAYERS: Dict[str, Dict[str, Any]] = {
+CHANNEL_LAYERS: dict[str, dict[str, Any]] = {
     "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 }

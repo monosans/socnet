@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from typing import Optional, Sequence, Union
+from collections.abc import Sequence
+from typing import Literal, TypeAlias
 
 from rest_framework.request import Request
-from typing_extensions import Literal, TypeAlias
 
 from ..users.models import User
 
-SerializerFields: TypeAlias = Optional[Union[Sequence[str], Literal["__all__"]]]
-SerializerExclude: TypeAlias = Optional[Sequence[str]]
+SerializerFields: TypeAlias = Sequence[str] | Literal["__all__"] | None
+SerializerExclude: TypeAlias = Sequence[str] | None
 
 
 class AuthedRequest(Request):

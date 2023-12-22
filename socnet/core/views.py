@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Dict, Optional
-
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -17,7 +15,7 @@ from ..users.types import AuthedRequest
 @login_required
 def admin_site_login_view(
     request: AuthedRequest,
-    extra_context: Optional[Dict[str, Any]] = None,  # noqa: ARG001
+    extra_context: dict[str, Any] | None = None,  # noqa: ARG001
 ) -> HttpResponse:
     if not admin.site.has_permission(request):
         raise PermissionDenied

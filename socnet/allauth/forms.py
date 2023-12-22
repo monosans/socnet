@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Dict
-
 from allauth.account import forms as allauth_forms
 from django import forms
 from django.utils.translation import gettext, gettext_lazy
@@ -38,7 +36,7 @@ class ResetPasswordForm(allauth_forms.ResetPasswordForm):
 
 
 class SignupForm(allauth_forms.SignupForm):
-    fields: Dict[str, forms.Field]
+    fields: dict[str, forms.Field]
 
     display_name = User._meta.get_field("display_name").formfield()
     field_order = (

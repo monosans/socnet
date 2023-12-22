@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Type, Union
-
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
@@ -27,7 +25,7 @@ class _AuthedViewSet(ViewSet):
 
 
 class _LikeViewSet(_AuthedViewSet):
-    model: Type[Union[blog_models.Post, blog_models.Comment]]
+    model: type[blog_models.Post | blog_models.Comment]
     serializer_class = serializers.PkSerializer
 
     @extend_schema(responses=None)

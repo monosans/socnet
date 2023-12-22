@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Type, no_type_check
+from collections.abc import Iterator
+from typing import no_type_check
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
@@ -20,7 +21,7 @@ IGNORED_LOOKUPS = frozenset(("unaccent",))
 
 
 class HasModelSerializer(Protocol):
-    serializer_class: Type[ModelSerializer[Any]]
+    serializer_class: type[ModelSerializer[Any]]
 
 
 THasModelSerializer = TypeVar("THasModelSerializer", bound=HasModelSerializer)
@@ -35,8 +36,8 @@ def generate_filterset(view: THasModelSerializer, /) -> THasModelSerializer:
 
 
 def generate_filterset_from_serializer(
-    serializer: Type[ModelSerializer[Any]],
-) -> Type[FilterSet]:
+    serializer: type[ModelSerializer[Any]],
+) -> type[FilterSet]:
     model = serializer.Meta.model
     filterable_fields = _get_filterable_fields(
         model,
@@ -51,7 +52,7 @@ def generate_filterset_from_serializer(
 
 
 def _get_filterable_fields(
-    model: Type[models.Model],
+    model: type[models.Model],
     fields: SerializerFields,
     exclude: SerializerExclude,
 ) -> Iterator[models.Field[Any, Any]]:
@@ -62,7 +63,7 @@ def _get_filterable_fields(
             yield field
 
 
-def _get_lookups(field: models.Field[Any, Any]) -> List[str]:
+def _get_lookups(field: models.Field[Any, Any]) -> list[str]:
     return [
         lookup
         for lookup in field.get_lookups()

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Dict
-
 from django.forms import model_to_dict
 from django.test import Client
 from django.urls import reverse, reverse_lazy
@@ -17,7 +15,7 @@ url = reverse_lazy("users:edit_profile")
 fields = EditProfileForm.Meta.fields
 
 
-def user_to_dict(user: User) -> Dict[str, Any]:
+def user_to_dict(user: User) -> dict[str, Any]:
     return model_to_dict(user, fields=fields)
 
 
