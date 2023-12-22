@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from datetime import date
-from typing import Optional
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
@@ -86,8 +85,8 @@ class User(AbstractUser):  # type: ignore[explicit-override]
         return self.display_name
 
     @property
-    def age(self) -> Optional[int]:
-        bd: Optional[date] = self.birth_date
+    def age(self) -> int | None:
+        bd: date | None = self.birth_date
         if bd is None:
             return None
         today = timezone.now().date()

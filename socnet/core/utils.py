@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 import time
-from typing import Iterator, Optional, Tuple, Union
+from collections.abc import Iterator
 
 from django.core.paginator import Page, Paginator
 from django.db.models import Model, QuerySet
@@ -18,7 +18,7 @@ def dt_to_epoch(dt: datetime.date) -> int:
 
 def paginate(
     request: HttpRequest, object_list: QuerySet[TModel], *, per_page: int
-) -> Tuple[Page[TModel], Optional[Iterator[Union[str, int]]]]:
+) -> tuple[Page[TModel], Iterator[str | int] | None]:
     paginator = Paginator(object_list, per_page=per_page)
     try:
         page = int(request.GET["page"])

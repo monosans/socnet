@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Dict
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import TrigramWordSimilarity
 from django.db.models import OuterRef, Q, Subquery
@@ -81,7 +79,7 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
             ]
         else:
             msgs_with_interlocutor = None
-        context: Dict[str, Any] = {
+        context: dict[str, Any] = {
             "messages_": msgs_with_interlocutor,
             "form": form,
         }

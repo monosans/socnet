@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 import pytest
 from django.test import Client
 from django.urls import reverse_lazy
@@ -17,7 +15,7 @@ url = reverse_lazy("users:search_users")
     ("q", "search_fields"), [(UserFactory.build().username, ["username"])]
 )
 def test_search_users(
-    client: Client, *, auth: bool, q: str, search_fields: List[str]
+    client: Client, *, auth: bool, q: str, search_fields: list[str]
 ) -> None:
     if auth:
         auth_client(client)

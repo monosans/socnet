@@ -8,10 +8,10 @@ repository = "https://github.com/monosans/socnet"
 classifiers = ["Private :: Do Not Upload"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 channels = "4.0.0"
 channels-redis = "4.1.0"
-Django = { version = "4.2.8", extras = ["argon2"] }
+Django = { version = "5.0", extras = ["argon2"] }
 django-allauth = { version = "0.59.0", extras = ["mfa"] }
 django-bootstrap5 = "23.3"
 django-cleanup = "8.0.0"
@@ -44,7 +44,7 @@ djangorestframework-stubs = { version = "3.14.5", extras = ["compatible-mypy"] }
 djlint = "1.34.1"
 factory-boy = "3.3.0"
 mypy = "1.7.1"
-pre-commit = "3.5.0"
+pre-commit = "3.6.0"
 psycopg = { version = "3.1.16", extras = ["binary"] }
 pytest = "7.4.3"
 pytest-cov = "4.1.0"
@@ -90,7 +90,7 @@ max_line_length = 80
 profile = "django"
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.10"
 platform = "linux"
 disallow_subclassing_any = false
 disallow_untyped_calls = false
@@ -181,7 +181,7 @@ ignore-init-module-imports = true
 line-length = 80
 preview = true
 select = ["ALL"]
-target-version = "py38"
+target-version = "py310"
 
 [tool.ruff.per-file-ignores]
 "config/settings/*" = ["F403", "F405"]

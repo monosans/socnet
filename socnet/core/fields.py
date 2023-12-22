@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from io import BytesIO
-from typing import Type
 
 from django.core.files.base import ContentFile, File
 from django.db.models import (
@@ -26,7 +25,7 @@ T_co = TypeVar("T_co", covariant=True)
 TField = TypeVar("TField", bound=Field[Any, Any])
 
 
-def create_normalized_str_field(field: Type[TField]) -> Type[TField]:
+def create_normalized_str_field(field: type[TField]) -> type[TField]:
     return type(
         f"Normalized{field.__name__}",
         (field,),

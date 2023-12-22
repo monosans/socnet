@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Dict, Union
+from typing import TYPE_CHECKING, Literal
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
 from django.db.models import Model
-from typing_extensions import Any, Literal, TypedDict
+from typing_extensions import Any, TypedDict
 
 from socnet_rs import markdownify
 
@@ -38,10 +38,10 @@ class ChatMessageEvent(TypedDict):
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
-    channel_layer: Union[RedisChannelLayer, InMemoryChannelLayer]
+    channel_layer: RedisChannelLayer | InMemoryChannelLayer
 
     async def connect(self) -> None:
-        user: Union[User, AnonymousUser] = self.scope["user"]
+        user: User | AnonymousUser = self.scope["user"]
         if user.is_anonymous:
             await self.close()
             return
@@ -60,7 +60,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_discard(self.group, self.channel_name)
 
     async def receive_json(
-        self, content: Dict[str, str], **kwargs: Any
+        self, content: dict[str, str], **kwargs: Any
     ) -> None:
         sender: User = self.scope["user"]
         message = models.Message(

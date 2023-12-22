@@ -89,8 +89,8 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 ### Backend
 
-- Python 3.8+
-- Django 4.2
+- Python 3.10+
+- Django 5.0
 - django-allauth
 - django-bootstrap5
 - django-cleanup

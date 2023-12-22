@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -54,7 +52,7 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
         form = forms.UserSearchForm(request.GET)
         if form.is_valid():
             query: str = form.cleaned_data["q"]
-            search_fields: List[str] = form.cleaned_data["search_fields"]
+            search_fields: list[str] = form.cleaned_data["search_fields"]
             expr = Func(Value(" "), *search_fields, function="CONCAT_WS")
             similarity = TrigramWordSimilarity(query, expr)
             users = (

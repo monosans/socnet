@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,16 +22,16 @@ from ..users.types import AuthedRequest
 from . import forms, models, services
 
 TBaseModelForm = TypeVar(
-    "TBaseModelForm", bound=Union[forms.PostForm, forms.CommentForm]
+    "TBaseModelForm", bound=forms.PostForm | forms.CommentForm
 )
-TPost = TypeVar("TPost", bound=Union[models.Post, models.Comment])
+TPost = TypeVar("TPost", bound=models.Post | models.Comment)
 
 
 class _BasePostUpdateView(
     LoginRequiredMixin, UpdateView[TPost, TBaseModelForm]
 ):
     @override
-    def get_object(self, queryset: Optional[QuerySet[TPost]] = None) -> TPost:
+    def get_object(self, queryset: QuerySet[TPost] | None = None) -> TPost:
         obj = super().get_object(queryset)
         if obj.author_id != self.request.user.pk:
             raise PermissionDenied
@@ -167,7 +165,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: Optional[Union[QuerySet[models.Post], Page[models.Post]]] = None
+    posts: QuerySet[models.Post] | Page[models.Post] | None = None
     page_range = None
     qs = services.get_posts_preview_qs(request)
     is_search = bool(request.GET.get("q"))

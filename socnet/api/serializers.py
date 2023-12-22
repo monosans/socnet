@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Type
-
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
@@ -23,7 +21,7 @@ class UsernameSerializer(serializers.Serializer[Any]):
 
 
 def validate_single_field(
-    serializer_cls: Type[serializers.Serializer[Any]], field: str, data: Any
+    serializer_cls: type[serializers.Serializer[Any]], field: str, data: Any
 ) -> Any:
     if not isinstance(data, dict):
         data = {field: data}

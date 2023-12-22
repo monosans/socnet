@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import functools
-from typing import Callable
+from collections.abc import Callable
 
 from typing_extensions import Any, ParamSpec, TypeVar
 
