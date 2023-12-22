@@ -13,7 +13,7 @@ MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 TEMPLATES[0]["OPTIONS"]["string_if_invalid"] = "INVALID EXPRESSION: %s"  # type: ignore[index]
 
-# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
 INTERNAL_IPS = [
     ip[: ip.rfind(".")] + ".1"
     for ip in socket.gethostbyname_ex(socket.gethostname())[2]
