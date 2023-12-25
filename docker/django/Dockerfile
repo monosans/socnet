@@ -29,7 +29,7 @@ FROM python as python-build-stage
 
 # hadolint ignore=DL3008,DL3013,DL4006
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential curl libpq-dev pkg-config \
+  && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
   && curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
