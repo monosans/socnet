@@ -7,7 +7,7 @@ from socnet_rs import minify_html
 
 @pytest.mark.parametrize(
     ("given", "expected"),
-    [("<html></html>", ""), ('<input type="text" />', "<input>")],
+    [("<html></html>", ""), ('<input type="text" />', "<input type=text>")],
 )
 def test_minify_html(given: str, expected: str) -> None:
     assert minify_html(given) == expected
