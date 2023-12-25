@@ -69,7 +69,7 @@ FROM python as python-ci-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext libpq-dev \
+  && apt-get install -y --no-install-recommends gettext libpq-dev wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
@@ -101,7 +101,7 @@ FROM python as python-production-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y brotli gettext libpq-dev \
+  && apt-get install --no-install-recommends -y brotli gettext libpq-dev wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd --system django \

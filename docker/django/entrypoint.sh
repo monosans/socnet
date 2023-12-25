@@ -2,6 +2,6 @@
 
 set -euo pipefail
 
-while ! </dev/tcp/"${POSTGRES_HOST}"/"${POSTGRES_PORT}"; do sleep 1; done
+wait-for-it "${POSTGRES_HOST}:${POSTGRES_PORT}"
 
 exec "$@"

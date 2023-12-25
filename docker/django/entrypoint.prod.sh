@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-while ! </dev/tcp/"${POSTGRES_HOST}"/"${POSTGRES_PORT}"; do sleep 1; done
-while ! </dev/tcp/"${REDIS_HOST}"/"${REDIS_PORT}"; do sleep 1; done
+wait-for-it "${POSTGRES_HOST}:${POSTGRES_PORT}" &
+wait-for-it "${REDIS_HOST}:${REDIS_PORT}"
 
 exec "$@"
