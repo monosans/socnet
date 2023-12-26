@@ -32,6 +32,7 @@ const CMARK_OPTIONS: pulldown_cmark::Options =
         .union(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
 
 #[pyfunction]
+#[pyo3(signature = (value, /))]
 pub fn markdownify(py: Python, value: &str) -> String {
     py.allow_threads(move || {
         let parser = pulldown_cmark::Parser::new_ext(value, CMARK_OPTIONS);

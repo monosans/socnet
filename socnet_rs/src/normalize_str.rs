@@ -1,6 +1,7 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
+#[pyo3(signature = (value, /))]
 pub fn normalize_str(py: Python, value: &str) -> String {
     py.allow_threads(move || {
         value
