@@ -1,6 +1,6 @@
 use pyo3::prelude::*;
 
-pub(crate) const CFG: ::minify_html::Cfg = ::minify_html::Cfg {
+const CFG: ::minify_html::Cfg = ::minify_html::Cfg {
     do_not_minify_doctype: true,
     ensure_spec_compliant_unquoted_attribute_values: true,
     keep_closing_tags: false,
