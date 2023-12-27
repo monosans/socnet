@@ -33,7 +33,7 @@ const CMARK_OPTIONS: pulldown_cmark::Options =
 
 #[pyfunction]
 #[pyo3(signature = (value, /))]
-pub fn markdownify(py: Python, value: &str) -> String {
+pub(crate) fn markdownify(py: Python, value: &str) -> String {
     py.allow_threads(move || {
         let parser = pulldown_cmark::Parser::new_ext(value, CMARK_OPTIONS);
         let mut html = String::new();

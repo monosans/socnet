@@ -1,6 +1,6 @@
 use pyo3::prelude::*;
 
-const CFG: ::minify_html::Cfg = ::minify_html::Cfg {
+pub(crate) const CFG: ::minify_html::Cfg = ::minify_html::Cfg {
     do_not_minify_doctype: true,
     ensure_spec_compliant_unquoted_attribute_values: true,
     keep_closing_tags: false,
@@ -19,7 +19,7 @@ const CFG: ::minify_html::Cfg = ::minify_html::Cfg {
 
 #[pyfunction]
 #[pyo3(signature = (value, /))]
-pub fn minify_html(py: Python, value: &str) -> String {
+pub(crate) fn minify_html(py: Python, value: &str) -> String {
     py.allow_threads(move || {
         let minified = ::minify_html::minify(value.as_bytes(), &CFG);
         String::from_utf8(minified).unwrap()
