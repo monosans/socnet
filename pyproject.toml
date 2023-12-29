@@ -13,7 +13,7 @@ channels = "4.0.0"
 channels-redis = "4.1.0"
 Django = { version = "5.0", extras = ["argon2"] }
 django-allauth = { version = "0.59.0", extras = ["mfa"] }
-django-bootstrap5 = "23.3"
+django-bootstrap5 = "23.4"
 django-cleanup = "8.0.0"
 django-environ = "0.11.2"
 django-filter = "23.5"
