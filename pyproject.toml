@@ -11,7 +11,7 @@ classifiers = ["Private :: Do Not Upload"]
 python = "^3.10"
 channels = "4.0.0"
 channels-redis = "4.1.0"
-Django = { version = "5.0", extras = ["argon2"] }
+Django = { version = "5.0.1", extras = ["argon2"] }
 django-allauth = { version = "0.59.0", extras = ["mfa"] }
 django-bootstrap5 = "23.4"
 django-cleanup = "8.0.0"
@@ -24,7 +24,7 @@ docutils = "0.20.1"
 drf-spectacular = "0.27.0"
 drf-standardized-errors = { version = "0.12.6", extras = ["openapi"] }
 httptools = "0.6.1"
-Pillow = "10.1.0"
+Pillow = "10.2.0"
 python-json-logger = "2.0.7"
 sentry-sdk = { version = "1.39.1", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
@@ -48,7 +48,7 @@ psycopg = { version = "3.1.16", extras = ["binary"] }
 pytest = "7.4.4"
 pytest-cov = "4.1.0"
 pytest-django = "4.7.0"
-ruff = "0.1.9"
+ruff = "0.1.11"
 types-Pillow = "10.1.0.2"
 watchfiles = "0.21.0"
 
