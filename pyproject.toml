@@ -12,7 +12,7 @@ python = "^3.10"
 channels = "4.0.0"
 channels-redis = "4.1.0"
 Django = { version = "5.0.1", extras = ["argon2"] }
-django-allauth = { version = "0.59.0", extras = ["mfa"] }
+django-allauth = { version = "0.60.0", extras = ["mfa"] }
 django-bootstrap5 = "23.4"
 django-cleanup = "8.0.0"
 django-environ = "0.11.2"
@@ -44,7 +44,7 @@ djangorestframework-stubs = { version = "3.14.5", extras = ["compatible-mypy"] }
 djlint = "1.34.1"
 factory-boy = "3.3.0"
 mypy = "1.7.1"
-psycopg = { version = "3.1.16", extras = ["binary"] }
+psycopg = { version = "3.1.17", extras = ["binary"] }
 pytest = "7.4.4"
 pytest-cov = "4.1.0"
 pytest-django = "4.7.0"
@@ -54,7 +54,7 @@ watchfiles = "0.21.0"
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "21.2.0"
-psycopg = { version = "3.1.16", extras = ["c"] }
+psycopg = { version = "3.1.17", extras = ["c"] }
 redis = { version = "5.0.1", extras = ["hiredis"] }
 
 [tool.coverage.report]
