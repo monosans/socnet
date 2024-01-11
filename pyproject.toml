@@ -26,7 +26,7 @@ drf-standardized-errors = { version = "0.12.6", extras = ["openapi"] }
 httptools = "0.6.1"
 Pillow = "10.2.0"
 python-json-logger = "2.0.7"
-sentry-sdk = { version = "1.39.1", extras = ["django"] }
+sentry-sdk = { version = "1.39.2", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.9.0"
 uvicorn = "0.25.0"
@@ -49,7 +49,7 @@ pytest = "7.4.4"
 pytest-cov = "4.1.0"
 pytest-django = "4.7.0"
 ruff = "0.1.11"
-types-Pillow = "10.1.0.20240106"
+types-Pillow = "10.2.0.20240111"
 watchfiles = "0.21.0"
 
 [tool.poetry.group.production.dependencies]
