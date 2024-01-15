@@ -10,7 +10,7 @@ classifiers = ["Private :: Do Not Upload"]
 [tool.poetry.dependencies]
 python = "^3.10"
 channels = "4.0.0"
-channels-redis = "4.1.0"
+channels-redis = "4.2.0"
 Django = { version = "5.0.1", extras = ["argon2"] }
 django-allauth = { version = "0.60.0", extras = ["mfa"] }
 django-bootstrap5 = "23.4"
@@ -48,7 +48,7 @@ psycopg = { version = "3.1.17", extras = ["binary"] }
 pytest = "7.4.4"
 pytest-cov = "4.1.0"
 pytest-django = "4.7.0"
-ruff = "0.1.12"
+ruff = "0.1.13"
 types-Pillow = "10.2.0.20240111"
 watchfiles = "0.21.0"
 
