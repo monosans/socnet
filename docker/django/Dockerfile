@@ -19,8 +19,19 @@ RUN npm run build
 
 FROM docker.io/python:3.12-slim-bookworm as python-base-stage
 
-ENV PYTHONUNBUFFERED=1 \
-  PYTHONDONTWRITEBYTECODE=1
+ENV \
+  PIP_DISABLE_PIP_VERSION_CHECK=1 \
+  PIP_NO_CACHE_DIR=1 \
+  PIP_NO_COLOR=1 \
+  PIP_NO_INPUT=1 \
+  PIP_PROGRESS_BAR=off \
+  PIP_ROOT_USER_ACTION=ignore \
+  PIP_UPGRADE=1 \
+  POETRY_NO_ANSI=1 \
+  POETRY_NO_CACHE=1 \
+  POETRY_NO_INTERACTION=1 \
+  PYTHONDONTWRITEBYTECODE=1 \
+  PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
@@ -33,14 +44,7 @@ RUN apt-get update \
   && curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
-  && pip install \
-  --upgrade \
-  --progress-bar off \
-  --no-input \
-  --no-cache-dir \
-  --disable-pip-version-check \
-  --no-color \
-  poetry poetry-plugin-export
+  && pip install poetry poetry-plugin-export
 
 ENV PATH="/root/.cargo/bin:${PATH}"
 
@@ -50,19 +54,8 @@ COPY ./socnet_rs/ ./socnet_rs/
 ARG POETRY_GROUPS
 
 # hadolint ignore=DL4006
-RUN poetry export \
-  --only="${POETRY_GROUPS}" \
-  --no-ansi \
-  --no-interaction \
-  --no-cache | \
-  pip wheel \
-  --wheel-dir /usr/src/app/wheels \
-  -r /dev/stdin \
-  --progress-bar off \
-  --no-input \
-  --no-cache-dir \
-  --disable-pip-version-check \
-  --no-color
+RUN poetry export --without-hashes --only="${POETRY_GROUPS}" | \
+  pip wheel --wheel-dir /usr/src/app/wheels -r /dev/stdin
 
 
 FROM python-base-stage as python-ci-run-stage
@@ -75,14 +68,7 @@ RUN apt-get update \
 
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
-RUN pip install \
-  --upgrade \
-  --progress-bar off \
-  --no-index \
-  --find-links /wheels/ /wheels/* \
-  --no-input \
-  --no-cache-dir \
-  --no-color \
+RUN pip install --no-index --find-links /wheels/ /wheels/* \
   && rm -rf /wheels/
 
 ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
@@ -112,14 +98,7 @@ RUN apt-get update \
 
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
-RUN pip install \
-  --upgrade \
-  --progress-bar off \
-  --no-index \
-  --find-links /wheels/ /wheels/* \
-  --no-input \
-  --no-cache-dir \
-  --no-color \
+RUN pip install --no-index --find-links /wheels/ /wheels/* \
   && rm -rf /wheels/
 
 COPY --chown=django:django . .
