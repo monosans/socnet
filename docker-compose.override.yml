@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/django/Dockerfile
-      target: node
+      target: node-base-stage
     command:
       - npm
       - run

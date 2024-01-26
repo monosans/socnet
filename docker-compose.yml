@@ -11,7 +11,7 @@ services:
     networks:
       - django-postgres
   postgres:
-    image: postgres:16
+    image: docker.io/postgres:16
     env_file: ./.env
     networks:
       - django-postgres

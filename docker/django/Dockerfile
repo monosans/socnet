@@ -1,4 +1,4 @@
-FROM node:lts-bookworm-slim as node
+FROM docker.io/node:lts-bookworm-slim as node-base-stage
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm ci && \
   npm cache clean --force
 
 
-FROM node as node-esbuild
+FROM node-base-stage as node-esbuild-stage
 
 COPY ./tsconfig.json ./tsconfig.json
 COPY ./socnet/static/private/css/ ./socnet/static/private/css/
@@ -17,7 +17,7 @@ COPY ./socnet/static/private/js/ ./socnet/static/private/js/
 RUN npm run build
 
 
-FROM python:3.12-slim-bookworm as python
+FROM docker.io/python:3.12-slim-bookworm as python-base-stage
 
 ENV PYTHONUNBUFFERED=1 \
   PYTHONDONTWRITEBYTECODE=1
@@ -25,7 +25,7 @@ ENV PYTHONUNBUFFERED=1 \
 WORKDIR /app
 
 
-FROM python as python-build-stage
+FROM python-base-stage as python-build-stage
 
 # hadolint ignore=DL3008,DL3013,DL4006
 RUN apt-get update \
@@ -34,7 +34,9 @@ RUN apt-get update \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && pip install \
+  --upgrade \
   --progress-bar off \
+  --no-input \
   --no-cache-dir \
   --disable-pip-version-check \
   --no-color \
@@ -49,8 +51,6 @@ ARG POETRY_GROUPS
 
 # hadolint ignore=DL4006
 RUN poetry export \
-  --without-hashes \
-  --without-urls \
   --only="${POETRY_GROUPS}" \
   --no-ansi \
   --no-interaction \
@@ -59,13 +59,13 @@ RUN poetry export \
   --wheel-dir /usr/src/app/wheels \
   -r /dev/stdin \
   --progress-bar off \
-  --no-deps \
+  --no-input \
   --no-cache-dir \
   --disable-pip-version-check \
   --no-color
 
 
-FROM python as python-ci-run-stage
+FROM python-base-stage as python-ci-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
@@ -76,11 +76,12 @@ RUN apt-get update \
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
 RUN pip install \
+  --upgrade \
   --progress-bar off \
   --no-index \
   --find-links /wheels/ /wheels/* \
+  --no-input \
   --no-cache-dir \
-  --disable-pip-version-check \
   --no-color \
   && rm -rf /wheels/
 
@@ -97,7 +98,7 @@ RUN groupadd --gid "${GID}" --system django \
 USER django
 
 
-FROM python as python-production-run-stage
+FROM python-base-stage as python-production-run-stage
 
 # hadolint ignore=DL3008
 RUN apt-get update \
@@ -112,17 +113,18 @@ RUN apt-get update \
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
 RUN pip install \
+  --upgrade \
   --progress-bar off \
   --no-index \
   --find-links /wheels/ /wheels/* \
+  --no-input \
   --no-cache-dir \
-  --disable-pip-version-check \
   --no-color \
   && rm -rf /wheels/
 
 COPY --chown=django:django . .
-COPY --chown=django:django --from=node-esbuild /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --chown=django:django --from=node-esbuild /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY --chown=django:django --from=node-esbuild-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
+COPY --chown=django:django --from=node-esbuild-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 
