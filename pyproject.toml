@@ -71,7 +71,6 @@ omit = [
   "config/asgi.py",
   "config/settings/local.py",
   "config/settings/production.py",
-  "config/wsgi.py",
   "manage.py",
 ]
 plugins = ["covdefaults", "django_coverage_plugin"]
@@ -121,9 +120,13 @@ module = [
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "config.settings.test"
-FAIL_INVALID_TEMPLATE_VARS = true
-addopts = ["--strict-config", "--strict-markers"]
+addopts = [
+  "--ds=config.settings.test",
+  "--fail-on-template-vars",
+  "--strict-config",
+  "--strict-markers",
+]
+usefixtures = ["db"]
 xfail_strict = true
 
 [tool.ruff]

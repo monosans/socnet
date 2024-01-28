@@ -59,7 +59,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 ROOT_URLCONF = "config.urls"
 ASGI_APPLICATION = "config.asgi.application"
-WSGI_APPLICATION = "config.wsgi.application"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
