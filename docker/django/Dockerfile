@@ -8,13 +8,28 @@ RUN npm ci && \
   npm cache clean --force
 
 
-FROM node-base-stage as node-esbuild-stage
+FROM node-base-stage as node-build-stage
 
 COPY ./tsconfig.json ./tsconfig.json
 COPY ./socnet/static/private/css/ ./socnet/static/private/css/
 COPY ./socnet/static/private/js/ ./socnet/static/private/js/
 
 RUN npm run build
+
+
+FROM node-base-stage as node-watch-stage
+
+# hadolint ignore=DL3008
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends tini \
+  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+  && rm -rf /var/lib/apt/lists/*
+
+USER node
+
+ENTRYPOINT ["tini", "--"]
+
+CMD ["npm", "run", "watch"]
 
 
 FROM docker.io/python:3.12-slim-bookworm as python-base-stage
@@ -27,9 +42,6 @@ ENV \
   PIP_PROGRESS_BAR=off \
   PIP_ROOT_USER_ACTION=ignore \
   PIP_UPGRADE=1 \
-  POETRY_NO_ANSI=1 \
-  POETRY_NO_CACHE=1 \
-  POETRY_NO_INTERACTION=1 \
   PYTHONDONTWRITEBYTECODE=1 \
   PYTHONUNBUFFERED=1
 
@@ -37,6 +49,11 @@ WORKDIR /app
 
 
 FROM python-base-stage as python-build-stage
+
+ENV \
+  POETRY_NO_ANSI=1 \
+  POETRY_NO_CACHE=1 \
+  POETRY_NO_INTERACTION=1
 
 # hadolint ignore=DL3008,DL3013,DL4006
 RUN apt-get update \
@@ -58,20 +75,30 @@ RUN poetry export --without-hashes --only="${POETRY_GROUPS}" | \
   pip wheel --wheel-dir /usr/src/app/wheels -r /dev/stdin
 
 
-FROM python-base-stage as python-ci-run-stage
+FROM python-base-stage as python-base-run-stage
+
+ENV READ_ENV_EXAMPLE=False
+
+
+FROM python-base-run-stage as python-ci-run-stage
+
+ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext libpq-dev wait-for-it \
+  && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
+# hadolint ignore=DL3013
 RUN pip install --no-index --find-links /wheels/ /wheels/* \
   && rm -rf /wheels/
 
-ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
+ENTRYPOINT ["tini", "--", "/app/docker/django/entrypoint.sh"]
+
+CMD ["/app/docker/django/start.sh"]
 
 
 FROM python-ci-run-stage as python-local-run-stage
@@ -84,11 +111,13 @@ RUN groupadd --gid "${GID}" --system django \
 USER django
 
 
-FROM python-base-stage as python-production-run-stage
+FROM python-base-run-stage as python-production-run-stage
+
+ENV DJANGO_SETTINGS_MODULE=config.settings.production
 
 # hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y brotli gettext libpq-dev wait-for-it \
+  && apt-get install -y --no-install-recommends brotli gettext libpq-dev tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd --system django \
@@ -98,13 +127,16 @@ RUN apt-get update \
 
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
+# hadolint ignore=DL3013
 RUN pip install --no-index --find-links /wheels/ /wheels/* \
   && rm -rf /wheels/
 
 COPY --chown=django:django . .
-COPY --chown=django:django --from=node-esbuild-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --chown=django:django --from=node-esbuild-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
+COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 
-ENTRYPOINT ["bash", "/app/docker/django/entrypoint.prod.sh"]
+ENTRYPOINT ["tini", "--", "/app/docker/django/entrypoint.prod.sh"]
+
+CMD ["/app/docker/django/start.prod.sh"]

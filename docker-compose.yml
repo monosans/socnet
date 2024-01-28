@@ -6,8 +6,6 @@ services:
     depends_on:
       - postgres
     env_file: ./.env
-    environment:
-      - READ_ENV_EXAMPLE=False
     networks:
       - django-postgres
   postgres:

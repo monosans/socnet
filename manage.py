@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import os
 import sys
 
 
 def main() -> None:
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
     from django.core.management import (  # noqa: PLC0415
         execute_from_command_line,
     )
