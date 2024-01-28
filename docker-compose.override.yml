@@ -7,9 +7,6 @@ services:
         - POETRY_GROUPS=main,local
         - GID=${GID:-1000}
         - UID=${UID:-1000}
-    command:
-      - bash
-      - /app/docker/django/start.sh
     ports:
       - 8000:8000
     volumes:
@@ -22,13 +19,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/django/Dockerfile
-      target: node-base-stage
-    command:
-      - npm
-      - run
-      - watch
+      target: node-watch-stage
     networks: []
-    user: node
     volumes:
       - ./socnet/static:/app/socnet/static
       - ./package.json:/app/package.json

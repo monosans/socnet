@@ -45,7 +45,7 @@ djlint = "1.34.1"
 factory-boy = "3.3.0"
 mypy = "1.7.1"
 psycopg = { version = "3.1.17", extras = ["binary"] }
-pytest = "7.4.4"
+pytest = "8.0.0"
 pytest-cov = "4.1.0"
 pytest-django = "4.7.0"
 ruff = "0.1.14"
@@ -71,7 +71,6 @@ omit = [
   "config/asgi.py",
   "config/settings/local.py",
   "config/settings/production.py",
-  "config/wsgi.py",
   "manage.py",
 ]
 plugins = ["covdefaults", "django_coverage_plugin"]
@@ -121,9 +120,13 @@ module = [
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "config.settings.test"
-FAIL_INVALID_TEMPLATE_VARS = true
-addopts = ["--strict-config", "--strict-markers"]
+addopts = [
+  "--ds=config.settings.test",
+  "--fail-on-template-vars",
+  "--strict-config",
+  "--strict-markers",
+]
+usefixtures = ["db"]
 xfail_strict = true
 
 [tool.ruff]

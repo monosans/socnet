@@ -5,13 +5,8 @@ services:
       target: python-production-run-stage
       args:
         - POETRY_GROUPS=main,production
-    command:
-      - bash
-      - /app/docker/django/start.prod.sh
     depends_on:
       - redis
-    environment:
-      - DJANGO_SETTINGS_MODULE=config.settings.production
     networks:
       - caddy-django
       - django-redis
