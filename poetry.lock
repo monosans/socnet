@@ -917,13 +917,13 @@ doc = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-spelling"]
 
 [[package]]
 name = "faker"
-version = "22.5.1"
+version = "22.6.0"
 description = "Faker is a Python package that generates fake data for you."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Faker-22.5.1-py3-none-any.whl", hash = "sha256:4e7bb19c1955bb978bf1d4cb0cf25930e37de0e7dfbc6abd768fd4784d9a9653"},
-    {file = "Faker-22.5.1.tar.gz", hash = "sha256:79cbe3be786789efa05b8c75d7e0ec4efa6ecb786b8fe90eae49c2f8f9cbe31a"},
+    {file = "Faker-22.6.0-py3-none-any.whl", hash = "sha256:2b57f0256da6b45b7851dca87836ef5e2ae2fbb64d63d8697f1e47830d7b505d"},
+    {file = "Faker-22.6.0.tar.gz", hash = "sha256:fa6d969728ef3da6229da91267a1bd4e6b902044c4822012d4fc46c71bb92b26"},
 ]
 
 [package.dependencies]
@@ -1759,13 +1759,13 @@ postgresql = ["psycopg2"]
 
 [[package]]
 name = "pytz"
-version = "2023.3.post1"
+version = "2023.4"
 description = "World timezone definitions, modern and historical"
 optional = false
 python-versions = "*"
 files = [
-    {file = "pytz-2023.3.post1-py2.py3-none-any.whl", hash = "sha256:ce42d816b81b68506614c11e8937d3aa9e41007ceb50bfdcb0749b921bf646c7"},
-    {file = "pytz-2023.3.post1.tar.gz", hash = "sha256:7b4fddbeb94a1eba4b557da24f19fdf9db575192544270a9101d8509f9f43d7b"},
+    {file = "pytz-2023.4-py2.py3-none-any.whl", hash = "sha256:f90ef520d95e7c46951105338d918664ebfd6f1d995bd7d153127ce90efafa6a"},
+    {file = "pytz-2023.4.tar.gz", hash = "sha256:31d4583c4ed539cd037956140d695e42c033a19e984bfce9964a3f7d59bc2b40"},
 ]
 
 [[package]]
@@ -2301,13 +2301,13 @@ files = [
 
 [[package]]
 name = "types-pytz"
-version = "2023.3.1.1"
+version = "2023.4.0.20240130"
 description = "Typing stubs for pytz"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "types-pytz-2023.3.1.1.tar.gz", hash = "sha256:cc23d0192cd49c8f6bba44ee0c81e4586a8f30204970fc0894d209a6b08dab9a"},
-    {file = "types_pytz-2023.3.1.1-py3-none-any.whl", hash = "sha256:1999a123a3dc0e39a2ef6d19f3f8584211de9e6a77fe7a0259f04a524e90a5cf"},
+    {file = "types-pytz-2023.4.0.20240130.tar.gz", hash = "sha256:33676a90bf04b19f92c33eec8581136bea2f35ddd12759e579a624a006fd387a"},
+    {file = "types_pytz-2023.4.0.20240130-py3-none-any.whl", hash = "sha256:6ce76a9f8fd22bd39b01a59c35bfa2db39b60d11a2f77145e97b730de7e64fe0"},
 ]
 
 [[package]]
