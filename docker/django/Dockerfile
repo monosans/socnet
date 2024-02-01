@@ -1,3 +1,4 @@
+# hadolint global ignore=DL3008,DL3013,DL4006
 FROM docker.io/node:lts-bookworm-slim as node-base-stage
 
 WORKDIR /app
@@ -19,11 +20,15 @@ RUN npm run build
 
 FROM node-base-stage as node-watch-stage
 
-# hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install -y --no-install-recommends tini \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
+
+ARG GID UID
+
+RUN groupmod --gid "${GID}" node \
+  && usermod --gid node --uid "${UID}" node
 
 USER node
 
@@ -55,7 +60,6 @@ ENV \
   POETRY_NO_CACHE=1 \
   POETRY_NO_INTERACTION=1
 
-# hadolint ignore=DL3008,DL3013,DL4006
 RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
   && curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal \
@@ -70,7 +74,6 @@ COPY ./socnet_rs/ ./socnet_rs/
 
 ARG POETRY_GROUPS
 
-# hadolint ignore=DL4006
 RUN poetry export --without-hashes --only="${POETRY_GROUPS}" | \
   pip wheel --wheel-dir /usr/src/app/wheels -r /dev/stdin
 
@@ -84,7 +87,6 @@ FROM python-base-run-stage as python-ci-run-stage
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
-# hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
@@ -92,7 +94,6 @@ RUN apt-get update \
 
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
-# hadolint ignore=DL3013
 RUN pip install --no-index --find-links /wheels/ /wheels/* \
   && rm -rf /wheels/
 
@@ -103,7 +104,7 @@ CMD ["/app/docker/django/start.sh"]
 
 FROM python-ci-run-stage as python-local-run-stage
 
-ARG UID GID
+ARG GID UID
 
 RUN groupadd --gid "${GID}" --system django \
   && useradd --gid django --no-log-init --system --uid "${UID}" django
@@ -115,25 +116,23 @@ FROM python-base-run-stage as python-production-run-stage
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.production
 
-# hadolint ignore=DL3008
 RUN apt-get update \
   && apt-get install -y --no-install-recommends brotli gettext libpq-dev tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd --system django \
-  && useradd --gid django --system django \
+  && useradd --gid django --no-log-init --system django \
   && mkdir -p /var/www/django/static /var/www/django/media \
   && chown django:django /var/www/django/static /var/www/django/media
 
 COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 
-# hadolint ignore=DL3013
 RUN pip install --no-index --find-links /wheels/ /wheels/* \
   && rm -rf /wheels/
 
-COPY --chown=django:django . .
-COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY . .
+COPY --from=node-build-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
+COPY --from=node-build-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 
