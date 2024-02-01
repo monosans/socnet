@@ -20,6 +20,9 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
       target: node-watch-stage
+      args:
+        - GID=${GID:-1000}
+        - UID=${UID:-1000}
     networks: []
     volumes:
       - ./socnet/static:/app/socnet/static
