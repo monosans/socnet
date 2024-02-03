@@ -12,7 +12,8 @@ crate-type = ["cdylib"]
 ammonia = "=3.3.0"
 minify-html = "=0.15.0"
 once_cell = { version = "=1.19.0", features = ["parking_lot"] }
-pulldown-cmark = { version = "=0.9.6", default-features = false, features = [
+pulldown-cmark = { version = "=0.10.0", default-features = false, features = [
+  "html",
   "simd",
 ] }
 pyo3 = "=0.20.2"
