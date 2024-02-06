@@ -13,6 +13,6 @@
     "allowSyntheticDefaultImports": false,
 
     "target": "es6",
-    "useDefineForClassFields": true,
-  },
+    "useDefineForClassFields": true
+  }
 }
