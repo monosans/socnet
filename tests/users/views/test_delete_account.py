@@ -32,7 +32,7 @@ def test_authed_get(client: Client) -> None:
 
 
 def test_authed_post_correct_password(client: Client) -> None:
-    password = "pw"
+    password = "pw"  # noqa: S105
     user = UserFactory(password=password)
     client.force_login(user)
     response = client.post(url, data={"password": password}, follow=True)
@@ -42,7 +42,7 @@ def test_authed_post_correct_password(client: Client) -> None:
 
 
 def test_authed_post_incorrect_password(client: Client) -> None:
-    user = auth_client(client, password="pw")
+    user = auth_client(client, password="pw")  # noqa: S106
     response = client.post(url, data={"password": "pw1"})
     assert response.status_code == 200
     assert User.objects.filter(pk=user.pk).exists()

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import ClassVar
+
 from django import forms
 from django.utils.translation import pgettext_lazy
 
@@ -10,7 +12,7 @@ class MessageCreationForm(forms.ModelForm[models.Message]):
     class Meta:
         model = models.Message
         fields = ("content",)
-        widgets = {
+        widgets: ClassVar[dict[str, forms.Textarea]] = {
             "content": forms.Textarea({
                 "class": "form-control border-0 rounded-top-0",
                 "placeholder": models.Message._meta.get_field(

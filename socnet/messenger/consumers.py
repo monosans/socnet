@@ -60,7 +60,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_discard(self.group, self.channel_name)
 
     async def receive_json(
-        self, content: dict[str, str], **kwargs: Any
+        self,
+        content: dict[str, str],
+        **kwargs: Any,  # noqa: ARG002
     ) -> None:
         sender: User = self.scope["user"]
         message = models.Message(

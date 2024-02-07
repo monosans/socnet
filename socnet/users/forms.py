@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+from typing import ClassVar
+
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import gettext, gettext_lazy as _
+from django_stubs_ext import StrPromise
 from typing_extensions import Any
 
 from .models import User
@@ -43,7 +46,9 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
             "about",
             "show_last_login",
         )
-        widgets = {"about": forms.Textarea({"rows": 1})}
+        widgets: ClassVar[dict[str, forms.Textarea]] = {
+            "about": forms.Textarea({"rows": 1})
+        }
 
     def clean_username(self) -> str:
         old_username = self.instance.username
@@ -77,7 +82,9 @@ class AccountDeletionForm(InjectUserMixin, forms.Form):
         label=_("Password"),
     )
 
-    error_messages = {"invalid_password": _("Invalid password.")}
+    error_messages: ClassVar[dict[str, StrPromise]] = {
+        "invalid_password": _("Invalid password.")
+    }
 
     def clean_password(self) -> str:
         password: str = self.cleaned_data["password"]

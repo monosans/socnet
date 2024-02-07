@@ -1,0 +1,17 @@
+[report]
+exclude_lines =
+  ^\s*@(?:abc\.)?abstractmethod$
+  ^\s*if\s+(?:settings\.)?DEBUG\s*:$
+fail_under = 75
+
+[run]
+omit =
+  .venv/*
+  node_modules/*
+  config/asgi.py
+  config/settings/local.py
+  config/settings/production.py
+  manage.py
+plugins =
+  covdefaults
+  django_coverage_plugin

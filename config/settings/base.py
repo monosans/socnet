@@ -1,4 +1,5 @@
 # https://docs.djangoproject.com/en/5.0/ref/settings/
+# ruff: noqa: E402
 from __future__ import annotations
 
 import logging
@@ -16,10 +17,10 @@ if not logging.root.handlers:
     )
 
 
-import environ  # noqa: E402
-from django.contrib.messages import constants as messages  # noqa: E402
-from django.utils.translation import gettext_lazy as _  # noqa: E402
-from typing_extensions import Any  # noqa: E402
+import environ
+from django.contrib.messages import constants as messages
+from django.utils.translation import gettext_lazy as _
+from typing_extensions import Any
 
 BASE_DIR = current_file.parents[2]
 

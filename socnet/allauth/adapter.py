@@ -14,7 +14,7 @@ class AccountAdapter(DefaultAccountAdapter):
         request: HttpRequest,
         user: User,
         form: SignupForm,
-        commit: bool = True,  # noqa: FBT001
+        commit: bool = True,  # noqa: FBT001, FBT002
     ) -> User:
         user = super().save_user(request, user, form, commit=False)
         user_field(user, "display_name", form.cleaned_data["display_name"])

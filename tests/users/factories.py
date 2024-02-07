@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import ClassVar
+
 from factory import Faker
 from factory.django import DjangoModelFactory, Password
 
@@ -17,4 +19,4 @@ class UserFactory(DjangoModelFactory):
 
     class Meta:
         model = User
-        django_get_or_create = ["email", "username"]
+        django_get_or_create: ClassVar[list[str]] = ["email", "username"]

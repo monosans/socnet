@@ -9,7 +9,10 @@ from .models import User
 
 
 def forbid_self_subscription(
-    instance: User, action: str, pk_set: set[int], **kwargs: Any
+    instance: User,
+    action: str,
+    pk_set: set[int],
+    **kwargs: Any,  # noqa: ARG001
 ) -> None:
     if action == "pre_add" and instance.pk in pk_set:
         msg = _("You can't subscribe to yourself.")

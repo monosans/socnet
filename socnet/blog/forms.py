@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import ClassVar
+
 from django import forms
 from django.utils.translation import pgettext_lazy
 from typing_extensions import TypeVar
@@ -14,8 +16,10 @@ TMarkdownContentModel = TypeVar(
 
 class MarkdownContentModelForm(forms.ModelForm[TMarkdownContentModel]):
     class Meta:
-        labels = {"content": ""}
-        widgets = {"content": forms.Textarea({"rows": 2})}
+        labels: ClassVar[dict[str, str]] = {"content": ""}
+        widgets: ClassVar[dict[str, forms.Textarea]] = {
+            "content": forms.Textarea({"rows": 2})
+        }
 
     def clean_content(self) -> str:
         old_content = self.instance.content
