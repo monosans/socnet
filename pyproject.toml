@@ -16,7 +16,7 @@ python = "^3.10"
 channels = "4.0.0"
 channels-redis = "4.2.0"
 Django = { version = "5.0.2", extras = ["argon2"] }
-django-allauth = { version = "0.60.1", extras = ["mfa"] }
+django-allauth = { version = "0.61.0", extras = ["mfa"] }
 django-bootstrap5 = "23.4"
 django-cleanup = "8.1.0"
 django-environ = "0.11.2"
@@ -30,7 +30,7 @@ drf-standardized-errors = { version = "0.12.6", extras = ["openapi"] }
 httptools = "0.6.1"
 Pillow = "10.2.0"
 python-json-logger = "2.0.7"
-sentry-sdk = { version = "1.40.1", extras = ["django"] }
+sentry-sdk = { version = "1.40.2", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.9.0"
 uvicorn = "0.27.0.post1"
