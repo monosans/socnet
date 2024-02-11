@@ -41,7 +41,6 @@ FROM docker.io/python:3.12-slim-bookworm as python-base-stage
 
 ENV \
   PIP_DISABLE_PIP_VERSION_CHECK=1 \
-  PIP_NO_CACHE_DIR=1 \
   PIP_NO_COLOR=1 \
   PIP_NO_INPUT=1 \
   PIP_PROGRESS_BAR=off \
@@ -64,17 +63,20 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
   && curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/* \
-  && pip install poetry poetry-plugin-export
+  && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/root/.cargo/bin:${PATH}"
+
+RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+  pip install poetry poetry-plugin-export
 
 COPY ./poetry.lock ./pyproject.toml ./
 COPY ./socnet_rs/ ./socnet_rs/
 
 ARG POETRY_GROUPS
 
-RUN poetry export --without-hashes --only="${POETRY_GROUPS}" | \
+RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+  poetry export --without-hashes --only="${POETRY_GROUPS}" | \
   pip wheel --wheel-dir /usr/src/app/wheels -r /dev/stdin
 
 
