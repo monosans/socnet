@@ -502,12 +502,12 @@ test-randomorder = ["pytest-randomly"]
 
 [[package]]
 name = "cssbeautifier"
-version = "1.14.11"
+version = "1.15.0"
 description = "CSS unobfuscator and beautifier."
 optional = false
 python-versions = "*"
 files = [
-    {file = "cssbeautifier-1.14.11.tar.gz", hash = "sha256:40544c2b62bbcb64caa5e7f37a02df95654e5ce1bcacadac4ca1f3dc89c31513"},
+    {file = "cssbeautifier-1.15.0.tar.gz", hash = "sha256:7ab092581365698d1e270bdf114c268f567e63f6122dbb5f4dfc0e6ef64030ea"},
 ]
 
 [package.dependencies]
@@ -1186,12 +1186,12 @@ files = [
 
 [[package]]
 name = "jsbeautifier"
-version = "1.14.11"
+version = "1.15.0"
 description = "JavaScript unobfuscator and beautifier."
 optional = false
 python-versions = "*"
 files = [
-    {file = "jsbeautifier-1.14.11.tar.gz", hash = "sha256:6b632581ea60dd1c133cd25a48ad187b4b91f526623c4b0fb5443ef805250505"},
+    {file = "jsbeautifier-1.15.0.tar.gz", hash = "sha256:b44acb3e890799985999fa38247b6ed5766d8a7de912b6f1ff8d41ca3cd1b53f"},
 ]
 
 [package.dependencies]
