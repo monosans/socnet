@@ -672,17 +672,17 @@ testing = ["coverage[toml] (>=5.0a4)", "pytest (>=4.6.11)"]
 
 [[package]]
 name = "django-extra-checks"
-version = "0.13.3"
+version = "0.14.0"
 description = "Collection of useful checks for Django Checks Framework"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "django-extra-checks-0.13.3.tar.gz", hash = "sha256:02782cee0763f48f4cd471e8cb4a3aeee6b3b5a02d351a8ed32b0f3213e30385"},
-    {file = "django_extra_checks-0.13.3-py3-none-any.whl", hash = "sha256:4f62eb1788219ec2635ccc83ba46d78dc0af7452058842dcffb1634710360b6d"},
+    {file = "django_extra_checks-0.14.0-py3-none-any.whl", hash = "sha256:3e0d7413bac22eae7c26bf1b1be4eb7c7e5b86eb7eaa3f9c546c910553f6fbcf"},
+    {file = "django_extra_checks-0.14.0.tar.gz", hash = "sha256:1f3436d485ef23b0836afc6d7447b53bd64a088ba0a1a617d9500e876548fb77"},
 ]
 
 [package.extras]
-dev = ["Django", "black", "django-stubs", "djangorestframework", "djangorestframework-stubs", "flake8", "flake8-bugbear", "isort", "mypy (<0.990)", "pdbpp", "pre-commit"]
+dev = ["django", "django-stubs", "djangorestframework", "djangorestframework-stubs", "mypy", "pdbpp", "pre-commit", "ruff"]
 test = ["pytest", "pytest-cov", "pytest-django"]
 
 [[package]]
@@ -2165,13 +2165,13 @@ files = [
 
 [[package]]
 name = "sentry-sdk"
-version = "1.40.4"
+version = "1.40.5"
 description = "Python client for Sentry (https://sentry.io)"
 optional = false
 python-versions = "*"
 files = [
-    {file = "sentry-sdk-1.40.4.tar.gz", hash = "sha256:657abae98b0050a0316f0873d7149f951574ae6212f71d2e3a1c4c88f62d6456"},
-    {file = "sentry_sdk-1.40.4-py2.py3-none-any.whl", hash = "sha256:ac5cf56bb897ec47135d239ddeedf7c1c12d406fb031a4c0caa07399ed014d7e"},
+    {file = "sentry-sdk-1.40.5.tar.gz", hash = "sha256:d2dca2392cc5c9a2cc9bb874dd7978ebb759682fe4fe889ee7e970ee8dd1c61e"},
+    {file = "sentry_sdk-1.40.5-py2.py3-none-any.whl", hash = "sha256:d188b407c9bacbe2a50a824e1f8fb99ee1aeb309133310488c570cb6d7056643"},
 ]
 
 [package.dependencies]
@@ -2198,7 +2198,7 @@ huey = ["huey (>=2)"]
 loguru = ["loguru (>=0.5)"]
 opentelemetry = ["opentelemetry-distro (>=0.35b0)"]
 opentelemetry-experimental = ["opentelemetry-distro (>=0.40b0,<1.0)", "opentelemetry-instrumentation-aiohttp-client (>=0.40b0,<1.0)", "opentelemetry-instrumentation-django (>=0.40b0,<1.0)", "opentelemetry-instrumentation-fastapi (>=0.40b0,<1.0)", "opentelemetry-instrumentation-flask (>=0.40b0,<1.0)", "opentelemetry-instrumentation-requests (>=0.40b0,<1.0)", "opentelemetry-instrumentation-sqlite3 (>=0.40b0,<1.0)", "opentelemetry-instrumentation-urllib (>=0.40b0,<1.0)"]
-pure-eval = ["asttokens", "executing", "pure_eval"]
+pure-eval = ["asttokens", "executing", "pure-eval"]
 pymongo = ["pymongo (>=3.1)"]
 pyspark = ["pyspark (>=2.4.4)"]
 quart = ["blinker (>=1.1)", "quart (>=0.16.1)"]
@@ -2622,4 +2622,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bf6948d099521f3339431bc328093b3bda7b531a6125cd1ae2597cfee4c286ea"
+content-hash = "8b9f06f998613a5fd147f292730df0b89deb97eca5a81f98b20c1742f922a23f"
