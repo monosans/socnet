@@ -41,7 +41,6 @@ MEDIA_ROOT = str(APPS_DIR / "media")
 EXTRA_CHECKS = {
     "checks": [
         "no-unique-together",
-        "no-index-together",
         "model-admin",
         "field-file-upload-to",
         "field-verbose-name",
