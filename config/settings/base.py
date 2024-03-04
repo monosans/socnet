@@ -191,48 +191,20 @@ SPECTACULAR_SETTINGS = {
         "drf_standardized_errors.openapi_hooks.postprocess_schema_enums"
     ],
     "ENUM_NAME_OVERRIDES": {
-        "ValidationErrorEnum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ValidationErrorEnum.values"
-        ),
-        "ClientErrorEnum": (
-            "drf_standardized_errors.openapi_serializers.ClientErrorEnum.values"
-        ),
-        "ServerErrorEnum": (
-            "drf_standardized_errors.openapi_serializers.ServerErrorEnum.values"
-        ),
-        "ErrorCode401Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode401Enum.values"
-        ),
-        "ErrorCode403Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode403Enum.values"
-        ),
-        "ErrorCode404Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode404Enum.values"
-        ),
-        "ErrorCode405Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode405Enum.values"
-        ),
-        "ErrorCode406Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode406Enum.values"
-        ),
-        "ErrorCode415Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode415Enum.values"
-        ),
-        "ErrorCode429Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode429Enum.values"
-        ),
-        "ErrorCode500Enum": (
-            "drf_standardized_errors.openapi_serializers."
-            "ErrorCode500Enum.values"
-        ),
+        enum: f"drf_standardized_errors.openapi_serializers.{enum}.choices"
+        for enum in (
+            "ValidationErrorEnum",
+            "ClientErrorEnum",
+            "ServerErrorEnum",
+            "ErrorCode401Enum",
+            "ErrorCode403Enum",
+            "ErrorCode404Enum",
+            "ErrorCode405Enum",
+            "ErrorCode406Enum",
+            "ErrorCode415Enum",
+            "ErrorCode429Enum",
+            "ErrorCode500Enum",
+        )
     },
     "TITLE": "API | SocNet",
 }
