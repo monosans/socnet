@@ -21,7 +21,7 @@
     "prettier-plugin-packagejson": "2.4.12",
     "stylelint": "16.2.1",
     "stylelint-config-standard": "36.0.0",
-    "typescript": "5.3.3",
+    "typescript": "5.4.2",
     "typescript-eslint": "7.1.1",
     "viewerjs": "1.11.6"
   }
