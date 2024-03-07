@@ -25,11 +25,14 @@ services:
       args:
         - GID=${GID:-1000}
         - UID=${UID:-1000}
-    networks: []
+    networks:
+      - esbuild
     volumes:
       - ./socnet/static:/app/socnet/static
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json
+networks:
+  esbuild:
 volumes:
   local-postgres-data:
