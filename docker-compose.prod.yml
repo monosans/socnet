@@ -1,6 +1,6 @@
 services:
   django:
-    image: socnet_production_django
+    image: socnet-production-django
     build:
       target: python-production-run-stage
       args:
@@ -12,19 +12,19 @@ services:
       - django-redis
     restart: unless-stopped
     volumes:
-      - production_django_media:/var/www/django/media
-      - production_django_static:/var/www/django/static
+      - production-django-media:/var/www/django/media
+      - production-django-static:/var/www/django/static
   postgres:
     restart: unless-stopped
     volumes:
-      - production_postgres_data:/var/lib/postgresql/data
+      - production-postgres-data:/var/lib/postgresql/data
   redis:
     image: docker.io/redis:7
     networks:
       - django-redis
     restart: unless-stopped
   caddy:
-    image: socnet_production_caddy
+    image: socnet-production-caddy
     build:
       context: .
       dockerfile: ./docker/caddy/Dockerfile
@@ -38,16 +38,16 @@ services:
       - 443:443
     restart: unless-stopped
     volumes:
-      - production_caddy_config:/config
-      - production_caddy_data:/data
-      - production_django_media:/var/www/django/media
-      - production_django_static:/var/www/django/static
+      - production-caddy-config:/config
+      - production-caddy-data:/data
+      - production-django-media:/var/www/django/media
+      - production-django-static:/var/www/django/static
 networks:
   caddy-django:
   django-redis:
 volumes:
-  production_caddy_config:
-  production_caddy_data:
-  production_django_media:
-  production_django_static:
-  production_postgres_data:
+  production-caddy-config:
+  production-caddy-data:
+  production-django-media:
+  production-django-static:
+  production-postgres-data:

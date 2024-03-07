@@ -1,21 +1,23 @@
 services:
   django:
-    image: socnet_local_django
+    image: socnet-local-django
     build:
       target: python-local-run-stage
       args:
         - POETRY_GROUPS=main,local
         - GID=${GID:-1000}
         - UID=${UID:-1000}
+    depends_on:
+      - esbuild
     ports:
       - 8000:8000
     volumes:
       - .:/app
   postgres:
     volumes:
-      - socnet_local_postgres_data:/var/lib/postgresql/data
+      - local-postgres-data:/var/lib/postgresql/data
   esbuild:
-    image: socnet_esbuild
+    image: socnet-local-esbuild
     build:
       context: .
       dockerfile: ./docker/django/Dockerfile
@@ -30,4 +32,4 @@ services:
       - ./package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json
 volumes:
-  socnet_local_postgres_data:
+  local-postgres-data:
