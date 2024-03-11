@@ -33,7 +33,7 @@ python-json-logger = "2.0.7"
 sentry-sdk = { version = "1.41.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.10.0"
-uvicorn = "0.27.1"
+uvicorn = "0.28.0"
 uvloop = { version = "0.19.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
 websockets = "12.0"
 
@@ -49,14 +49,14 @@ djlint = "1.34.1"
 factory-boy = "3.3.0"
 mypy = "1.7.1"
 psycopg = { version = "3.1.18", extras = ["binary"] }
-pytest = "8.1.0"
+pytest = "8.1.1"
 pytest-cov = "4.1.0"
 pytest-django = "4.8.0"
-ruff = "0.3.1"
+ruff = "0.3.2"
 types-Pillow = "10.2.0.20240213"
 watchfiles = "0.21.0"
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "21.2.0"
 psycopg = { version = "3.1.18", extras = ["c"] }
-redis = { version = "5.0.2", extras = ["hiredis"] }
+redis = { version = "5.0.3", extras = ["hiredis"] }
