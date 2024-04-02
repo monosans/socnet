@@ -25,10 +25,10 @@ django-logentry-admin = "1.1.0"
 django-stubs-ext = "4.2.7"
 djangorestframework = "3.15.1"
 docutils = "0.20.1"
-drf-spectacular = "0.27.1"
+drf-spectacular = "0.27.2"
 drf-standardized-errors = { version = "0.13.0", extras = ["openapi"] }
 httptools = "0.6.1"
-Pillow = "10.2.0"
+Pillow = "10.3.0"
 python-json-logger = "2.0.7"
 sentry-sdk = { version = "1.44.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
@@ -52,7 +52,7 @@ psycopg = { version = "3.1.18", extras = ["binary"] }
 pytest = "8.1.1"
 pytest-cov = "5.0.0"
 pytest-django = "4.8.0"
-ruff = "0.3.4"
+ruff = "0.3.5"
 types-Pillow = "10.2.0.20240331"
 watchfiles = "0.21.0"
 
