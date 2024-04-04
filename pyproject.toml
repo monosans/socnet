@@ -13,9 +13,9 @@ classifiers = ["Private :: Do Not Upload"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-channels = "4.0.0"
+channels = "4.1.0"
 channels-redis = "4.2.0"
-Django = { version = "5.0.3", extras = ["argon2"] }
+Django = { version = "5.0.4", extras = ["argon2"] }
 django-allauth = { version = "0.61.1", extras = ["mfa"] }
 django-bootstrap5 = "23.4"
 django-cleanup = "8.1.0"
@@ -30,7 +30,7 @@ drf-standardized-errors = { version = "0.13.0", extras = ["openapi"] }
 httptools = "0.6.1"
 Pillow = "10.3.0"
 python-json-logger = "2.0.7"
-sentry-sdk = { version = "1.44.0", extras = ["django"] }
+sentry-sdk = { version = "1.44.1", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.10.0"
 uvicorn = "0.29.0"
