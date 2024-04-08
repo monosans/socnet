@@ -114,7 +114,7 @@ Markdown parsing, HTML minification and sanitization, and a few other things are
 ### Databases
 
 - PostgreSQL 16 for persistent data
-- Redis 7 for cache and as a layer for Channels
+- Redis 7.2.4 for cache and as a layer for Channels
 
 ### Frontend
 
