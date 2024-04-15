@@ -602,13 +602,13 @@ saml = ["python3-saml (>=1.15.0,<2.0.0)"]
 
 [[package]]
 name = "django-bootstrap5"
-version = "23.4"
+version = "24.1"
 description = "Bootstrap 5 for Django"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django-bootstrap5-23.4.tar.gz", hash = "sha256:fbf9942a17e1f48b4142e78df9e85afb65e4066a20e38ec7c497d36ae5ef7256"},
-    {file = "django_bootstrap5-23.4-py3-none-any.whl", hash = "sha256:5181bf1e97afae6211e963f28f48d4a90c937a3b036b3f752f52260f0029f3bc"},
+    {file = "django-bootstrap5-24.1.tar.gz", hash = "sha256:fc272b5bb218690fe6f32d52b23c155ebb46fbc5a2856c84eb353c1bf5fc49ea"},
+    {file = "django_bootstrap5-24.1-py3-none-any.whl", hash = "sha256:c42b4f6e673d35af847486733da77104e1e98e7fd5caecc6d56f32a96cc77479"},
 ]
 
 [package.dependencies]
@@ -2604,4 +2604,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f5fdd57329e0bd07faf49dad3b97307a5c7f500bd3c27e6632a16d72b0443d4f"
+content-hash = "9b03d84de944ebe43197ac53c52d435733e9adca4358694c268d59bf1aeda46e"
