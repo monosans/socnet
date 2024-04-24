@@ -12,14 +12,14 @@ channels = "4.1.0"
 channels-redis = "4.2.0"
 Django = { version = "5.0.4", extras = ["argon2"] }
 django-allauth = { version = "0.62.0", extras = ["mfa"] }
-django-bootstrap5 = "24.1"
+django-bootstrap5 = "24.2"
 django-cleanup = "8.1.0"
 django-environ = "0.11.2"
 django-filter = "24.2"
 django-logentry-admin = "1.1.0"
 django-stubs-ext = "4.2.7"
 djangorestframework = "3.15.1"
-docutils = "0.21.1"
+docutils = "0.21.2"
 drf-spectacular = "0.27.2"
 drf-standardized-errors = { version = "0.13.0", extras = ["openapi"] }
 httptools = "0.6.1"
@@ -54,4 +54,4 @@ watchfiles = "0.21.0"
 [tool.poetry.group.production.dependencies]
 gunicorn = "22.0.0"
 psycopg = { version = "3.1.18", extras = ["c"] }
-redis = { version = "5.0.3", extras = ["hiredis"] }
+redis = { version = "5.0.4", extras = ["hiredis"] }
