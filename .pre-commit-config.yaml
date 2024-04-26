@@ -17,7 +17,7 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v16.3.1
+    rev: v16.4.0
     hooks:
       - id: stylelint
         args:
@@ -32,7 +32,7 @@ repos:
         args:
           - --no-config
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.4.1
+    rev: v0.4.2
     hooks:
       - id: ruff
         args:
