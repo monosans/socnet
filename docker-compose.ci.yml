@@ -4,6 +4,6 @@ services:
     build:
       target: python-ci-run-stage
       args:
-        - POETRY_GROUPS=local
+        - POETRY_GROUPS=main,local
     volumes:
       - .:/app
