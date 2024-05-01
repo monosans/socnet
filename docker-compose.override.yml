@@ -4,7 +4,7 @@ services:
     build:
       target: python-local-run-stage
       args:
-        - POETRY_GROUPS=main,local
+        - POETRY_GROUPS=local
         - GID=${GID:-1000}
         - UID=${UID:-1000}
     depends_on:

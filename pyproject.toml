@@ -32,6 +32,9 @@ uvicorn = "0.29.0"
 uvloop = { version = "0.19.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
 websockets = "12.0"
 
+[tool.poetry.group.local]
+optional = true
+
 [tool.poetry.group.local.dependencies]
 covdefaults = "2.3.0"
 debugpy = "1.8.1"
@@ -50,6 +53,9 @@ pytest-django = "4.8.0"
 ruff = "0.4.2"
 types-Pillow = "10.2.0.20240423"
 watchfiles = "0.21.0"
+
+[tool.poetry.group.production]
+optional = true
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "22.0.0"
