@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/strictest",
+  "extends": "@tsconfig/strictest/tsconfig.json",,
   "exclude": ["socnet/static/public/js/"],
   "compilerOptions": {
     "noUncheckedIndexedAccess": false,
