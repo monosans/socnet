@@ -132,7 +132,7 @@ COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
 RUN pip install --no-index --find-links /wheels/ /wheels/* \
   && rm -rf /wheels/
 
-COPY . .
+COPY --chown=django:django . .
 COPY --from=node-build-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
 COPY --from=node-build-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
