@@ -19,8 +19,7 @@ services:
     volumes:
       - production-postgres-data:/var/lib/postgresql/data
   redis:
-    # TODO: switch to valkey when there is a release
-    image: docker.io/redis:7.2.4
+    image: docker.io/valkey/valkey:7.2
     networks:
       - django-redis
     restart: unless-stopped
