@@ -21,7 +21,7 @@
 
 	handle_errors {
 		import headers
-		encode gzip
+		encode zstd gzip
 	}
 }
 
@@ -29,7 +29,7 @@
 # www.{$DOMAIN_NAME} {
 # 	import common
 # 	redir https://{$DOMAIN_NAME}{uri}
-# 	encode gzip
+# 	encode zstd gzip
 # }
 
 {$DOMAIN_NAME} {
@@ -54,11 +54,11 @@ Disallow: /"
 		# MEDIA_ROOT
 		root * /var/www/django/media
 		file_server
-		encode gzip
+		encode zstd gzip
 	}
 
 	handle {
 		reverse_proxy django:5000
-		encode gzip
+		encode zstd gzip
 	}
 }
