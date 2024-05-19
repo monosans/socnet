@@ -19,13 +19,8 @@ def test_unauthed(client: Client, url: str) -> None:
     assert response.redirect_chain == [
         ("{}?next={}".format(reverse("admin:login"), url), 302),
         (
-            "{}?next={}{}".format(
-                reverse("account_login"),
-                reverse("admin:login"),
-                urlencode(
-                    "?next={}".format(urlencode(url, mark_safe(""))),
-                    mark_safe(""),
-                ),
+            "{}?next={}".format(
+                reverse("account_login"), urlencode(url, mark_safe(""))
             ),
             302,
         ),
