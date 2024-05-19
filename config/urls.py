@@ -9,12 +9,9 @@ from django.urls import URLPattern, URLResolver, include, path
 from socnet.allauth import urls as allauth_urls
 from socnet.api import urls as api_urls
 from socnet.blog import urls as blog_urls
-from socnet.core import urls as core_urls, views as core_views
+from socnet.core import urls as core_urls
 from socnet.messenger import urls as messenger_urls
 from socnet.users import urls as users_urls
-
-# https://django-allauth.readthedocs.io/en/latest/advanced.html#admin
-admin.site.login = core_views.admin_site_login_view  # type: ignore[assignment]
 
 urlpatterns: list[URLPattern | URLResolver] = [
     path(f"{settings.ADMIN_URL}/doc/", include(admindocs_urls)),

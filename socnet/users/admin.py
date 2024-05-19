@@ -2,11 +2,16 @@ from __future__ import annotations
 
 from copy import deepcopy
 
+from allauth.account.decorators import secure_admin_login
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from . import forms
 from .models import User
+
+# https://docs.allauth.org/en/latest/common/admin.html#admin
+admin.autodiscover()
+admin.site.login = secure_admin_login(admin.site.login)  # type: ignore[method-assign]
 
 
 @admin.register(User)
