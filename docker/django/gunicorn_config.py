@@ -15,7 +15,7 @@ max_requests_jitter = 100
 
 chdir = "/app"
 worker_tmp_dir = "/dev/shm"  # noqa: S108
-worker_class = "uvicorn.workers.UvicornWorker"
+worker_class = "uvicorn_worker.UvicornWorker"
 
 accesslog: None = None
 errorlog: None = None
