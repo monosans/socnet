@@ -15,7 +15,7 @@ admin.site.login = secure_admin_login(admin.site.login)  # type: ignore[method-a
 
 
 @admin.register(User)
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(BaseUserAdmin[User]):
     add_fieldsets = deepcopy(BaseUserAdmin.add_fieldsets)
     add_fieldsets[0][1]["fields"] = (
         "display_name",
@@ -45,7 +45,7 @@ class UserAdmin(BaseUserAdmin):
         BaseUserAdmin.fieldsets[2],  # type: ignore[index]
     )
     filter_horizontal = (*BaseUserAdmin.filter_horizontal, "subscriptions")
-    form = forms.UserAdminChangeForm  # type: ignore[assignment]
+    form = forms.UserAdminChangeForm
     list_display = ("id", "username", "email", "display_name", "is_staff")
     list_filter = (*BaseUserAdmin.list_filter, "date_joined", "last_login")
     readonly_fields = ("date_joined", "last_login")
