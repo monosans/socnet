@@ -26,7 +26,7 @@ repos:
           - stylelint
           - stylelint-config-standard
   - repo: https://github.com/monosans/pre-commit-prettier
-    rev: v3.2.5
+    rev: v3.3.0
     hooks:
       - id: prettier
         args:
