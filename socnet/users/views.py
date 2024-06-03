@@ -1,17 +1,22 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.postgres.search import TrigramWordSimilarity
 from django.db.models import Func, Value
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
 from . import forms
 from .models import User
-from .types import AuthedRequest
+
+if TYPE_CHECKING:
+    from django.http import HttpRequest, HttpResponse
+
+    from .types import AuthedRequest
 
 
 @login_required

@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from allauth.account import forms as allauth_forms
-from django import forms
 from django.utils.translation import gettext, gettext_lazy
 from typing_extensions import Any
 
 from ..users.models import User
+
+if TYPE_CHECKING:
+    from django import forms
 
 # Needed to redefine translation
 gettext_lazy("Email")

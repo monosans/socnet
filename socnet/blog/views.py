@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import TrigramWordSimilarity
 from django.core.exceptions import PermissionDenied
-from django.core.paginator import Page
 from django.db.models import Case, Count, Prefetch, Q, QuerySet, When
 from django.db.models.functions import Extract
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
@@ -18,8 +19,12 @@ from typing_extensions import TypeVar, override
 
 from ..core.utils import paginate
 from ..users.models import User
-from ..users.types import AuthedRequest
 from . import forms, models, services
+
+if TYPE_CHECKING:
+    from django.core.paginator import Page
+
+    from ..users.types import AuthedRequest
 
 TBaseModelForm = TypeVar(
     "TBaseModelForm", bound=forms.PostForm | forms.CommentForm

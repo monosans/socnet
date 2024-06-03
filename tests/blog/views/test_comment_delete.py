@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import pytest
-from django.test import Client
 from django.urls import reverse
 
 from socnet.blog import models
 
 from ...utils import auth_client, parametrize_by_auth
 from .. import factories
+
+if TYPE_CHECKING:
+    from django.test import Client
 
 factory = factories.CommentFactory
 

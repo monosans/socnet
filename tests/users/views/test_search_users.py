@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import pytest
-from django.test import Client
 from django.urls import reverse_lazy
 
 from ...utils import auth_client, parametrize_by_auth
 from ..factories import UserFactory
+
+if TYPE_CHECKING:
+    from django.test import Client
 
 url = reverse_lazy("users:search_users")
 

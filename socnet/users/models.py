@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date
+from typing import TYPE_CHECKING
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
@@ -17,6 +17,9 @@ from ..core.fields import (
     WebpImageField,
 )
 from . import validators
+
+if TYPE_CHECKING:
+    from datetime import date
 
 
 def image_upload_to(instance: User, filename: str) -> str:  # noqa: ARG001

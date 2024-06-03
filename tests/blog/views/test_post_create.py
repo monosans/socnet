@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from django.test import Client
+from typing import TYPE_CHECKING
+
 from django.urls import reverse, reverse_lazy
 
 from socnet.blog import models
 
 from ...utils import ClientMethods, auth_client, parametrize_by_get_post
 from .. import factories
+
+if TYPE_CHECKING:
+    from django.test import Client
 
 factory = factories.PostFactory
 

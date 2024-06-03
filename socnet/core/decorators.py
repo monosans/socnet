@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import functools
-from collections.abc import Callable
+from typing import TYPE_CHECKING
 
 from typing_extensions import Any, ParamSpec, TypeVar
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 T = TypeVar("T")
 T2 = TypeVar("T2")

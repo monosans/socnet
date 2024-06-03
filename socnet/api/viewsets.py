@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from allauth.account.models import EmailAddress
 from django.contrib.admin.models import LogEntry
 from django.contrib.auth import models as auth_models
@@ -17,7 +19,9 @@ from ..users.exceptions import SelfSubscriptionError
 from ..users.models import User
 from . import serializers
 from .filters import generate_filterset
-from .types import AuthedRequest
+
+if TYPE_CHECKING:
+    from .types import AuthedRequest
 
 
 class _AuthedViewSet(ViewSet):

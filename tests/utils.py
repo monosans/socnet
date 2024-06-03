@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 from enum import Enum, auto
+from typing import TYPE_CHECKING
 
 import pytest
-from django.test import Client
 from typing_extensions import Any
 
-from socnet.users.models import User
-
 from .users.factories import UserFactory
+
+if TYPE_CHECKING:
+    from django.test import Client
+
+    from socnet.users.models import User
 
 
 def auth_client(client: Client, **kwargs: Any) -> User:

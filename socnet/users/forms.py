@@ -1,14 +1,16 @@
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import TYPE_CHECKING, ClassVar
 
 from django import forms
 from django.contrib.auth import forms as auth_forms
 from django.utils.translation import gettext, gettext_lazy as _
-from django_stubs_ext import StrPromise
 from typing_extensions import Any
 
 from .models import User
+
+if TYPE_CHECKING:
+    from django_stubs_ext import StrPromise
 
 
 class InjectUserMixin:

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import pytest
-from django.test import Client
 from django.urls import reverse
 from typing_extensions import Any
 
@@ -9,6 +10,9 @@ from socnet.blog import models
 
 from ...utils import ClientMethods, auth_client, parametrize_by_get_post
 from .. import factories
+
+if TYPE_CHECKING:
+    from django.test import Client
 
 factory = factories.CommentFactory
 

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from django.forms import model_to_dict
-from django.test import Client
 from django.urls import reverse, reverse_lazy
 from typing_extensions import Any
 
@@ -10,6 +11,9 @@ from socnet.users.models import User
 
 from ...utils import ClientMethods, auth_client, parametrize_by_get_post
 from ..factories import UserFactory
+
+if TYPE_CHECKING:
+    from django.test import Client
 
 url = reverse_lazy("users:edit_profile")
 fields = EditProfileForm.Meta.fields

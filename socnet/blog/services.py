@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from django.db.models import Count, Prefetch, Q, QuerySet
-from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
 from ..users.models import User
 from . import models
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from django.http import HttpRequest
 
 
 def get_posts_preview_qs(

@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from django.test import Client
+from typing import TYPE_CHECKING
+
 from django.urls import reverse, reverse_lazy
 
 from ...utils import auth_client
+
+if TYPE_CHECKING:
+    from django.test import Client
 
 url = reverse_lazy("users:account_security")
 

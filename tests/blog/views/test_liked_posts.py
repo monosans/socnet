@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from django.test import Client
-from django.urls import reverse
+from typing import TYPE_CHECKING
 
-from socnet.users.models import User
+from django.urls import reverse
 
 from ...users.factories import UserFactory
 from ...utils import auth_client, parametrize_by_auth_self
 from .. import factories
+
+if TYPE_CHECKING:
+    from django.test import Client
+
+    from socnet.users.models import User
 
 
 def get_url(user: User) -> str:

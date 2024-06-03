@@ -1,11 +1,15 @@
 from __future__ import annotations
 
-from allauth.account.adapter import DefaultAccountAdapter
-from allauth.account.forms import SignupForm
-from allauth.account.utils import user_field
-from django.http import HttpRequest
+from typing import TYPE_CHECKING
 
-from ..users.models import User
+from allauth.account.adapter import DefaultAccountAdapter
+from allauth.account.utils import user_field
+
+if TYPE_CHECKING:
+    from allauth.account.forms import SignupForm
+    from django.http import HttpRequest
+
+    from ..users.models import User
 
 
 class AccountAdapter(DefaultAccountAdapter):

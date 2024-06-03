@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-import datetime
 import time
-from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from django.core.paginator import Page, Paginator
 from django.db.models import Model, QuerySet
-from django.http import HttpRequest
 from typing_extensions import TypeVar
+
+if TYPE_CHECKING:
+    import datetime
+    from collections.abc import Iterator
+
+    from django.http import HttpRequest
 
 TModel = TypeVar("TModel", bound=Model)
 

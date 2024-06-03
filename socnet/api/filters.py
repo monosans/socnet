@@ -1,15 +1,18 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import no_type_check
+from typing import TYPE_CHECKING, no_type_check
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django_filters import FilterSet
-from rest_framework.serializers import ModelSerializer
 from typing_extensions import Any, Protocol, TypeVar
 
-from .types import SerializerExclude, SerializerFields
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+
+    from rest_framework.serializers import ModelSerializer
+
+    from .types import SerializerExclude, SerializerFields
 
 IGNORED_FIELDS = (
     models.FileField,

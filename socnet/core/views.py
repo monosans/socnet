@@ -1,12 +1,16 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.templatetags.static import static
 from django.views.generic import TemplateView
 
-from ..users.types import AuthedRequest
+if TYPE_CHECKING:
+    from django.http import HttpRequest, HttpResponse
+
+    from ..users.types import AuthedRequest
 
 
 @login_required

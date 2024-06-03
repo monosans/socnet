@@ -1,9 +1,13 @@
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
-from django.conf import LazySettings
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from django.conf import LazySettings
 
 
 @pytest.fixture(autouse=True)

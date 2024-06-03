@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from django import template
 from django.contrib.admin.templatetags.admin_urls import admin_urlname
-from django.db.models import Model
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+
+if TYPE_CHECKING:
+    from django.db.models import Model
 
 register = template.Library()
 

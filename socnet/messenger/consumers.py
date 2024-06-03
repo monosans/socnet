@@ -5,20 +5,21 @@ from typing import TYPE_CHECKING, Literal
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import ValidationError
-from django.db.models import Model
 from typing_extensions import Any, TypedDict
 
 from socnet_rs import markdownify
 
 from ..core.utils import dt_to_epoch
-from ..users.models import User
 from . import models
 
 if TYPE_CHECKING:
     from channels.layers import InMemoryChannelLayer
     from channels_redis.core import RedisChannelLayer
+    from django.contrib.auth.models import AnonymousUser
+    from django.db.models import Model
+
+    from ..users.models import User
 
 logger = logging.getLogger("socnet.messenger")
 

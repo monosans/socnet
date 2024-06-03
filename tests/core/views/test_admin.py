@@ -1,12 +1,16 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import pytest
 from django.template.defaultfilters import urlencode
-from django.test import Client
 from django.urls import reverse, reverse_lazy
 from django.utils.safestring import mark_safe
 
 from ...utils import auth_client
+
+if TYPE_CHECKING:
+    from django.test import Client
 
 pytestmark = pytest.mark.parametrize(
     "url",
