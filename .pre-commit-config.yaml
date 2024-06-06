@@ -26,13 +26,13 @@ repos:
           - stylelint
           - stylelint-config-standard
   - repo: https://github.com/monosans/pre-commit-prettier
-    rev: v3.3.0
+    rev: v3.3.1
     hooks:
       - id: prettier
         args:
           - --no-config
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.4.7
+    rev: v0.4.8
     hooks:
       - id: ruff
         args:
