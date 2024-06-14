@@ -5,8 +5,8 @@ WORKDIR /app
 
 COPY ./package.json ./package-lock.json ./
 
-RUN npm ci && \
-  npm cache clean --force
+RUN --mount=type=cache,target=/root/.npm \
+  npm ci
 
 
 FROM node-base-stage as node-build-stage
