@@ -75,7 +75,9 @@ COPY ./socnet_rs/ ./socnet_rs/
 
 ARG POETRY_GROUPS
 
-RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+RUN --mount=type=cache,target=/app/socnet_rs/target,sharing=locked \
+  --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+  --mount=type=cache,target=/root/.cargo/registry,sharing=locked \
   poetry export --without-hashes --only="${POETRY_GROUPS}" | \
   pip wheel --wheel-dir /usr/src/app/wheels -r /dev/stdin
 
