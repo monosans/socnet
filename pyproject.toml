@@ -18,14 +18,14 @@ django-environ = "0.11.2"
 django-filter = "24.2"
 django-logentry-admin = "1.1.0"
 django-stubs-ext = "5.0.2"
-djangorestframework = "3.15.1"
+djangorestframework = "3.15.2"
 docutils = "0.21.2"
 drf-spectacular = "0.27.2"
-drf-standardized-errors = { version = "0.13.0", extras = ["openapi"] }
+drf-standardized-errors = { version = "0.14.0", extras = ["openapi"] }
 httptools = "0.6.1"
 Pillow = "10.3.0"
 python-json-logger = "2.0.7"
-sentry-sdk = { version = "2.5.1", extras = ["django"] }
+sentry-sdk = { version = "2.6.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 typing-extensions = "4.12.2"
 uvicorn = "0.30.1"

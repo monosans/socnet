@@ -688,17 +688,17 @@ typing-extensions = "*"
 
 [[package]]
 name = "djangorestframework"
-version = "3.15.1"
+version = "3.15.2"
 description = "Web APIs for Django, made easy."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.8"
 files = [
-    {file = "djangorestframework-3.15.1-py3-none-any.whl", hash = "sha256:3ccc0475bce968608cf30d07fb17d8e52d1d7fc8bfe779c905463200750cbca6"},
-    {file = "djangorestframework-3.15.1.tar.gz", hash = "sha256:f88fad74183dfc7144b2756d0d2ac716ea5b4c7c9840995ac3bfd8ec034333c1"},
+    {file = "djangorestframework-3.15.2-py3-none-any.whl", hash = "sha256:2b8871b062ba1aefc2de01f773875441a961fefbf79f5eed1e32b2f096944b20"},
+    {file = "djangorestframework-3.15.2.tar.gz", hash = "sha256:36fe88cd2d6c6bec23dca9804bab2ba5517a8bb9d8f47ebc68981b56840107ad"},
 ]
 
 [package.dependencies]
-django = ">=3.0"
+django = ">=4.2"
 
 [[package]]
 name = "djangorestframework-stubs"
@@ -784,25 +784,25 @@ sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
 name = "drf-standardized-errors"
-version = "0.13.0"
+version = "0.14.0"
 description = "Standardize your API error responses."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "drf_standardized_errors-0.13.0-py3-none-any.whl", hash = "sha256:ee6513f1e289f02a62ed447fee2608dab12b5687817c9bcb429587658d4ad3aa"},
-    {file = "drf_standardized_errors-0.13.0.tar.gz", hash = "sha256:f18b2b7f40c9f04f9023bb5f74fb451462cb50d1484ea2ebb94f3774d14993bf"},
+    {file = "drf_standardized_errors-0.14.0-py3-none-any.whl", hash = "sha256:60f83597094b16fe3c99a1085a33c54e721bb14f258399c2f3271e453c4a5ba9"},
+    {file = "drf_standardized_errors-0.14.0.tar.gz", hash = "sha256:2cc6d5c89cbd1b9a45865c56d115b8b6dacd717319b132eeff1a24bdef9e2669"},
 ]
 
 [package.dependencies]
 django = ">=3.2"
 djangorestframework = ">=3.12"
-drf-spectacular = {version = "*", optional = true, markers = "extra == \"openapi\""}
+drf-spectacular = {version = ">=0.27.0", optional = true, markers = "extra == \"openapi\""}
 inflection = {version = "*", optional = true, markers = "extra == \"openapi\""}
 
 [package.extras]
 dev = ["pre-commit"]
 doc = ["myst-parser", "sphinx (!=5.2.0.post0)", "sphinx-autobuild", "sphinx-rtd-theme (>=1.1.0)"]
-openapi = ["drf-spectacular", "inflection"]
+openapi = ["drf-spectacular (>=0.27.0)", "inflection"]
 release = ["flit", "keyring", "tbump"]
 test = ["tox", "tox-gh-actions"]
 
@@ -2009,13 +2009,12 @@ files = [
 
 [[package]]
 name = "sentry-sdk"
-version = "2.5.1"
+version = "2.6.0"
 description = "Python client for Sentry (https://sentry.io)"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "sentry_sdk-2.5.1-py2.py3-none-any.whl", hash = "sha256:1f87acdce4a43a523ae5aa21a3fc37522d73ebd9ec04b1dbf01aa3d173852def"},
-    {file = "sentry_sdk-2.5.1.tar.gz", hash = "sha256:fbc40a78a8a9c6675133031116144f0d0940376fa6e4e1acd5624c90b0aaf58b"},
+    {file = "sentry_sdk-2.6.0-py2.py3-none-any.whl", hash = "sha256:422b91cb49378b97e7e8d0e8d5a1069df23689d45262b86f54988a7db264e874"},
 ]
 
 [package.dependencies]
@@ -2474,4 +2473,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bc1341241dde45c18de7bcc8546780a761bc328b7e85b99ad57c1eefea199fed"
+content-hash = "f7004ce61f49f588f44a3310e3606238cd31e9374f47d9bb7c5387abb364771f"
