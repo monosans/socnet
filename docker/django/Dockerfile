@@ -1,5 +1,5 @@
 # hadolint global ignore=DL3008,DL3013,DL4006
-FROM docker.io/node:lts-bookworm-slim as node-base-stage
+FROM docker.io/node:lts-bookworm-slim AS node-base-stage
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN --mount=type=cache,target=/root/.npm \
   npm ci
 
 
-FROM node-base-stage as node-build-stage
+FROM node-base-stage AS node-build-stage
 
 COPY ./tsconfig.json ./tsconfig.json
 COPY ./socnet/static/private/css/ ./socnet/static/private/css/
@@ -18,7 +18,7 @@ COPY ./socnet/static/private/js/ ./socnet/static/private/js/
 RUN npm run build
 
 
-FROM node-base-stage as node-watch-stage
+FROM node-base-stage AS node-watch-stage
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends tini \
@@ -37,7 +37,7 @@ ENTRYPOINT ["tini", "--"]
 CMD ["npm", "run", "watch"]
 
 
-FROM docker.io/python:3.12-slim-bookworm as python-base-stage
+FROM docker.io/python:3.12-slim-bookworm AS python-base-stage
 
 ENV \
   PIP_DISABLE_PIP_VERSION_CHECK=1 \
@@ -52,7 +52,7 @@ ENV \
 WORKDIR /app
 
 
-FROM python-base-stage as python-build-stage
+FROM python-base-stage AS python-build-stage
 
 ENV \
   POETRY_NO_ANSI=1 \
@@ -82,12 +82,12 @@ RUN --mount=type=cache,target=/app/socnet_rs/target,sharing=locked \
   pip wheel --wheel-dir /usr/src/app/wheels -r /dev/stdin
 
 
-FROM python-base-stage as python-base-run-stage
+FROM python-base-stage AS python-base-run-stage
 
 ENV READ_ENV_EXAMPLE=False
 
 
-FROM python-base-run-stage as python-ci-run-stage
+FROM python-base-run-stage AS python-ci-run-stage
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
@@ -106,7 +106,7 @@ ENTRYPOINT ["tini", "--", "/app/docker/django/entrypoint.sh"]
 CMD ["/app/docker/django/start.sh"]
 
 
-FROM python-ci-run-stage as python-local-run-stage
+FROM python-ci-run-stage AS python-local-run-stage
 
 ARG GID UID
 
@@ -116,7 +116,7 @@ RUN groupadd --gid "${GID}" --system django \
 USER django
 
 
-FROM python-base-run-stage as python-production-run-stage
+FROM python-base-run-stage AS python-production-run-stage
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.production
 
