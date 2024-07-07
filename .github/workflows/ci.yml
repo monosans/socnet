@@ -40,7 +40,7 @@ jobs:
       - run: cp .env.example .env
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml pull --ignore-buildable
       - id: build
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --pull
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --pull django
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
       - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django pytest --cov
       - if: ${{ !cancelled() && steps.build.conclusion == 'success' }}
