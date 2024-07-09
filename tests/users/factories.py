@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import TYPE_CHECKING
 
 from factory import Faker
 from factory.django import DjangoModelFactory, Password
 
 from socnet.users.models import User
+
+if TYPE_CHECKING:
+    from typing import ClassVar
 
 
 class UserFactory(DjangoModelFactory):

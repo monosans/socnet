@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING
 
 import pytest
 from django.urls import reverse
-from typing_extensions import Any
 
 from socnet.blog import models
 
@@ -13,6 +12,7 @@ from .. import factories
 
 if TYPE_CHECKING:
     from django.test import Client
+    from typing_extensions import Any
 
 factory = factories.CommentFactory
 

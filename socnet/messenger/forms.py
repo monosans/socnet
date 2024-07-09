@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import TYPE_CHECKING
 
 from django import forms
 from django.utils.translation import pgettext_lazy
 
 from . import models
+
+if TYPE_CHECKING:
+    from typing import ClassVar
 
 
 class MessageCreationForm(forms.ModelForm[models.Message]):

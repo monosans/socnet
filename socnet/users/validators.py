@@ -1,10 +1,14 @@
 from __future__ import annotations
 
-from datetime import date, timedelta
+from datetime import timedelta
+from typing import TYPE_CHECKING
 
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext as _
+
+if TYPE_CHECKING:
+    from datetime import date
 
 WORLD_RECORD_FOR_NUMBER_OF_DAYS_LIVED = timedelta(days=44724)
 

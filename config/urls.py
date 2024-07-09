@@ -1,10 +1,12 @@
 # https://docs.djangoproject.com/en/5.0/topics/http/urls/
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs_urls
-from django.urls import URLPattern, URLResolver, include, path
+from django.urls import include, path
 
 from socnet.allauth import urls as allauth_urls
 from socnet.api import urls as api_urls
@@ -12,6 +14,9 @@ from socnet.blog import urls as blog_urls
 from socnet.core import urls as core_urls
 from socnet.messenger import urls as messenger_urls
 from socnet.users import urls as users_urls
+
+if TYPE_CHECKING:
+    from django.urls import URLPattern, URLResolver
 
 urlpatterns: list[URLPattern | URLResolver] = [
     path(f"{settings.ADMIN_URL}/doc/", include(admindocs_urls)),

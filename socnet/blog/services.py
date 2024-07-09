@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from django.db.models import Count, Prefetch, Q, QuerySet
+from django.db.models import Count, Prefetch, Q
 from django.shortcuts import get_object_or_404
 
 from ..users.models import User
@@ -11,6 +11,7 @@ from . import models
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
+    from django.db.models import QuerySet
     from django.http import HttpRequest
 
 

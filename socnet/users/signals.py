@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from django.db.models.signals import m2m_changed
 from django.utils.translation import gettext as _
-from typing_extensions import Any
 
 from . import exceptions
 from .models import User
+
+if TYPE_CHECKING:
+    from typing_extensions import Any
 
 
 def forbid_self_subscription(

@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.core.exceptions import ValidationError
-from typing_extensions import Any, TypedDict
+from typing_extensions import TypedDict
 
 from socnet_rs import markdownify
 
@@ -14,10 +14,13 @@ from ..core.utils import dt_to_epoch
 from . import models
 
 if TYPE_CHECKING:
+    from typing import Literal
+
     from channels.layers import InMemoryChannelLayer
     from channels_redis.core import RedisChannelLayer
     from django.contrib.auth.models import AnonymousUser
     from django.db.models import Model
+    from typing_extensions import Any
 
     from ..users.models import User
 

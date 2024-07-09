@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING
 
 from django import template
 from typing_extensions import Protocol
 
 if TYPE_CHECKING:
+    from typing import Literal
+
     from django.http import HttpRequest
 
 register = template.Library()

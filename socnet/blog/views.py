@@ -8,9 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.postgres.search import TrigramWordSimilarity
 from django.core.exceptions import PermissionDenied
-from django.db.models import Case, Count, Prefetch, Q, QuerySet, When
+from django.db.models import Case, Count, Prefetch, Q, When
 from django.db.models.functions import Extract
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
@@ -23,6 +23,8 @@ from . import forms, models, services
 
 if TYPE_CHECKING:
     from django.core.paginator import Page
+    from django.db.models import QuerySet
+    from django.http import HttpRequest, HttpResponse
 
     from ..users.types import AuthedRequest
 

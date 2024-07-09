@@ -7,13 +7,13 @@ from django.contrib.postgres.search import TrigramWordSimilarity
 from django.db.models import OuterRef, Q, Subquery
 from django.db.models.functions import Extract, Substr
 from django.shortcuts import get_object_or_404, render
-from typing_extensions import Any
 
 from ..users.models import User
 from . import forms, models
 
 if TYPE_CHECKING:
     from django.http import HttpResponse
+    from typing_extensions import Any
 
     from ..users.types import AuthedRequest
 

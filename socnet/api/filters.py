@@ -5,12 +5,13 @@ from typing import TYPE_CHECKING, no_type_check
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django_filters import FilterSet
-from typing_extensions import Any, Protocol, TypeVar
+from typing_extensions import Protocol, TypeVar
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
     from rest_framework.serializers import ModelSerializer
+    from typing_extensions import Any
 
     from .types import SerializerExclude, SerializerFields
 

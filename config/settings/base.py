@@ -17,10 +17,14 @@ if not logging.root.handlers:
     )
 
 
+from typing import TYPE_CHECKING
+
 import environ
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _
-from typing_extensions import Any
+
+if TYPE_CHECKING:
+    from typing_extensions import Any
 
 BASE_DIR = current_file.parents[2]
 

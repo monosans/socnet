@@ -4,12 +4,12 @@ from enum import Enum, auto
 from typing import TYPE_CHECKING
 
 import pytest
-from typing_extensions import Any
 
 from .users.factories import UserFactory
 
 if TYPE_CHECKING:
     from django.test import Client
+    from typing_extensions import Any
 
     from socnet.users.models import User
 

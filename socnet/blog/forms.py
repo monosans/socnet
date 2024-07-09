@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import TYPE_CHECKING
 
 from django import forms
 from django.utils.translation import pgettext_lazy
@@ -8,6 +8,9 @@ from typing_extensions import TypeVar
 
 from ..core.models import MarkdownContentModel
 from . import models
+
+if TYPE_CHECKING:
+    from typing import ClassVar
 
 TMarkdownContentModel = TypeVar(
     "TMarkdownContentModel", bound=MarkdownContentModel
