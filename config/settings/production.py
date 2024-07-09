@@ -52,11 +52,9 @@ STORAGES = {
 _SENTRY_DSN = env.str("SENTRY_DSN", None)
 if _SENTRY_DSN:
     import sentry_sdk
-    from sentry_sdk.integrations.asyncio import AsyncioIntegration
 
     sentry_sdk.init(
         dsn=_SENTRY_DSN,
-        integrations=(AsyncioIntegration(),),
         max_request_body_size="always",
         traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", 0.0),
     )
