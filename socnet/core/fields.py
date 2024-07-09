@@ -4,17 +4,11 @@ from io import BytesIO
 from typing import TYPE_CHECKING
 
 from django.core.files.base import ContentFile
-from django.db.models import (
-    CharField,
-    DateTimeField,
-    Field,
-    ImageField,
-    TextField,
-)
+from django.db.models import CharField, DateTimeField, ImageField, TextField
 from django.db.models.fields.files import ImageFieldFile
 from django.utils import timezone
 from PIL import Image, ImageOps
-from typing_extensions import Any, TypeVar, override
+from typing_extensions import override
 
 from socnet_rs import normalize_str
 
@@ -22,11 +16,12 @@ from . import decorators
 
 if TYPE_CHECKING:
     from django.core.files.base import File
-    from django.db.models import Model
+    from django.db.models import Field, Model
+    from typing_extensions import Any, TypeVar
 
-T_contra = TypeVar("T_contra", contravariant=True)
-T_co = TypeVar("T_co", covariant=True)
-TField = TypeVar("TField", bound=Field[Any, Any])
+    T_contra = TypeVar("T_contra", contravariant=True)
+    T_co = TypeVar("T_co", covariant=True)
+    TField = TypeVar("TField", bound=Field[Any, Any])
 
 
 def create_normalized_str_field(field: type[TField]) -> type[TField]:
@@ -45,7 +40,7 @@ NormalizedCharField = create_normalized_str_field(CharField)
 NormalizedTextField = create_normalized_str_field(TextField)
 
 
-class NullAutoNowDateTimeField(DateTimeField[T_contra, T_co]):
+class NullAutoNowDateTimeField(DateTimeField["T_contra", "T_co"]):
     @decorators.copy_type_hints(DateTimeField.__init__)
     def __init__(self, **kwargs: Any) -> None:
         kwargs["auto_now"] = True

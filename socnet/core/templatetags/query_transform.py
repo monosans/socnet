@@ -3,18 +3,18 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from django import template
-from typing_extensions import Protocol
 
 if TYPE_CHECKING:
     from typing import Literal
 
     from django.http import HttpRequest
+    from typing_extensions import Protocol
+
+    class Context(Protocol):
+        def __getitem__(self, _: Literal["request"], /) -> HttpRequest: ...
+
 
 register = template.Library()
-
-
-class Context(Protocol):
-    def __getitem__(self, _: Literal["request"], /) -> HttpRequest: ...
 
 
 @register.simple_tag(takes_context=True)

@@ -3,16 +3,14 @@ from __future__ import annotations
 import functools
 from typing import TYPE_CHECKING
 
-from typing_extensions import ParamSpec, TypeVar
-
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-    from typing_extensions import Any
+    from typing_extensions import Any, ParamSpec, TypeVar
 
-T = TypeVar("T")
-T2 = TypeVar("T2")
-P = ParamSpec("P")
+    T = TypeVar("T")
+    T2 = TypeVar("T2")
+    P = ParamSpec("P")
 
 
 def copy_type_hints(

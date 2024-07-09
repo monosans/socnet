@@ -4,18 +4,17 @@ import time
 from typing import TYPE_CHECKING
 
 from django.core.paginator import Paginator
-from django.db.models import Model
-from typing_extensions import TypeVar
 
 if TYPE_CHECKING:
     import datetime
     from collections.abc import Iterator
 
     from django.core.paginator import Page
-    from django.db.models import QuerySet
+    from django.db.models import Model, QuerySet
     from django.http import HttpRequest
+    from typing_extensions import TypeVar
 
-TModel = TypeVar("TModel", bound=Model)
+    TModel = TypeVar("TModel", bound=Model)
 
 
 def dt_to_epoch(dt: datetime.date) -> int:

@@ -4,20 +4,22 @@ from typing import TYPE_CHECKING
 
 from django import forms
 from django.utils.translation import pgettext_lazy
-from typing_extensions import TypeVar
 
-from ..core.models import MarkdownContentModel
 from . import models
 
 if TYPE_CHECKING:
     from typing import ClassVar
 
-TMarkdownContentModel = TypeVar(
-    "TMarkdownContentModel", bound=MarkdownContentModel
-)
+    from typing_extensions import TypeVar
+
+    from ..core.models import MarkdownContentModel
+
+    TMarkdownContentModel = TypeVar(
+        "TMarkdownContentModel", bound=MarkdownContentModel
+    )
 
 
-class MarkdownContentModelForm(forms.ModelForm[TMarkdownContentModel]):
+class MarkdownContentModelForm(forms.ModelForm["TMarkdownContentModel"]):
     class Meta:
         labels: ClassVar[dict[str, str]] = {"content": ""}
         widgets: ClassVar[dict[str, forms.Textarea]] = {

@@ -15,7 +15,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, UpdateView
-from typing_extensions import TypeVar, override
+from typing_extensions import override
 
 from ..core.utils import paginate
 from ..users.models import User
@@ -25,17 +25,18 @@ if TYPE_CHECKING:
     from django.core.paginator import Page
     from django.db.models import QuerySet
     from django.http import HttpRequest, HttpResponse
+    from typing_extensions import TypeVar
 
     from ..users.types import AuthedRequest
 
-TBaseModelForm = TypeVar(
-    "TBaseModelForm", bound=forms.PostForm | forms.CommentForm
-)
-TPost = TypeVar("TPost", bound=models.Post | models.Comment)
+    TBaseModelForm = TypeVar(
+        "TBaseModelForm", bound=forms.PostForm | forms.CommentForm
+    )
+    TPost = TypeVar("TPost", bound=models.Post | models.Comment)
 
 
 class _BasePostUpdateView(
-    LoginRequiredMixin, UpdateView[TPost, TBaseModelForm]
+    LoginRequiredMixin, UpdateView["TPost", "TBaseModelForm"]
 ):
     @override
     def get_object(self, queryset: QuerySet[TPost] | None = None) -> TPost:

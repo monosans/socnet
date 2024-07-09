@@ -5,15 +5,22 @@ from typing import TYPE_CHECKING, no_type_check
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django_filters import FilterSet
-from typing_extensions import Protocol, TypeVar
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
 
     from rest_framework.serializers import ModelSerializer
-    from typing_extensions import Any
+    from typing_extensions import Any, Protocol, TypeVar
 
     from .types import SerializerExclude, SerializerFields
+
+    class HasModelSerializer(Protocol):
+        serializer_class: type[ModelSerializer[Any]]
+
+    THasModelSerializer = TypeVar(
+        "THasModelSerializer", bound=HasModelSerializer
+    )
+
 
 IGNORED_FIELDS = (
     models.FileField,
@@ -22,13 +29,6 @@ IGNORED_FIELDS = (
     GenericForeignKey,
 )
 IGNORED_LOOKUPS = frozenset(("unaccent",))
-
-
-class HasModelSerializer(Protocol):
-    serializer_class: type[ModelSerializer[Any]]
-
-
-THasModelSerializer = TypeVar("THasModelSerializer", bound=HasModelSerializer)
 
 
 @no_type_check
