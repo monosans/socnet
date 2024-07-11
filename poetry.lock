@@ -515,12 +515,12 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-allauth"
-version = "0.63.3"
+version = "0.63.4"
 description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "django_allauth-0.63.3.tar.gz", hash = "sha256:2374164c468a309e6badf70bc3405136df6036f24a20a13387f2a063066bdaa9"},
+    {file = "django_allauth-0.63.4.tar.gz", hash = "sha256:db7adb630ee5742956c0b15fce562d52714ad7c62f9097510b33b143e548375b"},
 ]
 
 [package.dependencies]
@@ -575,13 +575,13 @@ coverage = "*"
 
 [[package]]
 name = "django-debug-toolbar"
-version = "4.4.5"
+version = "4.4.6"
 description = "A configurable set of panels that display various debug information about the current request/response."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_debug_toolbar-4.4.5-py3-none-any.whl", hash = "sha256:91425606673ee674d780f7aeedf3595c264eb382dcf41f55c6779577900904c0"},
-    {file = "django_debug_toolbar-4.4.5.tar.gz", hash = "sha256:8298ce966b4c8fc71430082dd4739ef2badb5f867734e1973a413c4ab2ea81b7"},
+    {file = "django_debug_toolbar-4.4.6-py3-none-any.whl", hash = "sha256:3beb671c9ec44ffb817fad2780667f172bd1c067dbcabad6268ce39a81335f45"},
+    {file = "django_debug_toolbar-4.4.6.tar.gz", hash = "sha256:36e421cb908c2f0675e07f9f41e3d1d8618dc386392ec82d23bcfcd5d29c7044"},
 ]
 
 [package.dependencies]
@@ -2011,13 +2011,13 @@ files = [
 
 [[package]]
 name = "sentry-sdk"
-version = "2.8.0"
+version = "2.9.0"
 description = "Python client for Sentry (https://sentry.io)"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "sentry_sdk-2.8.0-py2.py3-none-any.whl", hash = "sha256:6051562d2cfa8087bb8b4b8b79dc44690f8a054762a29c07e22588b1f619bfb5"},
-    {file = "sentry_sdk-2.8.0.tar.gz", hash = "sha256:aa4314f877d9cd9add5a0c9ba18e3f27f99f7de835ce36bd150e48a41c7c646f"},
+    {file = "sentry_sdk-2.9.0-py2.py3-none-any.whl", hash = "sha256:0bea5fa8b564cc0d09f2e6f55893e8f70286048b0ffb3a341d5b695d1af0e6ee"},
+    {file = "sentry_sdk-2.9.0.tar.gz", hash = "sha256:4c85bad74df9767976afb3eeddc33e0e153300e887d637775a753a35ef99bee6"},
 ]
 
 [package.dependencies]
@@ -2476,4 +2476,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f2c689cea5cdd7071fc2d23a68348e4773e5c70b0ce8368c7c8539c5d6cbeb2d"
+content-hash = "a82a9baf089076941371cbc2189ebfd229843a2b8fdf9bda7ee0905e1a9732b8"
