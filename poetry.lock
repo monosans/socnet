@@ -515,12 +515,12 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-allauth"
-version = "0.63.4"
+version = "0.63.5"
 description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "django_allauth-0.63.4.tar.gz", hash = "sha256:db7adb630ee5742956c0b15fce562d52714ad7c62f9097510b33b143e548375b"},
+    {file = "django_allauth-0.63.5.tar.gz", hash = "sha256:ab612c58dac10e64ab7c1ef1389610c56e43e4a39ce36abaf11b8564a6b2e998"},
 ]
 
 [package.dependencies]
@@ -2476,4 +2476,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a82a9baf089076941371cbc2189ebfd229843a2b8fdf9bda7ee0905e1a9732b8"
+content-hash = "a069c17b2627639dab3e05e6e2a1592a642a340328228b708eb56c8382194baf"
