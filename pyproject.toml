@@ -25,7 +25,7 @@ drf-standardized-errors = { version = "0.14.0", extras = ["openapi"] }
 httptools = "0.6.1"
 Pillow = "10.4.0"
 python-json-logger = "2.0.7"
-sentry-sdk = { version = "2.9.0", extras = ["django"] }
+sentry-sdk = { version = "2.10.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 uvicorn = "0.30.1"
 uvloop = { version = "0.19.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
