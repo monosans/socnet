@@ -26,7 +26,7 @@ def image_upload_to(instance: User, filename: str) -> str:  # noqa: ARG001
     return f"{uuid4().hex}.webp"
 
 
-class User(AbstractUser):  # type: ignore[explicit-override]
+class User(AbstractUser):
     first_name = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
 
