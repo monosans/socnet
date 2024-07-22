@@ -21,7 +21,7 @@ for prefix, viewset, basename in (
     ("posts", viewsets.PostViewSet, None),
     ("users", viewsets.UserViewSet, None),
 ):
-    router.register(prefix, viewset, basename)  # type: ignore[arg-type]
+    router.register(prefix, viewset, basename)
 
 urlpatterns = [
     *router.urls,

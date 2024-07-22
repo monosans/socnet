@@ -35,9 +35,7 @@ class DateUpdatedModel(models.Model):
         abstract = True
 
 
-class TimestampedModel(  # type: ignore[explicit-override]
-    DateCreatedModel, DateUpdatedModel
-):
+class TimestampedModel(DateCreatedModel, DateUpdatedModel):
     objects = TimestampedModelQuerySet.as_manager()
 
     class Meta(TypedModelMeta):

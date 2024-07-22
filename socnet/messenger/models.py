@@ -8,9 +8,7 @@ from django_stubs_ext.db.models import TypedModelMeta
 from ..core.models import DateCreatedModel, MarkdownContentModel
 
 
-class Message(  # type: ignore[explicit-override]
-    MarkdownContentModel, DateCreatedModel
-):
+class Message(MarkdownContentModel, DateCreatedModel):
     sender = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
