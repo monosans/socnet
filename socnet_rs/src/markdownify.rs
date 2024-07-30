@@ -1,5 +1,4 @@
-use std::collections::HashMap;
-use std::sync::LazyLock;
+use std::{collections::HashMap, sync::LazyLock};
 
 use pyo3::prelude::*;
 
