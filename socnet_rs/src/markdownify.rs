@@ -1,9 +1,8 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::LazyLock};
 
-use once_cell::sync::Lazy;
 use pyo3::prelude::*;
 
-static AMMONIA: Lazy<ammonia::Builder> = Lazy::new(|| {
+static AMMONIA: LazyLock<ammonia::Builder> = LazyLock::new(|| {
     let mut cleaner = ammonia::Builder::default();
     cleaner.set_tag_attribute_values(HashMap::from([
         (
