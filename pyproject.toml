@@ -36,7 +36,7 @@ optional = true
 
 [tool.poetry.group.local.dependencies]
 covdefaults = "2.3.0"
-debugpy = "1.8.3"
+debugpy = "1.8.5"
 django-coverage-plugin = "3.1.0"
 django-debug-toolbar = "4.4.6"
 django-extra-checks = "0.15.0"
