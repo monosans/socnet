@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                     " with a letter and end with a letter or number."
                 ),
                 max_length=32,
-                unique=True,
+                unique=False,
                 validators=[
                     django.core.validators.RegexValidator(
                         "^(?:[a-z]|[a-z][\\d_a-z]*[\\da-z])$"

@@ -1,4 +1,3 @@
-# https://docs.djangoproject.com/en/5.0/topics/http/urls/
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             model_name="user",
             name="email",
             field=models.EmailField(
-                max_length=254, unique=True, verbose_name="email address"
+                max_length=254, unique=False, verbose_name="email address"
             ),
         ),
         migrations.AlterField(
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                     " with a letter or number."
                 ),
                 max_length=32,
-                unique=True,
+                unique=False,
                 validators=[
                     django.core.validators.RegexValidator(
                         "^(?:[a-z]|[a-z][\\d_a-z]*[\\da-z])$"

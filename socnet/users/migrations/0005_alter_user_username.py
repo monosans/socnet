@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                     "Only English letters, numbers, underscores and hyphens."
                 ),
                 max_length=32,
-                unique=True,
+                unique=False,
                 validators=[
                     django.core.validators.RegexValidator(
                         re.compile("^[-a-zA-Z0-9_]+\\Z"),

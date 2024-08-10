@@ -1,4 +1,3 @@
-# https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
 # https://channels.readthedocs.io/en/latest/introduction.html#django-integration
 from __future__ import annotations
 

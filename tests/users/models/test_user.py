@@ -59,9 +59,9 @@ def test_username_unique() -> None:
     with pytest.raises(ValidationError, match=exc_str):
         user2.full_clean()
     exc_str = re.escape(
-        "duplicate key value violates unique constraint"
-        ' "users_user_username_key"\nDETAIL:  Key (username)=(user) already'
-        " exists."
+        "duplicate key value violates unique constraint "
+        '"users_user_username_06e46fe6_uniq"'
+        "\nDETAIL:  Key (username)=(user) already exists."
     )
     with pytest.raises(IntegrityError, match=exc_str):
         user2.save()
