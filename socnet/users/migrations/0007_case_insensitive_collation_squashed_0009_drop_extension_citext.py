@@ -9,12 +9,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    replaces = [
-        ("users", "0007_case_insensitive_collation"),
-        ("users", "0008_alter_user_email_alter_user_username"),
-        ("users", "0009_drop_extension_citext"),
-    ]
-
     dependencies = [("users", "0006_alter_user_email")]
 
     operations = [

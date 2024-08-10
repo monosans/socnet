@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
             model_name="user",
             name="email",
             field=django.contrib.postgres.fields.citext.CIEmailField(
-                max_length=254, unique=True, verbose_name="email address"
+                max_length=254, unique=False, verbose_name="email address"
             ),
         )
     ]
