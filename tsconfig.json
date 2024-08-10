@@ -3,6 +3,7 @@
   "exclude": ["socnet/static/public/js/"],
   "compilerOptions": {
     "noUncheckedIndexedAccess": false,
+    "useUnknownInCatchVariables": true,
 
     "module": "node16",
 
