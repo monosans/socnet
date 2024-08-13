@@ -734,37 +734,37 @@ Django = ">=2.2"
 
 [[package]]
 name = "django-stubs"
-version = "5.0.2"
+version = "5.0.4"
 description = "Mypy stubs for Django"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_stubs-5.0.2-py3-none-any.whl", hash = "sha256:cb0c506cb5c54c64612e4a2ee8d6b913c6178560ec168009fe847c09747c304b"},
-    {file = "django_stubs-5.0.2.tar.gz", hash = "sha256:236bc5606e5607cb968f92b648471f9edaa461a774bc013bf9e6bff8730f6bdf"},
+    {file = "django_stubs-5.0.4-py3-none-any.whl", hash = "sha256:c2502f5ecbae50c68f9a86d52b5b2447d8648fd205036dad0ccb41e19a445927"},
+    {file = "django_stubs-5.0.4.tar.gz", hash = "sha256:78e3764488fdfd2695f12502136548ec22f8d4b1780541a835042b8238d11514"},
 ]
 
 [package.dependencies]
 asgiref = "*"
 django = "*"
-django-stubs-ext = ">=5.0.2"
+django-stubs-ext = ">=5.0.4"
 tomli = {version = "*", markers = "python_version < \"3.11\""}
 types-PyYAML = "*"
 typing-extensions = ">=4.11.0"
 
 [package.extras]
-compatible-mypy = ["mypy (>=1.10.0,<1.11.0)"]
+compatible-mypy = ["mypy (>=1.11.0,<1.12.0)"]
 oracle = ["oracledb"]
 redis = ["redis"]
 
 [[package]]
 name = "django-stubs-ext"
-version = "5.0.2"
+version = "5.0.4"
 description = "Monkey-patching and extensions for django-stubs"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_stubs_ext-5.0.2-py3-none-any.whl", hash = "sha256:8d8efec5a86241266bec94a528fe21258ad90d78c67307f3ae5f36e81de97f12"},
-    {file = "django_stubs_ext-5.0.2.tar.gz", hash = "sha256:409c62585d7f996cef5c760e6e27ea3ff29f961c943747e67519c837422cad32"},
+    {file = "django_stubs_ext-5.0.4-py3-none-any.whl", hash = "sha256:910cbaff3d1e8e806a5c27d5ddd4088535aae8371ea921b7fd680fdfa5f14e30"},
+    {file = "django_stubs_ext-5.0.4.tar.gz", hash = "sha256:85da065224204774208be29c7d02b4482d5a69218a728465c2fbe41725fdc819"},
 ]
 
 [package.dependencies]
@@ -869,13 +869,13 @@ sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
 name = "drf-standardized-errors"
-version = "0.14.0"
+version = "0.14.1"
 description = "Standardize your API error responses."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "drf_standardized_errors-0.14.0-py3-none-any.whl", hash = "sha256:60f83597094b16fe3c99a1085a33c54e721bb14f258399c2f3271e453c4a5ba9"},
-    {file = "drf_standardized_errors-0.14.0.tar.gz", hash = "sha256:2cc6d5c89cbd1b9a45865c56d115b8b6dacd717319b132eeff1a24bdef9e2669"},
+    {file = "drf_standardized_errors-0.14.1-py3-none-any.whl", hash = "sha256:4941e0f81be94eb0904549999cf221988a5b0f524041c3877530e24f70328ed8"},
+    {file = "drf_standardized_errors-0.14.1.tar.gz", hash = "sha256:0610dcd0096b75365102d276022a22e59a1f8db8825bb0bff05e1b7194ba145d"},
 ]
 
 [package.dependencies]
@@ -2581,4 +2581,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "2acc16e7d07129e93f0d16006c3be5f264809caff6f8cad2c883a03a1b0a70f3"
+content-hash = "9109cab2b9aa035f759331c715477bc72e027415b089807f71f0b566c44578c1"
