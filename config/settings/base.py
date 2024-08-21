@@ -56,6 +56,7 @@ DATABASES = {
         "HOST": env.str("POSTGRES_HOST"),
         "PORT": env.int("POSTGRES_PORT"),
         "ATOMIC_REQUESTS": True,
+        "OPTIONS": {"pool": True},
     }
 }
 

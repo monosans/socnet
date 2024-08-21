@@ -4,8 +4,6 @@ from .base import *
 
 ALLOWED_HOSTS = [env.str("DOMAIN_NAME")]
 
-DATABASES["default"]["CONN_MAX_AGE"] = 60
-
 MIDDLEWARE.remove("socnet.core.middleware.ResponseHeadersMiddleware")
 
 _REDIS_HOST = env.str("REDIS_HOST")
