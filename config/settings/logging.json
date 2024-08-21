@@ -9,17 +9,13 @@
   "formatters": {
     "default": {
       "format": "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
-    },
-    "json": {
-      "class": "pythonjsonlogger.jsonlogger.JsonFormatter",
-      "format": "%(asctime)s%(levelname)s%(name)s%(message)s"
     }
   },
   "handlers": {
     "console": {
-      "level": "DEBUG",
+      "level": "NOTSET",
       "class": "logging.StreamHandler",
-      "formatter": "json"
+      "formatter": "default"
     },
     "mail_admins": {
       "level": "ERROR",
@@ -28,25 +24,5 @@
       "reporter_class": "django.views.debug.ExceptionReporter"
     }
   },
-  "root": { "level": "DEBUG", "handlers": ["console", "mail_admins"] },
-  "loggers": {
-    "django.db.backends": { "level": "INFO" },
-    "django.request": { "level": "INFO" },
-    "django.template": { "level": "INFO" },
-    "environ.environ": { "level": "INFO" },
-    "factory.generate": { "level": "INFO" },
-    "faker.factory": { "level": "INFO" },
-    "gunicorn.access": {
-      "level": "NOTSET",
-      "handlers": ["console", "mail_admins"]
-    },
-    "gunicorn.error": {
-      "level": "INFO",
-      "handlers": ["console", "mail_admins"]
-    },
-    "PIL": { "level": "INFO" },
-    "psycopg": { "level": "INFO" },
-    "uvicorn.error": { "level": "INFO" },
-    "watchfiles.main": { "level": "WARNING" }
-  }
+  "root": { "level": "INFO", "handlers": ["console", "mail_admins"] }
 }
