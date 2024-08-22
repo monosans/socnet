@@ -25,6 +25,7 @@ repos:
         additional_dependencies:
           - stylelint
           - stylelint-config-standard
+          - stylelint-config-recess-order
   - repo: https://github.com/monosans/pre-commit-prettier
     rev: v3.3.3
     hooks:
