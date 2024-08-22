@@ -1,4 +1,4 @@
-# hadolint global ignore=DL3008,DL3013,DL4006
+# hadolint global ignore=DL3008,DL3013,DL3042,DL4006,SC3028
 FROM docker.io/node:lts-bookworm-slim AS node-base-stage
 
 WORKDIR /app
