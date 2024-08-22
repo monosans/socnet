@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from typing import ClassVar
 
 
-class UserFactory(DjangoModelFactory):
+class UserFactory(DjangoModelFactory[User]):
     about = Faker("paragraph")
     birth_date = Faker("date_of_birth")
     display_name = Faker("name")
