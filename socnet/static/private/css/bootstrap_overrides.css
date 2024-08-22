@@ -14,8 +14,8 @@ body,
 }
 
 .text-bg-color {
-  background-color: var(--bg-color);
   color: var(--bs-body-color);
+  background-color: var(--bg-color);
 }
 
 .card {
