@@ -1,5 +1,3 @@
-{% load query_transform %}
-
 {% if page_range %}
   <ul class="pagination justify-content-center mt-3 mb-0">
     {% for page in page_range %}
@@ -13,7 +11,7 @@
         </li>
       {% else %}
         <li class="page-item">
-          <a href="?{% query_transform page=page %}" class="page-link">{{ page }}</a>
+          <a href="{% querystring page=page %}" class="page-link">{{ page }}</a>
         </li>
       {% endif %}
     {% endfor %}
