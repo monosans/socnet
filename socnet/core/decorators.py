@@ -3,12 +3,15 @@ from __future__ import annotations
 import functools
 from typing import TYPE_CHECKING
 
+from django.core.exceptions import BadRequest
 from django.views.decorators.vary import vary_on_headers
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
     from typing_extensions import Any, ParamSpec, TypeVar
+
+    from .types import HttpRequest
 
     T = TypeVar("T")
     T2 = TypeVar("T2")
@@ -34,6 +37,17 @@ def process_returned_value(
         return functools.update_wrapper(wrapper, f)
 
     return decorator
+
+
+def require_htmx(f: Callable[P, T], /) -> Callable[P, T]:
+    def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
+        if TYPE_CHECKING:
+            assert isinstance(args[0], HttpRequest)
+        if not args[0].htmx:
+            raise BadRequest
+        return f(*args, **kwargs)
+
+    return functools.update_wrapper(wrapper, f)
 
 
 vary_on_htmx = vary_on_headers("HX-Request")

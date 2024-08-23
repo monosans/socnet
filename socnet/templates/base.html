@@ -42,7 +42,7 @@
     {% block javascript %}
     {% endblock javascript %}
   </head>
-  <body>
+  <body hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
     <div class="mb-3 sticky-top">
       <nav class="navbar navbar-expand-xl bg-body border-bottom">
         <div class="container-xxl">

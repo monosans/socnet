@@ -10,6 +10,7 @@ post_patterns = [
     path("", views.posts_view, name="posts"),
     path("<int:pk>/", views.post_view, name="post"),
     path("create/", views.PostCreateView.as_view(), name="post_create"),
+    path("<int:pk>/comments/", views.comments_view, name="comments"),
     path("<int:pk>/edit/", views.PostUpdateView.as_view(), name="post_update"),
     path("<int:pk>/delete/", views.post_delete_view, name="post_delete"),
 ]
