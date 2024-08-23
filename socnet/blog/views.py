@@ -197,7 +197,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
                 author__in=request.user.subscriptions.all()
             ).order_by("-pk")
     context: dict[str, Any] = {
-        "posts": paginate(request, posts, per_page=1, include_page_range=False)
+        "posts": paginate(request, posts, per_page=10, include_page_range=False)
         if posts
         else None
     }
@@ -223,7 +223,7 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         services.get_posts_preview_qs(request)
         .filter(likers=user)
         .order_by("-pk"),
-        per_page=1,
+        per_page=10,
         include_page_range=False,
     )
     context = {"posts": posts, "user": user}
@@ -261,7 +261,7 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         template = "blog/user_posts.html"
         context["user"] = user
     context["posts"] = paginate(
-        request, user.posts.all(), per_page=1, include_page_range=False
+        request, user.posts.all(), per_page=10, include_page_range=False
     )
     return render(request, template, context)
 
