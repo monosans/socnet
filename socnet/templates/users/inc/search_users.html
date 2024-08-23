@@ -1,0 +1,17 @@
+{% for user in users %}
+  <a href="{{ user.get_absolute_url }}"
+     {% if forloop.last and users.has_next %} hx-get="{% querystring page=users.next_page_number %}" hx-trigger="revealed" hx-swap="afterend" {% endif %}
+     class="list-group-item list-group-item-action d-flex align-items-center">
+    <div class="avatar-thumbnail d-flex align-items-center justify-content-center me-2">
+      {% if user.image %}
+        <img src="{{ user.image.url }}" loading="lazy" class="rounded" />
+      {% else %}
+        <i class="fa-solid fa-user text-secondary"></i>
+      {% endif %}
+    </div>
+    <div class="text-break">
+      <span class="text-body">{{ user.display_name }}</span>
+      <span class="ms-1 text-secondary">@{{ user.username }}</span>
+    </div>
+  </a>
+{% endfor %}

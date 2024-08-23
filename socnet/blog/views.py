@@ -14,10 +14,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.decorators.vary import vary_on_headers
 from django.views.generic import CreateView, UpdateView
 from typing_extensions import override
 
+from ..core.decorators import vary_on_htmx
 from ..core.utils import paginate
 from ..users.models import User
 from . import forms, models, services
@@ -35,8 +35,6 @@ if TYPE_CHECKING:
         "TBaseModelForm", bound=forms.PostForm | forms.CommentForm
     )
     TPost = TypeVar("TPost", bound=models.Post | models.Comment)
-
-vary_on_htmx = vary_on_headers("HX-Request")
 
 
 class _BasePostUpdateView(
@@ -197,9 +195,7 @@ def posts_view(request: HttpRequest) -> HttpResponse:
                 author__in=request.user.subscriptions.all()
             ).order_by("-pk")
     context: dict[str, Any] = {
-        "posts": paginate(request, posts, per_page=10, include_page_range=False)
-        if posts
-        else None
+        "posts": paginate(request, posts, per_page=10) if posts else None
     }
     if request.htmx:
         template = "blog/inc/posts_preview.html"
@@ -224,7 +220,6 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         .filter(likers=user)
         .order_by("-pk"),
         per_page=10,
-        include_page_range=False,
     )
     context = {"posts": posts, "user": user}
     return render(request, template, context)
@@ -260,9 +255,7 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     else:
         template = "blog/user_posts.html"
         context["user"] = user
-    context["posts"] = paginate(
-        request, user.posts.all(), per_page=10, include_page_range=False
-    )
+    context["posts"] = paginate(request, user.posts.all(), per_page=10)
     return render(request, template, context)
 
 

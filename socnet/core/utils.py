@@ -40,7 +40,7 @@ def paginate(
     object_list: QuerySet[TModel],
     *,
     per_page: int,
-    include_page_range: Literal[False],
+    include_page_range: Literal[False] = ...,
 ) -> Page[TModel]: ...
 
 
@@ -49,7 +49,7 @@ def paginate(
     object_list: QuerySet[TModel],
     *,
     per_page: int,
-    include_page_range: bool,
+    include_page_range: bool = False,
 ) -> tuple[Page[TModel], Iterator[str | int] | None] | Page[TModel]:
     paginator = Paginator(object_list, per_page=per_page)
     try:

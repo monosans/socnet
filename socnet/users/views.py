@@ -10,10 +10,14 @@ from django.db.models import Func, Value
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
+from ..core.decorators import vary_on_htmx
+from ..core.utils import paginate
 from . import forms
 from .models import User
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from django.http import HttpResponse
 
     from ..core.types import AuthedRequest, HttpRequest
@@ -51,6 +55,7 @@ def edit_profile_view(request: AuthedRequest) -> HttpResponse:
     return render(request, "users/edit_profile.html", context)
 
 
+@vary_on_htmx
 def search_users_view(request: HttpRequest) -> HttpResponse:
     users = None
     if request.GET:
@@ -68,5 +73,14 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
             )
     else:
         form = forms.UserSearchForm()
-    context = {"form": form, "users": users}
-    return render(request, "users/search_users.html", context)
+    context: dict[str, Any] = {
+        "users": paginate(request, users, per_page=10)
+        if users is not None
+        else None
+    }
+    if request.htmx:
+        template_name = "users/inc/search_users.html"
+    else:
+        template_name = "users/search_users.html"
+        context["form"] = form
+    return render(request, template_name, context)

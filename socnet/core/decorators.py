@@ -3,6 +3,8 @@ from __future__ import annotations
 import functools
 from typing import TYPE_CHECKING
 
+from django.views.decorators.vary import vary_on_headers
+
 if TYPE_CHECKING:
     from collections.abc import Callable
 
@@ -32,3 +34,6 @@ def process_returned_value(
         return functools.update_wrapper(wrapper, f)
 
     return decorator
+
+
+vary_on_htmx = vary_on_headers("HX-Request")
