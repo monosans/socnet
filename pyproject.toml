@@ -57,7 +57,7 @@ watchfiles = "0.23.0"
 optional = true
 
 [tool.poetry.group.production.dependencies]
-gunicorn = "22.0.0"
+gunicorn = "23.0.0"
 psycopg = { version = "3.2.1", extras = ["c", "pool"] }
 redis = { version = "5.0.8", extras = ["hiredis"] }
 uvicorn-worker = "0.2.0"
