@@ -119,6 +119,7 @@ Markdown parsing, HTML minification and sanitization, and a few other things are
 ### Frontend
 
 - HTML with Django Template language
+- HTMX 2
 - Bootstrap CSS 5.x
 - Font Awesome 6
 - TypeScript (compiled and minified with esbuild)

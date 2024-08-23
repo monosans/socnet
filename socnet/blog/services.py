@@ -12,7 +12,8 @@ if TYPE_CHECKING:
     from collections.abc import Iterable
 
     from django.db.models import QuerySet
-    from django.http import HttpRequest
+
+    from ..core.types import HttpRequest
 
 
 def get_posts_preview_qs(

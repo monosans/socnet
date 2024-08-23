@@ -8,8 +8,9 @@ import socnet_rs
 
 if TYPE_CHECKING:
     from django.http import HttpResponse
-    from django.http.request import HttpRequest
     from django.http.response import HttpResponseBase
+
+    from ..core.types import HttpRequest
 
 HEADERS = (
     (

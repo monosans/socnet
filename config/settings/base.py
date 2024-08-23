@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "allauth.mfa",
     "django_bootstrap5",
     "django_filters",
+    "django_htmx",
     "drf_spectacular",
     "drf_standardized_errors",
     "logentry_admin",
@@ -123,13 +124,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "socnet.core.middleware.MinifyHtmlMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "socnet.core.middleware.MinifyHtmlMiddleware",
     "socnet.core.middleware.ResponseHeadersMiddleware",
 ]
 

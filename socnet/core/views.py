@@ -8,9 +8,10 @@ from django.templatetags.static import static
 from django.views.generic import TemplateView
 
 if TYPE_CHECKING:
-    from django.http import HttpRequest, HttpResponse
+    from django.http import HttpResponse
 
-    from ..users.types import AuthedRequest
+    from ..core.types import HttpRequest
+    from .types import AuthedRequest
 
 
 @login_required

@@ -29,7 +29,6 @@
   {% if posts %}
     {% csrf_token %}
     {% include "blog/inc/posts_preview.html" %}
-    {% include "inc/pagination.html" with object_list=posts %}
   {% elif not is_search %}
     <div class="card mt-2">
       <div class="card-body text-center">

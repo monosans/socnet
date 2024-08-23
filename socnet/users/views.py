@@ -14,9 +14,9 @@ from . import forms
 from .models import User
 
 if TYPE_CHECKING:
-    from django.http import HttpRequest, HttpResponse
+    from django.http import HttpResponse
 
-    from .types import AuthedRequest
+    from ..core.types import AuthedRequest, HttpRequest
 
 
 @login_required

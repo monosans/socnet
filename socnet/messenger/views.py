@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from django.http import HttpResponse
     from typing_extensions import Any
 
-    from ..users.types import AuthedRequest
+    from ..core.types import AuthedRequest
 
 
 @login_required

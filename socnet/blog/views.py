@@ -14,6 +14,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
+from django.views.decorators.vary import vary_on_headers
 from django.views.generic import CreateView, UpdateView
 from typing_extensions import override
 
@@ -22,17 +23,20 @@ from ..users.models import User
 from . import forms, models, services
 
 if TYPE_CHECKING:
-    from django.core.paginator import Page
+    from typing import Any
+
     from django.db.models import QuerySet
-    from django.http import HttpRequest, HttpResponse
+    from django.http import HttpResponse
     from typing_extensions import TypeVar
 
-    from ..users.types import AuthedRequest
+    from ..core.types import AuthedRequest, HttpRequest
 
     TBaseModelForm = TypeVar(
         "TBaseModelForm", bound=forms.PostForm | forms.CommentForm
     )
     TPost = TypeVar("TPost", bound=models.Post | models.Comment)
+
+vary_on_htmx = vary_on_headers("HX-Request")
 
 
 class _BasePostUpdateView(
@@ -172,9 +176,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "blog/post.html", context)
 
 
+@vary_on_htmx
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: QuerySet[models.Post] | Page[models.Post] | None = None
-    page_range = None
+    posts: QuerySet[models.Post] | None = None
     qs = services.get_posts_preview_qs(request)
     is_search = bool(request.GET.get("q"))
     if is_search:
@@ -189,31 +193,44 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.PostSearchForm()
         if request.user.is_authenticated:
-            subscribed_posts = qs.filter(
+            posts = qs.filter(
                 author__in=request.user.subscriptions.all()
             ).order_by("-pk")
-            posts, page_range = paginate(request, subscribed_posts, per_page=10)
-    context = {
-        "posts": posts,
-        "page_range": page_range,
-        "is_search": is_search,
-        "form": form,
+    context: dict[str, Any] = {
+        "posts": paginate(request, posts, per_page=1, include_page_range=False)
+        if posts
+        else None
     }
-    return render(request, "blog/posts.html", context)
+    if request.htmx:
+        template = "blog/inc/posts_preview.html"
+    else:
+        template = "blog/posts.html"
+        context.update({"is_search": is_search, "form": form})
+    return render(request, template, context)
 
 
+@vary_on_htmx
 def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
-    qs = User.objects.only("display_name", "username").filter(username=username)
-    user = get_object_or_404(qs)
-    posts = (
+    if request.htmx:
+        qs = User.objects.only("pk")
+        template = "blog/inc/posts_preview.html"
+    else:
+        qs = User.objects.only("display_name", "username")
+        template = "blog/liked_posts.html"
+    user = get_object_or_404(qs.filter(username=username))
+    posts = paginate(
+        request,
         services.get_posts_preview_qs(request)
         .filter(likers=user)
-        .order_by("-pk")
+        .order_by("-pk"),
+        per_page=1,
+        include_page_range=False,
     )
-    context = {"user": user, "posts": posts}
-    return render(request, "blog/liked_posts.html", context)
+    context = {"posts": posts, "user": user}
+    return render(request, template, context)
 
 
+@vary_on_htmx
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     posts = (
         models.Post.objects.only("allow_commenting", "author_id", "content")
@@ -237,8 +254,16 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         .filter(username=username)
     )
     user = get_object_or_404(qs)
-    context = {"user": user, "posts": user.posts.all()}
-    return render(request, "blog/user_posts.html", context)
+    context: dict[str, Any] = {}
+    if request.htmx:
+        template = "blog/inc/posts_preview.html"
+    else:
+        template = "blog/user_posts.html"
+        context["user"] = user
+    context["posts"] = paginate(
+        request, user.posts.all(), per_page=1, include_page_range=False
+    )
+    return render(request, template, context)
 
 
 def subscribers_view(request: HttpRequest, username: str) -> HttpResponse:

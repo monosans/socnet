@@ -7,8 +7,8 @@ from allauth.account.utils import user_field
 
 if TYPE_CHECKING:
     from allauth.account.forms import SignupForm
-    from django.http import HttpRequest
 
+    from ..core.types import HttpRequest
     from ..users.models import User
 
 
