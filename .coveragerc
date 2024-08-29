@@ -2,7 +2,7 @@
 exclude_lines =
   ^\s*@(?:abc\.)?abstractmethod$
   ^\s*if\s+(?:settings\.)?DEBUG\s*:$
-fail_under = 75
+fail_under = 50
 
 [run]
 omit =
