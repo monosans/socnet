@@ -26,8 +26,11 @@ def test_get(client: Client, *, auth: bool) -> None:
         auth_client(client)
     comment = factory()
     url = get_url(comment)
-    response = client.get(url)
-    assert response.status_code == 405
+    response = client.get(url, follow=True)
+    assert response.redirect_chain == [
+        ("{}?next={}".format(reverse("account_login"), url), 302)
+    ]
+    assert response.status_code == 200
     assert models.Comment.objects.filter(pk=comment.pk).exists()
 
 
