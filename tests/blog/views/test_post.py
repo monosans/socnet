@@ -64,7 +64,7 @@ def test_authed_post(client: Client) -> None:
         "author_id", "content", "post_id"
     ).last()
     assert comment is not None
-    assert response.redirect_chain == [(comment.get_absolute_url(), 302)]
+    assert response.redirect_chain == [(url, 302)]
     assert comment.author_id == user.pk
     assert comment.content == comment_content.strip()
     assert comment.post_id == post.pk
