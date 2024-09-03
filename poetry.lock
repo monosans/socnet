@@ -691,13 +691,13 @@ testing = ["coverage[toml] (>=5.0a4)", "pytest (>=4.6.11)"]
 
 [[package]]
 name = "django-extra-checks"
-version = "0.15.0"
+version = "0.15.1"
 description = "Collection of useful checks for Django Checks Framework"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_extra_checks-0.15.0-py3-none-any.whl", hash = "sha256:e76a33d81375a1772cbe2e8638e40ce01fe0ff626c71448e1684a7c2ff1e77ae"},
-    {file = "django_extra_checks-0.15.0.tar.gz", hash = "sha256:e6585da13dd21da590e2d7169938f266145999ee1f8efa95ff372dacd1bb1237"},
+    {file = "django_extra_checks-0.15.1-py3-none-any.whl", hash = "sha256:3e724a76285331ca42cf340f94cea82cef99ebfe435ec27831b5edddcc9d5bcb"},
+    {file = "django_extra_checks-0.15.1.tar.gz", hash = "sha256:9a9ceba3d2c405cbf01fef718c46fbbdba46d3b402767869a05fe57684fc716d"},
 ]
 
 [package.extras]
@@ -1710,13 +1710,13 @@ testing = ["fields", "hunter", "process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
 name = "pytest-django"
-version = "4.8.0"
+version = "4.9.0"
 description = "A Django plugin for pytest."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pytest-django-4.8.0.tar.gz", hash = "sha256:5d054fe011c56f3b10f978f41a8efb2e5adfc7e680ef36fb571ada1f24779d90"},
-    {file = "pytest_django-4.8.0-py3-none-any.whl", hash = "sha256:ca1ddd1e0e4c227cf9e3e40a6afc6d106b3e70868fd2ac5798a22501271cd0c7"},
+    {file = "pytest_django-4.9.0-py3-none-any.whl", hash = "sha256:1d83692cb39188682dbb419ff0393867e9904094a549a7d38a3154d5731b2b99"},
+    {file = "pytest_django-4.9.0.tar.gz", hash = "sha256:8bf7bc358c9ae6f6fc51b6cebb190fe20212196e6807121f11bd6a3b03428314"},
 ]
 
 [package.dependencies]
@@ -2597,4 +2597,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "52d254b4821d0a93304a5d08a21b051945d2314c2c43451d03a690e06830908a"
+content-hash = "8c395e437d27c18921217c57b99ae80e2b2cc9a8cf311aebab15adead08648a3"
