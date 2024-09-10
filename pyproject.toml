@@ -25,7 +25,7 @@ drf-spectacular = "0.27.2"
 drf-standardized-errors = { version = "0.14.1", extras = ["openapi"] }
 httptools = "0.6.1"
 Pillow = "10.4.0"
-sentry-sdk = { version = "2.13.0", extras = ["django"] }
+sentry-sdk = { version = "2.14.0", extras = ["django"] }
 socnet-rs = { path = "socnet_rs", develop = false }
 uvicorn = "0.30.6"
 uvloop = { version = "0.20.0", markers = "implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')" }
