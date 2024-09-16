@@ -45,11 +45,11 @@ djangorestframework-stubs = "3.15.0"
 djlint = "1.35.2"
 factory-boy = "3.3.1"
 mypy = "1.11.2"
-psycopg = { version = "3.2.1", extras = ["binary", "pool"] }
+psycopg = { version = "3.2.2", extras = ["binary", "pool"] }
 pytest = "8.3.3"
 pytest-cov = "5.0.0"
 pytest-django = "4.9.0"
-ruff = "0.6.4"
+ruff = "0.6.5"
 types-Pillow = "10.2.0.20240822"
 typing-extensions = "4.12.2"
 watchfiles = "0.24.0"
@@ -59,6 +59,6 @@ optional = true
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "23.0.0"
-psycopg = { version = "3.2.1", extras = ["c", "pool"] }
+psycopg = { version = "3.2.2", extras = ["c", "pool"] }
 redis = { version = "5.0.8", extras = ["hiredis"] }
 uvicorn-worker = "0.2.0"
