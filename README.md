@@ -114,7 +114,7 @@ Markdown parsing, HTML minification and sanitization, and a few other things are
 ### Databases
 
 - PostgreSQL 16 for persistent data
-- Valkey 7 (FOSS Redis fork) for cache and as a layer for Channels
+- Valkey 8 (FOSS Redis fork) for cache and as a layer for Channels
 
 ### Frontend
 
