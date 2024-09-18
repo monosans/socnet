@@ -621,17 +621,20 @@ steam = ["python3-openid (>=3.0.8)"]
 
 [[package]]
 name = "django-bootstrap5"
-version = "24.2"
+version = "24.3"
 description = "Bootstrap 5 for Django"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_bootstrap5-24.2-py3-none-any.whl", hash = "sha256:6a5d83e9ff1952f7c07c54cebcb76c85f09787b8b57eeb4ec07554cd583acc64"},
-    {file = "django_bootstrap5-24.2.tar.gz", hash = "sha256:a3cee2b3d45745210c5b898af2917f310f44df746269fe09a93be28a0adc2a4b"},
+    {file = "django_bootstrap5-24.3-py3-none-any.whl", hash = "sha256:98f7916f9f7f9c34dfe157f7c062a28ebf6d17ff95307bef260ba794ba34e2a0"},
+    {file = "django_bootstrap5-24.3.tar.gz", hash = "sha256:ca5ec5568fc2a3fc239f0cb8ce41a7df3802b8c4af930d7f64451784ec7ddc16"},
 ]
 
 [package.dependencies]
 Django = ">=4.2"
+
+[package.extras]
+jinja = ["Jinja2 (>=3.0,<4)"]
 
 [[package]]
 name = "django-cleanup"
@@ -2634,4 +2637,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a51c3684768476992daaa9c56bc2b484fa5726d393547e94db786c9661f98215"
+content-hash = "09274d83f8191a7fdbe68b1121f73f07ddbaf536f3032e19d32a3aab07094b6c"
