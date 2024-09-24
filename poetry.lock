@@ -599,12 +599,12 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-allauth"
-version = "65.0.0"
+version = "65.0.1"
 description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_allauth-65.0.0.tar.gz", hash = "sha256:5bc344c7caa610b4ef87f529831473cb0c17184696a5f3bcd4678c8ead983e61"},
+    {file = "django_allauth-65.0.1.tar.gz", hash = "sha256:1f8281e2dc17d3b977bcd95b99538f128c5cd2fb2551346a7f8ad31aa76f17cc"},
 ]
 
 [package.dependencies]
@@ -752,37 +752,37 @@ Django = ">=2.2"
 
 [[package]]
 name = "django-stubs"
-version = "5.0.2"
+version = "5.1.0"
 description = "Mypy stubs for Django"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_stubs-5.0.2-py3-none-any.whl", hash = "sha256:cb0c506cb5c54c64612e4a2ee8d6b913c6178560ec168009fe847c09747c304b"},
-    {file = "django_stubs-5.0.2.tar.gz", hash = "sha256:236bc5606e5607cb968f92b648471f9edaa461a774bc013bf9e6bff8730f6bdf"},
+    {file = "django_stubs-5.1.0-py3-none-any.whl", hash = "sha256:b98d49a80aa4adf1433a97407102d068de26c739c405431d93faad96dd282c40"},
+    {file = "django_stubs-5.1.0.tar.gz", hash = "sha256:86128c228b65e6c9a85e5dc56eb1c6f41125917dae0e21e6cfecdf1b27e630c5"},
 ]
 
 [package.dependencies]
 asgiref = "*"
 django = "*"
-django-stubs-ext = ">=5.0.2"
+django-stubs-ext = ">=5.1.0"
 tomli = {version = "*", markers = "python_version < \"3.11\""}
 types-PyYAML = "*"
 typing-extensions = ">=4.11.0"
 
 [package.extras]
-compatible-mypy = ["mypy (>=1.10.0,<1.11.0)"]
+compatible-mypy = ["mypy (>=1.11.0,<1.12.0)"]
 oracle = ["oracledb"]
 redis = ["redis"]
 
 [[package]]
 name = "django-stubs-ext"
-version = "5.0.2"
+version = "5.1.0"
 description = "Monkey-patching and extensions for django-stubs"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_stubs_ext-5.0.2-py3-none-any.whl", hash = "sha256:8d8efec5a86241266bec94a528fe21258ad90d78c67307f3ae5f36e81de97f12"},
-    {file = "django_stubs_ext-5.0.2.tar.gz", hash = "sha256:409c62585d7f996cef5c760e6e27ea3ff29f961c943747e67519c837422cad32"},
+    {file = "django_stubs_ext-5.1.0-py3-none-any.whl", hash = "sha256:a455fc222c90b30b29ad8c53319559f5b54a99b4197205ddbb385aede03b395d"},
+    {file = "django_stubs_ext-5.1.0.tar.gz", hash = "sha256:ed7d51c0b731651879fc75f331fb0806d98b67bfab464e96e2724db6b46ef926"},
 ]
 
 [package.dependencies]
@@ -805,24 +805,24 @@ django = ">=4.2"
 
 [[package]]
 name = "djangorestframework-stubs"
-version = "3.15.0"
+version = "3.15.1"
 description = "PEP-484 stubs for django-rest-framework"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "djangorestframework_stubs-3.15.0-py3-none-any.whl", hash = "sha256:6c634f16fe1f9b1654cfd921eca64cd4188ce8534ab5e3ec7e44aaa0ca969d93"},
-    {file = "djangorestframework_stubs-3.15.0.tar.gz", hash = "sha256:f60ee1c80abb01a77acc0169969e07c45c2739ae64667b9a0dd4a2e32697dcab"},
+    {file = "djangorestframework_stubs-3.15.1-py3-none-any.whl", hash = "sha256:79dc9018f5d5fa420f9981eec9f1e820ecbd04719791f144419cdc6c5b8e29bd"},
+    {file = "djangorestframework_stubs-3.15.1.tar.gz", hash = "sha256:34539871895d66d382b6ae3655d9f95c1de7733cf50bc29097638d367ed3117d"},
 ]
 
 [package.dependencies]
-django-stubs = ">=5.0.0"
+django-stubs = ">=5.0.4"
 requests = ">=2.0.0"
 types-PyYAML = ">=5.4.3"
 types-requests = ">=0.1.12"
 typing-extensions = ">=3.10.0"
 
 [package.extras]
-compatible-mypy = ["django-stubs[compatible-mypy]", "mypy (>=1.10.0,<1.11.0)"]
+compatible-mypy = ["django-stubs[compatible-mypy]", "mypy (>=1.11.0,<1.12.0)"]
 coreapi = ["coreapi (>=2.0.0)"]
 markdown = ["types-Markdown (>=0.1.5)"]
 
@@ -2637,4 +2637,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "e77fcf39c7d63fcefba41df1b17002d2416e0eac3cf26312811caaa2b9e736fc"
+content-hash = "f8efb4cf001b5851a703707d927af0aeace4bda6e6967814543b9c7774e1ded7"
