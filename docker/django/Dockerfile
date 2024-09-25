@@ -87,6 +87,8 @@ COPY --chown=django:django --from=python-build-stage /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
+USER django
+
 ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
 
 CMD ["bash", "/app/docker/django/start.sh"]
