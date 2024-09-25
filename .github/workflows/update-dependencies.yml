@@ -19,15 +19,40 @@ jobs:
           - cmd: npm update --package-lock-only --lockfile-version 3
             commit-msg: Update package-lock.json
             branch: update/npm-lock
-          - cmd: pipx install 'maturin<2' && pipx run poetry lock --no-interaction
-            commit-msg: Update poetry.lock
-            branch: update/poetry-lock
-          - cmd: pipx run pre-commit autoupdate
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - run: ${{ matrix.cmd }}
+      - id: generate-token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          commit-message: ${{ matrix.commit-msg }}
+          branch: ${{ matrix.branch }}
+          delete-branch: true
+          sign-commits: true
+          title: ${{ matrix.commit-msg }}
+          body:
+  update-dependencies-uv:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'monosans' }}
+    strategy:
+      matrix:
+        include:
+          - cmd: uv lock --upgrade --no-cache
+            commit-msg: Update uv.lock
+            branch: update/uv-lock
+          - cmd: uv tool run --from pre-commit@latest --with pre-commit-uv --no-cache pre-commit autoupdate
             commit-msg: Update .pre-commit-config.yaml
             branch: update/pre-commit-config
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
       - run: ${{ matrix.cmd }}
       - id: generate-token
         uses: tibdex/github-app-token@v2

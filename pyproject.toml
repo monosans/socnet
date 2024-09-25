@@ -21,10 +21,10 @@ dependencies = [
   "httptools==0.6.1",
   "Pillow==10.4.0",
   "sentry-sdk[django]==2.14.0",
+  "socnet-rs",
   "uvicorn==0.30.6",
   "uvloop==0.20.0; implementation_name == 'cpython' and (sys_platform == 'darwin' or sys_platform == 'linux')",
   "websockets==13.1",
-  "socnet-rs",
 ]
 
 [project.optional-dependencies]
