@@ -28,10 +28,8 @@ services:
     networks:
       - esbuild
     volumes:
-      - ./socnet/static/private/css:/app/socnet/static/private/css
-      - ./socnet/static/private/js:/app/socnet/static/private/js
-      - ./socnet/static/public/css:/app/socnet/static/public/css
-      - ./socnet/static/public/js:/app/socnet/static/public/js
+      - ./socnet/static/private:/app/socnet/static/private
+      - ./socnet/static/public:/app/socnet/static/public
       - ./package.json:/app/package.json
       - ./tsconfig.json:/app/tsconfig.json
 networks:
