@@ -78,15 +78,11 @@ ENV DJANGO_SETTINGS_MODULE=config.settings.local
 RUN apt-get update \
   && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/* \
-  && groupadd --gid 1000 django \
-  && useradd --gid 1000 --no-log-init --uid 1000 django
+  && rm -rf /var/lib/apt/lists/*
 
-COPY --chown=django:django --from=python-build-stage /app/.venv /app/.venv
+COPY --from=python-build-stage /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
-
-USER django
 
 ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
 
