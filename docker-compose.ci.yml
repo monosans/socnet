@@ -7,3 +7,4 @@ services:
         - EXTRA=local
     volumes:
       - .:/app
+      - /app/.venv
