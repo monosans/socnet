@@ -10,7 +10,12 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/app
+      - ./config:/app/config
+      - ./docker:/app/docker
+      - ./locale:/app/locale
+      - ./socnet:/app/socnet
+      - ./tests:/app/tests
+      - ./manage.py:/app/manage.py
   postgres:
     volumes:
       - local-postgres-data:/var/lib/postgresql/data
