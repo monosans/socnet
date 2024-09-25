@@ -89,8 +89,6 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 USER django
 
-COPY --chown=django:django . .
-
 ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
 
 CMD ["bash", "/app/docker/django/start.sh"]

@@ -5,3 +5,5 @@ services:
       target: python-ci-run-stage
       args:
         - EXTRA=local
+    volumes:
+      - .:/app
