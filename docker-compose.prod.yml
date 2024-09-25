@@ -4,7 +4,7 @@ services:
     build:
       target: python-production-run-stage
       args:
-        - POETRY_GROUPS=main,production
+        - EXTRA=production
     depends_on:
       - redis
     networks:

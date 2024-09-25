@@ -4,9 +4,7 @@ services:
     build:
       target: python-local-run-stage
       args:
-        - POETRY_GROUPS=main,local
-        - GID=${GID:-1000}
-        - UID=${UID:-1000}
+        - EXTRA=local
     depends_on:
       - esbuild
     ports:
@@ -22,9 +20,6 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
       target: node-watch-stage
-      args:
-        - GID=${GID:-1000}
-        - UID=${UID:-1000}
     networks:
       - esbuild
     volumes:
