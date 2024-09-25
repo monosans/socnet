@@ -11,14 +11,14 @@ python = "^3.10"
 channels = "4.1.0"
 channels-redis = "4.2.0"
 Django = { version = "5.1.1", extras = ["argon2"] }
-django-allauth = { version = "65.0.0", extras = ["mfa"] }
+django-allauth = { version = "65.0.1", extras = ["mfa"] }
 django-bootstrap5 = "24.3"
 django-cleanup = "9.0.0"
 django-environ = "0.11.2"
 django-filter = "24.3"
 django-htmx = "1.19.0"
 django-logentry-admin = "1.1.0"
-django-stubs-ext = "5.0.2"
+django-stubs-ext = "5.1.0"
 djangorestframework = "3.15.2"
 docutils = "0.21.2"
 drf-spectacular = "0.27.2"
@@ -36,12 +36,12 @@ optional = true
 
 [tool.poetry.group.local.dependencies]
 covdefaults = "2.3.0"
-debugpy = "1.8.5"
+debugpy = "1.8.6"
 django-coverage-plugin = "3.1.0"
 django-debug-toolbar = "4.4.6"
 django-extra-checks = "0.15.1"
-django-stubs = "5.0.2"
-djangorestframework-stubs = "3.15.0"
+django-stubs = "5.1.0"
+djangorestframework-stubs = "3.15.1"
 djlint = "1.35.2"
 factory-boy = "3.3.1"
 mypy = "1.11.2"
