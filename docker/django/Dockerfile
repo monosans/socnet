@@ -3,19 +3,18 @@ FROM docker.io/node:lts-bookworm-slim AS node-base-stage
 
 WORKDIR /app
 
-COPY ./package.json ./package-lock.json ./
+COPY ./package.json ./
 
 RUN --mount=type=cache,target=/root/.npm \
+  --mount=type=bind,source=package-lock.json,target=package-lock.json \
   npm ci
 
 
 FROM node-base-stage AS node-build-stage
 
-COPY ./tsconfig.json ./tsconfig.json
-COPY ./socnet/static/private/css/ ./socnet/static/private/css/
-COPY ./socnet/static/private/js/ ./socnet/static/private/js/
-
-RUN npm run build
+RUN --mount=type=bind,source=tsconfig.json,target=tsconfig.json \
+  --mount=type=bind,source=socnet/static/private,target=socnet/static/private \
+  npm run build
 
 
 FROM node-base-stage AS node-watch-stage
@@ -24,11 +23,6 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends tini \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
-
-ARG GID UID
-
-RUN groupmod --gid "${GID}" node \
-  && usermod --gid node --uid "${UID}" node
 
 USER node
 
@@ -40,12 +34,6 @@ CMD ["npm", "run", "watch"]
 FROM docker.io/python:3.12-slim-bookworm AS python-base-stage
 
 ENV \
-  PIP_DISABLE_PIP_VERSION_CHECK=1 \
-  PIP_NO_COLOR=1 \
-  PIP_NO_INPUT=1 \
-  PIP_PROGRESS_BAR=off \
-  PIP_ROOT_USER_ACTION=ignore \
-  PIP_UPGRADE=1 \
   PYTHONDONTWRITEBYTECODE=1 \
   PYTHONUNBUFFERED=1
 
@@ -54,32 +42,28 @@ WORKDIR /app
 
 FROM python-base-stage AS python-build-stage
 
-ENV \
-  POETRY_NO_ANSI=1 \
-  POETRY_NO_CACHE=1 \
-  POETRY_NO_INTERACTION=1
-
 RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
   && curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
-ENV PATH="/root/.cargo/bin:${PATH}"
+ENV \
+  PATH="/root/.cargo/bin:${PATH}" \
+  UV_COMPILE_BYTECODE=1 \
+  UV_LINK_MODE=copy
 
-RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
-  pip install poetry poetry-plugin-export
-
-COPY ./poetry.lock ./pyproject.toml ./
 COPY ./socnet_rs/ ./socnet_rs/
 
-ARG POETRY_GROUPS
+ARG EXTRA
 
-RUN --mount=type=cache,target=/app/socnet_rs/target,sharing=locked \
-  --mount=type=cache,target=/root/.cache/pip,sharing=locked \
+RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
+  --mount=type=cache,target=/app/socnet_rs/target,sharing=locked \
+  --mount=type=cache,target=/root/.cache/uv,sharing=locked \
   --mount=type=cache,target=/root/.cargo/registry,sharing=locked \
-  poetry export --without-hashes --only="${POETRY_GROUPS}" | \
-  pip wheel --wheel-dir /usr/src/app/wheels -r /dev/stdin
+  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+  --mount=type=bind,source=uv.lock,target=uv.lock \
+  uv sync --extra="${EXTRA}" --no-dev --no-install-project --frozen
 
 
 FROM python-base-stage AS python-base-run-stage
@@ -96,24 +80,35 @@ RUN apt-get update \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
-COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
+COPY --from=python-build-stage /app/.venv /app/.venv
 
-RUN pip install --no-index --find-links /wheels/ /wheels/* \
-  && rm -rf /wheels/
+ENV PATH="/app/.venv/bin:$PATH"
 
-ENTRYPOINT ["tini", "--", "/app/docker/django/entrypoint.sh"]
+ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
 
-CMD ["/app/docker/django/start.sh"]
+CMD ["bash", "/app/docker/django/start.sh"]
 
 
-FROM python-ci-run-stage AS python-local-run-stage
+FROM python-base-run-stage AS python-local-run-stage
 
-ARG GID UID
+ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
-RUN groupadd --gid "${GID}" --system django \
-  && useradd --gid django --no-log-init --system --uid "${UID}" django
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
+  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+  && rm -rf /var/lib/apt/lists/* \
+  && groupadd --gid 1000 django \
+  && useradd --gid 1000 --no-log-init --uid 1000 django
+
+COPY --chown=django:django --from=python-build-stage /app/.venv /app/.venv
+
+ENV PATH="/app/.venv/bin:$PATH"
 
 USER django
+
+ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
+
+CMD ["bash", "/app/docker/django/start.sh"]
 
 
 FROM python-base-run-stage AS python-production-run-stage
@@ -124,22 +119,21 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends brotli gettext libpq-dev tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
-  && groupadd --system django \
-  && useradd --gid django --no-log-init --system django \
+  && groupadd --gid 1000 django \
+  && useradd --gid 1000 --no-log-init --uid 1000 django \
   && mkdir -p /var/www/django/static /var/www/django/media \
   && chown django:django /var/www/django/static /var/www/django/media
 
-COPY --from=python-build-stage /usr/src/app/wheels/ /wheels/
+COPY --chown=django:django --from=python-build-stage /app/.venv /app/.venv
 
-RUN pip install --no-index --find-links /wheels/ /wheels/* \
-  && rm -rf /wheels/
+ENV PATH="/app/.venv/bin:$PATH"
 
 COPY --chown=django:django . .
-COPY --from=node-build-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --from=node-build-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
+COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 
-ENTRYPOINT ["tini", "--", "/app/docker/django/entrypoint.prod.sh"]
+ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.prod.sh"]
 
-CMD ["/app/docker/django/start.prod.sh"]
+CMD ["bash", "/app/docker/django/start.prod.sh"]

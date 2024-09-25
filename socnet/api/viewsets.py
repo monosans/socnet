@@ -39,7 +39,7 @@ class _LikeViewSet(_AuthedViewSet):
         )
         qs = self.model.objects.filter(pk=pk)
         obj = get_object_or_404(qs)
-        obj.likers.add(request.user)
+        obj.likers.add(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_201_CREATED)
 
     def destroy(self, request: AuthedRequest, pk: int) -> Response:
@@ -48,7 +48,7 @@ class _LikeViewSet(_AuthedViewSet):
         )
         qs = self.model.objects.filter(pk=valid_pk)
         obj = get_object_or_404(qs)
-        obj.likers.remove(request.user)
+        obj.likers.remove(request.user)  # type: ignore[attr-defined]
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

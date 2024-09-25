@@ -4,6 +4,7 @@ services:
     build:
       target: python-ci-run-stage
       args:
-        - POETRY_GROUPS=main,local
+        - EXTRA=local
     volumes:
       - .:/app
+      - /app/.venv

@@ -4,15 +4,14 @@ services:
     build:
       target: python-local-run-stage
       args:
-        - POETRY_GROUPS=main,local
-        - GID=${GID:-1000}
-        - UID=${UID:-1000}
+        - EXTRA=local
     depends_on:
       - esbuild
     ports:
       - 8000:8000
     volumes:
       - .:/app
+      - /app/.venv
   postgres:
     volumes:
       - local-postgres-data:/var/lib/postgresql/data
@@ -22,15 +21,12 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
       target: node-watch-stage
-      args:
-        - GID=${GID:-1000}
-        - UID=${UID:-1000}
     networks:
       - esbuild
     volumes:
-      - ./socnet/static:/app/socnet/static
+      - ./socnet/static/private:/app/socnet/static/private
+      - ./socnet/static/public:/app/socnet/static/public
       - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
       - ./tsconfig.json:/app/tsconfig.json
 networks:
   esbuild:
