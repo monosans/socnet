@@ -53,4 +53,4 @@ find /var/www/django/static -type f ! \( -iname '*.br' -o -iname '*.gz' \) | whi
 	done
 done
 
-exec /usr/local/bin/gunicorn --config python:docker.django.gunicorn_config config.asgi:application
+exec gunicorn --config python:docker.django.gunicorn_config config.asgi:application
