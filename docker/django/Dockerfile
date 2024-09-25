@@ -13,8 +13,7 @@ RUN --mount=type=cache,target=/root/.npm \
 FROM node-base-stage AS node-build-stage
 
 RUN --mount=type=bind,source=tsconfig.json,target=tsconfig.json \
-  --mount=type=bind,source=socnet/static/private/css/,target=socnet/static/private/css/ \
-  --mount=type=bind,source=socnet/static/private/js/,target=socnet/static/private/js/ \
+  --mount=type=bind,source=socnet/static/private,target=socnet/static/private \
   npm run build
 
 
