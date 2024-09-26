@@ -7,23 +7,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  update-dependencies:
+  update-uv-lock:
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'monosans' }}
-    strategy:
-      matrix:
-        include:
-          - cmd: uv lock --upgrade --no-cache
-            commit-msg: Update uv.lock
-            branch: update/uv-lock
-          - cmd: uv tool run --from pre-commit@latest --with pre-commit-uv --no-cache pre-commit autoupdate
-            commit-msg: Update .pre-commit-config.yaml
-            branch: update/pre-commit-config
-      fail-fast: false
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
-      - run: ${{ matrix.cmd }}
+      - run: uv lock --upgrade --no-cache
       - id: generate-token
         uses: tibdex/github-app-token@v2
         with:
@@ -32,9 +22,9 @@ jobs:
       - uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.generate-token.outputs.token }}
-          commit-message: ${{ matrix.commit-msg }}
-          branch: ${{ matrix.branch }}
+          commit-message: Update uv.lock
+          branch: update/uv-lock
           delete-branch: true
           sign-commits: true
-          title: ${{ matrix.commit-msg }}
+          title: Update uv.lock
           body:
