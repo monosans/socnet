@@ -7,12 +7,15 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  update-dependencies-uv:
+  update-dependencies:
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'monosans' }}
     strategy:
       matrix:
         include:
+          - cmd: uv lock --upgrade --no-cache
+            commit-msg: Update uv.lock
+            branch: update/uv-lock
           - cmd: uv tool run --from pre-commit@latest --with pre-commit-uv --no-cache pre-commit autoupdate
             commit-msg: Update .pre-commit-config.yaml
             branch: update/pre-commit-config
