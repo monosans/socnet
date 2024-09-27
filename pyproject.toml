@@ -51,7 +51,7 @@ local = [
 production = [
   "gunicorn==23.0.0",
   "psycopg[c,pool]==3.2.2",
-  "redis[hiredis]==5.0.8",
+  "redis[hiredis]==5.1.0",
   "uvicorn-worker==0.2.0",
 ]
 
