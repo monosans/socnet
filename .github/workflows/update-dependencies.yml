@@ -1,8 +1,13 @@
 name: Update dependencies
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ./pyproject.toml
   workflow_dispatch:
   schedule:
-    - cron: 00 01 * * *
+    - cron: 00 * * * *
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
