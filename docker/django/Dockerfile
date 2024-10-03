@@ -76,7 +76,7 @@ FROM python-base-run-stage AS python-ci-run-stage
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
+  && apt-get install -y --no-install-recommends gettext tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
@@ -94,7 +94,7 @@ FROM python-base-run-stage AS python-local-run-stage
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
+  && apt-get install -y --no-install-recommends gettext tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd --gid 1000 django \
