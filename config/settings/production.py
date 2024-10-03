@@ -51,11 +51,7 @@ _SENTRY_DSN = env.str("SENTRY_DSN", None)
 if _SENTRY_DSN:
     import sentry_sdk
 
-    sentry_sdk.init(
-        dsn=_SENTRY_DSN,
-        max_request_body_size="always",
-        traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", 0.0),
-    )
+    sentry_sdk.init(dsn=_SENTRY_DSN)
 else:
     _ADMIN_EMAILS = env.str("ADMIN_EMAILS", None)
     if _ADMIN_EMAILS:
