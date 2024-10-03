@@ -24,7 +24,6 @@ services:
       - django-redis
     restart: unless-stopped
   caddy:
-    image: socnet-production-caddy
     build:
       context: .
       dockerfile: ./docker/caddy/Dockerfile

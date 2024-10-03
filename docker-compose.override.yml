@@ -16,7 +16,6 @@ services:
     volumes:
       - local-postgres-data:/var/lib/postgresql/data
   esbuild:
-    image: socnet-local-esbuild
     build:
       context: .
       dockerfile: ./docker/django/Dockerfile
