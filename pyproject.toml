@@ -1,7 +1,7 @@
 [project]
 name = "app"
 version = "0.0.0"
-requires-python = ">=3.10,<3.14"
+requires-python = ">=3.12,<3.14"
 dependencies = [
   "channels==4.1",
   "channels-redis==4.2",

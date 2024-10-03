@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.core.exceptions import ValidationError
-from typing_extensions import TypedDict
 
 from socnet_rs import markdownify
 
@@ -14,15 +13,23 @@ from ..core.utils import dt_to_epoch
 from . import models
 
 if TYPE_CHECKING:
-    from typing import Literal
+    from typing import Any, Literal
 
     from channels.layers import InMemoryChannelLayer
     from channels_redis.core import RedisChannelLayer
     from django.contrib.auth.models import AnonymousUser
     from django.db.models import Model
-    from typing_extensions import Any
+    from typing_extensions import TypedDict
 
     from ..users.models import User
+
+    class ChatMessageEvent(TypedDict):
+        type: Literal["chat_message"]
+        pk: int
+        content: str
+        createdEpoch: int
+        sender: str
+
 
 logger = logging.getLogger("socnet.messenger")
 
@@ -31,14 +38,6 @@ logger = logging.getLogger("socnet.messenger")
 def save_obj(obj: Model) -> None:
     obj.full_clean()
     obj.save()
-
-
-class ChatMessageEvent(TypedDict):
-    type: Literal["chat_message"]
-    pk: int
-    content: str
-    createdEpoch: int
-    sender: str
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
@@ -79,13 +78,13 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         except ValidationError:
             logger.exception("")
             return
-        msg = ChatMessageEvent(
-            type="chat_message",
-            pk=message.pk,
-            content=markdownify(message.content),
-            createdEpoch=dt_to_epoch(message.date_created),
-            sender=sender.username,
-        )
+        msg: ChatMessageEvent = {
+            "type": "chat_message",
+            "pk": message.pk,
+            "content": markdownify(message.content),
+            "createdEpoch": dt_to_epoch(message.date_created),
+            "sender": sender.username,
+        }
         await self.channel_layer.group_send(self.group, msg)
 
     async def chat_message(self, event: ChatMessageEvent) -> None:

@@ -8,8 +8,9 @@ from django.views.decorators.vary import vary_on_headers
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    from typing import Any
 
-    from typing_extensions import Any, ParamSpec, TypeVar
+    from typing_extensions import ParamSpec, TypeVar
 
     from .types import HttpRequest
 

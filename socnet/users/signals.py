@@ -9,7 +9,7 @@ from . import exceptions
 from .models import User
 
 if TYPE_CHECKING:
-    from typing_extensions import Any
+    from typing import Any
 
 
 def forbid_self_subscription(

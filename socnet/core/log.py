@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import logging
+from typing import override
 
 from django.conf import settings
-from typing_extensions import override
 
 
 class RequireAdmins(logging.Filter):

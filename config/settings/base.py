@@ -23,7 +23,7 @@ from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _
 
 if TYPE_CHECKING:
-    from typing_extensions import Any
+    from typing import Any
 
 BASE_DIR = current_file.parents[2]
 

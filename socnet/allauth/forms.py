@@ -8,8 +8,9 @@ from django.utils.translation import gettext, gettext_lazy
 from ..users.models import User
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from django import forms
-    from typing_extensions import Any
 
 # Needed to redefine translation
 gettext_lazy("Email")

@@ -9,10 +9,9 @@ from django.utils.translation import gettext, gettext_lazy as _
 from .models import User
 
 if TYPE_CHECKING:
-    from typing import ClassVar
+    from typing import Any, ClassVar
 
     from django_stubs_ext import StrPromise
-    from typing_extensions import Any
 
 
 class InjectUserMixin:

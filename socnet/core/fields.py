@@ -1,23 +1,24 @@
 from __future__ import annotations
 
 from io import BytesIO
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from django.core.files.base import ContentFile
 from django.db.models import CharField, DateTimeField, ImageField, TextField
 from django.db.models.fields.files import ImageFieldFile
 from django.utils import timezone
 from PIL import Image, ImageOps
-from typing_extensions import override
 
 from socnet_rs import normalize_str
 
 from . import decorators
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from django.core.files.base import File
     from django.db.models import Field, Model
-    from typing_extensions import Any, TypeVar
+    from typing_extensions import TypeVar
 
     T_contra = TypeVar("T_contra", contravariant=True)
     T_co = TypeVar("T_co", covariant=True)

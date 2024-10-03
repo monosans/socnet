@@ -12,8 +12,9 @@ from ...utils import ClientMethods, auth_client, parametrize_by_get_post
 from ..factories import UserFactory
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from django.test import Client
-    from typing_extensions import Any
 
 url = reverse_lazy("users:edit_profile")
 fields = EditProfileForm.Meta.fields

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods, require_POST
 from django.views.generic import CreateView, UpdateView
-from typing_extensions import override
 
 from ..core.decorators import require_htmx, vary_on_htmx
 from ..core.utils import paginate

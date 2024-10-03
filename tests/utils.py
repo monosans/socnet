@@ -8,8 +8,9 @@ import pytest
 from .users.factories import UserFactory
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from django.test import Client
-    from typing_extensions import Any
 
     from socnet.users.models import User
 

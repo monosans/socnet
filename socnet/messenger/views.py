@@ -12,8 +12,9 @@ from ..users.models import User
 from . import forms, models
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from django.http import HttpResponse
-    from typing_extensions import Any
 
     from ..core.types import AuthedRequest
 

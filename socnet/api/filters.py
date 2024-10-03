@@ -8,9 +8,10 @@ from django_filters import FilterSet
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+    from typing import Any, Protocol
 
     from rest_framework.serializers import ModelSerializer
-    from typing_extensions import Any, Protocol, TypeVar
+    from typing_extensions import TypeVar
 
     from .types import SerializerExclude, SerializerFields
 

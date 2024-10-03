@@ -89,8 +89,8 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 ### Backend
 
-- Python 3.10+
-- Django 5.0
+- Python 3.12
+- Django 5.1
 - django-allauth
 - django-bootstrap5
 - django-cleanup
@@ -113,7 +113,7 @@ Markdown parsing, HTML minification and sanitization, and a few other things are
 
 ### Databases
 
-- PostgreSQL 16 for persistent data
+- PostgreSQL 17 for persistent data
 - Valkey 8 (FOSS Redis fork) for cache and as a layer for Channels
 
 ### Frontend

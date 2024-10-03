@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from typing import override
+
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
-from typing_extensions import override
 
 
 class UsersConfig(AppConfig):

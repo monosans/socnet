@@ -1,6 +1,6 @@
 line-length = 80
 preview = true
-target-version = "py310"
+target-version = "py312"
 
 [format]
 docstring-code-format = true
@@ -52,6 +52,7 @@ ignore = [
   "SIM105",
   "TID252",
   "TRY400",
+  "UP040",
 ]
 select = ["ALL"]
 unfixable = ["T"]
