@@ -47,14 +47,11 @@ STORAGES = {
     },
 }
 
-_SENTRY_DSN = env.str("SENTRY_DSN", None)
-if _SENTRY_DSN:
+if _SENTRY_DSN := env.str("SENTRY_DSN", None):
     import sentry_sdk
 
     sentry_sdk.init(dsn=_SENTRY_DSN)
-else:
-    _ADMIN_EMAILS = env.str("ADMIN_EMAILS", None)
-    if _ADMIN_EMAILS:
-        from email.utils import getaddresses
+elif _ADMIN_EMAILS := env.str("ADMIN_EMAILS", None):
+    from email.utils import getaddresses
 
-        ADMINS = getaddresses([_ADMIN_EMAILS])
+    ADMINS = getaddresses([_ADMIN_EMAILS])

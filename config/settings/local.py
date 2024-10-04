@@ -56,3 +56,9 @@ EXTRA_CHECKS = {
         "drf-model-serializer-extra-kwargs",
     ]
 }
+
+
+if _SENTRY_DSN := env.str("SENTRY_DSN", None):
+    import sentry_sdk
+
+    sentry_sdk.init(dsn=_SENTRY_DSN, environment="local")
