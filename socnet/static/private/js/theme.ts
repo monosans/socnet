@@ -9,7 +9,7 @@ function getTheme(): "auto" | "dark" | "light" {
 }
 
 function getAutoTheme(): "dark" | "light" {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
+  return globalThis.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 }
@@ -35,7 +35,7 @@ function setTheme(theme: string): void {
 }
 
 setTheme(getTheme());
-window
+globalThis
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", () => setTheme(getTheme()));
 

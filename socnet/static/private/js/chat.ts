@@ -91,9 +91,9 @@ const chatLog = {
 chatLog.scrollToEnd();
 
 const chatWs = ((): WebSocket => {
-  const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+  const wsProtocol = globalThis.location.protocol === "https:" ? "wss" : "ws";
   const ws = new WebSocket(
-    `${wsProtocol}://${window.location.host}/ws/chat/${chatData.interlocutorPk}/`,
+    `${wsProtocol}://${globalThis.location.host}/ws/chat/${chatData.interlocutorPk}/`,
   );
   ws.addEventListener("message", (e: MessageEvent<string>) => {
     const data = JSON.parse(e.data) as ChatMessageEvent;
