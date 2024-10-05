@@ -3,4 +3,4 @@ services:
     command:
       - /app/docker/django/start.debugpy.sh
     ports:
-      - 5678:5678
+      - "5678:5678"
