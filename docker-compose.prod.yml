@@ -27,14 +27,17 @@ services:
     build:
       context: .
       dockerfile: ./docker/caddy/Dockerfile
+    cap_add:
+      - NET_ADMIN
     depends_on:
       - django
     env_file: ./.env
     networks:
       - caddy-django
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     restart: unless-stopped
     volumes:
       - production-caddy-config:/config
