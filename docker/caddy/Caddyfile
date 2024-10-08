@@ -4,36 +4,25 @@
 	email {$TLS_EMAIL}
 }
 
-(headers) {
+(common) {
 	header {
 		-Server
 		Content-Security-Policy "default-src 'none'; connect-src 'self'; font-src 'self' https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' blob: data: https:;"
 		Permissions-Policy "interest-cohort=()"
 		Referrer-Policy "same-origin"
-		Strict-Transport-Security "max-age=86400"
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 	}
+
+	encode zstd gzip
 }
-
-(common) {
-	import headers
-
-	handle_errors {
-		import headers
-		encode zstd gzip
-	}
-}
-
-# Redirect "www" to "non-www"
-# www.{$DOMAIN_NAME} {
-# 	import common
-# 	redir https://{$DOMAIN_NAME}{uri}
-# 	encode zstd gzip
-# }
 
 {$DOMAIN_NAME} {
 	import common
+
+	handle_errors {
+		import common
+	}
 
 	handle /robots.txt {
 		respond 200 {
@@ -45,20 +34,16 @@ Disallow: /"
 	handle_path /static/* {
 		# STATIC_ROOT
 		root * /var/www/django/static
-		file_server {
-			precompressed br gzip
-		}
+		file_server
 	}
 
 	handle_path /media/* {
 		# MEDIA_ROOT
 		root * /var/www/django/media
 		file_server
-		encode zstd gzip
 	}
 
 	handle {
 		reverse_proxy django:5000
-		encode zstd gzip
 	}
 }

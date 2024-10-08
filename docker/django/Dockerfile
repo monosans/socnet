@@ -116,7 +116,7 @@ FROM python-base-run-stage AS python-production-run-stage
 ENV DJANGO_SETTINGS_MODULE=config.settings.production
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends brotli gettext libpq-dev tini wait-for-it \
+  && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd --gid 1000 django \

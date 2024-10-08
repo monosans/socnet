@@ -55,7 +55,7 @@ docker compose run --rm django python3 manage.py migrate
 # Create a superuser if you want
 docker compose run --rm django python3 manage.py createsuperuser
 # Compile translations
-docker compose run --rm django python3 manage.py compilemessages -i site-packages
+docker compose run --rm django python3 manage.py compilemessages --locale en --locale ru
 
 # Run without debugpy
 docker compose up
