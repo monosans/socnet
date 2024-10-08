@@ -20,7 +20,7 @@ dependencies = [
   "drf-standardized-errors[openapi]==0.14.1",
   "httptools==0.6.1",
   "pillow==10.4",
-  "sentry-sdk[django]==2.15",
+  "sentry-sdk[django]==2.16.0",
   "socnet-rs",
   "uvicorn==0.31",
   "uvloop==0.20; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
