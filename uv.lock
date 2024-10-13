@@ -3,15 +3,15 @@ requires-python = ">=3.12, <3.14"
 
 [[package]]
 name = "anyio"
-version = "4.6.0"
+version = "4.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "idna" },
     { name = "sniffio" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/78/49/f3f17ec11c4a91fe79275c426658e509b07547f874b14c1a526d86a83fc8/anyio-4.6.0.tar.gz", hash = "sha256:137b4559cbb034c477165047febb6ff83f390fc3b20bf181c1fc0a728cb8beeb", size = 170983 }
+sdist = { url = "https://files.pythonhosted.org/packages/eb/27/6fa26db273f2454d25104b3327192fca83a08eec62f8d61c1078d4a4ed66/anyio-4.6.1.tar.gz", hash = "sha256:936e6613a08e8f71a300cfffca1c1c0806335607247696ac45f9b32c63bfb9aa", size = 173336 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9e/ef/7a4f225581a0d7886ea28359179cb861d7fbcdefad29663fc1167b86f69f/anyio-4.6.0-py3-none-any.whl", hash = "sha256:c7d2e9d63e31599eeb636c8c5c03a7e108d73b345f064f1c19fdc87b79036a9a", size = 89631 },
+    { url = "https://files.pythonhosted.org/packages/96/4e/93dba0472b569c0b4f2c848fa1f06b70242836b2da1741370288271c3f9d/anyio-4.6.1-py3-none-any.whl", hash = "sha256:0632863c9044798a494a05cab0b159dfad6a3f064094863a45878320eb4e8ed2", size = 90286 },
 ]
 
 [[package]]
