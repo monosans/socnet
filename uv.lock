@@ -112,7 +112,7 @@ requires-dist = [
     { name = "socnet-rs", directory = "socnet_rs" },
     { name = "types-pillow", marker = "extra == 'local'", specifier = "==10.2.0.20240822" },
     { name = "typing-extensions", marker = "extra == 'local'", specifier = "==4.12.2" },
-    { name = "uvicorn", specifier = "==0.31.1" },
+    { name = "uvicorn", specifier = "==0.32.0" },
     { name = "uvicorn-worker", marker = "extra == 'production'", specifier = "==0.2" },
     { name = "uvloop", marker = "(implementation_name == 'cpython' and sys_platform == 'darwin') or (implementation_name == 'cpython' and sys_platform == 'linux')", specifier = "==0.21.0" },
     { name = "watchfiles", marker = "extra == 'local'", specifier = "==0.24" },
@@ -1427,15 +1427,15 @@ wheels = [
 
 [[package]]
 name = "uvicorn"
-version = "0.31.1"
+version = "0.32.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
     { name = "h11" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/76/87/a886eda9ed495a3a4506d5a125cd07c54524280718c4969bde88f075fe98/uvicorn-0.31.1.tar.gz", hash = "sha256:f5167919867b161b7bcaf32646c6a94cdbd4c3aa2eb5c17d36bb9aa5cfd8c493", size = 77368 }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/fc/1d785078eefd6945f3e5bab5c076e4230698046231eb0f3747bc5c8fa992/uvicorn-0.32.0.tar.gz", hash = "sha256:f78b36b143c16f54ccdb8190d0a26b5f1901fe5a3c777e1ab29f26391af8551e", size = 77564 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3c/55/37407280931038a3f21fa0245d60edeaa76f18419581aa3f4397761c78df/uvicorn-0.31.1-py3-none-any.whl", hash = "sha256:adc42d9cac80cf3e51af97c1851648066841e7cfb6993a4ca8de29ac1548ed41", size = 63666 },
+    { url = "https://files.pythonhosted.org/packages/eb/14/78bd0e95dd2444b6caacbca2b730671d4295ccb628ef58b81bee903629df/uvicorn-0.32.0-py3-none-any.whl", hash = "sha256:60b8f3a5ac027dcd31448f411ced12b5ef452c646f76f02f8cc3f25d8d26fd82", size = 63723 },
 ]
 
 [[package]]
