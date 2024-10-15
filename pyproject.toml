@@ -22,7 +22,7 @@ dependencies = [
   "pillow==11.0.0",
   "sentry-sdk[django]==2.16.0",
   "socnet-rs",
-  "uvicorn==0.31.1",
+  "uvicorn==0.32.0",
   "uvloop==0.21.0; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
   "websockets==13.1",
 ]
