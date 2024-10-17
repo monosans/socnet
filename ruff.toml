@@ -52,6 +52,7 @@ ignore = [
   "SIM105",
   "TID252",
   "TRY400",
+  "UP040",
 ]
 select = ["ALL"]
 unfixable = ["T"]
