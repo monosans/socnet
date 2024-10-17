@@ -1,7 +1,7 @@
 [project]
 name = "app"
 version = "0.0.0"
-requires-python = ">=3.12,<3.14"
+requires-python = ">=3.12,<3.13"
 dependencies = [
   "channels==4.1",
   "channels-redis==4.2",
@@ -19,11 +19,11 @@ dependencies = [
   "drf-spectacular==0.27.2",
   "drf-standardized-errors[openapi]==0.14.1",
   "httptools==0.6.4",
-  "pillow==11.0.0",
-  "sentry-sdk[django]==2.16.0",
+  "pillow==11",
+  "sentry-sdk[django]==2.17",
   "socnet-rs",
-  "uvicorn==0.32.0",
-  "uvloop==0.21.0; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
+  "uvicorn==0.32",
+  "uvloop==0.21; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
   "websockets==13.1",
 ]
 optional-dependencies.local = [

@@ -4,14 +4,14 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
-    from typing import Literal, TypeAlias
+    from typing import Literal
 
     from rest_framework.request import Request
 
     from ..users.models import User
 
-    SerializerFields: TypeAlias = Sequence[str] | Literal["__all__"] | None
-    SerializerExclude: TypeAlias = Sequence[str] | None
+    type SerializerFields = Sequence[str] | Literal["__all__"] | None
+    type SerializerExclude = Sequence[str] | None
 
     class AuthedRequest(Request):
         user: User
