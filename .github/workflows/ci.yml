@@ -34,8 +34,6 @@ jobs:
       - run: uv tool run --from pre-commit@latest --with pre-commit-uv --no-cache --python 3.12 pre-commit run --all-files
   run-pytest-mypy:
     runs-on: ubuntu-latest
-    env:
-      DOCKER_BUILDKIT: "1"
     steps:
       - uses: actions/checkout@v4
       - run: cp .env.example .env
