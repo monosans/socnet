@@ -20,14 +20,6 @@
       "groupName": "django-stubs"
     },
     {
-      "matchDepTypes": ["devDependencies"],
-      "automerge": true
-    },
-    {
-      "matchManagers": ["pre-commit"],
-      "automerge": true
-    },
-    {
       "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
@@ -39,6 +31,14 @@
         "replacement",
         "rollback"
       ],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["pre-commit"],
       "automerge": true
     }
   ],
