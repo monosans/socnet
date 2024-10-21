@@ -12,6 +12,14 @@
   },
   "packageRules": [
     {
+      "matchPackageNames": [
+        "django-stubs",
+        "django-stubs-ext",
+        "djangorestframework-stubs"
+      ],
+      "groupName": "django-stubs"
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "automerge": true
     },
