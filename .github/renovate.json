@@ -15,7 +15,8 @@
       "matchPackageNames": [
         "django-stubs",
         "django-stubs-ext",
-        "djangorestframework-stubs"
+        "djangorestframework-stubs",
+        "mypy"
       ],
       "groupName": "django-stubs"
     },
