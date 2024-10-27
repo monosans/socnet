@@ -10,16 +10,10 @@ from . import models
 if TYPE_CHECKING:
     from typing import ClassVar
 
-    from typing_extensions import TypeVar
-
     from ..core.models import MarkdownContentModel
 
-    TMarkdownContentModel = TypeVar(
-        "TMarkdownContentModel", bound=MarkdownContentModel
-    )
 
-
-class MarkdownContentModelForm(forms.ModelForm["TMarkdownContentModel"]):
+class MarkdownContentModelForm[T: MarkdownContentModel](forms.ModelForm[T]):
     class Meta:
         labels: ClassVar[dict[str, str]] = {"content": ""}
         widgets: ClassVar[dict[str, forms.Textarea]] = {

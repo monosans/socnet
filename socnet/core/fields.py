@@ -18,14 +18,9 @@ if TYPE_CHECKING:
 
     from django.core.files.base import File
     from django.db.models import Field, Model
-    from typing_extensions import TypeVar
-
-    T_contra = TypeVar("T_contra", contravariant=True)
-    T_co = TypeVar("T_co", covariant=True)
-    TField = TypeVar("TField", bound=Field[Any, Any])
 
 
-def create_normalized_str_field(field: type[TField]) -> type[TField]:
+def create_normalized_str_field[T: Field[Any, Any]](field: type[T]) -> type[T]:
     return type(
         f"Normalized{field.__name__}",
         (field,),
@@ -41,7 +36,7 @@ NormalizedCharField = create_normalized_str_field(CharField)
 NormalizedTextField = create_normalized_str_field(TextField)
 
 
-class NullAutoNowDateTimeField(DateTimeField["T_contra", "T_co"]):
+class NullAutoNowDateTimeField[ST, GT](DateTimeField[ST, GT]):
     @decorators.copy_type_hints(DateTimeField.__init__)
     def __init__(self, **kwargs: Any) -> None:
         kwargs["auto_now"] = True

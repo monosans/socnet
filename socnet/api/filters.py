@@ -11,16 +11,11 @@ if TYPE_CHECKING:
     from typing import Any, Protocol
 
     from rest_framework.serializers import ModelSerializer
-    from typing_extensions import TypeVar
 
     from .types import SerializerExclude, SerializerFields
 
     class HasModelSerializer(Protocol):
         serializer_class: type[ModelSerializer[Any]]
-
-    THasModelSerializer = TypeVar(
-        "THasModelSerializer", bound=HasModelSerializer
-    )
 
 
 IGNORED_FIELDS = (
@@ -33,7 +28,7 @@ IGNORED_LOOKUPS = frozenset(("unaccent",))
 
 
 @no_type_check
-def generate_filterset(view: THasModelSerializer, /) -> THasModelSerializer:
+def generate_filterset[T: HasModelSerializer](view: T, /) -> T:
     view.filterset_class = generate_filterset_from_serializer(
         view.serializer_class
     )

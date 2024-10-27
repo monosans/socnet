@@ -55,7 +55,6 @@ ignore = [
   "TD003",
   "TID252",
   "TRY400",
-  "UP040",
 ]
 select = ["ALL"]
 unfixable = ["RUF027", "T"]

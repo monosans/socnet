@@ -10,16 +10,10 @@ if TYPE_CHECKING:
     from collections.abc import Callable
     from typing import Any
 
-    from typing_extensions import ParamSpec, TypeVar
-
     from .types import HttpRequest
 
-    T = TypeVar("T")
-    T2 = TypeVar("T2")
-    P = ParamSpec("P")
 
-
-def copy_type_hints(
+def copy_type_hints[**P, T](
     _f: Callable[P, Any], /
 ) -> Callable[[Callable[..., T]], Callable[P, T]]:
     def wrapper(func: Callable[..., T]) -> Callable[P, T]:
@@ -28,7 +22,7 @@ def copy_type_hints(
     return wrapper
 
 
-def process_returned_value(
+def process_returned_value[**P, T, T2](
     processor: Callable[[T], T2],
 ) -> Callable[[Callable[P, T]], Callable[P, T2]]:
     def decorator(f: Callable[P, T]) -> Callable[P, T2]:
@@ -40,7 +34,7 @@ def process_returned_value(
     return decorator
 
 
-def require_htmx(f: Callable[P, T], /) -> Callable[P, T]:
+def require_htmx[**P, T](f: Callable[P, T], /) -> Callable[P, T]:
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
         if TYPE_CHECKING:
             assert isinstance(args[0], HttpRequest)

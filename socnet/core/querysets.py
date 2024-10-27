@@ -8,19 +8,17 @@ from django.db.models.functions import Extract
 if TYPE_CHECKING:
     from django.db.models import Model
     from django_stubs_ext import WithAnnotations
-    from typing_extensions import TypedDict, TypeVar
-
-    _TModel = TypeVar("_TModel", bound=Model, covariant=True)  # noqa: PLC0105
+    from typing_extensions import TypedDict
 
     class EpochDates(TypedDict):
         date_created_epoch: int
         date_updated_epoch: int
 
 
-class TimestampedModelQuerySet(QuerySet["_TModel"]):
+class TimestampedModelQuerySet[T: Model](QuerySet[T]):
     def annotate_epoch_dates(
         self,
-    ) -> TimestampedModelQuerySet[WithAnnotations[_TModel, EpochDates]]:
+    ) -> TimestampedModelQuerySet[WithAnnotations[T, EpochDates]]:
         return self.annotate(  # type: ignore[no-any-return]
             date_created_epoch=Extract("date_created", "epoch"),
             date_updated_epoch=Extract("date_updated", "epoch"),

@@ -25,28 +25,23 @@ if TYPE_CHECKING:
     from typing import Any
 
     from django.db.models import QuerySet
-    from typing_extensions import TypeVar
 
     from ..core.types import AuthedRequest, HttpRequest
 
-    TBaseModelForm = TypeVar(
-        "TBaseModelForm", bound=forms.PostForm | forms.CommentForm
-    )
-    TPost = TypeVar("TPost", bound=models.Post | models.Comment)
 
-
-class _BasePostUpdateView(
-    LoginRequiredMixin, UpdateView["TPost", "TBaseModelForm"]
-):
+class _BasePostUpdateView[
+    TModel: models.Post | models.Comment,
+    TModelForm: forms.PostForm | forms.CommentForm,
+](LoginRequiredMixin, UpdateView[TModel, TModelForm]):
     @override
-    def get_object(self, queryset: QuerySet[TPost] | None = None) -> TPost:
+    def get_object(self, queryset: QuerySet[TModel] | None = None) -> TModel:
         obj = super().get_object(queryset)
         if obj.author_id != self.request.user.pk:
             raise PermissionDenied
         return obj
 
     @override
-    def form_valid(self, form: TBaseModelForm) -> HttpResponse:
+    def form_valid(self, form: TModelForm) -> HttpResponse:
         self.object = form.save(commit=False)  # type: ignore[assignment]
         update_fields = (
             (*form.Meta.fields, "date_updated")
@@ -156,7 +151,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             .order_by("pk")
         )
         if request.user.is_authenticated:
-            comments_qs = comments_qs.annotate(
+            comments_qs = comments_qs.annotate(  # type: ignore[assignment]
                 is_liked=Q(pk__in=request.user.liked_comments.all())
             )
         qs = qs.prefetch_related(Prefetch("comments", comments_qs))
@@ -186,7 +181,7 @@ def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
         .order_by("pk")
     )
     if request.user.is_authenticated:
-        comments_qs = comments_qs.annotate(
+        comments_qs = comments_qs.annotate(  # type: ignore[assignment]
             is_liked=Q(pk__in=request.user.liked_comments.all())
         )
     return render(
