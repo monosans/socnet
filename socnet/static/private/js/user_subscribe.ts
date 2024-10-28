@@ -36,7 +36,12 @@ function getRequest(dataset: DOMStringMap): {
 }
 
 async function handler(e: Event): Promise<void> {
-  const btn = e.currentTarget! as HTMLButtonElement;
+  const btn = (e.target as Element).closest<HTMLButtonElement>(
+    "[data-is-subscribed]",
+  );
+  if (!btn) {
+    return;
+  }
   btn.disabled = true;
 
   const request = getRequest(btn.dataset);
@@ -73,6 +78,4 @@ async function handler(e: Event): Promise<void> {
   btn.disabled = false;
 }
 
-for (const btn of document.querySelectorAll("[data-is-subscribed]")) {
-  btn.addEventListener("click", (e) => void handler(e));
-}
+document.body.addEventListener("click", (e) => void handler(e));
