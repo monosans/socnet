@@ -92,7 +92,7 @@ requires-dist = [
     { name = "django-stubs-ext", specifier = "==5.1.1" },
     { name = "djangorestframework", specifier = "==3.15.2" },
     { name = "djangorestframework-stubs", marker = "extra == 'local'", specifier = "==3.15.1" },
-    { name = "djlint", marker = "extra == 'local'", specifier = "==1.35.3" },
+    { name = "djlint", marker = "extra == 'local'", specifier = "==1.35.4" },
     { name = "docutils", specifier = "==0.21.2" },
     { name = "drf-spectacular", specifier = "==0.27.2" },
     { name = "drf-standardized-errors", extras = ["openapi"], specifier = "==0.14.1" },
@@ -552,7 +552,7 @@ wheels = [
 
 [[package]]
 name = "djlint"
-version = "1.35.3"
+version = "1.35.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -566,10 +566,15 @@ dependencies = [
     { name = "pyyaml" },
     { name = "regex" },
     { name = "tqdm" },
+    { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a7/e6/4b633476fa2ebbd09ade007f052617227fb0c250e7f708d6e56e9f6c4b85/djlint-1.35.3.tar.gz", hash = "sha256:780ea3e25662fca89033fa96ecf656099954d6f81dce039eac90f4bba3cbe850", size = 45902 }
+sdist = { url = "https://files.pythonhosted.org/packages/87/4b/78205d41de135f8c36515f8b015a2e923492926576fe7ca76abb3aee8027/djlint-1.35.4.tar.gz", hash = "sha256:d4a1342d83e65171059925b87ab351a1d5201289a764f9e092ef7a99e312554e", size = 46417 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cd/f9/1788c861b4f8aea24bc8f216e57877354f138a3730cafb407f8ec4cc6cd2/djlint-1.35.3-py3-none-any.whl", hash = "sha256:bf2f23798909f9c5a110925c369538383de0141f9a2be37ee0d26422d41b7543", size = 50744 },
+    { url = "https://files.pythonhosted.org/packages/15/94/f06d8215b3a6a5c25b5e63c798751d8b238e8d4f6fd73c241d8c112844d3/djlint-1.35.4-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:c5dddbf2d5cb2bbbf4ef53c6e7c0042e41ff3e7097eed3f1ce53a8e4c2cb7eec", size = 342237 },
+    { url = "https://files.pythonhosted.org/packages/3c/a6/a62a349c851c16ec848d626bdd478e9e23d3ed52544747abb46a2dd3617e/djlint-1.35.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:65ebe3f4dcee2944d101e3ccadc71cab13a4c59cebd428bb5ba59609d365c232", size = 311364 },
+    { url = "https://files.pythonhosted.org/packages/27/4b/47f98ef87738b40e662d584352dffa60146c6071446e986fd20c223b9b2d/djlint-1.35.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b457e672fca03eefdfcf6e4c1dd4bfc2c324e8b0755e5def2d94c9273eb6edc7", size = 398225 },
+    { url = "https://files.pythonhosted.org/packages/5b/b7/f69c10f4d89f356289887622bccf915c2f5756f73fe32e112fa8d2185950/djlint-1.35.4-cp312-cp312-win_amd64.whl", hash = "sha256:6982bebd9e2587bc503d6bd0fdea492fd70ebac79aad7cbecd0d67dfebe1de4e", size = 348959 },
+    { url = "https://files.pythonhosted.org/packages/0c/3f/7937f331265c44acf89ebe9c61ba490ca70df0b463e9490ce44910b2fe73/djlint-1.35.4-py3-none-any.whl", hash = "sha256:ed6088d416019e453c1451463ed44ffbf3f84c3bd8b1dfeadc456103fd1e5d14", size = 50603 },
 ]
 
 [[package]]
