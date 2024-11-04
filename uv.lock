@@ -108,7 +108,7 @@ requires-dist = [
     { name = "pytest-django", marker = "extra == 'local'", specifier = "==4.9" },
     { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==5.2" },
     { name = "ruff", marker = "extra == 'local'", specifier = "==0.7.2" },
-    { name = "sentry-sdk", extras = ["django"], specifier = "==2.17" },
+    { name = "sentry-sdk", extras = ["django"], specifier = "==2.18.0" },
     { name = "socnet-rs", directory = "socnet_rs" },
     { name = "types-pillow", marker = "extra == 'local'", specifier = "==10.2.0.20240822" },
     { name = "typing-extensions", marker = "extra == 'local'", specifier = "==4.12.2" },
@@ -1193,15 +1193,15 @@ wheels = [
 
 [[package]]
 name = "sentry-sdk"
-version = "2.17.0"
+version = "2.18.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "certifi" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b1/83/7d0956a71ac894717099be3669ca7b8f164bccbcfb570b2f02817d0a0068/sentry_sdk-2.17.0.tar.gz", hash = "sha256:dd0a05352b78ffeacced73a94e86f38b32e2eae15fff5f30ca5abb568a72eacf", size = 290959 }
+sdist = { url = "https://files.pythonhosted.org/packages/24/cc/0d87cc8246f52d92228aa6718a24e1988a2893f4abe2f64ec5a8bcba4185/sentry_sdk-2.18.0.tar.gz", hash = "sha256:0dc21febd1ab35c648391c664df96f5f79fb0d92d7d4225cd9832e53a617cafd", size = 293615 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/10/63/8e80fff3aa15488bc332ede44165a397a29bb13ec4a4b2236299e3b66067/sentry_sdk-2.17.0-py2.py3-none-any.whl", hash = "sha256:625955884b862cc58748920f9e21efdfb8e0d4f98cca4ab0d3918576d5b606ad", size = 314520 },
+    { url = "https://files.pythonhosted.org/packages/76/9b/2d512efdb0de203d1f0312fae53433c3009ba70b0078421d25baaedc960a/sentry_sdk-2.18.0-py2.py3-none-any.whl", hash = "sha256:ee70e27d1bbe4cd52a38e1bd28a5fadb9b17bc29d91b5f2b97ae29c0a7610442", size = 317514 },
 ]
 
 [package.optional-dependencies]
