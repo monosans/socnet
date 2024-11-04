@@ -1,4 +1,5 @@
-# hadolint global ignore=DL3008,DL3013,DL3042,DL4006,SC3028
+# syntax=docker/dockerfile:1
+
 FROM docker.io/node:lts-bookworm-slim AS node-base-stage
 
 WORKDIR /app
@@ -6,14 +7,14 @@ WORKDIR /app
 COPY ./package.json ./
 
 RUN --mount=type=cache,target=/root/.npm \
-  --mount=type=bind,source=package-lock.json,target=package-lock.json \
+  --mount=source=package-lock.json,target=package-lock.json \
   npm ci
 
 
 FROM node-base-stage AS node-build-stage
 
-RUN --mount=type=bind,source=tsconfig.json,target=tsconfig.json \
-  --mount=type=bind,source=socnet/static/private,target=socnet/static/private \
+RUN --mount=source=tsconfig.json,target=tsconfig.json \
+  --mount=source=socnet/static/private,target=socnet/static/private \
   npm run build
 
 
@@ -61,8 +62,8 @@ RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
   --mount=type=cache,target=/app/socnet_rs/target,sharing=locked \
   --mount=type=cache,target=/root/.cache/uv,sharing=locked \
   --mount=type=cache,target=/root/.cargo/registry,sharing=locked \
-  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-  --mount=type=bind,source=uv.lock,target=uv.lock \
+  --mount=source=pyproject.toml,target=pyproject.toml \
+  --mount=source=uv.lock,target=uv.lock \
   uv sync --extra="${EXTRA}" --no-dev --no-install-project --frozen
 
 
@@ -80,7 +81,7 @@ RUN apt-get update \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
-COPY --from=python-build-stage /app/.venv /app/.venv
+COPY --from=python-build-stage --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
@@ -100,7 +101,7 @@ RUN apt-get update \
   && groupadd --gid 1000 django \
   && useradd --gid 1000 --no-log-init --uid 1000 django
 
-COPY --chown=django:django --from=python-build-stage /app/.venv /app/.venv
+COPY --from=python-build-stage --chown=django:django --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
@@ -124,13 +125,13 @@ RUN apt-get update \
   && mkdir -p /var/www/django/static /var/www/django/media \
   && chown django:django /var/www/django/static /var/www/django/media
 
-COPY --chown=django:django --from=python-build-stage /app/.venv /app/.venv
+COPY --from=python-build-stage --chown=django:django --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
 COPY --chown=django:django . .
-COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --chown=django:django --from=node-build-stage /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY --from=node-build-stage --chown=django:django --link /app/socnet/static/public/css/ /app/socnet/static/public/css/
+COPY --from=node-build-stage --chown=django:django --link /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 
