@@ -101,7 +101,7 @@ RUN apt-get update \
   && groupadd --gid 1000 django \
   && useradd --gid 1000 --no-log-init --uid 1000 django
 
-COPY --from=python-build-stage --chown=django:django --link /app/.venv /app/.venv
+COPY --from=python-build-stage --chown=1000:1000 --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
@@ -123,15 +123,15 @@ RUN apt-get update \
   && groupadd --gid 1000 django \
   && useradd --gid 1000 --no-log-init --uid 1000 django \
   && mkdir -p /var/www/django/static /var/www/django/media \
-  && chown django:django /var/www/django/static /var/www/django/media
+  && chown 1000:1000 /var/www/django/static /var/www/django/media
 
-COPY --from=python-build-stage --chown=django:django --link /app/.venv /app/.venv
+COPY --from=python-build-stage --chown=1000:1000 --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-COPY --chown=django:django . .
-COPY --from=node-build-stage --chown=django:django --link /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --from=node-build-stage --chown=django:django --link /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY --chown=1000:1000 . .
+COPY --from=node-build-stage --chown=1000:1000 --link /app/socnet/static/public/css/ /app/socnet/static/public/css/
+COPY --from=node-build-stage --chown=1000:1000 --link /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 USER django
 
