@@ -1,9 +1,0 @@
-{
-  "blank_line_after_tag": "load,extends",
-  "close_void_tags": true,
-  "ignore": "H006,H013,H030,H031,T002",
-  "include": "H017,H035",
-  "indent": 2,
-  "max_line_length": 80,
-  "profile": "django"
-}

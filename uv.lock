@@ -92,7 +92,7 @@ requires-dist = [
     { name = "django-stubs-ext", specifier = "==5.1.1" },
     { name = "djangorestframework", specifier = "==3.15.2" },
     { name = "djangorestframework-stubs", marker = "extra == 'local'", specifier = "==3.15.1" },
-    { name = "djlint", marker = "extra == 'local'", specifier = "==1.35.4" },
+    { name = "djlint", marker = "extra == 'local'", specifier = "==1.36" },
     { name = "docutils", specifier = "==0.21.2" },
     { name = "drf-spectacular", specifier = "==0.27.2" },
     { name = "drf-standardized-errors", extras = ["openapi"], specifier = "==0.14.1" },
@@ -108,7 +108,7 @@ requires-dist = [
     { name = "pytest-django", marker = "extra == 'local'", specifier = "==4.9" },
     { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==5.2" },
     { name = "ruff", marker = "extra == 'local'", specifier = "==0.7.2" },
-    { name = "sentry-sdk", extras = ["django"], specifier = "==2.18.0" },
+    { name = "sentry-sdk", extras = ["django"], specifier = "==2.18" },
     { name = "socnet-rs", directory = "socnet_rs" },
     { name = "types-pillow", marker = "extra == 'local'", specifier = "==10.2.0.20240822" },
     { name = "typing-extensions", marker = "extra == 'local'", specifier = "==4.12.2" },
@@ -552,29 +552,26 @@ wheels = [
 
 [[package]]
 name = "djlint"
-version = "1.35.4"
+version = "1.36.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
     { name = "colorama" },
     { name = "cssbeautifier" },
-    { name = "html-tag-names" },
-    { name = "html-void-elements" },
     { name = "jsbeautifier" },
     { name = "json5" },
     { name = "pathspec" },
     { name = "pyyaml" },
     { name = "regex" },
     { name = "tqdm" },
-    { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/87/4b/78205d41de135f8c36515f8b015a2e923492926576fe7ca76abb3aee8027/djlint-1.35.4.tar.gz", hash = "sha256:d4a1342d83e65171059925b87ab351a1d5201289a764f9e092ef7a99e312554e", size = 46417 }
+sdist = { url = "https://files.pythonhosted.org/packages/b1/60/45f31c057ed7957aa28fadca9e9575c89273c785de774b6a8cae3d1cc4b5/djlint-1.36.0.tar.gz", hash = "sha256:c6a16905d69d02bfd745084a3ebf065707efbaf0a31762b34441802beb206b51", size = 47608 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/15/94/f06d8215b3a6a5c25b5e63c798751d8b238e8d4f6fd73c241d8c112844d3/djlint-1.35.4-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:c5dddbf2d5cb2bbbf4ef53c6e7c0042e41ff3e7097eed3f1ce53a8e4c2cb7eec", size = 342237 },
-    { url = "https://files.pythonhosted.org/packages/3c/a6/a62a349c851c16ec848d626bdd478e9e23d3ed52544747abb46a2dd3617e/djlint-1.35.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:65ebe3f4dcee2944d101e3ccadc71cab13a4c59cebd428bb5ba59609d365c232", size = 311364 },
-    { url = "https://files.pythonhosted.org/packages/27/4b/47f98ef87738b40e662d584352dffa60146c6071446e986fd20c223b9b2d/djlint-1.35.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b457e672fca03eefdfcf6e4c1dd4bfc2c324e8b0755e5def2d94c9273eb6edc7", size = 398225 },
-    { url = "https://files.pythonhosted.org/packages/5b/b7/f69c10f4d89f356289887622bccf915c2f5756f73fe32e112fa8d2185950/djlint-1.35.4-cp312-cp312-win_amd64.whl", hash = "sha256:6982bebd9e2587bc503d6bd0fdea492fd70ebac79aad7cbecd0d67dfebe1de4e", size = 348959 },
-    { url = "https://files.pythonhosted.org/packages/0c/3f/7937f331265c44acf89ebe9c61ba490ca70df0b463e9490ce44910b2fe73/djlint-1.35.4-py3-none-any.whl", hash = "sha256:ed6088d416019e453c1451463ed44ffbf3f84c3bd8b1dfeadc456103fd1e5d14", size = 50603 },
+    { url = "https://files.pythonhosted.org/packages/5d/5f/6d10b286ebb572d35017e5e1f6066b021341bf63348f0386729e6b36222e/djlint-1.36.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:f60d6a50a6f9a78d0ffaedf2921aa181f88342d51b330c63309109af5845dccf", size = 353346 },
+    { url = "https://files.pythonhosted.org/packages/80/34/794336baa079ffb9f165965951e0cb2811737cb6f8024b955f9e724209ec/djlint-1.36.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:a85d79b5fcb7c829e3466e106f5851a8cff0b363ab42aa79e7efb8b1aa68894d", size = 321949 },
+    { url = "https://files.pythonhosted.org/packages/1e/98/49b4f9e16c949352939707ff05fc5fed83bc0d68c3f716d186a8401539e5/djlint-1.36.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:dcff6d3013ba55a26604abb0ce63b185de192b250c7220242e373d5fb6fa3700", size = 408034 },
+    { url = "https://files.pythonhosted.org/packages/a8/7a/1dd84b5fc59ccae0829617b0f521f1bf900215c1aeff3a89180230293e34/djlint-1.36.0-cp312-cp312-win_amd64.whl", hash = "sha256:8fd87e4ca1a1d5595e9fb8566b4eb5df025836d3dedec5fe6d8579a1dcbce8c2", size = 360787 },
+    { url = "https://files.pythonhosted.org/packages/c2/6b/64c23a4110814bec324ab9a1a15465e1ddbd7e0f3cc3004fbe1707dffd12/djlint-1.36.0-py3-none-any.whl", hash = "sha256:dc10fe009b8d6dfafa800b326e8e3cfff6267d7040a485ff635f2ff09e200a44", size = 52067 },
 ]
 
 [[package]]
@@ -707,24 +704,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/56/4f/5f36865f9f032caf00d603ff9cbde21506d2b1e0e0ce0b5d2ce2851411c9/hiredis-3.0.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:034925b5fb514f7b11aac38cd55b3fd7e9d3af23bd6497f3f20aa5b8ba58e232", size = 163968 },
     { url = "https://files.pythonhosted.org/packages/d3/ee/c38693bd1dbce34806ecc3536dc425e87e420030de7018194865511860c2/hiredis-3.0.0-cp312-cp312-win32.whl", hash = "sha256:120f2dda469b28d12ccff7c2230225162e174657b49cf4cd119db525414ae281", size = 20189 },
     { url = "https://files.pythonhosted.org/packages/4e/67/f50b45071bb8652fa9a28a84ee470a02042fb7a096a16f3c08842f2a5c2b/hiredis-3.0.0-cp312-cp312-win_amd64.whl", hash = "sha256:e584fe5f4e6681d8762982be055f1534e0170f6308a7a90f58d737bab12ff6a8", size = 21971 },
-]
-
-[[package]]
-name = "html-tag-names"
-version = "0.1.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/41/7c/8c0dc3c5650036127fb4629d31cadf6cbdd57e21a77f9793fa8b2c8a3241/html-tag-names-0.1.2.tar.gz", hash = "sha256:04924aca48770f36b5a41c27e4d917062507be05118acb0ba869c97389084297", size = 15173 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/9a/e4/242318dcaa06d8525ff72332fc15cea2cffb84c06cfc73c7da6c6b45801a/html_tag_names-0.1.2-py3-none-any.whl", hash = "sha256:eeb69ef21078486b615241f0393a72b41352c5219ee648e7c61f5632d26f0420", size = 15218 },
-]
-
-[[package]]
-name = "html-void-elements"
-version = "0.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/80/5c/5f17d77256bf78ca98647517fadee50575e75d812daa01352c31d89d5bf2/html-void-elements-0.1.0.tar.gz", hash = "sha256:931b88f84cd606fee0b582c28fcd00e41d7149421fb673e1e1abd2f0c4f231f0", size = 14766 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/f5/0a/373f28a1cf37f8c9aa23c82cbcac7197ddea95c88b5a3eaa564cdb8de375/html_void_elements-0.1.0-py3-none-any.whl", hash = "sha256:784cf39db03cdeb017320d9301009f8f3480f9d7b254d0974272e80e0cb5e0d2", size = 14889 },
 ]
 
 [[package]]
