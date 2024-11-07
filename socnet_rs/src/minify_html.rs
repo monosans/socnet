@@ -11,8 +11,8 @@ const CFG: ::minify_html::Cfg = ::minify_html::Cfg {
     keep_ssi_comments: false,
     preserve_brace_template_syntax: false,
     preserve_chevron_percent_template_syntax: false,
-    minify_css: true,
-    minify_js: true,
+    minify_css: false,
+    minify_js: false,
     remove_bangs: false,
     remove_processing_instructions: false,
 };
