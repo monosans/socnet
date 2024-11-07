@@ -31,7 +31,7 @@ if TYPE_CHECKING:
         sender: str
 
 
-logger = logging.getLogger("socnet.messenger")
+_logger = logging.getLogger(__name__)
 
 
 @database_sync_to_async
@@ -76,7 +76,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         try:
             await save_obj(message)
         except ValidationError:
-            logger.exception("")
+            _logger.exception("")
             return
         msg: ChatMessageEvent = {
             "type": "chat_message",
