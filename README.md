@@ -58,9 +58,9 @@ docker compose run --rm django python3 manage.py createsuperuser
 docker compose run --rm django python3 manage.py compilemessages --locale en --locale ru
 
 # Run without debugpy
-docker compose up
+docker compose up --remove-orphans
 # Or run with debugpy
-docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.debugpy.yml up
+docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.debugpy.yml up --remove-orphans
 ```
 
 ### Production
@@ -77,7 +77,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django 
 # Create a superuser if you want
 docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py createsuperuser
 # Run
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --remove-orphans
 ```
 
 ## Tech Stack
