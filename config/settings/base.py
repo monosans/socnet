@@ -2,22 +2,19 @@
 from __future__ import annotations
 
 import logging
-from pathlib import Path
 
-current_file = Path(__file__).resolve(strict=True)
-
-# Set up logging only if it has not already been set up by uvicorn or gunicorn
+# Set up logging only if it has not already been set up by granian
 if not logging.root.handlers:
-    import json
     import logging.config
 
-    logging.config.dictConfig(
-        json.loads(current_file.with_name("logging.json").read_bytes())
-    )
+    from .logging import LOGGING as _LOGGING
 
+    logging.config.dictConfig(_LOGGING)
 
+from pathlib import Path
 from typing import TYPE_CHECKING
 
+import django_stubs_ext as _django_stubs_ext
 import environ
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _
@@ -25,7 +22,9 @@ from django.utils.translation import gettext_lazy as _
 if TYPE_CHECKING:
     from typing import Any
 
-BASE_DIR = current_file.parents[2]
+_django_stubs_ext.monkeypatch(include_builtins=False)
+
+BASE_DIR = Path().resolve(strict=True)
 
 env = environ.Env()
 env.smart_cast = False
