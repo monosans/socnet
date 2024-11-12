@@ -60,7 +60,7 @@ docker compose run --rm django python3 manage.py compilemessages --locale en --l
 # Run without debugpy
 docker compose up --remove-orphans
 # Or run with debugpy
-docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.debugpy.yml up --remove-orphans
+docker compose -f compose.yaml -f compose.override.yaml -f compose.debug.yaml up --remove-orphans
 ```
 
 ### Production
@@ -69,15 +69,15 @@ To run this in production, you need to specify the production settings in `.env`
 
 ```bash
 # Pull service images
-docker compose -f docker-compose.yml -f docker-compose.prod.yml pull --ignore-buildable
+docker compose -f compose.yaml -f compose.prod.yaml pull --ignore-buildable
 # Build services
-docker compose -f docker-compose.yml -f docker-compose.prod.yml build --pull
+docker compose -f compose.yaml -f compose.prod.yaml build --pull
 # Run DB migrations
-docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py migrate
+docker compose -f compose.yaml -f compose.prod.yaml run --rm django python3 manage.py migrate
 # Create a superuser if you want
-docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm django python3 manage.py createsuperuser
+docker compose -f compose.yaml -f compose.prod.yaml run --rm django python3 manage.py createsuperuser
 # Run
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --remove-orphans
+docker compose -f compose.yaml -f compose.prod.yaml up -d --remove-orphans
 ```
 
 ## Tech Stack

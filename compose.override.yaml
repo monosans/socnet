@@ -20,6 +20,8 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
       target: node-watch-stage
+    logging:
+      driver: local
     networks:
       - esbuild
     volumes:
