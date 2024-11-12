@@ -8,7 +8,7 @@
   },
   "formatters": {
     "default": {
-      "format": "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+      "format": "%(asctime)s | %(levelname)-8s | %(name)s: %(message)s"
     }
   },
   "handlers": {
@@ -24,7 +24,10 @@
       "reporter_class": "django.views.debug.ExceptionReporter"
     }
   },
-  "root": { "level": "INFO", "handlers": ["console", "mail_admins"] },
+  "root": {
+    "level": "INFO",
+    "handlers": ["console", "mail_admins"]
+  },
   "loggers": {
     "gunicorn.access": {
       "level": "INFO",
