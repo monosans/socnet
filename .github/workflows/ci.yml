@@ -45,15 +45,15 @@ jobs:
         with:
           persist-credentials: false
       - run: cp .env.example .env
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml pull --ignore-buildable
+      - run: docker compose -f compose.yaml -f compose.ci.yaml pull --ignore-buildable
       - id: build
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml build --pull django
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django python3 manage.py migrate
-      - run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django pytest --cov
+        run: docker compose -f compose.yaml -f compose.ci.yaml build --pull django
+      - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django python3 manage.py migrate
+      - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django pytest --cov
       - if: ${{ !cancelled() && steps.build.conclusion == 'success' }}
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm django mypy .
+        run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django mypy .
       - if: ${{ always() && steps.build.conclusion == 'success' }}
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml down --remove-orphans
+        run: docker compose -f compose.yaml -f compose.ci.yaml down --remove-orphans
   run-rustfmt:
     runs-on: ubuntu-latest
     steps:
