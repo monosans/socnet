@@ -24,7 +24,7 @@ dependencies = [
   "socnet-rs",
   "uvicorn==0.32",
   "uvloop==0.21; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
-  "websockets==14.0",
+  "websockets==14.1",
 ]
 optional-dependencies.local = [
   "covdefaults==2.3",
