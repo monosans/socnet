@@ -288,20 +288,20 @@ wheels = [
 
 [[package]]
 name = "coverage"
-version = "7.6.4"
+version = "7.6.5"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/52/12/3669b6382792783e92046730ad3327f53b2726f0603f4c311c4da4824222/coverage-7.6.4.tar.gz", hash = "sha256:29fc0f17b1d3fea332f8001d4558f8214af7f1d87a345f3a133c901d60347c73", size = 798716 }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/45/817562b52dc4270a9600d2cf7b6d85aa26ea4b7edf9fe10c6147b8ab59c8/coverage-7.6.5.tar.gz", hash = "sha256:6069188329fbe0a63876719099076261ce7a1adeea95bf236cff4353a8451b0d", size = 799549 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7d/e7/9291de916d084f41adddfd4b82246e68d61d6a75747f075f7e64628998d2/coverage-7.6.4-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:12394842a3a8affa3ba62b0d4ab7e9e210c5e366fbac3e8b2a68636fb19892c2", size = 207013 },
-    { url = "https://files.pythonhosted.org/packages/27/03/932c2c5717a7fa80cd43c6a07d3177076d97b79f12f40f882f9916db0063/coverage-7.6.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:2b6b4c83d8e8ea79f27ab80778c19bc037759aea298da4b56621f4474ffeb117", size = 207251 },
-    { url = "https://files.pythonhosted.org/packages/d5/3f/0af47dcb9327f65a45455fbca846fe96eb57c153af46c4754a3ba678938a/coverage-7.6.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1d5b8007f81b88696d06f7df0cb9af0d3b835fe0c8dbf489bad70b45f0e45613", size = 240268 },
-    { url = "https://files.pythonhosted.org/packages/8a/3c/37a9d81bbd4b23bc7d46ca820e16174c613579c66342faa390a271d2e18b/coverage-7.6.4-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b57b768feb866f44eeed9f46975f3d6406380275c5ddfe22f531a2bf187eda27", size = 237298 },
-    { url = "https://files.pythonhosted.org/packages/c0/70/6b0627e5bd68204ee580126ed3513140b2298995c1233bd67404b4e44d0e/coverage-7.6.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5915fcdec0e54ee229926868e9b08586376cae1f5faa9bbaf8faf3561b393d52", size = 239367 },
-    { url = "https://files.pythonhosted.org/packages/3c/eb/634d7dfab24ac3b790bebaf9da0f4a5352cbc125ce6a9d5c6cf4c6cae3c7/coverage-7.6.4-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:0b58c672d14f16ed92a48db984612f5ce3836ae7d72cdd161001cc54512571f2", size = 238853 },
-    { url = "https://files.pythonhosted.org/packages/d9/0d/8e3ed00f1266ef7472a4e33458f42e39492e01a64281084fb3043553d3f1/coverage-7.6.4-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:2fdef0d83a2d08d69b1f2210a93c416d54e14d9eb398f6ab2f0a209433db19e1", size = 237160 },
-    { url = "https://files.pythonhosted.org/packages/ce/9c/4337f468ef0ab7a2e0887a9c9da0e58e2eada6fc6cbee637a4acd5dfd8a9/coverage-7.6.4-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:8cf717ee42012be8c0cb205dbbf18ffa9003c4cbf4ad078db47b95e10748eec5", size = 238824 },
-    { url = "https://files.pythonhosted.org/packages/5e/09/3e94912b8dd37251377bb02727a33a67ee96b84bbbe092f132b401ca5dd9/coverage-7.6.4-cp312-cp312-win32.whl", hash = "sha256:7bb92c539a624cf86296dd0c68cd5cc286c9eef2d0c3b8b192b604ce9de20a17", size = 209639 },
-    { url = "https://files.pythonhosted.org/packages/01/69/d4f3a4101171f32bc5b3caec8ff94c2c60f700107a6aaef7244b2c166793/coverage-7.6.4-cp312-cp312-win_amd64.whl", hash = "sha256:1032e178b76a4e2b5b32e19d0fd0abbce4b58e77a1ca695820d10e491fa32b08", size = 210428 },
+    { url = "https://files.pythonhosted.org/packages/99/aa/8ee864841222c55b28fd2fbf2ac6c738bac010ac59bfdde581148093b226/coverage-7.6.5-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:9ae01c434cb0d445008257bb42dcd38112190e5bfc3a4480fde49572b16bc2ae", size = 207180 },
+    { url = "https://files.pythonhosted.org/packages/95/3c/32d967cffd098f855d25acca024a8dc9ffe84802e20c90a984fa65e21a9a/coverage-7.6.5-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:c72ef3be899f389c9f0934a9d06a28fa097ade096760102c732583c04cc31d75", size = 207426 },
+    { url = "https://files.pythonhosted.org/packages/c1/82/0fb1fc8986706cc9cfcba018d734f4d26c9bb6c51c6b8fccbf362dfebbcb/coverage-7.6.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d2fc574b4fb082a0141d4df00079c4877d46cb98e8ec979cbd9a92426f5abd8a", size = 240442 },
+    { url = "https://files.pythonhosted.org/packages/cd/bb/8c77cba6dac838fc35dacde176be6e80556446b233fa5f628c2240a83c2d/coverage-7.6.5-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:1bc0eba158ad9d1883efb4f1bf08f88a999e091daf30454fd5f136322e700c72", size = 237474 },
+    { url = "https://files.pythonhosted.org/packages/fe/25/9096d4f0c21d7f01d3d0fdbe5886e5160f90cd838dea79683bb2a6371553/coverage-7.6.5-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a360b282c0acbf3541cc67e8d8a2a65589ea6cfa10c7e8a48e318bf28ca90f94", size = 239546 },
+    { url = "https://files.pythonhosted.org/packages/99/fd/11621d9daef245911dd8ba3f10e59adbd05b2c1a5431326a3b2fb91687bf/coverage-7.6.5-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:b22f96d3f2425942a649d786f57ae431425c9a970afae784cd865c1ffee34bad", size = 239029 },
+    { url = "https://files.pythonhosted.org/packages/aa/c4/31cca7fdc785cc1374e8675d1ccfb83c7a8d32ce9229c77e61b314bdc475/coverage-7.6.5-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:70eca9c6bf742feaf3ee453c1aaa932c2ab88ca420f411d90aa43ae831127b22", size = 237334 },
+    { url = "https://files.pythonhosted.org/packages/88/57/2ef0eb3acad84e1987a6e98028717fd83c869f980b35ead4db31a7e00baf/coverage-7.6.5-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:2c4bafec5da3498d498a4ca3136f5a01fded487c6a54f18aea0bcd673feedf1b", size = 238997 },
+    { url = "https://files.pythonhosted.org/packages/a6/d5/0e873a65270145e0bd417e0e06ddc7a0821b95626cd990d0d6b21ee88540/coverage-7.6.5-cp312-cp312-win32.whl", hash = "sha256:edecf498cabb335e8a683eb672558355bb9536d4397c54f1e135d9b8910512a3", size = 209818 },
+    { url = "https://files.pythonhosted.org/packages/c2/93/41d47e337daf6bb7cc51134de6da99d76aef6750442c1b31348dbd475cba/coverage-7.6.5-cp312-cp312-win_amd64.whl", hash = "sha256:e7c40ae56761d3c08f916019b2f8579a147f93be8e12f0f2bf4edc4ea9e1c0ab", size = 210602 },
 ]
 
 [[package]]
