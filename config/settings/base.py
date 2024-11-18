@@ -1,16 +1,6 @@
 # ruff: noqa: E402
 from __future__ import annotations
 
-import logging
-
-# Set up logging only if it has not already been set up by granian
-if not logging.root.handlers:
-    import logging.config
-
-    from .logging import LOGGING as _LOGGING
-
-    logging.config.dictConfig(_LOGGING)
-
 from pathlib import Path
 from typing import TYPE_CHECKING
 
