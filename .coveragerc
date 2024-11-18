@@ -12,6 +12,7 @@ omit =
   config/settings/local.py
   config/settings/production.py
   manage.py
+  run.py
 plugins =
   covdefaults
   django_coverage_plugin

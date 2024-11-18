@@ -44,6 +44,10 @@ Disallow: /"
 	}
 
 	handle {
-		reverse_proxy django:5000
+		reverse_proxy django:8000 {
+			transport http {
+				versions 1.1 2 h2c
+			}
+		}
 	}
 }

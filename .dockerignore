@@ -17,6 +17,7 @@
 !./package-lock.json
 !./package.json
 !./pyproject.toml
+!./run.py
 !./tsconfig.json
 !./uv.lock
 Dockerfile
