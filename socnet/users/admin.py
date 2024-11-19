@@ -20,7 +20,9 @@ class UserAdmin(BaseUserAdmin[User]):
     add_fieldsets[0][1]["fields"] = (
         "display_name",
         "email",
-        *add_fieldsets[0][1]["fields"],
+        "username",
+        "password1",
+        "password2",
     )
     add_form = forms.UserAdminCreationForm
     fieldsets = (
