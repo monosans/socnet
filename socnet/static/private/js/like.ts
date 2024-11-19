@@ -1,5 +1,3 @@
-import formatNumber from "./number_formatter.js";
-
 function getRequest(dataset: DOMStringMap): {
   url: string;
   options: RequestInit;
@@ -75,7 +73,6 @@ async function handler(e: Event): Promise<void> {
     btn.dataset["isLiked"] = "y";
     span.dataset["unformattedNumber"] = (unformattedNumber + 1).toString();
   }
-  formatNumber(span);
 
   const iconClassList = btn.querySelector("i")!.classList;
   iconClassList.toggle("text-danger");

@@ -1,5 +1,3 @@
-import formatDates from "./date_formatter.js";
-
 function randomNumber(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
@@ -44,7 +42,7 @@ const chatLog = {
   element: document.querySelector("#chat-log")!,
 
   // eslint-disable-next-line sort-keys
-  async addNewMessage(data: ChatMessageEvent): Promise<void> {
+  addNewMessage(data: ChatMessageEvent): void {
     const id = `msg${data.pk}`;
     const sender = getSender(data);
     const html = `
@@ -71,17 +69,6 @@ const chatLog = {
       </div>
     `;
     this.element.insertAdjacentHTML("beforeend", html);
-
-    const messageElement = document.querySelector<HTMLElement>(`#${id}`)!;
-    await Promise.all([
-      formatDates(messageElement),
-      import("https://cdn.jsdelivr.net/npm/viewerjs@1/+esm").then(
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        ({ default: Viewer }) => {
-          new Viewer(messageElement, { button: false });
-        },
-      ),
-    ]);
   },
 
   scrollToEnd(): void {
@@ -98,7 +85,7 @@ const chatWs = ((): WebSocket => {
   ws.addEventListener("message", (e: MessageEvent<string>) => {
     const data = JSON.parse(e.data) as ChatMessageEvent;
 
-    void chatLog.addNewMessage(data);
+    chatLog.addNewMessage(data);
     if (getSender(data).isCurrentUser) {
       chatLog.scrollToEnd();
     }

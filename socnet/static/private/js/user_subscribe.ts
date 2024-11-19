@@ -1,5 +1,3 @@
-import formatNumber from "./number_formatter.js";
-
 function getRequest(dataset: DOMStringMap): {
   url: string;
   options: RequestInit;
@@ -64,7 +62,6 @@ async function handler(e: Event): Promise<void> {
     subscribersCount.dataset["unformattedNumber"] = (
       unformattedNumber + (isSubscribe ? 1 : -1)
     ).toString();
-    formatNumber(subscribersCount);
   }
 
   btn.classList.toggle("btn-primary");

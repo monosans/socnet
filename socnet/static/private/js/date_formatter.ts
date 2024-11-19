@@ -1,8 +1,6 @@
 const options = { locale: document.documentElement.lang };
 
-export default async function formatDates(
-  parentNode: ParentNode,
-): Promise<void> {
+async function formatDates(parentNode: ParentNode): Promise<void> {
   const elements = parentNode.querySelectorAll<HTMLElement>("[data-epoch]");
 
   if (elements.length) {
@@ -28,6 +26,24 @@ export default async function formatDates(
 }
 
 void (async function formatAllDates(): Promise<void> {
-  await formatDates(document);
+  await formatDates(document.body);
   setTimeout(formatAllDates, 1000);
 })();
+
+new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    if (mutation.type === "childList") {
+      void (async (): Promise<void> => {
+        for (const node of mutation.addedNodes) {
+          if (node instanceof Element) {
+            // eslint-disable-next-line no-await-in-loop
+            await formatDates(node);
+          }
+        }
+      })();
+    }
+  }
+}).observe(document.body, {
+  childList: true,
+  subtree: true,
+});
