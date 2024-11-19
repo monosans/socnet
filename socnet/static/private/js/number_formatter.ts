@@ -19,10 +19,7 @@ for (const el of document.body.querySelectorAll<HTMLElement>(
 new MutationObserver((mutations) => {
   for (const mutation of mutations) {
     if (mutation.type === "attributes") {
-      if (
-        mutation.attributeName === "data-unformatted-number" &&
-        mutation.target instanceof HTMLElement
-      ) {
+      if (mutation.target instanceof HTMLElement) {
         formatNumber(mutation.target);
       }
     } else if (mutation.type === "childList") {
