@@ -33,6 +33,7 @@ export default tseslint.config(
       ],
       "@typescript-eslint/no-magic-numbers": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-unsafe-type-assertion": "off",
       "@typescript-eslint/parameter-properties": [
         "error",
         { prefer: "parameter-property" },
