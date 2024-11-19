@@ -21,7 +21,7 @@ if __name__ == "__main__":
         target="config.asgi:application",
         address="0.0.0.0",  # noqa: S104
         port=8000,
-        interface=granian.constants.Interfaces.ASGI,
+        interface=granian.constants.Interfaces.ASGINL,
         workers=(os.cpu_count() or 1) if args.prod else 1,
         log_dictconfig=LOGGING,
         log_access=True,
