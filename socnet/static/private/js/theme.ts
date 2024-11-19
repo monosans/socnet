@@ -1,22 +1,19 @@
 const themeSwitcher = document.querySelector("#themeSwitcher")!;
 const currentThemeIcon = document.querySelector("#currentThemeIcon")!;
 
-function getTheme(): "auto" | "dark" | "light" {
+function getStoredOrDefaultTheme(): "dark" | "light" {
   const storedTheme = localStorage.getItem("theme");
-  return storedTheme === "light" || storedTheme === "dark"
-    ? storedTheme
-    : "auto";
-}
-
-function getAutoTheme(): "dark" | "light" {
+  if (storedTheme === "dark" || storedTheme === "light") {
+    return storedTheme;
+  }
   return globalThis.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 }
 
-function setTheme(theme: string): void {
-  document.documentElement.dataset["bsTheme"] =
-    theme === "auto" ? getAutoTheme() : theme;
+function setTheme(): void {
+  const theme = getStoredOrDefaultTheme();
+  document.documentElement.dataset["bsTheme"] = theme;
 
   const activeDropdown = themeSwitcher.querySelector(".dropdown-item.active")!;
   const activeDropdownIcon = activeDropdown.querySelector("i")!;
@@ -34,17 +31,26 @@ function setTheme(theme: string): void {
   dropdownToActivateIcon.classList.remove("text-primary");
 }
 
-setTheme(getTheme());
+setTheme();
+
 globalThis
   .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", () => setTheme(getTheme()));
+  .addEventListener("change", setTheme);
 
-function toggleHandler(e: Event): void {
-  const theme = (e.currentTarget! as HTMLElement).dataset["bsThemeValue"]!;
+globalThis.addEventListener("storage", (e) => {
+  if (e.key === "theme") {
+    setTheme();
+  }
+});
+
+document.body.addEventListener("click", (e) => {
+  const btn = (e.target as Element).closest<HTMLElement>(
+    "[data-bs-theme-value]",
+  );
+  if (!btn) {
+    return;
+  }
+  const theme = btn.dataset["bsThemeValue"]!;
   localStorage.setItem("theme", theme);
-  setTheme(theme);
-}
-
-for (const toggle of themeSwitcher.querySelectorAll("[data-bs-theme-value]")) {
-  toggle.addEventListener("click", toggleHandler);
-}
+  setTheme();
+});
