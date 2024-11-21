@@ -16,7 +16,8 @@ if __name__ == "__main__":
     parser.add_argument("--prod", action="store_true")
     args = parser.parse_args()
 
-    granian.log.log_levels_map[granian.log.LogLevels.info] = logging.NOTSET
+    for log_level in granian.log.LogLevels:
+        granian.log.log_levels_map[log_level] = logging.NOTSET
     Granian(
         target="config.asgi:application",
         address="0.0.0.0",  # noqa: S104
