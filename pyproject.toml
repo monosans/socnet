@@ -21,7 +21,7 @@ dependencies = [
   "granian==1.6.3",
   "pillow==11",
   "psycopg[pool]==3.2.3",
-  "sentry-sdk[django]==2.18",
+  "sentry-sdk[django]==2.19.0",
   "socnet-rs",
 ]
 optional-dependencies.local = [
