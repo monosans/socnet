@@ -41,6 +41,12 @@
     {
       "matchManagers": ["pre-commit"],
       "automerge": true
+    },
+    {
+      "matchCategories": ["docker"],
+      "matchDepNames": ["docker.io/python"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": false
     }
   ],
   "prConcurrentLimit": 0,
