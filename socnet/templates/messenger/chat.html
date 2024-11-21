@@ -1,6 +1,6 @@
 {% extends "list_group.html" %}
 
-{% load i18n static django_bootstrap5 markdownify %}
+{% load django_bootstrap5 i18n markdownify static %}
 
 {% block title %}
   {% blocktranslate with display_name=interlocutor.display_name username=interlocutor.username %}Chat with {{ display_name }} ({{ username }}){% endblocktranslate %}

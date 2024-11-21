@@ -1,6 +1,6 @@
 {% extends "list_group.html" %}
 
-{% load i18n static django_bootstrap5 %}
+{% load django_bootstrap5 i18n static %}
 
 {% block title %}
   {% blocktranslate with post_pk=post.pk %}Post #{{ post_pk }}{% endblocktranslate %}
