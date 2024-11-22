@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/markdown_container.css' %}" />
   {% include "inc/viewerjs_css.html" %}
 {% endblock css %}
-{% block javascript %}
+{% block js %}
   <script type="module" src="{% static 'js/chat.js' %}"></script>
   <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
   <script type="module" src="{% static 'js/autosize.js' %}"></script>
@@ -39,7 +39,7 @@
       }
     }
   </script>
-{% endblock javascript %}
+{% endblock js %}
 {% block list_group %}
   <a href="{{ interlocutor.get_absolute_url }}"
      class="list-group-item list-group-item-action">

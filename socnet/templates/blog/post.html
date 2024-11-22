@@ -8,12 +8,12 @@
 {% block css %}
   {% include "blog/inc/post_css.html" %}
 {% endblock css %}
-{% block javascript %}
+{% block js %}
   {% if post.allow_commenting or request.user == post.author %}
     <script type="module" src="{% static 'js/autosize.js' %}"></script>
   {% endif %}
   {% include "blog/inc/post_js.html" %}
-{% endblock javascript %}
+{% endblock js %}
 {% block list_group %}
   <div class="list-group-item">{% include "blog/inc/post_body.html" %}</div>
   <div class="list-group-item"

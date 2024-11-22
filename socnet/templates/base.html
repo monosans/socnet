@@ -33,8 +33,8 @@
             referrerpolicy="no-referrer"></script>
     {% django_htmx_script %}
     <script type="module" src="{% static 'js/theme.js' %}"></script>
-    {% block javascript %}
-    {% endblock javascript %}
+    {% block js %}
+    {% endblock js %}
   </head>
   <body hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
     <div class="mb-3 sticky-top">

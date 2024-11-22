@@ -5,9 +5,9 @@
 {% block title %}
   {% blocktranslate with post_pk=object.pk context "noun" %}Edit post #{{ post_pk }}{% endblocktranslate %}
 {% endblock title %}
-{% block javascript %}
+{% block js %}
   <script type="module" src="{% static 'js/autosize.js' %}"></script>
-{% endblock javascript %}
+{% endblock js %}
 {% block card %}
   <h3 class="mb-3 text-center">
     {% blocktranslate trimmed with post_url=post.get_absolute_url post_pk=object.pk context "noun" %}

@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
   {% endif %}
 {% endblock css %}
-{% block javascript %}
+{% block js %}
   {% if subscriptions and user == request.user %}
     <script type="module" src="{% static 'js/user_subscribe.js' %}"></script>
   {% endif %}
-{% endblock javascript %}
+{% endblock js %}
 {% block list_group %}
   {% if subscriptions %}
     {% csrf_token %}

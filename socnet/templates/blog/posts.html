@@ -10,12 +10,12 @@
     {% include "blog/inc/post_css.html" %}
   {% endif %}
 {% endblock css %}
-{% block javascript %}
+{% block js %}
   {% if posts %}
     {% include "blog/inc/post_js.html" %}
   {% endif %}
   <script type="module" src="{% static 'js/autosize.js' %}"></script>
-{% endblock javascript %}
+{% endblock js %}
 {% block col %}
   <form method="get">
     {% bootstrap_form_errors form %}

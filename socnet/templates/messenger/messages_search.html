@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
   {% endif %}
 {% endblock css %}
-{% block javascript %}
+{% block js %}
   {% if messages_ %}
     <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
   {% endif %}
   <script type="module" src="{% static 'js/autosize.js' %}"></script>
-{% endblock javascript %}
+{% endblock js %}
 {% block list_group %}
   <form class="list-group-item p-0">
     <div class="input-group">

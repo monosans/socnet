@@ -11,7 +11,7 @@
     {% include "inc/viewerjs_css.html" %}
   {% endif %}
 {% endblock css %}
-{% block javascript %}
+{% block js %}
   <script type="module" src="{% static 'js/number_formatter.js' %}"></script>
   <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
   {% if request.user.is_authenticated and user != request.user %}
@@ -20,7 +20,7 @@
   {% if user.image %}
     <script type="module" src="{% static 'js/viewer_avatar.js' %}"></script>
   {% endif %}
-{% endblock javascript %}
+{% endblock js %}
 {% block content %}
   <div class="row">
     <div class="col-12 col-xl-3 mb-2 mb-xl-0">
