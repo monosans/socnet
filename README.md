@@ -129,7 +129,8 @@ Markdown parsing, HTML minification and sanitization, and a few other things are
 ### Web servers
 
 - Caddy
-- granian
+- gunicorn
+- uvicorn
 
 ### Testing
 

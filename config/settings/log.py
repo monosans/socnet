@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-LOGGING = {
+LOG_CONFIG = {
     "version": 1,
     "disable_existing_loggers": False,
     "filters": {"require_admins": {"()": "socnet.core.log.RequireAdmins"}},
     "formatters": {
         "default": {
             "format": "%(asctime)s | %(levelname)-8s | %(name)s: %(message)s"
-        }
+        },
+        "access": {},
     },
     "handlers": {
         "console": {
@@ -23,5 +24,14 @@ LOGGING = {
         },
     },
     "root": {"level": "INFO", "handlers": ["console", "mail_admins"]},
-    "loggers": {"_granian": {}},
+    "loggers": {
+        "gunicorn.access": {
+            "level": "INFO",
+            "handlers": ["console", "mail_admins"],
+        },
+        "gunicorn.error": {
+            "level": "INFO",
+            "handlers": ["console", "mail_admins"],
+        },
+    },
 }

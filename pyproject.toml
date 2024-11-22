@@ -18,11 +18,14 @@ dependencies = [
   "docutils==0.21.2",
   "drf-spectacular==0.27.2",
   "drf-standardized-errors[openapi]==0.14.1",
-  "granian==1.6.3",
+  "httptools==0.6.4",
   "pillow==11",
   "psycopg[pool]==3.2.3",
   "sentry-sdk[django]==2.19.0",
   "socnet-rs",
+  "uvicorn==0.32.1",
+  "uvloop==0.21; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
+  "websockets==14.1",
 ]
 optional-dependencies.local = [
   "covdefaults==2.3",
@@ -34,7 +37,6 @@ optional-dependencies.local = [
   "djangorestframework-stubs==3.15.1",
   "djlint==1.36.1",
   "factory-boy==3.3.1",
-  "granian[reload]==1.6.3",
   "mypy[faster-cache]==1.13",
   "psycopg[binary]==3.2.3",
   "pytest==8.3.3",
@@ -43,8 +45,14 @@ optional-dependencies.local = [
   "ruff==0.7.4",
   "types-pillow==10.2.0.20240822",
   "typing-extensions==4.12.2",
+  "watchfiles==0.24",
 ]
-optional-dependencies.production = ["psycopg[c]==3.2.3", "redis[hiredis]==5.2"]
+optional-dependencies.production = [
+  "gunicorn==23",
+  "psycopg[c]==3.2.3",
+  "redis[hiredis]==5.2",
+  "uvicorn-worker==0.2",
+]
 
 [tool.uv]
 package = false

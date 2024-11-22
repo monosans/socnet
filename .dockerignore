@@ -13,11 +13,11 @@
 !./socnet_rs/Cargo.lock
 !./socnet_rs/pyproject.toml
 !./socnet_rs/socnet_rs.pyi
+!./dev_serve.py
 !./manage.py
 !./package-lock.json
 !./package.json
 !./pyproject.toml
-!./run.py
 !./tsconfig.json
 !./uv.lock
 Dockerfile
