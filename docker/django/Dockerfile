@@ -67,12 +67,7 @@ RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
   uv sync --extra="${EXTRA}" --no-dev --no-install-project --frozen
 
 
-FROM python-base-stage AS python-base-run-stage
-
-ENV READ_ENV_EXAMPLE=False
-
-
-FROM python-base-run-stage AS python-ci-run-stage
+FROM python-base-stage AS python-ci-run-stage
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
@@ -90,7 +85,7 @@ ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
 CMD ["bash", "/app/docker/django/start.sh"]
 
 
-FROM python-base-run-stage AS python-local-run-stage
+FROM python-base-stage AS python-local-run-stage
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
@@ -112,7 +107,7 @@ ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
 CMD ["bash", "/app/docker/django/start.sh"]
 
 
-FROM python-base-run-stage AS python-production-run-stage
+FROM python-base-stage AS python-production-run-stage
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.production
 

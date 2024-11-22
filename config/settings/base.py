@@ -11,6 +11,7 @@ if not logging.root.handlers:
     logging.config.dictConfig(_LOG_CONFIG)
     logging.getLogger(__name__).warning("Configured logging")
 
+import os
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -30,8 +31,9 @@ env = environ.Env()
 env.smart_cast = False
 
 # Needed for running mypy outside of docker
-if env.bool("READ_ENV_EXAMPLE", default=True):  # pragma: no cover
+if "DJANGO_SECRET_KEY" not in os.environ:  # pragma: no cover
     env.read_env(str(BASE_DIR / ".env.example"))
+    logging.getLogger(__name__).warning("Read .env.example")
 
 APPS_DIR = BASE_DIR / "socnet"
 
