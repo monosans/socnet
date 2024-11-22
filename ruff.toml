@@ -60,7 +60,7 @@ unfixable = ["RUF027", "T"]
 
 [lint.per-file-ignores]
 "config/settings/*" = ["F403", "F405"]
-"socnet/*/migrations/*" = ["RUF012", "SLF001"]
+"socnet/*/migrations/*" = ["RUF012", "RUF039", "SLF001"]
 "tests/*" = ["FBT001", "PLR2004", "S101"]
 
 [lint.flake8-gettext]
