@@ -16,17 +16,17 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods, require_POST
 from django.views.generic import CreateView, UpdateView
 
-from ..core.decorators import require_htmx, vary_on_htmx
-from ..core.utils import paginate
-from ..users.models import User
-from . import forms, models, services
+from socnet.blog import forms, models, services
+from socnet.core.decorators import require_htmx, vary_on_htmx
+from socnet.core.utils import paginate
+from socnet.users.models import User
 
 if TYPE_CHECKING:
     from typing import Any
 
     from django.db.models import QuerySet
 
-    from ..core.types import AuthedRequest, HttpRequest
+    from socnet.core.types import AuthedRequest, HttpRequest
 
 
 class _BasePostUpdateView[

@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from .users.factories import UserFactory
+from tests.users.factories import UserFactory
 
 if TYPE_CHECKING:
     from typing import Any

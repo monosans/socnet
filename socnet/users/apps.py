@@ -12,4 +12,4 @@ class UsersConfig(AppConfig):
 
     @override
     def ready(self) -> None:
-        from . import signals  # noqa: F401, PLC0415
+        from socnet.users import signals  # noqa: F401, PLC0415

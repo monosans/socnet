@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING
 from django.db.models.signals import m2m_changed
 from django.utils.translation import gettext as _
 
-from . import exceptions
-from .models import User
+from socnet.users import exceptions
+from socnet.users.models import User
 
 if TYPE_CHECKING:
     from typing import Any

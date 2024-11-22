@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING
 import pytest
 from django.urls import reverse_lazy
 
-from ...utils import auth_client, parametrize_by_auth
-from ..factories import UserFactory
+from tests.users.factories import UserFactory
+from tests.utils import auth_client, parametrize_by_auth
 
 if TYPE_CHECKING:
     from django.test import Client

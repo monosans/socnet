@@ -8,8 +8,8 @@ from allauth.account.utils import user_field
 if TYPE_CHECKING:
     from allauth.account.forms import SignupForm
 
-    from ..core.types import HttpRequest
-    from ..users.models import User
+    from socnet.core.types import HttpRequest
+    from socnet.users.models import User
 
 
 class AccountAdapter(DefaultAccountAdapter):

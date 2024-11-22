@@ -6,8 +6,8 @@ from allauth.account.decorators import secure_admin_login
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from . import forms
-from .models import User
+from socnet.users import forms
+from socnet.users.models import User
 
 # https://docs.allauth.org/en/latest/common/admin.html#admin
 admin.autodiscover()

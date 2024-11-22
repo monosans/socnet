@@ -8,9 +8,9 @@ from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 
-from ..blog import models as blog_models
-from ..messenger import models as messenger_models
-from ..users.models import User
+from socnet.blog import models as blog_models
+from socnet.messenger import models as messenger_models
+from socnet.users.models import User
 
 
 class PkSerializer(serializers.Serializer[Any]):

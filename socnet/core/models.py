@@ -4,8 +4,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext.db.models import TypedModelMeta
 
-from .fields import NullAutoNowDateTimeField
-from .querysets import TimestampedModelQuerySet
+from socnet.core.fields import NullAutoNowDateTimeField
+from socnet.core.querysets import TimestampedModelQuerySet
 
 
 class MarkdownContentModel(models.Model):

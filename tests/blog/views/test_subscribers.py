@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING
 
 from django.urls import reverse
 
-from ...users.factories import UserFactory
-from ...utils import auth_client, parametrize_by_auth
+from tests.users.factories import UserFactory
+from tests.utils import auth_client, parametrize_by_auth
 
 if TYPE_CHECKING:
     from django.test import Client

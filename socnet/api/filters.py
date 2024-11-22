@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
     from rest_framework.serializers import ModelSerializer
 
-    from .types import SerializerExclude, SerializerFields
+    from socnet.api.types import SerializerExclude, SerializerFields
 
     class HasModelSerializer(Protocol):
         serializer_class: type[ModelSerializer[Any]]

@@ -9,8 +9,7 @@ from django.db import IntegrityError
 from django.utils import timezone
 
 from socnet.users.models import User
-
-from .. import factories
+from tests.users import factories
 
 factory = factories.UserFactory
 

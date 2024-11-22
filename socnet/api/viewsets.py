@@ -13,15 +13,15 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
-from ..blog import models as blog_models
-from ..messenger import models as messenger_models
-from ..users.exceptions import SelfSubscriptionError
-from ..users.models import User
-from . import serializers
-from .filters import generate_filterset
+from socnet.api import serializers
+from socnet.api.filters import generate_filterset
+from socnet.blog import models as blog_models
+from socnet.messenger import models as messenger_models
+from socnet.users.exceptions import SelfSubscriptionError
+from socnet.users.models import User
 
 if TYPE_CHECKING:
-    from .types import AuthedRequest
+    from socnet.api.types import AuthedRequest
 
 
 class _AuthedViewSet(ViewSet):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import socket
 
-from .base import *
+from config.settings.base import *
 
 DEBUG = True
 

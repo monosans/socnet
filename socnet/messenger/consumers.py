@@ -7,10 +7,9 @@ from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.core.exceptions import ValidationError
 
+from socnet.core.utils import dt_to_epoch
+from socnet.messenger import models
 from socnet_rs import markdownify
-
-from ..core.utils import dt_to_epoch
-from . import models
 
 if TYPE_CHECKING:
     from typing import Any, Literal
@@ -21,7 +20,7 @@ if TYPE_CHECKING:
     from django.db.models import Model
     from typing_extensions import TypedDict
 
-    from ..users.models import User
+    from socnet.users.models import User
 
     class ChatMessageEvent(TypedDict):
         type: Literal["chat_message"]

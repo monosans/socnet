@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 
 from django.urls import reverse, reverse_lazy
 
-from ...utils import auth_client
+from tests.utils import auth_client
 
 if TYPE_CHECKING:
     from django.test import Client

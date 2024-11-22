@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .base import *
+from config.settings.base import *
 
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"

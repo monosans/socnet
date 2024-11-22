@@ -7,9 +7,8 @@ from django.urls import reverse, reverse_lazy
 
 from socnet.users.forms import EditProfileForm
 from socnet.users.models import User
-
-from ...utils import ClientMethods, auth_client, parametrize_by_get_post
-from ..factories import UserFactory
+from tests.users.factories import UserFactory
+from tests.utils import ClientMethods, auth_client, parametrize_by_get_post
 
 if TYPE_CHECKING:
     from typing import Any

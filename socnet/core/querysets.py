@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from django_stubs_ext import WithAnnotations
     from typing_extensions import TypedDict
 
-    from .models import TimestampedModel
+    from socnet.core.models import TimestampedModel
 
     class EpochDates(TypedDict):
         date_created_epoch: int

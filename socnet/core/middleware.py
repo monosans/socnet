@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from django.http import HttpResponse
     from django.http.response import HttpResponseBase
 
-    from ..core.types import HttpRequest
+    from socnet.core.types import HttpRequest
 
 HEADERS = (
     (

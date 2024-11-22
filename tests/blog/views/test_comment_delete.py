@@ -6,9 +6,8 @@ import pytest
 from django.urls import reverse
 
 from socnet.blog import models
-
-from ...utils import auth_client, parametrize_by_auth
-from .. import factories
+from tests.blog import factories
+from tests.utils import auth_client, parametrize_by_auth
 
 if TYPE_CHECKING:
     from django.test import Client

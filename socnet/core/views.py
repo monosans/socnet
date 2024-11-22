@@ -10,8 +10,7 @@ from django.views.generic import TemplateView
 if TYPE_CHECKING:
     from django.http import HttpResponse
 
-    from ..core.types import HttpRequest
-    from .types import AuthedRequest
+    from socnet.core.types import AuthedRequest, HttpRequest
 
 
 @login_required

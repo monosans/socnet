@@ -10,17 +10,17 @@ from django.db.models import Func, Value
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
-from ..core.decorators import vary_on_htmx
-from ..core.utils import paginate
-from . import forms
-from .models import User
+from socnet.core.decorators import vary_on_htmx
+from socnet.core.utils import paginate
+from socnet.users import forms
+from socnet.users.models import User
 
 if TYPE_CHECKING:
     from typing import Any
 
     from django.http import HttpResponse
 
-    from ..core.types import AuthedRequest, HttpRequest
+    from socnet.core.types import AuthedRequest, HttpRequest
 
 
 @login_required

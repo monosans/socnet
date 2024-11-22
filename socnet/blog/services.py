@@ -5,15 +5,15 @@ from typing import TYPE_CHECKING
 from django.db.models import Count, Prefetch, Q
 from django.shortcuts import get_object_or_404
 
-from ..users.models import User
-from . import models
+from socnet.blog import models
+from socnet.users.models import User
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
     from django.db.models import QuerySet
 
-    from ..core.types import HttpRequest
+    from socnet.core.types import HttpRequest
 
 
 def get_posts_preview_qs(

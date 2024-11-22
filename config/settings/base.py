@@ -6,7 +6,7 @@ import logging
 if not logging.root.handlers:
     import logging.config
 
-    from .log import LOG_CONFIG as _LOG_CONFIG
+    from config.settings.log import LOG_CONFIG as _LOG_CONFIG
 
     logging.config.dictConfig(_LOG_CONFIG)
     logging.getLogger(__name__).warning("Configured logging")

@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from django.core.paginator import Page
     from django.db.models import Model, QuerySet
 
-    from ..core.types import HttpRequest
+    from socnet.core.types import HttpRequest
 
 
 def dt_to_epoch(dt: datetime.date) -> int:

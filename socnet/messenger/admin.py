@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django.contrib import admin
 
-from . import models
+from socnet.messenger import models
 
 
 @admin.register(models.Message)

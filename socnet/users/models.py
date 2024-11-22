@@ -10,12 +10,12 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from ..core.fields import (
+from socnet.core.fields import (
     NormalizedCharField,
     NormalizedTextField,
     WebpImageField,
 )
-from . import validators
+from socnet.users import validators
 
 if TYPE_CHECKING:
     from datetime import date

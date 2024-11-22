@@ -8,15 +8,15 @@ from django.db.models import OuterRef, Q, Subquery
 from django.db.models.functions import Extract, Substr
 from django.shortcuts import get_object_or_404, render
 
-from ..users.models import User
-from . import forms, models
+from socnet.messenger import forms, models
+from socnet.users.models import User
 
 if TYPE_CHECKING:
     from typing import Any
 
     from django.http import HttpResponse
 
-    from ..core.types import AuthedRequest
+    from socnet.core.types import AuthedRequest
 
 
 @login_required

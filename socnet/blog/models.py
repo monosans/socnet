@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext.db.models import TypedModelMeta
 
-from ..core.models import MarkdownContentModel, TimestampedModel
+from socnet.core.models import MarkdownContentModel, TimestampedModel
 
 
 class Post(MarkdownContentModel, TimestampedModel):

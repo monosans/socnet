@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 
     from rest_framework.request import Request
 
-    from ..users.models import User
+    from socnet.users.models import User
 
     type SerializerFields = Sequence[str] | Literal["__all__"] | None
     type SerializerExclude = Sequence[str] | None

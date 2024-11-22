@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable
     from typing import Any
 
-    from .types import HttpRequest
+    from socnet.core.types import HttpRequest
 
 
 def copy_type_hints[**P, T](

@@ -5,9 +5,8 @@ from typing import TYPE_CHECKING
 from django.urls import reverse, reverse_lazy
 
 from socnet.blog import models
-
-from ...utils import ClientMethods, auth_client, parametrize_by_get_post
-from .. import factories
+from tests.blog import factories
+from tests.utils import ClientMethods, auth_client, parametrize_by_get_post
 
 if TYPE_CHECKING:
     from django.test import Client

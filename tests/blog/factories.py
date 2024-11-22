@@ -4,8 +4,7 @@ from factory import Faker, SubFactory
 from factory.django import DjangoModelFactory
 
 from socnet.blog import models
-
-from ..users.factories import UserFactory
+from tests.users.factories import UserFactory
 
 
 class PostFactory(DjangoModelFactory):

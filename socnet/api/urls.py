@@ -4,7 +4,7 @@ from django.urls import path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
-from . import viewsets
+from socnet.api import viewsets
 
 router = routers.SimpleRouter()
 for prefix, viewset, basename in (

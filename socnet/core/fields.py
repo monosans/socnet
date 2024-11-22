@@ -9,9 +9,8 @@ from django.db.models.fields.files import ImageFieldFile
 from django.utils import timezone
 from PIL import Image, ImageOps
 
+from socnet.core import decorators
 from socnet_rs import normalize_str
-
-from . import decorators
 
 if TYPE_CHECKING:
     from typing import Any

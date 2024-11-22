@@ -5,12 +5,12 @@ from typing import TYPE_CHECKING
 from django import forms
 from django.utils.translation import pgettext_lazy
 
-from . import models
+from socnet.blog import models
 
 if TYPE_CHECKING:
     from typing import ClassVar
 
-    from ..core.models import MarkdownContentModel
+    from socnet.core.models import MarkdownContentModel
 
 
 class MarkdownContentModelForm[T: MarkdownContentModel](forms.ModelForm[T]):

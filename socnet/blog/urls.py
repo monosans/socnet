@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django.urls import include, path
 
-from . import views
+from socnet.blog import views
 
 app_name = "blog"
 
