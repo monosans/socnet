@@ -1,5 +1,4 @@
 # https://docs.gunicorn.org/en/stable/settings.html
-# ruff: noqa: INP001
 from __future__ import annotations
 
 import multiprocessing
