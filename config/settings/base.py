@@ -1,6 +1,16 @@
 # ruff: noqa: E402
 from __future__ import annotations
 
+import logging
+
+if not logging.root.handlers:
+    import logging.config
+
+    from .log import LOG_CONFIG as _LOG_CONFIG
+
+    logging.config.dictConfig(_LOG_CONFIG)
+    logging.getLogger(__name__).warning("Configured logging")
+
 from pathlib import Path
 from typing import TYPE_CHECKING
 

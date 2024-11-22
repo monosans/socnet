@@ -11,9 +11,9 @@ omit =
   config/asgi.py
   config/settings/gunicorn.py
   config/settings/local.py
-  config/settings/log.py
   config/settings/production.py
-  dev_server.py
+  socnet_rs/target/**/*.txt
+  dev_serve.py
   manage.py
 plugins =
   covdefaults
