@@ -27,6 +27,6 @@
     "stylelint-config-standard": "36.0.1",
     "typescript": "5.7.2",
     "typescript-eslint": "8.15.0",
-    "viewerjs": "1.11.6"
+    "viewerjs": "1.11.7"
   }
 }
