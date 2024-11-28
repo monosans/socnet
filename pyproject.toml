@@ -35,7 +35,7 @@ optional-dependencies.local = [
   "django-extra-checks==0.15.1",
   "django-stubs==5.1.1",
   "djangorestframework-stubs==3.15.1",
-  "djlint==1.36.1",
+  "djlint==1.36.2",
   "factory-boy==3.3.1",
   "mypy[faster-cache]==1.13",
   "psycopg[binary]==3.2.3",
