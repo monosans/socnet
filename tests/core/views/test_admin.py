@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 pytestmark = pytest.mark.parametrize(
     "url",
-    (reverse_lazy("admin:index"), reverse_lazy("django-admindocs-docroot")),
+    [reverse_lazy("admin:index"), reverse_lazy("django-admindocs-docroot")],
 )
 
 
