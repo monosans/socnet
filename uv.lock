@@ -93,7 +93,7 @@ requires-dist = [
     { name = "django-stubs-ext", specifier = "==5.1.1" },
     { name = "djangorestframework", specifier = "==3.15.2" },
     { name = "djangorestframework-stubs", marker = "extra == 'local'", specifier = "==3.15.1" },
-    { name = "djlint", marker = "extra == 'local'", specifier = "==1.36.2" },
+    { name = "djlint", marker = "extra == 'local'", specifier = "==1.36.3" },
     { name = "docutils", specifier = "==0.21.2" },
     { name = "drf-spectacular", specifier = "==0.27.2" },
     { name = "drf-standardized-errors", extras = ["openapi"], specifier = "==0.14.1" },
@@ -558,7 +558,7 @@ wheels = [
 
 [[package]]
 name = "djlint"
-version = "1.36.2"
+version = "1.36.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -571,13 +571,13 @@ dependencies = [
     { name = "regex" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/de/74/9173e0a91e705976c639eba1a39ce44b2b2ca1694e01c5ed8e397886d554/djlint-1.36.2.tar.gz", hash = "sha256:00d1a79de3c43b50e46a0ce6f279535b88bbf203d3f50ada92f56740fca4f590", size = 47816 }
+sdist = { url = "https://files.pythonhosted.org/packages/ff/dd/a442814263f6ef16153f87fe78658097c6690106f53f0d2594bf4ee81202/djlint-1.36.3.tar.gz", hash = "sha256:d85735da34bc7ac93ad8ef9b4822cc2a23d5f0ce33f25438737b8dca1d404f78", size = 47657 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dc/2f/144e0bc6bf1f1c640279b2298a7b0ebc8823c40f64d3ee7fcac95d3ce617/djlint-1.36.2-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:a16a95d21f17b68a406deb47bfa227d7537385d4fba8f6e61351d68d55bc899d", size = 357336 },
-    { url = "https://files.pythonhosted.org/packages/1a/d1/68b7977df95fc70a23ac54cc36a50011fb2fb9ef9b71fdc997966dac9f08/djlint-1.36.2-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:e126d197612046a0a1c1d07830576372fec52e18edfbaa899e71c3bd824a9ca2", size = 325719 },
-    { url = "https://files.pythonhosted.org/packages/b4/ec/d694f807822c0c0c20579befd30bb6ce1ac56cf3a69b67bce9706ef9061b/djlint-1.36.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:0417729ebb50592344f1b6beec2931faa62e95153c3ef7f388ab61c234f22795", size = 414744 },
-    { url = "https://files.pythonhosted.org/packages/c3/60/712dac780d1600bf81df5e8408e320430d5d597b27ba22f97d61f0389450/djlint-1.36.2-cp312-cp312-win_amd64.whl", hash = "sha256:bfd5fe43d2b8fe09c08d13cce60457ec9e53c13cd6c8949c794ea6643245a1bb", size = 364827 },
-    { url = "https://files.pythonhosted.org/packages/f9/6a/c593c857bfe12b748011c4387c309820b3ae69d363aeb7dd61e74d0c7f2d/djlint-1.36.2-py3-none-any.whl", hash = "sha256:98193159b1563a8644b58b7adfcbad04246bb9078ad49c389ac586fec181c48d", size = 52317 },
+    { url = "https://files.pythonhosted.org/packages/64/c7/721f9882300d477e6bf3d0e26b935bd38e3be6f152e81ac52b025575a15d/djlint-1.36.3-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:e66361a865e5e5a4bbcb40f56af7f256fd02cbf9d48b763a40172749cc294084", size = 354201 },
+    { url = "https://files.pythonhosted.org/packages/68/e8/282228db12c2d0236afab8dd11ffc1cf0e22355d03c8144c69d41979ba38/djlint-1.36.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:36e102b80d83e9ac2e6be9a9ded32fb925945f6dbc7a7156e4415de1b0aa0dba", size = 322234 },
+    { url = "https://files.pythonhosted.org/packages/a8/fb/d6709ee3bcb66f1d9876b518c7a099366db06631212b2de24856f1341ecb/djlint-1.36.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9ac4b7370d80bd82281e57a470de8923ac494ffb571b89d8787cef57c738c69a", size = 409797 },
+    { url = "https://files.pythonhosted.org/packages/d9/c0/7b473515c41135891523698cfc8e781213cde9b28ef5aeba0f22bd2d8368/djlint-1.36.3-cp312-cp312-win_amd64.whl", hash = "sha256:107cc56bbef13d60cc0ae774a4d52881bf98e37c02412e573827a3e549217e3a", size = 361005 },
+    { url = "https://files.pythonhosted.org/packages/cb/d7/a909c3a5600560ecffe2110749b413672a2f41e7138a0e8a4f020054dbd0/djlint-1.36.3-py3-none-any.whl", hash = "sha256:0c05cd5b76785de2c41a2420c06ffd112800bfc0f9c0f399cc7cea7c42557f4c", size = 52166 },
 ]
 
 [[package]]
