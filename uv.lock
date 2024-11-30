@@ -95,7 +95,7 @@ requires-dist = [
     { name = "djangorestframework-stubs", marker = "extra == 'local'", specifier = "==3.15.1" },
     { name = "djlint", marker = "extra == 'local'", specifier = "==1.36.3" },
     { name = "docutils", specifier = "==0.21.2" },
-    { name = "drf-spectacular", specifier = "==0.27.2" },
+    { name = "drf-spectacular", specifier = "==0.28.0" },
     { name = "drf-standardized-errors", extras = ["openapi"], specifier = "==0.14.1" },
     { name = "factory-boy", marker = "extra == 'local'", specifier = "==3.3.1" },
     { name = "gunicorn", marker = "extra == 'production'", specifier = "==23" },
@@ -591,7 +591,7 @@ wheels = [
 
 [[package]]
 name = "drf-spectacular"
-version = "0.27.2"
+version = "0.28.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -601,9 +601,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "uritemplate" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b1/c9/55311dcbdae9a437eeb8f898f8421a6a3eabf08725c23ddf458cf2479b78/drf-spectacular-0.27.2.tar.gz", hash = "sha256:a199492f2163c4101055075ebdbb037d59c6e0030692fc83a1a8c0fc65929981", size = 235131 }
+sdist = { url = "https://files.pythonhosted.org/packages/da/b9/741056455aed00fa51a1df41fad5ad27c8e0d433b6bf490d4e60e2808bc6/drf_spectacular-0.28.0.tar.gz", hash = "sha256:2c778a47a40ab2f5078a7c42e82baba07397bb35b074ae4680721b2805943061", size = 237849 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b2/cd/84c44a5d435f6544e58a9b138305f59bca232157ae4ecb658f9787f87d1c/drf_spectacular-0.27.2-py3-none-any.whl", hash = "sha256:b1c04bf8b2fbbeaf6f59414b4ea448c8787aba4d32f76055c3b13335cf7ec37b", size = 102930 },
+    { url = "https://files.pythonhosted.org/packages/fb/66/c2929871393b1515c3767a670ff7d980a6882964a31a4ca2680b30d7212a/drf_spectacular-0.28.0-py3-none-any.whl", hash = "sha256:856e7edf1056e49a4245e87a61e8da4baff46c83dbc25be1da2df77f354c7cb4", size = 103928 },
 ]
 
 [[package]]
