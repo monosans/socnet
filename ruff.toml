@@ -1,6 +1,6 @@
 line-length = 80
 preview = true
-target-version = "py312"
+target-version = "py313"
 
 [format]
 docstring-code-format = true
