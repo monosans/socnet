@@ -12,13 +12,12 @@ from socnet.messenger import models
 from socnet_rs import markdownify
 
 if TYPE_CHECKING:
-    from typing import Any, Literal
+    from typing import Any, Literal, TypedDict
 
     from channels.layers import InMemoryChannelLayer
     from channels_redis.core import RedisChannelLayer
     from django.contrib.auth.models import AnonymousUser
     from django.db.models import Model
-    from typing_extensions import TypedDict
 
     from socnet.users.models import User
 
