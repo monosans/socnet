@@ -49,7 +49,7 @@ optional-dependencies.local = [
 optional-dependencies.production = [
   "gunicorn==23",
   "psycopg[c]==3.2.3",
-  "redis[hiredis]==5.2",
+  "redis[hiredis]==5.2.1",
   "uvicorn-worker==0.2",
 ]
 
