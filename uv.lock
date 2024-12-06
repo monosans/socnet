@@ -107,7 +107,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'local'", specifier = "==8.3.4" },
     { name = "pytest-cov", marker = "extra == 'local'", specifier = "==6" },
     { name = "pytest-django", marker = "extra == 'local'", specifier = "==4.9" },
-    { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==5.2" },
+    { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==5.2.1" },
     { name = "ruff", marker = "extra == 'local'", specifier = "==0.8.2" },
     { name = "sentry-sdk", extras = ["django"], specifier = "==2.19.1" },
     { name = "socnet-rs", directory = "socnet_rs" },
@@ -1081,11 +1081,11 @@ wheels = [
 
 [[package]]
 name = "redis"
-version = "5.2.0"
+version = "5.2.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/53/17/2f4a87ffa4cd93714cf52edfa3ea94589e9de65f71e9f99cbcfa84347a53/redis-5.2.0.tar.gz", hash = "sha256:0b1087665a771b1ff2e003aa5bdd354f15a70c9e25d5a7dbf9c722c16528a7b0", size = 4607878 }
+sdist = { url = "https://files.pythonhosted.org/packages/47/da/d283a37303a995cd36f8b92db85135153dc4f7a8e4441aa827721b442cfb/redis-5.2.1.tar.gz", hash = "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f", size = 4608355 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/12/f5/ffa560ecc4bafbf25f7961c3d6f50d627a90186352e27e7d0ba5b1f6d87d/redis-5.2.0-py3-none-any.whl", hash = "sha256:ae174f2bb3b1bf2b09d54bf3e51fbc1469cf6c10aa03e21141f51969801a7897", size = 261428 },
+    { url = "https://files.pythonhosted.org/packages/3c/5f/fa26b9b2672cbe30e07d9a5bdf39cf16e3b80b42916757c5f92bca88e4ba/redis-5.2.1-py3-none-any.whl", hash = "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4", size = 261502 },
 ]
 
 [package.optional-dependencies]
