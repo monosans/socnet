@@ -84,7 +84,7 @@ requires-dist = [
     { name = "django-coverage-plugin", marker = "extra == 'local'", specifier = "==3.1" },
     { name = "django-debug-toolbar", marker = "extra == 'local'", specifier = "==4.4.6" },
     { name = "django-environ", specifier = "==0.11.2" },
-    { name = "django-extra-checks", marker = "extra == 'local'", specifier = "==0.16.0" },
+    { name = "django-extra-checks", marker = "extra == 'local'", specifier = "==0.16.1" },
     { name = "django-filter", specifier = "==24.3" },
     { name = "django-htmx", specifier = "==1.21" },
     { name = "django-logentry-admin", specifier = "==1.1" },
@@ -463,11 +463,11 @@ wheels = [
 
 [[package]]
 name = "django-extra-checks"
-version = "0.16.0"
+version = "0.16.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f6/d2/8f758ed3f1856ef4f3a19c63839477dd8d42e1cfd96b5c39253ca9412232/django_extra_checks-0.16.0.tar.gz", hash = "sha256:4fa4f0a438ca011753ee250219de7edea82eaaf06857f91e2ef0171eb59eef87", size = 14934 }
+sdist = { url = "https://files.pythonhosted.org/packages/16/20/6b7138fc78f5cd2379f8f517cab99ad1f7451b3796a66819cd0590931789/django_extra_checks-0.16.1.tar.gz", hash = "sha256:10a4e5a6d2cb8de6e3f4bbc708a5e1f7c7ed5bb2b5f74e531d9014db2282889b", size = 14953 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3c/df/f55f9ccc25443c1a341696f69b9589afe37faa1e3430995e29dcc62bd67b/django_extra_checks-0.16.0-py3-none-any.whl", hash = "sha256:8828d569d6f1c771b774b4482bc37ad24d3038f7f0af1c2291eafb7603d14071", size = 21539 },
+    { url = "https://files.pythonhosted.org/packages/a4/a9/967bdd409c815a99c4283ca6d321514dcbee2037c34dd3e1addbd9a3a7c3/django_extra_checks-0.16.1-py3-none-any.whl", hash = "sha256:bd23455585e96ad5bb07120bd09a40ecf1ff7e2f9827a7fd66b2c1314e22c946", size = 21566 },
 ]
 
 [[package]]
