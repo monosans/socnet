@@ -29,7 +29,7 @@ dependencies = [
 ]
 optional-dependencies.local = [
   "covdefaults==2.3",
-  "debugpy==1.8.9",
+  "debugpy==1.8.10",
   "django-coverage-plugin==3.1",
   "django-debug-toolbar==4.4.6",
   "django-extra-checks==0.16.1",
