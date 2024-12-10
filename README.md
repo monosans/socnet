@@ -8,6 +8,7 @@ Social network built with Django Framework.
 
 - Multi-language (currently English and Russian). Selected based on browser settings.
 - Light and dark theme support with a switch. The browser theme is selected by default.
+- Infinite scrolling.
 - Progressive Web App (PWA) support.
 
 ### Regular users
