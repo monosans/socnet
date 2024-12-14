@@ -34,7 +34,7 @@ optional-dependencies.local = [
   "django-debug-toolbar==4.4.6",
   "django-extra-checks==0.16.1",
   "django-stubs==5.1.1",
-  "djangorestframework-stubs==3.15.1",
+  "djangorestframework-stubs==3.15.2",
   "djlint==1.36.3",
   "factory-boy==3.3.1",
   "mypy[faster-cache]==1.13",
