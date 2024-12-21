@@ -77,13 +77,7 @@ def test_author_post(client: Client) -> None:
     assert response.redirect_chain == [
         (
             "{}#comment{}".format(
-                reverse(
-                    "blog:post",
-                    args=(
-                        comment.post.pk,  # type: ignore[attr-defined]
-                    ),
-                ),
-                comment.pk,
+                reverse("blog:post", args=(comment.post.pk,)), comment.pk
             ),
             302,
         )
