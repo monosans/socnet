@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from factory import Faker
 from factory.django import DjangoModelFactory, Password
+from factory.faker import Faker
 
 from socnet.users.models import User
 

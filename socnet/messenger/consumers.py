@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
@@ -41,6 +41,7 @@ def save_obj(obj: Model) -> None:
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     channel_layer: RedisChannelLayer | InMemoryChannelLayer
 
+    @override
     async def connect(self) -> None:
         user: User | AnonymousUser = self.scope["user"]
         if user.is_anonymous:
@@ -55,15 +56,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_add(self.group, self.channel_name)
         await self.accept()
 
-    async def disconnect(self, code: int) -> None:  # noqa: ARG002
+    @override
+    async def disconnect(self, code: int) -> None:
         if not hasattr(self, "group"):
             return
         await self.channel_layer.group_discard(self.group, self.channel_name)
 
+    @override
     async def receive_json(
-        self,
-        content: dict[str, str],
-        **kwargs: Any,  # noqa: ARG002
+        self, content: dict[str, str], **kwargs: Any
     ) -> None:
         sender: User = self.scope["user"]
         message = models.Message(

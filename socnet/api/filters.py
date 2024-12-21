@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, no_type_check
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
-from django_filters import FilterSet
+from django_filters.filterset import FilterSet
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
