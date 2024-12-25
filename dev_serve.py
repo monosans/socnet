@@ -11,7 +11,7 @@ if __name__ == "__main__":
         host="0.0.0.0",  # noqa: S104
         port=8000,
         reload=True,
-        reload_includes=[".html"],
+        reload_includes=["*.html"],
         log_config=LOG_CONFIG,
         server_header=False,
         use_colors=False,
