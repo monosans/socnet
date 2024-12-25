@@ -14,11 +14,11 @@
     <textarea readonly class="form-control mt-3">{% for code in unused_codes %}{{ code }}{% if not forloop.last %}
 {% endif %}{% endfor %}</textarea>
     <div class="row mt-3">
-      <div class="col-12 col-xl-6">
+      <div class="col-12 col-lg-6">
         <a href="{% url 'mfa_download_recovery_codes' %}"
            class="btn btn-primary w-100 h-100">{% translate "Download codes" %}</a>
       </div>
-      <div class="col-12 col-xl-6 mt-2 mt-xl-0">
+      <div class="col-12 col-lg-6 mt-2 mt-lg-0">
         <a href="{% url 'mfa_generate_recovery_codes' %}"
            class="btn btn-primary w-100 h-100">{% translate "Generate new codes" %}</a>
       </div>
