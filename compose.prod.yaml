@@ -10,12 +10,12 @@ services:
     networks:
       - caddy-django
       - django-redis
-    restart: unless-stopped
+    restart: on-failure
     volumes:
       - production-django-media:/var/www/django/media
       - production-django-static:/var/www/django/static
   postgres:
-    restart: unless-stopped
+    restart: on-failure
     volumes:
       - production-postgres-data:/var/lib/postgresql/data
   redis:
@@ -24,7 +24,7 @@ services:
       driver: local
     networks:
       - django-redis
-    restart: unless-stopped
+    restart: on-failure
   caddy:
     build:
       context: .
@@ -42,7 +42,7 @@ services:
       - "80:80"
       - "443:443"
       - "443:443/udp"
-    restart: unless-stopped
+    restart: on-failure
     volumes:
       - production-caddy-config:/config
       - production-caddy-data:/data
