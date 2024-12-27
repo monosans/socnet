@@ -113,7 +113,7 @@ requires-dist = [
     { name = "socnet-rs", directory = "socnet_rs" },
     { name = "types-pillow", marker = "extra == 'local'", specifier = "==10.2.0.20240822" },
     { name = "uvicorn", specifier = "==0.34" },
-    { name = "uvicorn-worker", marker = "extra == 'production'", specifier = "==0.3.0" },
+    { name = "uvicorn-worker", marker = "extra == 'production'", specifier = "==0.3" },
     { name = "uvloop", marker = "(implementation_name == 'cpython' and sys_platform == 'darwin') or (implementation_name == 'cpython' and sys_platform == 'linux')", specifier = "==0.21" },
     { name = "watchfiles", marker = "extra == 'local'", specifier = "==1.0.3" },
     { name = "websockets", specifier = "==14.1" },
