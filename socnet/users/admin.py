@@ -11,7 +11,9 @@ from socnet.users.models import User
 
 # https://docs.allauth.org/en/latest/common/admin.html#admin
 admin.autodiscover()
-admin.site.login = secure_admin_login(admin.site.login)  # type: ignore[method-assign]
+admin.site.login = (  # type: ignore[method-assign]
+    secure_admin_login(admin.site.login)
+)
 
 
 @admin.register(User)

@@ -13,10 +13,7 @@ if TYPE_CHECKING:
 
 
 def forbid_self_subscription(
-    instance: User,
-    action: str,
-    pk_set: set[int],
-    **kwargs: Any,  # noqa: ARG001
+    instance: User, action: str, pk_set: set[int], **_kwargs: Any
 ) -> None:
     if action == "pre_add" and instance.pk in pk_set:
         msg = _("You can't subscribe to yourself.")

@@ -26,7 +26,9 @@ class UserAdminChangeForm(auth_forms.UserChangeForm[User]):
 
 
 class UserAdminCreationForm(auth_forms.BaseUserCreationForm[User]):
-    class Meta(auth_forms.BaseUserCreationForm.Meta):  # type: ignore[name-defined]
+    class Meta(
+        auth_forms.BaseUserCreationForm.Meta  # type: ignore[name-defined]
+    ):
         model = User
         fields = ("display_name", "email", "username")
 

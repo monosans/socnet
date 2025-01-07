@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from datetime import date
 
 
-def image_upload_to(instance: User, filename: str) -> str:  # noqa: ARG001
+def image_upload_to(_instance: User, _filename: str) -> str:
     return f"{uuid4().hex}.webp"
 
 
