@@ -42,7 +42,7 @@ optional-dependencies.local = [
   "pytest==8.3.4",
   "pytest-cov==6",
   "pytest-django==4.9",
-  "ruff==0.9.0",
+  "ruff==0.9.1",
   "types-pillow==10.2.0.20240822",
   "watchfiles==1.0.4",
 ]
