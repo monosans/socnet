@@ -44,7 +44,7 @@ optional-dependencies.local = [
   "pytest-django==4.9",
   "ruff==0.9.0",
   "types-pillow==10.2.0.20240822",
-  "watchfiles==1.0.3",
+  "watchfiles==1.0.4",
 ]
 optional-dependencies.production = [
   "gunicorn==23",
