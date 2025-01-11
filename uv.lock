@@ -32,9 +32,11 @@ dependencies = [
     { name = "django-stubs-ext" },
     { name = "djangorestframework" },
     { name = "docutils" },
+    { name = "drf-orjson-renderer" },
     { name = "drf-spectacular" },
     { name = "drf-standardized-errors", extra = ["openapi"] },
     { name = "httptools" },
+    { name = "orjson" },
     { name = "pillow" },
     { name = "psycopg", extra = ["pool"] },
     { name = "sentry-sdk", extra = ["django"] },
@@ -94,12 +96,14 @@ requires-dist = [
     { name = "djangorestframework-stubs", marker = "extra == 'local'", specifier = "==3.15.2" },
     { name = "djlint", marker = "extra == 'local'", specifier = "==1.36.4" },
     { name = "docutils", specifier = "==0.21.2" },
+    { name = "drf-orjson-renderer", specifier = "==1.7.3" },
     { name = "drf-spectacular", specifier = "==0.28" },
     { name = "drf-standardized-errors", extras = ["openapi"], specifier = "==0.14.1" },
     { name = "factory-boy", marker = "extra == 'local'", specifier = "==3.3.1" },
     { name = "gunicorn", marker = "extra == 'production'", specifier = "==23" },
     { name = "httptools", specifier = "==0.6.4" },
     { name = "mypy", extras = ["faster-cache"], marker = "extra == 'local'", specifier = "==1.14.1" },
+    { name = "orjson", specifier = "==3.10.14" },
     { name = "pillow", specifier = "==11.1.0" },
     { name = "psycopg", extras = ["binary"], marker = "extra == 'local'", specifier = "==3.2.3" },
     { name = "psycopg", extras = ["c"], marker = "extra == 'production'", specifier = "==3.2.3" },
@@ -591,6 +595,20 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/ae/ed/aefcc8cd0ba62a0560c3c18c33925362d46c6075480bfa4df87b28e169a9/docutils-0.21.2.tar.gz", hash = "sha256:3a6b18732edf182daa3cd12775bbb338cf5691468f91eeeb109deff6ebfa986f", size = 2204444 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8f/d7/9322c609343d929e75e7e5e6255e614fcc67572cfd083959cdef3b7aad79/docutils-0.21.2-py3-none-any.whl", hash = "sha256:dafca5b9e384f0e419294eb4d2ff9fa826435bf15f15b7bd45723e8ad76811b2", size = 587408 },
+]
+
+[[package]]
+name = "drf-orjson-renderer"
+version = "1.7.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "djangorestframework" },
+    { name = "orjson" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4d/3e/5cc16467d91087bf883cdbeb52a06f3a6fa59563ad09b9b84bac72d68716/drf_orjson_renderer-1.7.3.tar.gz", hash = "sha256:0c49760fc415df8096c1ef05f029802f2e5862d4e15fe96066289b8c526835f1", size = 8492 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/87/53e1a0e13f1d0247fe97e53619cff72181888a5bac8fd0401e5607c101b6/drf_orjson_renderer-1.7.3-py3-none-any.whl", hash = "sha256:9c3fe521b0e8c641b334c40bb81ecadb14519a27599a495d360385abe193a4b4", size = 7138 },
 ]
 
 [[package]]
