@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, override
 
+import orjson
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.core.exceptions import ValidationError
@@ -85,6 +86,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "sender": sender.username,
         }
         await self.channel_layer.group_send(self.group, msg)
+
+    @classmethod
+    @override
+    async def decode_json(cls, text_data: Any) -> Any:
+        return orjson.loads(text_data)
+
+    @classmethod
+    @override
+    async def encode_json(cls, content: Any) -> str:
+        return orjson.dumps(content).decode("utf-8")
 
     async def chat_message(self, event: ChatMessageEvent) -> None:
         content = {k: v for k, v in event.items() if k != "type"}

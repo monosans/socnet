@@ -178,6 +178,13 @@ ACCOUNT_FORMS = {
 }
 
 REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "drf_orjson_renderer.renderers.ORJSONRenderer"
+    ],
+    "DEFAULT_PARSER_CLASSES": ["drf_orjson_renderer.parsers.ORJSONParser"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication"
+    ],
     "DEFAULT_PERMISSION_CLASSES": [
         "socnet.api.permissions.ActualDjangoModelPermissions"
     ],
