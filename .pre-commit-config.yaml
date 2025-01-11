@@ -33,6 +33,13 @@ repos:
       - id: prettier
         args:
           - --no-config
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: "1.22.2"
+    hooks:
+      - id: django-upgrade
+        args:
+          - --target-version
+          - "5.1"
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.9.1
     hooks:

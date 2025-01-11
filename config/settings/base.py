@@ -43,7 +43,6 @@ SECRET_KEY = env.str("DJANGO_SECRET_KEY")
 TIME_ZONE = "UTC"
 LANGUAGE_CODE = "en-us"
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 LANGUAGES = [("en", _("English")), ("ru", _("Russian"))]
 LOCALE_PATHS = [str(BASE_DIR / "locale")]
