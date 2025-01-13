@@ -22,7 +22,7 @@ repos:
     hooks:
       - id: stylelint
         args:
-          - --fix
+          - --fix=lax
         additional_dependencies:
           - stylelint
           - stylelint-config-standard
