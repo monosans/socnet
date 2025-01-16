@@ -20,6 +20,7 @@ services:
       context: .
       dockerfile: ./docker/django/Dockerfile
       target: node-watch-stage
+    init: true
     logging:
       driver: local
     networks:

@@ -20,14 +20,7 @@ RUN --mount=source=tsconfig.json,target=tsconfig.json \
 
 FROM node-base-stage AS node-watch-stage
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends tini \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
-
 USER node
-
-ENTRYPOINT ["tini", "--"]
 
 CMD ["npm", "run", "watch"]
 
@@ -72,7 +65,7 @@ FROM python-base-stage AS python-ci-run-stage
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext tini wait-for-it \
+  && apt-get install -y --no-install-recommends gettext wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
@@ -80,7 +73,7 @@ COPY --from=python-build-stage --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
+ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
 
 CMD ["bash", "/app/docker/django/start.sh"]
 
@@ -90,7 +83,7 @@ FROM python-base-stage AS python-local-run-stage
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext tini wait-for-it \
+  && apt-get install -y --no-install-recommends gettext wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd --gid 1000 django \
@@ -102,7 +95,7 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 USER django
 
-ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.sh"]
+ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
 
 CMD ["bash", "/app/docker/django/start.sh"]
 
@@ -112,7 +105,7 @@ FROM python-base-stage AS python-production-run-stage
 ENV DJANGO_SETTINGS_MODULE=config.settings.production
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext libpq-dev tini wait-for-it \
+  && apt-get install -y --no-install-recommends gettext libpq-dev wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd --gid 1000 django \
@@ -130,6 +123,6 @@ COPY --from=node-build-stage --chown=1000:1000 --link /app/socnet/static/public/
 
 USER django
 
-ENTRYPOINT ["tini", "--", "bash", "/app/docker/django/entrypoint.prod.sh"]
+ENTRYPOINT ["bash", "/app/docker/django/entrypoint.prod.sh"]
 
 CMD ["bash", "/app/docker/django/start.prod.sh"]

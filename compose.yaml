@@ -7,6 +7,7 @@ services:
     depends_on:
       - postgres
     env_file: ./.env
+    init: true
     logging:
       driver: local
     networks:
@@ -14,6 +15,7 @@ services:
   postgres:
     image: docker.io/postgres:17
     env_file: ./.env
+    init: true
     logging:
       driver: local
     networks:
