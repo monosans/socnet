@@ -1113,15 +1113,15 @@ hiredis = [
 
 [[package]]
 name = "referencing"
-version = "0.36.0"
+version = "0.36.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
     { name = "rpds-py" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/84/7c/c7fb671169578ca7f31081365ccd28e3da845815d38254d337f9a37b12ca/referencing-0.36.0.tar.gz", hash = "sha256:246db964bb6101905167895cd66499cfb2aabc5f83277d008c52afe918ef29ba", size = 74566 }
+sdist = { url = "https://files.pythonhosted.org/packages/27/32/fd98246df7a0f309b58cae68b10b6b219ef2eb66747f00dfb34422687087/referencing-0.36.1.tar.gz", hash = "sha256:ca2e6492769e3602957e9b831b94211599d2aade9477f5d44110d2530cf9aade", size = 74661 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/30/2f/a969d8bb4b86c2f1308cf020fba2f81a6c9c719b53a34b2ae83da2713629/referencing-0.36.0-py3-none-any.whl", hash = "sha256:01fc2916bab821aa3284d645bbbb41ba39609e7ff47072416a39ec2fb04d10d9", size = 26770 },
+    { url = "https://files.pythonhosted.org/packages/cc/fa/9f193ef0c9074b659009f06d7cbacc6f25b072044815bcf799b76533dbb8/referencing-0.36.1-py3-none-any.whl", hash = "sha256:363d9c65f080d0d70bc41c721dce3c7f3e77fc09f269cd5c8813da18069a6794", size = 26777 },
 ]
 
 [[package]]
