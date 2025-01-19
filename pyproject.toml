@@ -20,7 +20,7 @@ dependencies = [
   "drf-spectacular==0.28",
   "drf-standardized-errors[openapi]==0.14.1",
   "httptools==0.6.4",
-  "orjson==3.10.14",
+  "orjson==3.10.15",
   "pillow==11.1.0",
   "psycopg[pool]==3.2.4",
   "sentry-sdk[django]==2.20.0",
