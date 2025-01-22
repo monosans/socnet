@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   run-clippy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,7 +18,7 @@ jobs:
       - run: cargo +stable clippy --all-targets --all-features -- -Dwarnings -Wclippy::pedantic
         working-directory: ./socnet_rs
   run-eslint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
       - run: npx eslint --max-warnings 0 .
   run-pre-commit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,7 +41,7 @@ jobs:
           enable-cache: false
       - run: uv tool run --from pre-commit@latest --with pre-commit-uv --no-cache --python 3.13 pre-commit run --all-files
   run-pytest-mypy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -57,7 +57,7 @@ jobs:
       - if: ${{ always() && steps.build.conclusion == 'success' }}
         run: docker compose -f compose.yaml -f compose.ci.yaml down --remove-orphans
   run-rustfmt:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,7 +66,7 @@ jobs:
       - run: cargo +nightly fmt --check
         working-directory: ./socnet_rs
   run-tsc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
