@@ -32,8 +32,8 @@ env.smart_cast = False
 
 # Needed for running mypy outside of docker
 if "DJANGO_SECRET_KEY" not in os.environ:  # pragma: no cover
-    env.read_env(str(BASE_DIR / ".env.example"))
-    logging.getLogger(__name__).warning("Read .env.example")
+    env.read_env(str(BASE_DIR / ".env"))
+    logging.getLogger(__name__).warning("Read .env")
 
 APPS_DIR = BASE_DIR / "socnet"
 

@@ -9,15 +9,31 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 jobs:
-  run-clippy:
+  check:
+    if: ${{ always() && github.event_name == 'pull_request' }}
+    needs:
+      - clippy
+      - eslint
+      - mypy
+      - pre-commit
+      - pytest
+      - rustfmt
+      - tsc
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
+  clippy:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - run: cargo +stable clippy --all-targets --all-features -- -Dwarnings -Wclippy::pedantic
+      - run: rustup toolchain install nightly --profile minimal --component rustfmt --allow-downgrade
+      - run: cargo +beta clippy --all-targets --all-features -- -Dwarnings -Wclippy::pedantic
         working-directory: ./socnet_rs
-  run-eslint:
+  eslint:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +46,20 @@ jobs:
           check-latest: true
       - run: npm ci
       - run: npx eslint --max-warnings 0 .
-  run-pre-commit:
+  mypy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: cp .env.example .env
+      - run: docker compose -f compose.yaml -f compose.ci.yaml pull --ignore-buildable
+      - id: build
+        run: docker compose -f compose.yaml -f compose.ci.yaml build --pull django
+      - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django mypy .
+      - if: ${{ always() && steps.build.conclusion == 'success' }}
+        run: docker compose -f compose.yaml -f compose.ci.yaml down --remove-orphans
+  pre-commit:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -39,8 +68,8 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: false
-      - run: uv tool run --from pre-commit@latest --with pre-commit-uv --no-cache --python 3.13 pre-commit run --all-files
-  run-pytest-mypy:
+      - run: uv tool run --from pre-commit@latest --with pre-commit-uv --no-cache --python 3.13 pre-commit run --all-files --show-diff-on-failure
+  pytest:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -52,20 +81,18 @@ jobs:
         run: docker compose -f compose.yaml -f compose.ci.yaml build --pull django
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django python3 manage.py migrate
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django pytest --cov
-      - if: ${{ !cancelled() && steps.build.conclusion == 'success' }}
-        run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django mypy .
       - if: ${{ always() && steps.build.conclusion == 'success' }}
         run: docker compose -f compose.yaml -f compose.ci.yaml down --remove-orphans
-  run-rustfmt:
+  rustfmt:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - run: rustup toolchain install nightly --profile minimal --component rustfmt --no-self-update --allow-downgrade
+      - run: rustup toolchain install nightly --profile minimal --component rustfmt --allow-downgrade
       - run: cargo +nightly fmt --check
         working-directory: ./socnet_rs
-  run-tsc:
+  tsc:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
