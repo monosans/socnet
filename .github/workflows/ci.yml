@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - run: rustup toolchain install nightly --profile minimal --component rustfmt --allow-downgrade
+      - run: rustup toolchain install beta --profile minimal --component clippy --allow-downgrade
       - run: cargo +beta clippy --all-targets --all-features -- -Dwarnings -Wclippy::pedantic
         working-directory: ./socnet_rs
   eslint:
