@@ -6,19 +6,17 @@ ALLOWED_HOSTS = [env.str("DOMAIN_NAME")]
 
 MIDDLEWARE.remove("socnet.core.middleware.ResponseHeadersMiddleware")
 
-_REDIS_HOST = env.str("REDIS_HOST")
-_REDIS_PORT = env.int("REDIS_PORT")
-_REDIS_URL = f"redis://{_REDIS_HOST}:{_REDIS_PORT}"
+_REDIS_URL = f"redis://{env.str('REDIS_HOST')}:{env.int('REDIS_PORT')}"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": _REDIS_URL,
+        "LOCATION": f"{_REDIS_URL}/{env.int('REDIS_CACHE_DB')}",
     }
 }
 
 CHANNEL_LAYERS["default"] = {
     "BACKEND": "channels_redis.core.RedisChannelLayer",
-    "CONFIG": {"hosts": [(_REDIS_HOST, _REDIS_PORT)]},
+    "CONFIG": {"hosts": [f"{_REDIS_URL}/{env.int('REDIS_CHANNELS_DB')}"]},
 }
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
