@@ -32,7 +32,7 @@ def test_empty_request(
 ) -> None:
     if auth:
         auth_client(client)
-    post = factory()
+    post = factory.create()
     url = get_url(post)
     response = (
         client.get(url) if method == ClientMethods.GET else client.post(url)
@@ -42,7 +42,7 @@ def test_empty_request(
 
 
 def test_unauthed_post(client: Client) -> None:
-    post = factory()
+    post = factory.create()
     url = get_url(post)
     response = client.post(url, follow=True)
     assert response.redirect_chain == [
@@ -54,7 +54,7 @@ def test_unauthed_post(client: Client) -> None:
 
 def test_authed_post(client: Client) -> None:
     user = auth_client(client)
-    post = factory()
+    post = factory.create()
     url = get_url(post)
     comment_content = factories.CommentFactory.build().content
     response = client.post(url, data={"content": comment_content}, follow=True)

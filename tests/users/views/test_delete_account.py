@@ -36,7 +36,7 @@ def test_authed_get(client: Client) -> None:
 
 def test_authed_post_correct_password(client: Client) -> None:
     password = "pw"  # noqa: S105
-    user = UserFactory(password=password)
+    user = UserFactory.create(password=password)
     client.force_login(user)
     response = client.post(url, data={"password": password}, follow=True)
     assert response.redirect_chain == [(reverse("account_login"), 302)]

@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
 
 def auth_client(client: Client, **kwargs: Any) -> User:
-    user = UserFactory(**kwargs)
+    user = UserFactory.create(**kwargs)
     client.force_login(user)
     return user
 
