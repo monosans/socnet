@@ -50,7 +50,7 @@ def test_username_allowed_patterns(username: str) -> None:
 
 
 def test_username_unique() -> None:
-    factory(username="user")
+    factory.create(username="user")
     user2 = factory.build(username="user")
     exc_str = re.escape(
         "{'username': ['A user with that username already exists.']}"
@@ -67,7 +67,7 @@ def test_username_unique() -> None:
 
 
 def test_username_case_insensitive() -> None:
-    factory(username="user")
+    factory.create(username="user")
     assert User.objects.filter(username="USER").exists()
 
 

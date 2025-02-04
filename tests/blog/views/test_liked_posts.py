@@ -24,13 +24,13 @@ def test_get(client: Client, *, auth: bool, self: bool) -> None:
         user = auth_client(client)
     elif auth:
         auth_client(client)
-        user = UserFactory()
+        user = UserFactory.create()
     else:
-        user = UserFactory()
+        user = UserFactory.create()
     url = get_url(user)
     response = client.get(url)
     assert response.status_code == 200
-    post = factories.PostFactory(author=user)
+    post = factories.PostFactory.create(author=user)
     post.likers.add(user)
     response = client.get(url)
     assert response.status_code == 200

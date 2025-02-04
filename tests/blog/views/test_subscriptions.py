@@ -21,11 +21,11 @@ def get_url(user: User) -> str:
 def test_get(client: Client, *, auth: bool) -> None:
     if auth:
         auth_client(client)
-    user = UserFactory()
+    user = UserFactory.create()
     url = get_url(user)
     response = client.get(url)
     assert response.status_code == 200
-    subscription = UserFactory()
+    subscription = UserFactory.create()
     user.subscriptions.add(subscription)
     response = client.get(url)
     assert response.status_code == 200
@@ -36,7 +36,7 @@ def test_authed_get_self(client: Client) -> None:
     url = get_url(user)
     response = client.get(url)
     assert response.status_code == 200
-    subscription = UserFactory()
+    subscription = UserFactory.create()
     user.subscriptions.add(subscription)
     response = client.get(url)
     assert response.status_code == 200

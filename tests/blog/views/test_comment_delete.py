@@ -23,7 +23,7 @@ def get_url(comment: models.Comment) -> str:
 def test_get(client: Client, *, auth: bool) -> None:
     if auth:
         auth_client(client)
-    comment = factory()
+    comment = factory.create()
     url = get_url(comment)
     response = client.get(url)
     assert response.status_code == 405
@@ -31,7 +31,7 @@ def test_get(client: Client, *, auth: bool) -> None:
 
 
 def test_unauthed_post(client: Client) -> None:
-    comment = factory()
+    comment = factory.create()
     url = get_url(comment)
     response = client.delete(url, follow=True)
     assert response.redirect_chain == [
@@ -44,7 +44,7 @@ def test_unauthed_post(client: Client) -> None:
 @pytest.mark.parametrize("is_author", [True, False])
 def test_authed_post(client: Client, *, is_author: bool) -> None:
     user = auth_client(client)
-    comment = factory(author=user) if is_author else factory()
+    comment = factory.create(author=user) if is_author else factory.create()
     url = get_url(comment)
     response = client.delete(url)
     assert response.status_code == 200
@@ -53,8 +53,8 @@ def test_authed_post(client: Client, *, is_author: bool) -> None:
 
 def test_post_author_post(client: Client) -> None:
     user = auth_client(client)
-    post = factories.PostFactory(author=user)
-    comment = factory(post=post)
+    post = factories.PostFactory.create(author=user)
+    comment = factory.create(post=post)
     url = get_url(comment)
     response = client.delete(url)
     assert response.status_code == 200

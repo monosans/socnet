@@ -23,7 +23,7 @@ def get_url(post: models.Post) -> str:
 
 @parametrize_by_get_post
 def test_unauthed(client: Client, method: ClientMethods) -> None:
-    post = factory()
+    post = factory.create()
     url = get_url(post)
     response = (
         client.get(url, follow=True)
@@ -46,7 +46,7 @@ def test_unauthed(client: Client, method: ClientMethods) -> None:
 )
 def test_non_author(client: Client, method: ClientMethods, data: Any) -> None:
     auth_client(client)
-    post = factory()
+    post = factory.create()
     url = get_url(post)
     response = (
         client.get(url)
@@ -60,7 +60,7 @@ def test_non_author(client: Client, method: ClientMethods, data: Any) -> None:
 
 def test_author_get(client: Client) -> None:
     user = auth_client(client)
-    post = factory(author=user)
+    post = factory.create(author=user)
     url = get_url(post)
     response = client.get(url)
     assert response.status_code == 200
@@ -70,7 +70,7 @@ def test_author_get(client: Client) -> None:
 
 def test_author_post(client: Client) -> None:
     user = auth_client(client)
-    post = factory(author=user)
+    post = factory.create(author=user)
     url = get_url(post)
     new_content = factory.build().content
     response = client.post(url, data={"content": new_content}, follow=True)
@@ -87,7 +87,7 @@ def test_author_post(client: Client) -> None:
 
 def test_author_post_empty(client: Client) -> None:
     user = auth_client(client)
-    post = factory(author=user)
+    post = factory.create(author=user)
     url = get_url(post)
     response = client.post(url)
     assert response.status_code == 200
