@@ -34,7 +34,7 @@ repos:
         args:
           - --no-config
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: "1.23.0"
+    rev: "1.23.1"
     hooks:
       - id: django-upgrade
         args:
