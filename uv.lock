@@ -674,15 +674,14 @@ wheels = [
 
 [[package]]
 name = "faker"
-version = "35.2.1"
+version = "36.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "python-dateutil" },
-    { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/11/33/0f4c1fb0c4d995aa8c6ab73732c7ed4588097f55318fc709c840d71e1925/faker-35.2.1.tar.gz", hash = "sha256:58066f85143954337cde60ade88ca31ba3e258ccb820510a0ff1eb5a65e28b9d", size = 1875063 }
+sdist = { url = "https://files.pythonhosted.org/packages/8b/94/16c18822dfc66d4f5f709b32c199e782090bcc55faa4bcfa0cc53f1eb4b4/faker-36.0.0.tar.gz", hash = "sha256:e00cf69e55d3466f93c82cf63259a484d14b48702a1d9ed719ff039e9f392b49", size = 1874807 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/9f/86c81a2016a3c8713f365d501e39e7e8c713be7e38f841cd9fc6291d1e7d/Faker-35.2.1-py3-none-any.whl", hash = "sha256:7f75ac8c654e6274282cb85244eddce24815961585a8395bfdcf57079194b150", size = 1917765 },
+    { url = "https://files.pythonhosted.org/packages/1d/21/015998540c7f9bce88fc80efd4c38af3960c95f096fe0096c8aff2c9419e/Faker-36.0.0-py3-none-any.whl", hash = "sha256:67b89f255843c84fac395ae4430d48a7422e1f48b3435dbcceb77364d24e2bb8", size = 1917629 },
 ]
 
 [[package]]
