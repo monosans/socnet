@@ -43,7 +43,4 @@ new MutationObserver((mutations) => {
       })();
     }
   }
-}).observe(document.body, {
-  childList: true,
-  subtree: true,
-});
+}).observe(document.body, { childList: true, subtree: true });

@@ -11,10 +11,7 @@ export default tseslint.config(
   ...tseslint.configs.all,
   eslintConfigPrettier,
   {
-    languageOptions: {
-      ecmaVersion: 6,
-      parserOptions: { project: true },
-    },
+    languageOptions: { ecmaVersion: 6, parserOptions: { project: true } },
     linterOptions: { reportUnusedDisableDirectives: "error" },
     rules: {
       "@typescript-eslint/ban-ts-comment": [
