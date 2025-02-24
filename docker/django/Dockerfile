@@ -38,7 +38,7 @@ FROM python-base-stage AS python-build-stage
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
-  && curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain beta --profile minimal \
+  && curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --profile minimal \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
