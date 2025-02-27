@@ -94,7 +94,7 @@
                 {% if user.birth_date %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Birth date" %}</td>
-                    <td class="ps-2 pe-0 py-1">{{ user.birth_date }} ({{ user.age }})</td>
+                    <td class="ps-2 pe-0 py-1">{{ user.birth_date }} ({{ user.get_age }})</td>
                   </tr>
                 {% endif %}
                 {% if user.location %}

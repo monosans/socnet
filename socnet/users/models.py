@@ -86,8 +86,7 @@ class User(AbstractUser):
     def get_short_name(self) -> str:
         return self.display_name
 
-    @property
-    def age(self) -> int | None:
+    def get_age(self) -> int | None:
         bd: date | None = self.birth_date
         if bd is None:
             return None
