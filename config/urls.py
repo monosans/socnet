@@ -12,6 +12,7 @@ from socnet.api import urls as api_urls
 from socnet.blog import urls as blog_urls
 from socnet.core import urls as core_urls
 from socnet.messenger import urls as messenger_urls
+from socnet.ninja_api import urls as ninja_urls
 from socnet.users import urls as users_urls
 
 if TYPE_CHECKING:
@@ -21,6 +22,7 @@ urlpatterns: list[URLPattern | URLResolver] = [
     path(f"{settings.ADMIN_URL}/doc/", include(admindocs_urls)),
     path(f"{settings.ADMIN_URL}/", admin.site.urls),
     path("api/", include(api_urls)),
+    path("ninja-api/", include(ninja_urls)),
     path("messenger/", include(messenger_urls)),
     path("", include(allauth_urls)),
     path("", include(core_urls)),
