@@ -18,7 +18,7 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v16.14.1
+    rev: v16.15.0
     hooks:
       - id: stylelint
         args:
