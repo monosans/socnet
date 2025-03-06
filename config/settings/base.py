@@ -80,10 +80,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     "django_filters",
     "django_htmx",
-    "drf_spectacular",
-    "drf_standardized_errors",
     "logentry_admin",
-    "rest_framework",
     "socnet.allauth",
     "socnet.api",
     "socnet.core",
@@ -174,52 +171,6 @@ ACCOUNT_FORMS = {
     "login": "socnet.allauth.forms.LoginForm",
     "reset_password": "socnet.allauth.forms.ResetPasswordForm",
     "signup": "socnet.allauth.forms.SignupForm",
-}
-
-REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": [
-        "drf_orjson_renderer.renderers.ORJSONRenderer"
-    ],
-    "DEFAULT_PARSER_CLASSES": ["drf_orjson_renderer.parsers.ORJSONParser"],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication"
-    ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "socnet.api.permissions.ActualDjangoModelPermissions"
-    ],
-    "DEFAULT_SCHEMA_CLASS": "drf_standardized_errors.openapi.AutoSchema",
-    "DEFAULT_FILTER_BACKENDS": [
-        "django_filters.rest_framework.DjangoFilterBackend",
-        "rest_framework.filters.OrderingFilter",
-    ],
-    "DEFAULT_PAGINATION_CLASS": (
-        "rest_framework.pagination.LimitOffsetPagination"
-    ),
-    "PAGE_SIZE": 10,
-    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
-}
-SPECTACULAR_SETTINGS = {
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
-    "POSTPROCESSING_HOOKS": [
-        "drf_standardized_errors.openapi_hooks.postprocess_schema_enums"
-    ],
-    "ENUM_NAME_OVERRIDES": {
-        enum: f"drf_standardized_errors.openapi_serializers.{enum}.choices"
-        for enum in (
-            "ValidationErrorEnum",
-            "ClientErrorEnum",
-            "ServerErrorEnum",
-            "ErrorCode401Enum",
-            "ErrorCode403Enum",
-            "ErrorCode404Enum",
-            "ErrorCode405Enum",
-            "ErrorCode406Enum",
-            "ErrorCode415Enum",
-            "ErrorCode429Enum",
-            "ErrorCode500Enum",
-        )
-    },
-    "TITLE": "API | SocNet",
 }
 
 CHANNEL_LAYERS: dict[str, dict[str, Any]] = {

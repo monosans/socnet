@@ -55,7 +55,6 @@ EXTRA_CHECKS = {
         "field-related-name",
         "field-default-null",
         "field-choices-constraint",
-        "drf-model-serializer-extra-kwargs",
     ]
 }
 

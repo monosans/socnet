@@ -14,6 +14,7 @@ if TYPE_CHECKING:
 
     class AuthedRequest(HttpRequest):
         user: User
+
 else:
     HttpRequest = HttpRequestBase
     AuthedRequest = HttpRequest
