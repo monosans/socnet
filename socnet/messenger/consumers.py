@@ -95,7 +95,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     @classmethod
     @override
     async def encode_json(cls, content: Any) -> str:
-        return orjson.dumps(content).decode("utf-8")
+        return orjson.dumps(content).decode()
 
     async def chat_message(self, event: ChatMessageEvent) -> None:
         content = {k: v for k, v in event.items() if k != "type"}
