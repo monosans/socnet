@@ -8,16 +8,16 @@
     "watch": "npm run esbuild-base -- --watch=forever"
   },
   "devDependencies": {
-    "@eslint/js": "9.21.0",
+    "@eslint/js": "9.22.0",
     "@ianvs/prettier-plugin-sort-imports": "4.4.1",
     "@total-typescript/ts-reset": "0.6.1",
     "@tsconfig/strictest": "2.0.5",
     "@types/autosize": "4.0.3",
     "@types/eslint-config-prettier": "6.11.3",
     "@types/luxon": "3.4.2",
-    "esbuild": "0.25.0",
-    "eslint": "9.21.0",
-    "eslint-config-prettier": "10.0.2",
+    "esbuild": "0.25.1",
+    "eslint": "9.22.0",
+    "eslint-config-prettier": "10.1.1",
     "eslint-plugin-unicorn": "57.0.0",
     "prettier": "3.5.3",
     "prettier-plugin-packagejson": "2.5.10",
@@ -25,7 +25,7 @@
     "stylelint-config-recess-order": "6.0.0",
     "stylelint-config-standard": "37.0.0",
     "typescript": "5.8.2",
-    "typescript-eslint": "8.26.0",
+    "typescript-eslint": "8.26.1",
     "viewerjs": "1.11.7"
   }
 }

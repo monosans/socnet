@@ -7,6 +7,7 @@
   "lockFileMaintenance": { "enabled": true, "schedule": ["at any time"] },
   "packageRules": [
     {
+      "matchCategories": ["python"],
       "matchPackageNames": [
         "django-stubs",
         "django-stubs-ext",
@@ -15,21 +16,20 @@
       "groupName": "django-stubs"
     },
     {
-      "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
+      "matchUpdateTypes": ["minor"],
       "automerge": true
     },
     {
-      "matchUpdateTypes": [
-        "lockFileMaintenance",
-        "patch",
-        "replacement",
-        "rollback"
-      ],
+      "matchUpdateTypes": ["lockFileMaintenance", "patch", "replacement"],
       "automerge": true
     },
-    { "matchDepTypes": ["devDependencies"], "automerge": true },
-    { "matchManagers": ["pre-commit"], "automerge": true },
+    {
+      "matchDepTypes": ["dependency-groups"],
+      "matchManagers": ["pep621"],
+      "automerge": true
+    },
+    { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
     {
       "matchCategories": ["docker"],
       "matchDepNames": ["docker.io/python"],
