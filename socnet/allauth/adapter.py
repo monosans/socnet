@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, override
 
 from allauth.account.adapter import DefaultAccountAdapter
-from allauth.account.utils import user_field
+from allauth.account.internal.userkit import user_field
 
 if TYPE_CHECKING:
     from allauth.account.forms import SignupForm
