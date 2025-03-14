@@ -56,7 +56,7 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
-      - run: uv run --frozen --python 3.13 mypy .
+      - run: uv run --extra local --frozen --python 3.13 mypy .
   pre-commit:
     runs-on: ubuntu-24.04
     steps:
