@@ -25,6 +25,7 @@ LOG_CONFIG = {
     },
     "root": {"level": "INFO", "handlers": ["console", "mail_admins"]},
     "loggers": {
+        "django.db.backends": {"level": "INFO"},
         "gunicorn.access": {
             "level": "INFO",
             "handlers": ["console", "mail_admins"],
