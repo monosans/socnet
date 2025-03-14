@@ -13,7 +13,7 @@ function getRequest(dataset: DOMStringMap): {
           )!.value,
         ],
       ],
-      method: dataset["isSubscribed"] === "y" ? "DELETE" : "POST",
+      method: dataset["isSubscribed"] === "y" ? "DELETE":"POST",
     },
     url: `/api/users/${dataset["username"]}/subscriptions`,
   };

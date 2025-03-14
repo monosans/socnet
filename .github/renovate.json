@@ -8,7 +8,11 @@
   "packageRules": [
     {
       "matchCategories": ["python"],
-      "matchPackageNames": ["django-stubs", "django-stubs-ext", "mypy"],
+      "matchPackageNames": [
+        "django-stubs",
+        "django-stubs-ext",
+        "mypy"
+      ],
       "groupName": "django-stubs"
     },
     {
