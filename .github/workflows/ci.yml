@@ -53,12 +53,10 @@ jobs:
         with:
           persist-credentials: false
       - run: cp .env.example .env
-      - run: docker compose -f compose.yaml -f compose.ci.yaml pull --ignore-buildable
-      - id: build
-        run: docker compose -f compose.yaml -f compose.ci.yaml build --pull django
-      - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django mypy .
-      - if: ${{ always() && steps.build.conclusion == 'success' }}
-        run: docker compose -f compose.yaml -f compose.ci.yaml down --remove-orphans
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv run --frozen --python 3.13 mypy .
   pre-commit:
     runs-on: ubuntu-24.04
     steps:

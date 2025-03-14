@@ -7,6 +7,7 @@
   "lockFileMaintenance": { "enabled": true, "schedule": ["at any time"] },
   "packageRules": [
     {
+      "matchCategories": ["python"],
       "matchPackageNames": [
         "django-stubs",
         "django-stubs-ext",
