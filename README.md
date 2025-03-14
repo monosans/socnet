@@ -33,7 +33,6 @@ Social network built with Django Framework.
 
 - All of the above
 - Use Django admin panel
-- Use a REST API that has a Swagger UI and supports all CRUD operations and filtering
 - Receive error notifications in [Sentry](https://sentry.io/) or by email
 
 ## Installation
@@ -98,8 +97,7 @@ docker compose -f compose.yaml -f compose.prod.yaml up -d --remove-orphans
 - django-environ
 - django-filter
 - django-logentry-admin
-- djangorestframework
-- drf-spectacular
+- django-ninja
 - channels
 - channels-redis
 - sentry-sdk

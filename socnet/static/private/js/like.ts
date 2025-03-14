@@ -2,35 +2,19 @@ function getRequest(dataset: DOMStringMap): {
   url: string;
   options: RequestInit;
 } {
-  let value;
   let url;
-
   if (dataset["postPk"]) {
-    url = "/api/post-likes/";
-    value = dataset["postPk"];
+    url = `/api/posts/${dataset["postPk"]}/likes`;
   } else if (dataset["commentPk"]) {
-    url = "/api/comment-likes/";
-    value = dataset["commentPk"];
+    url = `/api/comments/${dataset["commentPk"]}/likes`;
   } else {
     throw new Error(
       "Like button must contain data-post-pk or data-comment-pk attribute",
     );
   }
 
-  let body;
-  let method;
-  if (dataset["isLiked"] === "y") {
-    url += `${value}/`;
-    method = "DELETE";
-    body = null;
-  } else {
-    method = "POST";
-    body = JSON.stringify({ pk: value });
-  }
-
   return {
     options: {
-      body,
       headers: [
         ["Content-Type", "application/json"],
         [
@@ -40,7 +24,7 @@ function getRequest(dataset: DOMStringMap): {
           )!.value,
         ],
       ],
-      method,
+      method: dataset["isLiked"] === "y" ? "DELETE" : "POST",
     },
     url,
   };

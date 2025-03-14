@@ -81,6 +81,14 @@ ban-relative-imports = "all"
 
 [lint.flake8-type-checking]
 exempt-modules = []
+runtime-evaluated-decorators = [
+  "ninja.NinjaAPI.api_operation",
+  "ninja.NinjaAPI.delete",
+  "ninja.NinjaAPI.get",
+  "ninja.NinjaAPI.patch",
+  "ninja.NinjaAPI.post",
+  "ninja.NinjaAPI.put",
+]
 strict = true
 
 [lint.isort]

@@ -2,22 +2,8 @@ function getRequest(dataset: DOMStringMap): {
   url: string;
   options: RequestInit;
 } {
-  let body;
-  let method;
-  let url = "/api/subscriptions/";
-
-  if (dataset["isSubscribed"] === "y") {
-    url += `${dataset["username"]!}/`;
-    method = "DELETE";
-    body = null;
-  } else {
-    method = "POST";
-    body = JSON.stringify({ username: dataset["username"] });
-  }
-
   return {
     options: {
-      body,
       headers: [
         ["Content-Type", "application/json"],
         [
@@ -27,9 +13,9 @@ function getRequest(dataset: DOMStringMap): {
           )!.value,
         ],
       ],
-      method,
+      method: dataset["isSubscribed"] === "y" ? "DELETE" : "POST",
     },
-    url,
+    url: `/api/users/${dataset["username"]}/subscriptions`,
   };
 }
 
