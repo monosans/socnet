@@ -61,5 +61,10 @@ EXTRA_CHECKS = {
 
 if _SENTRY_DSN := env.str("SENTRY_DSN", None):
     import sentry_sdk
+    from sentry_sdk.integrations.asyncio import AsyncioIntegration
 
-    sentry_sdk.init(dsn=_SENTRY_DSN, environment="local")
+    sentry_sdk.init(
+        dsn=_SENTRY_DSN,
+        environment="local",
+        integrations=(AsyncioIntegration(),),
+    )

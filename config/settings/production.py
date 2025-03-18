@@ -48,8 +48,9 @@ STORAGES = {
 
 if _SENTRY_DSN := env.str("SENTRY_DSN", None):
     import sentry_sdk
+    from sentry_sdk.integrations.asyncio import AsyncioIntegration
 
-    sentry_sdk.init(dsn=_SENTRY_DSN)
+    sentry_sdk.init(dsn=_SENTRY_DSN, integrations=(AsyncioIntegration(),))
 elif _ADMIN_EMAILS := env.str("ADMIN_EMAILS", None):
     from email.utils import getaddresses
 
