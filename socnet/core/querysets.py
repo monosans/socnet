@@ -6,9 +6,8 @@ from django.db.models import QuerySet
 from django.db.models.functions import Extract
 
 if TYPE_CHECKING:
-    from typing import TypedDict
-
     from django_stubs_ext import WithAnnotations
+    from typing_extensions import TypedDict
 
     from socnet.core.models import TimestampedModel
 
