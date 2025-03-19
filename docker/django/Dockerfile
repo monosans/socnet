@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1
+# syntax=docker.io/docker/dockerfile:1
 
 FROM docker.io/node:lts-bookworm-slim AS node-base-stage
 
