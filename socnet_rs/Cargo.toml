@@ -9,7 +9,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 ammonia = "=4.0.0"
-minify-html = "=0.15.0"
+minify-html = "=0.16.4"
 pulldown-cmark = { version = "=0.13.0", default-features = false, features = [
   "html",
   "simd",
