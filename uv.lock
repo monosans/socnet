@@ -86,7 +86,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "channels", specifier = "==4.2.1" },
+    { name = "channels", specifier = "==4.2.2" },
     { name = "channels-redis", specifier = "==4.2.1" },
     { name = "covdefaults", marker = "extra == 'local'", specifier = "==2.3" },
     { name = "debugpy", marker = "extra == 'local'", specifier = "==1.8.13" },
@@ -211,15 +211,15 @@ wheels = [
 
 [[package]]
 name = "channels"
-version = "4.2.1"
+version = "4.2.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b0/b7/67d4a1d0fc63958f44c38b43e9b38efda429eb4476f79b572349e6f6a809/channels-4.2.1.tar.gz", hash = "sha256:dc3d56c8e5b2bcd73320e410ee13e5a1970b535d9327c82dc397f2e13eaa60a8", size = 26515 }
+sdist = { url = "https://files.pythonhosted.org/packages/16/d6/049f93c3c96a88265a52f85da91d2635279261bbd4a924b45caa43b8822e/channels-4.2.2.tar.gz", hash = "sha256:8d7208e48ab8fdb972aaeae8311ce920637d97656ffc7ae5eca4f93f84bcd9a0", size = 26647 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d0/c5/0daba3a093bda0e6834f809ff9e54f47f0ad1fa93f36f789ab3da4d28b4f/channels-4.2.1-py3-none-any.whl", hash = "sha256:e91701d9d5a55a45a63d5fccac7601ba118ec97d56ba477cbbd0d1764aefeaf2", size = 30917 },
+    { url = "https://files.pythonhosted.org/packages/cc/bf/4799809715225d19928147d59fda0d3a4129da055b59a9b3e35aa6223f52/channels-4.2.2-py3-none-any.whl", hash = "sha256:ff36a6e1576cacf40bcdc615fa7aece7a709fc4fdd2dc87f2971f4061ffdaa81", size = 31048 },
 ]
 
 [[package]]
