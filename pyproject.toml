@@ -52,7 +52,7 @@ dev = [
   "django-stubs==5.1.3",
   "djlint==1.36.4",
   "mypy[faster-cache]==1.15",
-  "ruff==0.11.3",
+  "ruff==0.11.4",
   "types-pillow==10.2.0.20240822",
 ]
 
