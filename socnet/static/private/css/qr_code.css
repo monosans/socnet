@@ -1,6 +1,6 @@
 .qr-code > * {
   --bs-bg-opacity: 1;
 
-  background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity));
+  background-color: rgb(var(--bs-white-rgb), var(--bs-bg-opacity));
   border-radius: var(--bs-border-radius);
 }
