@@ -90,7 +90,7 @@ docker compose -f compose.yaml -f compose.prod.yaml up -d --remove-orphans
 ### Backend
 
 - Python 3.13
-- Django 5.1
+- Django 5.2
 - django-allauth
 - django-bootstrap5
 - django-cleanup

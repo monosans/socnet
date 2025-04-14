@@ -99,7 +99,7 @@ LOGIN_REDIRECT_URL = "core:index"
 LOGIN_URL = "account_login"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-# https://docs.djangoproject.com/en/5.1/topics/auth/passwords/#using-argon2-with-django
+# https://docs.djangoproject.com/en/5.2/topics/auth/passwords/#using-argon2-with-django
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
