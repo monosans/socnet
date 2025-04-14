@@ -2,9 +2,11 @@ services:
   django:
     image: socnet-local-django
     build:
-      target: python-local-run-stage
       args:
-        - EXTRA=local
+        - "EXTRA=local"
+        - "UID=${UID:-1000}"
+        - "GID=${GID:-1000}"
+      target: python-local-run-stage
     depends_on:
       - esbuild
     ports:
@@ -17,8 +19,11 @@ services:
       - local-postgres-data:/var/lib/postgresql/data
   esbuild:
     build:
-      context: .
+      args:
+        - "UID=${UID:-1000}"
+        - "GID=${GID:-1000}"
       dockerfile: ./docker/django/Dockerfile
+      pull: true
       target: node-watch-stage
     init: true
     logging:

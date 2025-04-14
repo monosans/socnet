@@ -2,8 +2,8 @@ name: socnet
 services:
   django:
     build:
-      context: .
       dockerfile: ./docker/django/Dockerfile
+      pull: true
     depends_on:
       - postgres
     env_file: ./.env
@@ -20,5 +20,6 @@ services:
       driver: local
     networks:
       - django-postgres
+    pull_policy: always
 networks:
   django-postgres:

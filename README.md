@@ -46,10 +46,14 @@ Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` 
 ### Development
 
 ```bash
-# Pull service images
-docker compose pull --ignore-buildable
 # Build services
-docker compose build --pull
+
+# Linux
+docker compose build
+
+# Windows
+docker compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g)
+
 # Run DB migrations
 docker compose run --rm django python3 manage.py migrate
 # Create a superuser if you want
@@ -68,10 +72,8 @@ docker compose -f compose.yaml -f compose.override.yaml -f compose.debug.yaml up
 To run this in production, you need to specify the production settings in `.env`.
 
 ```bash
-# Pull service images
-docker compose -f compose.yaml -f compose.prod.yaml pull --ignore-buildable
 # Build services
-docker compose -f compose.yaml -f compose.prod.yaml build --pull
+docker compose -f compose.yaml -f compose.prod.yaml build
 # Run DB migrations
 docker compose -f compose.yaml -f compose.prod.yaml run --rm django python3 manage.py migrate
 # Create a superuser if you want

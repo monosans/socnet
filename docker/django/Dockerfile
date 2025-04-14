@@ -20,6 +20,13 @@ RUN --mount=source=tsconfig.json,target=tsconfig.json \
 
 FROM node-base-stage AS node-watch-stage
 
+ARG \
+  UID=1000 \
+  GID=1000
+
+RUN groupmod --gid "${GID}" node \
+  && usermod --uid "${UID}" --gid "${GID}" node
+
 USER node
 
 CMD ["npm", "run", "watch"]
@@ -85,11 +92,16 @@ ENV DJANGO_SETTINGS_MODULE=config.settings.local
 RUN apt-get update \
   && apt-get install -y --no-install-recommends gettext wait-for-it \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/* \
-  && groupadd --gid 1000 django \
-  && useradd --gid 1000 --no-log-init --uid 1000 django
+  && rm -rf /var/lib/apt/lists/*
 
-COPY --from=python-build-stage --chown=1000:1000 --link /app/.venv /app/.venv
+ARG \
+  UID=1000 \
+  GID=1000
+
+RUN groupadd --gid "${GID}" django \
+  && useradd --gid "${GID}" --no-log-init --uid "${UID}" django
+
+COPY --from=python-build-stage --chown=${UID}:${GID} --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 

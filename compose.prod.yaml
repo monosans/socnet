@@ -25,11 +25,12 @@ services:
       driver: local
     networks:
       - django-redis
+    pull_policy: always
     restart: on-failure
   caddy:
     build:
-      context: .
       dockerfile: ./docker/caddy/Dockerfile
+      pull: true
     cap_add:
       - NET_ADMIN
     depends_on:
