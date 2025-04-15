@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY ./package.json ./
 
-RUN --mount=type=cache,target=/root/.npm \
+RUN --mount=type=cache,target=/root/.npm,sharing=locked \
   --mount=source=package-lock.json,target=package-lock.json \
   npm ci
 
