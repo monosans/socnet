@@ -81,7 +81,13 @@ jobs:
           persist-credentials: false
       - run: cp .env.example .env
       - id: build
-        run: docker compose -f compose.yaml -f compose.ci.yaml build django
+        uses: docker/build-push-action@v4
+        with:
+          build-args: EXTRA=local
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          file: ./docker/django/Dockerfile
+          target: python-ci-run-stage
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django python3 manage.py migrate
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django pytest --cov
       - if: ${{ always() && steps.build.conclusion == 'success' }}
