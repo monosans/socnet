@@ -87,7 +87,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           file: ./docker/django/Dockerfile
-          load: true
+          # load: true
+          tags: socnet-ci-django
           target: python-ci-run-stage
       - run: cp .env.example .env
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django python3 manage.py migrate
