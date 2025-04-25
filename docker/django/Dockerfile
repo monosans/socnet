@@ -1,24 +1,24 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/node:lts-bookworm-slim AS node-base-stage
+FROM docker.io/node:lts-bookworm-slim AS node-base
 
 WORKDIR /app
 
-COPY ./package.json ./
+COPY --link ./package.json ./
 
 RUN --mount=type=cache,target=/root/.npm,sharing=locked \
   --mount=source=package-lock.json,target=package-lock.json \
   npm ci
 
 
-FROM node-base-stage AS node-build-stage
+FROM node-base AS node-build
 
 RUN --mount=source=tsconfig.json,target=tsconfig.json \
   --mount=source=socnet/static/private,target=socnet/static/private \
   npm run build
 
 
-FROM node-base-stage AS node-watch-stage
+FROM node-base AS node-watch
 
 ARG \
   UID=1000 \
@@ -32,7 +32,7 @@ USER node
 CMD ["npm", "run", "watch"]
 
 
-FROM docker.io/python:3.13-slim-bookworm AS python-base-stage
+FROM docker.io/python:3.13-slim-bookworm AS python-base
 
 ENV \
   PYTHONDONTWRITEBYTECODE=1 \
@@ -40,21 +40,27 @@ ENV \
 
 WORKDIR /app
 
+RUN rm -f /etc/apt/apt.conf.d/docker-clean \
+  && echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 
-FROM python-base-stage AS python-build-stage
 
-RUN apt-get update \
+FROM python-base AS python-builder
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
-  && curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain beta --profile minimal \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
+  && curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain beta --profile minimal
 
 ENV \
   PATH="/root/.cargo/bin:${PATH}" \
   UV_COMPILE_BYTECODE=1 \
-  UV_LINK_MODE=copy
+  UV_LINK_MODE=copy \
+  UV_PYTHON_DOWNLOADS=0
 
-COPY ./socnet_rs/ ./socnet_rs/
+COPY --link ./socnet_rs/ ./socnet_rs/
 
 ARG EXTRA
 
@@ -64,17 +70,17 @@ RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
   --mount=type=cache,target=/root/.cargo/registry,sharing=locked \
   --mount=source=pyproject.toml,target=pyproject.toml \
   --mount=source=uv.lock,target=uv.lock \
-  uv sync --extra="${EXTRA}" --no-dev --no-install-project --frozen
+  uv sync --extra="${EXTRA}" --no-dev --no-install-project --locked
 
 
-FROM python-base-stage AS python-ci-run-stage
+FROM python-base AS python-ci
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext wait-for-it \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  apt-get update \
+  && apt-get install -y --no-install-recommends gettext wait-for-it
 
 COPY --from=python-build-stage --link /app/.venv /app/.venv
 
@@ -85,14 +91,14 @@ ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
 CMD ["bash", "/app/docker/django/start.sh"]
 
 
-FROM python-base-stage AS python-local-run-stage
+FROM python-base AS python-local
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends gettext wait-for-it \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/*
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  apt-get update \
+  && apt-get install -y --no-install-recommends gettext wait-for-it
 
 ARG \
   UID=1000 \
@@ -101,7 +107,7 @@ ARG \
 RUN groupadd --gid "${GID}" django \
   && useradd --gid "${GID}" --no-log-init --uid "${UID}" django
 
-COPY --from=python-build-stage --chown=${UID}:${GID} --link /app/.venv /app/.venv
+COPY --from=python-builder --chown=${UID}:${GID} --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
@@ -112,28 +118,28 @@ ENTRYPOINT ["bash", "/app/docker/django/entrypoint.sh"]
 CMD ["bash", "/app/docker/django/start.sh"]
 
 
-FROM python-base-stage AS python-production-run-stage
+FROM python-base AS python-production
 
 ENV DJANGO_SETTINGS_MODULE=config.settings.production
 
-RUN apt-get update \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  apt-get update \
   && apt-get install -y --no-install-recommends gettext libpq-dev wait-for-it \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/* \
   && groupadd --gid 1000 django \
   && useradd --gid 1000 --no-log-init --uid 1000 django \
   && mkdir -p /var/www/django/static /var/www/django/media \
   && chown 1000:1000 /var/www/django/static /var/www/django/media
 
-COPY --from=python-build-stage --chown=1000:1000 --link /app/.venv /app/.venv
+COPY --from=python-builder --chown=1000:1000 --link /app/.venv /app/.venv
+COPY --from=node-build --chown=1000:1000 --link /app/socnet/static/public/css/ /app/socnet/static/public/css/
+COPY --from=node-build --chown=1000:1000 --link /app/socnet/static/public/js/ /app/socnet/static/public/js/
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-COPY --chown=1000:1000 . .
-COPY --from=node-build-stage --chown=1000:1000 --link /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --from=node-build-stage --chown=1000:1000 --link /app/socnet/static/public/js/ /app/socnet/static/public/js/
-
 USER django
+
+COPY --chown=1000:1000 --link . .
 
 ENTRYPOINT ["bash", "/app/docker/django/entrypoint.prod.sh"]
 

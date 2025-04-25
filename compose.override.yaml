@@ -6,7 +6,7 @@ services:
         - "EXTRA=local"
         - "UID=${UID:-1000}"
         - "GID=${GID:-1000}"
-      target: python-local-run-stage
+      target: python-local
     depends_on:
       - esbuild
     ports:
@@ -24,7 +24,7 @@ services:
         - "GID=${GID:-1000}"
       dockerfile: ./docker/django/Dockerfile
       pull: true
-      target: node-watch-stage
+      target: node-watch
     init: true
     logging:
       driver: local

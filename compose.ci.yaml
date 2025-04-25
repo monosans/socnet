@@ -2,7 +2,7 @@ services:
   django:
     image: socnet-ci-django
     build:
-      target: python-ci-run-stage
+      target: python-ci
       args:
         - EXTRA=local
     volumes:

@@ -2,7 +2,7 @@ services:
   django:
     image: socnet-production-django
     build:
-      target: python-production-run-stage
+      target: python-production
       args:
         - EXTRA=production
     depends_on:

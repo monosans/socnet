@@ -8,7 +8,7 @@
 ./socnet/static/public/css/
 ./socnet/static/public/js/
 !./socnet/templates/
-!./socnet_rs/src/
+!./socnet_rs/src/**/*.rs
 !./socnet_rs/Cargo.toml
 !./socnet_rs/Cargo.lock
 !./socnet_rs/pyproject.toml
