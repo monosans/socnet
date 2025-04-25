@@ -82,7 +82,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   apt-get update \
   && apt-get install -y --no-install-recommends gettext wait-for-it
 
-COPY --from=python-build-stage --link /app/.venv /app/.venv
+COPY --from=python-builder --link /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
