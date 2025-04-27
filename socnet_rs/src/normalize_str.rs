@@ -2,7 +2,7 @@ use pyo3::prelude::*;
 
 #[pyfunction]
 #[pyo3(signature = (value, /))]
-pub(crate) fn normalize_str(py: Python<'_>, value: &str) -> String {
+pub fn normalize_str(py: Python<'_>, value: &str) -> String {
     py.allow_threads(move || {
         value
             .lines()

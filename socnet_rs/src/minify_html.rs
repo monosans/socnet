@@ -20,7 +20,7 @@ const CFG: ::minify_html::Cfg = ::minify_html::Cfg {
 
 #[pyfunction]
 #[pyo3(signature = (value, /))]
-pub(crate) fn minify_html(py: Python<'_>, value: &str) -> String {
+pub fn minify_html(py: Python<'_>, value: &str) -> String {
     py.allow_threads(move || {
         let minified = ::minify_html::minify(value.as_bytes(), &CFG);
         String::from_utf8(minified).unwrap()
