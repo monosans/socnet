@@ -19,7 +19,7 @@ dependencies = [
   "httptools==0.6.4",
   "orjson==3.10.18",
   "pillow==11.2.1",
-  "psycopg[pool]==3.2.6",
+  "psycopg[pool]==3.2.7",
   "sentry-sdk[django]==2.27.0",
   "socnet-rs",
   "uvicorn==0.34.2",
@@ -33,7 +33,7 @@ optional-dependencies.local = [
   "django-debug-toolbar==5.2.0",
   "django-extra-checks==0.16.1",
   "factory-boy==3.3.3",
-  "psycopg[binary]==3.2.6",
+  "psycopg[binary]==3.2.7",
   "pytest==8.3.5",
   "pytest-cov==6.1.1",
   "pytest-django==4.11.1",
@@ -42,7 +42,7 @@ optional-dependencies.local = [
 ]
 optional-dependencies.production = [
   "gunicorn==23",
-  "psycopg[c]==3.2.6",
+  "psycopg[c]==3.2.7",
   "redis[hiredis]==5.2.1",
   "uvicorn-worker==0.3",
 ]
