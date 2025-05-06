@@ -15,7 +15,7 @@
     "@types/autosize": "4.0.3",
     "@types/eslint-config-prettier": "6.11.3",
     "@types/luxon": "3.6.2",
-    "esbuild": "0.25.3",
+    "esbuild": "0.25.4",
     "eslint": "9.26.0",
     "eslint-config-prettier": "10.1.2",
     "eslint-plugin-unicorn": "59.0.0",
