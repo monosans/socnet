@@ -51,7 +51,7 @@ optional-dependencies.production = [
 dev = [
   "django-stubs==5.2.0",
   "djlint==1.36.4",
-  "mypy[faster-cache]==1.15",
+  "mypy[faster-cache]==1.16.0",
   "ruff==0.11.12",
   "types-pillow==10.2.0.20240822",
 ]
