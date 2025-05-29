@@ -13,7 +13,7 @@ dependencies = [
   "django-filter==25.1",
   "django-htmx==1.23.0",
   "django-logentry-admin==1.1",
-  "django-ninja==1.4.1",
+  "django-ninja==1.4.2",
   "django-stubs-ext==5.2.0",
   "docutils==0.21.2",
   "httptools==0.6.4",
