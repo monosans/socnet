@@ -22,7 +22,7 @@ dependencies = [
   "psycopg[pool]==3.2.9",
   "sentry-sdk[django]==2.29.1",
   "socnet-rs",
-  "uvicorn==0.34.2",
+  "uvicorn==0.34.3",
   "uvloop==0.21; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
   "websockets==15.0.1",
 ]
