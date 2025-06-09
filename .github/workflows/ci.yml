@@ -118,4 +118,4 @@ jobs:
           cache: npm
           check-latest: true
       - run: npm ci
-      - run: npx tsc --noEmit
+      - run: npx tsc --build --noEmit

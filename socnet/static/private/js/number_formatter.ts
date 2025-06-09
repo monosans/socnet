@@ -1,5 +1,4 @@
 const formatter = new Intl.NumberFormat(document.documentElement.lang, {
-  // @ts-expect-error
   notation: "compact",
 });
 

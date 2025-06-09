@@ -5,14 +5,34 @@ import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: [".venv/", "socnet/static/public/js/"] },
+  { ignores: [".venv", "socnet/static/public/js"] },
   eslint.configs.all,
   eslintPluginUnicorn.configs.all,
   tseslint.configs.all,
   eslintConfigPrettier,
   {
-    languageOptions: { ecmaVersion: 6, parserOptions: { project: true } },
-    linterOptions: { reportUnusedDisableDirectives: "error" },
+    files: ["socnet"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      parserOptions: {
+        projectService: { defaultProject: "tsconfig.app.json" },
+      },
+    },
+  },
+  {
+    ignores: ["socnet"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      parserOptions: {
+        projectService: { defaultProject: "tsconfig.node.json" },
+      },
+    },
+  },
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: "error",
+      reportUnusedInlineConfigs: "error",
+    },
     rules: {
       "@typescript-eslint/ban-ts-comment": [
         "error",

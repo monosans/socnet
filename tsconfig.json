@@ -1,20 +1,7 @@
 {
-  "extends": "@tsconfig/strictest/tsconfig.json",
-  "exclude": ["socnet/static/public/js/"],
-  "compilerOptions": {
-    "noUncheckedIndexedAccess": false,
-    "useUnknownInCatchVariables": true,
-
-    "module": "node16",
-
-    "newLine": "lf",
-    "noEmit": true,
-    "removeComments": true,
-
-    "allowSyntheticDefaultImports": false,
-    "forceConsistentCasingInFileNames": true,
-
-    "target": "es6",
-    "useDefineForClassFields": true
-  }
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }
