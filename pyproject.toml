@@ -38,7 +38,7 @@ optional-dependencies.local = [
   "pytest-cov==6.2.1",
   "pytest-django==4.11.1",
   "pytest-github-actions-annotate-failures==0.3",
-  "watchfiles==1.0.5",
+  "watchfiles==1.1.0",
 ]
 optional-dependencies.production = [
   "gunicorn==23",
