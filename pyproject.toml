@@ -11,7 +11,7 @@ dependencies = [
   "django-cleanup==9",
   "django-environ==0.12",
   "django-filter==25.1",
-  "django-htmx==1.23.0",
+  "django-htmx==1.23.1",
   "django-logentry-admin==1.1",
   "django-ninja==1.4.3",
   "django-stubs-ext==5.2.1",
