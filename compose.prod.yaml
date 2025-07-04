@@ -10,12 +10,12 @@ services:
     networks:
       - caddy-django
       - django-redis
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - production-django-media:/var/www/django/media
       - production-django-static:/var/www/django/static
   postgres:
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - production-postgres-data:/var/lib/postgresql/data
   redis:
@@ -26,7 +26,7 @@ services:
     networks:
       - django-redis
     pull_policy: always
-    restart: on-failure
+    restart: unless-stopped
   caddy:
     build:
       dockerfile: ./docker/caddy/Dockerfile
@@ -45,7 +45,7 @@ services:
       - "80:80"
       - "443:443"
       - "443:443/udp"
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - production-caddy-config:/config
       - production-caddy-data:/data
