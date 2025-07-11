@@ -8,7 +8,7 @@
     "watch": "npm run esbuild-base -- --watch=forever"
   },
   "devDependencies": {
-    "@eslint/js": "9.30.1",
+    "@eslint/js": "9.31.0",
     "@ianvs/prettier-plugin-sort-imports": "4.5.1",
     "@total-typescript/ts-reset": "0.6.1",
     "@tsconfig/node22": "22.0.2",
