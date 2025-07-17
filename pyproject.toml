@@ -14,7 +14,7 @@ dependencies = [
   "django-htmx==1.23.2",
   "django-logentry-admin==1.1",
   "django-ninja==1.4.3",
-  "django-stubs-ext==5.2.1",
+  "django-stubs-ext==5.2.2",
   "docutils==0.21.2",
   "httptools==0.6.4",
   "orjson==3.11",
@@ -49,7 +49,7 @@ optional-dependencies.production = [
 
 [dependency-groups]
 dev = [
-  "django-stubs==5.2.1",
+  "django-stubs==5.2.2",
   "djlint==1.36.4",
   "mypy[faster-cache]==1.17",
   "ruff==0.12.3",
