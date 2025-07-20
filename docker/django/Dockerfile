@@ -24,7 +24,7 @@ ARG \
   UID=1000 \
   GID=1000
 
-RUN groupmod --gid "${GID}" node \
+RUN (getent group "${GID}" || groupmod --gid "${GID}" node) \
   && usermod --uid "${UID}" --gid "${GID}" node
 
 USER node
