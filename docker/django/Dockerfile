@@ -104,7 +104,7 @@ ARG \
   UID=1000 \
   GID=1000
 
-RUN groupadd --gid "${GID}" django \
+RUN (getent group "${GID}" || groupadd --gid "${GID}" django) \
   && useradd --gid "${GID}" --no-log-init --uid "${UID}" django
 
 COPY --from=python-builder --chown=${UID}:${GID} --link /app/.venv /app/.venv
