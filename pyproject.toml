@@ -4,7 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.13,<3.14"
 dependencies = [
   "channels==4.2.2",
-  "channels-redis==4.2.1",
+  "channels-redis==4.3.0",
   "django[argon2]==5.2.4",
   "django-allauth[mfa]==65.10",
   "django-bootstrap5==25.1",
