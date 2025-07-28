@@ -21,8 +21,6 @@ services:
   redis:
     image: docker.io/valkey/valkey:8
     init: true
-    logging:
-      driver: local
     networks:
       - django-redis
     pull_policy: always
@@ -37,8 +35,6 @@ services:
       - django
     env_file: ./.env
     init: true
-    logging:
-      driver: local
     networks:
       - caddy-django
     ports:

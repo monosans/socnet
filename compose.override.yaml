@@ -26,8 +26,6 @@ services:
       pull: true
       target: node-watch
     init: true
-    logging:
-      driver: local
     networks:
       - esbuild
     volumes:
