@@ -87,7 +87,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "channels", specifier = "==4.2.2" },
-    { name = "channels-redis", specifier = "==4.3.0" },
+    { name = "channels-redis", specifier = "==4.3" },
     { name = "covdefaults", marker = "extra == 'local'", specifier = "==2.3" },
     { name = "debugpy", marker = "extra == 'local'", specifier = "==1.8.15" },
     { name = "django", extras = ["argon2"], specifier = "==5.2.4" },
@@ -95,7 +95,7 @@ requires-dist = [
     { name = "django-bootstrap5", specifier = "==25.1" },
     { name = "django-cleanup", specifier = "==9" },
     { name = "django-coverage-plugin", marker = "extra == 'local'", specifier = "==3.1.1" },
-    { name = "django-debug-toolbar", marker = "extra == 'local'", specifier = "==6.0.0" },
+    { name = "django-debug-toolbar", marker = "extra == 'local'", specifier = "==6" },
     { name = "django-environ", specifier = "==0.12" },
     { name = "django-extra-checks", marker = "extra == 'local'", specifier = "==0.16.1" },
     { name = "django-filter", specifier = "==25.1" },

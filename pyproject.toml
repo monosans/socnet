@@ -4,7 +4,7 @@ version = "0.1.0"
 requires-python = ">=3.13,<3.14"
 dependencies = [
   "channels==4.2.2",
-  "channels-redis==4.3.0",
+  "channels-redis==4.3",
   "django[argon2]==5.2.4",
   "django-allauth[mfa]==65.10",
   "django-bootstrap5==25.1",
@@ -30,7 +30,7 @@ optional-dependencies.local = [
   "covdefaults==2.3",
   "debugpy==1.8.15",
   "django-coverage-plugin==3.1.1",
-  "django-debug-toolbar==6.0.0",
+  "django-debug-toolbar==6",
   "django-extra-checks==0.16.1",
   "factory-boy==3.3.3",
   "psycopg[binary]==3.2.9",
