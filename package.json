@@ -15,7 +15,7 @@
     "@tsconfig/strictest": "2.0.5",
     "@types/autosize": "4.0.3",
     "@types/eslint-config-prettier": "6.11.3",
-    "@types/luxon": "3.6.2",
+    "@types/luxon": "3.7.0",
     "esbuild": "0.25.8",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
