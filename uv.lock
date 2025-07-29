@@ -86,7 +86,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "channels", specifier = "==4.3.0" },
+    { name = "channels", specifier = "==4.3" },
     { name = "channels-redis", specifier = "==4.3" },
     { name = "covdefaults", marker = "extra == 'local'", specifier = "==2.3" },
     { name = "debugpy", marker = "extra == 'local'", specifier = "==1.8.15" },
