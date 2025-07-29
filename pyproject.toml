@@ -15,7 +15,7 @@ dependencies = [
   "django-logentry-admin==1.1",
   "django-ninja==1.4.3",
   "django-stubs-ext==5.2.2",
-  "docutils==0.21.2",
+  "docutils==0.22",
   "httptools==0.6.4",
   "orjson==3.11.1",
   "pillow==11.3",
