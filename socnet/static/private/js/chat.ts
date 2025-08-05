@@ -16,7 +16,7 @@ interface ChatMessageEvent {
   readonly sender: string;
 }
 
-const chatData = JSON.parse(document.querySelector("#data")!.textContent!) as {
+const chatData = JSON.parse(document.querySelector("#data")!.textContent) as {
   readonly interlocutorPk: number;
   readonly users: Record<string, User>;
 };

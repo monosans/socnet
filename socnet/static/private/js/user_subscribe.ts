@@ -55,7 +55,7 @@ async function handler(e: Event): Promise<void> {
   btn.dataset["isSubscribed"] = isSubscribe ? "y" : "n";
   [btn.textContent, btn.dataset["textToggle"]] = [
     btn.dataset["textToggle"]!,
-    btn.textContent!,
+    btn.textContent,
   ];
 
   btn.disabled = false;
