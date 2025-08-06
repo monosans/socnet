@@ -116,7 +116,7 @@ requires-dist = [
     { name = "pytest-cov", marker = "extra == 'local'", specifier = "==6.2.1" },
     { name = "pytest-django", marker = "extra == 'local'", specifier = "==4.11.1" },
     { name = "pytest-github-actions-annotate-failures", marker = "extra == 'local'", specifier = "==0.3" },
-    { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==6.3.0" },
+    { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==6.3" },
     { name = "sentry-sdk", extras = ["django"], specifier = "==2.34.1" },
     { name = "socnet-rs", directory = "socnet_rs" },
     { name = "uvicorn", specifier = "==0.35" },
