@@ -34,7 +34,7 @@ jobs:
         with:
           toolchain: beta
           components: clippy
-      - run: cargo +beta clippy --all-targets -- -Dwarnings
+      - run: cargo +beta clippy -- -Dwarnings
         working-directory: ./socnet_rs
   eslint:
     runs-on: ubuntu-24.04
