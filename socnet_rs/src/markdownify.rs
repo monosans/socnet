@@ -2,7 +2,7 @@ use std::{collections::HashMap, sync::LazyLock};
 
 use pyo3::prelude::*;
 
-static AMMONIA: LazyLock<ammonia::Builder> = LazyLock::new(|| {
+static AMMONIA: LazyLock<ammonia::Builder<'_>> = LazyLock::new(|| {
     let mut cleaner = ammonia::Builder::default();
     cleaner.set_tag_attribute_values(HashMap::from([
         (
