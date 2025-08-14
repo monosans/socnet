@@ -19,6 +19,7 @@ jobs:
       - pytest
       - rustfmt
       - tsc
+      - udeps
     runs-on: ubuntu-24.04
     steps:
       - uses: re-actors/alls-green@release/v1
@@ -119,3 +120,16 @@ jobs:
           check-latest: true
       - run: npm ci
       - run: npx tsc --build --noEmit
+  udeps:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: nightly
+          cache-key: x86_64-unknown-linux-gnu
+      - run: cargo +nightly install --locked cargo-udeps
+      - run: cargo +nightly udeps
+        working-directory: ./socnet_rs
