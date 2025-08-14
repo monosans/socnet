@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/node:lts-bookworm-slim AS node-base
+FROM docker.io/node:lts-trixie-slim AS node-base
 
 WORKDIR /app
 
