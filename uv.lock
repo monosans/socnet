@@ -91,7 +91,7 @@ requires-dist = [
     { name = "covdefaults", marker = "extra == 'local'", specifier = "==2.3" },
     { name = "debugpy", marker = "extra == 'local'", specifier = "==1.8.16" },
     { name = "django", extras = ["argon2"], specifier = "==5.2.5" },
-    { name = "django-allauth", extras = ["mfa"], specifier = "==65.10" },
+    { name = "django-allauth", extras = ["mfa"], specifier = "==65.11.0" },
     { name = "django-bootstrap5", specifier = "==25.2" },
     { name = "django-cleanup", specifier = "==9" },
     { name = "django-coverage-plugin", marker = "extra == 'local'", specifier = "==3.1.1" },
@@ -384,13 +384,13 @@ argon2 = [
 
 [[package]]
 name = "django-allauth"
-version = "65.10.0"
+version = "65.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e1/9e/271e3b8ea27c089ddf3431140cf4aa86df86556ec102e360da5af62c3a99/django_allauth-65.10.0.tar.gz", hash = "sha256:47daa3b0e11a1d75724ea32995de37bd2b8963e9e4cce2b3a7fd64eb6d3b3c48", size = 1897777, upload-time = "2025-07-10T11:32:44.098Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/7a/29d515bc66f13bdbe0d52ee93a384f47d863010cd1a750fed6c928e5d85c/django_allauth-65.11.0.tar.gz", hash = "sha256:d08ee0b60a1a54f84720bb749518628c517c9af40b6cfb3bc980206e182745ab", size = 1914618, upload-time = "2025-08-15T10:10:38.318Z" }
 
 [package.optional-dependencies]
 mfa = [
