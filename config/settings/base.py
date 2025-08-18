@@ -127,7 +127,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    "socnet.core.middleware.MinifyHtmlMiddleware",
     "socnet.core.middleware.ResponseHeadersMiddleware",
 ]
 

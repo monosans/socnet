@@ -108,7 +108,6 @@ docker compose -f compose.yaml -f compose.prod.yaml up -d --remove-orphans
 Markdown parsing, HTML minification and sanitization, and a few other things are implemented in Rust in the `socnet_rs` package using the following libraries:
 
 - ammonia
-- minify-html
 - pulldown-cmark
 - pyo3
 

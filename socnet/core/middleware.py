@@ -40,26 +40,3 @@ class ResponseHeadersMiddleware(MiddlewareMixin):
         for header, value in HEADERS:
             response.headers.setdefault(header, value)
         return response
-
-
-class MinifyHtmlMiddleware(MiddlewareMixin):
-    """Based on https://github.com/adamchainz/django-minify-html"""
-
-    def process_response(  # noqa: PLR6301
-        self,
-        request: HttpRequest,  # noqa: ARG002
-        response: HttpResponseBase,
-    ) -> HttpResponseBase:
-        if (
-            not getattr(response, "streaming", False)
-            and response.get("Content-Encoding", "") == ""  # noqa: PLC1901
-            and response.get("Content-Type", "").split(";", 1)[0] == "text/html"
-        ):
-            if TYPE_CHECKING:
-                assert isinstance(response, HttpResponse)
-            content = response.content.decode(response.charset)
-            minified_content = socnet_rs.minify_html(content)
-            response.content = minified_content
-            if "Content-Length" in response:
-                response["Content-Length"] = len(response.content)
-        return response
