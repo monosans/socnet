@@ -4,10 +4,7 @@ from typing import TYPE_CHECKING
 
 from django.utils.deprecation import MiddlewareMixin
 
-import socnet_rs
-
 if TYPE_CHECKING:
-    from django.http import HttpResponse
     from django.http.response import HttpResponseBase
 
     from socnet.core.types import HttpRequest
