@@ -4,7 +4,7 @@
 	email {$TLS_EMAIL}
 }
 
-{$DOMAIN_NAME} {
+(common) {
 	header {
 		-Server
 		-Via
@@ -16,6 +16,14 @@
 	}
 
 	encode zstd gzip
+}
+
+{$DOMAIN_NAME} {
+	import common
+
+	handle_errors {
+		import common
+	}
 
 	handle /robots.txt {
 		respond 200 {
@@ -27,17 +35,13 @@ Disallow: /"
 	handle_path /static/* {
 		# STATIC_ROOT
 		root * /var/www/django/static
-		file_server {
-			pass_thru
-		}
+		file_server
 	}
 
 	handle_path /media/* {
 		# MEDIA_ROOT
 		root * /var/www/django/media
-		file_server {
-			pass_thru
-		}
+		file_server
 	}
 
 	handle {
