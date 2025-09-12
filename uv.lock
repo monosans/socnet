@@ -99,7 +99,7 @@ requires-dist = [
     { name = "django-environ", specifier = "==0.12" },
     { name = "django-extra-checks", marker = "extra == 'local'", specifier = "==0.16.1" },
     { name = "django-filter", specifier = "==25.1" },
-    { name = "django-htmx", specifier = "==1.24.0" },
+    { name = "django-htmx", specifier = "==1.24.1" },
     { name = "django-logentry-admin", specifier = "==1.1" },
     { name = "django-ninja", specifier = "==1.4.3" },
     { name = "django-stubs-ext", specifier = "==5.2.2" },
@@ -477,15 +477,15 @@ wheels = [
 
 [[package]]
 name = "django-htmx"
-version = "1.24.0"
+version = "1.24.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3e/45/9e93167eac5b8506e17aef8522c085302f1968a3d9fe469ced5d16300467/django_htmx-1.24.0.tar.gz", hash = "sha256:5a40d4b2a3a4d5a444b516ca7f9c9836dc512dc40634770687989e96999466e5", size = 64436, upload-time = "2025-09-09T23:08:32.18Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/75/c3/f9bac5ea1fcd46d422b336cc9fb94e5ca012db6ee5a43c270d4922e8efd3/django_htmx-1.24.1.tar.gz", hash = "sha256:2750c05ff673e4c4a86f0d5e79aaff3c1bdd4b1c73089a4e7a3ad4aa4a008ee7", size = 64764, upload-time = "2025-09-11T20:59:49.868Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9c/f1/0fa3b0eee85149e14e311f346005d7518d54e7e1ce7cbd1f98bf0d8e8cf0/django_htmx-1.24.0-py3-none-any.whl", hash = "sha256:9418ac5a2c89c593b71d32dbef361dc4fdf0033dda0fbb63584fd3e67b165207", size = 61538, upload-time = "2025-09-09T23:08:30.745Z" },
+    { url = "https://files.pythonhosted.org/packages/56/fa/0864fdc191816335c50feb5348387434ab170a90c271e8fc4e045d08caca/django_htmx-1.24.1-py3-none-any.whl", hash = "sha256:8fc6feba50f77cc45cebd269c94a30a5c0063dbbdb7af8963062e4d5f7a0c9e4", size = 61852, upload-time = "2025-09-11T20:59:48.312Z" },
 ]
 
 [[package]]
