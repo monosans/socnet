@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, override
+from typing import override
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
@@ -16,9 +16,6 @@ from socnet.core.fields import (
     WebpImageField,
 )
 from socnet.users import validators
-
-if TYPE_CHECKING:
-    from datetime import date
 
 
 def image_upload_to(_instance: User, _filename: str) -> str:
@@ -87,7 +84,7 @@ class User(AbstractUser):
         return self.display_name
 
     def get_age(self) -> int | None:
-        bd: date | None = self.birth_date
+        bd = self.birth_date
         if bd is None:
             return None
         today = timezone.now().date()

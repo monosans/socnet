@@ -151,7 +151,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             .order_by("pk")
         )
         if request.user.is_authenticated:
-            comments_qs = comments_qs.annotate(  # type: ignore[assignment]
+            comments_qs = comments_qs.annotate(
                 is_liked=Q(pk__in=request.user.liked_comments.all())
             )
         qs = qs.prefetch_related(Prefetch("comments", comments_qs))
@@ -181,7 +181,7 @@ def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
         .order_by("pk")
     )
     if request.user.is_authenticated:
-        comments_qs = comments_qs.annotate(  # type: ignore[assignment]
+        comments_qs = comments_qs.annotate(
             is_liked=Q(pk__in=request.user.liked_comments.all())
         )
     return render(
@@ -193,7 +193,7 @@ def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
 
 @vary_on_htmx
 def posts_view(request: HttpRequest) -> HttpResponse:
-    posts: QuerySet[models.Post] | None = None
+    posts = None
     qs = services.get_posts_preview_qs(request)
     is_search = bool(request.GET.get("q"))
     if is_search:

@@ -22,4 +22,4 @@ class UserFactory(DjangoModelFactory[User]):
 
     class Meta:
         model = User
-        django_get_or_create: ClassVar[list[str]] = ["email", "username"]
+        django_get_or_create: ClassVar = ["email", "username"]
