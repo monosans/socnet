@@ -15,10 +15,8 @@ if TYPE_CHECKING:
 
 class MarkdownContentModelForm[T: MarkdownContentModel](forms.ModelForm[T]):
     class Meta:
-        labels: ClassVar[dict[str, str]] = {"content": ""}
-        widgets: ClassVar[dict[str, forms.Textarea]] = {
-            "content": forms.Textarea({"rows": 2})
-        }
+        labels: ClassVar = {"content": ""}
+        widgets: ClassVar = {"content": forms.Textarea({"rows": 2})}
 
     def clean_content(self) -> str:
         old_content = self.instance.content

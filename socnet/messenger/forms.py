@@ -15,7 +15,7 @@ class MessageCreationForm(forms.ModelForm[models.Message]):
     class Meta:
         model = models.Message
         fields = ("content",)
-        widgets: ClassVar[dict[str, forms.Textarea]] = {
+        widgets: ClassVar = {
             "content": forms.Textarea({
                 "class": "form-control border-0 rounded-top-0",
                 "placeholder": models.Message._meta.get_field(

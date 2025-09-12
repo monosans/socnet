@@ -11,8 +11,6 @@ from socnet.users.models import User
 if TYPE_CHECKING:
     from typing import Any, ClassVar
 
-    from django_stubs_ext import StrPromise
-
 
 class InjectUserMixin:
     def __init__(self, user: User, *args: Any, **kwargs: Any) -> None:
@@ -47,9 +45,7 @@ class EditProfileForm(auth_forms.UserChangeForm[User]):
             "about",
             "show_last_login",
         )
-        widgets: ClassVar[dict[str, forms.Textarea]] = {
-            "about": forms.Textarea({"rows": 1})
-        }
+        widgets: ClassVar = {"about": forms.Textarea({"rows": 1})}
 
     def clean_username(self) -> str:
         old_username = self.instance.username
@@ -83,9 +79,7 @@ class AccountDeletionForm(InjectUserMixin, forms.Form):
         label=_("Password"),
     )
 
-    error_messages: ClassVar[dict[str, StrPromise]] = {
-        "invalid_password": _("Invalid password.")
-    }
+    error_messages: ClassVar = {"invalid_password": _("Invalid password.")}
 
     def clean_password(self) -> str:
         password: str = self.cleaned_data["password"]
