@@ -154,7 +154,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             comments_qs = comments_qs.annotate(
                 is_liked=Q(pk__in=request.user.liked_comments.all())
             )
-        qs = qs.prefetch_related(Prefetch("comments", comments_qs))
+        qs = qs.prefetch_related(  # type: ignore[type-var]
+            Prefetch("comments", comments_qs)  # type: ignore[type-var]
+        )
         post = get_object_or_404(qs)
         comments = post.comments.all()
     else:
@@ -252,7 +254,7 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         )
         .order_by("-pk")
     )
-    prefetch = Prefetch(
+    prefetch = Prefetch(  # type: ignore[type-var]
         "posts",
         (
             posts.annotate(is_liked=Q(pk__in=request.user.liked_posts.all()))
@@ -262,7 +264,7 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     )
     qs = (
         User.objects.only("display_name", "image", "username")
-        .prefetch_related(prefetch)
+        .prefetch_related(prefetch)  # type: ignore[type-var]
         .filter(username=username)
     )
     user = get_object_or_404(qs)
