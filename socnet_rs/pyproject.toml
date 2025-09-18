@@ -5,3 +5,11 @@ requires = ["maturin>=1,<2"]
 [project]
 name = "socnet-rs"
 version = "0.1.0"
+
+[tool.uv]
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "src/**/*.rs" },
+    { file = "Cargo.toml" },
+    { file = "Cargo.lock" },
+]
