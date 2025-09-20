@@ -44,7 +44,7 @@ optional-dependencies.production = [
   "gunicorn==23",
   "psycopg[c]==3.2.10",
   "redis[hiredis]==6.4.0",
-  "uvicorn-worker==0.3",
+  "uvicorn-worker==0.4.0",
 ]
 
 [dependency-groups]
