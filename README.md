@@ -113,7 +113,7 @@ Markdown parsing and HTML sanitization, and a few other things are implemented i
 
 ### Databases
 
-- PostgreSQL 17 for persistent data
+- PostgreSQL 18 for persistent data
 - Valkey 8 (FOSS Redis fork) for cache and as a layer for Channels
 
 ### Frontend
