@@ -44,7 +44,7 @@ repos:
           - --target-version
           - "5.2"
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.13.3
+    rev: v0.14.0
     hooks:
       - id: ruff-check
         args:
