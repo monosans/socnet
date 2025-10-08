@@ -27,9 +27,8 @@
     },
     { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
     {
-      "matchCategories": ["docker"],
-      "matchDepNames": ["docker.io/python"],
-      "matchUpdateTypes": ["minor"],
+      "matchPackageNames": ["python", "docker.io/python"],
+      "groupName": "python",
       "automerge": false
     }
   ],
