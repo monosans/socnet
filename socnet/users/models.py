@@ -59,7 +59,10 @@ class User(AbstractUser):
         verbose_name=_("location"), max_length=128, blank=True
     )
     image = WebpImageField(
-        verbose_name=_("image"), upload_to=image_upload_to, blank=True
+        verbose_name=_("image"),
+        upload_to=image_upload_to,
+        max_size=1024,
+        blank=True,
     )
     about = NormalizedTextField(
         verbose_name=_("about me"), max_length=4096, blank=True
