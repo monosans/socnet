@@ -18,7 +18,7 @@ dependencies = [
   "docutils==0.22.2",
   "httptools==0.7.1",
   "orjson==3.11.3",
-  "pillow==11.3",
+  "pillow==12.0.0",
   "psycopg[pool]==3.2.10",
   "sentry-sdk[django]==2.42.0",
   "socnet-rs",
