@@ -101,7 +101,7 @@ requires-dist = [
     { name = "django-filter", specifier = "==25.2" },
     { name = "django-htmx", specifier = "==1.26.0" },
     { name = "django-logentry-admin", specifier = "==1.1" },
-    { name = "django-ninja", specifier = "==1.4.4" },
+    { name = "django-ninja", specifier = "==1.4.5" },
     { name = "django-stubs-ext", specifier = "==5.2.2" },
     { name = "docutils", specifier = "==0.22.2" },
     { name = "factory-boy", marker = "extra == 'local'", specifier = "==3.3.3" },
@@ -513,15 +513,15 @@ wheels = [
 
 [[package]]
 name = "django-ninja"
-version = "1.4.4"
+version = "1.4.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/34/34/aa7b46bc395e99107877de3928b59541039908c9c0c06b9129b98955a979/django_ninja-1.4.4.tar.gz", hash = "sha256:7433e587f41c82f7eb961bc0196e2b1ba9445f3d30b7f01c8412708598633c35", size = 3709693, upload-time = "2025-10-17T11:24:59.291Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fa/9a/558489e0e25173772fbd826306b7d1777e80285b02d69e0e1aaec41e3eec/django_ninja-1.4.5.tar.gz", hash = "sha256:aa1a2ee2b22c5f1c2f4bfbc004386be7074cbfaf133680c2b359a31221965503", size = 3710511, upload-time = "2025-10-19T18:28:02.362Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5f/0b/9e02e486f73d122fd94a8e193c58eda7f1ba7e0f525a315857b027cd226d/django_ninja-1.4.4-py3-none-any.whl", hash = "sha256:280fd93eef32ee743388820753378720e6ff4bc838fbbbdd0c9e58700167fd23", size = 2426297, upload-time = "2025-10-17T11:24:57.486Z" },
+    { url = "https://files.pythonhosted.org/packages/49/e3/168274a8def4b9a2fb2540319a68914e8e4e529cd7f7b5f1ba8939d011bc/django_ninja-1.4.5-py3-none-any.whl", hash = "sha256:d779702ddc6e17b10739049ddb075a6a1e6c6270bdc04e0b0429f6adbf670373", size = 2426449, upload-time = "2025-10-19T18:28:00.518Z" },
 ]
 
 [[package]]
