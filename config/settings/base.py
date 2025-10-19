@@ -160,9 +160,6 @@ LOGGING_CONFIG: None = None
 
 MESSAGE_TAGS = {messages.DEBUG: "", messages.ERROR: "danger"}
 
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_ADAPTER = "socnet.allauth.adapter.AccountAdapter"
 ACCOUNT_FORMS = {
     "add_email": "socnet.allauth.forms.AddEmailForm",
@@ -170,6 +167,9 @@ ACCOUNT_FORMS = {
     "reset_password": "socnet.allauth.forms.ResetPasswordForm",
     "signup": "socnet.allauth.forms.SignupForm",
 }
+ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
+ACCOUNT_LOGIN_METHODS = {"username", "email"}
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 CHANNEL_LAYERS: dict[str, dict[str, Any]] = {
     "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
