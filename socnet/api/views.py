@@ -11,7 +11,7 @@ from socnet.blog.models import Comment, Post
 from socnet.core.types import AuthedRequest
 from socnet.users.models import User
 
-api = NinjaAPI(title="SocNet", csrf=True, auth=django_auth)
+api = NinjaAPI(title="SocNet", auth=django_auth)
 
 
 @api.post("/posts/{post_id}/likes", response={201: None})
