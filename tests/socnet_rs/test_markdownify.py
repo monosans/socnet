@@ -20,6 +20,6 @@ def test_markdownify(given: str, expected: str) -> None:
 
 
 def test_type_error() -> None:
-    exc_str = "argument 'value': 'int' object cannot be converted to 'PyString'"
+    exc_str = "argument 'value': 'int' object cannot be cast as 'str'"
     with pytest.raises(TypeError, match=exc_str):
         markdownify(0)  # type: ignore[arg-type]
