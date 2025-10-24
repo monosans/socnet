@@ -17,7 +17,7 @@ dependencies = [
   "django-stubs-ext==5.2.2",
   "docutils==0.22.2",
   "httptools==0.7.1",
-  "orjson==3.11.3",
+  "orjson==3.11.4",
   "pillow==12.0.0",
   "psycopg[pool]==3.2.11",
   "sentry-sdk[django]==2.42.1",
