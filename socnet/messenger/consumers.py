@@ -45,8 +45,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @override
     async def connect(self) -> None:
-        user: User | AnonymousUser = self.scope["user"]
-        if user.is_anonymous:
+        user: User | AnonymousUser | None = self.scope["user"]
+        if user is None or user.is_anonymous:
             await self.close()
             return
         self.interlocutor_pk = int(
@@ -68,7 +68,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     async def receive_json(
         self, content: dict[str, str], **kwargs: Any
     ) -> None:
-        sender: User = self.scope["user"]
+        sender: User | None = self.scope["user"]
+        if sender is None:
+            return
         message = models.Message(
             content=content["message"],
             recipient_id=self.interlocutor_pk,
