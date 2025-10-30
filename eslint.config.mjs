@@ -8,6 +8,7 @@ import tseslint from "typescript-eslint";
 export default defineConfig(
   { ignores: [".venv", "socnet/static/public/js"] },
   eslint.configs.all,
+  // @ts-expect-error
   eslintPluginUnicorn.configs.all,
   tseslint.configs.all,
   eslintConfigPrettier,
@@ -23,7 +24,7 @@ export default defineConfig(
   {
     ignores: ["socnet"],
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2024,
       parserOptions: {
         projectService: { defaultProject: "tsconfig.node.json" },
       },

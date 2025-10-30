@@ -6,6 +6,7 @@
     "noUncheckedIndexedAccess": false,
     "module": "node16",
     "noEmit": true,
+    "checkJs": true,
     "allowSyntheticDefaultImports": false,
     "target": "es2020",
     "useDefineForClassFields": true
