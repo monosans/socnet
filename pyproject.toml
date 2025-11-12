@@ -34,7 +34,7 @@ optional-dependencies.local = [
   "django-extra-checks==0.16.1",
   "factory-boy==3.3.3",
   "psycopg[binary]==3.2.12",
-  "pytest==9.0.0",
+  "pytest==9.0.1",
   "pytest-cov==7.0.0",
   "pytest-django==4.11.1",
   "pytest-github-actions-annotate-failures==0.3",
