@@ -3,7 +3,7 @@ name = "app"
 version = "0.1.0"
 requires-python = ">=3.13,<3.14"
 dependencies = [
-  "channels==4.3.1",
+  "channels==4.3.2",
   "channels-redis==4.3",
   "django[argon2]==5.2.8",
   "django-allauth[mfa]==65.13.0",
