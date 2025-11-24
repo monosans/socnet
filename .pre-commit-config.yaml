@@ -20,7 +20,7 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v16.25.0
+    rev: v16.26.0
     hooks:
       - id: stylelint
         args:
