@@ -49,10 +49,10 @@ Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` 
 # Build services
 
 # Linux
-docker compose build
+docker compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g)
 
 # Windows
-docker compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g)
+docker compose build
 
 # Run DB migrations
 docker compose run --rm django python3 manage.py migrate
