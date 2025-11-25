@@ -17,7 +17,7 @@ services:
   postgres:
     restart: unless-stopped
     volumes:
-      - production-postgres-data:/var/lib/postgresql/data
+      - production-postgres-data:/var/lib/postgresql
   redis:
     image: docker.io/valkey/valkey:9
     init: true

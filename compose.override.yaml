@@ -16,7 +16,7 @@ services:
       - /app/.venv
   postgres:
     volumes:
-      - local-postgres-data:/var/lib/postgresql/data
+      - local-postgres-data:/var/lib/postgresql
   esbuild:
     build:
       args:
