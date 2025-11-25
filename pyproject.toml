@@ -29,7 +29,6 @@ optional-dependencies.local = [
   "debugpy==1.8.17",
   "django-coverage-plugin==3.2.0",
   "django-debug-toolbar==6.1.0",
-  "django-extra-checks==0.16.1",
   "factory-boy==3.3.3",
   "psycopg[binary]==3.2.13",
   "pytest==9.0.1",

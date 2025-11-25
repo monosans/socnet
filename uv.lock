@@ -57,7 +57,6 @@ local = [
     { name = "debugpy" },
     { name = "django-coverage-plugin" },
     { name = "django-debug-toolbar" },
-    { name = "django-extra-checks" },
     { name = "factory-boy" },
     { name = "psycopg", extra = ["binary"] },
     { name = "pytest" },
@@ -93,7 +92,6 @@ requires-dist = [
     { name = "django-coverage-plugin", marker = "extra == 'local'", specifier = "==3.2.0" },
     { name = "django-debug-toolbar", marker = "extra == 'local'", specifier = "==6.1.0" },
     { name = "django-environ", specifier = "==0.12" },
-    { name = "django-extra-checks", marker = "extra == 'local'", specifier = "==0.16.1" },
     { name = "django-filter", specifier = "==25.2" },
     { name = "django-htmx", specifier = "==1.26.0" },
     { name = "django-logentry-admin", specifier = "==1.1" },
@@ -493,15 +491,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d6/04/65d2521842c42f4716225f20d8443a50804920606aec018188bbee30a6b0/django_environ-0.12.0.tar.gz", hash = "sha256:227dc891453dd5bde769c3449cf4a74b6f2ee8f7ab2361c93a07068f4179041a", size = 56804, upload-time = "2025-01-13T17:03:37.74Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/83/b3/0a3bec4ecbfee960f39b1842c2f91e4754251e0a6ed443db9fe3f666ba8f/django_environ-0.12.0-py2.py3-none-any.whl", hash = "sha256:92fb346a158abda07ffe6eb23135ce92843af06ecf8753f43adf9d2366dcc0ca", size = 19957, upload-time = "2025-01-13T17:03:32.918Z" },
-]
-
-[[package]]
-name = "django-extra-checks"
-version = "0.16.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/16/20/6b7138fc78f5cd2379f8f517cab99ad1f7451b3796a66819cd0590931789/django_extra_checks-0.16.1.tar.gz", hash = "sha256:10a4e5a6d2cb8de6e3f4bbc708a5e1f7c7ed5bb2b5f74e531d9014db2282889b", size = 14953, upload-time = "2024-12-09T13:16:27.326Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/a9/967bdd409c815a99c4283ca6d321514dcbee2037c34dd3e1addbd9a3a7c3/django_extra_checks-0.16.1-py3-none-any.whl", hash = "sha256:bd23455585e96ad5bb07120bd09a40ecf1ff7e2f9827a7fd66b2c1314e22c946", size = 21566, upload-time = "2024-12-09T13:16:26.379Z" },
 ]
 
 [[package]]
