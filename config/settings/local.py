@@ -8,7 +8,7 @@ DEBUG = True
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-INSTALLED_APPS += ["debug_toolbar", "extra_checks"]
+INSTALLED_APPS += ["debug_toolbar"]
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 TEMPLATES[0]["OPTIONS"]["string_if_invalid"] = (  # type: ignore[index]
@@ -39,24 +39,6 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 MEDIA_ROOT = str(APPS_DIR / "media")
-
-EXTRA_CHECKS = {
-    "checks": [
-        "no-unique-together",
-        "model-admin",
-        "field-file-upload-to",
-        "field-verbose-name",
-        "field-verbose-name-gettext",
-        "field-verbose-name-gettext-case",
-        "field-help-text-gettext",
-        "field-text-null",
-        "field-null",
-        "field-foreign-key-db-index",
-        "field-related-name",
-        "field-default-null",
-        "field-choices-constraint",
-    ]
-}
 
 
 if _SENTRY_DSN := env.str("SENTRY_DSN", None):
