@@ -103,7 +103,6 @@ docker compose -f compose.yaml -f compose.prod.yaml up -d --remove-orphans
 - channels
 - channels-redis
 - sentry-sdk
-- websockets
 
 Markdown parsing and HTML sanitization, and a few other things are implemented in Rust in the `socnet_rs` package using the following libraries:
 
@@ -129,8 +128,7 @@ Markdown parsing and HTML sanitization, and a few other things are implemented i
 ### Web servers
 
 - Caddy
-- gunicorn
-- uvicorn
+- granian
 
 ### Testing
 

@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-exec python3 /app/dev_serve.py
+exec python3 /app/server.py

@@ -9,12 +9,11 @@ omit =
   .venv/*
   node_modules/*
   config/asgi.py
-  config/settings/gunicorn.py
   config/settings/local.py
   config/settings/production.py
   socnet_rs/target/**/*.txt
-  dev_serve.py
   manage.py
+  server.py
 plugins =
   covdefaults
   django_coverage_plugin

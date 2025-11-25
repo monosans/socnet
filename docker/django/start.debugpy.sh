@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-exec python3 -m debugpy --wait-for-client --listen 0.0.0.0:5678 python3 /app/dev_serve.py
+exec python3 -m debugpy --wait-for-client --listen 0.0.0.0:5678 python3 /app/server.py

@@ -7,8 +7,7 @@ LOG_CONFIG = {
     "formatters": {
         "default": {
             "format": "%(asctime)s | %(levelname)-8s | %(name)s: %(message)s"
-        },
-        "access": {},
+        }
     },
     "handlers": {
         "console": {
@@ -24,14 +23,5 @@ LOG_CONFIG = {
         },
     },
     "root": {"level": "INFO", "handlers": ["console", "mail_admins"]},
-    "loggers": {
-        "gunicorn.access": {
-            "level": "INFO",
-            "handlers": ["console", "mail_admins"],
-        },
-        "gunicorn.error": {
-            "level": "INFO",
-            "handlers": ["console", "mail_admins"],
-        },
-    },
+    "loggers": {},
 }
