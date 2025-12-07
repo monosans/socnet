@@ -52,7 +52,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   apt-get update \
   && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
-  && curl -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain beta --profile minimal
+  && curl -sSf 'https://raw.githubusercontent.com/rust-lang/rustup/refs/heads/main/rustup-init.sh' | sh -s -- -y --default-toolchain beta --profile minimal
 
 ENV \
   PATH="/root/.cargo/bin:${PATH}" \
