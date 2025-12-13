@@ -8,7 +8,7 @@
     "watch": "npm run esbuild-base -- --watch=forever"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.1",
+    "@eslint/js": "9.39.2",
     "@ianvs/prettier-plugin-sort-imports": "4.7.0",
     "@total-typescript/ts-reset": "0.6.1",
     "@tsconfig/node24": "24.0.3",
@@ -17,7 +17,7 @@
     "@types/eslint-config-prettier": "6.11.3",
     "@types/luxon": "3.7.1",
     "esbuild": "0.27.1",
-    "eslint": "9.39.1",
+    "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-unicorn": "62.0.0",
     "prettier": "3.7.4",
