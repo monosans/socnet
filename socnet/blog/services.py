@@ -20,7 +20,8 @@ def get_posts_preview_qs(
     request: HttpRequest, extra_fields: Iterable[str] = ()
 ) -> QuerySet[models.Post]:
     qs = (
-        models.Post.objects.only(
+        models.Post.objects
+        .only(
             "allow_commenting",
             "content",
             "author__display_name",
@@ -47,7 +48,8 @@ def get_subscriptions(username: str, field: str) -> User:
         ),
     )
     qs = (
-        User.objects.only("display_name", "username")
+        User.objects
+        .only("display_name", "username")
         .prefetch_related(prefetch)
         .filter(username=username)
     )

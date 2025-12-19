@@ -26,7 +26,8 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
     )
     interlocutor = get_object_or_404(qs)
     messages = (
-        models.Message.objects.only(
+        models.Message.objects
+        .only(
             "content",
             "sender__display_name",
             "sender__image",
@@ -56,7 +57,8 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         if form.is_valid():
             q: str = form.cleaned_data["q"]
             messages = (
-                models.Message.objects.only(
+                models.Message.objects
+                .only(
                     "recipient__display_name",
                     "recipient__image",
                     "recipient__username",
@@ -92,7 +94,8 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         return render(request, "messenger/messages_search.html", context)
     form = forms.MessageSearchForm()
     last_message = (
-        models.Message.objects.annotate(
+        models.Message.objects
+        .annotate(
             date_created_epoch=Extract("date_created", "epoch"),
             truncated_content=Substr("content", 1, 30),
         )
@@ -103,7 +106,8 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         .order_by("-pk")
     )
     chats = (
-        User.objects.distinct()
+        User.objects
+        .distinct()
         .only("display_name", "image", "username")
         .annotate(
             last_message_date_epoch=Subquery(

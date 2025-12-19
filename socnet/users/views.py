@@ -66,7 +66,8 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
             expr = Func(Value(" "), *search_fields, function="CONCAT_WS")
             similarity = TrigramWordSimilarity(query, expr)
             users = (
-                User.objects.only("display_name", "image", "username")
+                User.objects
+                .only("display_name", "image", "username")
                 .annotate(similarity=similarity)
                 .filter(similarity__gte=0.6)
                 .order_by("-similarity")
