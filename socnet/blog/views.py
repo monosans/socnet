@@ -138,7 +138,8 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
     )
     if "#comment" in request.path:
         comments_qs = (
-            models.Comment.objects.only(
+            models.Comment.objects
+            .only(
                 "content",
                 "post_id",
                 "author__display_name",
@@ -167,7 +168,8 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 @require_htmx
 def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
     comments_qs = (
-        models.Comment.objects.only(
+        models.Comment.objects
+        .only(
             "content",
             "post_id",
             "author__display_name",
@@ -201,7 +203,8 @@ def posts_view(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             q: str = form.cleaned_data["q"]
             posts = (
-                qs.annotate(similarity=TrigramWordSimilarity(q, "content"))
+                qs
+                .annotate(similarity=TrigramWordSimilarity(q, "content"))
                 .filter(similarity__gte=0.6)
                 .order_by("-pk")
             )
@@ -233,7 +236,8 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     user = get_object_or_404(qs.filter(username=username))
     posts = paginate(
         request,
-        services.get_posts_preview_qs(request)
+        services
+        .get_posts_preview_qs(request)
         .filter(likers=user)
         .order_by("-pk"),
         per_page=10,
@@ -245,7 +249,8 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 @vary_on_htmx
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     posts = (
-        models.Post.objects.only("allow_commenting", "author_id", "content")
+        models.Post.objects
+        .only("allow_commenting", "author_id", "content")
         .annotate_epoch_dates()
         .annotate(
             Count("comments", distinct=True), Count("likers", distinct=True)
@@ -261,7 +266,8 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
         ),
     )
     qs = (
-        User.objects.only("display_name", "image", "username")
+        User.objects
+        .only("display_name", "image", "username")
         .prefetch_related(prefetch)
         .filter(username=username)
     )
@@ -290,7 +296,8 @@ def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
 
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = (
-        User.objects.only(
+        User.objects
+        .only(
             "about",
             "birth_date",
             "display_name",
