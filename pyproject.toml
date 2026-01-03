@@ -7,7 +7,7 @@ dependencies = [
   "channels-redis==4.3",
   "django[argon2]==5.2.9",
   "django-allauth[mfa]==65.13.1",
-  "django-bootstrap5==25.3",
+  "django-bootstrap5==26.1",
   "django-cleanup==9",
   "django-environ==0.12",
   "django-filter==25.2",
