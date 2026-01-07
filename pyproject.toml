@@ -16,7 +16,7 @@ dependencies = [
   "django-ninja==1.5.2",
   "django-stubs-ext==5.2.2",
   "docutils==0.22.4",
-  "granian==2.6.0",
+  "granian==2.6.1",
   "orjson==3.11.5",
   "pillow==12.1.0",
   "psycopg[pool]==3.3.2",
