@@ -23,7 +23,7 @@
     "prettier": "3.8.0",
     "prettier-plugin-packagejson": "2.5.22",
     "stylelint": "17.0.0",
-    "stylelint-config-recess-order": "7.4.0",
+    "stylelint-config-recess-order": "7.5.0",
     "stylelint-config-standard": "40.0.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.53.1",
