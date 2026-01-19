@@ -19,16 +19,16 @@ repos:
         args:
           - --fix=lf
       - id: trailing-whitespace
-  - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v17.0.0
-    hooks:
-      - id: stylelint
-        args:
-          - --fix=lax
-        additional_dependencies:
-          - stylelint
-          - stylelint-config-standard
-          - stylelint-config-recess-order
+  # - repo: https://github.com/thibaudcolas/pre-commit-stylelint
+  #   rev: v17.0.0
+  #   hooks:
+  #     - id: stylelint
+  #       args:
+  #         - --fix=lax
+  #       additional_dependencies:
+  #         - stylelint
+  #         - stylelint-config-standard
+  #         - stylelint-config-recess-order
   - repo: https://github.com/rbubley/mirrors-prettier
     rev: v3.8.0
     hooks:
