@@ -52,9 +52,8 @@ mod normalize_str;
 
 use pyo3::prelude::*;
 
-#[pymodule(gil_used = false)]
-fn socnet_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(crate::markdownify::markdownify, m)?)?;
-    m.add_function(wrap_pyfunction!(crate::normalize_str::normalize_str, m)?)?;
-    Ok(())
+#[pymodule]
+mod socnet_rs {
+    #[pymodule_export]
+    use crate::{markdownify::markdownify, normalize_str::normalize_str};
 }
