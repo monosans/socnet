@@ -1,3 +1,4 @@
+extend-include = ["*.md"]
 line-length = 80
 preview = true
 target-version = "py314"
@@ -55,7 +56,7 @@ ignore = [
   "TRY400",
 ]
 select = ["ALL"]
-unfixable = ["RUF027"]
+unfixable = ["RUF027", "T"]
 
 [lint.per-file-ignores]
 "config/settings/*" = ["F403", "F405"]
