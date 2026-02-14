@@ -33,7 +33,7 @@ optional-dependencies.local = [
   "psycopg[binary]==3.3.2",
   "pytest==9.0.2",
   "pytest-cov==7.0.0",
-  "pytest-django==4.11.1",
+  "pytest-django==4.12.0",
   "pytest-github-actions-annotate-failures==0.3",
   "watchfiles==1.1.1",
 ]
