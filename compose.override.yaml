@@ -15,6 +15,16 @@ services:
       - .:/app
       - /app/.venv
   postgres:
+    command:
+      [
+        "postgres",
+        "-c",
+        "shared_preload_libraries=pg_stat_statements",
+        "-c",
+        "pg_stat_statements.track=all",
+      ]
+    networks:
+      - pghero-postgres
     volumes:
       - local-postgres-data:/var/lib/postgresql
   esbuild:
@@ -33,7 +43,21 @@ services:
       - ./socnet/static/public:/app/socnet/static/public
       - ./package.json:/app/package.json
       - ./tsconfig.json:/app/tsconfig.json
+  pghero:
+    image: docker.io/ankane/pghero
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+    init: true
+    networks:
+      - pghero-postgres
+    ports:
+      - "8080:8080"
+    pull_policy: always
+    restart: unless-stopped
 networks:
   esbuild:
+  pghero-postgres:
 volumes:
   local-postgres-data:
