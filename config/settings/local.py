@@ -41,7 +41,7 @@ DEBUG_TOOLBAR_CONFIG = {
 MEDIA_ROOT = str(APPS_DIR / "media")
 
 
-if _SENTRY_DSN := env.str("SENTRY_DSN", None):
+if _SENTRY_DSN := env.str("SENTRY_DSN", ""):
     import sentry_sdk
     from sentry_sdk.integrations.asyncio import AsyncioIntegration
 
