@@ -8,7 +8,7 @@
 {% block css %}
   {% if user.image %}
     <link rel="stylesheet" href="{% static 'css/avatar.css' %}" />
-    {% include "inc/viewerjs_css.html" %}
+    <link rel="stylesheet" href="{% static 'css/viewer.css' %}" />
   {% endif %}
 {% endblock css %}
 {% block js %}

@@ -1,4 +1,4 @@
-import Viewer from "https://cdn.jsdelivr.net/npm/viewerjs@1/+esm";
+import Viewer from "viewerjs";
 
 new Viewer(document.querySelector("#avatar")!, {
   button: false,

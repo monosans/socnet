@@ -11,25 +11,12 @@
       {% endblock title %}
     | SocNet</title>
     {% include "inc/favicon.html" %}
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css"
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'css/bootstrap_overrides.css' %}" />
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css"
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
     {% block css %}
     {% endblock css %}
-    <script type="module"
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5/+esm"
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
-    <script type="module"
-            src="https://cdn.jsdelivr.net/npm/htmx.org@2/+esm"
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
+    <script type="module" src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="module" src="{% static 'js/htmx.js' %}"></script>
     {% django_htmx_script %}
     <script type="module" src="{% static 'js/theme.js' %}"></script>
     {% block js %}

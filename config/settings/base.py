@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "django_filters",
     "django_htmx",
     "logentry_admin",
+    "ninja",
     "socnet.allauth",
     "socnet.api",
     "socnet.core",

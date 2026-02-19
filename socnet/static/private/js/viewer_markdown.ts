@@ -1,4 +1,4 @@
-import Viewer from "https://cdn.jsdelivr.net/npm/viewerjs@1/+esm";
+import Viewer from "viewerjs";
 
 function initializeViewer(element: HTMLElement): void {
   new Viewer(element, { button: false });

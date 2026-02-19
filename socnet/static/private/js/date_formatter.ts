@@ -5,8 +5,7 @@ async function formatDates(parentNode: ParentNode): Promise<void> {
 
   if (elements.length) {
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { DateTime } =
-      await import("https://cdn.jsdelivr.net/npm/luxon@3/+esm");
+    const { DateTime } = await import("luxon");
     const relativeOptions = { base: DateTime.now() };
     for (const el of elements) {
       const dt = DateTime.fromSeconds(

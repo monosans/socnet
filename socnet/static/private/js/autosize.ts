@@ -1,3 +1,3 @@
-import autosize from "https://cdn.jsdelivr.net/npm/autosize@6/+esm";
+import autosize from "autosize";
 
 autosize(document.body.querySelectorAll("textarea"));

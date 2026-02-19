@@ -4,8 +4,16 @@
   "type": "module",
   "scripts": {
     "build": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild \"./socnet/static/private/**/*\" --format=esm --outdir=./socnet/static/public/ --platform=browser --target=chrome63,edge79,safari11.1,firefox67,opera50",
+    "esbuild-base": "esbuild \"./socnet/static/private/**/*\" --bundle --format=esm --loader:.ttf=file --loader:.woff2=file --outdir=./socnet/static/public/ --platform=browser --splitting --target=chrome63,edge79,safari11.1,firefox67,opera50",
     "watch": "npm run esbuild-base -- --watch=forever"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "6.7.2",
+    "autosize": "6.0.1",
+    "bootstrap": "5.3.8",
+    "htmx.org": "2.0.8",
+    "luxon": "3.7.2",
+    "viewerjs": "1.11.7"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
@@ -26,7 +34,6 @@
     "stylelint-config-recess-order": "7.6.1",
     "stylelint-config-standard": "40.0.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.56.0",
-    "viewerjs": "1.11.7"
+    "typescript-eslint": "8.56.0"
   }
 }

@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/strictest/tsconfig.json",
   "include": ["socnet"],
-  "exclude": ["socnet/static/public/js"],
+  "exclude": ["socnet/static/public"],
   "compilerOptions": {
     "noUncheckedIndexedAccess": false,
     "module": "node16",
