@@ -132,8 +132,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   && chown 1000:1000 /var/www/django/static /var/www/django/media
 
 COPY --from=python-builder --chown=1000:1000 --link /app/.venv /app/.venv
-COPY --from=node-build --chown=1000:1000 --link /app/socnet/static/public/css/ /app/socnet/static/public/css/
-COPY --from=node-build --chown=1000:1000 --link /app/socnet/static/public/js/ /app/socnet/static/public/js/
+COPY --from=node-build --chown=1000:1000 --link /app/socnet/static/public/ /app/socnet/static/public/
 
 ENV PATH="/app/.venv/bin:$PATH"
 
