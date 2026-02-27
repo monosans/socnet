@@ -4,8 +4,8 @@ edition = "2024"
 publish = false
 
 [lib]
-name = "socnet_rs"
 crate-type = ["cdylib"]
+name = "socnet_rs"
 
 [dependencies]
 ammonia = "=4.1.2"
