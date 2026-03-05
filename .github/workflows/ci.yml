@@ -81,7 +81,7 @@ jobs:
           persist-credentials: false
       - uses: docker/setup-buildx-action@v4
       - id: build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           build-args: EXTRA=local
           cache-from: type=gha
