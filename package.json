@@ -29,7 +29,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-unicorn": "63.0.0",
     "prettier": "3.8.1",
-    "prettier-plugin-packagejson": "3.0.1",
+    "prettier-plugin-packagejson": "3.0.2",
     "stylelint": "17.4.0",
     "stylelint-config-recess-order": "7.6.1",
     "stylelint-config-standard": "40.0.0",
