@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from django_stubs_ext.db.models import TypedModelMeta
 
 from socnet.core.fields import NullAutoNowDateTimeField
-from socnet.core.querysets import TimestampedModelQuerySet
 
 
 class MarkdownContentModel(models.Model):
@@ -36,7 +35,5 @@ class DateUpdatedModel(models.Model):
 
 
 class TimestampedModel(DateCreatedModel, DateUpdatedModel):
-    objects = TimestampedModelQuerySet.as_manager()
-
     class Meta(TypedModelMeta):
         abstract = True

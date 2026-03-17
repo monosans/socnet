@@ -6,6 +6,7 @@ from django.db.models import Count, Prefetch, Q
 from django.shortcuts import get_object_or_404
 
 from socnet.blog import models
+from socnet.core.db_utils import annotate_epoch_dates
 from socnet.users.models import User
 
 if TYPE_CHECKING:
@@ -20,16 +21,16 @@ def get_posts_preview_qs(
     request: HttpRequest, extra_fields: Iterable[str] = ()
 ) -> QuerySet[models.Post]:
     qs = (
-        models.Post.objects
-        .only(
-            "allow_commenting",
-            "content",
-            "author__display_name",
-            "author__image",
-            "author__username",
-            *extra_fields,
+        annotate_epoch_dates(
+            models.Post.objects.only(
+                "allow_commenting",
+                "content",
+                "author__display_name",
+                "author__image",
+                "author__username",
+                *extra_fields,
+            )
         )
-        .annotate_epoch_dates()
         .annotate(
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
