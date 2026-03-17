@@ -16,7 +16,8 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods, require_POST
 from django.views.generic import CreateView, UpdateView
 
-from socnet.blog import forms, models, services
+from socnet.blog import db_utils, forms, models
+from socnet.core.db_utils import annotate_epoch_dates
 from socnet.core.decorators import require_htmx, vary_on_htmx
 from socnet.core.utils import paginate
 from socnet.users.models import User
@@ -133,20 +134,20 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
         )
     else:
         form = forms.CommentForm()
-    qs = services.get_posts_preview_qs(request, ("allow_commenting",)).filter(
+    qs = db_utils.get_posts_preview_qs(request, ("allow_commenting",)).filter(
         pk=pk
     )
     if "#comment" in request.path:
         comments_qs = (
-            models.Comment.objects
-            .only(
-                "content",
-                "post_id",
-                "author__display_name",
-                "author__image",
-                "author__username",
+            annotate_epoch_dates(
+                models.Comment.objects.only(
+                    "content",
+                    "post_id",
+                    "author__display_name",
+                    "author__image",
+                    "author__username",
+                )
             )
-            .annotate_epoch_dates()
             .annotate(Count("likers"))
             .select_related("author")
             .order_by("pk")
@@ -168,15 +169,15 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 @require_htmx
 def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
     comments_qs = (
-        models.Comment.objects
-        .only(
-            "content",
-            "post_id",
-            "author__display_name",
-            "author__image",
-            "author__username",
+        annotate_epoch_dates(
+            models.Comment.objects.only(
+                "content",
+                "post_id",
+                "author__display_name",
+                "author__image",
+                "author__username",
+            )
         )
-        .annotate_epoch_dates()
         .annotate(Count("likers"))
         .select_related("author")
         .filter(post_id=pk)
@@ -196,7 +197,7 @@ def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
 @vary_on_htmx
 def posts_view(request: HttpRequest) -> HttpResponse:
     posts = None
-    qs = services.get_posts_preview_qs(request)
+    qs = db_utils.get_posts_preview_qs(request)
     is_search = bool(request.GET.get("q"))
     if is_search:
         form = forms.PostSearchForm(request.GET)
@@ -236,7 +237,7 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     user = get_object_or_404(qs.filter(username=username))
     posts = paginate(
         request,
-        services
+        db_utils
         .get_posts_preview_qs(request)
         .filter(likers=user)
         .order_by("-pk"),
@@ -249,9 +250,9 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 @vary_on_htmx
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     posts = (
-        models.Post.objects
-        .only("allow_commenting", "author_id", "content")
-        .annotate_epoch_dates()
+        annotate_epoch_dates(
+            models.Post.objects.only("allow_commenting", "author_id", "content")
+        )
         .annotate(
             Count("comments", distinct=True), Count("likers", distinct=True)
         )
@@ -283,13 +284,13 @@ def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 
 
 def subscribers_view(request: HttpRequest, username: str) -> HttpResponse:
-    user = services.get_subscriptions(username, "subscribers")
+    user = db_utils.get_subscriptions(username, "subscribers")
     context = {"user": user, "subscribers": user.subscribers.all()}
     return render(request, "blog/subscribers.html", context)
 
 
 def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
-    user = services.get_subscriptions(username, "subscriptions")
+    user = db_utils.get_subscriptions(username, "subscriptions")
     context = {"user": user, "subscriptions": user.subscriptions.all()}
     return render(request, "blog/subscriptions.html", context)
 
