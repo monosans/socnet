@@ -39,7 +39,7 @@ optional-dependencies.local = [
 ]
 optional-dependencies.production = [
   "psycopg[c]==3.3.3",
-  "redis[hiredis]==7.3.0",
+  "redis[hiredis]==7.4.0",
 ]
 
 [dependency-groups]
