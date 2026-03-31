@@ -19,14 +19,12 @@ class InjectUserMixin:
 
 
 class UserAdminChangeForm(auth_forms.UserChangeForm[User]):
-    class Meta(auth_forms.UserChangeForm.Meta):  # type: ignore[name-defined]
+    class Meta(auth_forms.UserChangeForm.Meta):
         model = User
 
 
 class UserAdminCreationForm(auth_forms.BaseUserCreationForm[User]):
-    class Meta(
-        auth_forms.BaseUserCreationForm.Meta  # type: ignore[name-defined]
-    ):
+    class Meta(auth_forms.BaseUserCreationForm.Meta):
         model = User
         fields = ("display_name", "email", "username")
 
@@ -34,9 +32,9 @@ class UserAdminCreationForm(auth_forms.BaseUserCreationForm[User]):
 class EditProfileForm(auth_forms.UserChangeForm[User]):
     password = None  # type: ignore[assignment]
 
-    class Meta(auth_forms.UserChangeForm.Meta):  # type: ignore[name-defined]
+    class Meta(auth_forms.UserChangeForm.Meta):
         model = User
-        fields = (
+        fields = (  # type: ignore[assignment]
             "display_name",
             "username",
             "image",

@@ -6,6 +6,8 @@ from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.internal.userkit import user_field
 
 if TYPE_CHECKING:
+    from typing import Any
+
     from allauth.account.forms import SignupForm
 
     from socnet.core.types import HttpRequest
@@ -20,7 +22,7 @@ class AccountAdapter(DefaultAccountAdapter):
         user: User,
         form: SignupForm,
         commit: bool = True,
-    ) -> User:
+    ) -> Any:
         user = super().save_user(request, user, form, commit=False)
         user_field(user, "display_name", form.cleaned_data["display_name"])
         if commit:
