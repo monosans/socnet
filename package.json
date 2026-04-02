@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild \"./socnet/static/private/**/*\" --bundle --format=esm --loader:.ttf=file --loader:.woff2=file --outdir=./socnet/static/public/ --platform=browser --splitting --target=chrome63,edge79,safari11.1,firefox67,opera50",
+    "esbuild-base": "esbuild \"./socnet/static/private/**/*\" --bundle --format=esm --loader:.ttf=file --loader:.woff2=file --outdir=./socnet/static/public/ --platform=browser --splitting --target=chrome63,edge79,safari14.1,firefox67,opera50",
     "watch": "npm run esbuild-base -- --watch=forever"
   },
   "dependencies": {
