@@ -73,7 +73,7 @@ production = [
 dev = [
     { name = "django-stubs" },
     { name = "djlint" },
-    { name = "mypy", extra = ["faster-cache"] },
+    { name = "mypy" },
     { name = "ruff" },
     { name = "types-pillow" },
 ]
@@ -120,7 +120,7 @@ provides-extras = ["local", "production"]
 dev = [
     { name = "django-stubs", specifier = "==6.0.1" },
     { name = "djlint", specifier = "==1.36.4" },
-    { name = "mypy", extras = ["faster-cache"], specifier = "==1.20.0" },
+    { name = "mypy", specifier = "==1.20.0" },
     { name = "ruff", specifier = "==0.15.9" },
     { name = "types-pillow", specifier = "==10.2.0.20240822" },
 ]
@@ -837,11 +837,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/aa/76/53e893a498138066acd28192b77495c9357e5a58cc4be753182846b43315/mypy-1.20.0-cp314-cp314t-win_amd64.whl", hash = "sha256:47781555a7aa5fedcc2d16bcd72e0dc83eb272c10dd657f9fb3f9cc08e2e6abb", size = 12572380, upload-time = "2026-03-31T16:49:52.454Z" },
     { url = "https://files.pythonhosted.org/packages/76/9c/6dbdae21f01b7aacddc2c0bbf3c5557aa547827fdf271770fe1e521e7093/mypy-1.20.0-cp314-cp314t-win_arm64.whl", hash = "sha256:c70380fe5d64010f79fb863b9081c7004dd65225d2277333c219d93a10dad4dd", size = 10381174, upload-time = "2026-03-31T16:51:20.179Z" },
     { url = "https://files.pythonhosted.org/packages/21/66/4d734961ce167f0fd8380769b3b7c06dbdd6ff54c2190f3f2ecd22528158/mypy-1.20.0-py3-none-any.whl", hash = "sha256:a6e0641147cbfa7e4e94efdb95c2dab1aff8cfc159ded13e07f308ddccc8c48e", size = 2636365, upload-time = "2026-03-31T16:51:44.911Z" },
-]
-
-[package.optional-dependencies]
-faster-cache = [
-    { name = "orjson" },
 ]
 
 [[package]]
