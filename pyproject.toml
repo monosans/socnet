@@ -5,7 +5,7 @@ requires-python = ">=3.14,<3.15"
 dependencies = [
   "channels==4.3.2",
   "channels-redis==4.3",
-  "django-allauth[mfa]==65.15.0",
+  "django-allauth[mfa]==65.15.1",
   "django-bootstrap5==26.2",
   "django-cleanup==9",
   "django-environ==0.13.0",
@@ -18,7 +18,7 @@ dependencies = [
   "docutils==0.22.4",
   "granian==2.7.2",
   "orjson==3.11.8",
-  "pillow==12.1.1",
+  "pillow==12.2.0",
   "psycopg[pool]==3.3.3",
   "sentry-sdk[django]==2.57.0",
   "socnet-rs",
@@ -28,7 +28,7 @@ optional-dependencies.local = [
   "covdefaults==2.3",
   "debugpy==1.8.20",
   "django-coverage-plugin==3.2.0",
-  "django-debug-toolbar==6.2.0",
+  "django-debug-toolbar==6.3.0",
   "factory-boy==3.3.3",
   "psycopg[binary]==3.3.3",
   "pytest==9.0.2",
@@ -46,8 +46,8 @@ optional-dependencies.production = [
 dev = [
   "django-stubs==6.0.1",
   "djlint==1.36.4",
-  "mypy[faster-cache]==1.20.0",
-  "ruff==0.15.8",
+  "mypy==1.20.0",
+  "ruff==0.15.9",
   "types-pillow==10.2.0.20240822",
 ]
 
