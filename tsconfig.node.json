@@ -1,5 +1,8 @@
 {
-  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node24/tsconfig"],
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node24/tsconfig.json"
+  ],
   "exclude": [".venv", "socnet"],
   "compilerOptions": { "noEmit": true, "checkJs": true }
 }
