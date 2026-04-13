@@ -20,7 +20,7 @@ dependencies = [
   "orjson==3.11.8",
   "pillow==12.2.0",
   "psycopg[pool]==3.3.3",
-  "sentry-sdk[django]==2.57.0",
+  "sentry-sdk[django]==2.58.0",
   "socnet-rs",
   "uvloop==0.22.1; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
 ]
