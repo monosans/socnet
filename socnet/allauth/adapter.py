@@ -8,10 +8,9 @@ from allauth.account.internal.userkit import user_field
 if TYPE_CHECKING:
     from typing import Any
 
-    from allauth.account.forms import SignupForm
-
-    from socnet.core.types import HttpRequest
-    from socnet.users.models import User
+    from allauth.account.forms import BaseSignupForm
+    from django.contrib.auth.base_user import AbstractBaseUser
+    from django.http import HttpRequest
 
 
 class AccountAdapter(DefaultAccountAdapter):
@@ -19,8 +18,8 @@ class AccountAdapter(DefaultAccountAdapter):
     def save_user(
         self,
         request: HttpRequest,
-        user: User,
-        form: SignupForm,
+        user: AbstractBaseUser,
+        form: BaseSignupForm,
         commit: bool = True,
     ) -> Any:
         user = super().save_user(request, user, form, commit=False)
