@@ -146,10 +146,9 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
                     "author__display_name",
                     "author__image",
                     "author__username",
-                )
+                ).select_related("author")
             )
             .annotate(Count("likers"))
-            .select_related("author")
             .order_by("pk")
         )
         if request.user.is_authenticated:
@@ -170,17 +169,18 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
 def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
     comments_qs = (
         annotate_epoch_dates(
-            models.Comment.objects.only(
+            models.Comment.objects
+            .only(
                 "content",
                 "post_id",
                 "author__display_name",
                 "author__image",
                 "author__username",
             )
+            .select_related("author")
+            .filter(post_id=pk)
         )
         .annotate(Count("likers"))
-        .select_related("author")
-        .filter(post_id=pk)
         .order_by("pk")
     )
     if request.user.is_authenticated:
