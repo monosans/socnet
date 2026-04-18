@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from django.db.models import Count, Prefetch, Q
 from django.shortcuts import get_object_or_404
@@ -20,25 +20,22 @@ if TYPE_CHECKING:
 def get_posts_preview_qs(
     request: HttpRequest, extra_fields: Iterable[str] = ()
 ) -> QuerySet[models.Post]:
-    qs = (
-        annotate_epoch_dates(
-            models.Post.objects.only(
-                "allow_commenting",
-                "content",
-                "author__display_name",
-                "author__image",
-                "author__username",
-                *extra_fields,
-            )
-        )
-        .annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
-        .select_related("author")
-    )
+    qs = annotate_epoch_dates(
+        models.Post.objects.only(
+            "allow_commenting",
+            "content",
+            "author__display_name",
+            "author__image",
+            "author__username",
+            *extra_fields,
+        ).select_related("author")
+    ).annotate(Count("comments", distinct=True), Count("likers", distinct=True))
     if request.user.is_anonymous:
-        return qs
-    return qs.annotate(is_liked=Q(pk__in=request.user.liked_posts.all()))
+        return cast("QuerySet[models.Post]", qs)
+    return cast(
+        "QuerySet[models.Post]",
+        qs.annotate(is_liked=Q(pk__in=request.user.liked_posts.all())),
+    )
 
 
 def get_subscriptions(username: str, field: str) -> User:

@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 def annotate_epoch_dates[T: TimestampedModel](
     qs: QuerySet[T],
 ) -> QuerySet[WithAnnotations[T, EpochDates]]:
-    return qs.annotate(  # type: ignore[no-any-return]
+    return qs.annotate(
         date_created_epoch=Extract("date_created", "epoch"),
         date_updated_epoch=Extract("date_updated", "epoch"),
     )
