@@ -22,7 +22,7 @@ from django.utils.translation import gettext_lazy as _
 if TYPE_CHECKING:
     from typing import Any
 
-_django_stubs_ext.monkeypatch(include_builtins=False)
+_django_stubs_ext.monkeypatch()
 
 BASE_DIR = Path().resolve(strict=True)
 
