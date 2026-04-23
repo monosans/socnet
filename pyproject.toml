@@ -16,7 +16,7 @@ dependencies = [
   "django-stubs-ext==6.0.3",
   "django[argon2]==6.0.4",
   "docutils==0.22.4",
-  "granian==2.7.3",
+  "granian==2.7.4",
   "orjson==3.11.8",
   "pillow==12.2.0",
   "psycopg[pool]==3.3.3",
