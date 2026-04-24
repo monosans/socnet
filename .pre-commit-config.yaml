@@ -29,7 +29,7 @@ repos:
   #         - stylelint-config-standard
   #         - stylelint-config-recess-order
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: v0.9.21
+    rev: v0.9.22
     hooks:
       - id: tombi-format
         exclude: ^(?:.*Cargo.lock|uv.lock)$
