@@ -59,8 +59,6 @@ DATABASES = {
     }
 }
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 ROOT_URLCONF = "config.urls"
 ASGI_APPLICATION = "config.asgi.application"
 

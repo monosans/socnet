@@ -19,15 +19,16 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   # - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-  #   rev: v17.0.0
+  #   rev: v17.9.0
   #   hooks:
   #     - id: stylelint
+  #       language: node
   #       args:
   #         - --fix=lax
   #       additional_dependencies:
-  #         - stylelint
-  #         - stylelint-config-standard
-  #         - stylelint-config-recess-order
+  #         - stylelint@17.9.0
+  #         - stylelint-config-standard@40.0.0
+  #         - stylelint-config-recess-order@7.7.0
   - repo: https://github.com/tombi-toml/tombi-pre-commit
     rev: v0.9.25
     hooks:
@@ -46,7 +47,7 @@ repos:
       - id: django-upgrade
         args:
           - --target-version
-          - "5.2"
+          - "6.0"
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.15.12
     hooks:
