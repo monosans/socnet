@@ -32,7 +32,7 @@ USER node
 CMD ["npm", "run", "watch"]
 
 
-FROM docker.io/python:3.14-slim-trixie AS python-base
+FROM docker.io/python:3.14-slim-trixie@sha256:5b3879b6f3cb77e712644d50262d05a7c146b7312d784a18eff7ff5462e77033 AS python-base
 
 ENV \
   PYTHONDONTWRITEBYTECODE=1 \
