@@ -18,17 +18,17 @@ repos:
         args:
           - --fix=lf
       - id: trailing-whitespace
-  - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v17.9.0
-    hooks:
-      - id: stylelint
-        language: node
-        args:
-          - --fix=lax
-        additional_dependencies:
-          - stylelint@17.9.0
-          - stylelint-config-standard@40.0.0
-          - stylelint-config-recess-order@7.7.0
+  # - repo: https://github.com/thibaudcolas/pre-commit-stylelint
+  #   rev: v17.9.0
+  #   hooks:
+  #     - id: stylelint
+  #       language: node
+  #       args:
+  #         - --fix=lax
+  #       additional_dependencies:
+  #         - stylelint@17.9.0
+  #         - stylelint-config-standard@40.0.0
+  #         - stylelint-config-recess-order@7.7.0
   - repo: https://github.com/tombi-toml/tombi-pre-commit
     rev: v0.9.25
     hooks:
