@@ -1,6 +1,7 @@
 [project]
 name = "socnet-rs"
 version = "0.1.0"
+requires-python = ">=3.14,<3.15"
 
 [build-system]
 requires = ["maturin>=1,<2"]
@@ -13,3 +14,4 @@ cache-keys = [
   { file = "Cargo.toml" },
   { file = "Cargo.lock" },
 ]
+exclude-newer = "3 days"
