@@ -17,7 +17,7 @@ dependencies = [
   "django[argon2]==6.0.5",
   "docutils==0.22.4",
   "granian==2.7.4",
-  "orjson==3.11.8",
+  "orjson==3.11.9",
   "pillow==12.2.0",
   "psycopg[pool]==3.3.4",
   "sentry-sdk[django]==2.59.0",
