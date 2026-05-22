@@ -10,10 +10,14 @@ name = "socnet_rs"
 [dependencies]
 ammonia = "=4.1.2"
 compact_str = "=0.9.0"
-pulldown-cmark = { version = "=0.13.3", default-features = false, features = [
-  "html",
-  "simd",
-] }
+pulldown-cmark = {
+  version = "=0.13.3",
+  default-features = false,
+  features = [
+    "html",
+    "simd",
+  ]
+}
 pyo3 = "=0.28.3"
 
 [profile.release]
