@@ -4,8 +4,6 @@ from typing import TYPE_CHECKING, override
 
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.internal.userkit import user_field
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.http import HttpRequest
 
 if TYPE_CHECKING:
     from django.contrib.auth.base_user import AbstractBaseUser
