@@ -68,11 +68,11 @@ const chatLog = {
         ${data.content}
       </div>
     `;
-    this.element.insertAdjacentHTML("beforeend", html);
+    chatLog.element.insertAdjacentHTML("beforeend", html);
   },
 
   scrollToEnd(): void {
-    this.element.scrollTop = this.element.scrollHeight;
+    chatLog.element.scrollTop = chatLog.element.scrollHeight;
   },
 };
 chatLog.scrollToEnd();
