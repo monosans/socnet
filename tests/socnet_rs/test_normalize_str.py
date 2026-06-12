@@ -20,6 +20,6 @@ def test_normalize_str(given: str, expected: str) -> None:
 
 
 def test_type_error() -> None:
-    exc_str = "argument 'value': 'int' object is not an instance of 'str'"
+    exc_str = "'int' object is not an instance of 'str'\nwhile processing 'value'"
     with pytest.raises(TypeError, match=exc_str):
         normalize_str(0)  # type: ignore[arg-type]
