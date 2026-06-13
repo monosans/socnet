@@ -20,6 +20,8 @@ def test_markdownify(given: str, expected: str) -> None:
 
 
 def test_type_error() -> None:
-    exc_str = "'int' object is not an instance of 'str'\nwhile processing 'value'"
+    exc_str = (
+        "'int' object is not an instance of 'str'\nwhile processing 'value'"
+    )
     with pytest.raises(TypeError, match=exc_str):
         markdownify(0)  # type: ignore[arg-type]
