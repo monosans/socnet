@@ -86,6 +86,7 @@ export default defineConfig(
       radix: "off",
       "sort-imports": "off",
       "unicorn/catch-error-name": ["error", { name: "e" }],
+      "unicorn/consistent-class-member-order": "off",
       "unicorn/explicit-length-check": "off",
       "unicorn/filename-case": ["error", { case: "snakeCase" }],
       "unicorn/no-keyword-prefix": "off",
