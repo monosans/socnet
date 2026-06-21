@@ -53,6 +53,7 @@ async function handler(e: Event): Promise<void> {
   btn.classList.toggle("btn-primary");
   btn.classList.toggle("btn-outline-primary");
   btn.dataset["isSubscribed"] = isSubscribe ? "y" : "n";
+  // eslint-disable-next-line unicorn/no-unreadable-array-destructuring
   [btn.textContent, btn.dataset["textToggle"]] = [
     btn.dataset["textToggle"]!,
     btn.textContent,
