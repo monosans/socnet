@@ -68,6 +68,7 @@ const chatLog = {
         ${data.content}
       </div>
     `;
+    // eslint-disable-next-line unicorn/no-unsafe-dom-html
     chatLog.element.insertAdjacentHTML("beforeend", html);
   },
 

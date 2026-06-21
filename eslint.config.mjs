@@ -90,6 +90,7 @@ export default defineConfig(
       "unicorn/filename-case": ["error", { case: "snakeCase" }],
       "unicorn/no-keyword-prefix": "off",
       "unicorn/no-null": "off",
+      "unicorn/no-unreadable-new-expression": "off",
       "unicorn/prefer-json-parse-buffer": "off",
       "unicorn/prefer-top-level-await": "off",
       "unicorn/prevent-abbreviations": "off",
