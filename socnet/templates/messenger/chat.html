@@ -41,8 +41,10 @@
   </script>
 {% endblock js %}
 {% block list_group %}
-  <a href="{{ interlocutor.get_absolute_url }}"
-     class="list-group-item list-group-item-action">
+  <a
+    href="{{ interlocutor.get_absolute_url }}"
+    class="list-group-item list-group-item-action"
+  >
     <div class="d-flex align-items-center justify-content-center">
       {% if interlocutor.image %}
         <div class="avatar-thumbnail-no-height me-2">
@@ -59,8 +61,10 @@
     <div id="chat-log" class="p-3 overflow-x-hidden overflow-y-scroll">
       {% for message in messages_ %}
         <div id="msg{{ message.pk }}" class="d-flex mb-1">
-          <a href="{{ message.sender.get_absolute_url }}"
-             class="avatar-thumbnail d-flex align-items-center me-2">
+          <a
+            href="{{ message.sender.get_absolute_url }}"
+            class="avatar-thumbnail d-flex align-items-center me-2"
+          >
             {% if message.sender.image %}
               <img src="{{ message.sender.image.url }}" loading="lazy" class="rounded" />
             {% else %}
@@ -68,8 +72,10 @@
             {% endif %}
           </a>
           <div>
-            <a href="{{ message.sender.get_absolute_url }}"
-               class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break">{{ message.sender.display_name }} <span class="text-secondary">@{{ message.sender.username }}</span></a>
+            <a
+              href="{{ message.sender.get_absolute_url }}"
+              class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
+            >{{ message.sender.display_name }} <span class="text-secondary">@{{ message.sender.username }}</span></a>
             <div class="text-secondary" data-epoch="{{ message.date_created_epoch }}">
             </div>
           </div>
@@ -83,9 +89,11 @@
   <form id="messageSendForm" class="list-group-item p-0">
     <div class="input-group">
       {{ form.content }}
-      <button type="submit"
-              class="btn btn-primary rounded-top-0"
-              id="messageSendBtn">
+      <button
+        type="submit"
+        class="btn btn-primary rounded-top-0"
+        id="messageSendBtn"
+      >
         <i class="fa-solid fa-paper-plane mx-2"></i>
       </button>
     </div>

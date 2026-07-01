@@ -16,8 +16,10 @@
 {% endblock js %}
 {% block list_group %}
   <div class="list-group-item">{% include "blog/inc/post_body.html" %}</div>
-  <div class="list-group-item"
-       {% if comments is None %} hx-get="{% url "blog:comments" post.pk %}" hx-trigger="revealed" hx-swap="afterend" {% endif %}>
+  <div
+    class="list-group-item"
+    {% if comments is None %} hx-get="{% url "blog:comments" post.pk %}" hx-trigger="revealed" hx-swap="afterend" {% endif %}
+  >
     {% if not post.allow_commenting and request.user != post.author %}
       <div class="text-center">
         {% translate "The author has restricted commenting on this post." %}
@@ -26,8 +28,10 @@
       <div class="text-center">
         {% url 'account_login' as url_login %}
         {% blocktranslate trimmed with next=request.path|urlencode %}
-          <a href="{{ url_login }}?next={{ next }}"
-             class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">Log in</a>
+          <a
+            href="{{ url_login }}?next={{ next }}"
+            class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+          >Log in</a>
           to comment.
         {% endblocktranslate %}
       </div>

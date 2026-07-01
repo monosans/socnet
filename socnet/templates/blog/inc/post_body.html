@@ -1,8 +1,10 @@
 {% load i18n markdownify obj_admin_url %}
 
 <div class="d-flex mb-1">
-  <a href="{{ post.author.get_absolute_url }}"
-     class="avatar-thumbnail d-flex align-items-center me-2">
+  <a
+    href="{{ post.author.get_absolute_url }}"
+    class="avatar-thumbnail d-flex align-items-center me-2"
+  >
     {% if post.author.image %}
       <img src="{{ post.author.image.url }}" loading="lazy" class="rounded" />
     {% else %}
@@ -11,8 +13,10 @@
   </a>
   <div>
     <div>
-      <a href="{{ post.author.get_absolute_url }}"
-         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break">{{ post.author.display_name }} <span class="text-secondary">@{{ post.author.username }}</span></a>
+      <a
+        href="{{ post.author.get_absolute_url }}"
+        class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
+      >{{ post.author.display_name }} <span class="text-secondary">@{{ post.author.username }}</span></a>
     </div>
     {% include "blog/inc/timestamp.html" with object=post %}
   </div>
@@ -33,10 +37,12 @@
               <a href="{% url 'blog:post_update' post.pk %}" class="dropdown-item"><i class="fa-solid fa-pen-to-square text-primary"></i> {% translate "Edit" %}</a>
             </li>
             <li>
-              <button type="button"
-                      class="dropdown-item"
-                      data-bs-toggle="modal"
-                      data-bs-target="#post{{ post.pk }}Modal">
+              <button
+                type="button"
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#post{{ post.pk }}Modal"
+              >
                 <i class="fa-solid fa-xmark text-danger"></i>
                 {% translate "Delete" %}
               </button>
@@ -75,24 +81,34 @@
 </div>
 <div class="markdown-container text-break">{{ post.content|markdownify }}</div>
 {% if request.user.is_anonymous %}
-  <a href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
-     class="btn badge rounded-pill text-bg-color fs-6"><i class="fa-regular fa-heart"></i> <span data-unformatted-number="{{ post.likers__count }}"></span></a>
+  <a
+    href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
+    class="btn badge rounded-pill text-bg-color fs-6"
+  ><i class="fa-regular fa-heart"></i> <span data-unformatted-number="{{ post.likers__count }}"></span></a>
 {% elif post.is_liked %}
-  <button type="button"
-          class="btn badge rounded-pill text-bg-color fs-6"
-          data-is-liked="y"
-          data-post-pk="{{ post.pk }}">
+  <button
+    type="button"
+    class="btn badge rounded-pill text-bg-color fs-6"
+    data-is-liked="y"
+    data-post-pk="{{ post.pk }}"
+  >
     <i class="fa-solid fa-heart text-danger"></i>
     <span data-unformatted-number="{{ post.likers__count }}"></span>
   </button>
 {% else %}
-  <button type="button"
-          class="btn badge rounded-pill text-bg-color fs-6"
-          data-is-liked="n"
-          data-post-pk="{{ post.pk }}">
+  <button
+    type="button"
+    class="btn badge rounded-pill text-bg-color fs-6"
+    data-is-liked="n"
+    data-post-pk="{{ post.pk }}"
+  >
     <i class="fa-regular fa-heart"></i>
     <span data-unformatted-number="{{ post.likers__count }}"></span>
   </button>
 {% endif %}
-<a href="{{ post.get_absolute_url }}"
-   class="btn badge rounded-pill text-bg-color fs-6"><i class="fa-regular fa-comment{% if not post.allow_commenting %} text-danger{% endif %}"></i> <span data-unformatted-number="{{ post.comments__count }}"></span></a>
+<a
+  href="{{ post.get_absolute_url }}"
+  class="btn badge rounded-pill text-bg-color fs-6"
+><i
+  class="fa-regular fa-comment{% if not post.allow_commenting %} text-danger{% endif %}"
+></i> <span data-unformatted-number="{{ post.comments__count }}"></span></a>

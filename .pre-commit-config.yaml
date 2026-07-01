@@ -56,7 +56,7 @@ repos:
           - --fix
       - id: ruff-format
   - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.39.4
+    rev: v1.40.0
     hooks:
       - id: djlint-reformat
       - id: djlint

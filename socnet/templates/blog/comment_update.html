@@ -12,8 +12,10 @@
   <h3 class="mb-3 text-center">
     {% blocktranslate trimmed with comment_url=object.get_absolute_url comment_pk=object.pk context "noun" %}
       Edit
-      <a href="{{ comment_url }}"
-         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">comment #{{ comment_pk }}</a>
+      <a
+        href="{{ comment_url }}"
+        class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+      >comment #{{ comment_pk }}</a>
     {% endblocktranslate %}
   </h3>
   <form method="post">

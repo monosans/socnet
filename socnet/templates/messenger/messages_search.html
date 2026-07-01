@@ -26,9 +26,13 @@
     </div>
   </form>
   {% for message, interlocutor in messages_ %}
-    <a href="{% url 'messenger:chat' interlocutor.username %}#msg{{ message.pk }}"
-       class="d-flex align-items-center list-group-item list-group-item-action">
-      <div class="avatar-thumbnail d-flex align-items-center justify-content-center me-2">
+    <a
+      href="{% url 'messenger:chat' interlocutor.username %}#msg{{ message.pk }}"
+      class="d-flex align-items-center list-group-item list-group-item-action"
+    >
+      <div
+        class="avatar-thumbnail d-flex align-items-center justify-content-center me-2"
+      >
         {% if interlocutor.image %}
           <img src="{{ interlocutor.image.url }}" loading="lazy" class="rounded" />
         {% else %}
@@ -42,7 +46,9 @@
           <div class="text-secondary">{{ message.truncated_content }}</div>
         {% else %}
           <div class="d-flex align-items-center">
-            <span class="avatar-thumbnail-font-size d-flex align-items-center justify-content-center me-2">
+            <span
+              class="avatar-thumbnail-font-size d-flex align-items-center justify-content-center me-2"
+            >
               {% if message.sender.image %}
                 <img src="{{ message.sender.image.url }}" loading="lazy" class="rounded" />
               {% else %}
@@ -53,8 +59,10 @@
           </div>
         {% endif %}
       </div>
-      <div class="ms-auto text-secondary"
-           data-epoch="{{ message.date_created_epoch }}"></div>
+      <div
+        class="ms-auto text-secondary"
+        data-epoch="{{ message.date_created_epoch }}"
+      ></div>
     </a>
   {% empty %}
     <div class="list-group-item text-center">

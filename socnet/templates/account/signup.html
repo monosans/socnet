@@ -12,9 +12,11 @@
       {% csrf_token %}
       {% bootstrap_form form layout="floating" %}
       {% if redirect_field_value %}
-        <input type="hidden"
-               name="{{ redirect_field_name }}"
-               value="{{ redirect_field_value }}" />
+        <input
+          type="hidden"
+          name="{{ redirect_field_name }}"
+          value="{{ redirect_field_value }}"
+        />
       {% endif %}
       <button type="submit" class="btn btn-primary w-100">
         {% translate "Sign up" %}
@@ -24,8 +26,10 @@
   <div class="list-group-item text-center">
     {% blocktranslate trimmed %}
       If you already have an account,
-      <a href="{{ login_url }}"
-         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">log in</a>.
+      <a
+        href="{{ login_url }}"
+        class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+      >log in</a>.
     {% endblocktranslate %}
   </div>
 {% endblock list_group %}

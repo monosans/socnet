@@ -7,9 +7,11 @@
   <div class="mt-3">
     {% translate "You are about to generate a new set of recovery codes for your account. This action will invalidate the existing codes. Are you sure?" %}
   </div>
-  <form method="post"
-        action="{% url 'mfa_generate_recovery_codes' %}"
-        class="mt-3">
+  <form
+    method="post"
+    action="{% url 'mfa_generate_recovery_codes' %}"
+    class="mt-3"
+  >
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
     <button type="submit" class="btn btn-primary w-100">

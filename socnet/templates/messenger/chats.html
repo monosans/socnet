@@ -27,9 +27,13 @@
       </div>
     </form>
     {% for chat in chats %}
-      <a href="{% url 'messenger:chat' chat.username %}"
-         class="d-flex align-items-center list-group-item list-group-item-action">
-        <div class="avatar-thumbnail d-flex align-items-center justify-content-center me-2">
+      <a
+        href="{% url 'messenger:chat' chat.username %}"
+        class="d-flex align-items-center list-group-item list-group-item-action"
+      >
+        <div
+          class="avatar-thumbnail d-flex align-items-center justify-content-center me-2"
+        >
           {% if chat.image %}
             <img src="{{ chat.image.url }}" loading="lazy" class="rounded" />
           {% else %}
@@ -41,8 +45,10 @@
           <span class="ms-1 text-secondary">@{{ chat.username }}</span>
           <div class="text-secondary">{{ chat.last_message_truncated_content }}</div>
         </div>
-        <div class="ms-auto text-secondary"
-             data-epoch="{{ chat.last_message_date_epoch }}"></div>
+        <div
+          class="ms-auto text-secondary"
+          data-epoch="{{ chat.last_message_date_epoch }}"
+        ></div>
       </a>
     {% endfor %}
   {% else %}

@@ -11,8 +11,10 @@
   </h3>
   {% blocktranslate trimmed with display_name=user.display_name username=user.username user_url=user.get_absolute_url %}
     Are you sure you want to delete the
-    <a href="{{ user_url }}"
-       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ display_name }} ({{ username }})</a>
+    <a
+      href="{{ user_url }}"
+      class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+    >{{ display_name }} ({{ username }})</a>
     account? All data associated with this account will be deleted.
   {% endblocktranslate %}
   <form method="post" class="mt-3">

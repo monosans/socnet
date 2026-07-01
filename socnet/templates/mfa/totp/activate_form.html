@@ -14,11 +14,13 @@
     </div>
   </div>
   <div class="form-floating mt-3">
-    <input type="text"
-           disabled
-           value="{{ form.secret }}"
-           placeholder="{% translate 'Authenticator secret' %}"
-           class="form-control" />
+    <input
+      type="text"
+      disabled
+      value="{{ form.secret }}"
+      placeholder="{% translate 'Authenticator secret' %}"
+      class="form-control"
+    />
     <label class="form-label">{% translate "Authenticator secret" %}</label>
   </div>
   <form method="post" action="{% url 'mfa_activate_totp' %}" class="mt-3">

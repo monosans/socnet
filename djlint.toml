@@ -5,3 +5,4 @@ include = "H017,H035"
 indent = 2
 max_line_length = 80
 profile = "django"
+single-attribute-per-line = true

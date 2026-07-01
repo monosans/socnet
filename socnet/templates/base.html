@@ -26,12 +26,16 @@
     <div class="mb-3 sticky-top">
       <nav class="navbar navbar-expand-lg bg-body border-bottom">
         <div class="container-xxl">
-          <a href="{% url 'core:index' %}"
-             class="navbar-brand text-bg-primary rounded px-2 py-1"><i class="fa-solid fa-s"></i> <i class="fa-solid fa-o"></i> <i class="fa-solid fa-c"></i> <i class="fa-solid fa-n"></i> <i class="fa-solid fa-e"></i> <i class="fa-solid fa-t"></i></a>
-          <button type="button"
-                  class="navbar-toggler"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav">
+          <a
+            href="{% url 'core:index' %}"
+            class="navbar-brand text-bg-primary rounded px-2 py-1"
+          ><i class="fa-solid fa-s"></i> <i class="fa-solid fa-o"></i> <i class="fa-solid fa-c"></i> <i class="fa-solid fa-n"></i> <i class="fa-solid fa-e"></i> <i class="fa-solid fa-t"></i></a>
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -39,31 +43,41 @@
               {% if request.user.is_authenticated %}
                 <li class="nav-item">
                   {% with user_url=request.user.get_absolute_url %}
-                    <a href="{{ user_url }}"
-                       class="nav-link{% if user_url == request.path %} active{% endif %}"><i class="fa-solid fa-user text-primary"></i> {% translate "My profile" %}</a>
+                    <a
+                      href="{{ user_url }}"
+                      class="nav-link{% if user_url == request.path %} active{% endif %}"
+                    ><i class="fa-solid fa-user text-primary"></i> {% translate "My profile" %}</a>
                   {% endwith %}
                 </li>
                 <li class="nav-item">
                   {% url "blog:posts" as url_posts %}
-                  <a href="{{ url_posts }}"
-                     class="nav-link{% if url_posts == request.path %} active{% endif %}"><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
+                  <a
+                    href="{{ url_posts }}"
+                    class="nav-link{% if url_posts == request.path %} active{% endif %}"
+                  ><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
                 </li>
                 <li class="nav-item">
                   {% url "messenger:chats" as url_chats %}
-                  <a href="{{ url_chats }}"
-                     class="nav-link{% if url_chats == request.path %} active{% endif %}"><i class="fa-solid fa-message text-primary"></i> {% translate "Messenger" %}</a>
+                  <a
+                    href="{{ url_chats }}"
+                    class="nav-link{% if url_chats == request.path %} active{% endif %}"
+                  ><i class="fa-solid fa-message text-primary"></i> {% translate "Messenger" %}</a>
                 </li>
               {% else %}
                 <li class="nav-item">
                   {% url "blog:posts" as url_posts %}
-                  <a href="{{ url_posts }}"
-                     class="nav-link{% if url_posts == request.path %} active{% endif %}"><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
+                  <a
+                    href="{{ url_posts }}"
+                    class="nav-link{% if url_posts == request.path %} active{% endif %}"
+                  ><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
                 </li>
               {% endif %}
               <li class="nav-item">
                 {% url "users:search_users" as url_search_users %}
-                <a href="{{ url_search_users }}"
-                   class="nav-link{% if url_search_users == request.path %} active{% endif %}"><i class="fa-solid fa-magnifying-glass text-primary"></i> {% blocktranslate context "noun" %}Search users{% endblocktranslate %}</a>
+                <a
+                  href="{{ url_search_users }}"
+                  class="nav-link{% if url_search_users == request.path %} active{% endif %}"
+                ><i class="fa-solid fa-magnifying-glass text-primary"></i> {% blocktranslate context "noun" %}Search users{% endblocktranslate %}</a>
               </li>
               {% if request.user.is_staff %}
                 <li class="nav-item">
@@ -99,13 +113,17 @@
                 {% else %}
                   <li class="nav-item">
                     {% url "account_login" as url_login %}
-                    <a href="{{ url_login }}"
-                       class="nav-link{% if url_login == request.path %} active{% endif %}"><i class="fa-solid fa-user text-primary"></i> {% blocktranslate context "noun" %}Log in{% endblocktranslate %}</a>
+                    <a
+                      href="{{ url_login }}"
+                      class="nav-link{% if url_login == request.path %} active{% endif %}"
+                    ><i class="fa-solid fa-user text-primary"></i> {% blocktranslate context "noun" %}Log in{% endblocktranslate %}</a>
                   </li>
                   <li class="nav-item">
                     {% url "account_signup" as url_signup %}
-                    <a href="{{ url_signup }}"
-                       class="nav-link{% if url_signup == request.path %} active{% endif %}"><i class="fa-solid fa-clipboard-list text-primary"></i> {% translate "Sign-up" %}</a>
+                    <a
+                      href="{{ url_signup }}"
+                      class="nav-link{% if url_signup == request.path %} active{% endif %}"
+                    ><i class="fa-solid fa-clipboard-list text-primary"></i> {% translate "Sign-up" %}</a>
                   </li>
                 {% endif %}
               </li>
@@ -139,8 +157,10 @@
     </div>
     <div class="container-xxl">
       {% for message in messages %}
-        <div class="alert alert-{{ message.tags|default:'primary' }} alert-dismissible fade show"
-             role="alert">
+        <div
+          class="alert alert-{{ message.tags|default:'primary' }} alert-dismissible fade show"
+          role="alert"
+        >
           {{ message }}
           <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
@@ -148,8 +168,10 @@
       {% block content %}
       {% endblock content %}
     </div>
-    <a href="https://github.com/monosans/socnet"
-       rel="noopener noreferrer"
-       class="position-absolute bottom-0 mb-3 end-0 me-3"><i class="fa-brands fa-github fs-1 text-body"></i></a>
+    <a
+      href="https://github.com/monosans/socnet"
+      rel="noopener noreferrer"
+      class="position-absolute bottom-0 mb-3 end-0 me-3"
+    ><i class="fa-brands fa-github fs-1 text-body"></i></a>
   </body>
 </html>
