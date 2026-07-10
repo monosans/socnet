@@ -14,7 +14,7 @@ dependencies = [
   "django-logentry-admin==1.1",
   "django-ninja==1.6.2",
   "django-stubs-ext==6.0.6",
-  "django[argon2]==6.0.6",
+  "django[argon2]==6.0.7",
   "docutils==0.23",
   "granian==2.7.9",
   "orjson==3.11.9",
