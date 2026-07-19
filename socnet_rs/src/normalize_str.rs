@@ -2,11 +2,11 @@ use pyo3::prelude::*;
 
 #[pyfunction]
 #[pyo3(signature = (value, /))]
-pub fn normalize_str<'py>(
-    py: Python<'py>,
+pub fn normalize_str(
+    py: Python<'_>,
     value: &str,
-) -> Bound<'py, pyo3::types::PyString> {
-    let result = py.detach(move || {
+) -> compact_str::CompactString {
+    py.detach(move || {
         let mut out = compact_str::CompactString::const_new("");
         let mut first_line = true;
 
@@ -27,6 +27,5 @@ pub fn normalize_str<'py>(
         }
 
         out
-    });
-    pyo3::types::PyString::new(py, &result)
+    })
 }
