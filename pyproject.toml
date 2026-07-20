@@ -47,7 +47,7 @@ optional-dependencies.production = [
 [dependency-groups]
 dev = [
   "django-stubs==6.0.7",
-  "djlint==1.40.7",
+  "djlint==1.40.8",
   "mypy==2.3.0",
   "ruff==0.15.22",
   "types-pillow==10.2.0.20240822",
