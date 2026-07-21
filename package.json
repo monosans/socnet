@@ -13,7 +13,7 @@
     "bootstrap": "5.3.8",
     "htmx.org": "2.0.10",
     "luxon": "3.7.2",
-    "viewerjs": "1.11.7"
+    "viewerjs": "1.11.8"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
