@@ -49,7 +49,7 @@ dev = [
   "django-stubs==6.0.7",
   "djlint==1.42.2",
   "mypy==2.3.0",
-  "ruff==0.15.22",
+  "ruff==0.16.0",
   "types-pillow==10.2.0.20240822",
 ]
 
