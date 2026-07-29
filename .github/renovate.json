@@ -32,6 +32,7 @@
       "automerge": true
     },
     { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
+    { "matchManagers": ["cargo"], "minimumReleaseAge": null },
     {
       "matchPackageNames": ["python", "docker.io/python"],
       "groupName": "python",
