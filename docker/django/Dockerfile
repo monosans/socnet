@@ -136,9 +136,12 @@ COPY --from=node-build --chown=1000:1000 --link /app/socnet/static/public/ /app/
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-USER django
-
 COPY --chown=1000:1000 --link . .
+
+RUN chmod +x ./docker/django/*.sh \
+  && sed -i 's/\r$//' ./docker/django/*.sh
+
+USER django
 
 ENTRYPOINT ["bash", "/app/docker/django/entrypoint.prod.sh"]
 
