@@ -1,7 +1,5 @@
 # Socnet
 
-[![CI](https://github.com/monosans/socnet/actions/workflows/ci.yml/badge.svg)](https://github.com/monosans/socnet/actions/workflows/ci.yml)
-
 Social network built with Django Framework.
 
 ## Features
