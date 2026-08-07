@@ -1,7 +1,5 @@
 # Socnet
 
-
-
 Social network built with Django Framework.
 
 ## Features
