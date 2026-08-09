@@ -7,9 +7,9 @@ import pytest
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from django.conf import LazySettings
+    from pytest_django import Settings
 
 
 @pytest.fixture(autouse=True)
-def _media_root(settings: LazySettings, tmp_path: Path) -> None:
+def _media_root(settings: Settings, tmp_path: Path) -> None:
     settings.MEDIA_ROOT = str(tmp_path.resolve())
