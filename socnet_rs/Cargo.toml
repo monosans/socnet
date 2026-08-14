@@ -11,7 +11,7 @@ name = "socnet_rs"
 ammonia = "=4.1.4"
 compact_str = { version = "=0.10.0", features = ["pyo3"] }
 pulldown-cmark = {
-  version = "=0.13.3",
+  version = "=0.13.4",
   default-features = false,
   features = [
     "html",
