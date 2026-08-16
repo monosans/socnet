@@ -1,9 +1,4 @@
 [pytest]
-addopts = [
-  "--autocheck",
-  "--autocheck-skip=system_checks",
-  "--ds=config.settings.test",
-  "--fail-on-template-vars"
-]
+addopts = ["--autocheck", "--autocheck-skip=system_checks", "--ds=config.settings.test", "--fail-on-template-vars"]
 strict = true
 usefixtures = ["db"]
