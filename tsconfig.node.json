@@ -4,5 +4,5 @@
     "@tsconfig/node24/tsconfig.json"
   ],
   "exclude": [".venv", "socnet"],
-  "compilerOptions": { "noEmit": true, "checkJs": true }
+  "compilerOptions": { "noEmit": true, "checkJs": true, "types": [] }
 }
