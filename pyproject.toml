@@ -35,7 +35,7 @@ optional-dependencies.local = [
   "pytest==9.1.1",
   "pytest-cov==7.1.0",
   "pytest-django==4.14.0",
-  "pytest-django-autocheck==0.1.0",
+  "pytest-django-autocheck==0.3.0",
   "pytest-github-actions-annotate-failures==0.4.2",
   "watchfiles==1.2.0",
 ]

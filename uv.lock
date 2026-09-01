@@ -114,7 +114,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'local'", specifier = "==9.1.1" },
     { name = "pytest-cov", marker = "extra == 'local'", specifier = "==7.1.0" },
     { name = "pytest-django", marker = "extra == 'local'", specifier = "==4.14.0" },
-    { name = "pytest-django-autocheck", marker = "extra == 'local'", specifier = "==0.1.0" },
+    { name = "pytest-django-autocheck", marker = "extra == 'local'", specifier = "==0.3.0" },
     { name = "pytest-github-actions-annotate-failures", marker = "extra == 'local'", specifier = "==0.4.2" },
     { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==8.1.0" },
     { name = "sentry-sdk", extras = ["django"], specifier = "==2.68.1" },
@@ -1214,7 +1214,7 @@ wheels = [
 
 [[package]]
 name = "pytest-django-autocheck"
-version = "0.1.0"
+version = "0.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
@@ -1222,9 +1222,9 @@ dependencies = [
     { name = "pytest" },
     { name = "pytest-django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/09/675c12b3160896128704e5cc86bdb4943bfa5a4ec991f0e764648f530c53/pytest_django_autocheck-0.1.0.tar.gz", hash = "sha256:cea2dfaccabcb53a84bf077883131aed49cb51567830ad395902450278ba16f3", size = 47470, upload-time = "2026-07-07T23:31:52.297Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ac/9a/26aaf5405ead97a4016d639b11c798ab7a69857b09115c5dea32295f6463/pytest_django_autocheck-0.3.0.tar.gz", hash = "sha256:293f7f0ff70cb49958faeae66f08567f5167d228456f7e650b17f33808f18f9e", size = 58587, upload-time = "2026-08-29T23:24:11.599Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f8/71/6086f0bc3ab87f9648e044fb79e02b876b45eb97152fbe166bd3708bbf50/pytest_django_autocheck-0.1.0-py3-none-any.whl", hash = "sha256:d3b44ba76fb872222c87d66fbe7807317b1232c7d785893cf9a8700267ad9012", size = 41081, upload-time = "2026-07-07T23:31:50.75Z" },
+    { url = "https://files.pythonhosted.org/packages/d9/d2/9701f4cbe6c68737910cb326313671447ff497f0c6b4ec61ed5b145ec605/pytest_django_autocheck-0.3.0-py3-none-any.whl", hash = "sha256:fd5d389d03f2f3a496183c239839de54423d5065d78139e0490ba2810cc12afc", size = 48266, upload-time = "2026-08-29T23:24:10.359Z" },
 ]
 
 [[package]]
