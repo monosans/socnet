@@ -8,13 +8,13 @@
   >
     <div class="d-flex justify-content-between mb-1">
       <a
-        href="{{ comment.author.get_absolute_url }}"
         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+        href="{{ comment.author.get_absolute_url }}"
       >
         <div class="d-flex">
           <div class="avatar-thumbnail me-2">
             {% if comment.author.image %}
-              <img src="{{ comment.author.image.url }}" loading="lazy" class="rounded" />
+              <img class="rounded" loading="lazy" src="{{ comment.author.image.url }}" />
             {% else %}
               <i class="fa-solid fa-user text-secondary"></i>
             {% endif %}
@@ -28,30 +28,30 @@
       {% if request.user.is_staff or request.user == comment.author or request.user == comment.post.author %}
         <div>
           <div class="dropdown">
-            <button class="btn" type="button" data-bs-toggle="dropdown">
+            <button class="btn" data-bs-toggle="dropdown" type="button">
               <i class="fa-solid fa-ellipsis text-secondary"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               {% if request.user.is_staff %}
                 <li>
-                  <a href="{{ comment|obj_admin_url }}" class="dropdown-item"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin page" %}</a>
+                  <a class="dropdown-item" href="{{ comment|obj_admin_url }}"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin page" %}</a>
                 </li>
               {% endif %}
               {% if request.user == comment.author %}
                 <li>
                   <a
-                    href="{% url 'blog:comment_update' comment.pk %}"
                     class="dropdown-item"
+                    href="{% url 'blog:comment_update' comment.pk %}"
                   ><i class="fa-solid fa-pen-to-square text-primary"></i> {% translate "Edit" %}</a>
                 </li>
               {% endif %}
               {% if request.user == comment.author or request.user == comment.post.author %}
                 <li>
                   <button
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#comment{{ comment.pk }}Modal"
                     class="dropdown-item"
+                    data-bs-target="#comment{{ comment.pk }}Modal"
+                    data-bs-toggle="modal"
+                    type="button"
                   >
                     <i class="fa-solid fa-xmark text-danger"></i>
                     {% translate "Delete" %}
@@ -61,27 +61,27 @@
             </ul>
           </div>
           {% if request.user == comment.author or request.user == comment.post.author %}
-            <div class="modal fade" id="comment{{ comment.pk }}Modal" tabindex="-1">
+            <div id="comment{{ comment.pk }}Modal" class="modal fade" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">
                       {% blocktranslate context "noun" %}Delete comment{% endblocktranslate %}
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
                   </div>
                   <div class="modal-body"></div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
                       {% translate "Close" %}
                     </button>
                     <button
-                      type="button"
+                      class="btn btn-danger"
                       data-bs-dismiss="modal"
                       hx-delete="{% url "blog:comment_delete" comment.pk %}"
-                      hx-target="#comment{{ comment.pk }}"
                       hx-swap="delete"
-                      class="btn btn-danger"
+                      hx-target="#comment{{ comment.pk }}"
+                      type="button"
                     >{% translate "Delete" %}</button>
                   </div>
                 </div>
@@ -98,25 +98,25 @@
       {% include "blog/inc/timestamp.html" with object=comment %}
       {% if request.user.is_anonymous %}
         <a
-          href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
           class="btn badge rounded-pill text-bg-color fs-6"
+          href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
         ><i class="fa-regular fa-heart"></i> <span data-unformatted-number="{{ comment.likers__count }}"></span></a>
       {% elif comment.is_liked %}
         <button
-          type="button"
           class="btn badge rounded-pill text-bg-color fs-6"
-          data-is-liked="y"
           data-comment-pk="{{ comment.pk }}"
+          data-is-liked="y"
+          type="button"
         >
           <i class="fa-solid fa-heart text-danger"></i>
           <span data-unformatted-number="{{ comment.likers__count }}"></span>
         </button>
       {% else %}
         <button
-          type="button"
           class="btn badge rounded-pill text-bg-color fs-6"
-          data-is-liked="n"
           data-comment-pk="{{ comment.pk }}"
+          data-is-liked="n"
+          type="button"
         >
           <i class="fa-regular fa-heart"></i>
           <span data-unformatted-number="{{ comment.likers__count }}"></span>

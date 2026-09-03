@@ -6,16 +6,16 @@
   {% blocktranslate context "noun" %}Edit profile{% endblocktranslate %}
 {% endblock title %}
 {% block js %}
-  <script type="module" src="{% static 'js/autosize.js' %}"></script>
+  <script src="{% static 'js/autosize.js' %}" type="module"></script>
 {% endblock js %}
 {% block card %}
   <h3 class="mb-3 text-center">
     {% blocktranslate context "noun" %}Edit profile{% endblocktranslate %}
   </h3>
-  <form method="post" enctype="multipart/form-data">
+  <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
-    <button type="submit" class="btn btn-primary w-100">
+    <button class="btn btn-primary w-100" type="submit">
       {% translate "Save" %}
     </button>
   </form>

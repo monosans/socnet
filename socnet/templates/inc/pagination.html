@@ -11,7 +11,7 @@
         </li>
       {% else %}
         <li class="page-item">
-          <a href="{% querystring page=page %}" class="page-link">{{ page }}</a>
+          <a class="page-link" href="{% querystring page=page %}">{{ page }}</a>
         </li>
       {% endif %}
     {% endfor %}

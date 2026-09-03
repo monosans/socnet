@@ -2,176 +2,176 @@
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {% block title %}
-      {% endblock title %}
-    | Socnet</title>
-    {% include "inc/favicon.html" %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
-    {% block css %}
-    {% endblock css %}
-    <script type="module" src="{% static 'js/bootstrap.js' %}"></script>
-    <script type="module" src="{% static 'js/htmx.js' %}"></script>
-    {% django_htmx_script %}
-    <script type="module" src="{% static 'js/theme.js' %}"></script>
-    {% block js %}
-    {% endblock js %}
-  </head>
-  <body hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
-    <div class="mb-3 sticky-top">
-      <nav class="navbar navbar-expand-lg bg-body border-bottom">
-        <div class="container-xxl">
-          <a
-            href="{% url 'core:index' %}"
-            class="navbar-brand text-bg-primary rounded px-2 py-1"
-          ><i class="fa-solid fa-s"></i> <i class="fa-solid fa-o"></i> <i class="fa-solid fa-c"></i> <i class="fa-solid fa-n"></i> <i class="fa-solid fa-e"></i> <i class="fa-solid fa-t"></i></a>
-          <button
-            type="button"
-            class="navbar-toggler"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  {% with user_url=request.user.get_absolute_url %}
-                    <a
-                      href="{{ user_url }}"
-                      class="nav-link{% if user_url == request.path %} active{% endif %}"
-                    ><i class="fa-solid fa-user text-primary"></i> {% translate "My profile" %}</a>
-                  {% endwith %}
-                </li>
-                <li class="nav-item">
-                  {% url "blog:posts" as url_posts %}
-                  <a
-                    href="{{ url_posts }}"
-                    class="nav-link{% if url_posts == request.path %} active{% endif %}"
-                  ><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
-                </li>
-                <li class="nav-item">
-                  {% url "messenger:chats" as url_chats %}
-                  <a
-                    href="{{ url_chats }}"
-                    class="nav-link{% if url_chats == request.path %} active{% endif %}"
-                  ><i class="fa-solid fa-message text-primary"></i> {% translate "Messenger" %}</a>
-                </li>
-              {% else %}
-                <li class="nav-item">
-                  {% url "blog:posts" as url_posts %}
-                  <a
-                    href="{{ url_posts }}"
-                    class="nav-link{% if url_posts == request.path %} active{% endif %}"
-                  ><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
-                </li>
-              {% endif %}
+<html data-bs-theme="dark" lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>
+    {% block title %}
+    {% endblock title %}
+  | Socnet</title>
+  {% include "inc/favicon.html" %}
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/fontawesome.css' %}" rel="stylesheet" />
+  {% block css %}
+  {% endblock css %}
+  <script src="{% static 'js/bootstrap.js' %}" type="module"></script>
+  <script src="{% static 'js/htmx.js' %}" type="module"></script>
+  {% django_htmx_script %}
+  <script src="{% static 'js/theme.js' %}" type="module"></script>
+  {% block js %}
+  {% endblock js %}
+</head>
+<body hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}'>
+  <div class="mb-3 sticky-top">
+    <nav class="navbar navbar-expand-lg bg-body border-bottom">
+      <div class="container-xxl">
+        <a
+          class="navbar-brand text-bg-primary rounded px-2 py-1"
+          href="{% url 'core:index' %}"
+        ><i class="fa-solid fa-s"></i> <i class="fa-solid fa-o"></i> <i class="fa-solid fa-c"></i> <i class="fa-solid fa-n"></i> <i class="fa-solid fa-e"></i> <i class="fa-solid fa-t"></i></a>
+        <button
+          class="navbar-toggler"
+          data-bs-target="#navbarNav"
+          data-bs-toggle="collapse"
+          type="button"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarNav" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            {% if request.user.is_authenticated %}
               <li class="nav-item">
-                {% url "users:search_users" as url_search_users %}
+                {% with user_url=request.user.get_absolute_url %}
+                  <a
+                    class="nav-link{% if user_url == request.path %} active{% endif %}"
+                    href="{{ user_url }}"
+                  ><i class="fa-solid fa-user text-primary"></i> {% translate "My profile" %}</a>
+                {% endwith %}
+              </li>
+              <li class="nav-item">
+                {% url "blog:posts" as url_posts %}
                 <a
-                  href="{{ url_search_users }}"
-                  class="nav-link{% if url_search_users == request.path %} active{% endif %}"
-                ><i class="fa-solid fa-magnifying-glass text-primary"></i> {% blocktranslate context "noun" %}Search users{% endblocktranslate %}</a>
+                  class="nav-link{% if url_posts == request.path %} active{% endif %}"
+                  href="{{ url_posts }}"
+                ><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
               </li>
-              {% if request.user.is_staff %}
-                <li class="nav-item">
-                  <a href="{% url 'admin:index' %}" class="nav-link"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin panel" %}</a>
-                </li>
-                <li class="nav-item">
-                  <a href="{% url 'api-1.0.0:openapi-view' %}" class="nav-link"><i class="fa-solid fa-bolt text-primary"></i> API</a>
-                </li>
-              {% endif %}
-            </ul>
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item dropdown">
-                {% if request.user.is_authenticated %}
-                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa-solid fa-gear text-primary"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      {% url "users:account_security" as url_account_security %}
-                      {% if url_account_security == request.path %}
-                        <a href="{{ url_account_security }}" class="dropdown-item active"><i class="fa-solid fa-shield"></i> {% translate "Security" %}</a>
-                      {% else %}
-                        <a href="{{ url_account_security }}" class="dropdown-item"><i class="fa-solid fa-shield text-primary"></i> {% translate "Security" %}</a>
-                      {% endif %}
-                    </li>
-                    <li>
-                      {% url "account_logout" as url_account_logout %}
-                      {% if url_account_logout == request.path %}
-                        <a href="{{ url_account_logout }}" class="dropdown-item active"><i class="fa-solid fa-right-from-bracket"></i> {% blocktranslate context "noun" %}Log out{% endblocktranslate %}</a>
-                      {% else %}
-                        <a href="{{ url_account_logout }}" class="dropdown-item"><i class="fa-solid fa-right-from-bracket text-primary"></i> {% blocktranslate context "noun" %}Log out{% endblocktranslate %}</a>
-                      {% endif %}
-                    </li>
-                  </ul>
-                {% else %}
-                  <li class="nav-item">
-                    {% url "account_login" as url_login %}
-                    <a
-                      href="{{ url_login }}"
-                      class="nav-link{% if url_login == request.path %} active{% endif %}"
-                    ><i class="fa-solid fa-user text-primary"></i> {% blocktranslate context "noun" %}Log in{% endblocktranslate %}</a>
-                  </li>
-                  <li class="nav-item">
-                    {% url "account_signup" as url_signup %}
-                    <a
-                      href="{{ url_signup }}"
-                      class="nav-link{% if url_signup == request.path %} active{% endif %}"
-                    ><i class="fa-solid fa-clipboard-list text-primary"></i> {% translate "Sign-up" %}</a>
-                  </li>
-                {% endif %}
+              <li class="nav-item">
+                {% url "messenger:chats" as url_chats %}
+                <a
+                  class="nav-link{% if url_chats == request.path %} active{% endif %}"
+                  href="{{ url_chats }}"
+                ><i class="fa-solid fa-message text-primary"></i> {% translate "Messenger" %}</a>
               </li>
-              <li id="themeSwitcher" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i id="currentThemeIcon" class="fa-solid fa-moon text-primary"></i></a>
+            {% else %}
+              <li class="nav-item">
+                {% url "blog:posts" as url_posts %}
+                <a
+                  class="nav-link{% if url_posts == request.path %} active{% endif %}"
+                  href="{{ url_posts }}"
+                ><i class="fa-solid fa-newspaper text-primary"></i> {% translate "Posts" %}</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              {% url "users:search_users" as url_search_users %}
+              <a
+                class="nav-link{% if url_search_users == request.path %} active{% endif %}"
+                href="{{ url_search_users }}"
+              ><i class="fa-solid fa-magnifying-glass text-primary"></i> {% blocktranslate context "noun" %}Search users{% endblocktranslate %}</a>
+            </li>
+            {% if request.user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin panel" %}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'api-1.0.0:openapi-view' %}"><i class="fa-solid fa-bolt text-primary"></i> API</a>
+              </li>
+            {% endif %}
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              {% if request.user.is_authenticated %}
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-gear text-primary"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li>
-                    <button type="button" class="dropdown-item" data-bs-theme-value="light">
-                      <i class="fa-solid fa-sun text-primary"></i>
-                      {% translate "Light" %}
-                    </button>
+                    {% url "users:account_security" as url_account_security %}
+                    {% if url_account_security == request.path %}
+                      <a class="dropdown-item active" href="{{ url_account_security }}"><i class="fa-solid fa-shield"></i> {% translate "Security" %}</a>
+                    {% else %}
+                      <a class="dropdown-item" href="{{ url_account_security }}"><i class="fa-solid fa-shield text-primary"></i> {% translate "Security" %}</a>
+                    {% endif %}
                   </li>
                   <li>
-                    <button type="button" class="dropdown-item active" data-bs-theme-value="dark">
-                      <i class="fa-solid fa-moon"></i>
-                      {% translate "Dark" %}
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="dropdown-item" data-bs-theme-value="auto">
-                      <i class="fa-solid fa-circle-half-stroke text-primary"></i>
-                      {% translate "Auto" %}
-                    </button>
+                    {% url "account_logout" as url_account_logout %}
+                    {% if url_account_logout == request.path %}
+                      <a class="dropdown-item active" href="{{ url_account_logout }}"><i class="fa-solid fa-right-from-bracket"></i> {% blocktranslate context "noun" %}Log out{% endblocktranslate %}</a>
+                    {% else %}
+                      <a class="dropdown-item" href="{{ url_account_logout }}"><i class="fa-solid fa-right-from-bracket text-primary"></i> {% blocktranslate context "noun" %}Log out{% endblocktranslate %}</a>
+                    {% endif %}
                   </li>
                 </ul>
-              </li>
-            </ul>
-          </div>
+              {% else %}
+                <li class="nav-item">
+                  {% url "account_login" as url_login %}
+                  <a
+                    class="nav-link{% if url_login == request.path %} active{% endif %}"
+                    href="{{ url_login }}"
+                  ><i class="fa-solid fa-user text-primary"></i> {% blocktranslate context "noun" %}Log in{% endblocktranslate %}</a>
+                </li>
+                <li class="nav-item">
+                  {% url "account_signup" as url_signup %}
+                  <a
+                    class="nav-link{% if url_signup == request.path %} active{% endif %}"
+                    href="{{ url_signup }}"
+                  ><i class="fa-solid fa-clipboard-list text-primary"></i> {% translate "Sign-up" %}</a>
+                </li>
+              {% endif %}
+            </li>
+            <li id="themeSwitcher" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><i id="currentThemeIcon" class="fa-solid fa-moon text-primary"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <button class="dropdown-item" data-bs-theme-value="light" type="button">
+                    <i class="fa-solid fa-sun text-primary"></i>
+                    {% translate "Light" %}
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item active" data-bs-theme-value="dark" type="button">
+                    <i class="fa-solid fa-moon"></i>
+                    {% translate "Dark" %}
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" data-bs-theme-value="auto" type="button">
+                    <i class="fa-solid fa-circle-half-stroke text-primary"></i>
+                    {% translate "Auto" %}
+                  </button>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
-      </nav>
-    </div>
-    <div class="container-xxl">
-      {% for message in messages %}
-        <div
-          class="alert alert-{{ message.tags|default:'primary' }} alert-dismissible fade show"
-          role="alert"
-        >
-          {{ message }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      {% endfor %}
-      {% block content %}
-      {% endblock content %}
-    </div>
-    <a
-      href="https://github.com/monosans/socnet"
-      rel="noopener noreferrer"
-      class="position-absolute bottom-0 mb-3 end-0 me-3"
-    ><i class="fa-brands fa-github fs-1 text-body"></i></a>
-  </body>
+      </div>
+    </nav>
+  </div>
+  <div class="container-xxl">
+    {% for message in messages %}
+      <div
+        class="alert alert-{{ message.tags|default:'primary' }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+      </div>
+    {% endfor %}
+    {% block content %}
+    {% endblock content %}
+  </div>
+  <a
+    class="position-absolute bottom-0 mb-3 end-0 me-3"
+    href="https://github.com/monosans/socnet"
+    rel="noopener noreferrer"
+  ><i class="fa-brands fa-github fs-1 text-body"></i></a>
+</body>
 </html>
