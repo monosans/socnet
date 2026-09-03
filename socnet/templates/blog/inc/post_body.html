@@ -2,11 +2,11 @@
 
 <div class="d-flex mb-1">
   <a
-    class="avatar-thumbnail d-flex align-items-center me-2"
     href="{{ post.author.get_absolute_url }}"
+    class="avatar-thumbnail d-flex align-items-center me-2"
   >
     {% if post.author.image %}
-      <img class="rounded" loading="lazy" src="{{ post.author.image.url }}" />
+      <img src="{{ post.author.image.url }}" loading="lazy" class="rounded" />
     {% else %}
       <i class="fa-solid fa-user text-secondary"></i>
     {% endif %}
@@ -14,8 +14,8 @@
   <div>
     <div>
       <a
-        class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
         href="{{ post.author.get_absolute_url }}"
+        class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
       >{{ post.author.display_name }} <span class="text-secondary">@{{ post.author.username }}</span></a>
     </div>
     {% include "blog/inc/timestamp.html" with object=post %}
@@ -23,25 +23,25 @@
   {% if request.user.is_staff or request.user == post.author %}
     <div class="ms-auto">
       <div class="dropdown">
-        <button class="btn" data-bs-toggle="dropdown" type="button">
+        <button class="btn" type="button" data-bs-toggle="dropdown">
           <i class="fa-solid fa-ellipsis text-secondary"></i>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
           {% if request.user.is_staff %}
             <li>
-              <a class="dropdown-item" href="{{ post|obj_admin_url }}"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin page" %}</a>
+              <a href="{{ post|obj_admin_url }}" class="dropdown-item"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin page" %}</a>
             </li>
           {% endif %}
           {% if request.user == post.author %}
             <li>
-              <a class="dropdown-item" href="{% url 'blog:post_update' post.pk %}"><i class="fa-solid fa-pen-to-square text-primary"></i> {% translate "Edit" %}</a>
+              <a href="{% url 'blog:post_update' post.pk %}" class="dropdown-item"><i class="fa-solid fa-pen-to-square text-primary"></i> {% translate "Edit" %}</a>
             </li>
             <li>
               <button
-                class="dropdown-item"
-                data-bs-target="#post{{ post.pk }}Modal"
-                data-bs-toggle="modal"
                 type="button"
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#post{{ post.pk }}Modal"
               >
                 <i class="fa-solid fa-xmark text-danger"></i>
                 {% translate "Delete" %}
@@ -51,25 +51,25 @@
         </ul>
       </div>
       {% if request.user == post.author %}
-        <div id="post{{ post.pk }}Modal" class="modal fade" tabindex="-1">
+        <div class="modal fade" id="post{{ post.pk }}Modal" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">
                   {% blocktranslate context "noun" %}Delete post{% endblocktranslate %}
                 </h5>
-                <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
               <div class="modal-body">
                 {% translate "Are you sure you want to delete your post?" %}
               </div>
               <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                   {% translate "Close" %}
                 </button>
-                <form action="{% url 'blog:post_delete' post.pk %}" method="post">
+                <form method="post" action="{% url 'blog:post_delete' post.pk %}">
                   {% csrf_token %}
-                  <button class="btn btn-danger" type="submit">{% translate "Delete" %}</button>
+                  <button type="submit" class="btn btn-danger">{% translate "Delete" %}</button>
                 </form>
               </div>
             </div>
@@ -82,33 +82,33 @@
 <div class="markdown-container text-break">{{ post.content|markdownify }}</div>
 {% if request.user.is_anonymous %}
   <a
-    class="btn badge rounded-pill text-bg-color fs-6"
     href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
+    class="btn badge rounded-pill text-bg-color fs-6"
   ><i class="fa-regular fa-heart"></i> <span data-unformatted-number="{{ post.likers__count }}"></span></a>
 {% elif post.is_liked %}
   <button
+    type="button"
     class="btn badge rounded-pill text-bg-color fs-6"
     data-is-liked="y"
     data-post-pk="{{ post.pk }}"
-    type="button"
   >
     <i class="fa-solid fa-heart text-danger"></i>
     <span data-unformatted-number="{{ post.likers__count }}"></span>
   </button>
 {% else %}
   <button
+    type="button"
     class="btn badge rounded-pill text-bg-color fs-6"
     data-is-liked="n"
     data-post-pk="{{ post.pk }}"
-    type="button"
   >
     <i class="fa-regular fa-heart"></i>
     <span data-unformatted-number="{{ post.likers__count }}"></span>
   </button>
 {% endif %}
 <a
-  class="btn badge rounded-pill text-bg-color fs-6"
   href="{{ post.get_absolute_url }}"
+  class="btn badge rounded-pill text-bg-color fs-6"
 ><i
   class="fa-regular fa-comment{% if not post.allow_commenting %} text-danger{% endif %}"
 ></i> <span data-unformatted-number="{{ post.comments__count }}"></span></a>

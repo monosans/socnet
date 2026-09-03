@@ -7,11 +7,11 @@
 {% endblock title %}
 {% block css %}
   {% if users %}
-    <link href="{% static 'css/avatar_thumbnail.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
   {% endif %}
 {% endblock css %}
 {% block js %}
-  <script src="{% static 'js/autosize.js' %}" type="module"></script>
+  <script type="module" src="{% static 'js/autosize.js' %}"></script>
 {% endblock js %}
 {% block list_group %}
   <div class="list-group-item">
@@ -20,7 +20,7 @@
     </h3>
     <form method="get">
       {% bootstrap_form form layout="floating" %}
-      <button class="btn btn-primary w-100" type="submit">
+      <button type="submit" class="btn btn-primary w-100">
         {% blocktranslate context "verb" %}Search{% endblocktranslate %}
       </button>
     </form>

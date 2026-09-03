@@ -7,13 +7,13 @@
 {% endblock title %}
 {% block css %}
   {% if chats %}
-    <link href="{% static 'css/avatar_thumbnail.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
   {% endif %}
 {% endblock css %}
 {% block js %}
   {% if chats %}
-    <script src="{% static 'js/date_formatter.js' %}" type="module"></script>
-    <script src="{% static 'js/autosize.js' %}" type="module"></script>
+    <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
+    <script type="module" src="{% static 'js/autosize.js' %}"></script>
   {% endif %}
 {% endblock js %}
 {% block list_group %}
@@ -21,21 +21,21 @@
     <form class="list-group-item p-0">
       <div class="input-group">
         {{ form.q }}
-        <button class="btn btn-primary rounded-bottom-0" type="submit">
+        <button type="submit" class="btn btn-primary rounded-bottom-0">
           <i class="fa-solid fa-magnifying-glass mx-2"></i>
         </button>
       </div>
     </form>
     {% for chat in chats %}
       <a
-        class="d-flex align-items-center list-group-item list-group-item-action"
         href="{% url 'messenger:chat' chat.username %}"
+        class="d-flex align-items-center list-group-item list-group-item-action"
       >
         <div
           class="avatar-thumbnail d-flex align-items-center justify-content-center me-2"
         >
           {% if chat.image %}
-            <img class="rounded" loading="lazy" src="{{ chat.image.url }}" />
+            <img src="{{ chat.image.url }}" loading="lazy" class="rounded" />
           {% else %}
             <i class="fa-solid fa-user text-secondary"></i>
           {% endif %}

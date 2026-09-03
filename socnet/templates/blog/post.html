@@ -10,7 +10,7 @@
 {% endblock css %}
 {% block js %}
   {% if post.allow_commenting or request.user == post.author %}
-    <script src="{% static 'js/autosize.js' %}" type="module"></script>
+    <script type="module" src="{% static 'js/autosize.js' %}"></script>
   {% endif %}
   {% include "blog/inc/post_js.html" %}
 {% endblock js %}
@@ -29,8 +29,8 @@
         {% url 'account_login' as url_login %}
         {% blocktranslate trimmed with next=request.path|urlencode %}
           <a
-            class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
             href="{{ url_login }}?next={{ next }}"
+            class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
           >Log in</a>
           to comment.
         {% endblocktranslate %}
@@ -39,7 +39,7 @@
       <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button class="btn btn-primary w-100" type="submit">
+        <button type="submit" class="btn btn-primary w-100">
           {% blocktranslate context "verb" %}Comment{% endblocktranslate %}
         </button>
       </form>

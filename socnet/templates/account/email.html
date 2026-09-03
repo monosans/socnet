@@ -10,15 +10,15 @@
     <div class="card-body">
       <h3 class="mb-3 text-center">{% translate "Email addresses" %}</h3>
       {% if emailaddresses %}
-        <form action="{% url 'account_email' %}" method="post">
+        <form method="post" action="{% url 'account_email' %}">
           {% csrf_token %}
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th class="text-center" scope="col">{% translate "Verified" %}</th>
-                  <th class="text-center" scope="col">{% translate "Primary" %}</th>
+                  <th scope="col" class="text-center">{% translate "Verified" %}</th>
+                  <th scope="col" class="text-center">{% translate "Primary" %}</th>
                 </tr>
               </thead>
               <tbody>
@@ -32,8 +32,8 @@
                         value="{{ emailaddress.email }}"
                       />
                       <a
-                        class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
                         href="mailto:{{ emailaddress.email }}"
+                        class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
                       >{{ emailaddress.email }}</a>
                     </td>
                     <td class="text-center">
@@ -58,39 +58,39 @@
           <div class="row">
             <div class="col-12 col-lg-4 mb-2 mb-lg-0">
               <button
-                class="btn btn-primary w-100 h-100"
-                name="action_primary"
                 type="submit"
+                name="action_primary"
+                class="btn btn-primary w-100 h-100"
               >{% translate "Make primary" %}</button>
             </div>
             <div class="col-12 col-lg-4 mb-2 mb-lg-0">
-              <button class="btn btn-primary w-100 h-100" name="action_send" type="submit">
+              <button type="submit" name="action_send" class="btn btn-primary w-100 h-100">
                 {% translate "Resend verification" %}
               </button>
             </div>
             <div class="col-12 col-lg-4 mb-2 mb-lg-0">
               <button
-                class="btn btn-danger w-100 h-100"
-                data-bs-target="#emailRemove"
-                data-bs-toggle="modal"
                 type="button"
+                class="btn btn-danger w-100 h-100"
+                data-bs-toggle="modal"
+                data-bs-target="#emailRemove"
               >{% translate "Remove" %}</button>
             </div>
           </div>
-          <div id="emailRemove" class="modal fade" tabindex="-1">
+          <div class="modal fade" id="emailRemove" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                   {% translate "Do you really want to remove the selected email address?" %}
                 </div>
                 <div class="modal-footer">
-                  <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     {% translate "Close" %}
                   </button>
-                  <button class="btn btn-danger" name="action_remove" type="submit">
+                  <button type="submit" name="action_remove" class="btn btn-danger">
                     {% translate "Remove" %}
                   </button>
                 </div>
@@ -109,10 +109,10 @@
         <h3 class="mb-3 text-center">
           {% blocktranslate context "noun" %}Add email address{% endblocktranslate %}
         </h3>
-        <form action="{% url 'account_email' %}" method="post">
+        <form method="post" action="{% url 'account_email' %}">
           {% csrf_token %}
           {% bootstrap_form form %}
-          <button class="btn btn-primary w-100" name="action_add" type="submit">
+          <button type="submit" name="action_add" class="btn btn-primary w-100">
             {% translate "Add" %}
           </button>
         </form>

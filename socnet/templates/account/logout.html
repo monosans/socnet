@@ -10,16 +10,16 @@
     {% blocktranslate context "noun" %}Log out{% endblocktranslate %}
   </h3>
   {% translate "Are you sure you want to log out?" %}
-  <form class="mt-3" action="{% url 'account_logout' %}" method="post">
+  <form method="post" action="{% url 'account_logout' %}" class="mt-3">
     {% csrf_token %}
     {% if redirect_field_value %}
       <input
-        name="{{ redirect_field_name }}"
         type="hidden"
+        name="{{ redirect_field_name }}"
         value="{{ redirect_field_value }}"
       />
     {% endif %}
-    <button class="btn btn-primary w-100" type="submit">
+    <button type="submit" class="btn btn-primary w-100">
       {% blocktranslate context "verb" %}Log out{% endblocktranslate %}
     </button>
   </form>
