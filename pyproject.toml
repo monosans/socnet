@@ -19,7 +19,7 @@ dependencies = [
   "granian==2.8.2",
   "orjson==3.12.0",
   "pillow==12.3.0",
-  "psycopg[pool]==3.3.4",
+  "psycopg[pool]==3.3.5",
   "sentry-sdk[django]==2.68.1",
   "socnet-rs",
   "uvloop==0.22.1; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
@@ -31,7 +31,7 @@ optional-dependencies.local = [
   "django-debug-toolbar==7.1.1",
   "django-extra-checks==0.17.0",
   "factory-boy==3.3.3",
-  "psycopg[binary]==3.3.4",
+  "psycopg[binary]==3.3.5",
   "pytest==9.1.1",
   "pytest-cov==7.1.0",
   "pytest-django==4.14.0",
@@ -40,7 +40,7 @@ optional-dependencies.local = [
   "watchfiles==1.2.0",
 ]
 optional-dependencies.production = [
-  "psycopg[c]==3.3.4",
+  "psycopg[c]==3.3.5",
   "redis[hiredis]==8.1.0",
 ]
 
