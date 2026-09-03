@@ -14,8 +14,8 @@
           <div class="mt-3">
             {% blocktranslate trimmed with email=current_emailaddress.email %}
               <a
-                href="mailto:{{ email }}"
                 class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+                href="mailto:{{ email }}"
               >{{ email }}</a> is associated with your account.
             {% endblocktranslate %}
           </div>
@@ -24,15 +24,15 @@
           <div class="mt-1">
             {% blocktranslate trimmed with email=new_emailaddress.email %}
               <a
-                href="mailto:{{ email }}"
                 class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+                href="mailto:{{ email }}"
               >{{ email }}</a> is pending verification.
             {% endblocktranslate %}
           </div>
-          <form method="post" action="{% url 'account_email' %}" class="mt-2">
+          <form class="mt-2" action="{% url 'account_email' %}" method="post">
             {% csrf_token %}
-            <input type="hidden" name="email" value="{{ new_emailaddress.email }}" />
-            <button type="submit" name="action_send" class="btn btn-primary w-100">
+            <input name="email" type="hidden" value="{{ new_emailaddress.email }}" />
+            <button class="btn btn-primary w-100" name="action_send" type="submit">
               {% translate "Resend verification" %}
             </button>
           </form>
@@ -47,10 +47,10 @@
       <h3 class="mb-0 text-center">
         {% blocktranslate context "noun" %}Change email{% endblocktranslate %}
       </h3>
-      <form method="post" action="{% url 'account_email' %}" class="mt-3">
+      <form class="mt-3" action="{% url 'account_email' %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" name="action_add" class="btn btn-primary w-100">
+        <button class="btn btn-primary w-100" name="action_add" type="submit">
           {% translate "Change" %}
         </button>
       </form>

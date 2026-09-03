@@ -47,7 +47,7 @@ optional-dependencies.production = [
 [dependency-groups]
 dev = [
   "django-stubs==6.1.0",
-  "djlint==1.44.2",
+  "djlint==1.45.0",
   "mypy==2.3.1",
   "ruff==0.16.5",
   "types-pillow==10.2.0.20240822",
@@ -55,6 +55,7 @@ dev = [
 
 [tool.uv]
 exclude-newer = "3 days"
+exclude-newer-package = { "djlint" = "2026-09-03" }
 package = false
 
 [tool.uv.sources]

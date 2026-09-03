@@ -8,7 +8,7 @@
       class="avatar-thumbnail d-flex align-items-center justify-content-center me-2"
     >
       {% if user.image %}
-        <img src="{{ user.image.url }}" loading="lazy" class="rounded" />
+        <img class="rounded" loading="lazy" src="{{ user.image.url }}" />
       {% else %}
         <i class="fa-solid fa-user text-secondary"></i>
       {% endif %}

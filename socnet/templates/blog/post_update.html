@@ -6,22 +6,22 @@
   {% blocktranslate with post_pk=object.pk context "noun" %}Edit post #{{ post_pk }}{% endblocktranslate %}
 {% endblock title %}
 {% block js %}
-  <script type="module" src="{% static 'js/autosize.js' %}"></script>
+  <script src="{% static 'js/autosize.js' %}" type="module"></script>
 {% endblock js %}
 {% block card %}
   <h3 class="mb-3 text-center">
     {% blocktranslate trimmed with post_url=post.get_absolute_url post_pk=object.pk context "noun" %}
       Edit
       <a
-        href="{{ post_url }}"
         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+        href="{{ post_url }}"
       >post #{{ post_pk }}</a>
     {% endblocktranslate %}
   </h3>
   <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button type="submit" class="btn btn-primary w-100">
+    <button class="btn btn-primary w-100" type="submit">
       {% translate "Save" %}
     </button>
   </form>

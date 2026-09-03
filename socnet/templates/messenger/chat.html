@@ -6,17 +6,17 @@
   {% blocktranslate with display_name=interlocutor.display_name username=interlocutor.username %}Chat with {{ display_name }} ({{ username }}){% endblocktranslate %}
 {% endblock title %}
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/markdown_container.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/viewer.css' %}" />
+  <link href="{% static 'css/chat.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/avatar_thumbnail.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/markdown_container.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/viewer.css' %}" rel="stylesheet" />
 {% endblock css %}
 {% block js %}
-  <script type="module" src="{% static 'js/chat.js' %}"></script>
-  <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
-  <script type="module" src="{% static 'js/autosize.js' %}"></script>
+  <script src="{% static 'js/chat.js' %}" type="module"></script>
+  <script src="{% static 'js/date_formatter.js' %}" type="module"></script>
+  <script src="{% static 'js/autosize.js' %}" type="module"></script>
   {% if messages_ %}
-    <script type="module" src="{% static 'js/viewer_markdown.js' %}"></script>
+    <script src="{% static 'js/viewer_markdown.js' %}" type="module"></script>
   {% endif %}
   <script id="data" type="application/json">
     {
@@ -42,13 +42,13 @@
 {% endblock js %}
 {% block list_group %}
   <a
-    href="{{ interlocutor.get_absolute_url }}"
     class="list-group-item list-group-item-action"
+    href="{{ interlocutor.get_absolute_url }}"
   >
     <div class="d-flex align-items-center justify-content-center">
       {% if interlocutor.image %}
         <div class="avatar-thumbnail-no-height me-2">
-          <img src="{{ interlocutor.image.url }}" loading="lazy" class="rounded" />
+          <img class="rounded" loading="lazy" src="{{ interlocutor.image.url }}" />
         </div>
       {% endif %}
       <div class="text-body text-break">
@@ -62,19 +62,19 @@
       {% for message in messages_ %}
         <div id="msg{{ message.pk }}" class="d-flex mb-1">
           <a
-            href="{{ message.sender.get_absolute_url }}"
             class="avatar-thumbnail d-flex align-items-center me-2"
+            href="{{ message.sender.get_absolute_url }}"
           >
             {% if message.sender.image %}
-              <img src="{{ message.sender.image.url }}" loading="lazy" class="rounded" />
+              <img class="rounded" loading="lazy" src="{{ message.sender.image.url }}" />
             {% else %}
               <i class="fa-solid fa-user text-secondary"></i>
             {% endif %}
           </a>
           <div>
             <a
-              href="{{ message.sender.get_absolute_url }}"
               class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
+              href="{{ message.sender.get_absolute_url }}"
             >{{ message.sender.display_name }} <span class="text-secondary">@{{ message.sender.username }}</span></a>
             <div class="text-secondary" data-epoch="{{ message.date_created_epoch }}">
             </div>
@@ -90,9 +90,9 @@
     <div class="input-group">
       {{ form.content }}
       <button
-        type="submit"
-        class="btn btn-primary rounded-top-0"
         id="messageSendBtn"
+        class="btn btn-primary rounded-top-0"
+        type="submit"
       >
         <i class="fa-solid fa-paper-plane mx-2"></i>
       </button>
