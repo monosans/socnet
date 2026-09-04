@@ -7,12 +7,12 @@
 {% endblock title %}
 {% block css %}
   {% if subscriptions %}
-    <link rel="stylesheet" href="{% static 'css/avatar_thumbnail.css' %}" />
+    <link href="{% static 'css/avatar_thumbnail.css' %}" rel="stylesheet" />
   {% endif %}
 {% endblock css %}
 {% block js %}
   {% if subscriptions and user == request.user %}
-    <script type="module" src="{% static 'js/user_subscribe.js' %}"></script>
+    <script src="{% static 'js/user_subscribe.js' %}" type="module"></script>
   {% endif %}
 {% endblock js %}
 {% block list_group %}
@@ -20,8 +20,8 @@
     {% csrf_token %}
     <h3 class="list-group-item text-center">
       <a
-        href="{{ user.get_absolute_url }}"
         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
+        href="{{ user.get_absolute_url }}"
       >{{ user.display_name }} ({{ user.username }})</a>
       <div>{% translate "Subscriptions" %}</div>
     </h3>
@@ -33,25 +33,29 @@
           class="avatar-thumbnail d-flex align-items-center justify-content-center me-2"
         >
           {% if subscription.image %}
-            <img src="{{ subscription.image.url }}" loading="lazy" class="rounded" />
+            <img
+              class="rounded"
+              loading="lazy"
+              src="{{ subscription.image.url }}"
+            />
           {% else %}
             <i class="fa-solid fa-user text-secondary"></i>
           {% endif %}
         </div>
         <a
-          href="{{ subscription.get_absolute_url }}"
           class="stretched-link text-break text-decoration-none"
+          href="{{ subscription.get_absolute_url }}"
         >
           <span class="text-body">{{ subscription.display_name }}</span>
           <span class="text-secondary">@{{ subscription.username }}</span>
         </a>
         {% if user == request.user %}
           <button
-            type="button"
             class="btn btn-primary ms-auto z-1"
             data-is-subscribed="y"
             data-text-toggle="{% translate "Subscribe" %}"
             data-username="{{ subscription.username }}"
+            type="button"
           >{% translate "Unsubscribe" %}</button>
         {% endif %}
       </div>
@@ -60,8 +64,8 @@
     <div class="list-group-item text-center">
       {% blocktranslate trimmed with display_name=user.display_name username=user.username user_url=user.get_absolute_url %}
         <a
-          href="{{ user_url }}"
           class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+          href="{{ user_url }}"
         >{{ display_name }} ({{ username }})</a>
         has no subscriptions.
       {% endblocktranslate %}

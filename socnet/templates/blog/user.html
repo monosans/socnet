@@ -7,18 +7,18 @@
 {% endblock title %}
 {% block css %}
   {% if user.image %}
-    <link rel="stylesheet" href="{% static 'css/avatar.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/viewer.css' %}" />
+    <link href="{% static 'css/avatar.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/viewer.css' %}" rel="stylesheet" />
   {% endif %}
 {% endblock css %}
 {% block js %}
-  <script type="module" src="{% static 'js/number_formatter.js' %}"></script>
-  <script type="module" src="{% static 'js/date_formatter.js' %}"></script>
+  <script src="{% static 'js/number_formatter.js' %}" type="module"></script>
+  <script src="{% static 'js/date_formatter.js' %}" type="module"></script>
   {% if request.user.is_authenticated and user != request.user %}
-    <script type="module" src="{% static 'js/user_subscribe.js' %}"></script>
+    <script src="{% static 'js/user_subscribe.js' %}" type="module"></script>
   {% endif %}
   {% if user.image %}
-    <script type="module" src="{% static 'js/viewer_avatar.js' %}"></script>
+    <script src="{% static 'js/viewer_avatar.js' %}" type="module"></script>
   {% endif %}
 {% endblock js %}
 {% block content %}
@@ -29,55 +29,61 @@
           {% if user.image %}
             <div class="mb-2 text-center">
               <img
-                src="{{ user.image.url }}"
-                loading="lazy"
-                role="button"
                 id="avatar"
                 class="rounded"
+                loading="lazy"
+                role="button"
+                src="{{ user.image.url }}"
               />
             </div>
           {% endif %}
           {% if user == request.user %}
-            <a href="{% url 'users:edit_profile' %}" class="btn btn-primary w-100">{% translate "Edit" %}</a>
             <a
-              href="{% url 'blog:post_create' %}"
+              class="btn btn-primary w-100"
+              href="{% url 'users:edit_profile' %}"
+            >{% translate "Edit" %}</a>
+            <a
               class="btn btn-primary w-100 mt-2"
+              href="{% url 'blog:post_create' %}"
             >{% blocktranslate context "verb" %}Create post{% endblocktranslate %}</a>
           {% elif request.user.is_authenticated %}
             <a
-              href="{% url 'messenger:chat' user.username %}"
               class="btn btn-primary w-100"
+              href="{% url 'messenger:chat' user.username %}"
             >{% translate "Write message" %}</a>
             {% csrf_token %}
             {% if user.is_subscription %}
               <button
-                type="button"
                 class="btn btn-outline-primary w-100 mt-2"
                 data-is-subscribed="y"
                 data-text-toggle="{% translate "Subscribe" %}"
                 data-username="{{ user.username }}"
+                type="button"
               >{% translate "Unsubscribe" %}</button>
             {% else %}
               <button
-                type="button"
                 class="btn btn-primary w-100 mt-2"
                 data-is-subscribed="n"
                 data-text-toggle="{% translate "Unsubscribe" %}"
                 data-username="{{ user.username }}"
+                type="button"
               >{% translate "Subscribe" %}</button>
             {% endif %}
           {% else %}
             <a
-              href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
               class="btn btn-primary w-100"
+              href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
             >{% translate "Write message" %}</a>
             <a
-              href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
               class="btn btn-primary w-100 mt-2"
+              href="{% url 'account_login' %}?next={{ request.path|urlencode }}"
             >{% translate "Subscribe" %}</a>
           {% endif %}
           {% if request.user.is_staff %}
-            <a href="{{ user|obj_admin_url }}" class="btn btn-primary w-100 mt-2">{% translate "Admin page" %}</a>
+            <a
+              class="btn btn-primary w-100 mt-2"
+              href="{{ user|obj_admin_url }}"
+            >{% translate "Admin page" %}</a>
           {% endif %}
         </div>
       </div>
@@ -87,57 +93,71 @@
         <div class="card-body">
           <h4>{{ user.display_name }}</h4>
           <a
-            href="{{ user.get_absolute_url }}"
             class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="{{ user.get_absolute_url }}"
           >@{{ user.username }}</a>
           <div class="table-responsive">
             <table class="table table-borderless mb-0 w-auto">
               <tbody>
                 <tr>
                   <td class="ps-0 pe-2 py-1">{% translate "Signed up" %}</td>
-                  <td class="ps-2 pe-0 py-1" data-epoch="{{ user.date_joined_epoch }}"></td>
+                  <td
+                    class="ps-2 pe-0 py-1"
+                    data-epoch="{{ user.date_joined_epoch }}"
+                  ></td>
                 </tr>
                 {% if user.last_login_epoch %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Last login" %}</td>
-                    <td class="ps-2 pe-0 py-1" data-epoch="{{ user.last_login_epoch }}"></td>
+                    <td
+                      class="ps-2 pe-0 py-1"
+                      data-epoch="{{ user.last_login_epoch }}"
+                    ></td>
                   </tr>
                 {% endif %}
                 {% if user.birth_date %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Birth date" %}</td>
-                    <td class="ps-2 pe-0 py-1">{{ user.birth_date }} ({{ user.get_age }})</td>
+                    <td
+                      class="ps-2 pe-0 py-1"
+                    >{{ user.birth_date }} ({{ user.get_age }})</td>
                   </tr>
                 {% endif %}
                 {% if user.location %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Location" %}</td>
-                    <td class="ps-2 pe-0 py-1 text-break">{{ user.location }}</td>
+                    <td
+                      class="ps-2 pe-0 py-1 text-break"
+                    >{{ user.location }}</td>
                   </tr>
                 {% endif %}
                 {% if user.about %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "About me" %}</td>
-                    <td class="ps-2 pe-0 py-1 text-break">{{ user.about|linebreaksbr }}</td>
+                    <td
+                      class="ps-2 pe-0 py-1 text-break"
+                    >{{ user.about|linebreaksbr }}</td>
                   </tr>
                 {% endif %}
                 <tr>
                   <td class="ps-0 pe-2 py-1">{% translate "Posts" %}</td>
                   <td class="ps-2 pe-0 py-1">
                     <a
-                      href="{% url 'blog:user_posts' user.username %}"
                       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
                       data-unformatted-number="{{ user.posts__count }}"
+                      href="{% url 'blog:user_posts' user.username %}"
                     ></a>
                   </td>
                 </tr>
                 <tr>
-                  <td class="ps-0 pe-2 py-1">{% translate "Subscriptions" %}</td>
+                  <td
+                    class="ps-0 pe-2 py-1"
+                  >{% translate "Subscriptions" %}</td>
                   <td class="ps-2 pe-0 py-1">
                     <a
-                      href="{% url 'blog:subscriptions' user.username %}"
                       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
                       data-unformatted-number="{{ user.subscriptions__count }}"
+                      href="{% url 'blog:subscriptions' user.username %}"
                     ></a>
                   </td>
                 </tr>
@@ -145,20 +165,22 @@
                   <td class="ps-0 pe-2 py-1">{% translate "Subscribers" %}</td>
                   <td class="ps-2 pe-0 py-1">
                     <a
-                      href="{% url 'blog:subscribers' user.username %}"
                       id="subscribersCount"
                       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
                       data-unformatted-number="{{ user.subscribers__count }}"
+                      href="{% url 'blog:subscribers' user.username %}"
                     ></a>
                   </td>
                 </tr>
                 <tr>
-                  <td class="ps-0 pe-2 pt-1 pb-0">{% translate "Liked posts" %}</td>
+                  <td
+                    class="ps-0 pe-2 pt-1 pb-0"
+                  >{% translate "Liked posts" %}</td>
                   <td class="ps-2 pe-0 pt-1 pb-0">
                     <a
-                      href="{% url 'blog:liked_posts' user.username %}"
                       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
                       data-unformatted-number="{{ user.liked_posts__count }}"
+                      href="{% url 'blog:liked_posts' user.username %}"
                     ></a>
                   </td>
                 </tr>

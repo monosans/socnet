@@ -1,8 +1,12 @@
-blank_line_after_tag = "load,extends"
+blank_line_after_tag = ["extends", "load"]
 close_void_tags = true
-ignore = "H006,H013,H030,H031,T002"
-include = "H017,H035"
+format_attribute_template_tags = true
+ignore = ["H013"]
+include = ["H017", "T003"]
 indent = 2
 max_line_length = 80
+name_endblocks = true
+no_indent_inner_html = true
 profile = "django"
 single_attribute_per_line = true
+sort_attributes = true

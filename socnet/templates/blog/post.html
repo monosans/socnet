@@ -10,7 +10,7 @@
 {% endblock css %}
 {% block js %}
   {% if post.allow_commenting or request.user == post.author %}
-    <script type="module" src="{% static 'js/autosize.js' %}"></script>
+    <script src="{% static 'js/autosize.js' %}" type="module"></script>
   {% endif %}
   {% include "blog/inc/post_js.html" %}
 {% endblock js %}
@@ -18,7 +18,11 @@
   <div class="list-group-item">{% include "blog/inc/post_body.html" %}</div>
   <div
     class="list-group-item"
-    {% if comments is None %} hx-get="{% url "blog:comments" post.pk %}" hx-trigger="revealed" hx-swap="afterend" {% endif %}
+    {% if comments is None %}
+      hx-get="{% url "blog:comments" post.pk %}"
+      hx-trigger="revealed"
+      hx-swap="afterend"
+    {% endif %}
   >
     {% if not post.allow_commenting and request.user != post.author %}
       <div class="text-center">
@@ -29,8 +33,8 @@
         {% url 'account_login' as url_login %}
         {% blocktranslate trimmed with next=request.path|urlencode %}
           <a
-            href="{{ url_login }}?next={{ next }}"
             class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="{{ url_login }}?next={{ next }}"
           >Log in</a>
           to comment.
         {% endblocktranslate %}
@@ -39,7 +43,7 @@
       <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary w-100">
+        <button class="btn btn-primary w-100" type="submit">
           {% blocktranslate context "verb" %}Comment{% endblocktranslate %}
         </button>
       </form>

@@ -10,23 +10,23 @@
     <h3 class="mb-3 text-center">
       {% blocktranslate context "noun" %}Log in{% endblocktranslate %}
     </h3>
-    <form method="post" action="{% url 'account_login' %}">
+    <form action="{% url 'account_login' %}" method="post">
       {% csrf_token %}
       {% bootstrap_form form layout="floating" %}
       {% if redirect_field_value %}
         <input
-          type="hidden"
           name="{{ redirect_field_name }}"
+          type="hidden"
           value="{{ redirect_field_value }}"
         />
       {% endif %}
       <div class="mb-3 text-center">
         <a
-          href="{% url 'account_reset_password' %}"
           class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+          href="{% url 'account_reset_password' %}"
         >{% translate "Forgot password?" %}</a>
       </div>
-      <button type="submit" class="btn btn-primary w-100">
+      <button class="btn btn-primary w-100" type="submit">
         {% blocktranslate context "verb" %}Log in{% endblocktranslate %}
       </button>
     </form>
@@ -35,8 +35,8 @@
     {% blocktranslate trimmed %}
       If you don't have an account yet,
       <a
-        href="{{ signup_url }}"
         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+        href="{{ signup_url }}"
       >sign up</a>.
     {% endblocktranslate %}
   </div>

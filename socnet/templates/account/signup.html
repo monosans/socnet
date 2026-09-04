@@ -8,17 +8,17 @@
 {% block list_group %}
   <div class="list-group-item">
     <h3 class="mb-3 text-center">{% translate "Sign-up" %}</h3>
-    <form method="post" action="{% url 'account_signup' %}">
+    <form action="{% url 'account_signup' %}" method="post">
       {% csrf_token %}
       {% bootstrap_form form layout="floating" %}
       {% if redirect_field_value %}
         <input
-          type="hidden"
           name="{{ redirect_field_name }}"
+          type="hidden"
           value="{{ redirect_field_value }}"
         />
       {% endif %}
-      <button type="submit" class="btn btn-primary w-100">
+      <button class="btn btn-primary w-100" type="submit">
         {% translate "Sign up" %}
       </button>
     </form>
@@ -27,8 +27,8 @@
     {% blocktranslate trimmed %}
       If you already have an account,
       <a
-        href="{{ login_url }}"
         class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+        href="{{ login_url }}"
       >log in</a>.
     {% endblocktranslate %}
   </div>

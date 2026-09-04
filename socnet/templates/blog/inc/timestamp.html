@@ -1,10 +1,12 @@
 {% load i18n %}
 
 <a
-  href="{{ object.get_absolute_url }}"
   class="text-secondary link-underline-secondary link-underline-opacity-0 link-underline-opacity-100-hover"
+  href="{{ object.get_absolute_url }}"
 ><span data-epoch="{{ object.date_created_epoch }}"></span>
   {% if object.date_updated_epoch %}
-    ({% translate "last edited" %} <span data-epoch="{{ object.date_updated_epoch }}"></span>)
+    ({% translate "last edited" %} <span
+   data-epoch="{{ object.date_updated_epoch }}"
+ ></span>)
   {% endif %}
 </a>

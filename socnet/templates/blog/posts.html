@@ -14,14 +14,14 @@
   {% if posts %}
     {% include "blog/inc/post_js.html" %}
   {% endif %}
-  <script type="module" src="{% static 'js/autosize.js' %}"></script>
+  <script src="{% static 'js/autosize.js' %}" type="module"></script>
 {% endblock js %}
 {% block col %}
   <form method="get">
     {% bootstrap_form_errors form %}
     <div class="input-group">
       {{ form.q }}
-      <button type="submit" class="btn btn-primary">
+      <button class="btn btn-primary" type="submit">
         <i class="fa-solid fa-magnifying-glass mx-2"></i>
       </button>
     </div>
