@@ -7,7 +7,7 @@ exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for 
 exclude-newer-span = "P3D"
 
 [options.exclude-newer-package]
-djlint = "2026-09-04T21:00:00Z"
+djlint = "2026-09-04T18:28:00Z"
 
 [[package]]
 name = "annotated-types"
@@ -683,7 +683,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/41/a4/fd8a2eb446a41a37ea440b97bd2a0346e2265ad72f96188fb181d680d863/djlint-1.45.2-cp314-cp314t-win32.whl", hash = "sha256:908aaa8b5e0f5e2a8e981d76dca5da5fe523236d7ea57eb31086631fa4ce697b", size = 873942, upload-time = "2026-09-04T18:27:41.981Z" },
     { url = "https://files.pythonhosted.org/packages/e5/cf/95b5d13d6b189fe2f6eb93078033f4573684cb0b80a8221cba740e41f73d/djlint-1.45.2-cp314-cp314t-win_amd64.whl", hash = "sha256:8b0930c471989ab63450277f85dfb6c6883de74cfd77dd99f6e1969cd80f9607", size = 981472, upload-time = "2026-09-04T18:27:43.395Z" },
     { url = "https://files.pythonhosted.org/packages/b2/a7/d719809511a4bcc43018dc547cce62d1e7c9676fa003ac956b872a83a6bc/djlint-1.45.2-cp314-cp314t-win_arm64.whl", hash = "sha256:9342220613f71c8c4a99e9b5c8fddf8b6854bac90e85c321cb86bc2d53e58b21", size = 874543, upload-time = "2026-09-04T18:27:44.775Z" },
-    { url = "https://files.pythonhosted.org/packages/2b/f5/88ece43fa41069ef27298efc2dbb2bba62a8575be158fb234a4fee15db32/djlint-1.45.2-py3-none-any.whl", hash = "sha256:1dcc5b94fa1fa56c4cb19449a709ca5b682e3bc3cff792f194143c37385c158e", size = 121369, upload-time = "2026-09-04T18:28:14.145Z" },
 ]
 
 [[package]]

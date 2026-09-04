@@ -55,7 +55,7 @@ dev = [
 
 [tool.uv]
 exclude-newer = "3 days"
-exclude-newer-package = { "djlint" = "2026-09-04" }
+exclude-newer-package = { "djlint" = "2026-09-04T18:28:00Z" }
 package = false
 
 [tool.uv.sources]
