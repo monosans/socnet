@@ -48,7 +48,11 @@
     <div class="d-flex align-items-center justify-content-center">
       {% if interlocutor.image %}
         <div class="avatar-thumbnail-no-height me-2">
-          <img class="rounded" loading="lazy" src="{{ interlocutor.image.url }}" />
+          <img
+            class="rounded"
+            loading="lazy"
+            src="{{ interlocutor.image.url }}"
+          />
         </div>
       {% endif %}
       <div class="text-body text-break">
@@ -66,7 +70,11 @@
             href="{{ message.sender.get_absolute_url }}"
           >
             {% if message.sender.image %}
-              <img class="rounded" loading="lazy" src="{{ message.sender.image.url }}" />
+              <img
+                class="rounded"
+                loading="lazy"
+                src="{{ message.sender.image.url }}"
+              />
             {% else %}
               <i class="fa-solid fa-user text-secondary"></i>
             {% endif %}
@@ -76,8 +84,10 @@
               class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
               href="{{ message.sender.get_absolute_url }}"
             >{{ message.sender.display_name }} <span class="text-secondary">@{{ message.sender.username }}</span></a>
-            <div class="text-secondary" data-epoch="{{ message.date_created_epoch }}">
-            </div>
+            <div
+              class="text-secondary"
+              data-epoch="{{ message.date_created_epoch }}"
+            ></div>
           </div>
         </div>
         <div class="markdown-container text-break">

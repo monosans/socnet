@@ -4,7 +4,11 @@
   <div
     id="comment{{ comment.pk }}"
     class="list-group-item"
-    {% if forloop.last and comments.has_next %} hx-get="{% querystring page=comments.next_page_number %}" hx-trigger="revealed" hx-swap="afterend" {% endif %}
+    {% if forloop.last and comments.has_next %}
+      hx-get="{% querystring page=comments.next_page_number %}"
+      hx-trigger="revealed"
+      hx-swap="afterend"
+    {% endif %}
   >
     <div class="d-flex justify-content-between mb-1">
       <a
@@ -14,7 +18,11 @@
         <div class="d-flex">
           <div class="avatar-thumbnail me-2">
             {% if comment.author.image %}
-              <img class="rounded" loading="lazy" src="{{ comment.author.image.url }}" />
+              <img
+                class="rounded"
+                loading="lazy"
+                src="{{ comment.author.image.url }}"
+              />
             {% else %}
               <i class="fa-solid fa-user text-secondary"></i>
             {% endif %}
@@ -61,20 +69,30 @@
             </ul>
           </div>
           {% if request.user == comment.author or request.user == comment.post.author %}
-            <div id="comment{{ comment.pk }}Modal" class="modal fade" tabindex="-1">
+            <div
+              id="comment{{ comment.pk }}Modal"
+              class="modal fade"
+              tabindex="-1"
+            >
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">
                       {% blocktranslate context "noun" %}Delete comment{% endblocktranslate %}
                     </h5>
-                    <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    <button
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      type="button"
+                    ></button>
                   </div>
                   <div class="modal-body"></div>
                   <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
-                      {% translate "Close" %}
-                    </button>
+                    <button
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                      type="button"
+                    >{% translate "Close" %}</button>
                     <button
                       class="btn btn-danger"
                       data-bs-dismiss="modal"

@@ -8,7 +8,9 @@
 {% block col %}
   <div class="card">
     <div class="card-body">
-      <h3 class="mb-0 text-center">{% translate "Two-factor authentication" %}</h3>
+      <h3
+        class="mb-0 text-center"
+      >{% translate "Two-factor authentication" %}</h3>
       {% if authenticators.totp %}
         <a
           class="btn btn-danger w-100 mt-3"

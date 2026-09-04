@@ -18,7 +18,11 @@
   <div class="list-group-item">{% include "blog/inc/post_body.html" %}</div>
   <div
     class="list-group-item"
-    {% if comments is None %} hx-get="{% url "blog:comments" post.pk %}" hx-trigger="revealed" hx-swap="afterend" {% endif %}
+    {% if comments is None %}
+      hx-get="{% url "blog:comments" post.pk %}"
+      hx-trigger="revealed"
+      hx-swap="afterend"
+    {% endif %}
   >
     {% if not post.allow_commenting and request.user != post.author %}
       <div class="text-center">

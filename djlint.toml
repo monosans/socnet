@@ -1,6 +1,6 @@
 blank_line_after_tag = ["extends", "load"]
 close_void_tags = true
-format_attribute_template_tags = false
+format_attribute_template_tags = true
 ignore = ["H013"]
 include = ["H017", "T003"]
 indent = 2

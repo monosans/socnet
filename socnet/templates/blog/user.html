@@ -38,7 +38,10 @@
             </div>
           {% endif %}
           {% if user == request.user %}
-            <a class="btn btn-primary w-100" href="{% url 'users:edit_profile' %}">{% translate "Edit" %}</a>
+            <a
+              class="btn btn-primary w-100"
+              href="{% url 'users:edit_profile' %}"
+            >{% translate "Edit" %}</a>
             <a
               class="btn btn-primary w-100 mt-2"
               href="{% url 'blog:post_create' %}"
@@ -77,7 +80,10 @@
             >{% translate "Subscribe" %}</a>
           {% endif %}
           {% if request.user.is_staff %}
-            <a class="btn btn-primary w-100 mt-2" href="{{ user|obj_admin_url }}">{% translate "Admin page" %}</a>
+            <a
+              class="btn btn-primary w-100 mt-2"
+              href="{{ user|obj_admin_url }}"
+            >{% translate "Admin page" %}</a>
           {% endif %}
         </div>
       </div>
@@ -95,30 +101,42 @@
               <tbody>
                 <tr>
                   <td class="ps-0 pe-2 py-1">{% translate "Signed up" %}</td>
-                  <td class="ps-2 pe-0 py-1" data-epoch="{{ user.date_joined_epoch }}"></td>
+                  <td
+                    class="ps-2 pe-0 py-1"
+                    data-epoch="{{ user.date_joined_epoch }}"
+                  ></td>
                 </tr>
                 {% if user.last_login_epoch %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Last login" %}</td>
-                    <td class="ps-2 pe-0 py-1" data-epoch="{{ user.last_login_epoch }}"></td>
+                    <td
+                      class="ps-2 pe-0 py-1"
+                      data-epoch="{{ user.last_login_epoch }}"
+                    ></td>
                   </tr>
                 {% endif %}
                 {% if user.birth_date %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Birth date" %}</td>
-                    <td class="ps-2 pe-0 py-1">{{ user.birth_date }} ({{ user.get_age }})</td>
+                    <td
+                      class="ps-2 pe-0 py-1"
+                    >{{ user.birth_date }} ({{ user.get_age }})</td>
                   </tr>
                 {% endif %}
                 {% if user.location %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Location" %}</td>
-                    <td class="ps-2 pe-0 py-1 text-break">{{ user.location }}</td>
+                    <td
+                      class="ps-2 pe-0 py-1 text-break"
+                    >{{ user.location }}</td>
                   </tr>
                 {% endif %}
                 {% if user.about %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "About me" %}</td>
-                    <td class="ps-2 pe-0 py-1 text-break">{{ user.about|linebreaksbr }}</td>
+                    <td
+                      class="ps-2 pe-0 py-1 text-break"
+                    >{{ user.about|linebreaksbr }}</td>
                   </tr>
                 {% endif %}
                 <tr>
@@ -132,7 +150,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="ps-0 pe-2 py-1">{% translate "Subscriptions" %}</td>
+                  <td
+                    class="ps-0 pe-2 py-1"
+                  >{% translate "Subscriptions" %}</td>
                   <td class="ps-2 pe-0 py-1">
                     <a
                       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
@@ -153,7 +173,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="ps-0 pe-2 pt-1 pb-0">{% translate "Liked posts" %}</td>
+                  <td
+                    class="ps-0 pe-2 pt-1 pb-0"
+                  >{% translate "Liked posts" %}</td>
                   <td class="ps-2 pe-0 pt-1 pb-0">
                     <a
                       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"

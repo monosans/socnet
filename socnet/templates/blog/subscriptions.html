@@ -33,7 +33,11 @@
           class="avatar-thumbnail d-flex align-items-center justify-content-center me-2"
         >
           {% if subscription.image %}
-            <img class="rounded" loading="lazy" src="{{ subscription.image.url }}" />
+            <img
+              class="rounded"
+              loading="lazy"
+              src="{{ subscription.image.url }}"
+            />
           {% else %}
             <i class="fa-solid fa-user text-secondary"></i>
           {% endif %}

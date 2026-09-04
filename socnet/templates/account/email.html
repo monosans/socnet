@@ -17,8 +17,14 @@
               <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th class="text-center" scope="col">{% translate "Verified" %}</th>
-                  <th class="text-center" scope="col">{% translate "Primary" %}</th>
+                  <th
+                    class="text-center"
+                    scope="col"
+                  >{% translate "Verified" %}</th>
+                  <th
+                    class="text-center"
+                    scope="col"
+                  >{% translate "Primary" %}</th>
                 </tr>
               </thead>
               <tbody>
@@ -64,9 +70,11 @@
               >{% translate "Make primary" %}</button>
             </div>
             <div class="col-12 col-lg-4 mb-2 mb-lg-0">
-              <button class="btn btn-primary w-100 h-100" name="action_send" type="submit">
-                {% translate "Resend verification" %}
-              </button>
+              <button
+                class="btn btn-primary w-100 h-100"
+                name="action_send"
+                type="submit"
+              >{% translate "Resend verification" %}</button>
             </div>
             <div class="col-12 col-lg-4 mb-2 mb-lg-0">
               <button
@@ -81,18 +89,26 @@
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                  <button
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    type="button"
+                  ></button>
                 </div>
                 <div class="modal-body">
                   {% translate "Do you really want to remove the selected email address?" %}
                 </div>
                 <div class="modal-footer">
-                  <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
-                    {% translate "Close" %}
-                  </button>
-                  <button class="btn btn-danger" name="action_remove" type="submit">
-                    {% translate "Remove" %}
-                  </button>
+                  <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                    type="button"
+                  >{% translate "Close" %}</button>
+                  <button
+                    class="btn btn-danger"
+                    name="action_remove"
+                    type="submit"
+                  >{% translate "Remove" %}</button>
                 </div>
               </div>
             </div>

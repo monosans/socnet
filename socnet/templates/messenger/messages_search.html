@@ -34,7 +34,11 @@
         class="avatar-thumbnail d-flex align-items-center justify-content-center me-2"
       >
         {% if interlocutor.image %}
-          <img class="rounded" loading="lazy" src="{{ interlocutor.image.url }}" />
+          <img
+            class="rounded"
+            loading="lazy"
+            src="{{ interlocutor.image.url }}"
+          />
         {% else %}
           <i class="fa-solid fa-user text-secondary"></i>
         {% endif %}
@@ -50,7 +54,11 @@
               class="avatar-thumbnail-font-size d-flex align-items-center justify-content-center me-2"
             >
               {% if message.sender.image %}
-                <img class="rounded" loading="lazy" src="{{ message.sender.image.url }}" />
+                <img
+                  class="rounded"
+                  loading="lazy"
+                  src="{{ message.sender.image.url }}"
+                />
               {% else %}
                 <i class="fa-solid fa-user text-secondary"></i>
               {% endif %}

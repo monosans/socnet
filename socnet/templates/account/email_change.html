@@ -31,10 +31,16 @@
           </div>
           <form class="mt-2" action="{% url 'account_email' %}" method="post">
             {% csrf_token %}
-            <input name="email" type="hidden" value="{{ new_emailaddress.email }}" />
-            <button class="btn btn-primary w-100" name="action_send" type="submit">
-              {% translate "Resend verification" %}
-            </button>
+            <input
+              name="email"
+              type="hidden"
+              value="{{ new_emailaddress.email }}"
+            />
+            <button
+              class="btn btn-primary w-100"
+              name="action_send"
+              type="submit"
+            >{% translate "Resend verification" %}</button>
           </form>
         {% endif %}
       {% else %}

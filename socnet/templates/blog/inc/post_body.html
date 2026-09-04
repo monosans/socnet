@@ -64,12 +64,20 @@
                 {% translate "Are you sure you want to delete your post?" %}
               </div>
               <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
-                  {% translate "Close" %}
-                </button>
-                <form action="{% url 'blog:post_delete' post.pk %}" method="post">
+                <button
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  type="button"
+                >{% translate "Close" %}</button>
+                <form
+                  action="{% url 'blog:post_delete' post.pk %}"
+                  method="post"
+                >
                   {% csrf_token %}
-                  <button class="btn btn-danger" type="submit">{% translate "Delete" %}</button>
+                  <button
+                    class="btn btn-danger"
+                    type="submit"
+                  >{% translate "Delete" %}</button>
                 </form>
               </div>
             </div>
@@ -110,5 +118,6 @@
   class="btn badge rounded-pill text-bg-color fs-6"
   href="{{ post.get_absolute_url }}"
 ><i
-  class="fa-regular fa-comment{% if not post.allow_commenting %} text-danger{% endif %}"
+  class="fa-regular fa-comment{% if not post.allow_commenting %}
+           text-danger{% endif %}"
 ></i> <span data-unformatted-number="{{ post.comments__count }}"></span></a>
