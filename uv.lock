@@ -664,7 +664,6 @@ dependencies = [
     { name = "pyyaml" },
     { name = "regex" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/70/f1/053ff6c5c046dccfc0bbfa9f1ab020b35279fe91ecf9bdcc4deacdc44dd5/djlint-1.46.0.tar.gz", hash = "sha256:ac32f0a513824bea0a6eb2c517d9bef5e981a1b9478eebe1415bfdfb76ce8c9d", size = 126194, upload-time = "2026-09-07T17:38:44.835Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/af/65/c8a36c032a1912fa694d6e9df445b5ae70ad1035922853f9429e658adfa9/djlint-1.46.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:b960976e0381ba28ebb1344ef0ec61d656dd6c681437825442190b3c0acd34d0", size = 1335448, upload-time = "2026-09-07T17:37:53.629Z" },
     { url = "https://files.pythonhosted.org/packages/2b/82/cf8c443aebd461228a7b453cfefef4d0298f9ec57defe9511f2c93c86633/djlint-1.46.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:bc0a83744c261ecebca4d00bda8afb0bb27c7fd58aef76e91e88bec3b5334dd5", size = 1256078, upload-time = "2026-09-07T17:37:54.985Z" },
@@ -1389,11 +1388,11 @@ wheels = [
 
 [[package]]
 name = "types-pyyaml"
-version = "6.0.12.20260815"
+version = "6.0.12.20260906"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/9f/72/b56089aeee6c496d969bac42376bedb6e3eeab4682e1018fa3137122f94b/types_pyyaml-6.0.12.20260815.tar.gz", hash = "sha256:28764110c9cf35846e733da32d8d734df7473c5dde9ef67c3b7332ec0e819858", size = 18545, upload-time = "2026-08-15T02:41:51.532Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/90/6e/abec85b9013db5b934b0280a6dd104904d84f7bcbaab2e2f3def87ac7463/types_pyyaml-6.0.12.20260906.tar.gz", hash = "sha256:f59c1cc05010b833d2d72287bbaa72610106b28d42d89a907313117faba85212", size = 18649, upload-time = "2026-09-06T06:35:35.362Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/08/52/eefeba09be4ef2a1eb989eb92934561e8e502a6ee3c32654996e4be7e399/types_pyyaml-6.0.12.20260815-py3-none-any.whl", hash = "sha256:6f332212b7e191f3afd5016a713c510b6340593b7ebec573c7d5d20aa5386d3b", size = 21148, upload-time = "2026-08-15T02:41:50.555Z" },
+    { url = "https://files.pythonhosted.org/packages/15/c0/fc0644b7ddcfb969e95845837143cb5173ddd6e06ee4ba5fc493cd9329b7/types_pyyaml-6.0.12.20260906-py3-none-any.whl", hash = "sha256:bca893ff0d51df5c9053137d5d0e6ccd36e939a196356f1d5c16372422f5137b", size = 21282, upload-time = "2026-09-06T06:35:34.372Z" },
 ]
 
 [[package]]
