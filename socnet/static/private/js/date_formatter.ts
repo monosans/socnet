@@ -3,22 +3,24 @@ const options = { locale: document.documentElement.lang };
 async function formatDates(parentNode: ParentNode): Promise<void> {
   const elements = parentNode.querySelectorAll<HTMLElement>("[data-epoch]");
 
-  if (elements.length) {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { DateTime } = await import("luxon");
-    const relativeOptions = { base: DateTime.now() };
-    for (const el of elements) {
-      const dt = DateTime.fromSeconds(
-        Number.parseInt(el.dataset["epoch"]!),
-        options,
-      );
-      const relativeDt = dt.toRelative(relativeOptions);
-      if (el.textContent !== relativeDt) {
-        el.textContent = relativeDt;
-      }
-      if (!el.title) {
-        el.title = dt.toLocaleString(DateTime.DATETIME_FULL);
-      }
+  if (!elements.length) {
+    return;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { DateTime } = await import("luxon");
+  const relativeOptions = { base: DateTime.now() };
+  for (const el of elements) {
+    const dt = DateTime.fromSeconds(
+      Number.parseInt(el.dataset["epoch"]!),
+      options,
+    );
+    const relativeDt = dt.toRelative(relativeOptions);
+    if (el.textContent !== relativeDt) {
+      el.textContent = relativeDt;
+    }
+    if (!el.title) {
+      el.title = dt.toLocaleString(DateTime.DATETIME_FULL);
     }
   }
 }
