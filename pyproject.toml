@@ -9,7 +9,7 @@ dependencies = [
   "django-bootstrap5==26.3",
   "django-cleanup==9",
   "django-environ==0.14.0",
-  "django-filter==26.1",
+  "django-filter==26.2",
   "django-htmx==1.29.0",
   "django-logentry-admin==1.1",
   "django-ninja==1.7.1",
