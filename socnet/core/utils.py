@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from django.core.paginator import Paginator
 
 if TYPE_CHECKING:
-    import datetime
+    import datetime as dt
 
     from django.core.paginator import Page
     from django.db.models import Model, QuerySet
@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from socnet.core.types import HttpRequest
 
 
-def dt_to_epoch(dt: datetime.date) -> int:
+def dt_to_epoch(dt: dt.date) -> int:
     return int(time.mktime(dt.timetuple()))
 
 
