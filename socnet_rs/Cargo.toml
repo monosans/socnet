@@ -18,7 +18,7 @@ pulldown-cmark = {
     "simd",
   ]
 }
-pyo3 = "=0.29.3"
+pyo3 = "=0.30.1"
 
 [profile.release]
 strip = true
