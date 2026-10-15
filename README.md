@@ -1,6 +1,4 @@
-<img src="socnet/static/public/img/logo.svg" alt="" width="96" align="right">
-
-# Socnet
+# <img src="socnet/static/public/img/logo.svg" alt="" width="40" align="top"> Socnet
 
 Social network built with Django Framework.
 
