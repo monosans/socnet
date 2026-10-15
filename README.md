@@ -1,4 +1,4 @@
-# Socnet
+# <img src="socnet/static/public/img/logo.svg" alt="" width="40" align="top"> Socnet
 
 A social network built with Django: posts, comments, real-time messages, subscriptions and search, in English and Russian.
 
