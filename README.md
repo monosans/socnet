@@ -1,148 +1,68 @@
-# Socnet
+# <img src="socnet/static/public/img/logo.svg" alt="" width="40" align="top"> Socnet
 
-Social network built with Django Framework.
+A social network built with Django: posts, comments, real-time messages, subscriptions and search, in English and Russian.
 
 ## Features
 
-- Multi-language (currently English and Russian). Selected based on browser settings.
-- Light and dark theme support with a switch. The browser theme is selected by default.
-- Infinite scrolling.
-- Progressive Web App (PWA) support.
+- Sign up with email confirmation, backup email addresses, password reset and two-factor authentication (TOTP).
+- Profiles, subscriptions, a news feed of the people you follow, and account deletion.
+- Posts and comments with Markdown and HTML, likes and editing.
+- Real-time messages over WebSockets, also with Markdown and HTML.
+- Images in posts, comments and messages open in a gallery ([viewerjs](https://fengyuanchen.github.io/viewerjs/)).
+- Inexact search for posts and messages by text, and for users by the fields you pick.
+- English and Russian, picked from the browser settings.
+- Light and dark themes that follow the browser until you switch.
+- Infinite scrolling, and the site installs as a Progressive Web App.
+- Administrators get the Django admin panel and error reports in [Sentry](https://sentry.io/) or by email.
 
-### Regular users
+## Run locally
 
-- Register and confirm their account by email
-- Sign in
-- Add backup email addresses in case they lose access to the primary address
-- Reset and change their password
-- Use two-factor authentication with time-based one-time passwords (TOTP)
-- Provide information about themselves in their profile
-- Write real-time messages with Markdown and HTML support to other users using WebSockets
-- Create, edit, like and delete posts and comments with Markdown and HTML support
-- View images in posts, comments and messages as a gallery using [viewerjs](https://fengyuanchen.github.io/viewerjs/)
-- Subscribe to other users to see their posts in their news feed
-- Inexact search for posts by text
-- Inexact search for messages by text
-- Inexact search for users by selectable fields
-- Delete their account
-- And a lot of other little things
-
-### Administrators
-
-- All of the above
-- Use Django admin panel
-- Receive error notifications in [Sentry](https://sentry.io/) or by email
-
-## Installation
-
-[Install `Docker Compose`](https://docs.docker.com/compose/install/).
-
-### Configuration
-
-Copy the `.env.example` file to `.env`. Set the settings you need in the `.env` file.
-
-### Development
+You need [Docker Compose](https://docs.docker.com/compose/install/).
 
 ```bash
-# Build services
-
-# Linux
-docker compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g)
-
-# Windows
-docker compose build
-
-# Run DB migrations
+cp .env.example .env
+docker compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g)  # on Windows: docker compose build
 docker compose run --rm django python3 manage.py migrate
-# Create a superuser if you want
-docker compose run --rm django python3 manage.py createsuperuser
-# Compile translations
 docker compose run --rm django python3 manage.py compilemessages --locale en --locale ru
-
-# Run without debugpy
 docker compose up --remove-orphans
-# Or run with debugpy
+```
+
+Open <http://localhost:8000>. Emails, such as the sign-up confirmation, go to the log of the `django` container. [PgHero](https://github.com/ankane/pghero) runs at <http://localhost:8080>.
+
+Other commands:
+
+```bash
+# Create an administrator for the admin panel at /admin/ (ADMIN_URL in .env)
+docker compose run --rm django python3 manage.py createsuperuser
+# Run the tests
+docker compose run --rm django pytest
+# Start with debugpy listening on port 5678
 docker compose -f compose.yaml -f compose.override.yaml -f compose.debug.yaml up --remove-orphans
 ```
 
-### Production
+## Deploy
 
-To run this in production, you need to specify the production settings in `.env`.
+Fill in the production part of `.env`: `DJANGO_SECRET_KEY`, `DOMAIN_NAME`, `TLS_EMAIL` and the email settings. Caddy gets the TLS certificate for `DOMAIN_NAME` on its own.
 
 ```bash
-# Build services
 docker compose -f compose.yaml -f compose.prod.yaml build
-# Run DB migrations
 docker compose -f compose.yaml -f compose.prod.yaml run --rm django python3 manage.py migrate
-# Create a superuser if you want
-docker compose -f compose.yaml -f compose.prod.yaml run --rm django python3 manage.py createsuperuser
-# Run
 docker compose -f compose.yaml -f compose.prod.yaml up -d --remove-orphans
 ```
 
-## Tech Stack
+Static files and translations are collected and compiled when the container starts. To create an administrator, run `createsuperuser` with the same `-f` flags.
 
-### Containerization
+## Tech stack
 
-- Docker
-- Docker Compose
+- Backend: Python 3.14, Django 6.1, Channels, django-allauth, django-ninja, granian. Markdown rendering and HTML sanitization are written in Rust in `socnet_rs`, with pulldown-cmark, ammonia and PyO3.
+- Data: PostgreSQL 18, and in production Valkey 9 for the cache and Channels.
+- Frontend: Django templates, HTMX 2, Bootstrap 5, Font Awesome 6, TypeScript bundled with esbuild, viewerjs, luxon.
+- Infrastructure: Docker Compose, Caddy, Sentry.
+- Tests and linters: pytest, factory-boy, mypy, ruff, ESLint, Stylelint.
 
-### Backend
+## Database schema
 
-- Python 3.14
-- Django 6.1
-- django-allauth
-- django-bootstrap5
-- django-cleanup
-- django-environ
-- django-filter
-- django-logentry-admin
-- django-ninja
-- channels
-- channels-redis
-- sentry-sdk
-
-Markdown parsing and HTML sanitization, and a few other things are implemented in Rust in the `socnet_rs` package using the following libraries:
-
-- ammonia
-- pulldown-cmark
-- pyo3
-
-### Databases
-
-- PostgreSQL 18 for persistent data
-- Valkey 9 (FOSS Redis fork) for cache and as a layer for Channels
-
-### Frontend
-
-- HTML with Django Template language
-- HTMX 2
-- Bootstrap CSS 5.x
-- Font Awesome 6
-- TypeScript (compiled and minified with esbuild)
-- viewerjs
-- luxon
-
-### Web servers
-
-- Caddy
-- granian
-
-### Testing
-
-- pytest
-- factory-boy
-
-### Linting
-
-- mypy
-- ruff
-- eslint
-- stylelint
-
-## DB schema
-
-![](https://github.com/monosans/socnet/assets/76561516/f8d077b5-bb2c-4834-941e-3375ef56ba48)
+![Database schema](https://github.com/monosans/socnet/assets/76561516/f8d077b5-bb2c-4834-941e-3375ef56ba48)
 
 ## License
 
