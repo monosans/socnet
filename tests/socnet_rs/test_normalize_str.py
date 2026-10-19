@@ -19,6 +19,11 @@ def test_normalize_str(given: str, expected: str) -> None:
     assert normalize_str(given) == expected
 
 
+def test_returns_same_object_if_normalized() -> None:
+    value = "string\nstring string"
+    assert normalize_str(value) is value
+
+
 def test_type_error() -> None:
     exc_str = (
         "'int' object is not an instance of 'str'\nwhile processing 'value'"

@@ -51,8 +51,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   apt-get update \
-  && apt-get install -y --no-install-recommends curl gcc libc6-dev libpq-dev \
-  && curl -sSf 'https://raw.githubusercontent.com/rust-lang/rustup/refs/heads/main/rustup-init.sh' | sh -s -- -y --default-toolchain beta --profile minimal
+  && apt-get install -y --no-install-recommends curl gcc libc6-dev libpq-dev
+
+# The checksum changes with every new beta, so the toolchain layer below is
+# rebuilt exactly when there is a new toolchain to install.
+ADD --link https://static.rust-lang.org/dist/channel-rust-beta.toml.sha256 /tmp/
+
+RUN curl -sSf 'https://raw.githubusercontent.com/rust-lang/rustup/refs/heads/main/rustup-init.sh' | sh -s -- -y --default-toolchain beta --profile minimal
 
 ENV \
   PATH="/root/.cargo/bin:${PATH}" \
@@ -125,7 +130,7 @@ ENV DJANGO_SETTINGS_MODULE=config.settings.production
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
   apt-get update \
-  && apt-get install -y --no-install-recommends gettext libpq-dev wait-for-it \
+  && apt-get install -y --no-install-recommends gettext libpq5 wait-for-it \
   && groupadd --gid 1000 django \
   && useradd --gid 1000 --no-log-init --uid 1000 django \
   && mkdir -p /var/www/django/static /var/www/django/media \

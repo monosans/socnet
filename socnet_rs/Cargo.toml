@@ -8,8 +8,8 @@ crate-type = ["cdylib"]
 name = "socnet_rs"
 
 [dependencies]
-ammonia = "=4.2.3"
-compact_str = { version = "=0.10.0", features = ["pyo3"] }
+ammonia = "=4.2.4"
+compact_str = "=0.10.0"
 pulldown-cmark = {
   version = "=0.13.4",
   default-features = false,
@@ -18,7 +18,7 @@ pulldown-cmark = {
     "simd",
   ]
 }
-pyo3 = "=0.29.3"
+pyo3 = "=0.30.1"
 
 [profile.release]
 strip = true
