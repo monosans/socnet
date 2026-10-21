@@ -11,7 +11,7 @@ name = "socnet_rs"
 ammonia = "=4.2.4"
 compact_str = "=0.10.0"
 pulldown-cmark = {
-  version = "=0.13.4",
+  version = "=0.13.5",
   default-features = false,
   features = [
     "html",
