@@ -1,4 +1,4 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
+@import url("bootstrap/dist/css/bootstrap.min.css");
 
 :root,
 [data-bs-theme="light"] {

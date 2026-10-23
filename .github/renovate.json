@@ -20,9 +20,10 @@
       "matchPackageNames": ["prettier", "rbubley/mirrors-prettier"],
       "groupName": "prettier"
     },
+    { "matchPackageNames": ["djlint", "djlint/djLint"], "groupName": "djlint" },
     {
-      "matchPackageNames": ["djlint", "djlint/djLint"],
-      "groupName": "djlint"
+      "matchPackageNames": ["stylelint", "thibaudcolas/pre-commit-stylelint"],
+      "groupName": "stylelint"
     },
     {
       "matchCategories": ["python"],
@@ -44,6 +45,12 @@
       "automerge": true
     },
     { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
+    {
+      "matchCategories": ["js"],
+      "matchPackageNames": ["@types/node"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
     {
       "description": "Cargo has no cooldown for the transitive dependencies it resolves, so one on the direct dependencies would only delay updates",
       "matchManagers": ["cargo"],
