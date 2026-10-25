@@ -10,3 +10,4 @@ no_indent_inner_html = true
 profile = "django"
 single_attribute_per_line = true
 sort_attributes = true
+sort_load_tags = true
