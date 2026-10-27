@@ -29,7 +29,7 @@ repos:
         additional_dependencies:
           - stylelint@17.16.0
           - stylelint-config-standard@40.0.0
-          - stylelint-config-recess-order@7.8.2
+          - stylelint-config-recess-order@7.9.0
   - repo: https://github.com/tombi-toml/tombi-pre-commit
     rev: 69174e0716a3900d9ada7f01f14c2514ed6fb965 # frozen: v1.9.1
     hooks:
