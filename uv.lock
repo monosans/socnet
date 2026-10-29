@@ -83,45 +83,49 @@ test = [
     { name = "pytest-cov" },
     { name = "pytest-django" },
     { name = "pytest-django-autocheck" },
+]
+test-ci = [
+    { name = "covdefaults" },
+    { name = "django-coverage-plugin" },
+    { name = "factory-boy" },
+    { name = "psycopg", extra = ["binary"] },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "pytest-django" },
+    { name = "pytest-django-autocheck" },
     { name = "pytest-github-actions-annotate-failures" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "app", extra = ["test"] },
     { name = "django-debug-toolbar" },
     { name = "django-stubs" },
     { name = "djlint" },
-    { name = "factory-boy" },
     { name = "mypy" },
-    { name = "psycopg", extra = ["binary"] },
-    { name = "pytest" },
-    { name = "pytest-django" },
     { name = "ruff" },
     { name = "types-pillow" },
 ]
 typecheck = [
+    { name = "app", extra = ["test"] },
     { name = "django-debug-toolbar" },
     { name = "django-stubs" },
-    { name = "factory-boy" },
     { name = "mypy" },
-    { name = "psycopg", extra = ["binary"] },
-    { name = "pytest" },
-    { name = "pytest-django" },
     { name = "types-pillow" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "app", extras = ["test"], marker = "extra == 'local'" },
+    { name = "app", extras = ["test"], marker = "extra == 'test-ci'" },
     { name = "channels", specifier = "==4.3.2" },
     { name = "channels-redis", specifier = "==4.3" },
-    { name = "covdefaults", marker = "extra == 'local'", specifier = "==2.3" },
     { name = "covdefaults", marker = "extra == 'test'", specifier = "==2.3" },
     { name = "debugpy", marker = "extra == 'local'", specifier = "==1.8.22" },
     { name = "django", extras = ["argon2"], specifier = "==6.1.2" },
     { name = "django-allauth", extras = ["mfa"], specifier = "==65.21.0" },
     { name = "django-bootstrap5", specifier = "==26.4" },
     { name = "django-cleanup", specifier = "==9" },
-    { name = "django-coverage-plugin", marker = "extra == 'local'", specifier = "==3.2.2" },
     { name = "django-coverage-plugin", marker = "extra == 'test'", specifier = "==3.2.2" },
     { name = "django-debug-toolbar", marker = "extra == 'local'", specifier = "==8.0.0" },
     { name = "django-environ", specifier = "==0.14.0" },
@@ -132,53 +136,41 @@ requires-dist = [
     { name = "django-ninja", specifier = "==1.7.1" },
     { name = "django-stubs-ext", specifier = "==6.1.2" },
     { name = "docutils", specifier = "==0.23" },
-    { name = "factory-boy", marker = "extra == 'local'", specifier = "==3.3.3" },
     { name = "factory-boy", marker = "extra == 'test'", specifier = "==3.3.3" },
     { name = "granian", specifier = "==2.8.5" },
     { name = "orjson", specifier = "==3.13.0" },
     { name = "pillow", specifier = "==13.0.0" },
-    { name = "psycopg", extras = ["binary"], marker = "extra == 'local'", specifier = "==3.3.6" },
     { name = "psycopg", extras = ["binary"], marker = "extra == 'test'", specifier = "==3.3.6" },
     { name = "psycopg", extras = ["c"], marker = "extra == 'production'", specifier = "==3.3.6" },
     { name = "psycopg", extras = ["pool"], specifier = "==3.3.6" },
-    { name = "pytest", marker = "extra == 'local'", specifier = "==9.1.1" },
     { name = "pytest", marker = "extra == 'test'", specifier = "==9.1.1" },
-    { name = "pytest-cov", marker = "extra == 'local'", specifier = "==7.1.0" },
     { name = "pytest-cov", marker = "extra == 'test'", specifier = "==7.1.0" },
-    { name = "pytest-django", marker = "extra == 'local'", specifier = "==4.14.0" },
     { name = "pytest-django", marker = "extra == 'test'", specifier = "==4.14.0" },
-    { name = "pytest-django-autocheck", marker = "extra == 'local'", specifier = "==0.3.0" },
     { name = "pytest-django-autocheck", marker = "extra == 'test'", specifier = "==0.3.0" },
-    { name = "pytest-github-actions-annotate-failures", marker = "extra == 'test'", specifier = "==0.4.2" },
+    { name = "pytest-github-actions-annotate-failures", marker = "extra == 'test-ci'", specifier = "==0.4.2" },
     { name = "redis", extras = ["hiredis"], marker = "extra == 'production'", specifier = "==8.1.0" },
     { name = "sentry-sdk", extras = ["django"], specifier = "==2.73.0" },
     { name = "socnet-rs", directory = "socnet_rs" },
     { name = "uvloop", marker = "(implementation_name == 'cpython' and sys_platform == 'darwin') or (implementation_name == 'cpython' and sys_platform == 'linux')", specifier = "==0.23.0" },
     { name = "watchfiles", marker = "extra == 'local'", specifier = "==1.3.0" },
 ]
-provides-extras = ["local", "production", "test"]
+provides-extras = ["local", "production", "test", "test-ci"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "app", extras = ["test"] },
     { name = "django-debug-toolbar", specifier = "==8.0.0" },
     { name = "django-stubs", specifier = "==6.1.2" },
     { name = "djlint", specifier = "==1.47.1" },
-    { name = "factory-boy", specifier = "==3.3.3" },
     { name = "mypy", specifier = "==2.4.0" },
-    { name = "psycopg", extras = ["binary"], specifier = "==3.3.6" },
-    { name = "pytest", specifier = "==9.1.1" },
-    { name = "pytest-django", specifier = "==4.14.0" },
     { name = "ruff", specifier = "==0.17.2" },
     { name = "types-pillow", specifier = "==10.2.0.20240822" },
 ]
 typecheck = [
+    { name = "app", extras = ["test"] },
     { name = "django-debug-toolbar", specifier = "==8.0.0" },
     { name = "django-stubs", specifier = "==6.1.2" },
-    { name = "factory-boy", specifier = "==3.3.3" },
     { name = "mypy", specifier = "==2.4.0" },
-    { name = "psycopg", extras = ["binary"], specifier = "==3.3.6" },
-    { name = "pytest", specifier = "==9.1.1" },
-    { name = "pytest-django", specifier = "==4.14.0" },
     { name = "types-pillow", specifier = "==10.2.0.20240822" },
 ]
 

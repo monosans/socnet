@@ -25,17 +25,10 @@ dependencies = [
   "uvloop==0.23.0; implementation_name=='cpython' and (sys_platform=='darwin' or sys_platform=='linux')",
 ]
 optional-dependencies.local = [
-  "covdefaults==2.3",
+  "app[test]",
   "debugpy==1.8.22",
-  "django-coverage-plugin==3.2.2",
   "django-debug-toolbar==8.0.0",
   "django-extra-checks==0.17.0",
-  "factory-boy==3.3.3",
-  "psycopg[binary]==3.3.6",
-  "pytest==9.1.1",
-  "pytest-cov==7.1.0",
-  "pytest-django==4.14.0",
-  "pytest-django-autocheck==0.3.0",
   "watchfiles==1.3.0",
 ]
 optional-dependencies.production = [
@@ -51,6 +44,9 @@ optional-dependencies.test = [
   "pytest-cov==7.1.0",
   "pytest-django==4.14.0",
   "pytest-django-autocheck==0.3.0",
+]
+optional-dependencies.test-ci = [
+  "app[test]",
   "pytest-github-actions-annotate-failures==0.4.2",
 ]
 
@@ -61,13 +57,12 @@ dev = [
   { include-group = "typecheck" },
 ]
 typecheck = [
+  "app[test]",
+  # config/urls.py imports it. It is also in the local extra, which would
+  # bring debugpy, watchfiles and django-extra-checks along.
   "django-debug-toolbar==8.0.0",
   "django-stubs==6.1.2",
-  "factory-boy==3.3.3",
   "mypy==2.4.0",
-  "psycopg[binary]==3.3.6",
-  "pytest==9.1.1",
-  "pytest-django==4.14.0",
   "types-pillow==10.2.0.20240822",
 ]
 

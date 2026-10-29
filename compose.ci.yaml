@@ -4,7 +4,7 @@ services:
     build:
       target: python-ci
       args:
-        - EXTRA=test
+        - EXTRA=test-ci
     volumes:
       - .:/app
       - /app/.venv
