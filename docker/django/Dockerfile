@@ -80,7 +80,7 @@ RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
 
 FROM python-base AS python-ci
 
-ENV DJANGO_SETTINGS_MODULE=config.settings.local
+ENV DJANGO_SETTINGS_MODULE=config.settings.test
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
