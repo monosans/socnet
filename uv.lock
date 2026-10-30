@@ -98,19 +98,25 @@ test-ci = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "app", extra = ["test"] },
     { name = "django-debug-toolbar" },
     { name = "django-stubs" },
     { name = "djlint" },
+    { name = "factory-boy" },
     { name = "mypy" },
+    { name = "psycopg", extra = ["binary"] },
+    { name = "pytest" },
+    { name = "pytest-django" },
     { name = "ruff" },
     { name = "types-pillow" },
 ]
 typecheck = [
-    { name = "app", extra = ["test"] },
     { name = "django-debug-toolbar" },
     { name = "django-stubs" },
+    { name = "factory-boy" },
     { name = "mypy" },
+    { name = "psycopg", extra = ["binary"] },
+    { name = "pytest" },
+    { name = "pytest-django" },
     { name = "types-pillow" },
 ]
 
@@ -158,19 +164,25 @@ provides-extras = ["local", "production", "test", "test-ci"]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "app", extras = ["test"] },
     { name = "django-debug-toolbar", specifier = "==8.0.0" },
     { name = "django-stubs", specifier = "==6.1.2" },
     { name = "djlint", specifier = "==1.47.1" },
+    { name = "factory-boy", specifier = "==3.3.3" },
     { name = "mypy", specifier = "==2.4.0" },
+    { name = "psycopg", extras = ["binary"], specifier = "==3.3.6" },
+    { name = "pytest", specifier = "==9.1.1" },
+    { name = "pytest-django", specifier = "==4.14.0" },
     { name = "ruff", specifier = "==0.17.2" },
     { name = "types-pillow", specifier = "==10.2.0.20240822" },
 ]
 typecheck = [
-    { name = "app", extras = ["test"] },
     { name = "django-debug-toolbar", specifier = "==8.0.0" },
     { name = "django-stubs", specifier = "==6.1.2" },
+    { name = "factory-boy", specifier = "==3.3.3" },
     { name = "mypy", specifier = "==2.4.0" },
+    { name = "psycopg", extras = ["binary"], specifier = "==3.3.6" },
+    { name = "pytest", specifier = "==9.1.1" },
+    { name = "pytest-django", specifier = "==4.14.0" },
     { name = "types-pillow", specifier = "==10.2.0.20240822" },
 ]
 

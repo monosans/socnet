@@ -57,12 +57,15 @@ dev = [
   { include-group = "typecheck" },
 ]
 typecheck = [
-  "app[test]",
-  # config/urls.py imports it. It is also in the local extra, which would
-  # bring debugpy, watchfiles and django-extra-checks along.
+  # mypy follows the imports of config/urls.py and the tests, and the Django
+  # plugin loads the database backend, so these are installed too.
   "django-debug-toolbar==8.0.0",
   "django-stubs==6.1.2",
+  "factory-boy==3.3.3",
   "mypy==2.4.0",
+  "psycopg[binary]==3.3.6",
+  "pytest==9.1.1",
+  "pytest-django==4.14.0",
   "types-pillow==10.2.0.20240822",
 ]
 
