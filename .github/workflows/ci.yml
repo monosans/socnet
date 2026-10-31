@@ -38,7 +38,9 @@ jobs:
           components: clippy
           rust-src-dir: socnet_rs
           cache-save-if: ${{ github.ref == 'refs/heads/main' }}
-      - run: cargo +beta clippy --
+      - run: cargo +beta clippy --all-targets --
+        working-directory: ./socnet_rs
+      - run: cargo +beta test --locked
         working-directory: ./socnet_rs
   eslint:
     runs-on: ubuntu-26.04
@@ -136,6 +138,7 @@ jobs:
           package-manager-cache: false
       - run: npm ci
       - run: npx tsc --build --noEmit
+      - run: npm run build
   udeps:
     runs-on: ubuntu-26.04
     steps:
