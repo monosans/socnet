@@ -2,6 +2,52 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "branchTopic": "{{{depNameSanitized}}}-{{{newMajor}}}{{#if separateMinorPatch}}{{#if isPatch}}.{{{newMinor}}}{{/if}}{{/if}}{{#if separateMultipleMinor}}{{#if isMinor}}.{{{newMinor}}}{{/if}}{{/if}}.x",
   "configMigration": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Keep the Python version in sync with the Docker image, in the same pull request",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.+\\.yml$/",
+        "/^README\\.md$/",
+        "/^mypy\\.ini$/"
+      ],
+      "matchStrings": [
+        "python-version: \"(?<currentValue>\\d+\\.\\d+)\"",
+        "- Backend: Python (?<currentValue>\\d+\\.\\d+)",
+        "python_version = (?<currentValue>\\d+\\.\\d+)"
+      ],
+      "depNameTemplate": "docker.io/python",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Same as above, for the version written as py314",
+      "managerFilePatterns": ["/^ruff\\.toml$/"],
+      "matchStrings": ["target-version = \"py(?<major>\\d)(?<minor>\\d+)\""],
+      "currentValueTemplate": "{{{major}}}.{{{minor}}}",
+      "depNameTemplate": "docker.io/python",
+      "datasourceTemplate": "docker",
+      "autoReplaceStringTemplate": "target-version = \"py{{{newMajor}}}{{{newMinor}}}\""
+    },
+    {
+      "customType": "regex",
+      "description": "The Django version in the docs links, the README and django-upgrade. The same branch topic puts them in the PR that bumps the pin in pyproject.toml",
+      "managerFilePatterns": [
+        "/\\.py$/",
+        "/^\\.env\\.example$/",
+        "/^\\.pre-commit-config\\.yaml$/",
+        "/^README\\.md$/"
+      ],
+      "matchStrings": [
+        "docs\\.djangoproject\\.com/en/(?<currentValue>\\d+\\.\\d+)/",
+        "- --target-version\\n +- \"(?<currentValue>\\d+\\.\\d+)\"",
+        ", Django (?<currentValue>\\d+\\.\\d+),"
+      ],
+      "depNameTemplate": "django",
+      "datasourceTemplate": "pypi",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+)(?:\\.\\d+)?$"
+    }
+  ],
   "dependencyDashboard": false,
   "extends": [
     "config:recommended",
@@ -57,9 +103,11 @@
       "minimumReleaseAge": null
     },
     {
+      "description": "A new Python is reviewed by hand. A cooldown would count from the last rebuild of an image tag, which keeps part of the update out of the PR",
       "matchPackageNames": ["python", "docker.io/python"],
       "groupName": "python",
-      "automerge": false
+      "automerge": false,
+      "minimumReleaseAge": null
     }
   ],
   "pre-commit": { "enabled": true },
