@@ -62,7 +62,7 @@ typecheck = [
   "django-debug-toolbar==8.0.0",
   "django-stubs==6.1.2",
   "factory-boy==3.3.3",
-  "mypy==2.4.0",
+  "mypy==2.4.1",
   "psycopg[binary]==3.3.6",
   "pytest==9.2.0",
   "pytest-django==4.14.0",
