@@ -1,0 +1,84 @@
+name: 🐛 Bug report
+description: Report something in Socnet that is broken.
+labels: ["bug"]
+body:
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you start
+      options:
+        - label: >-
+            I searched the [existing
+            issues](https://github.com/monosans/socnet/issues?q=is%3Aissue)
+            and found nothing about this.
+          required: true
+        - label: "I can reproduce this on the latest commit of `main`."
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "What happened?"
+      description: What you did, what you expected and what you got instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |-
+        1. Sign in
+        2. Open ...
+        3. Click ...
+    validations:
+      required: true
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: "Where does it run?"
+      options:
+        - Local development
+        - Production
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit
+      description: "`git rev-parse HEAD`"
+    validations:
+      required: true
+  - type: input
+    id: docker
+    attributes:
+      label: Docker Compose version
+      description: "`docker compose version`"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system of the host
+      placeholder: Ubuntu 24.04
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      description: For problems in the interface.
+      placeholder: Firefox 150
+  - type: dropdown
+    id: language
+    attributes:
+      label: Interface language
+      options:
+        - English
+        - Russian
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: >-
+        `docker compose logs django` and the browser console, if relevant.
+        Remove `.env` values, tokens and personal data.
+      render: text

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 README
+    url: https://github.com/monosans/socnet#readme
+    about: How to run, deploy and test Socnet.
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/monosans/socnet/security/advisories/new
+    about: Report it privately instead of opening a public issue.
