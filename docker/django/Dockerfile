@@ -24,8 +24,13 @@ ARG \
   UID=1000 \
   GID=1000
 
-RUN (getent group "${GID}" || groupmod --gid "${GID}" node) \
-  && usermod --uid "${UID}" --gid "${GID}" node
+# UID and GID come from the host and can be anything, 0 and IDs the image uses included.
+RUN groupmod --non-unique --gid "${GID}" node \
+  && usermod --non-unique --uid "${UID}" node \
+  && chown -R "${UID}:${GID}" /home/node
+
+# Docker finds the home by UID, and that may belong to a user of the image.
+ENV HOME=/home/node
 
 USER node
 
@@ -109,8 +114,9 @@ ARG \
   UID=1000 \
   GID=1000
 
-RUN (getent group "${GID}" || groupadd --gid "${GID}" django) \
-  && useradd --gid "${GID}" --no-log-init --uid "${UID}" django
+# UID and GID come from the host and can be anything, 0 and IDs the image uses included.
+RUN groupadd --non-unique --gid "${GID}" django \
+  && useradd --gid "${GID}" --no-log-init --non-unique --uid "${UID}" django
 
 COPY --from=python-builder --chown=${UID}:${GID} --link /app/.venv /app/.venv
 
