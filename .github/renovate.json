@@ -90,6 +90,18 @@
       "matchManagers": ["pep621"],
       "automerge": true
     },
+    {
+      "description": "Every extra but production is for development or tests. The same pin in a dependency group shares its branch, and one update without automerge turns it off for the whole branch",
+      "matchDepTypes": ["project.optional-dependencies"],
+      "matchManagers": ["pep621"],
+      "matchPackageNames": ["!psycopg", "!redis"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchManagers": ["npm"],
+      "automerge": true
+    },
     { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
     {
       "matchCategories": ["js"],
