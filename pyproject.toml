@@ -40,7 +40,7 @@ optional-dependencies.test = [
   "django-coverage-plugin==3.2.2",
   "factory-boy==3.3.3",
   "psycopg[binary]==3.3.6",
-  "pytest==9.1.1",
+  "pytest==9.2.0",
   "pytest-cov==7.1.0",
   "pytest-django==4.14.0",
   "pytest-django-autocheck==0.3.0",
@@ -64,7 +64,7 @@ typecheck = [
   "factory-boy==3.3.3",
   "mypy==2.4.0",
   "psycopg[binary]==3.3.6",
-  "pytest==9.1.1",
+  "pytest==9.2.0",
   "pytest-django==4.14.0",
   "types-pillow==10.2.0.20240822",
 ]
