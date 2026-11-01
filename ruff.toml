@@ -105,3 +105,6 @@ split-on-trailing-comma = false
 
 [lint.pydocstyle]
 convention = "google"
+
+[lint.pyupgrade]
+keep-runtime-typing = true
