@@ -10,7 +10,7 @@
     "restriction": "error"
   },
   "options": { "typeAware": true, "reportUnusedDisableDirectives": "error" },
-  "env": { "browser": true },
+  "env": { "browser": true, "es2023": true },
   "ignorePatterns": [".venv/", "socnet/static/public/"],
   "rules": {
     "eqeqeq": ["error", "always", { "null": "ignore" }],
@@ -61,7 +61,7 @@
   "overrides": [
     {
       "files": ["*.mjs"],
-      "env": { "browser": false, "node": true },
+      "env": { "browser": false, "es2024": true, "node": true },
       "rules": { "import/no-nodejs-modules": "off" }
     },
     { "files": ["*.config.mjs"], "rules": { "import/no-default-export": "off" } },
