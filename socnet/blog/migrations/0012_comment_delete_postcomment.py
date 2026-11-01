@@ -19,34 +19,22 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
                     ),
                 ),
                 (
                     "content",
                     models.TextField(
-                        help_text=(
-                            "Supports a safe subset of HTML and Markdown."
-                        ),
+                        help_text=("Supports a safe subset of HTML and Markdown."),
                         max_length=4096,
                         verbose_name="content",
                     ),
                 ),
                 (
                     "date_created",
-                    models.DateTimeField(
-                        auto_now_add=True, verbose_name="date created"
-                    ),
+                    models.DateTimeField(auto_now_add=True, verbose_name="date created"),
                 ),
-                (
-                    "date_updated",
-                    models.DateTimeField(
-                        auto_now=True, verbose_name="date updated"
-                    ),
-                ),
+                ("date_updated", models.DateTimeField(auto_now=True, verbose_name="date updated")),
                 (
                     "author",
                     models.ForeignKey(
@@ -75,10 +63,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={
-                "verbose_name": "comment",
-                "verbose_name_plural": "comments",
-            },
+            options={"verbose_name": "comment", "verbose_name_plural": "comments"},
         ),
         migrations.DeleteModel(name="PostComment"),
     ]

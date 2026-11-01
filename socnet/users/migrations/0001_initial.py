@@ -25,21 +25,13 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
                     ),
                 ),
-                (
-                    "password",
-                    models.CharField(max_length=128, verbose_name="password"),
-                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
                 (
                     "last_login",
-                    models.DateTimeField(
-                        blank=True, null=True, verbose_name="last login"
-                    ),
+                    models.DateTimeField(blank=True, null=True, verbose_name="last login"),
                 ),
                 (
                     "is_superuser",
@@ -54,18 +46,13 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "email",
-                    models.EmailField(
-                        blank=True, max_length=254, verbose_name="email address"
-                    ),
+                    models.EmailField(blank=True, max_length=254, verbose_name="email address"),
                 ),
                 (
                     "is_staff",
                     models.BooleanField(
                         default=False,
-                        help_text=(
-                            "Designates whether the user can log into this"
-                            " admin site."
-                        ),
+                        help_text=("Designates whether the user can log into this admin site."),
                         verbose_name="staff status",
                     ),
                 ),
@@ -84,19 +71,14 @@ class Migration(migrations.Migration):
                 (
                     "date_joined",
                     models.DateTimeField(
-                        default=django.utils.timezone.now,
-                        verbose_name="date joined",
+                        default=django.utils.timezone.now, verbose_name="date joined"
                     ),
                 ),
                 (
                     "username",
                     models.CharField(
                         db_index=True,
-                        error_messages={
-                            "unique": (
-                                "A user with that username already exists."
-                            )
-                        },
+                        error_messages={"unique": ("A user with that username already exists.")},
                         help_text=(
                             "No more than 30 characters. Only English letters,"
                             " numbers and _. Must begin with a letter and end"
@@ -117,8 +99,7 @@ class Migration(migrations.Migration):
                     models.CharField(
                         blank=True,
                         help_text=(
-                            "No more than 30 characters. Only English and"
-                            " Russian letters and -."
+                            "No more than 30 characters. Only English and Russian letters and -."
                         ),
                         max_length=30,
                         validators=[
@@ -134,8 +115,7 @@ class Migration(migrations.Migration):
                     models.CharField(
                         blank=True,
                         help_text=(
-                            "No more than 30 characters. Only English and"
-                            " Russian letters and -."
+                            "No more than 30 characters. Only English and Russian letters and -."
                         ),
                         max_length=30,
                         validators=[
@@ -151,9 +131,7 @@ class Migration(migrations.Migration):
                     models.DateField(
                         blank=True,
                         null=True,
-                        validators=[
-                            socnet.users.validators.validate_birth_date
-                        ],
+                        validators=[socnet.users.validators.validate_birth_date],
                         verbose_name="birth date",
                     ),
                 ),
@@ -165,11 +143,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "image",
-                    models.ImageField(
-                        blank=True,
-                        upload_to="user_images/",
-                        verbose_name="image",
-                    ),
+                    models.ImageField(blank=True, upload_to="user_images/", verbose_name="image"),
                 ),
                 (
                     "about",
@@ -212,11 +186,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={
-                "verbose_name": "user",
-                "verbose_name_plural": "users",
-                "abstract": False,
-            },
+            options={"verbose_name": "user", "verbose_name_plural": "users", "abstract": False},
             managers=[("objects", django.contrib.auth.models.UserManager())],
         )
     ]

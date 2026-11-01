@@ -1,15 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "eslint",
-    "typescript",
-    "unicorn",
-    "oxc",
-    "import",
-    "jsdoc",
-    "promise",
-    "node"
-  ],
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "import", "jsdoc", "promise", "node"],
   "categories": {
     "correctness": "error",
     "suspicious": "error",
@@ -50,28 +41,15 @@
     "import/unambiguous": "off",
     "oxc/no-async-await": "off",
     "typescript/ban-ts-comment": ["error", { "ts-expect-error": false }],
-    "typescript/explicit-member-accessibility": [
-      "error",
-      { "accessibility": "no-public" }
-    ],
-    "typescript/no-confusing-void-expression": [
-      "error",
-      { "ignoreArrowShorthand": true }
-    ],
+    "typescript/explicit-member-accessibility": ["error", { "accessibility": "no-public" }],
+    "typescript/no-confusing-void-expression": ["error", { "ignoreArrowShorthand": true }],
     "typescript/no-non-null-assertion": "off",
     "typescript/no-unsafe-type-assertion": "off",
-    "typescript/parameter-properties": [
-      "error",
-      { "prefer": "parameter-property" }
-    ],
+    "typescript/parameter-properties": ["error", { "prefer": "parameter-property" }],
     "typescript/prefer-readonly-parameter-types": "off",
     "typescript/strict-boolean-expressions": [
       "error",
-      {
-        "allowNullableBoolean": true,
-        "allowNullableNumber": true,
-        "allowNullableString": true
-      }
+      { "allowNullableBoolean": true, "allowNullableNumber": true, "allowNullableString": true }
     ],
     "typescript/use-unknown-in-catch-callback-variable": "off",
     "unicorn/catch-error-name": ["error", { "name": "e" }],
@@ -86,10 +64,7 @@
       "env": { "browser": false, "node": true },
       "rules": { "import/no-nodejs-modules": "off" }
     },
-    {
-      "files": ["*.config.mjs"],
-      "rules": { "import/no-default-export": "off" }
-    },
+    { "files": ["*.config.mjs"], "rules": { "import/no-default-export": "off" } },
     {
       "files": [
         "*.d.ts",

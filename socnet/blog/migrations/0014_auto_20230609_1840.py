@@ -6,8 +6,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-    dependencies = [
-        ("blog", "0013_post_allow_commenting_alter_comment_content_and_more")
-    ]
+    dependencies = [("blog", "0013_post_allow_commenting_alter_comment_content_and_more")]
 
     operations = [TrigramExtension()]

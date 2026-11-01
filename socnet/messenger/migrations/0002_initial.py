@@ -29,9 +29,7 @@ class Migration(migrations.Migration):
             model_name="chat",
             name="participants",
             field=models.ManyToManyField(
-                related_name="chats",
-                to=settings.AUTH_USER_MODEL,
-                verbose_name="participants",
+                related_name="chats", to=settings.AUTH_USER_MODEL, verbose_name="participants"
             ),
         ),
     ]

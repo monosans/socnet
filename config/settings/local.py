@@ -17,8 +17,7 @@ TEMPLATES[0]["OPTIONS"]["string_if_invalid"] = (  # type: ignore[index]
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
 INTERNAL_IPS = [
-    ip[: ip.rfind(".")] + ".1"
-    for ip in socket.gethostbyname_ex(socket.gethostname())[2]
+    ip[: ip.rfind(".")] + ".1" for ip in socket.gethostbyname_ex(socket.gethostname())[2]
 ] + ["127.0.0.1", "10.0.2.2"]
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -62,8 +61,4 @@ if _SENTRY_DSN := env.str("SENTRY_DSN", ""):
     import sentry_sdk
     from sentry_sdk.integrations.asyncio import AsyncioIntegration
 
-    sentry_sdk.init(
-        dsn=_SENTRY_DSN,
-        environment="local",
-        integrations=(AsyncioIntegration(),),
-    )
+    sentry_sdk.init(dsn=_SENTRY_DSN, environment="local", integrations=(AsyncioIntegration(),))

@@ -25,9 +25,7 @@ class Post(MarkdownContentModel, TimestampedModel):
     allow_commenting = models.BooleanField(
         verbose_name=_("allow commenting"),
         default=True,
-        help_text=_(
-            "You can comment on your posts regardless of this setting."
-        ),
+        help_text=_("You can comment on your posts regardless of this setting."),
     )
 
     class Meta(TypedModelMeta):
@@ -40,10 +38,7 @@ class Post(MarkdownContentModel, TimestampedModel):
 
 class Comment(MarkdownContentModel, TimestampedModel):
     post = models.ForeignKey(
-        to=Post,
-        on_delete=models.CASCADE,
-        related_name="comments",
-        verbose_name=_("post"),
+        to=Post, on_delete=models.CASCADE, related_name="comments", verbose_name=_("post")
     )
     author = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,

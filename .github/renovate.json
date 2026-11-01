@@ -58,14 +58,8 @@
   "lockFileMaintenance": { "enabled": true, "schedule": ["at any time"] },
   "minimumReleaseAge": "3 days",
   "packageRules": [
-    {
-      "matchPackageNames": ["ruff", "charliermarsh/ruff-pre-commit"],
-      "groupName": "ruff"
-    },
-    {
-      "matchPackageNames": ["prettier", "rbubley/mirrors-prettier"],
-      "groupName": "prettier"
-    },
+    { "matchPackageNames": ["ruff", "charliermarsh/ruff-pre-commit"], "groupName": "ruff" },
+    { "matchPackageNames": ["prettier", "rbubley/mirrors-prettier"], "groupName": "prettier" },
     { "matchPackageNames": ["djlint", "djlint/djLint"], "groupName": "djlint" },
     {
       "matchPackageNames": ["stylelint", "thibaudcolas/pre-commit-stylelint"],
@@ -76,20 +70,9 @@
       "matchPackageNames": ["django-stubs", "django-stubs-ext", "mypy"],
       "groupName": "django-stubs"
     },
-    {
-      "matchCurrentVersion": "!/^0/",
-      "matchUpdateTypes": ["minor"],
-      "automerge": true
-    },
-    {
-      "matchUpdateTypes": ["lockFileMaintenance", "patch", "replacement"],
-      "automerge": true
-    },
-    {
-      "matchDepTypes": ["dependency-groups"],
-      "matchManagers": ["pep621"],
-      "automerge": true
-    },
+    { "matchCurrentVersion": "!/^0/", "matchUpdateTypes": ["minor"], "automerge": true },
+    { "matchUpdateTypes": ["lockFileMaintenance", "patch", "replacement"], "automerge": true },
+    { "matchDepTypes": ["dependency-groups"], "matchManagers": ["pep621"], "automerge": true },
     {
       "description": "Every extra but production is for development or tests. The same pin in a dependency group shares its branch, and one update without automerge turns it off for the whole branch",
       "matchDepTypes": ["project.optional-dependencies"],
@@ -97,11 +80,7 @@
       "matchPackageNames": ["!psycopg", "!redis"],
       "automerge": true
     },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "matchManagers": ["npm"],
-      "automerge": true
-    },
+    { "matchDepTypes": ["devDependencies"], "matchManagers": ["npm"], "automerge": true },
     { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
     {
       "matchCategories": ["js"],

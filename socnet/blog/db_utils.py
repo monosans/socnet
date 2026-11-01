@@ -33,17 +33,13 @@ def get_posts_preview_qs(
     if request.user.is_anonymous:
         return cast("QuerySet[models.Post]", qs)
     return cast(
-        "QuerySet[models.Post]",
-        qs.annotate(is_liked=Q(pk__in=request.user.liked_posts.all())),
+        "QuerySet[models.Post]", qs.annotate(is_liked=Q(pk__in=request.user.liked_posts.all()))
     )
 
 
 def get_subscriptions(username: str, field: str) -> User:
     prefetch = Prefetch(
-        field,
-        User.objects.only("display_name", "image", "username").order_by(
-            "username"
-        ),
+        field, User.objects.only("display_name", "image", "username").order_by("username")
     )
     qs = (
         User.objects

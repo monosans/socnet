@@ -9,10 +9,7 @@ from socnet_rs import normalize_str
     ("given", "expected"),
     [
         ("string", "string"),
-        (
-            "\n\n \tstring\t  \n\n\n   string  \tstring  \n  \t ",
-            "string\nstring string",
-        ),
+        ("\n\n \tstring\t  \n\n\n   string  \tstring  \n  \t ", "string\nstring string"),
     ],
 )
 def test_normalize_str(given: str, expected: str) -> None:
@@ -25,8 +22,6 @@ def test_returns_same_object_if_normalized() -> None:
 
 
 def test_type_error() -> None:
-    exc_str = (
-        "'int' object is not an instance of 'str'\nwhile processing 'value'"
-    )
+    exc_str = "'int' object is not an instance of 'str'\nwhile processing 'value'"
     with pytest.raises(TypeError, match=exc_str):
         normalize_str(0)  # type: ignore[arg-type]

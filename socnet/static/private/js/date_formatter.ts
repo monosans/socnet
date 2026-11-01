@@ -10,10 +10,7 @@ async function formatDates(parentNode: ParentNode): Promise<void> {
   const { DateTime } = await import("luxon");
   const relativeOptions = { base: DateTime.now() };
   for (const el of elements) {
-    const dt = DateTime.fromSeconds(
-      Number.parseInt(el.dataset["epoch"]!),
-      options,
-    );
+    const dt = DateTime.fromSeconds(Number.parseInt(el.dataset["epoch"]!), options);
     const relativeDt = dt.toRelative(relativeOptions);
     if (el.textContent !== relativeDt) {
       el.textContent = relativeDt;

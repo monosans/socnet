@@ -13,10 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         django.contrib.postgres.operations.CreateCollation(
-            name="case_insensitive",
-            provider="icu",
-            locale="und-u-ks-level2",
-            deterministic=False,
+            name="case_insensitive", provider="icu", locale="und-u-ks-level2", deterministic=False
         ),
         migrations.AlterField(
             model_name="user",
@@ -34,12 +31,8 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 db_collation="case_insensitive",
                 db_index=True,
-                error_messages={
-                    "unique": "A user with that username already exists."
-                },
-                help_text=(
-                    "Only English letters, numbers, underscores and hyphens."
-                ),
+                error_messages={"unique": "A user with that username already exists."},
+                help_text=("Only English letters, numbers, underscores and hyphens."),
                 max_length=32,
                 unique=True,
                 validators=[

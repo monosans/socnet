@@ -8,7 +8,5 @@ class Migration(migrations.Migration):
     dependencies = [("messenger", "0008_alter_message_content")]
 
     operations = [
-        migrations.RenameField(
-            model_name="chat", old_name="participants", new_name="members"
-        )
+        migrations.RenameField(model_name="chat", old_name="participants", new_name="members")
     ]

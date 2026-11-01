@@ -14,8 +14,6 @@
   >
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
-    <button class="btn btn-primary w-100" type="submit">
-      {% translate "Generate" %}
-    </button>
+    <button class="btn btn-primary w-100" type="submit">{% translate "Generate" %}</button>
   </form>
 {% endblock card %}

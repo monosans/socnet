@@ -34,9 +34,7 @@ def test_unauthed_post(client: Client) -> None:
     post = factory.create()
     url = get_url(post)
     response = client.post(url, follow=True)
-    assert response.redirect_chain == [
-        ("{}?next={}".format(reverse("account_login"), url), 302)
-    ]
+    assert response.redirect_chain == [("{}?next={}".format(reverse("account_login"), url), 302)]
     assert response.status_code == 200
     assert models.Post.objects.filter(pk=post.pk).exists()
 
@@ -47,8 +45,6 @@ def test_authed_post(client: Client, *, is_author: bool) -> None:
     post = factory.create(author=user) if is_author else factory.create()
     url = get_url(post)
     response = client.post(url, follow=True)
-    assert response.redirect_chain == [
-        (reverse("blog:user_posts", args=(user.username,)), 302)
-    ]
+    assert response.redirect_chain == [(reverse("blog:user_posts", args=(user.username,)), 302)]
     assert response.status_code == 200
     assert is_author != models.Post.objects.filter(pk=post.pk).exists()
