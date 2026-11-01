@@ -1,7 +1,7 @@
 line-length = 80
 output-prefer-rule-codes = true
 preview = true
-target-version = "py314"
+target-version = "py315"
 
 [format]
 docstring-code-format = true
