@@ -39,9 +39,6 @@ messageTextarea.addEventListener("keyup", (e) => {
 messageTextarea.focus();
 
 const chatLog = {
-  element: document.querySelector("#chat-log")!,
-
-  // eslint-disable-next-line sort-keys
   addNewMessage(data: ChatMessageEvent): void {
     const id = `msg${data.pk}`;
     const sender = getSender(data);
@@ -68,9 +65,10 @@ const chatLog = {
         ${data.content}
       </div>
     `;
-    // eslint-disable-next-line unicorn/no-unsafe-dom-html
     chatLog.element.insertAdjacentHTML("beforeend", html);
   },
+
+  element: document.querySelector("#chat-log")!,
 
   scrollToEnd(): void {
     chatLog.element.scrollTop = chatLog.element.scrollHeight;

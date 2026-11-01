@@ -7,7 +7,6 @@ async function formatDates(parentNode: ParentNode): Promise<void> {
     return;
   }
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { DateTime } = await import("luxon");
   const relativeOptions = { base: DateTime.now() };
   for (const el of elements) {
@@ -36,7 +35,7 @@ new MutationObserver((mutations) => {
       void (async (): Promise<void> => {
         for (const node of mutation.addedNodes) {
           if (node instanceof Element) {
-            // eslint-disable-next-line no-await-in-loop
+            // oxlint-disable-next-line no-await-in-loop
             await formatDates(node);
           }
         }
