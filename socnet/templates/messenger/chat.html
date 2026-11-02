@@ -23,17 +23,17 @@
       "interlocutorPk": {{ interlocutor.pk }},
       "users": {
         {% if request.user != interlocutor %}
-        "{{ interlocutor.username|lower }}": {
-          "href": "{{ interlocutor.get_absolute_url }}",
-          {% if interlocutor.image %}"image": "{{ interlocutor.image.url }}",{% endif %}
-          "displayName": "{{ interlocutor.display_name }}",
+        "{{ interlocutor.username|lower|escapejs }}": {
+          "href": "{{ interlocutor.get_absolute_url|escapejs }}",
+          {% if interlocutor.image %}"image": "{{ interlocutor.image.url|escapejs }}",{% endif %}
+          "displayName": "{{ interlocutor.display_name|escapejs }}",
           "isCurrentUser": false
         },
         {% endif %}
-        "{{ request.user.username|lower }}": {
-          "href": "{{ request.user.get_absolute_url }}",
-          {% if request.user.image %}"image": "{{ request.user.image.url }}",{% endif %}
-          "displayName": "{{ request.user.display_name }}",
+        "{{ request.user.username|lower|escapejs }}": {
+          "href": "{{ request.user.get_absolute_url|escapejs }}",
+          {% if request.user.image %}"image": "{{ request.user.image.url|escapejs }}",{% endif %}
+          "displayName": "{{ request.user.display_name|escapejs }}",
           "isCurrentUser": true
         }
       }
