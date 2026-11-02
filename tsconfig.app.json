@@ -4,9 +4,10 @@
   "exclude": ["socnet/static/public"],
   "compilerOptions": {
     "noUncheckedIndexedAccess": false,
-    "module": "node16",
     "noEmit": true,
     "checkJs": true,
-    "target": "es2023"
+    "target": "es2023",
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true
   }
 }
