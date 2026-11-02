@@ -30,12 +30,7 @@
           class="navbar-brand d-flex align-items-center gap-2 fw-semibold"
           href="{% url 'core:index' %}"
         >
-          <img
-            alt=""
-            height="32"
-            src="{% static 'img/logo.svg' %}"
-            width="32"
-          />
+          <img alt="" height="32" src="{% static 'img/logo.svg' %}" width="32" />
           Socnet
         </a>
         <button
@@ -100,7 +95,9 @@
                 <a
                   class="nav-link"
                   href="{% url 'api-1.0.0:openapi-view' %}"
-                ><i class="fa-solid fa-bolt text-primary"></i> API</a>
+                ><i
+  class="fa-solid fa-bolt text-primary"
+></i> API</a>
               </li>
             {% endif %}
           </ul>
@@ -111,12 +108,17 @@
                   class="nav-link dropdown-toggle"
                   data-bs-toggle="dropdown"
                   href="#"
-                ><i class="fa-solid fa-gear text-primary"></i></a>
+                ><i
+  class="fa-solid fa-gear text-primary"
+></i></a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li>
                     {% url "users:account_security" as url_account_security %}
                     {% if url_account_security == request.path %}
-                      <a class="dropdown-item active" href="{{ url_account_security }}"><i class="fa-solid fa-shield"></i> {% translate "Security" %}</a>
+                      <a
+                        class="dropdown-item active"
+                        href="{{ url_account_security }}"
+                      ><i class="fa-solid fa-shield"></i> {% translate "Security" %}</a>
                     {% else %}
                       <a class="dropdown-item" href="{{ url_account_security }}"><i class="fa-solid fa-shield text-primary"></i> {% translate "Security" %}</a>
                     {% endif %}
@@ -150,34 +152,29 @@
               {% endif %}
             </li>
             <li id="themeSwitcher" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><i id="currentThemeIcon" class="fa-solid fa-moon text-primary"></i></a>
+              <a
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                href="#"
+              ><i
+  id="currentThemeIcon"
+  class="fa-solid fa-moon text-primary"
+></i></a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                  <button
-                    class="dropdown-item"
-                    data-bs-theme-value="light"
-                    type="button"
-                  >
+                  <button class="dropdown-item" data-bs-theme-value="light" type="button">
                     <i class="fa-solid fa-sun text-primary"></i>
                     {% translate "Light" %}
                   </button>
                 </li>
                 <li>
-                  <button
-                    class="dropdown-item active"
-                    data-bs-theme-value="dark"
-                    type="button"
-                  >
+                  <button class="dropdown-item active" data-bs-theme-value="dark" type="button">
                     <i class="fa-solid fa-moon"></i>
                     {% translate "Dark" %}
                   </button>
                 </li>
                 <li>
-                  <button
-                    class="dropdown-item"
-                    data-bs-theme-value="auto"
-                    type="button"
-                  >
+                  <button class="dropdown-item" data-bs-theme-value="auto" type="button">
                     <i class="fa-solid fa-circle-half-stroke text-primary"></i>
                     {% translate "Auto" %}
                   </button>

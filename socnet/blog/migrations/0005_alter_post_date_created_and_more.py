@@ -11,15 +11,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="post",
             name="date_created",
-            field=models.DateTimeField(
-                auto_now_add=True, verbose_name="date created"
-            ),
+            field=models.DateTimeField(auto_now_add=True, verbose_name="date created"),
         ),
         migrations.AlterField(
             model_name="postcomment",
             name="date_created",
-            field=models.DateTimeField(
-                auto_now_add=True, verbose_name="date created"
-            ),
+            field=models.DateTimeField(auto_now_add=True, verbose_name="date created"),
         ),
     ]

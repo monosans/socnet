@@ -29,12 +29,18 @@
         <ul class="dropdown-menu dropdown-menu-end">
           {% if request.user.is_staff %}
             <li>
-              <a class="dropdown-item" href="{{ post|obj_admin_url }}"><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin page" %}</a>
+              <a
+                class="dropdown-item"
+                href="{{ post|obj_admin_url }}"
+              ><i class="fa-solid fa-toolbox text-primary"></i> {% translate "Admin page" %}</a>
             </li>
           {% endif %}
           {% if request.user == post.author %}
             <li>
-              <a class="dropdown-item" href="{% url 'blog:post_update' post.pk %}"><i class="fa-solid fa-pen-to-square text-primary"></i> {% translate "Edit" %}</a>
+              <a
+                class="dropdown-item"
+                href="{% url 'blog:post_update' post.pk %}"
+              ><i class="fa-solid fa-pen-to-square text-primary"></i> {% translate "Edit" %}</a>
             </li>
             <li>
               <button
@@ -55,29 +61,23 @@
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">
-                  {% blocktranslate context "noun" %}Delete post{% endblocktranslate %}
-                </h5>
+                <h5
+                  class="modal-title"
+                >{% blocktranslate context "noun" %}Delete post{% endblocktranslate %}</h5>
                 <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
               </div>
-              <div class="modal-body">
-                {% translate "Are you sure you want to delete your post?" %}
-              </div>
+              <div
+                class="modal-body"
+              >{% translate "Are you sure you want to delete your post?" %}</div>
               <div class="modal-footer">
                 <button
                   class="btn btn-secondary"
                   data-bs-dismiss="modal"
                   type="button"
                 >{% translate "Close" %}</button>
-                <form
-                  action="{% url 'blog:post_delete' post.pk %}"
-                  method="post"
-                >
+                <form action="{% url 'blog:post_delete' post.pk %}" method="post">
                   {% csrf_token %}
-                  <button
-                    class="btn btn-danger"
-                    type="submit"
-                  >{% translate "Delete" %}</button>
+                  <button class="btn btn-danger" type="submit">{% translate "Delete" %}</button>
                 </form>
               </div>
             </div>

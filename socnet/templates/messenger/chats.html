@@ -43,9 +43,7 @@
         <div class="text-break">
           <span class="text-body">{{ chat.display_name }}</span>
           <span class="ms-1 text-secondary">@{{ chat.username }}</span>
-          <div
-            class="text-secondary"
-          >{{ chat.last_message_truncated_content }}</div>
+          <div class="text-secondary">{{ chat.last_message_truncated_content }}</div>
         </div>
         <div
           class="ms-auto text-secondary"
@@ -54,8 +52,6 @@
       </a>
     {% endfor %}
   {% else %}
-    <div class="list-group-item text-center">
-      {% translate "You have no chats." %}
-    </div>
+    <div class="list-group-item text-center">{% translate "You have no chats." %}</div>
   {% endif %}
 {% endblock list_group %}

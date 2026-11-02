@@ -20,8 +20,6 @@
   <form class="mt-3" method="post">
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
-    <button class="btn btn-danger w-100" type="submit">
-      {% translate "Delete" %}
-    </button>
+    <button class="btn btn-danger w-100" type="submit">{% translate "Delete" %}</button>
   </form>
 {% endblock card %}

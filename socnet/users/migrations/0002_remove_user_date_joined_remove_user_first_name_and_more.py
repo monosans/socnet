@@ -19,25 +19,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="user",
             name="display_name",
-            field=models.CharField(
-                blank=True, max_length=64, verbose_name="display name"
-            ),
+            field=models.CharField(blank=True, max_length=64, verbose_name="display name"),
         ),
         migrations.AlterField(
             model_name="user",
             name="email",
-            field=models.EmailField(
-                max_length=254, unique=False, verbose_name="email address"
-            ),
+            field=models.EmailField(max_length=254, unique=False, verbose_name="email address"),
         ),
         migrations.AlterField(
             model_name="user",
             name="username",
             field=django.contrib.postgres.fields.citext.CICharField(
                 db_index=True,
-                error_messages={
-                    "unique": "A user with that username already exists."
-                },
+                error_messages={"unique": "A user with that username already exists."},
                 help_text=(
                     "No more than 30 characters. Only lowercase English"
                     " letters, numbers and _. Must begin with a letter and end"
@@ -46,9 +40,7 @@ class Migration(migrations.Migration):
                 max_length=32,
                 unique=False,
                 validators=[
-                    django.core.validators.RegexValidator(
-                        "^(?:[a-z]|[a-z][\\d_a-z]*[\\da-z])$"
-                    )
+                    django.core.validators.RegexValidator("^(?:[a-z]|[a-z][\\d_a-z]*[\\da-z])$")
                 ],
                 verbose_name="username",
             ),

@@ -14,11 +14,7 @@ if TYPE_CHECKING:
 class AccountAdapter(DefaultAccountAdapter):
     @override
     def save_user(
-        self,
-        request: HttpRequest,
-        user: AbstractBaseUser,
-        form: BaseForm,
-        commit: bool = True,
+        self, request: HttpRequest, user: AbstractBaseUser, form: BaseForm, commit: bool = True
     ) -> AbstractBaseUser:
         user = super().save_user(request, user, form, commit=False)
         user_field(user, "display_name", form.cleaned_data["display_name"])

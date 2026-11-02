@@ -54,36 +54,28 @@ class Command(BaseCommand):
 
             self.stdout.write("Creating users...")
             started = perf_counter()
-            users = User.objects.bulk_create(
-                UserFactory.build() for _ in range(users_count)
-            )
+            users = User.objects.bulk_create(UserFactory.build() for _ in range(users_count))
             self.stdout.write(
-                f"Created {len(users):,} users"
-                f" in {perf_counter() - started:,.2f} seconds."
+                f"Created {len(users):,} users in {perf_counter() - started:,.2f} seconds."
             )
 
             self.stdout.write("\nCreating posts...")
             started = perf_counter()
             posts = Post.objects.bulk_create(
-                PostFactory.build(author=random.choice(users))
-                for _ in range(posts_count)
+                PostFactory.build(author=random.choice(users)) for _ in range(posts_count)
             )
             self.stdout.write(
-                f"Created {len(posts):,} posts"
-                f" in {perf_counter() - started:,.2f} seconds."
+                f"Created {len(posts):,} posts in {perf_counter() - started:,.2f} seconds."
             )
 
             self.stdout.write("\nCreating comments...")
             started = perf_counter()
             comments = Comment.objects.bulk_create(
-                CommentFactory.build(
-                    post=random.choice(posts), author=random.choice(users)
-                )
+                CommentFactory.build(post=random.choice(posts), author=random.choice(users))
                 for _ in range(comments_count)
             )
             self.stdout.write(
-                f"Created {len(comments):,} comments"
-                f" in {perf_counter() - started:,.2f} seconds."
+                f"Created {len(comments):,} comments in {perf_counter() - started:,.2f} seconds."
             )
 
             self.stdout.write("\nCreating messages...")
@@ -96,8 +88,7 @@ class Command(BaseCommand):
                 for _ in range(messages_count)
             )
             self.stdout.write(
-                f"Created {len(messages):,} messages"
-                f" in {perf_counter() - started:,.2f} seconds."
+                f"Created {len(messages):,} messages in {perf_counter() - started:,.2f} seconds."
             )
 
             self.stdout.write("\nCreating subscriptions...")
@@ -106,9 +97,7 @@ class Command(BaseCommand):
                 (
                     User.subscriptions.through(
                         from_user_id=(u := random.choice(users)).pk,
-                        to_user_id=random.choice([
-                            x for x in users if x.pk != u.pk
-                        ]).pk,
+                        to_user_id=random.choice([x for x in users if x.pk != u.pk]).pk,
                     )
                     for _ in range(subscriptions_count)
                 ),
@@ -122,8 +111,7 @@ class Command(BaseCommand):
             post_likers = Post.likers.through.objects.bulk_create(
                 (
                     Post.likers.through(
-                        post_id=random.choice(posts).pk,
-                        user_id=random.choice(users).pk,
+                        post_id=random.choice(posts).pk, user_id=random.choice(users).pk
                     )
                     for _ in range(post_likes_count)
                 ),
@@ -139,8 +127,7 @@ class Command(BaseCommand):
             comment_likers = Comment.likers.through.objects.bulk_create(
                 (
                     Comment.likers.through(
-                        comment_id=random.choice(comments).pk,
-                        user_id=random.choice(users).pk,
+                        comment_id=random.choice(comments).pk, user_id=random.choice(users).pk
                     )
                     for _ in range(comment_likes_count)
                 ),

@@ -25,9 +25,9 @@
     {% endif %}
   >
     {% if not post.allow_commenting and request.user != post.author %}
-      <div class="text-center">
-        {% translate "The author has restricted commenting on this post." %}
-      </div>
+      <div
+        class="text-center"
+      >{% translate "The author has restricted commenting on this post." %}</div>
     {% elif request.user.is_anonymous %}
       <div class="text-center">
         {% url 'account_login' as url_login %}

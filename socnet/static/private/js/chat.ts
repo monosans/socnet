@@ -29,11 +29,9 @@ function getSender(data: ChatMessageEvent): User {
   return sender;
 }
 
-const messageSendBtn =
-  document.querySelector<HTMLButtonElement>("#messageSendBtn")!;
+const messageSendBtn = document.querySelector<HTMLButtonElement>("#messageSendBtn")!;
 
-const messageTextarea =
-  document.querySelector<HTMLTextAreaElement>("#id_content")!;
+const messageTextarea = document.querySelector<HTMLTextAreaElement>("#id_content")!;
 
 messageTextarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {

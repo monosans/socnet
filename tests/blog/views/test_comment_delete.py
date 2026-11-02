@@ -34,9 +34,7 @@ def test_unauthed_post(client: Client) -> None:
     comment = factory.create()
     url = get_url(comment)
     response = client.delete(url, follow=True)
-    assert response.redirect_chain == [
-        ("{}?next={}".format(reverse("account_login"), url), 302)
-    ]
+    assert response.redirect_chain == [("{}?next={}".format(reverse("account_login"), url), 302)]
     assert response.status_code == 200
     assert models.Comment.objects.filter(pk=comment.pk).exists()
 

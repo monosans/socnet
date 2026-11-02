@@ -6,9 +6,7 @@ function getStoredOrDefaultTheme(): "dark" | "light" {
   if (storedTheme === "dark" || storedTheme === "light") {
     return storedTheme;
   }
-  return globalThis.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return globalThis.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 function setTheme(): void {
@@ -33,9 +31,7 @@ function setTheme(): void {
 
 setTheme();
 
-globalThis
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", setTheme);
+globalThis.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", setTheme);
 
 globalThis.addEventListener("storage", (e) => {
   if (e.key === "theme") {
@@ -44,9 +40,7 @@ globalThis.addEventListener("storage", (e) => {
 });
 
 document.body.addEventListener("click", (e) => {
-  const btn = (e.target as Element).closest<HTMLElement>(
-    "[data-bs-theme-value]",
-  );
+  const btn = (e.target as Element).closest<HTMLElement>("[data-bs-theme-value]");
   if (!btn) {
     return;
   }
