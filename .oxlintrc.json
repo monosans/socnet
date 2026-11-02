@@ -9,11 +9,7 @@
     "style": "error",
     "restriction": "error"
   },
-  "options": {
-    "denyWarnings": true,
-    "reportUnusedDisableDirectives": "error",
-    "typeAware": true
-  },
+  "options": { "denyWarnings": true, "reportUnusedDisableDirectives": "error", "typeAware": true },
   "env": { "browser": true },
   "ignorePatterns": ["socnet/static/public/"],
   "rules": {
