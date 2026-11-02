@@ -77,6 +77,9 @@ extend-function-names = [
   "npgettext_lazy",
 ]
 
+[lint.flake8-pytest-style]
+warns-require-match-for = ["*"]
+
 [lint.flake8-self]
 ignore-names = ["_meta", "_name_", "_value_"]
 

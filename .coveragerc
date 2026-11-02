@@ -5,6 +5,9 @@ exclude_lines =
 fail_under = 50
 
 [run]
+# django_coverage_plugin needs a file tracer, which the default sys.monitoring core on
+# Python 3.14 doesn't support.
+core = ctrace
 omit =
   .venv/*
   node_modules/*

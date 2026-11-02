@@ -6,7 +6,9 @@ from config.settings.base import *
 
 DEBUG = True
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+MAILERS = {
+    "default": {"BACKEND": "django.core.mail.backends.console.EmailBackend"}
+}
 
 INSTALLED_APPS += ["debug_toolbar", "extra_checks"]
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]

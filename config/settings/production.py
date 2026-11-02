@@ -30,12 +30,20 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_NAME = "__Secure-csrftoken"
 
 DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL")
-EMAIL_HOST = env.str("EMAIL_HOST")
-EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
-EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
-EMAIL_PORT = env.int("EMAIL_PORT")
-EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
-EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
+MAILERS = {
+    "default": {
+        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+        "OPTIONS": {
+            "host": env.str("EMAIL_HOST"),
+            "password": env.str("EMAIL_HOST_PASSWORD"),
+            "port": env.int("EMAIL_PORT"),
+            "timeout": 5,
+            "use_ssl": env.bool("EMAIL_USE_SSL"),
+            "use_tls": env.bool("EMAIL_USE_TLS"),
+            "username": env.str("EMAIL_HOST_USER"),
+        },
+    }
+}
 
 STATIC_ROOT = "/var/www/django/static"
 MEDIA_ROOT = "/var/www/django/media"
