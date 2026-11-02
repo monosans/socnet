@@ -15,9 +15,7 @@ class Migration(migrations.Migration):
             model_name="user",
             name="image",
             field=socnet.core.fields.WebpImageField(
-                blank=True,
-                upload_to=socnet.users.models.image_upload_to,
-                verbose_name="image",
+                blank=True, upload_to=socnet.users.models.image_upload_to, verbose_name="image"
             ),
         )
     ]

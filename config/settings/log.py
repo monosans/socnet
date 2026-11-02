@@ -4,17 +4,9 @@ LOG_CONFIG = {
     "version": 1,
     "disable_existing_loggers": False,
     "filters": {"require_admins": {"()": "socnet.core.log.RequireAdmins"}},
-    "formatters": {
-        "default": {
-            "format": "%(asctime)s | %(levelname)-8s | %(name)s: %(message)s"
-        }
-    },
+    "formatters": {"default": {"format": "%(asctime)s | %(levelname)-8s | %(name)s: %(message)s"}},
     "handlers": {
-        "console": {
-            "level": "NOTSET",
-            "class": "logging.StreamHandler",
-            "formatter": "default",
-        },
+        "console": {"level": "NOTSET", "class": "logging.StreamHandler", "formatter": "default"},
         "mail_admins": {
             "level": "ERROR",
             "filters": ["require_admins"],

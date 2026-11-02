@@ -5,15 +5,9 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-    dependencies = [
-        ("blog", "0003_remove_post_image_remove_postcomment_image_and_more")
-    ]
+    dependencies = [("blog", "0003_remove_post_image_remove_postcomment_image_and_more")]
 
     operations = [
-        migrations.RenameField(
-            model_name="post", old_name="date", new_name="date_created"
-        ),
-        migrations.RenameField(
-            model_name="postcomment", old_name="date", new_name="date_created"
-        ),
+        migrations.RenameField(model_name="post", old_name="date", new_name="date_created"),
+        migrations.RenameField(model_name="postcomment", old_name="date", new_name="date_created"),
     ]

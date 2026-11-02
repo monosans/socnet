@@ -8,10 +8,7 @@ import socnet.users.models
 
 class Migration(migrations.Migration):
     dependencies = [
-        (
-            "users",
-            "0007_case_insensitive_collation_squashed_0009_drop_extension_citext",
-        )
+        ("users", "0007_case_insensitive_collation_squashed_0009_drop_extension_citext")
     ]
 
     operations = [
@@ -19,9 +16,7 @@ class Migration(migrations.Migration):
             model_name="user",
             name="image",
             field=models.ImageField(
-                blank=True,
-                upload_to=socnet.users.models.image_upload_to,
-                verbose_name="image",
+                blank=True, upload_to=socnet.users.models.image_upload_to, verbose_name="image"
             ),
         )
     ]

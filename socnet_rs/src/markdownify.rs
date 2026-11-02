@@ -4,10 +4,8 @@ use pyo3::{prelude::*, types::PyString};
 
 type Attributes = [(&'static str, &'static str)];
 
-const LINK_ATTRIBUTES: &Attributes = &[(
-    "class",
-    "link-underline link-underline-opacity-0 link-underline-opacity-100-hover",
-)];
+const LINK_ATTRIBUTES: &Attributes =
+    &[("class", "link-underline link-underline-opacity-0 link-underline-opacity-100-hover")];
 const IMAGE_ATTRIBUTES: &Attributes =
     &[("class", "rounded"), ("loading", "lazy"), ("role", "button")];
 const TABLE_ATTRIBUTES: &Attributes = &[("class", "table w-auto")];
@@ -41,27 +39,19 @@ const fn attributes_len(attributes: &Attributes) -> usize {
 const TAG_GROWTH: [(pulldown_cmark::TagEnd, usize); 3] = [
     (
         pulldown_cmark::TagEnd::Link,
-        attributes_len(LINK_ATTRIBUTES)
-            .saturating_add(attributes_len(&[("rel", LINK_REL)])),
+        attributes_len(LINK_ATTRIBUTES).saturating_add(attributes_len(&[("rel", LINK_REL)])),
     ),
     // Without the ` /` that pulldown-cmark closes `<img />` with.
-    (
-        pulldown_cmark::TagEnd::Image,
-        attributes_len(IMAGE_ATTRIBUTES).saturating_sub(" /".len()),
-    ),
+    (pulldown_cmark::TagEnd::Image, attributes_len(IMAGE_ATTRIBUTES).saturating_sub(" /".len())),
     (pulldown_cmark::TagEnd::Table, attributes_len(TABLE_ATTRIBUTES)),
 ];
 
 const CMARK_OPTIONS: pulldown_cmark::Options =
-    pulldown_cmark::Options::ENABLE_TABLES
-        .union(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
+    pulldown_cmark::Options::ENABLE_TABLES.union(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
 
 #[pyfunction]
 #[pyo3(signature = (value, /))]
-pub fn markdownify<'py>(
-    py: Python<'py>,
-    value: &str,
-) -> PyResult<Bound<'py, PyString>> {
+pub fn markdownify<'py>(py: Python<'py>, value: &str) -> PyResult<Bound<'py, PyString>> {
     let out = py.detach(|| {
         let (html, growth) = to_html(value);
         // Sanitizing mostly keeps the HTML as is, apart from the attributes
@@ -80,22 +70,16 @@ fn to_html(value: &str) -> (String, usize) {
     // Over a corpus of messages, HTML is up to 1.5 times longer than its
     // Markdown, plus the tags of a short paragraph.
     let mut html = String::with_capacity(
-        value
-            .len()
-            .saturating_add(value.len().div_euclid(2))
-            .saturating_add(32),
+        value.len().saturating_add(value.len().div_euclid(2)).saturating_add(32),
     );
     let mut growth = 0_usize;
-    let parser = pulldown_cmark::Parser::new_ext(value, CMARK_OPTIONS).inspect(
-        |event| {
-            if let pulldown_cmark::Event::End(end) = event
-                && let Some(&(_, tag_growth)) =
-                    TAG_GROWTH.iter().find(|(tag, _)| tag == end)
-            {
-                growth = growth.saturating_add(tag_growth);
-            }
-        },
-    );
+    let parser = pulldown_cmark::Parser::new_ext(value, CMARK_OPTIONS).inspect(|event| {
+        if let pulldown_cmark::Event::End(end) = event
+            && let Some(&(_, tag_growth)) = TAG_GROWTH.iter().find(|(tag, _)| tag == end)
+        {
+            growth = growth.saturating_add(tag_growth);
+        }
+    });
     pulldown_cmark::html::push_html(&mut html, parser);
     (html, growth)
 }

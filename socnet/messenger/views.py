@@ -21,18 +21,11 @@ if TYPE_CHECKING:
 
 @login_required
 def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
-    qs = User.objects.only("display_name", "username", "image").filter(
-        username=username
-    )
+    qs = User.objects.only("display_name", "username", "image").filter(username=username)
     interlocutor = get_object_or_404(qs)
     messages = (
         models.Message.objects
-        .only(
-            "content",
-            "sender__display_name",
-            "sender__image",
-            "sender__username",
-        )
+        .only("content", "sender__display_name", "sender__image", "sender__username")
         .annotate(date_created_epoch=Extract("date_created", "epoch"))
         .select_related("sender")
         .filter(
@@ -42,11 +35,7 @@ def chat_view(request: AuthedRequest, username: str) -> HttpResponse:
         .order_by("pk")
     )
     form = forms.MessageCreationForm()
-    context = {
-        "messages_": messages,
-        "interlocutor": interlocutor,
-        "form": form,
-    }
+    context = {"messages_": messages, "interlocutor": interlocutor, "form": form}
     return render(request, "messenger/chat.html", context)
 
 
@@ -72,25 +61,16 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
                     truncated_content=Substr("content", 1, 30),
                 )
                 .select_related("recipient", "sender")
-                .filter(
-                    Q(sender=request.user) | Q(recipient=request.user),
-                    similarity__gte=0.6,
-                )
+                .filter(Q(sender=request.user) | Q(recipient=request.user), similarity__gte=0.6)
                 .order_by("-pk")
             )
             msgs_with_interlocutor = [
-                (
-                    msg,
-                    msg.recipient if msg.sender == request.user else msg.sender,
-                )
+                (msg, msg.recipient if msg.sender == request.user else msg.sender)
                 for msg in messages
             ]
         else:
             msgs_with_interlocutor = None
-        context: dict[str, Any] = {
-            "messages_": msgs_with_interlocutor,
-            "form": form,
-        }
+        context: dict[str, Any] = {"messages_": msgs_with_interlocutor, "form": form}
         return render(request, "messenger/messages_search.html", context)
     form = forms.MessageSearchForm()
     last_message = (
@@ -110,16 +90,11 @@ def chats_view(request: AuthedRequest) -> HttpResponse:
         .distinct()
         .only("display_name", "image", "username")
         .annotate(
-            last_message_date_epoch=Subquery(
-                last_message.values("date_created_epoch")[:1]
-            ),
-            last_message_truncated_content=Subquery(
-                last_message.values("truncated_content")[:1]
-            ),
+            last_message_date_epoch=Subquery(last_message.values("date_created_epoch")[:1]),
+            last_message_truncated_content=Subquery(last_message.values("truncated_content")[:1]),
         )
         .filter(
-            Q(incoming_messages__sender=request.user)
-            | Q(outgoing_messages__recipient=request.user)
+            Q(incoming_messages__sender=request.user) | Q(outgoing_messages__recipient=request.user)
         )
         .order_by("-last_message_date_epoch")
     )

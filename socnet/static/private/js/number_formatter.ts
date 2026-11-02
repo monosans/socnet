@@ -1,17 +1,11 @@
-const formatter = new Intl.NumberFormat(document.documentElement.lang, {
-  notation: "compact",
-});
+const formatter = new Intl.NumberFormat(document.documentElement.lang, { notation: "compact" });
 
 function formatNumber(element: HTMLOrSVGElement & Node): void {
-  const unformattedNumber = Number.parseInt(
-    element.dataset["unformattedNumber"]!,
-  );
+  const unformattedNumber = Number.parseInt(element.dataset["unformattedNumber"]!);
   element.textContent = formatter.format(unformattedNumber);
 }
 
-for (const el of document.body.querySelectorAll<HTMLElement>(
-  "[data-unformatted-number]",
-)) {
+for (const el of document.body.querySelectorAll<HTMLElement>("[data-unformatted-number]")) {
   formatNumber(el);
 }
 
@@ -23,10 +17,7 @@ new MutationObserver((mutations) => {
       }
     } else if (mutation.type === "childList") {
       for (const node of mutation.addedNodes) {
-        if (
-          node instanceof HTMLElement &&
-          node.matches("[data-unformatted-number]")
-        ) {
+        if (node instanceof HTMLElement && node.matches("[data-unformatted-number]")) {
           formatNumber(node);
         }
       }

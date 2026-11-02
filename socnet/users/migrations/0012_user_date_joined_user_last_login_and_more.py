@@ -19,16 +19,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="user",
             name="last_login",
-            field=models.DateTimeField(
-                blank=True, null=True, verbose_name="last login"
-            ),
+            field=models.DateTimeField(blank=True, null=True, verbose_name="last login"),
         ),
         migrations.AddField(
             model_name="user",
             name="show_last_login",
-            field=models.BooleanField(
-                default=True, verbose_name="show last login time in profile"
-            ),
+            field=models.BooleanField(default=True, verbose_name="show last login time in profile"),
         ),
         migrations.AlterField(
             model_name="user",

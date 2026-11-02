@@ -30,9 +30,7 @@ def test_unauthed(client: Client, method: ClientMethods) -> None:
         if method == ClientMethods.GET
         else client.post(url, follow=True)
     )
-    assert response.redirect_chain == [
-        ("{}?next={}".format(reverse("account_login"), url), 302)
-    ]
+    assert response.redirect_chain == [("{}?next={}".format(reverse("account_login"), url), 302)]
     assert response.status_code == 200
 
 
@@ -48,11 +46,7 @@ def test_edit_username(client: Client) -> None:
     user = auth_client(client)
     generated_user = UserFactory.build()
     response = client.post(
-        url,
-        data={
-            "username": generated_user.username,
-            "display_name": generated_user.display_name,
-        },
+        url, data={"username": generated_user.username, "display_name": generated_user.display_name}
     )
     assert response.status_code == 200
     new_user = User.objects.only("username", "display_name").get(pk=user.pk)
@@ -64,9 +58,7 @@ def test_edit_username_case(client: Client) -> None:
     user = auth_client(client)
     new_username = user.username.swapcase()
     response = client.post(
-        url,
-        data={"username": new_username, "display_name": user.display_name},
-        follow=True,
+        url, data={"username": new_username, "display_name": user.display_name}, follow=True
     )
     assert response.status_code == 200
     new_user = User.objects.only("username").get(pk=user.pk)
