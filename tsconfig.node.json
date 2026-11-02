@@ -1,12 +1,12 @@
 {
-  "extends": [
-    "@tsconfig/strictest/tsconfig.json",
-    "@tsconfig/node26/tsconfig.json"
-  ],
+  "extends": "@tsconfig/strictest/tsconfig.json",
   "exclude": [".venv", "socnet"],
   "compilerOptions": {
     "noEmit": true,
     "checkJs": true,
+    "lib": ["es2025", "ESNext.Collection", "ESNext.Temporal"],
+    "module": "nodenext",
+    "target": "es2025",
     "types": ["node"],
     "verbatimModuleSyntax": true
   }
