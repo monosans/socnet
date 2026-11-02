@@ -23,7 +23,7 @@
     "@types/luxon": "3.7.6",
     "@types/node": "24.19.2",
     "esbuild": "0.28.2",
-    "oxfmt": "0.74.0",
+    "oxfmt": "0.75.0",
     "oxlint": "1.90.0",
     "oxlint-tsgolint": "7.0.2005",
     "stylelint": "17.16.0",
