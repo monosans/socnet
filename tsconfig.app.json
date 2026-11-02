@@ -3,11 +3,10 @@
   "include": ["socnet"],
   "exclude": ["socnet/static/public"],
   "compilerOptions": {
-    "noUncheckedIndexedAccess": false,
-    "module": "node16",
     "noEmit": true,
     "checkJs": true,
-    "target": "es2020",
-    "useDefineForClassFields": true
+    "target": "es2023",
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true
   }
 }

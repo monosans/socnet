@@ -58,7 +58,7 @@ Static files and translations are collected and compiled when the container star
 - Data: PostgreSQL 18, and in production Valkey 9 for the cache and Channels.
 - Frontend: Django templates, HTMX 2, Bootstrap 5, Font Awesome 6, TypeScript bundled with esbuild, viewerjs, luxon.
 - Infrastructure: Docker Compose, Caddy, Sentry.
-- Tests and linters: pytest, factory-boy, mypy, ruff, ESLint, Stylelint.
+- Tests and linters: pytest, factory-boy, mypy, ruff, Oxlint, Stylelint.
 
 ## Database schema
 

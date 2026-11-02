@@ -1,3 +1,5 @@
+import { requiredData, requiredElement } from "../../dom";
+
 function getRequest(dataset: DOMStringMap): {
   url: string;
   options: RequestInit;
@@ -8,9 +10,8 @@ function getRequest(dataset: DOMStringMap): {
         ["Content-Type", "application/json"],
         [
           "X-CSRFToken",
-          document.querySelector<HTMLInputElement>(
-            '[name="csrfmiddlewaretoken"]',
-          )!.value,
+          requiredElement('[name="csrfmiddlewaretoken"]', HTMLInputElement)
+            .value,
         ],
       ],
       method: dataset["isSubscribed"] === "y" ? "DELETE" : "POST",
@@ -43,7 +44,7 @@ async function handler(e: Event): Promise<void> {
 
   if (subscribersCount) {
     const unformattedNumber = Number.parseInt(
-      subscribersCount.dataset["unformattedNumber"]!,
+      requiredData(subscribersCount, "unformattedNumber"),
     );
     subscribersCount.dataset["unformattedNumber"] = (
       unformattedNumber + (isSubscribe ? 1 : -1)
@@ -53,9 +54,8 @@ async function handler(e: Event): Promise<void> {
   btn.classList.toggle("btn-primary");
   btn.classList.toggle("btn-outline-primary");
   btn.dataset["isSubscribed"] = isSubscribe ? "y" : "n";
-  // eslint-disable-next-line unicorn/no-unreadable-array-destructuring
   [btn.textContent, btn.dataset["textToggle"]] = [
-    btn.dataset["textToggle"]!,
+    requiredData(btn, "textToggle"),
     btn.textContent,
   ];
 

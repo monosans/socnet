@@ -64,7 +64,7 @@ unfixable = ["RUF027", "T"]
 
 [lint.per-file-ignores]
 "config/settings/*" = ["F403", "F405"]
-"socnet/*/migrations/*" = ["RUF012", "RUF039", "SLF001"]
+"socnet/*/migrations/*" = ["RUF012", "RUF039"]
 "tests/*" = ["FBT001", "PLR2004", "S101"]
 
 [lint.flake8-gettext]
@@ -76,6 +76,9 @@ extend-function-names = [
   "ngettext_lazy",
   "npgettext_lazy",
 ]
+
+[lint.flake8-pytest-style]
+warns-require-match-for = ["*"]
 
 [lint.flake8-self]
 ignore-names = ["_meta", "_name_", "_value_"]

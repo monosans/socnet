@@ -1,0 +1,24 @@
+{% comment %}
+  The sender of a message, and when it was sent. The <template> of each
+  participant in chat.html renders it without pk and epoch, which chat.ts fills
+  in for a new message.
+{% endcomment %}
+<div id="msg{{ pk }}" class="d-flex mb-1">
+  <a
+    class="avatar-thumbnail d-flex align-items-center me-2"
+    href="{{ sender.get_absolute_url }}"
+  >
+    {% if sender.image %}
+      <img class="rounded" loading="lazy" src="{{ sender.image.url }}" />
+    {% else %}
+      <i class="fa-solid fa-user text-secondary"></i>
+    {% endif %}
+  </a>
+  <div>
+    <a
+      class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
+      href="{{ sender.get_absolute_url }}"
+    >{{ sender.display_name }} <span class="text-secondary">@{{ sender.username }}</span></a>
+    <div class="text-secondary" data-epoch="{{ epoch }}"></div>
+  </div>
+</div>

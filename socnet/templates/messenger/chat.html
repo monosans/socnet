@@ -19,25 +19,7 @@
     <script src="{% static 'js/viewer_markdown.js' %}" type="module"></script>
   {% endif %}
   <script id="data" type="application/json">
-    {
-      "interlocutorPk": {{ interlocutor.pk }},
-      "users": {
-        {% if request.user != interlocutor %}
-        "{{ interlocutor.username|lower }}": {
-          "href": "{{ interlocutor.get_absolute_url }}",
-          {% if interlocutor.image %}"image": "{{ interlocutor.image.url }}",{% endif %}
-          "displayName": "{{ interlocutor.display_name }}",
-          "isCurrentUser": false
-        },
-        {% endif %}
-        "{{ request.user.username|lower }}": {
-          "href": "{{ request.user.get_absolute_url }}",
-          {% if request.user.image %}"image": "{{ request.user.image.url }}",{% endif %}
-          "displayName": "{{ request.user.display_name }}",
-          "isCurrentUser": true
-        }
-      }
-    }
+    {"interlocutorPk": {{ interlocutor.pk }}}
   </script>
 {% endblock js %}
 {% block list_group %}
@@ -62,34 +44,17 @@
     </div>
   </a>
   <div class="list-group-item p-0">
+    {% if request.user != interlocutor %}
+      <template id="sender-{{ interlocutor.username|lower }}">
+        {% include "messenger/inc/message_header.html" with sender=interlocutor %}
+      </template>
+    {% endif %}
+    <template id="sender-{{ request.user.username|lower }}" data-current-user>
+      {% include "messenger/inc/message_header.html" with sender=request.user %}
+    </template>
     <div id="chat-log" class="p-3 overflow-x-hidden overflow-y-scroll">
       {% for message in messages_ %}
-        <div id="msg{{ message.pk }}" class="d-flex mb-1">
-          <a
-            class="avatar-thumbnail d-flex align-items-center me-2"
-            href="{{ message.sender.get_absolute_url }}"
-          >
-            {% if message.sender.image %}
-              <img
-                class="rounded"
-                loading="lazy"
-                src="{{ message.sender.image.url }}"
-              />
-            {% else %}
-              <i class="fa-solid fa-user text-secondary"></i>
-            {% endif %}
-          </a>
-          <div>
-            <a
-              class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
-              href="{{ message.sender.get_absolute_url }}"
-            >{{ message.sender.display_name }} <span class="text-secondary">@{{ message.sender.username }}</span></a>
-            <div
-              class="text-secondary"
-              data-epoch="{{ message.date_created_epoch }}"
-            ></div>
-          </div>
-        </div>
+        {% include "messenger/inc/message_header.html" with sender=message.sender pk=message.pk epoch=message.date_created_epoch %}
         <div class="markdown-container text-break">
           {{ message.content|markdownify }}
         </div>

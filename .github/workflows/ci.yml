@@ -14,8 +14,8 @@ jobs:
     if: ${{ always() && github.event_name == 'pull_request' }}
     needs:
       - clippy
-      - eslint
       - mypy
+      - oxlint
       - pre-commit
       - pytest
       - rustfmt
@@ -42,19 +42,6 @@ jobs:
         working-directory: ./socnet_rs
       - run: cargo +beta test --locked
         working-directory: ./socnet_rs
-  eslint:
-    runs-on: ubuntu-26.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
-        with:
-          node-version-file: .nvmrc
-          check-latest: true
-          package-manager-cache: false
-      - run: npm ci
-      - run: npx eslint --max-warnings 0 .
   mypy:
     runs-on: ubuntu-26.04
     steps:
@@ -67,6 +54,19 @@ jobs:
           python-version: "3.14"
           enable-cache: false
       - run: uv run --group typecheck --no-group dev --locked mypy .
+  oxlint:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version-file: .nvmrc
+          check-latest: true
+          package-manager-cache: false
+      - run: npm ci
+      - run: npx oxlint
   pre-commit:
     runs-on: ubuntu-26.04
     steps:

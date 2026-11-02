@@ -63,8 +63,12 @@
       "groupName": "ruff"
     },
     {
-      "matchPackageNames": ["prettier", "rbubley/mirrors-prettier"],
-      "groupName": "prettier"
+      "matchPackageNames": ["oxlint", "oxlint-tsgolint"],
+      "groupName": "oxlint"
+    },
+    {
+      "matchPackageNames": ["oxfmt", "oxc-project/mirrors-oxfmt"],
+      "groupName": "oxfmt"
     },
     { "matchPackageNames": ["djlint", "djlint/djLint"], "groupName": "djlint" },
     {
@@ -104,10 +108,19 @@
     },
     { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
     {
-      "matchCategories": ["js"],
-      "matchPackageNames": ["@types/node"],
+      "description": "A new Node is reviewed by hand, in one pull request with its image and types. Node versioning holds each back until the major version reaches LTS",
+      "matchPackageNames": ["node", "docker.io/node", "@types/node"],
       "matchUpdateTypes": ["major"],
-      "enabled": false
+      "groupName": "node",
+      "automerge": false,
+      "prBodyNotes": [
+        "Replace `@tsconfig/node<major>` with the one of the new Node by hand: Renovate updates a version, not a package name."
+      ]
+    },
+    {
+      "description": "A cooldown would count from the last rebuild of the image tag, which keeps the image out of the Node pull request",
+      "matchPackageNames": ["docker.io/node"],
+      "minimumReleaseAge": null
     },
     {
       "description": "Cargo has no cooldown for the transitive dependencies it resolves, so one on the direct dependencies would only delay updates",

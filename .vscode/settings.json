@@ -1,0 +1,15 @@
+{
+  "[django-html]": { "editor.defaultFormatter": "monosans.djlint" },
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" },
+  "[rust]": { "editor.defaultFormatter": "rust-lang.rust-analyzer" },
+  "[toml]": { "editor.defaultFormatter": "tombi-toml.tombi" },
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "js/ts.experimental.useTsgo": true,
+  "js/ts.tsdk.path": "./node_modules/typescript",
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "python.testing.pytestEnabled": true,
+  "ruff.importStrategy": "fromEnvironment",
+  "rust-analyzer.cargo.extraEnv": { "RUSTUP_TOOLCHAIN": "beta" },
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.rustfmt.extraArgs": ["+nightly"]
+}

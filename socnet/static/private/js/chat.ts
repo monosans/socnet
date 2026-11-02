@@ -1,12 +1,7 @@
+import { requiredElement } from "../../dom";
+
 function randomNumber(min: number, max: number): number {
   return Math.random() * (max - min) + min;
-}
-
-interface User {
-  readonly href: string;
-  readonly image?: string;
-  readonly displayName: string;
-  readonly isCurrentUser: boolean;
 }
 
 interface ChatMessageEvent {
@@ -16,20 +11,24 @@ interface ChatMessageEvent {
   readonly sender: string;
 }
 
-const chatData = JSON.parse(document.querySelector("#data")!.textContent) as {
-  readonly interlocutorPk: number;
-  readonly users: Record<string, User>;
-};
+const chatData = JSON.parse(
+  requiredElement("#data", HTMLElement).textContent,
+) as { readonly interlocutorPk: number };
 
-function getSender(data: ChatMessageEvent): User {
-  return chatData.users[data.sender.toLowerCase()];
+/*
+ * The header of a message from `sender`, which the template renders for each
+ * participant, so that the data of a user never becomes markup here.
+ */
+function senderTemplate(sender: string): HTMLTemplateElement {
+  return requiredElement(
+    `#sender-${CSS.escape(sender.toLowerCase())}`,
+    HTMLTemplateElement,
+  );
 }
 
-const messageSendBtn =
-  document.querySelector<HTMLButtonElement>("#messageSendBtn")!;
+const messageSendBtn = requiredElement("#messageSendBtn", HTMLButtonElement);
 
-const messageTextarea =
-  document.querySelector<HTMLTextAreaElement>("#id_content")!;
+const messageTextarea = requiredElement("#id_content", HTMLTextAreaElement);
 
 messageTextarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -39,38 +38,24 @@ messageTextarea.addEventListener("keyup", (e) => {
 messageTextarea.focus();
 
 const chatLog = {
-  element: document.querySelector("#chat-log")!,
-
-  // eslint-disable-next-line sort-keys
   addNewMessage(data: ChatMessageEvent): void {
-    const id = `msg${data.pk}`;
-    const sender = getSender(data);
-    const html = `
-      <div id="${id}" class="d-flex mb-1">
-        <a href="${sender.href}"
-            class="avatar-thumbnail d-flex align-items-center me-2">
-          ${
-            sender.image
-              ? `<img src="${sender.image}" loading="lazy" class="rounded" />`
-              : '<i class="fa-solid fa-user text-secondary"></i>'
-          }
-        </a>
-        <div>
-          <a href="${sender.href}"
-              class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break">${
-                sender.displayName
-              } <span class="text-secondary">@${data.sender}</span></a>
-          <div class="text-secondary" data-epoch="${data.createdEpoch}">
-          </div>
-        </div>
-      </div>
-      <div class="markdown-container text-break">
-        ${data.content}
-      </div>
-    `;
-    // eslint-disable-next-line unicorn/no-unsafe-dom-html
-    chatLog.element.insertAdjacentHTML("beforeend", html);
+    const header = document.importNode(
+      senderTemplate(data.sender).content,
+      true,
+    );
+    requiredElement("div", HTMLElement, header).id = `msg${data.pk}`;
+    requiredElement("[data-epoch]", HTMLElement, header).dataset["epoch"] =
+      data.createdEpoch.toString();
+
+    // Markdown that the server rendered and sanitized.
+    const content = document.createElement("div");
+    content.className = "markdown-container text-break";
+    content.innerHTML = data.content;
+
+    chatLog.element.append(header, content);
   },
+
+  element: requiredElement("#chat-log", HTMLElement),
 
   scrollToEnd(): void {
     chatLog.element.scrollTop = chatLog.element.scrollHeight;
@@ -87,7 +72,7 @@ const chatWs = ((): WebSocket => {
     const data = JSON.parse(e.data) as ChatMessageEvent;
 
     chatLog.addNewMessage(data);
-    if (getSender(data).isCurrentUser) {
+    if (Object.hasOwn(senderTemplate(data.sender).dataset, "currentUser")) {
       chatLog.scrollToEnd();
     }
   });
@@ -102,7 +87,7 @@ const chatWs = ((): WebSocket => {
   return ws;
 })();
 
-const messageSendForm = document.querySelector("#messageSendForm")!;
+const messageSendForm = requiredElement("#messageSendForm", HTMLFormElement);
 
 messageSendForm.addEventListener("submit", (e) => {
   e.preventDefault();
