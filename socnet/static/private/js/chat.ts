@@ -4,13 +4,6 @@ function randomNumber(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
 
-interface User {
-  readonly href: string;
-  readonly image?: string;
-  readonly displayName: string;
-  readonly isCurrentUser: boolean;
-}
-
 interface ChatMessageEvent {
   readonly pk: number;
   readonly content: string;
@@ -20,25 +13,17 @@ interface ChatMessageEvent {
 
 const chatData = JSON.parse(
   requiredElement("#data", HTMLElement).textContent,
-) as { readonly interlocutorPk: number; readonly users: Record<string, User> };
+) as { readonly interlocutorPk: number };
 
-function getSender(data: ChatMessageEvent): User {
-  const sender = chatData.users[data.sender.toLowerCase()];
-  if (!sender) {
-    throw new Error(`The chat has no participant ${data.sender}`);
-  }
-  return sender;
-}
-
-function createElement<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  className: string,
-  ...children: readonly (Node | string)[]
-): HTMLElementTagNameMap[K] {
-  const element = document.createElement(tag);
-  element.className = className;
-  element.append(...children);
-  return element;
+/*
+ * The header of a message from `sender`, which the template renders for each
+ * participant, so that the data of a user never becomes markup here.
+ */
+function senderTemplate(sender: string): HTMLTemplateElement {
+  return requiredElement(
+    `#sender-${CSS.escape(sender.toLowerCase())}`,
+    HTMLTemplateElement,
+  );
 }
 
 const messageSendBtn = requiredElement("#messageSendBtn", HTMLButtonElement);
@@ -54,40 +39,17 @@ messageTextarea.focus();
 
 const chatLog = {
   addNewMessage(data: ChatMessageEvent): void {
-    const sender = getSender(data);
-
-    const avatar = createElement(
-      "a",
-      "avatar-thumbnail d-flex align-items-center me-2",
+    const header = document.importNode(
+      senderTemplate(data.sender).content,
+      true,
     );
-    avatar.href = sender.href;
-    if (sender.image) {
-      const image = createElement("img", "rounded");
-      image.src = sender.image;
-      image.loading = "lazy";
-      avatar.append(image);
-    } else {
-      avatar.append(createElement("i", "fa-solid fa-user text-secondary"));
-    }
-
-    const name = createElement(
-      "a",
-      "link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break",
-    );
-    name.href = sender.href;
-    name.append(
-      `${sender.displayName} `,
-      createElement("span", "text-secondary", `@${data.sender}`),
-    );
-    const date = createElement("div", "text-secondary");
-    date.dataset["epoch"] = data.createdEpoch.toString();
-
-    const header = createElement("div", "d-flex mb-1");
-    header.id = `msg${data.pk}`;
-    header.append(avatar, createElement("div", "", name, date));
+    requiredElement("div", HTMLElement, header).id = `msg${data.pk}`;
+    requiredElement("[data-epoch]", HTMLElement, header).dataset["epoch"] =
+      data.createdEpoch.toString();
 
     // Markdown that the server rendered and sanitized.
-    const content = createElement("div", "markdown-container text-break");
+    const content = document.createElement("div");
+    content.className = "markdown-container text-break";
     content.innerHTML = data.content;
 
     chatLog.element.append(header, content);
@@ -110,7 +72,7 @@ const chatWs = ((): WebSocket => {
     const data = JSON.parse(e.data) as ChatMessageEvent;
 
     chatLog.addNewMessage(data);
-    if (getSender(data).isCurrentUser) {
+    if (Object.hasOwn(senderTemplate(data.sender).dataset, "currentUser")) {
       chatLog.scrollToEnd();
     }
   });
