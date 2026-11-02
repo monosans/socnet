@@ -1,6 +1,8 @@
 import Viewer from "viewerjs";
 
-new Viewer(document.querySelector("#avatar")!, {
+import { requiredElement } from "../../dom";
+
+new Viewer(requiredElement("#avatar", HTMLElement), {
   button: false,
   navbar: false,
 });

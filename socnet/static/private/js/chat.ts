@@ -1,3 +1,5 @@
+import { requiredElement } from "../../dom";
+
 function randomNumber(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
@@ -16,10 +18,9 @@ interface ChatMessageEvent {
   readonly sender: string;
 }
 
-const chatData = JSON.parse(document.querySelector("#data")!.textContent) as {
-  readonly interlocutorPk: number;
-  readonly users: Record<string, User>;
-};
+const chatData = JSON.parse(
+  requiredElement("#data", HTMLElement).textContent,
+) as { readonly interlocutorPk: number; readonly users: Record<string, User> };
 
 function getSender(data: ChatMessageEvent): User {
   const sender = chatData.users[data.sender.toLowerCase()];
@@ -29,11 +30,9 @@ function getSender(data: ChatMessageEvent): User {
   return sender;
 }
 
-const messageSendBtn =
-  document.querySelector<HTMLButtonElement>("#messageSendBtn")!;
+const messageSendBtn = requiredElement("#messageSendBtn", HTMLButtonElement);
 
-const messageTextarea =
-  document.querySelector<HTMLTextAreaElement>("#id_content")!;
+const messageTextarea = requiredElement("#id_content", HTMLTextAreaElement);
 
 messageTextarea.addEventListener("keyup", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -72,7 +71,7 @@ const chatLog = {
     chatLog.element.insertAdjacentHTML("beforeend", html);
   },
 
-  element: document.querySelector("#chat-log")!,
+  element: requiredElement("#chat-log", HTMLElement),
 
   scrollToEnd(): void {
     chatLog.element.scrollTop = chatLog.element.scrollHeight;
@@ -104,7 +103,7 @@ const chatWs = ((): WebSocket => {
   return ws;
 })();
 
-const messageSendForm = document.querySelector("#messageSendForm")!;
+const messageSendForm = requiredElement("#messageSendForm", HTMLFormElement);
 
 messageSendForm.addEventListener("submit", (e) => {
   e.preventDefault();

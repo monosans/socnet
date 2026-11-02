@@ -66,7 +66,6 @@
       "error",
       { "ignoreArrowShorthand": true }
     ],
-    "typescript/no-non-null-assertion": "off",
     "typescript/no-unsafe-type-assertion": "off",
     "typescript/parameter-properties": [
       "error",

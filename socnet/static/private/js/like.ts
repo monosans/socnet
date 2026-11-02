@@ -1,3 +1,5 @@
+import { requiredData, requiredElement } from "../../dom";
+
 function getRequest(dataset: DOMStringMap): {
   url: string;
   options: RequestInit;
@@ -19,9 +21,8 @@ function getRequest(dataset: DOMStringMap): {
         ["Content-Type", "application/json"],
         [
           "X-CSRFToken",
-          document.querySelector<HTMLInputElement>(
-            '[name="csrfmiddlewaretoken"]',
-          )!.value,
+          requiredElement('[name="csrfmiddlewaretoken"]', HTMLInputElement)
+            .value,
         ],
       ],
       method: dataset["isLiked"] === "y" ? "DELETE" : "POST",
@@ -47,9 +48,11 @@ async function handler(e: Event): Promise<void> {
     );
   }
 
-  const span = btn.querySelector("span")!;
+  const span = requiredElement("span", HTMLElement, btn);
 
-  const unformattedNumber = Number.parseInt(span.dataset["unformattedNumber"]!);
+  const unformattedNumber = Number.parseInt(
+    requiredData(span, "unformattedNumber"),
+  );
   if (btn.dataset["isLiked"] === "y") {
     btn.dataset["isLiked"] = "n";
     span.dataset["unformattedNumber"] = (unformattedNumber - 1).toString();
@@ -58,7 +61,7 @@ async function handler(e: Event): Promise<void> {
     span.dataset["unformattedNumber"] = (unformattedNumber + 1).toString();
   }
 
-  const iconClassList = btn.querySelector("i")!.classList;
+  const iconClassList = requiredElement("i", HTMLElement, btn).classList;
   iconClassList.toggle("text-danger");
   iconClassList.toggle("fa-regular");
   iconClassList.toggle("fa-solid");
