@@ -14,9 +14,7 @@ if TYPE_CHECKING:
 
 
 def _record() -> logging.LogRecord:
-    return logging.LogRecord(
-        "socnet", logging.ERROR, __file__, 1, "boom", None, None
-    )
+    return logging.LogRecord("socnet", logging.ERROR, __file__, 1, "boom", None, None)
 
 
 def test_admin_email_handler_mails_the_admins(settings: Settings) -> None:
