@@ -31,6 +31,17 @@ function getSender(data: ChatMessageEvent): User {
   return sender;
 }
 
+function createElement<K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  className: string,
+  ...children: readonly (Node | string)[]
+): HTMLElementTagNameMap[K] {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.append(...children);
+  return element;
+}
+
 const messageSendBtn = requiredElement("#messageSendBtn", HTMLButtonElement);
 
 const messageTextarea = requiredElement("#id_content", HTMLTextAreaElement);
@@ -44,32 +55,43 @@ messageTextarea.focus();
 
 const chatLog = {
   addNewMessage(data: ChatMessageEvent): void {
-    const id = `msg${data.pk}`;
     const sender = getSender(data);
-    const html = `
-      <div id="${id}" class="d-flex mb-1">
-        <a href="${sender.href}"
-            class="avatar-thumbnail d-flex align-items-center me-2">
-          ${
-            sender.image
-              ? `<img src="${sender.image}" loading="lazy" class="rounded" />`
-              : '<i class="fa-solid fa-user text-secondary"></i>'
-          }
-        </a>
-        <div>
-          <a href="${sender.href}"
-              class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break">${
-                sender.displayName
-              } <span class="text-secondary">@${data.sender}</span></a>
-          <div class="text-secondary" data-epoch="${data.createdEpoch}">
-          </div>
-        </div>
-      </div>
-      <div class="markdown-container text-break">
-        ${data.content}
-      </div>
-    `;
-    chatLog.element.insertAdjacentHTML("beforeend", html);
+
+    const avatar = createElement(
+      "a",
+      "avatar-thumbnail d-flex align-items-center me-2",
+    );
+    avatar.href = sender.href;
+    if (sender.image) {
+      const image = createElement("img", "rounded");
+      image.src = sender.image;
+      image.loading = "lazy";
+      avatar.append(image);
+    } else {
+      avatar.append(createElement("i", "fa-solid fa-user text-secondary"));
+    }
+
+    const name = createElement(
+      "a",
+      "link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break",
+    );
+    name.href = sender.href;
+    name.append(
+      `${sender.displayName} `,
+      createElement("span", "text-secondary", `@${data.sender}`),
+    );
+    const date = createElement("div", "text-secondary");
+    date.dataset["epoch"] = data.createdEpoch.toString();
+
+    const header = createElement("div", "d-flex mb-1");
+    header.id = `msg${data.pk}`;
+    header.append(avatar, createElement("div", "", name, date));
+
+    // Markdown that the server rendered and sanitized.
+    const content = createElement("div", "markdown-container text-break");
+    content.innerHTML = data.content;
+
+    chatLog.element.append(header, content);
   },
 
   element: requiredElement("#chat-log", HTMLElement),
