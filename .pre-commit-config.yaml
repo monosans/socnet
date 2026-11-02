@@ -43,6 +43,8 @@ repos:
           - text
         args:
           - --no-error-on-unmatched-pattern
+        additional_dependencies:
+          - oxfmt@0.75.0
   - repo: https://github.com/adamchainz/django-upgrade
     rev: 5ccd385680292c5e5b10bedf0a3e509b5e6e9da8 # frozen: 1.33.0
     hooks:
