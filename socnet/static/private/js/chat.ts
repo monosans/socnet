@@ -57,10 +57,7 @@ const chatLog = {
   addNewMessage(data: ChatMessageEvent): void {
     const sender = getSender(data);
 
-    const avatar = createElement(
-      "a",
-      "avatar-thumbnail d-flex align-items-center me-2",
-    );
+    const avatar = createElement("a", "avatar-thumbnail d-flex align-items-center me-2");
     avatar.href = sender.href;
     if (sender.image) {
       const image = createElement("img", "rounded");
