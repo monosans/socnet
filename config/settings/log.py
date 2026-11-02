@@ -10,7 +10,7 @@ LOG_CONFIG = {
         "mail_admins": {
             "level": "ERROR",
             "filters": ["require_admins"],
-            "class": "django.utils.log.AdminEmailHandler",
+            "class": "socnet.core.log.AdminEmailHandler",
             "reporter_class": "django.views.debug.ExceptionReporter",
         },
     },
