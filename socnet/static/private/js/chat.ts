@@ -22,7 +22,11 @@ const chatData = JSON.parse(document.querySelector("#data")!.textContent) as {
 };
 
 function getSender(data: ChatMessageEvent): User {
-  return chatData.users[data.sender.toLowerCase()];
+  const sender = chatData.users[data.sender.toLowerCase()];
+  if (!sender) {
+    throw new Error(`The chat has no participant ${data.sender}`);
+  }
+  return sender;
 }
 
 const messageSendBtn = document.querySelector<HTMLButtonElement>("#messageSendBtn")!;

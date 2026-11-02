@@ -3,7 +3,6 @@
   "include": ["socnet"],
   "exclude": ["socnet/static/public"],
   "compilerOptions": {
-    "noUncheckedIndexedAccess": false,
     "noEmit": true,
     "checkJs": true,
     "target": "es2023",
