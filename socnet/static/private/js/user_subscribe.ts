@@ -1,18 +1,11 @@
 import { requiredData, requiredElement } from "../../dom";
 
-function getRequest(dataset: DOMStringMap): {
-  url: string;
-  options: RequestInit;
-} {
+function getRequest(dataset: DOMStringMap): { url: string; options: RequestInit } {
   return {
     options: {
       headers: [
         ["Content-Type", "application/json"],
-        [
-          "X-CSRFToken",
-          requiredElement('[name="csrfmiddlewaretoken"]', HTMLInputElement)
-            .value,
-        ],
+        ["X-CSRFToken", requiredElement('[name="csrfmiddlewaretoken"]', HTMLInputElement).value],
       ],
       method: dataset["isSubscribed"] === "y" ? "DELETE" : "POST",
     },
@@ -21,9 +14,7 @@ function getRequest(dataset: DOMStringMap): {
 }
 
 async function handler(e: Event): Promise<void> {
-  const btn = (e.target as Element).closest<HTMLButtonElement>(
-    "[data-is-subscribed]",
-  );
+  const btn = (e.target as Element).closest<HTMLButtonElement>("[data-is-subscribed]");
   if (!btn) {
     return;
   }
@@ -32,20 +23,15 @@ async function handler(e: Event): Promise<void> {
   const request = getRequest(btn.dataset);
   const response = await fetch(request.url, request.options);
   if (!response.ok) {
-    throw new Error(
-      `Subscribe API returned status ${response.status} (${response.statusText})`,
-    );
+    throw new Error(`Subscribe API returned status ${response.status} (${response.statusText})`);
   }
 
   const isSubscribe = request.options.method !== "DELETE";
 
-  const subscribersCount =
-    document.querySelector<HTMLElement>("#subscribersCount");
+  const subscribersCount = document.querySelector<HTMLElement>("#subscribersCount");
 
   if (subscribersCount) {
-    const unformattedNumber = Number.parseInt(
-      requiredData(subscribersCount, "unformattedNumber"),
-    );
+    const unformattedNumber = Number.parseInt(requiredData(subscribersCount, "unformattedNumber"));
     subscribersCount.dataset["unformattedNumber"] = (
       unformattedNumber + (isSubscribe ? 1 : -1)
     ).toString();
@@ -54,10 +40,7 @@ async function handler(e: Event): Promise<void> {
   btn.classList.toggle("btn-primary");
   btn.classList.toggle("btn-outline-primary");
   btn.dataset["isSubscribed"] = isSubscribe ? "y" : "n";
-  [btn.textContent, btn.dataset["textToggle"]] = [
-    requiredData(btn, "textToggle"),
-    btn.textContent,
-  ];
+  [btn.textContent, btn.dataset["textToggle"]] = [requiredData(btn, "textToggle"), btn.textContent];
 
   btn.disabled = false;
 }

@@ -18,9 +18,7 @@
   {% if messages_ %}
     <script src="{% static 'js/viewer_markdown.js' %}" type="module"></script>
   {% endif %}
-  <script id="data" type="application/json">
-    {"interlocutorPk": {{ interlocutor.pk }}}
-  </script>
+  <script id="data" type="application/json">{"interlocutorPk": {{ interlocutor.pk }}}</script>
 {% endblock js %}
 {% block list_group %}
   <a
@@ -30,11 +28,7 @@
     <div class="d-flex align-items-center justify-content-center">
       {% if interlocutor.image %}
         <div class="avatar-thumbnail-no-height me-2">
-          <img
-            class="rounded"
-            loading="lazy"
-            src="{{ interlocutor.image.url }}"
-          />
+          <img class="rounded" loading="lazy" src="{{ interlocutor.image.url }}" />
         </div>
       {% endif %}
       <div class="text-body text-break">
@@ -55,9 +49,7 @@
     <div id="chat-log" class="p-3 overflow-x-hidden overflow-y-scroll">
       {% for message in messages_ %}
         {% include "messenger/inc/message_header.html" with sender=message.sender pk=message.pk epoch=message.date_created_epoch %}
-        <div class="markdown-container text-break">
-          {{ message.content|markdownify }}
-        </div>
+        <div class="markdown-container text-break">{{ message.content|markdownify }}</div>
       {% endfor %}
     </div>
   </div>

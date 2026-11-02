@@ -16,12 +16,8 @@ class Migration(migrations.Migration):
             name="username",
             field=models.CharField(
                 db_collation="case_insensitive",
-                error_messages={
-                    "unique": "A user with that username already exists."
-                },
-                help_text=(
-                    "Only English letters, numbers, underscores and hyphens."
-                ),
+                error_messages={"unique": "A user with that username already exists."},
+                help_text=("Only English letters, numbers, underscores and hyphens."),
                 max_length=32,
                 unique=True,
                 validators=[

@@ -7,8 +7,4 @@ from django.db import migrations
 class Migration(migrations.Migration):
     dependencies = [("messenger", "0006_alter_message_sender")]
 
-    operations = [
-        migrations.RenameField(
-            model_name="message", old_name="text", new_name="content"
-        )
-    ]
+    operations = [migrations.RenameField(model_name="message", old_name="text", new_name="content")]

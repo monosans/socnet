@@ -29,9 +29,7 @@
         method="post"
       >
         {% csrf_token %}
-        <button class="btn btn-primary w-100" type="submit">
-          {% translate "Confirm" %}
-        </button>
+        <button class="btn btn-primary w-100" type="submit">{% translate "Confirm" %}</button>
       </form>
     {% else %}
       {% blocktranslate trimmed %}

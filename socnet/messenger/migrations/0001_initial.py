@@ -17,10 +17,7 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
                     ),
                 )
             ],
@@ -32,22 +29,11 @@ class Migration(migrations.Migration):
                 (
                     "id",
                     models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
                     ),
                 ),
-                (
-                    "text",
-                    models.TextField(max_length=4096, verbose_name="text"),
-                ),
-                (
-                    "date",
-                    models.DateTimeField(
-                        auto_now_add=True, verbose_name="date/time"
-                    ),
-                ),
+                ("text", models.TextField(max_length=4096, verbose_name="text")),
+                ("date", models.DateTimeField(auto_now_add=True, verbose_name="date/time")),
                 (
                     "chat",
                     models.ForeignKey(
@@ -58,9 +44,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={
-                "verbose_name": "message",
-                "verbose_name_plural": "messages",
-            },
+            options={"verbose_name": "message", "verbose_name_plural": "messages"},
         ),
     ]

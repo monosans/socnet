@@ -15,8 +15,6 @@
   <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
-    <button class="btn btn-primary w-100" type="submit">
-      {% translate "Save" %}
-    </button>
+    <button class="btn btn-primary w-100" type="submit">{% translate "Save" %}</button>
   </form>
 {% endblock card %}

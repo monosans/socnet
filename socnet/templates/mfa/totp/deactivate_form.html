@@ -7,8 +7,6 @@
   <form class="mt-3" action="{% url 'mfa_deactivate_totp' %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form layout="floating" %}
-    <button class="btn btn-danger w-100" type="submit">
-      {% translate "Disable" %}
-    </button>
+    <button class="btn btn-danger w-100" type="submit">{% translate "Disable" %}</button>
   </form>
 {% endblock card %}

@@ -12,9 +12,7 @@ if TYPE_CHECKING:
     from typing import Any
 
 
-def forbid_self_subscription(
-    instance: User, action: str, pk_set: set[int], **_kwargs: Any
-) -> None:
+def forbid_self_subscription(instance: User, action: str, pk_set: set[int], **_kwargs: Any) -> None:
     if action == "pre_add" and instance.pk in pk_set:
         msg = _("You can't subscribe to yourself.")
         raise exceptions.SelfSubscriptionError(msg)

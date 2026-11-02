@@ -43,9 +43,7 @@ class AccountSecurityView(LoginRequiredMixin, TemplateView):
 @login_required
 def edit_profile_view(request: AuthedRequest) -> HttpResponse:
     if request.method == "POST":
-        form = forms.EditProfileForm(
-            request.POST, request.FILES, instance=request.user
-        )
+        form = forms.EditProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect(request.user)
@@ -75,9 +73,7 @@ def search_users_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.UserSearchForm()
     context: dict[str, Any] = {
-        "users": paginate(request, users, per_page=10)
-        if users is not None
-        else None
+        "users": paginate(request, users, per_page=10) if users is not None else None
     }
     if request.htmx:
         template_name = "users/inc/search_users.html"

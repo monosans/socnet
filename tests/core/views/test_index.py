@@ -14,9 +14,7 @@ url = reverse_lazy("core:index")
 
 def test_unauthed(client: Client) -> None:
     response = client.get("", follow=True)
-    assert response.redirect_chain == [
-        ("{}?next={}".format(reverse("account_login"), url), 302)
-    ]
+    assert response.redirect_chain == [("{}?next={}".format(reverse("account_login"), url), 302)]
     assert response.status_code == 200
 
 

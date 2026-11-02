@@ -3,10 +3,7 @@ use pyo3::{prelude::*, pybacked::PyBackedStr, types::PyString};
 
 #[pyfunction]
 #[pyo3(signature = (value, /))]
-pub fn normalize_str(
-    py: Python<'_>,
-    value: PyBackedStr,
-) -> Bound<'_, PyString> {
+pub fn normalize_str(py: Python<'_>, value: PyBackedStr) -> Bound<'_, PyString> {
     py.detach(|| {
         let normalized = normalize(&value);
         (normalized != *value).then_some(normalized)
@@ -71,10 +68,7 @@ mod tests {
             ("a\u{a0}b", "a b"),
             ("a\u{3000}b", "a b"),
             ("caf\u{e9}  na\u{ef}ve", "caf\u{e9} na\u{ef}ve"),
-            (
-                "\n\n \tstring\t  \n\n\n   string  \tstring  \n  \t ",
-                "string\nstring string",
-            ),
+            ("\n\n \tstring\t  \n\n\n   string  \tstring  \n  \t ", "string\nstring string"),
         ] {
             assert_eq!(normalize(s), expected, "{s:?}");
         }

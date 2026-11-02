@@ -30,9 +30,7 @@ def test_unauthed(client: Client, method: ClientMethods) -> None:
         if method == ClientMethods.GET
         else client.post(url, follow=True)
     )
-    assert response.redirect_chain == [
-        ("{}?next={}".format(reverse("account_login"), url), 302)
-    ]
+    assert response.redirect_chain == [("{}?next={}".format(reverse("account_login"), url), 302)]
     assert response.status_code == 200
 
 
@@ -48,11 +46,7 @@ def test_non_author(client: Client, method: ClientMethods, data: Any) -> None:
     auth_client(client)
     post = factory.create()
     url = get_url(post)
-    response = (
-        client.get(url)
-        if method == ClientMethods.GET
-        else client.post(url, data=data)
-    )
+    response = client.get(url) if method == ClientMethods.GET else client.post(url, data=data)
     assert response.status_code == 403
     new_post = models.Post.objects.only("date_updated").get(pk=post.pk)
     assert post.date_updated == new_post.date_updated
@@ -74,9 +68,7 @@ def test_author_post(client: Client) -> None:
     url = get_url(post)
     new_content = factory.build().content
     response = client.post(url, data={"content": new_content}, follow=True)
-    assert response.redirect_chain == [
-        (reverse("blog:post", args=(post.pk,)), 302)
-    ]
+    assert response.redirect_chain == [(reverse("blog:post", args=(post.pk,)), 302)]
     assert response.status_code == 200
     updated_post = models.Post.objects.get(pk=post.pk)
     assert updated_post.author_id == post.author_id

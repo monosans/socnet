@@ -9,10 +9,7 @@ from socnet_rs import markdownify
     ("given", "expected"),
     [
         ("# Header", "<h1>Header</h1>\n"),
-        (
-            '<p>Paragraph</p><script>alert("Dangerous code")</script>',
-            "<p>Paragraph</p>",
-        ),
+        ('<p>Paragraph</p><script>alert("Dangerous code")</script>', "<p>Paragraph</p>"),
     ],
 )
 def test_markdownify(given: str, expected: str) -> None:
@@ -20,8 +17,6 @@ def test_markdownify(given: str, expected: str) -> None:
 
 
 def test_type_error() -> None:
-    exc_str = (
-        "'int' object is not an instance of 'str'\nwhile processing 'value'"
-    )
+    exc_str = "'int' object is not an instance of 'str'\nwhile processing 'value'"
     with pytest.raises(TypeError, match=exc_str):
         markdownify(0)  # type: ignore[arg-type]

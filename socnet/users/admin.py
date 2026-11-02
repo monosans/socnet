@@ -19,13 +19,7 @@ admin.site.login = (  # type: ignore[method-assign]
 @admin.register(User)
 class UserAdmin(BaseUserAdmin[User]):
     add_fieldsets = deepcopy(BaseUserAdmin.add_fieldsets)
-    add_fieldsets[0][1]["fields"] = (
-        "display_name",
-        "email",
-        "username",
-        "password1",
-        "password2",
-    )
+    add_fieldsets[0][1]["fields"] = ("display_name", "email", "username", "password1", "password2")
     add_form = forms.UserAdminCreationForm
     fieldsets = (
         (

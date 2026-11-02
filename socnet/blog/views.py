@@ -45,9 +45,7 @@ class _BasePostUpdateView[
     def form_valid(self, form: TModelForm) -> HttpResponse:
         self.object = form.save(commit=False)  # type: ignore[assignment]
         update_fields = (
-            (*form.Meta.fields, "date_updated")
-            if form.content_has_changed
-            else form.Meta.fields
+            (*form.Meta.fields, "date_updated") if form.content_has_changed else form.Meta.fields
         )
         self.object.save(update_fields=update_fields)
         form.save_m2m()
@@ -61,11 +59,7 @@ class PostUpdateView(_BasePostUpdateView[models.Post, forms.PostForm]):
 
     @override
     def get_queryset(self) -> QuerySet[models.Post]:
-        return (
-            super()
-            .get_queryset()
-            .only("author_id", *self.form_class.Meta.fields)
-        )
+        return super().get_queryset().only("author_id", *self.form_class.Meta.fields)
 
 
 class CommentUpdateView(_BasePostUpdateView[models.Comment, forms.CommentForm]):
@@ -75,16 +69,10 @@ class CommentUpdateView(_BasePostUpdateView[models.Comment, forms.CommentForm]):
 
     @override
     def get_queryset(self) -> QuerySet[models.Comment]:
-        return (
-            super()
-            .get_queryset()
-            .only("author_id", "post_id", *self.form_class.Meta.fields)
-        )
+        return super().get_queryset().only("author_id", "post_id", *self.form_class.Meta.fields)
 
 
-class PostCreateView(
-    LoginRequiredMixin, CreateView[models.Post, forms.PostForm]
-):
+class PostCreateView(LoginRequiredMixin, CreateView[models.Post, forms.PostForm]):
     form_class = forms.PostForm
     template_name = "blog/post_create.html"
 
@@ -126,17 +114,11 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             form.save()
             return redirect(request.path)
         messages.error(
-            request,
-            _(
-                "An error occurred while creating the comment. Please try"
-                " again."
-            ),
+            request, _("An error occurred while creating the comment. Please try again.")
         )
     else:
         form = forms.CommentForm()
-    qs = db_utils.get_posts_preview_qs(request, ("allow_commenting",)).filter(
-        pk=pk
-    )
+    qs = db_utils.get_posts_preview_qs(request, ("allow_commenting",)).filter(pk=pk)
     if "#comment" in request.path:
         comments_qs = (
             annotate_epoch_dates(
@@ -152,9 +134,7 @@ def post_view(request: HttpRequest, pk: int) -> HttpResponse:
             .order_by("pk")
         )
         if request.user.is_authenticated:
-            comments_qs = comments_qs.annotate(
-                is_liked=Q(pk__in=request.user.liked_comments.all())
-            )
+            comments_qs = comments_qs.annotate(is_liked=Q(pk__in=request.user.liked_comments.all()))
         qs = qs.prefetch_related(Prefetch("comments", comments_qs))
         post = get_object_or_404(qs)
         comments = post.comments.all()
@@ -170,13 +150,7 @@ def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
     comments_qs = (
         annotate_epoch_dates(
             models.Comment.objects
-            .only(
-                "content",
-                "post_id",
-                "author__display_name",
-                "author__image",
-                "author__username",
-            )
+            .only("content", "post_id", "author__display_name", "author__image", "author__username")
             .select_related("author")
             .filter(post_id=pk)
         )
@@ -184,13 +158,9 @@ def comments_view(request: HttpRequest, pk: int) -> HttpResponse:
         .order_by("pk")
     )
     if request.user.is_authenticated:
-        comments_qs = comments_qs.annotate(
-            is_liked=Q(pk__in=request.user.liked_comments.all())
-        )
+        comments_qs = comments_qs.annotate(is_liked=Q(pk__in=request.user.liked_comments.all()))
     return render(
-        request,
-        "blog/inc/comments.html",
-        {"comments": paginate(request, comments_qs, per_page=10)},
+        request, "blog/inc/comments.html", {"comments": paginate(request, comments_qs, per_page=10)}
     )
 
 
@@ -212,12 +182,8 @@ def posts_view(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.PostSearchForm()
         if request.user.is_authenticated:
-            posts = qs.filter(
-                author__in=request.user.subscriptions.all()
-            ).order_by("-pk")
-    context: dict[str, Any] = {
-        "posts": paginate(request, posts, per_page=10) if posts else None
-    }
+            posts = qs.filter(author__in=request.user.subscriptions.all()).order_by("-pk")
+    context: dict[str, Any] = {"posts": paginate(request, posts, per_page=10) if posts else None}
     if request.htmx:
         template = "blog/inc/posts_preview.html"
     else:
@@ -237,10 +203,7 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     user = get_object_or_404(qs.filter(username=username))
     posts = paginate(
         request,
-        db_utils
-        .get_posts_preview_qs(request)
-        .filter(likers=user)
-        .order_by("-pk"),
+        db_utils.get_posts_preview_qs(request).filter(likers=user).order_by("-pk"),
         per_page=10,
     )
     context = {"posts": posts, "user": user}
@@ -250,12 +213,8 @@ def liked_posts_view(request: HttpRequest, username: str) -> HttpResponse:
 @vary_on_htmx
 def user_posts_view(request: HttpRequest, username: str) -> HttpResponse:
     posts = (
-        annotate_epoch_dates(
-            models.Post.objects.only("allow_commenting", "author_id", "content")
-        )
-        .annotate(
-            Count("comments", distinct=True), Count("likers", distinct=True)
-        )
+        annotate_epoch_dates(models.Post.objects.only("allow_commenting", "author_id", "content"))
+        .annotate(Count("comments", distinct=True), Count("likers", distinct=True))
         .order_by("-pk")
     )
     prefetch = Prefetch(
@@ -298,14 +257,7 @@ def subscriptions_view(request: HttpRequest, username: str) -> HttpResponse:
 def user_view(request: HttpRequest, username: str) -> HttpResponse:
     qs = (
         User.objects
-        .only(
-            "about",
-            "birth_date",
-            "display_name",
-            "image",
-            "location",
-            "username",
-        )
+        .only("about", "birth_date", "display_name", "image", "location", "username")
         .annotate(
             Count("liked_posts", distinct=True),
             Count("posts", distinct=True),
@@ -313,8 +265,7 @@ def user_view(request: HttpRequest, username: str) -> HttpResponse:
             Count("subscriptions", distinct=True),
             date_joined_epoch=Extract("date_joined", "epoch"),
             last_login_epoch=Case(
-                When(show_last_login=True, then=Extract("last_login", "epoch")),
-                default=None,
+                When(show_last_login=True, then=Extract("last_login", "epoch")), default=None
             ),
         )
         .filter(username=username)

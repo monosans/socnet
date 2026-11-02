@@ -19,9 +19,7 @@ class MarkdownContentModel(models.Model):
 
 
 class DateCreatedModel(models.Model):
-    date_created = models.DateTimeField(
-        verbose_name=_("date created"), auto_now_add=True
-    )
+    date_created = models.DateTimeField(verbose_name=_("date created"), auto_now_add=True)
 
     class Meta(TypedModelMeta):
         abstract = True

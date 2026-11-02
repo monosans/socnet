@@ -9,6 +9,4 @@ from socnet_rs import markdownify
 register = template.Library()
 
 
-register.filter(
-    "markdownify", decorators.process_returned_value(mark_safe)(markdownify)
-)
+register.filter("markdownify", decorators.process_returned_value(mark_safe)(markdownify))

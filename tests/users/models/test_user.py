@@ -40,9 +40,7 @@ def test_username_forbidden_patterns(username: str, exc_str: str) -> None:
         user.full_clean()
 
 
-@pytest.mark.parametrize(
-    "username", ["user", "user_1", "user-_", "a", "-", "_", "1"]
-)
+@pytest.mark.parametrize("username", ["user", "user_1", "user-_", "a", "-", "_", "1"])
 def test_username_allowed_patterns(username: str) -> None:
     user = factory.build(username=username)
     user.full_clean()
@@ -52,9 +50,7 @@ def test_username_allowed_patterns(username: str) -> None:
 def test_username_unique() -> None:
     factory.create(username="user")
     user2 = factory.build(username="user")
-    exc_str = re.escape(
-        "{'username': ['A user with that username already exists.']}"
-    )
+    exc_str = re.escape("{'username': ['A user with that username already exists.']}")
     with pytest.raises(ValidationError, match=exc_str):
         user2.full_clean()
     exc_str = re.escape(
@@ -81,9 +77,7 @@ def test_birth_date_unrealistically_old() -> None:
 def test_birth_date_in_future() -> None:
     tomorrow = timezone.now() + timedelta(days=1)
     user = factory.build(birth_date=tomorrow)
-    exc_str = re.escape(
-        "{'birth_date': ['Birth date cannot be in the future.']}"
-    )
+    exc_str = re.escape("{'birth_date': ['Birth date cannot be in the future.']}")
     with pytest.raises(ValidationError, match=exc_str):
         user.full_clean()
 

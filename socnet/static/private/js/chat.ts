@@ -11,19 +11,16 @@ interface ChatMessageEvent {
   readonly sender: string;
 }
 
-const chatData = JSON.parse(
-  requiredElement("#data", HTMLElement).textContent,
-) as { readonly interlocutorPk: number };
+const chatData = JSON.parse(requiredElement("#data", HTMLElement).textContent) as {
+  readonly interlocutorPk: number;
+};
 
 /*
  * The header of a message from `sender`, which the template renders for each
  * participant, so that the data of a user never becomes markup here.
  */
 function senderTemplate(sender: string): HTMLTemplateElement {
-  return requiredElement(
-    `#sender-${CSS.escape(sender.toLowerCase())}`,
-    HTMLTemplateElement,
-  );
+  return requiredElement(`#sender-${CSS.escape(sender.toLowerCase())}`, HTMLTemplateElement);
 }
 
 const messageSendBtn = requiredElement("#messageSendBtn", HTMLButtonElement);
@@ -39,10 +36,7 @@ messageTextarea.focus();
 
 const chatLog = {
   addNewMessage(data: ChatMessageEvent): void {
-    const header = document.importNode(
-      senderTemplate(data.sender).content,
-      true,
-    );
+    const header = document.importNode(senderTemplate(data.sender).content, true);
     requiredElement("div", HTMLElement, header).id = `msg${data.pk}`;
     requiredElement("[data-epoch]", HTMLElement, header).dataset["epoch"] =
       data.createdEpoch.toString();

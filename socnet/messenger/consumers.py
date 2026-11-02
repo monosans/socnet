@@ -49,12 +49,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         if user is None or user.is_anonymous:
             await self.close()
             return
-        self.interlocutor_pk = int(
-            self.scope["url_route"]["kwargs"]["interlocutor_pk"]
-        )
-        self.group = "chat{}_{}".format(
-            *sorted((user.pk, self.interlocutor_pk))
-        )
+        self.interlocutor_pk = int(self.scope["url_route"]["kwargs"]["interlocutor_pk"])
+        self.group = "chat{}_{}".format(*sorted((user.pk, self.interlocutor_pk)))
         await self.channel_layer.group_add(self.group, self.channel_name)
         await self.accept()
 
@@ -65,16 +61,12 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_discard(self.group, self.channel_name)
 
     @override
-    async def receive_json(
-        self, content: dict[str, str], **kwargs: Any
-    ) -> None:
+    async def receive_json(self, content: dict[str, str], **kwargs: Any) -> None:
         sender: User | None = self.scope["user"]
         if sender is None:
             return
         message = models.Message(
-            content=content["message"],
-            recipient_id=self.interlocutor_pk,
-            sender=sender,
+            content=content["message"], recipient_id=self.interlocutor_pk, sender=sender
         )
         try:
             await save_obj(message)

@@ -7,12 +7,7 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-    dependencies = [
-        (
-            "users",
-            "0002_remove_user_date_joined_remove_user_first_name_and_more",
-        )
-    ]
+    dependencies = [("users", "0002_remove_user_date_joined_remove_user_first_name_and_more")]
 
     operations = [
         migrations.AlterField(
@@ -20,9 +15,7 @@ class Migration(migrations.Migration):
             name="username",
             field=django.contrib.postgres.fields.citext.CICharField(
                 db_index=True,
-                error_messages={
-                    "unique": "A user with that username already exists."
-                },
+                error_messages={"unique": "A user with that username already exists."},
                 help_text=(
                     "No more than 32 characters. Only lowercase English"
                     " letters, numbers and _. Must begin with a letter and end"
@@ -31,9 +24,7 @@ class Migration(migrations.Migration):
                 max_length=32,
                 unique=False,
                 validators=[
-                    django.core.validators.RegexValidator(
-                        "^(?:[a-z]|[a-z][\\d_a-z]*[\\da-z])$"
-                    )
+                    django.core.validators.RegexValidator("^(?:[a-z]|[a-z][\\d_a-z]*[\\da-z])$")
                 ],
                 verbose_name="username",
             ),

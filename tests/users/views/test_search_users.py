@@ -15,12 +15,8 @@ url = reverse_lazy("users:search_users")
 
 
 @parametrize_by_auth
-@pytest.mark.parametrize(
-    ("q", "search_fields"), [(UserFactory.build().username, ["username"])]
-)
-def test_search_users(
-    client: Client, *, auth: bool, q: str, search_fields: list[str]
-) -> None:
+@pytest.mark.parametrize(("q", "search_fields"), [(UserFactory.build().username, ["username"])])
+def test_search_users(client: Client, *, auth: bool, q: str, search_fields: list[str]) -> None:
     if auth:
         auth_client(client)
     response = client.get(url, data={"q": q, "search_fields": search_fields})

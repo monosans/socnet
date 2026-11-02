@@ -23,11 +23,7 @@ def create_normalized_str_field[T: Field[Any, Any]](field: type[T]) -> type[T]:
     return type(
         f"Normalized{field.__name__}",
         (field,),
-        {
-            "clean": decorators.process_returned_value(normalize_str)(
-                field.clean
-            )
-        },
+        {"clean": decorators.process_returned_value(normalize_str)(field.clean)},
     )
 
 
@@ -74,8 +70,6 @@ class WebpImageField(ImageField):
     attr_class = WebpImageFieldFile
 
     @decorators.copy_type_hints(ImageField.__init__)
-    def __init__(
-        self, *args: Any, max_size: int | None = None, **kwargs: Any
-    ) -> None:
+    def __init__(self, *args: Any, max_size: int | None = None, **kwargs: Any) -> None:
         self.max_size = max_size
         super().__init__(*args, **kwargs)

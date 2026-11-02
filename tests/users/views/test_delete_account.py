@@ -21,9 +21,7 @@ def test_unauthed(client: Client, method: ClientMethods) -> None:
         if method == ClientMethods.GET
         else client.post(url, follow=True)
     )
-    assert response.redirect_chain == [
-        ("{}?next={}".format(reverse("account_login"), url), 302)
-    ]
+    assert response.redirect_chain == [("{}?next={}".format(reverse("account_login"), url), 302)]
     assert response.status_code == 200
 
 

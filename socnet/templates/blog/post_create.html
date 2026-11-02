@@ -15,8 +15,6 @@
   <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button class="btn btn-primary w-100" type="submit">
-      {% translate "Create" %}
-    </button>
+    <button class="btn btn-primary w-100" type="submit">{% translate "Create" %}</button>
   </form>
 {% endblock card %}

@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-    dependencies = [
-        ("messenger", "0012_remove_message_chat_message_recipient_delete_chat")
-    ]
+    dependencies = [("messenger", "0012_remove_message_chat_message_recipient_delete_chat")]
 
     operations = [
         migrations.AlterField(

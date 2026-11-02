@@ -7,9 +7,9 @@
 {% endblock title %}
 {% block list_group %}
   <div class="list-group-item">
-    <h3 class="mb-3 text-center">
-      {% blocktranslate context "noun" %}Log in{% endblocktranslate %}
-    </h3>
+    <h3
+      class="mb-3 text-center"
+    >{% blocktranslate context "noun" %}Log in{% endblocktranslate %}</h3>
     <form action="{% url 'account_login' %}" method="post">
       {% csrf_token %}
       {% bootstrap_form form layout="floating" %}

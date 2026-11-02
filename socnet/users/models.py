@@ -10,11 +10,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from socnet.core.fields import (
-    NormalizedCharField,
-    NormalizedTextField,
-    WebpImageField,
-)
+from socnet.core.fields import NormalizedCharField, NormalizedTextField, WebpImageField
 from socnet.users import validators
 
 
@@ -32,18 +28,12 @@ class User(AbstractUser):
         unique=True,
         help_text=_("Only English letters, numbers, underscores and hyphens."),
         validators=(validate_slug,),
-        error_messages={
-            "unique": _("A user with that username already exists.")
-        },
+        error_messages={"unique": _("A user with that username already exists.")},
         db_collation="case_insensitive",
     )
-    display_name = models.CharField(
-        verbose_name=_("display name"), max_length=64
-    )
+    display_name = models.CharField(verbose_name=_("display name"), max_length=64)
     email = models.EmailField(
-        verbose_name=_("email address"),
-        unique=True,
-        db_collation="case_insensitive",
+        verbose_name=_("email address"), unique=True, db_collation="case_insensitive"
     )
 
     show_last_login = models.BooleanField(
@@ -55,18 +45,11 @@ class User(AbstractUser):
         null=True,
         validators=(validators.validate_birth_date,),
     )
-    location = NormalizedCharField(
-        verbose_name=_("location"), max_length=128, blank=True
-    )
+    location = NormalizedCharField(verbose_name=_("location"), max_length=128, blank=True)
     image = WebpImageField(
-        verbose_name=_("image"),
-        upload_to=image_upload_to,
-        max_size=1024,
-        blank=True,
+        verbose_name=_("image"), upload_to=image_upload_to, max_size=1024, blank=True
     )
-    about = NormalizedTextField(
-        verbose_name=_("about me"), max_length=4096, blank=True
-    )
+    about = NormalizedTextField(verbose_name=_("about me"), max_length=4096, blank=True)
     subscriptions = models.ManyToManyField(
         to="self",
         related_name="subscribers",

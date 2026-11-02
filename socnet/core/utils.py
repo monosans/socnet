@@ -18,9 +18,5 @@ def dt_to_epoch(dt: dt.date) -> int:
     return int(time.mktime(dt.timetuple()))
 
 
-def paginate[T: Model](
-    request: HttpRequest, object_list: QuerySet[T], *, per_page: int
-) -> Page[T]:
-    return Paginator(object_list, per_page=per_page).get_page(
-        request.GET.get("page", 1)
-    )
+def paginate[T: Model](request: HttpRequest, object_list: QuerySet[T], *, per_page: int) -> Page[T]:
+    return Paginator(object_list, per_page=per_page).get_page(request.GET.get("page", 1))

@@ -1,29 +1,20 @@
 import { requiredData, requiredElement } from "../../dom";
 
-function getRequest(dataset: DOMStringMap): {
-  url: string;
-  options: RequestInit;
-} {
+function getRequest(dataset: DOMStringMap): { url: string; options: RequestInit } {
   let url;
   if (dataset["postPk"]) {
     url = `/api/posts/${dataset["postPk"]}/likes`;
   } else if (dataset["commentPk"]) {
     url = `/api/comments/${dataset["commentPk"]}/likes`;
   } else {
-    throw new Error(
-      "Like button must contain data-post-pk or data-comment-pk attribute",
-    );
+    throw new Error("Like button must contain data-post-pk or data-comment-pk attribute");
   }
 
   return {
     options: {
       headers: [
         ["Content-Type", "application/json"],
-        [
-          "X-CSRFToken",
-          requiredElement('[name="csrfmiddlewaretoken"]', HTMLInputElement)
-            .value,
-        ],
+        ["X-CSRFToken", requiredElement('[name="csrfmiddlewaretoken"]', HTMLInputElement).value],
       ],
       method: dataset["isLiked"] === "y" ? "DELETE" : "POST",
     },
@@ -32,9 +23,7 @@ function getRequest(dataset: DOMStringMap): {
 }
 
 async function handler(e: Event): Promise<void> {
-  const btn = (e.target as Element).closest<HTMLButtonElement>(
-    "[data-is-liked]",
-  );
+  const btn = (e.target as Element).closest<HTMLButtonElement>("[data-is-liked]");
   if (!btn) {
     return;
   }
@@ -43,16 +32,12 @@ async function handler(e: Event): Promise<void> {
   const request = getRequest(btn.dataset);
   const response = await fetch(request.url, request.options);
   if (!response.ok) {
-    throw new Error(
-      `Like API returned status ${response.status} (${response.statusText})`,
-    );
+    throw new Error(`Like API returned status ${response.status} (${response.statusText})`);
   }
 
   const span = requiredElement("span", HTMLElement, btn);
 
-  const unformattedNumber = Number.parseInt(
-    requiredData(span, "unformattedNumber"),
-  );
+  const unformattedNumber = Number.parseInt(requiredData(span, "unformattedNumber"));
   if (btn.dataset["isLiked"] === "y") {
     btn.dataset["isLiked"] = "n";
     span.dataset["unformattedNumber"] = (unformattedNumber - 1).toString();

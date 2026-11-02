@@ -7,8 +7,4 @@ from django.db import migrations
 class Migration(migrations.Migration):
     dependencies = [("messenger", "0014_message_messenger_m_id_b96158_idx")]
 
-    operations = [
-        migrations.RemoveIndex(
-            model_name="message", name="messenger_m_id_b96158_idx"
-        )
-    ]
+    operations = [migrations.RemoveIndex(model_name="message", name="messenger_m_id_b96158_idx")]
