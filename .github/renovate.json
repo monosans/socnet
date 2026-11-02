@@ -112,7 +112,10 @@
       "matchPackageNames": ["node", "docker.io/node", "@types/node"],
       "matchUpdateTypes": ["major"],
       "groupName": "node",
-      "automerge": false
+      "automerge": false,
+      "prBodyNotes": [
+        "Replace `@tsconfig/node<major>` with the one of the new Node by hand: Renovate updates a version, not a package name."
+      ]
     },
     {
       "description": "A cooldown would count from the last rebuild of the image tag, which keeps the image out of the Node pull request",
