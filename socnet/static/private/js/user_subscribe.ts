@@ -1,12 +1,11 @@
+import { requiredData, requiredElement } from "../../dom";
+
 function getRequest(dataset: DOMStringMap): { url: string; options: RequestInit } {
   return {
     options: {
       headers: [
         ["Content-Type", "application/json"],
-        [
-          "X-CSRFToken",
-          document.querySelector<HTMLInputElement>('[name="csrfmiddlewaretoken"]')!.value,
-        ],
+        ["X-CSRFToken", requiredElement('[name="csrfmiddlewaretoken"]', HTMLInputElement).value],
       ],
       method: dataset["isSubscribed"] === "y" ? "DELETE" : "POST",
     },
@@ -32,7 +31,7 @@ async function handler(e: Event): Promise<void> {
   const subscribersCount = document.querySelector<HTMLElement>("#subscribersCount");
 
   if (subscribersCount) {
-    const unformattedNumber = Number.parseInt(subscribersCount.dataset["unformattedNumber"]!);
+    const unformattedNumber = Number.parseInt(requiredData(subscribersCount, "unformattedNumber"));
     subscribersCount.dataset["unformattedNumber"] = (
       unformattedNumber + (isSubscribe ? 1 : -1)
     ).toString();
@@ -41,7 +40,7 @@ async function handler(e: Event): Promise<void> {
   btn.classList.toggle("btn-primary");
   btn.classList.toggle("btn-outline-primary");
   btn.dataset["isSubscribed"] = isSubscribe ? "y" : "n";
-  [btn.textContent, btn.dataset["textToggle"]] = [btn.dataset["textToggle"]!, btn.textContent];
+  [btn.textContent, btn.dataset["textToggle"]] = [requiredData(btn, "textToggle"), btn.textContent];
 
   btn.disabled = false;
 }

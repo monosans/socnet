@@ -1,5 +1,7 @@
-const themeSwitcher = document.querySelector("#themeSwitcher")!;
-const currentThemeIcon = document.querySelector("#currentThemeIcon")!;
+import { requiredData, requiredElement } from "../../dom";
+
+const themeSwitcher = requiredElement("#themeSwitcher", HTMLElement);
+const currentThemeIcon = requiredElement("#currentThemeIcon", HTMLElement);
 
 function getStoredOrDefaultTheme(): "dark" | "light" {
   const storedTheme = localStorage.getItem("theme");
@@ -13,13 +15,15 @@ function setTheme(): void {
   const theme = getStoredOrDefaultTheme();
   document.documentElement.dataset["bsTheme"] = theme;
 
-  const activeDropdown = themeSwitcher.querySelector(".dropdown-item.active")!;
-  const activeDropdownIcon = activeDropdown.querySelector("i")!;
+  const activeDropdown = requiredElement(".dropdown-item.active", HTMLElement, themeSwitcher);
+  const activeDropdownIcon = requiredElement("i", HTMLElement, activeDropdown);
 
-  const dropdownToActivate = themeSwitcher.querySelector(
+  const dropdownToActivate = requiredElement(
     `[data-bs-theme-value="${CSS.escape(theme)}"]`,
-  )!;
-  const dropdownToActivateIcon = dropdownToActivate.querySelector("i")!;
+    HTMLElement,
+    themeSwitcher,
+  );
+  const dropdownToActivateIcon = requiredElement("i", HTMLElement, dropdownToActivate);
 
   activeDropdown.classList.remove("active");
   dropdownToActivate.classList.add("active");
@@ -44,7 +48,7 @@ document.body.addEventListener("click", (e) => {
   if (!btn) {
     return;
   }
-  const theme = btn.dataset["bsThemeValue"]!;
+  const theme = requiredData(btn, "bsThemeValue");
   localStorage.setItem("theme", theme);
   setTheme();
 });
