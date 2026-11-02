@@ -2,7 +2,7 @@
   height: 67vh;
 }
 
-/* stylelint-disable-next-line selector-id-pattern */
+/* stylelint-disable-next-line selector-id-pattern -- Django generates the id of the form field */
 #id_content {
   max-height: 15vh;
 }
