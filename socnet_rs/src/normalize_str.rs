@@ -10,8 +10,8 @@ pub fn normalize_str(py: Python<'_>, value: PyBackedStr) -> Bound<'_, PyString> 
     })
     .map_or_else(
         // Already normalized: hand back the original object without copying.
-        || value.into_pyobject(py).unwrap_or_else(|e| match e {}),
-        |normalized| PyString::new(py, &normalized),
+        move || value.into_pyobject(py).unwrap_or_else(|e| match e {}),
+        move |normalized| PyString::new(py, &normalized),
     )
 }
 

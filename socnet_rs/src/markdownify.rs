@@ -52,14 +52,16 @@ const CMARK_OPTIONS: pulldown_cmark::Options =
 #[pyfunction]
 #[pyo3(signature = (value, /))]
 pub fn markdownify<'py>(py: Python<'py>, value: &str) -> PyResult<Bound<'py, PyString>> {
-    let out = py.detach(|| {
+    let out = py.detach(move || {
         let (html, growth) = to_html(value);
         // Sanitizing mostly keeps the HTML as is, apart from the attributes
         // it adds.
         let mut out = Vec::with_capacity(html.len().saturating_add(growth));
         // `Document::to_string` serializes into a buffer and then copies it
         // into a `String`; writing straight into a buffer skips that copy.
-        AMMONIA.clean(&html).write_to(&mut out).map(|()| out)
+        let document = AMMONIA.clean(&html);
+        drop(html);
+        document.write_to(&mut out).map(move |()| out)
     })?;
     PyString::from_bytes(py, &out)
 }
@@ -75,7 +77,7 @@ fn to_html(value: &str) -> (String, usize) {
     let mut growth = 0_usize;
     let parser = pulldown_cmark::Parser::new_ext(value, CMARK_OPTIONS).inspect(|event| {
         if let pulldown_cmark::Event::End(end) = event
-            && let Some(&(_, tag_growth)) = TAG_GROWTH.iter().find(|(tag, _)| tag == end)
+            && let Some(&(_, tag_growth)) = TAG_GROWTH.iter().find(move |(tag, _)| tag == end)
         {
             growth = growth.saturating_add(tag_growth);
         }
