@@ -5,5 +5,7 @@ addopts = [
   "--ds=config.settings.test",
   "--fail-on-template-vars"
 ]
+empty_parameter_set_mark = "fail_at_collect"
+filterwarnings = ["error"]
 strict = true
 usefixtures = ["db"]
