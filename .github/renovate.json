@@ -63,8 +63,12 @@
       "groupName": "ruff"
     },
     {
-      "matchPackageNames": ["prettier", "rbubley/mirrors-prettier"],
-      "groupName": "prettier"
+      "matchPackageNames": ["oxlint", "oxlint-tsgolint"],
+      "groupName": "oxlint"
+    },
+    {
+      "matchPackageNames": ["oxfmt", "oxc-project/mirrors-oxfmt"],
+      "groupName": "oxfmt"
     },
     { "matchPackageNames": ["djlint", "djlint/djLint"], "groupName": "djlint" },
     {
