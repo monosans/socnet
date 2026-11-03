@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from io import BytesIO
 from typing import TYPE_CHECKING
 
 import pytest
@@ -109,18 +110,31 @@ def test_upload_image_is_converted_to_webp(
 
 def test_upload_image_applies_exif_orientation(client: Client) -> None:
     user = auth_client(client)
+    # The left half is red and the right half blue. Orientation 6 means the stored image
+    # has to be rotated 90 degrees clockwise for display, which puts the red half on top.
+    stored = Image.new("RGB", (200, 100), "blue")
+    stored.paste("red", (0, 0, 100, 100))
     exif = Image.Exif()
-    exif[ExifTags.Base.Orientation] = 6  # Rotated 90 degrees clockwise.
+    exif[ExifTags.Base.Orientation] = 6
+    with BytesIO() as buffer:
+        stored.save(buffer, "JPEG", exif=exif)
+        content = buffer.getvalue()
     data = {
         "display_name": user.display_name,
         "username": user.username,
-        "image": image_file((200, 100), "JPEG", exif),
+        "image": SimpleUploadedFile("image.jpeg", content),
     }
     response = client.post(url, data=data)
     assert response.status_code == 302
     updated_user = User.objects.only("image").get(pk=user.pk)
     with updated_user.image.open("rb") as file, Image.open(file) as image:
         assert image.size == (100, 200)
+        rgb = image.convert("RGB")
+        top, bottom = rgb.getpixel((50, 50)), rgb.getpixel((50, 150))
+    assert isinstance(top, tuple)
+    assert isinstance(bottom, tuple)
+    assert top[0] > 200 > top[2]  # red
+    assert bottom[2] > 200 > bottom[0]  # blue
 
 
 def test_upload_invalid_image(client: Client) -> None:

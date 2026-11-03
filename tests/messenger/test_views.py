@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+from datetime import timedelta
 from typing import TYPE_CHECKING
 
 import pytest
 from django.urls import reverse, reverse_lazy
+from django.utils import timezone
 
+from socnet.messenger.models import Message
 from tests.messenger.factories import MessageFactory
 from tests.users.factories import UserFactory
 from tests.utils import auth_client, set_image
@@ -104,6 +107,20 @@ def test_chats_lists_interlocutors_by_last_message(client: Client) -> None:
     content = response.content.decode()
     assert get_chat_url(newer) in content
     assert get_chat_url(older) in content
+
+
+def test_chats_ordered_by_last_message_date(client: Client) -> None:
+    user = auth_client(client)
+    earlier_pk, later_pk = UserFactory.create_batch(2)
+    first = MessageFactory.create(sender=user, recipient=earlier_pk)
+    second = MessageFactory.create(sender=later_pk, recipient=user)
+    # Give the message created first the later date, so ordering by pk would differ.
+    now = timezone.now()
+    Message.objects.filter(pk=first.pk).update(date_created=now)
+    Message.objects.filter(pk=second.pk).update(date_created=now - timedelta(days=1))
+    response = client.get(chats_url)
+    assert response.status_code == 200
+    assert list(response.context["chats"]) == [earlier_pk, later_pk]
 
 
 def test_chats_truncates_last_message(client: Client) -> None:

@@ -4,6 +4,7 @@ import re
 from typing import TYPE_CHECKING
 
 from allauth.account.models import EmailAddress
+from allauth.account.utils import user_pk_to_url_str
 from django.core import mail
 from django.urls import reverse, reverse_lazy
 
@@ -165,10 +166,18 @@ def test_password_reset(client: Client) -> None:
 
 
 def test_password_reset_invalid_key(client: Client) -> None:
-    url = reverse("account_reset_password_from_key", kwargs={"uidb36": "0", "key": "invalid"})
+    user = create_verified_user()
+    url = reverse(
+        "account_reset_password_from_key",
+        kwargs={"uidb36": user_pk_to_url_str(user), "key": "invalid"},
+    )
     response = client.get(url)
     assert response.status_code == 200
     assert response.context["token_fail"]
+    response = client.post(url, data={"password1": "x" * 20, "password2": "x" * 20})
+    assert response.status_code == 200
+    user.refresh_from_db()
+    assert user.check_password(PASSWORD)
 
 
 def test_password_change(client: Client) -> None:
@@ -191,8 +200,13 @@ def test_password_set(client: Client) -> None:
     user.set_unusable_password()
     user.save()
     client.force_login(user)
-    response = client.get(reverse("account_set_password"))
+    url = reverse("account_set_password")
+    response = client.get(url)
     assert response.status_code == 200
+    response = client.post(url, data={"password1": PASSWORD, "password2": PASSWORD})
+    assert response.status_code == 302
+    user.refresh_from_db()
+    assert user.check_password(PASSWORD)
 
 
 def test_email_management(client: Client) -> None:

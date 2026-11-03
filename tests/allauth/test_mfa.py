@@ -1,14 +1,12 @@
 from __future__ import annotations
 
+import time
+from types import SimpleNamespace
 from typing import TYPE_CHECKING
 
+import pytest
 from allauth.mfa.models import Authenticator
-from allauth.mfa.totp.internal.auth import (
-    SECRET_SESSION_KEY,
-    format_hotp_value,
-    hotp_value,
-    yield_hotp_counters_from_time,
-)
+from allauth.mfa.totp.internal import auth as totp_auth
 from django.urls import reverse
 
 from tests.allauth.test_views import PASSWORD, create_verified_user
@@ -17,6 +15,14 @@ if TYPE_CHECKING:
     from django.test import Client
 
     from socnet.users.models import User
+
+
+@pytest.fixture(autouse=True)
+def _freeze_totp_clock(monkeypatch: pytest.MonkeyPatch) -> None:
+    # allauth accepts only the current TOTP period, so a code generated near the end of
+    # one would be rejected if the period changed before it is checked.
+    now = time.time()
+    monkeypatch.setattr(totp_auth, "time", SimpleNamespace(time=lambda: now))
 
 
 def reauthenticate(client: Client, next_url: str) -> None:
@@ -36,17 +42,22 @@ def activate_totp(client: Client) -> None:
     reauthenticate(client, url)
     response = client.get(url)
     assert response.status_code == 200
-    secret = client.session[SECRET_SESSION_KEY]
+    secret = client.session[totp_auth.SECRET_SESSION_KEY]
     assert secret in response.content.decode()
-    code = format_hotp_value(hotp_value(secret, next(yield_hotp_counters_from_time())))
+    [counter] = totp_auth.yield_hotp_counters_from_time()
+    code = totp_auth.format_hotp_value(totp_auth.hotp_value(secret, counter))
     response = client.post(url, data={"code": code})
     assert response.status_code == 302
 
 
-def get_recovery_code(user: User) -> str:
+def get_unused_recovery_codes(user: User) -> list[str]:
     authenticator = Authenticator.objects.get(user=user, type=Authenticator.Type.RECOVERY_CODES)
-    code: str = authenticator.wrap().get_unused_codes()[0]
-    return code
+    codes: list[str] = authenticator.wrap().get_unused_codes()
+    return codes
+
+
+def get_recovery_code(user: User) -> str:
+    return get_unused_recovery_codes(user)[0]
 
 
 def test_index_without_mfa(client: Client) -> None:
@@ -113,9 +124,13 @@ def test_login_with_mfa(client: Client) -> None:
     assert "_auth_user_id" not in client.session
     response = client.get(reverse("mfa_authenticate"))
     assert response.status_code == 200
-    response = client.post(reverse("mfa_authenticate"), data={"code": get_recovery_code(user)})
+    code = get_recovery_code(user)
+    response = client.post(reverse("mfa_authenticate"), data={"code": code})
     assert response.status_code == 302
     assert client.session["_auth_user_id"] == str(user.pk)
+    unused_codes = get_unused_recovery_codes(user)
+    assert code not in unused_codes
+    assert len(unused_codes) == 9
 
 
 def test_deactivate_totp(client: Client) -> None:

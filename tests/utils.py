@@ -36,13 +36,11 @@ parametrize_by_auth_self = pytest.mark.parametrize(
 )
 
 
-def image_file(
-    size: tuple[int, int], image_format: str = "PNG", exif: Image.Exif | None = None
-) -> SimpleUploadedFile:
+def image_file(size: tuple[int, int]) -> SimpleUploadedFile:
     with BytesIO() as buffer:
-        Image.new("RGB", size, "red").save(buffer, image_format, exif=exif or Image.Exif())
+        Image.new("RGB", size, "red").save(buffer, "PNG")
         content = buffer.getvalue()
-    return SimpleUploadedFile(f"image.{image_format.lower()}", content)
+    return SimpleUploadedFile("image.png", content)
 
 
 def set_image(user: User) -> str:

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import html
+import re
 from typing import TYPE_CHECKING
 
 import pytest
@@ -65,15 +67,17 @@ def test_search_invalid_form(client: Client) -> None:
 
 def test_search_htmx_pagination(client: Client) -> None:
     users = UserFactory.create_batch(11, location="Amsterdam")
-    data: dict[str, str | int | list[str]] = {"q": "Amsterdam", "search_fields": ["location"]}
-    response = client.get(url, data=data)
+    response = client.get(url, data={"q": "Amsterdam", "search_fields": ["location"]})
     assert response.status_code == 200
-    assert "hx-get=" in response.content.decode()
-    response = client.get(url, data={**data, "page": 2}, headers={"hx-request": "true"})
+    first_page = list(response.context["users"])
+    match = re.search(r'hx-get="([^"]+)"', response.content.decode())
+    assert match is not None
+    # Follow the rendered link, so the test fails if it drops the search parameters.
+    response = client.get(f"{url}{html.unescape(match.group(1))}", headers={"hx-request": "true"})
     assert response.status_code == 200
     assert response.templates[0].name == "users/inc/search_users.html"
     [last] = response.context["users"]
-    assert last in users
+    assert set(users) == {*first_page, last}
     assert "HX-Request" in response["Vary"]
 
 
