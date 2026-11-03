@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from django.urls import reverse
 
 from tests.users.factories import UserFactory
-from tests.utils import auth_client, parametrize_by_auth
+from tests.utils import auth_client, parametrize_by_auth, set_image
 
 if TYPE_CHECKING:
     from django.test import Client
@@ -40,3 +40,14 @@ def test_authed_get_self(client: Client) -> None:
     subscriber.subscriptions.add(user)
     response = client.get(url)
     assert response.status_code == 200
+
+
+def test_subscriber_image(client: Client) -> None:
+    user = UserFactory.create()
+    subscriber = UserFactory.create()
+    subscriber.subscriptions.add(user)
+    image_src = set_image(subscriber)
+    response = client.get(get_url(user))
+    assert response.status_code == 200
+    assert list(response.context["subscribers"]) == [subscriber]
+    assert image_src in response.content.decode()
