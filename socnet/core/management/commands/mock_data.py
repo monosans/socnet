@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import random
+import re
 from time import perf_counter
 from typing import TYPE_CHECKING, override
 
@@ -55,13 +56,13 @@ class Command(BaseCommand):
             self.stdout.write("Creating users...")
             started = perf_counter()
             # A new process numbers the users from 0 again, so a run without
-            # --purge would reuse the usernames of an earlier one.
-            taken = User.objects.filter(username__regex=r"^user_[0-9]+$").values_list(
-                "username", flat=True
+            # --purge would reuse the usernames of an earlier one. Usernames
+            # compare without case, which PostgreSQL can't match a regex under.
+            taken = (
+                re.fullmatch(r"user_([0-9]+)", name, re.IGNORECASE)
+                for name in User.objects.values_list("username", flat=True)
             )
-            UserFactory.reset_sequence(
-                max((int(name.removeprefix("user_")) for name in taken), default=-1) + 1
-            )
+            UserFactory.reset_sequence(max((int(m[1]) for m in taken if m), default=-1) + 1)
             users = User.objects.bulk_create(UserFactory.build() for _ in range(users_count))
             self.stdout.write(
                 f"Created {len(users):,} users in {perf_counter() - started:,.2f} seconds."
