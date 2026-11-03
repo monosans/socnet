@@ -54,6 +54,14 @@ class Command(BaseCommand):
 
             self.stdout.write("Creating users...")
             started = perf_counter()
+            # A new process numbers the users from 0 again, so a run without
+            # --purge would reuse the usernames of an earlier one.
+            taken = User.objects.filter(username__regex=r"^user_[0-9]+$").values_list(
+                "username", flat=True
+            )
+            UserFactory.reset_sequence(
+                max((int(name.removeprefix("user_")) for name in taken), default=-1) + 1
+            )
             users = User.objects.bulk_create(UserFactory.build() for _ in range(users_count))
             self.stdout.write(
                 f"Created {len(users):,} users in {perf_counter() - started:,.2f} seconds."
@@ -81,11 +89,8 @@ class Command(BaseCommand):
             self.stdout.write("\nCreating messages...")
             started = perf_counter()
             messages = Message.objects.bulk_create(
-                MessageFactory.build(
-                    sender=(u := random.choice(users)),
-                    recipient=random.choice([x for x in users if x.pk != u.pk]),
-                )
-                for _ in range(messages_count)
+                MessageFactory.build(sender=sender, recipient=recipient)
+                for sender, recipient in (random.sample(users, 2) for _ in range(messages_count))
             )
             self.stdout.write(
                 f"Created {len(messages):,} messages in {perf_counter() - started:,.2f} seconds."
@@ -95,11 +100,10 @@ class Command(BaseCommand):
             started = perf_counter()
             subscriptions = User.subscriptions.through.objects.bulk_create(
                 (
-                    User.subscriptions.through(
-                        from_user_id=(u := random.choice(users)).pk,
-                        to_user_id=random.choice([x for x in users if x.pk != u.pk]).pk,
+                    User.subscriptions.through(from_user_id=from_user.pk, to_user_id=to_user.pk)
+                    for from_user, to_user in (
+                        random.sample(users, 2) for _ in range(subscriptions_count)
                     )
-                    for _ in range(subscriptions_count)
                 ),
                 ignore_conflicts=True,
             )
@@ -108,6 +112,7 @@ class Command(BaseCommand):
                 f" in {perf_counter() - started:,.2f} seconds."
             )
             self.stdout.write("\nCreating post likes...")
+            started = perf_counter()
             post_likers = Post.likers.through.objects.bulk_create(
                 (
                     Post.likers.through(
