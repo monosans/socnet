@@ -109,7 +109,7 @@ jobs:
           target: python-ci
       - run: cp .env.example .env
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django python3 manage.py migrate
-      - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django pytest --cov
+      - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django pytest --cov -n auto
       - if: ${{ always() && steps.build.conclusion == 'success' }}
         run: docker compose -f compose.yaml -f compose.ci.yaml down --remove-orphans
   rustfmt:
