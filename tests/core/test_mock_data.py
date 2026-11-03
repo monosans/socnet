@@ -64,3 +64,14 @@ def test_mock_data_keeps_existing_data() -> None:
     mock_data()
     assert Post.objects.count() == 5
     assert Comment.objects.count() == 6
+
+
+def test_mock_data_again_in_a_new_process() -> None:
+    UserFactory.create(username="USER_4")
+    # Each run is a new process, which starts the factory's numbering from 0.
+    UserFactory.reset_sequence()
+    mock_data()
+    UserFactory.reset_sequence()
+    mock_data()
+    assert User.objects.count() == 7
+    assert Post.objects.count() == 8
