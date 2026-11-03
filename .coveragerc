@@ -2,7 +2,7 @@
 exclude_lines =
   ^\s*@(?:abc\.)?abstractmethod$
   ^\s*if\s+(?:settings\.)?DEBUG\s*:$
-fail_under = 50
+fail_under = 90
 
 [run]
 # django_coverage_plugin needs a file tracer, which the default
