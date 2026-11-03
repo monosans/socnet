@@ -138,7 +138,7 @@ requires-dist = [
     { name = "django-extra-checks", marker = "extra == 'local'", specifier = "==0.17.0" },
     { name = "django-filter", specifier = "==26.2" },
     { name = "django-htmx", specifier = "==1.29.0" },
-    { name = "django-logentry-admin", specifier = "==1.1" },
+    { name = "django-logentry-admin", specifier = "==1.2.0" },
     { name = "django-ninja", specifier = "==1.7.3" },
     { name = "django-stubs-ext", specifier = "==6.1.2" },
     { name = "docutils", specifier = "==0.23" },
@@ -666,14 +666,14 @@ wheels = [
 
 [[package]]
 name = "django-logentry-admin"
-version = "1.1.0"
+version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5e/fe/529328451657a429cf1ea8c8c3789d0001a711d1c39706c9cca09fd742d3/django-logentry-admin-1.1.0.tar.gz", hash = "sha256:d0354f36da6f48204ae8327533128060513c8ef40259cbde1049d07db4e5d95a", size = 5497, upload-time = "2021-05-25T15:48:46.562Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cb/99/2acea147e88c20027708e5b8ec588747da5ecfa0ca805d1544ed89667219/django_logentry_admin-1.2.0.tar.gz", hash = "sha256:c73da3dcd26cbf4c9d1b4d1290256f16f6efc409c9738e4132bd81af3195874d", size = 13893, upload-time = "2026-10-31T20:41:06.329Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3f/b0/f8356dd2ad478bedb0a5f991d416aff3f99d8d73750da4459faf27989754/django_logentry_admin-1.1.0-py3-none-any.whl", hash = "sha256:26269ca78cd421c3cc63cb58eae55339c031b0d8a880e5b4404489d4128dd290", size = 5703, upload-time = "2021-05-25T15:48:44.353Z" },
+    { url = "https://files.pythonhosted.org/packages/4b/be/6734fd91bb44bace46b680f8f5e324bbfb03cb381ae8dbf1eefadd60e197/django_logentry_admin-1.2.0-py3-none-any.whl", hash = "sha256:c4e3f3cfb79ccc564fb755b8f1390cbb417ff20dd7bb6dec3e48fee681d4e460", size = 13072, upload-time = "2026-10-31T20:41:05.175Z" },
 ]
 
 [[package]]
