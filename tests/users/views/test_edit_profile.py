@@ -1,14 +1,18 @@
 from __future__ import annotations
 
+from io import BytesIO
 from typing import TYPE_CHECKING
 
+import pytest
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.forms import model_to_dict
 from django.urls import reverse, reverse_lazy
+from PIL import ExifTags, Image
 
 from socnet.users.forms import EditProfileForm
 from socnet.users.models import User
 from tests.users.factories import UserFactory
-from tests.utils import ClientMethods, auth_client, parametrize_by_get_post
+from tests.utils import ClientMethods, auth_client, image_file, parametrize_by_get_post
 
 if TYPE_CHECKING:
     from typing import Any
@@ -64,3 +68,83 @@ def test_edit_username_case(client: Client) -> None:
     new_user = User.objects.only("username").get(pk=user.pk)
     assert response.redirect_chain == [(new_user.get_absolute_url(), 302)]
     assert new_user.username == new_username
+
+
+def test_edit_profile_fields(client: Client) -> None:
+    user = auth_client(client, show_last_login=True)
+    data = {
+        "display_name": "New Name",
+        "username": user.username,
+        "birth_date": "2000-01-02",
+        "location": "  Somewhere  ",
+        "about": "About me",
+        "show_last_login": False,
+    }
+    response = client.post(url, data=data, follow=True)
+    assert response.redirect_chain == [(user.get_absolute_url(), 302)]
+    updated_user = User.objects.only(*fields).get(pk=user.pk)
+    assert updated_user.display_name == "New Name"
+    assert str(updated_user.birth_date) == "2000-01-02"
+    assert updated_user.location == "Somewhere"
+    assert updated_user.about == "About me"
+    assert not updated_user.show_last_login
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_size"),
+    [((2048, 1024), (1024, 512)), ((1024, 2048), (512, 1024)), ((300, 200), (300, 200))],
+)
+def test_upload_image_is_converted_to_webp(
+    client: Client, size: tuple[int, int], expected_size: tuple[int, int]
+) -> None:
+    user = auth_client(client)
+    data = {"display_name": user.display_name, "username": user.username, "image": image_file(size)}
+    response = client.post(url, data=data)
+    assert response.status_code == 302
+    updated_user = User.objects.only("image").get(pk=user.pk)
+    assert str(updated_user.image.name).endswith(".webp")
+    with updated_user.image.open("rb") as file, Image.open(file) as image:
+        assert image.format == "WEBP"
+        assert image.size == expected_size
+
+
+def test_upload_image_applies_exif_orientation(client: Client) -> None:
+    user = auth_client(client)
+    # The left half is red and the right half blue. Orientation 6 means the stored image
+    # has to be rotated 90 degrees clockwise for display, which puts the red half on top.
+    stored = Image.new("RGB", (200, 100), "blue")
+    stored.paste("red", (0, 0, 100, 100))
+    exif = Image.Exif()
+    exif[ExifTags.Base.Orientation] = 6
+    with BytesIO() as buffer:
+        stored.save(buffer, "JPEG", exif=exif)
+        content = buffer.getvalue()
+    data = {
+        "display_name": user.display_name,
+        "username": user.username,
+        "image": SimpleUploadedFile("image.jpeg", content),
+    }
+    response = client.post(url, data=data)
+    assert response.status_code == 302
+    updated_user = User.objects.only("image").get(pk=user.pk)
+    with updated_user.image.open("rb") as file, Image.open(file) as image:
+        assert image.size == (100, 200)
+        rgb = image.convert("RGB")
+        top, bottom = rgb.getpixel((50, 50)), rgb.getpixel((50, 150))
+    assert isinstance(top, tuple)
+    assert isinstance(bottom, tuple)
+    assert top[0] > 200 > top[2]  # red
+    assert bottom[2] > 200 > bottom[0]  # blue
+
+
+def test_upload_invalid_image(client: Client) -> None:
+    user = auth_client(client)
+    data = {
+        "display_name": user.display_name,
+        "username": user.username,
+        "image": SimpleUploadedFile("image.png", b"not an image"),
+    }
+    response = client.post(url, data=data)
+    assert response.status_code == 200
+    assert "image" in response.context["form"].errors
+    assert not User.objects.only("image").get(pk=user.pk).image

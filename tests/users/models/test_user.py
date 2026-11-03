@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import re
-from datetime import timedelta
+from datetime import UTC, date, datetime, timedelta
 
 import pytest
 from django.core.exceptions import ValidationError
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.utils import timezone
 
+from socnet.users.exceptions import SelfSubscriptionError
 from socnet.users.models import User
 from tests.users import factories
 
@@ -86,3 +87,40 @@ def test_birth_date_today() -> None:
     tomorrow = timezone.now()
     user = factory.build(birth_date=tomorrow)
     user.full_clean()
+
+
+def test_names_are_display_name() -> None:
+    user = factory.build(display_name="Display Name")
+    assert user.get_full_name() == "Display Name"
+    assert user.get_short_name() == "Display Name"
+
+
+def test_get_age_without_birth_date() -> None:
+    assert factory.build(birth_date=None).get_age() is None
+
+
+def test_get_age(monkeypatch: pytest.MonkeyPatch) -> None:
+    now = datetime(2024, 6, 15, tzinfo=UTC)
+    monkeypatch.setattr(timezone, "now", lambda: now)
+    assert factory.build(birth_date=date(2000, 6, 15)).get_age() == 24
+    assert factory.build(birth_date=date(2000, 6, 16)).get_age() == 23
+    assert factory.build(birth_date=date(2000, 1, 1)).get_age() == 24
+    assert factory.build(birth_date=date(2000, 12, 31)).get_age() == 23
+
+
+def test_self_subscription_forbidden() -> None:
+    user = factory.create()
+    with (
+        pytest.raises(SelfSubscriptionError, match=r"^You can't subscribe to yourself\.$"),
+        transaction.atomic(),
+    ):
+        user.subscriptions.add(user)
+    assert not user.subscriptions.exists()
+
+
+def test_subscription_is_not_symmetrical() -> None:
+    user, other = factory.create_batch(2)
+    user.subscriptions.add(other)
+    assert list(user.subscriptions.all()) == [other]
+    assert list(other.subscribers.all()) == [user]
+    assert not other.subscriptions.exists()
