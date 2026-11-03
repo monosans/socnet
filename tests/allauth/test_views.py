@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING
 
+import pytest
 from allauth.account.models import EmailAddress
 from allauth.account.utils import user_pk_to_url_str
 from django.core import mail
@@ -113,13 +114,14 @@ def test_login_form(client: Client) -> None:
     assert not form.fields["password"].help_text
 
 
-def test_login_with_username_and_email(client: Client) -> None:
+@pytest.mark.parametrize("field", ["username", "email"])
+def test_login_with_username_and_email(client: Client, field: str) -> None:
     user = create_verified_user()
-    for login in (user.username, user.email.upper()):
-        response = client.post(login_url, data={"login": login, "password": PASSWORD})
-        assert response.status_code == 302
-        assert client.session["_auth_user_id"] == str(user.pk)
-        client.logout()
+    # The email is matched without regard to case.
+    login = user.username if field == "username" else user.email.upper()
+    response = client.post(login_url, data={"login": login, "password": PASSWORD})
+    assert response.status_code == 302
+    assert client.session["_auth_user_id"] == str(user.pk)
 
 
 def test_login_unverified_email(client: Client) -> None:
