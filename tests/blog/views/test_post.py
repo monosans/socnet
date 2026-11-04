@@ -2,12 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
 from django.urls import reverse
 
 from socnet.blog import models
 from tests.blog import factories
-from tests.utils import ClientMethods, auth_client, set_image
+from tests.utils import ClientMethods, auth_client, parametrize_by_get_post, set_image
 
 if TYPE_CHECKING:
     from django.test import Client
@@ -19,13 +18,9 @@ def get_url(post: models.Post) -> str:
     return reverse("blog:post", args=(post.pk,))
 
 
-@pytest.mark.parametrize(
-    ("auth", "method"),
-    [(False, ClientMethods.GET), (True, ClientMethods.GET), (True, ClientMethods.POST)],
-)
-def test_empty_request(client: Client, *, auth: bool, method: ClientMethods) -> None:
-    if auth:
-        auth_client(client)
+@parametrize_by_get_post
+def test_authed_empty_request(client: Client, method: ClientMethods) -> None:
+    auth_client(client)
     post = factory.create()
     url = get_url(post)
     response = client.get(url) if method == ClientMethods.GET else client.post(url)

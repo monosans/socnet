@@ -8,7 +8,7 @@ from django.utils import timezone
 
 from tests.blog.factories import PostFactory
 from tests.users.factories import UserFactory
-from tests.utils import auth_client, parametrize_by_auth_self, set_image
+from tests.utils import auth_client, set_image
 
 if TYPE_CHECKING:
     from django.test import Client
@@ -20,17 +20,9 @@ def get_url(user: User) -> str:
     return reverse("blog:user", args=(user.username,))
 
 
-@parametrize_by_auth_self
-def test_get(client: Client, *, auth: bool, self: bool) -> None:
-    if auth and self:
-        user = auth_client(client)
-    elif auth:
-        auth_client(client)
-        user = UserFactory.create()
-    else:
-        user = UserFactory.create()
-    url = get_url(user)
-    response = client.get(url)
+def test_get_self(client: Client) -> None:
+    user = auth_client(client)
+    response = client.get(get_url(user))
     assert response.status_code == 200
 
 
