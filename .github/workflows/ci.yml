@@ -13,10 +13,9 @@ jobs:
   check:
     if: ${{ always() && github.event_name == 'pull_request' }}
     needs:
-      - build
       - clippy
+      - frontend
       - mypy
-      - oxlint
       - pre-commit
       - pytest
       - rustfmt
@@ -26,19 +25,6 @@ jobs:
       - uses: re-actors/alls-green@b5b5b37504aa4183270bd3d855c52a67f212be35 # release/v1
         with:
           jobs: ${{ toJSON(needs) }}
-  build:
-    runs-on: ubuntu-26.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
-        with:
-          node-version-file: .nvmrc
-          check-latest: true
-          package-manager-cache: false
-      - run: npm ci
-      - run: npm run build
   clippy:
     runs-on: ubuntu-26.04
     steps:
@@ -55,19 +41,7 @@ jobs:
         working-directory: ./socnet_rs
       - run: cargo +beta test --locked
         working-directory: ./socnet_rs
-  mypy:
-    runs-on: ubuntu-26.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-      - run: cp .env.example .env
-      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
-        with:
-          python-version: "3.14"
-          enable-cache: false
-      - run: uv run --group typecheck --no-group dev --locked mypy .
-  oxlint:
+  frontend:
     runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -80,6 +54,21 @@ jobs:
           package-manager-cache: false
       - run: npm ci
       - run: npx oxlint
+      # The CI image (python-ci) leaves out the node-build stage, so the bundle is
+      # only built here.
+      - run: npm run build
+  mypy:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - run: cp .env.example .env
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          python-version: "3.14"
+          enable-cache: false
+      - run: uv run --group typecheck --no-group dev --locked mypy .
   pre-commit:
     runs-on: ubuntu-26.04
     steps:
