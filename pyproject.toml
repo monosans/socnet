@@ -52,7 +52,7 @@ optional-dependencies.test-ci = [
 
 [dependency-groups]
 dev = [
-  "djlint==1.49.2",
+  "djlint==1.49.9",
   "ruff==0.17.4",
   { include-group = "typecheck" },
 ]
