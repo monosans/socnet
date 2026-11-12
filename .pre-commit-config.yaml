@@ -31,7 +31,7 @@ repos:
           - stylelint-config-standard@40.0.0
           - stylelint-config-recess-order@7.10.0
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: 3338d92255ee53d31bd0f5d0bac85f355418c36b # frozen: v1.11.0
+    rev: eb5a34a798c45a534791de7aa408a25100554273 # frozen: v1.11.1
     hooks:
       - id: tombi-format
         exclude: ^(?:.*Cargo.lock|uv.lock)$
