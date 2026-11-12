@@ -31,3 +31,19 @@ body,
 h3.list-group-item {
   margin-bottom: 0;
 }
+
+/*
+ * Grow textareas with their content. `field-sizing` ignores the `rows` attribute, so it is
+ * restored as a minimum height: `rows` lines plus the vertical padding and border of
+ * `.form-control`. The autosize fallback in autosize.ts covers browsers without support.
+ */
+textarea.form-control {
+  --textarea-rows: 2;
+
+  min-block-size: calc(var(--textarea-rows) * 1lh + 0.75rem + 2 * var(--bs-border-width));
+  field-sizing: content;
+}
+
+textarea.form-control[rows="1"] {
+  --textarea-rows: 1;
+}
