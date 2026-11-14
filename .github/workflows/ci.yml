@@ -121,6 +121,7 @@ jobs:
           tags: socnet-ci-django
           target: python-ci
       - run: cp .env.example .env
+      - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django python3 manage.py makemigrations --check --dry-run
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django python3 manage.py migrate
       - run: docker compose -f compose.yaml -f compose.ci.yaml run --rm django pytest
       - if: ${{ always() && steps.build.conclusion == 'success' }}
