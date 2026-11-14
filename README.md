@@ -54,7 +54,7 @@ Static files and translations are collected and compiled when the container star
 
 ## Tech stack
 
-- Backend: Python 3.14, Django 6.1, Channels, django-allauth, django-ninja, granian. Markdown rendering and HTML sanitization are written in Rust in `socnet_rs`, with pulldown-cmark, ammonia and PyO3.
+- Backend: Python 3.15, Django 6.1, Channels, django-allauth, django-ninja, granian. Markdown rendering and HTML sanitization are written in Rust in `socnet_rs`, with pulldown-cmark, ammonia and PyO3.
 - Data: PostgreSQL 18, and in production Valkey 9 for the cache and Channels.
 - Frontend: Django templates, HTMX 2, Bootstrap 5, Font Awesome 6, TypeScript bundled with esbuild, viewerjs, luxon.
 - Infrastructure: Docker Compose, Caddy, Sentry.
