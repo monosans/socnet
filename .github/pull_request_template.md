@@ -1,6 +1,14 @@
 <!--
 Pull requests are squash-merged, so write the title in the Conventional Commits
 style: `fix: ...`, `feat: ...`, `docs: ...`, `refactor: ...`, `test: ...`, `chore: ...`.
+
+CI runs the linters and tests. To catch failures before you push, run:
+
+uvx prek run --all-files
+docker compose run --rm django pytest
+uv run --group typecheck --no-group dev --locked mypy .
+npx oxlint
+cd socnet_rs && cargo +nightly fmt --check && cargo +beta clippy --all-targets --
 -->
 
 ## Summary
@@ -17,10 +25,5 @@ style: `fix: ...`, `feat: ...`, `docs: ...`, `refactor: ...`, `test: ...`, `chor
 
 ## Checklist
 
-- [ ] `uvx prek run --all-files` passes.
-- [ ] `docker compose run --rm django pytest` passes, and new behavior has tests.
-- [ ] `uv run --group typecheck --no-group dev --locked mypy .` passes, if Python code changed.
-- [ ] `npx oxlint` passes, if the frontend changed.
-- [ ] `cargo +nightly fmt --check` and `cargo +beta clippy --` pass in `socnet_rs/`, if Rust code changed.
-- [ ] Migrations are included for any model change.
+- [ ] New behavior has tests.
 - [ ] `locale/ru/LC_MESSAGES/django.po` has Russian translations for new or changed strings.
