@@ -61,7 +61,7 @@ repos:
           - --fix
       - id: ruff-format
   - repo: https://github.com/djlint/djLint
-    rev: 291f0f5d120ad016b3ff63a863c7fe8ad59402a5 # frozen: v1.49.10
+    rev: 9cf2467f5e6af251156f9b08a7a78ed11a89cc1d # frozen: v1.50.0
     hooks:
       - id: djlint-reformat
       - id: djlint
