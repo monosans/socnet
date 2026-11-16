@@ -8,7 +8,6 @@
 ./socnet/static/public/css/
 ./socnet/static/public/js/
 ./socnet/static/public/*.js
-./socnet/static/public/*.ttf
 ./socnet/static/public/*.woff2
 !./socnet/templates/
 !./socnet_rs/src/**/*.rs
