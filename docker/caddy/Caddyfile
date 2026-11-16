@@ -8,9 +8,11 @@
 	header {
 		-Server
 		-Via
-		Content-Security-Policy "default-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:;"
-		Permissions-Policy "interest-cohort=()"
+		Content-Security-Policy "default-src 'none'; base-uri 'self'; connect-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; manifest-src 'self';"
+		Cross-Origin-Opener-Policy "same-origin"
+		Permissions-Policy "camera=(), geolocation=(), microphone=()"
 		Referrer-Policy "same-origin"
+		Strict-Transport-Security "max-age=31536000"
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "DENY"
 	}
@@ -20,6 +22,11 @@
 
 {$DOMAIN_NAME} {
 	import common
+
+	# Avatars are the only uploads; this keeps a client from filling the disk.
+	request_body {
+		max_size 20MB
+	}
 
 	handle_errors {
 		import common
@@ -35,6 +42,13 @@ Disallow: /"
 	handle_path /static/* {
 		# STATIC_ROOT
 		root * /var/www/django/static
+		# ManifestStaticFilesStorage puts a 12-character hash of the content in the name.
+		@hashed path_regexp \.[0-9a-f]{12}\.\w+$
+		header @hashed {
+			Cache-Control "public, max-age=31536000, immutable"
+			# A 404 while collectstatic refills the directory must not be cached.
+			match status 2xx 304
+		}
 		file_server
 	}
 
