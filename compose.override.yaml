@@ -10,7 +10,7 @@ services:
     depends_on:
       - esbuild
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     volumes:
       - .:/app
       - /app/.venv
@@ -39,10 +39,12 @@ services:
     networks:
       - esbuild
     volumes:
-      - ./socnet/static/private:/app/socnet/static/private
+      # A directory, not dom.ts alone: a file mount keeps the old inode when an
+      # editor saves by replacing the file.
+      - ./socnet/static:/app/socnet/static:ro
       - ./socnet/static/public:/app/socnet/static/public
-      - ./package.json:/app/package.json
-      - ./tsconfig.json:/app/tsconfig.json
+      - ./package.json:/app/package.json:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
   pghero:
     image: docker.io/ankane/pghero
     depends_on:
@@ -53,7 +55,7 @@ services:
     networks:
       - pghero-postgres
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     pull_policy: always
     restart: unless-stopped
 networks:
