@@ -14,14 +14,19 @@ HEADERS = (
         "Content-Security-Policy",
         (
             "default-src 'none'; "
+            "base-uri 'self'; "
             "connect-src 'self'; "
             "font-src 'self'; "
+            "form-action 'self'; "
+            "frame-ancestors 'none'; "
             "script-src 'self' 'unsafe-inline'; "
             "style-src 'self' 'unsafe-inline'; "
-            "img-src 'self' blob: data:;"
+            "img-src 'self' blob: data:; "
+            "manifest-src 'self';"
         ),
     ),
-    ("Permissions-Policy", "interest-cohort=()"),
+    ("Cross-Origin-Opener-Policy", "same-origin"),
+    ("Permissions-Policy", "camera=(), geolocation=(), microphone=()"),
     ("Referrer-Policy", "same-origin"),
     ("X-Content-Type-Options", "nosniff"),
     ("X-Frame-Options", "DENY"),

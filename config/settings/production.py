@@ -23,6 +23,9 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
+# Caddy is the one proxy in front of Django and replaces X-Forwarded-For with the
+# client address. Without this, allauth rate-limits every visitor as Caddy's IP.
+ALLAUTH_TRUSTED_PROXY_COUNT = 1
 
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_NAME = "__Secure-sessionid"
