@@ -14,6 +14,7 @@ RUN --mount=type=cache,target=/root/.npm,sharing=locked \
 FROM node-base AS node-build
 
 RUN --mount=source=tsconfig.json,target=tsconfig.json \
+  --mount=source=socnet/static/dom.ts,target=socnet/static/dom.ts \
   --mount=source=socnet/static/private,target=socnet/static/private \
   npm run build
 

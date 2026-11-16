@@ -45,8 +45,8 @@ services:
     volumes:
       - production-caddy-config:/config
       - production-caddy-data:/data
-      - production-django-media:/var/www/django/media
-      - production-django-static:/var/www/django/static
+      - production-django-media:/var/www/django/media:ro
+      - production-django-static:/var/www/django/static:ro
 networks:
   caddy-django:
   django-redis:

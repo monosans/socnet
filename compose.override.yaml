@@ -39,10 +39,11 @@ services:
     networks:
       - esbuild
     volumes:
-      - ./socnet/static/private:/app/socnet/static/private
+      - ./socnet/static/dom.ts:/app/socnet/static/dom.ts:ro
+      - ./socnet/static/private:/app/socnet/static/private:ro
       - ./socnet/static/public:/app/socnet/static/public
-      - ./package.json:/app/package.json
-      - ./tsconfig.json:/app/tsconfig.json
+      - ./package.json:/app/package.json:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
   pghero:
     image: docker.io/ankane/pghero
     depends_on:
