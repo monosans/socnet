@@ -39,8 +39,9 @@ services:
     networks:
       - esbuild
     volumes:
-      - ./socnet/static/dom.ts:/app/socnet/static/dom.ts:ro
-      - ./socnet/static/private:/app/socnet/static/private:ro
+      # A directory, not dom.ts alone: a file mount keeps the old inode when an
+      # editor saves by replacing the file.
+      - ./socnet/static:/app/socnet/static:ro
       - ./socnet/static/public:/app/socnet/static/public
       - ./package.json:/app/package.json:ro
       - ./tsconfig.json:/app/tsconfig.json:ro
