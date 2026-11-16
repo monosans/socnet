@@ -10,7 +10,7 @@ services:
     depends_on:
       - esbuild
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     volumes:
       - .:/app
       - /app/.venv
@@ -54,7 +54,7 @@ services:
     networks:
       - pghero-postgres
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     pull_policy: always
     restart: unless-stopped
 networks:

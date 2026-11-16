@@ -24,7 +24,7 @@ cp .env.example .env
 docker compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g)  # on Windows: docker compose build
 docker compose run --rm django python3 manage.py migrate
 docker compose run --rm django python3 manage.py compilemessages --locale en --locale ru
-docker compose up --remove-orphans
+docker compose up --remove-orphans --renew-anon-volumes
 ```
 
 Open <http://localhost:8000>. Emails, such as the sign-up confirmation, go to the log of the `django` container. [PgHero](https://github.com/ankane/pghero) runs at <http://localhost:8080>.
@@ -37,7 +37,7 @@ docker compose run --rm django python3 manage.py createsuperuser
 # Run the tests
 docker compose run --rm django pytest
 # Start with debugpy listening on port 5678
-docker compose -f compose.yaml -f compose.override.yaml -f compose.debug.yaml up --remove-orphans
+docker compose -f compose.yaml -f compose.override.yaml -f compose.debug.yaml up --remove-orphans --renew-anon-volumes
 ```
 
 ## Deploy

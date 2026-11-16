@@ -33,7 +33,9 @@ services:
       - NET_ADMIN
     depends_on:
       - django
-    env_file: ./.env
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - TLS_EMAIL=${TLS_EMAIL}
     init: true
     networks:
       - caddy-django
