@@ -48,7 +48,7 @@
       "extractVersionTemplate": "^(?<version>\\d+\\.\\d+)(?:\\.\\d+)?$"
     }
   ],
-  "dependencyDashboard": false,
+  "dependencyDashboard": { "enabled": false },
   "extends": [
     "config:recommended",
     ":disableRateLimiting",
