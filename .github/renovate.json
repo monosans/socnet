@@ -65,7 +65,8 @@
     {
       "description": "A config's major version requires the stylelint it was made for, so neither passes CI without the other",
       "matchPackageNames": ["stylelint", "stylelint-config-*", "thibaudcolas/pre-commit-stylelint"],
-      "groupName": "stylelint"
+      "groupName": "stylelint",
+      "separateMajorMinor": false
     },
     {
       "matchCategories": ["python"],
