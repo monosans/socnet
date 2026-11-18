@@ -25,7 +25,7 @@ repos:
       - id: stylelint
         language: node
         args:
-          - --fix=lax
+          - --fix
         additional_dependencies:
           - stylelint@17.16.0
           - stylelint-config-standard@40.0.0
