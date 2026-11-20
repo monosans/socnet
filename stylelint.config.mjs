@@ -2,7 +2,7 @@ import { createRequire } from "node:module";
 
 /*
  * Stylelint resolves `extends` like ESM imports, which ignore NODE_PATH, so the
- * configs installed in the pre-commit hook environment are resolved here.
+ * packages installed in the pre-commit hook environment are resolved here.
  */
 const require = createRequire(import.meta.url);
 
@@ -12,6 +12,8 @@ const config = {
     require.resolve("stylelint-config-standard"),
     require.resolve("stylelint-config-recess-order"),
   ],
+  // Where the --bs-* custom properties are declared: the Bootstrap build bootstrap.css imports.
+  referenceFiles: require.resolve("bootstrap/dist/css/bootstrap.min.css"),
   reportDescriptionlessDisables: true,
   reportInvalidScopeDisables: true,
   reportNeedlessDisables: true,
@@ -23,9 +25,7 @@ const config = {
     "function-url-no-scheme-relative": true,
     "no-unknown-animations": true,
     "no-unknown-custom-media": true,
-    "selector-no-deprecated": true,
-    "selector-no-invalid": true,
-    "selector-no-unmatchable": true,
+    "no-unknown-custom-properties": true,
     "unit-no-unknown": true,
   },
 };
