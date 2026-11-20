@@ -12,7 +12,7 @@ const config = {
     require.resolve("stylelint-config-standard"),
     require.resolve("stylelint-config-recess-order"),
   ],
-  // The --bs-* custom properties come from the Bootstrap build that bootstrap.css imports.
+  // Where the --bs-* custom properties are declared: the Bootstrap build bootstrap.css imports.
   referenceFiles: require.resolve("bootstrap/dist/css/bootstrap.min.css"),
   reportDescriptionlessDisables: true,
   reportInvalidScopeDisables: true,
