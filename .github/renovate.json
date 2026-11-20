@@ -86,14 +86,19 @@
     { "matchDepTypes": ["devDependencies"], "matchManagers": ["npm"], "automerge": true },
     { "matchManagers": ["github-actions", "pre-commit"], "automerge": true },
     {
-      "description": "A new Node is reviewed by hand, in one pull request with its image and types. Node versioning holds each back until the major version reaches LTS",
-      "matchPackageNames": ["node", "docker.io/node", "@types/node"],
-      "matchUpdateTypes": ["major"],
+      "description": "A new Node is reviewed by hand, in one pull request with its image, types and tsconfig base. Node versioning holds Node, the image and the types back until the major version reaches LTS. The base is a replacement from Renovate's list, which learns of a new one on its own schedule",
+      "matchPackageNames": ["node", "docker.io/node", "@types/node", "/^@tsconfig/node\\d+$/"],
+      "matchUpdateTypes": ["major", "replacement"],
       "groupName": "node",
       "automerge": false,
       "prBodyNotes": [
-        "Replace `@tsconfig/node<major>` with the one of the new Node by hand: Renovate updates a version, not a package name."
+        "Merge once this PR moves both Node and `@tsconfig/node<major>`. If the base is missing, replace it by hand in package.json and tsconfig.node.json, then run `npm install`."
       ]
+    },
+    {
+      "description": "A major update and a replacement get separate branches unless majors stay with minors, and the Node PR needs both",
+      "matchPackageNames": ["node", "docker.io/node", "@types/node", "/^@tsconfig/node\\d+$/"],
+      "separateMajorMinor": false
     },
     {
       "description": "A cooldown would count from the last rebuild of the image tag, which keeps the image out of the Node pull request",
