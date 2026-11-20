@@ -27,6 +27,7 @@ repos:
         args:
           - --fix
         additional_dependencies:
+          - bootstrap@5.3.9
           - stylelint@17.16.0
           - stylelint-config-standard@40.0.0
           - stylelint-config-recess-order@7.10.0
