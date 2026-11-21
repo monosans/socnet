@@ -19,6 +19,7 @@
   "env": { "browser": true },
   "ignorePatterns": ["socnet/static/public/"],
   "rules": {
+    "capitalized-comments": ["error", "always", { "ignoreConsecutiveComments": true }],
     "eqeqeq": ["error", "always", { "null": "ignore" }],
     "func-style": ["error", "declaration"],
     "id-length": "off",
@@ -31,6 +32,7 @@
     "max-params": "off",
     "max-statements": "off",
     "no-continue": "off",
+    "no-duplicate-imports": ["error", { "allowSeparateTypeImports": true }],
     "no-empty": ["error", { "allowEmptyCatch": true }],
     "no-eq-null": "off",
     "no-implicit-globals": "off",
@@ -48,11 +50,16 @@
     "import/export": "error",
     "import/exports-last": "off",
     "import/group-exports": "off",
+    "import/max-dependencies": "off",
     "import/no-named-export": "off",
     "import/no-relative-parent-imports": "off",
     "import/prefer-default-export": "off",
     "import/unambiguous": "off",
+    "node/no-top-level-await": "off",
     "oxc/no-async-await": "off",
+    "oxc/no-optional-chaining": "off",
+    "oxc/no-rest-spread-properties": "off",
+    "promise/avoid-new": "off",
     "promise/no-return-in-finally": "error",
     "typescript/explicit-member-accessibility": ["error", { "accessibility": "no-public" }],
     "typescript/no-confusing-void-expression": ["error", { "ignoreArrowShorthand": true }],
@@ -70,9 +77,14 @@
     "unicorn/filename-case": ["error", { "case": "snakeCase" }],
     "unicorn/no-null": "off",
     "unicorn/no-useless-iterator-to-array": "error",
+    "unicorn/number-literal-case": "off",
     "unicorn/prefer-top-level-await": "off"
   },
   "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "rules": { "jsdoc/require-param-type": "off", "jsdoc/require-returns-type": "off" }
+    },
     {
       "files": ["*.mjs"],
       "env": { "browser": false, "node": true },
