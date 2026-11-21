@@ -20,16 +20,16 @@ repos:
           - --fix=lf
       - id: trailing-whitespace
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: a43d64a23287d2dc2e02289bd3b2cb0da5eddfb1 # frozen: v17.16.0
+    rev: e48ba09830adcf6ad3351bde49abdf5b46b13c16 # frozen: v18.0.0
     hooks:
       - id: stylelint
         language: node
         args:
           - --fix
         additional_dependencies:
-          - stylelint@17.16.0
-          - stylelint-config-standard@40.0.0
-          - stylelint-config-recess-order@7.10.0
+          - stylelint@18.0.0
+          - stylelint-config-standard@41.0.0
+          - stylelint-config-recess-order@7.10.1
   - repo: https://github.com/tombi-toml/tombi-pre-commit
     rev: 1066584123cce44a99b4818c2b2c4a7e732ff8e9 # frozen: v1.11.3
     hooks:
@@ -61,7 +61,7 @@ repos:
           - --fix
       - id: ruff-format
   - repo: https://github.com/djlint/djLint
-    rev: 2dbc8dc741a8cb5f446499508fcac98a2e0aa319 # frozen: v1.53.1
+    rev: ba83fa585bc2e2bf853a8eb50e297c14f0a652b5 # frozen: v1.54.0
     hooks:
       - id: djlint-reformat
       - id: djlint
