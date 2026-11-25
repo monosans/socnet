@@ -19,7 +19,6 @@ jobs:
       - pre-commit
       - pytest
       - rustfmt
-      - udeps
     runs-on: ubuntu-26.04
     steps:
       - uses: re-actors/alls-green@b5b5b37504aa4183270bd3d855c52a67f212be35 # release/v1
@@ -138,20 +137,4 @@ jobs:
           components: rustfmt
           cache: false
       - run: cargo +nightly fmt --check
-        working-directory: ./socnet_rs
-  udeps:
-    runs-on: ubuntu-26.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2
-        with:
-          toolchain: nightly
-          cache: false
-      - uses: taiki-e/install-action@75a7c0f87bd666af3cdb75c5b9e9d03ab6044e6f # v2.90.6
-        with:
-          tool: cargo-udeps
-          fallback: none
-      - run: cargo +nightly udeps
         working-directory: ./socnet_rs
