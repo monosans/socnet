@@ -3,7 +3,7 @@ import { requiredData } from "../../dom";
 const formatter = new Intl.NumberFormat(document.documentElement.lang, { notation: "compact" });
 
 function formatNumber(element: HTMLOrSVGElement & Node): void {
-  const unformattedNumber = Number.parseInt(requiredData(element, "unformattedNumber"));
+  const unformattedNumber = Number(requiredData(element, "unformattedNumber"));
   element.textContent = formatter.format(unformattedNumber);
 }
 
