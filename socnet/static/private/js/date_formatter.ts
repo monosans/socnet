@@ -23,10 +23,10 @@ async function formatDates(parentNode: ParentNode): Promise<void> {
   }
 }
 
-async function formatAllDates(): Promise<void> {
+void (async function formatAllDates(): Promise<void> {
   await formatDates(document.body);
   setTimeout(formatAllDates, 1000);
-}
+})();
 
 new MutationObserver((mutations) => {
   for (const mutation of mutations) {
@@ -42,5 +42,3 @@ new MutationObserver((mutations) => {
     }
   }
 }).observe(document.body, { childList: true, subtree: true });
-
-await formatAllDates();
