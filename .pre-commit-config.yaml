@@ -37,7 +37,7 @@ repos:
       - id: tombi-format
         exclude: ^(?:.*Cargo.lock|uv.lock)$
   - repo: https://github.com/oxc-project/mirrors-oxfmt
-    rev: b082b2f0f22aabef0f5cea2bd183dd85c08ba9ca # frozen: v0.79.0
+    rev: 1fa61b696bac4277fb1ea87154eb3304a8bf9067 # frozen: v0.80.0
     hooks:
       - id: oxfmt
         language: node
@@ -46,7 +46,7 @@ repos:
         args:
           - --no-error-on-unmatched-pattern
         additional_dependencies:
-          - oxfmt@0.79.0
+          - oxfmt@0.80.0
   - repo: https://github.com/adamchainz/django-upgrade
     rev: 5ccd385680292c5e5b10bedf0a3e509b5e6e9da8 # frozen: 1.33.0
     hooks:
