@@ -1,3 +1,5 @@
+{% load l10n %}
+
 {% comment %}
   The sender of a message, and when it was sent. The <template> of each
   participant in chat.html renders it without pk and epoch, which chat.ts fills
@@ -19,6 +21,6 @@
       class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover text-break"
       href="{{ sender.get_absolute_url }}"
     >{{ sender.display_name }} <span class="text-secondary">@{{ sender.username }}</span></a>
-    <div class="text-secondary" data-epoch="{{ epoch }}"></div>
+    <div class="text-secondary" data-epoch="{{ epoch|unlocalize }}"></div>
   </div>
 </div>

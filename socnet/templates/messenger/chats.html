@@ -1,6 +1,6 @@
 {% extends "list_group.html" %}
 
-{% load i18n static %}
+{% load i18n l10n static %}
 
 {% block title %}
   {% translate "Chats" %}
@@ -47,7 +47,7 @@
         </div>
         <div
           class="ms-auto text-secondary"
-          data-epoch="{{ chat.last_message_date_epoch }}"
+          data-epoch="{{ chat.last_message_date_epoch|unlocalize }}"
         ></div>
       </a>
     {% endfor %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n obj_admin_url static %}
+{% load i18n l10n obj_admin_url static %}
 
 {% block title %}
   {{ user.display_name }} ({{ user.username }})
@@ -101,12 +101,18 @@
               <tbody>
                 <tr>
                   <td class="ps-0 pe-2 py-1">{% translate "Signed up" %}</td>
-                  <td class="ps-2 pe-0 py-1" data-epoch="{{ user.date_joined_epoch }}"></td>
+                  <td
+                    class="ps-2 pe-0 py-1"
+                    data-epoch="{{ user.date_joined_epoch|unlocalize }}"
+                  ></td>
                 </tr>
                 {% if user.last_login_epoch %}
                   <tr>
                     <td class="ps-0 pe-2 py-1">{% translate "Last login" %}</td>
-                    <td class="ps-2 pe-0 py-1" data-epoch="{{ user.last_login_epoch }}"></td>
+                    <td
+                      class="ps-2 pe-0 py-1"
+                      data-epoch="{{ user.last_login_epoch|unlocalize }}"
+                    ></td>
                   </tr>
                 {% endif %}
                 {% if user.birth_date %}
