@@ -18,6 +18,8 @@ def init_sentry(dsn: str, environment: str | None = None) -> None:
             LoggingIntegration(level=None, event_level=logging.ERROR),
         ),
         data_collection={
+            # User id, username, email and IP address stay out of events.
+            "user_info": False,
             # Request bodies go out unfiltered, passwords and messages included.
             "http_bodies": [],
             # SQL and Redis arguments carry session keys and message texts.

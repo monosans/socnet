@@ -15,6 +15,7 @@ from sentry_sdk.transport import Transport
 from config.settings.sentry import init_sentry
 from socnet.blog import db_utils
 from socnet.users.models import User
+from tests.utils import auth_client
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -57,13 +58,16 @@ def test_server_error_event_leaks_no_secrets(
     monkeypatch.setattr(db_utils, "get_posts_preview_qs", fail)
     # Random, so the source lines sent with the event can't contain it.
     secret = secrets.token_urlsafe()
-    Client(raise_request_exception=False).post(reverse("blog:posts"), {"password": secret})
+    client = Client(raise_request_exception=False)
+    auth_client(client)
+    client.post(reverse("blog:posts"), {"password": secret})
 
     [event] = sentry_events
     assert event["exception"]["values"][-1]["type"] == "RuntimeError"
     frame = event["exception"]["values"][-1]["stacktrace"]["frames"][-1]
     assert "password" in frame["vars"]
     assert secret not in json.dumps(event)
+    assert not event.get("user")
 
 
 def test_logged_error_becomes_event_without_access_log(sentry_events: list[Event]) -> None:
