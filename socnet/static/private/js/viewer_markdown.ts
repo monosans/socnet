@@ -1,6 +1,7 @@
 import Viewer from "viewerjs";
 
 function initializeViewer(element: HTMLElement): void {
+  // oxlint-disable-next-line no-new -- the viewer binds itself to the element on construction
   new Viewer(element, { button: false });
 }
 

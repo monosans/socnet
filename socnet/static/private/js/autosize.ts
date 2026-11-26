@@ -7,4 +7,4 @@ async function autosizeTextareas(): Promise<void> {
   autosize(document.body.querySelectorAll("textarea"));
 }
 
-void autosizeTextareas();
+await autosizeTextareas();

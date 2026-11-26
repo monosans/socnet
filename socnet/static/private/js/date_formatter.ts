@@ -5,14 +5,14 @@ const options = { locale: document.documentElement.lang };
 async function formatDates(parentNode: ParentNode): Promise<void> {
   const elements = parentNode.querySelectorAll<HTMLElement>("[data-epoch]");
 
-  if (!elements.length) {
+  if (elements.length === 0) {
     return;
   }
 
   const { DateTime } = await import("luxon");
   const relativeOptions = { base: DateTime.now() };
   for (const el of elements) {
-    const dt = DateTime.fromSeconds(Number.parseInt(requiredData(el, "epoch")), options);
+    const dt = DateTime.fromSeconds(Number(requiredData(el, "epoch")), options);
     const relativeDt = dt.toRelative(relativeOptions);
     if (el.textContent !== relativeDt) {
       el.textContent = relativeDt;
@@ -23,10 +23,10 @@ async function formatDates(parentNode: ParentNode): Promise<void> {
   }
 }
 
-void (async function formatAllDates(): Promise<void> {
+async function formatAllDates(): Promise<void> {
   await formatDates(document.body);
   setTimeout(formatAllDates, 1000);
-})();
+}
 
 new MutationObserver((mutations) => {
   for (const mutation of mutations) {
@@ -42,3 +42,5 @@ new MutationObserver((mutations) => {
     }
   }
 }).observe(document.body, { childList: true, subtree: true });
+
+await formatAllDates();

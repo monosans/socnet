@@ -1,6 +1,6 @@
 {% extends "list_group.html" %}
 
-{% load i18n static %}
+{% load i18n l10n static %}
 
 {% block title %}
   {% blocktranslate context "noun" %}Search messages{% endblocktranslate %}
@@ -61,7 +61,7 @@
       </div>
       <div
         class="ms-auto text-secondary"
-        data-epoch="{{ message.date_created_epoch }}"
+        data-epoch="{{ message.date_created_epoch|unlocalize }}"
       ></div>
     </a>
   {% empty %}

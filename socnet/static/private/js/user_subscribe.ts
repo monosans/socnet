@@ -31,7 +31,7 @@ async function handler(e: Event): Promise<void> {
   const subscribersCount = document.querySelector<HTMLElement>("#subscribersCount");
 
   if (subscribersCount) {
-    const unformattedNumber = Number.parseInt(requiredData(subscribersCount, "unformattedNumber"));
+    const unformattedNumber = Number(requiredData(subscribersCount, "unformattedNumber"));
     subscribersCount.dataset["unformattedNumber"] = (
       unformattedNumber + (isSubscribe ? 1 : -1)
     ).toString();
